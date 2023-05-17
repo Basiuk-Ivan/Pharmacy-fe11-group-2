@@ -1,5 +1,16 @@
 .header {
   display: flex;
+  flex-direction: column;
   gap: 10px;
   margin: 10px;
+}
+
+.headerMain {
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerMenu {
+  display: flex;
+  justify-content: space-between;
 }
