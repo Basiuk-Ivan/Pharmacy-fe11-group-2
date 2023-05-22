@@ -8,7 +8,7 @@ module.exports = {
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
     'airbnb',
-    'airbnb/hooks',
+    'airbnb/hooks'
   ],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   settings: { react: { version: '18.2' } },
@@ -23,10 +23,11 @@ module.exports = {
       'error',
       {
         namedComponents: 'arrow-function',
-        unnamedComponents: 'arrow-function',
-      },
+        unnamedComponents: 'arrow-function'
+      }
     ],
     'no-param-reassign': 'off',
     'react/jsx-one-expression-per-line': 'off',
-  },
+    'object-curly-newline': 'off'
+  }
 };
