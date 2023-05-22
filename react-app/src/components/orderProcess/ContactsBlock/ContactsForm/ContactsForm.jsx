@@ -13,8 +13,7 @@ const ContactsForm = () => (
     <Typography
       variant="h5"
       sx={{
-        margin: '40px 0 40px 45px',
-
+        margin: '40px 0 40px 45px'
       }}
     >
       Контактні дані

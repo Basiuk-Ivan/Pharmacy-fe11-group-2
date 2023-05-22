@@ -1,4 +1,18 @@
+import { styled } from '@mui/material/styles';
 import { Grid, Typography } from '@mui/material';
+
+const TypographyTitle = styled(Typography)({
+  fontSize: '18px',
+  fontWeight: 500,
+  color: '#2F2F2F',
+  marginTop: '10px'
+});
+
+const TypographyData = styled(Typography)({
+  fontSize: '14px',
+  fontWeight: 400,
+  color: '#7C7C7C'
+});
 
 const Advantages = () => (
   <Grid
@@ -15,21 +29,8 @@ const Advantages = () => (
       }}
     >
       <img src="./orderprocessTest/im1.png" alt="" />
-      <Typography sx={{
-        fontSize: '18px',
-        fontWeight: 500,
-        color: '#2F2F2F',
-        mt: '10px'
-      }}
-      >Ассортимент
-      </Typography>
-      <Typography sx={{
-        fontSize: '14px',
-        fontWeight: 400,
-        color: '#7C7C7C',
-      }}
-      >Оборудование, мебель, посуда и инвентарь
-      </Typography>
+      <TypographyTitle>Ассортимент</TypographyTitle>
+      <TypographyData>Оборудование, мебель, посуда и инвентарь</TypographyData>
     </Grid>
     <Grid
       item
@@ -39,21 +40,8 @@ const Advantages = () => (
       }}
     >
       <img src="./orderprocessTest/im2.png" alt="" />
-      <Typography sx={{
-        fontSize: '18px',
-        fontWeight: 500,
-        color: '#2F2F2F',
-        mt: '10px'
-      }}
-      >Быстрая доставка
-      </Typography>
-      <Typography sx={{
-        fontSize: '14px',
-        fontWeight: 400,
-        color: '#7C7C7C',
-      }}
-      >В любую точку России быстро
-      </Typography>
+      <TypographyTitle>Быстрая доставка</TypographyTitle>
+      <TypographyData>В любую точку России быстро</TypographyData>
     </Grid>
     <Grid
       item
@@ -63,21 +51,8 @@ const Advantages = () => (
       }}
     >
       <img src="./orderprocessTest/im3.png" alt="" />
-      <Typography sx={{
-        fontSize: '18px',
-        fontWeight: 500,
-        color: '#2F2F2F',
-        mt: '10px'
-      }}
-      >Гарантия
-      </Typography>
-      <Typography sx={{
-        fontSize: '14px',
-        fontWeight: 400,
-        color: '#7C7C7C',
-      }}
-      >Вся продукция cертифицирована
-      </Typography>
+      <TypographyTitle>Гарантия</TypographyTitle>
+      <TypographyData>Вся продукция cертифицирована</TypographyData>
     </Grid>
     <Grid
       item
@@ -87,21 +62,8 @@ const Advantages = () => (
       }}
     >
       <img src="./orderprocessTest/im4.png" alt="" />
-      <Typography sx={{
-        fontSize: '18px',
-        fontWeight: 500,
-        color: '#2F2F2F',
-        mt: '10px'
-      }}
-      >Низкие цены
-      </Typography>
-      <Typography sx={{
-        fontSize: '14px',
-        fontWeight: 400,
-        color: '#7C7C7C',
-      }}
-      >Мы стараемся держать самые низкие цены
-      </Typography>
+      <TypographyTitle>Низкие цены</TypographyTitle>
+      <TypographyData>Мы стараемся держать самые низкие цены</TypographyData>
     </Grid>
   </Grid>
 );
