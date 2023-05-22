@@ -2,15 +2,15 @@ import { Box, Typography } from '@mui/material';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 
+const mainBox = {
+  display: 'flex',
+  flexGrow: 1,
+  justifyContent: 'space-between',
+  alignItems: 'center'
+};
+
 const ContactInfo = () => (
-  <Box
-    sx={{
-      display: 'flex',
-      flexGrow: 1,
-      justifyContent: 'space-between',
-      alignItems: 'center'
-    }}
-  >
+  <Box sx={mainBox}>
     <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
       <MailOutlineIcon sx={{ fill: '#2FD3AE' }} />
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>

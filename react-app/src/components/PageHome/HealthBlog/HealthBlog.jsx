@@ -13,7 +13,7 @@ const Item = styled(Paper)(({ theme }) => ({
   height: '375px'
 }));
 const HealthBlog = () => (
-  <>
+  <Box>
     <Box>
       <Typography
         fontFamily="Roboto"
@@ -32,9 +32,9 @@ const HealthBlog = () => (
       </Stack>
     </Box>
     <Box>
-      <img src={selfTreatmentRisks} alt="Samo" />
+      <img style={{ width: '100%' }} src={selfTreatmentRisks} alt="Samo" />
     </Box>
-  </>
+  </Box>
 );
 
 export default HealthBlog;

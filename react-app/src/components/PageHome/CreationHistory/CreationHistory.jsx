@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 import Card from './Card';
 
 const CreationHistory = () => (
-  <Box sx={{ background: '#F7FAFB', padding: '88px 60px 50px', marginBottom: '30px' }}>
+  <Box sx={{ background: '#F7FAFB', padding: '88px 60px 50px', marginBottom: '30px', marginTop: '20px' }}>
     <Box>
       <Typography
         fontFamily="Roboto"

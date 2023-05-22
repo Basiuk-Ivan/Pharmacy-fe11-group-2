@@ -12,7 +12,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const OurPartners = () => (
-  <>
+  <Box>
     <Box>
       <Typography
         fontFamily="Roboto"
@@ -32,7 +32,7 @@ const OurPartners = () => (
         ))}
       </Grid>
     </Box>
-  </>
+  </Box>
 );
 
 export default OurPartners;

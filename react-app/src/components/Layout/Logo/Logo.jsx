@@ -3,9 +3,9 @@ import { Box, Avatar, Typography } from '@mui/material';
 import logo from '../../../assets/logo.svg';
 
 const Logo = () => (
-  <Box>
+  <Box sx={{ marginRight: '10px' }}>
     <NavLink to="/" style={{ textDecoration: 'none' }}>
-      <Box sx={{ display: 'flex', flexGrow: 1, alignItems: 'center' }}>
+      <Box sx={{ display: 'flex', flexGrow: 1, alignItems: 'center', gap: '10px' }}>
         <Avatar alt="Логотип" src={logo} />
         <Typography component="div" sx={{ display: 'flex', flexDirection: 'column' }}>
           <Typography fontFamily="Roboto" component="span" sx={{ fontSize: 22, color: '#011D71' }}>

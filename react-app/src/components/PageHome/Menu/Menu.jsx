@@ -15,12 +15,17 @@ const menuStyle = {
   justifyContent: 'center',
   gap: '100px',
   background: 'linear-gradient(45deg, #011D71 30%, #2FD3BD 90%)',
-  top: '70px',
-  width: '100%'
+  top: '75px',
+  width: '100%',
+  // тут підпрвити
+  '@media (max-width: 959.95px)': {
+    display: 'block'
+  }
 };
 
 const Menu = () => (
-  <Box>
+  <>
+    {/* <Box> */}
     <Box position="absolute" sx={menuStyle}>
       {pages.map(page => (
         <NavLink key={page} to="/post" style={{ textDecoration: 'none' }}>
@@ -31,7 +36,8 @@ const Menu = () => (
     {/* <Box>
       <DiscountBanner />
     </Box> */}
-  </Box>
+    {/* </Box> */}
+  </>
 );
 
 export default Menu;

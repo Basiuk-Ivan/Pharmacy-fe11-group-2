@@ -10,7 +10,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary
 }));
 const HowWeWork = () => (
-  <>
+  <Box>
     <Box>
       <Typography
         fontFamily="Roboto"
@@ -28,7 +28,7 @@ const HowWeWork = () => (
         <Item>Item 4</Item>
       </Stack>
     </Box>
-  </>
+  </Box>
 );
 
 export default HowWeWork;

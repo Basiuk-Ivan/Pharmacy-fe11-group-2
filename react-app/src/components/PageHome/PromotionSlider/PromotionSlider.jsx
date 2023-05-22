@@ -24,7 +24,7 @@ const SlidePrevButton = () => {
 };
 
 const PromotionSlider = () => (
-  <>
+  <Box>
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <Typography
         fontFamily="Roboto"
@@ -53,7 +53,7 @@ const PromotionSlider = () => (
       <SwiperSlide>Slide 5</SwiperSlide>
       <SlideNextButton />
     </Swiper>
-  </>
+  </Box>
 );
 
 export default PromotionSlider;
