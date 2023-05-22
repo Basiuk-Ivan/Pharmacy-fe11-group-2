@@ -23,7 +23,7 @@ const OrderList = () => (
         '& ul': { padding: 0 }
       }}
     >
-      {[0, 1].map(sectionId => (
+      {[0, 1, 2].map(sectionId => (
         <li key={`section-${sectionId}`}>
           <ul>
             {[0, 1].map(item => (
