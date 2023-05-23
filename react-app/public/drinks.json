@@ -1,0 +1,492 @@
+[
+  {
+    "id": 1,
+    "name": "Джин Beefeater",
+    "price": "569.00 грн"
+  },
+  {
+    "id": 2,
+    "name": "Віскі Jim Beam White Label",
+    "price": "819.00 грн"
+  },
+  {
+    "id": 3,
+    "name": "Коньяк Hennessy V.S. в коробці",
+    "price": "1249.00 грн"
+  },
+  {
+    "id": 4,
+    "name": "Горілкa Staritsky & Levitsky Private Cellar в коробці",
+    "price": "1990.00 грн"
+  },
+  {
+    "id": 5,
+    "name": "Ром Havana Club Anejo",
+    "price": "667.00 грн"
+  },
+  {
+    "id": 6,
+    "name": "Арманьяк Saint-Vivant XO в коробці",
+    "price": "2669.00 грн"
+  },
+  {
+    "id": 7,
+    "name": "Чача KHAREBA",
+    "price": "669.00 грн"
+  },
+  {
+    "id": 8,
+    "name": "Ром Captain Morgan White",
+    "price": "519.00 грн"
+  },
+  {
+    "id": 9,
+    "name": "Кальвадос Прикарпатський",
+    "price": "209.00 грн"
+  },
+  {
+    "id": 10,
+    "name": "Diletta Grappa White",
+    "price": "649.00 грн"
+  },
+  {
+    "id": 11,
+    "name": "Джин Beefeater",
+    "price": "569.00 грн"
+  },
+  {
+    "id": 12,
+    "name": "Віскі Jim Beam White Label",
+    "price": "819.00 грн"
+  },
+  {
+    "id": 13,
+    "name": "Коньяк Hennessy V.S. в коробці",
+    "price": "1249.00 грн"
+  },
+  {
+    "id": 14,
+    "name": "Горілкa Staritsky & Levitsky Private Cellar в коробці",
+    "price": "1990.00 грн"
+  },
+  {
+    "id": 15,
+    "name": "Ром Havana Club Anejo",
+    "price": "667.00 грн"
+  },
+  {
+    "id": 16,
+    "name": "Арманьяк Saint-Vivant XO в коробці",
+    "price": "2669.00 грн"
+  },
+  {
+    "id": 17,
+    "name": "Чача KHAREBA",
+    "price": "669.00 грн"
+  },
+  {
+    "id": 18,
+    "name": "Ром Captain Morgan White",
+    "price": "519.00 грн"
+  },
+  {
+    "id": 19,
+    "name": "Кальвадос Прикарпатський",
+    "price": "209.00 грн"
+  },
+  {
+    "id": 20,
+    "name": "Diletta Grappa White",
+    "price": "649.00 грн"
+  },
+  {
+    "id": 21,
+    "name": "Джин Beefeater",
+    "price": "569.00 грн"
+  },
+  {
+    "id": 22,
+    "name": "Віскі Jim Beam White Label",
+    "price": "819.00 грн"
+  },
+  {
+    "id": 23,
+    "name": "Коньяк Hennessy V.S. в коробці",
+    "price": "1249.00 грн"
+  },
+  {
+    "id": 24,
+    "name": "Горілкa Staritsky & Levitsky Private Cellar в коробці",
+    "price": "1990.00 грн"
+  },
+  {
+    "id": 25,
+    "name": "Ром Havana Club Anejo",
+    "price": "667.00 грн"
+  },
+  {
+    "id": 26,
+    "name": "Арманьяк Saint-Vivant XO в коробці",
+    "price": "2669.00 грн"
+  },
+  {
+    "id": 27,
+    "name": "Чача KHAREBA",
+    "price": "669.00 грн"
+  },
+  {
+    "id": 28,
+    "name": "Ром Captain Morgan White",
+    "price": "519.00 грн"
+  },
+  {
+    "id": 29,
+    "name": "Кальвадос Прикарпатський",
+    "price": "209.00 грн"
+  },
+  {
+    "id": 30,
+    "name": "Diletta Grappa White",
+    "price": "649.00 грн"
+  },
+  {
+    "id": 31,
+    "name": "Джин Beefeater",
+    "price": "569.00 грн"
+  },
+  {
+    "id": 32,
+    "name": "Віскі Jim Beam White Label",
+    "price": "819.00 грн"
+  },
+  {
+    "id": 33,
+    "name": "Коньяк Hennessy V.S. в коробці",
+    "price": "1249.00 грн"
+  },
+  {
+    "id": 34,
+    "name": "Горілкa Staritsky & Levitsky Private Cellar в коробці",
+    "price": "1990.00 грн"
+  },
+  {
+    "id": 35,
+    "name": "Ром Havana Club Anejo",
+    "price": "667.00 грн"
+  },
+  {
+    "id": 36,
+    "name": "Арманьяк Saint-Vivant XO в коробці",
+    "price": "2669.00 грн"
+  },
+  {
+    "id": 37,
+    "name": "Чача KHAREBA",
+    "price": "669.00 грн"
+  },
+  {
+    "id": 38,
+    "name": "Ром Captain Morgan White",
+    "price": "519.00 грн"
+  },
+  {
+    "id": 39,
+    "name": "Кальвадос Прикарпатський",
+    "price": "209.00 грн"
+  },
+  {
+    "id": 40,
+    "name": "Diletta Grappa White",
+    "price": "649.00 грн"
+  },
+  {
+    "id": 41,
+    "name": "Джин Beefeater",
+    "price": "569.00 грн"
+  },
+  {
+    "id": 42,
+    "name": "Віскі Jim Beam White Label",
+    "price": "819.00 грн"
+  },
+  {
+    "id": 43,
+    "name": "Коньяк Hennessy V.S. в коробці",
+    "price": "1249.00 грн"
+  },
+  {
+    "id": 44,
+    "name": "Горілкa Staritsky & Levitsky Private Cellar в коробці",
+    "price": "1990.00 грн"
+  },
+  {
+    "id": 45,
+    "name": "Ром Havana Club Anejo",
+    "price": "667.00 грн"
+  },
+  {
+    "id": 46,
+    "name": "Арманьяк Saint-Vivant XO в коробці",
+    "price": "2669.00 грн"
+  },
+  {
+    "id": 47,
+    "name": "Чача KHAREBA",
+    "price": "669.00 грн"
+  },
+  {
+    "id": 48,
+    "name": "Ром Captain Morgan White",
+    "price": "519.00 грн"
+  },
+  {
+    "id": 49,
+    "name": "Кальвадос Прикарпатський",
+    "price": "209.00 грн"
+  },
+  {
+    "id": 50,
+    "name": "Diletta Grappa White",
+    "price": "649.00 грн"
+  },
+  {
+    "id": 51,
+    "name": "Джин Beefeater",
+    "price": "569.00 грн"
+  },
+  {
+    "id": 52,
+    "name": "Віскі Jim Beam White Label",
+    "price": "819.00 грн"
+  },
+  {
+    "id": 53,
+    "name": "Коньяк Hennessy V.S. в коробці",
+    "price": "1249.00 грн"
+  },
+  {
+    "id": 54,
+    "name": "Горілкa Staritsky & Levitsky Private Cellar в коробці",
+    "price": "1990.00 грн"
+  },
+  {
+    "id": 55,
+    "name": "Ром Havana Club Anejo",
+    "price": "667.00 грн"
+  },
+  {
+    "id": 56,
+    "name": "Арманьяк Saint-Vivant XO в коробці",
+    "price": "2669.00 грн"
+  },
+  {
+    "id": 57,
+    "name": "Чача KHAREBA",
+    "price": "669.00 грн"
+  },
+  {
+    "id": 58,
+    "name": "Ром Captain Morgan White",
+    "price": "519.00 грн"
+  },
+  {
+    "id": 59,
+    "name": "Кальвадос Прикарпатський",
+    "price": "209.00 грн"
+  },
+  {
+    "id": 60,
+    "name": "Diletta Grappa White",
+    "price": "649.00 грн"
+  },
+  {
+    "id": 61,
+    "name": "Джин Beefeater",
+    "price": "569.00 грн"
+  },
+  {
+    "id": 62,
+    "name": "Віскі Jim Beam White Label",
+    "price": "819.00 грн"
+  },
+  {
+    "id": 63,
+    "name": "Коньяк Hennessy V.S. в коробці",
+    "price": "1249.00 грн"
+  },
+  {
+    "id": 64,
+    "name": "Горілкa Staritsky & Levitsky Private Cellar в коробці",
+    "price": "1990.00 грн"
+  },
+  {
+    "id": 65,
+    "name": "Ром Havana Club Anejo",
+    "price": "667.00 грн"
+  },
+  {
+    "id": 66,
+    "name": "Арманьяк Saint-Vivant XO в коробці",
+    "price": "2669.00 грн"
+  },
+  {
+    "id": 67,
+    "name": "Чача KHAREBA",
+    "price": "669.00 грн"
+  },
+  {
+    "id": 68,
+    "name": "Ром Captain Morgan White",
+    "price": "519.00 грн"
+  },
+  {
+    "id": 69,
+    "name": "Кальвадос Прикарпатський",
+    "price": "209.00 грн"
+  },
+  {
+    "id": 70,
+    "name": "Diletta Grappa White",
+    "price": "649.00 грн"
+  },
+  {
+    "id": 71,
+    "name": "Джин Beefeater",
+    "price": "569.00 грн"
+  },
+  {
+    "id": 72,
+    "name": "Віскі Jim Beam White Label",
+    "price": "819.00 грн"
+  },
+  {
+    "id": 73,
+    "name": "Коньяк Hennessy V.S. в коробці",
+    "price": "1249.00 грн"
+  },
+  {
+    "id": 74,
+    "name": "Горілкa Staritsky & Levitsky Private Cellar в коробці",
+    "price": "1990.00 грн"
+  },
+  {
+    "id": 75,
+    "name": "Ром Havana Club Anejo",
+    "price": "667.00 грн"
+  },
+  {
+    "id": 76,
+    "name": "Арманьяк Saint-Vivant XO в коробці",
+    "price": "2669.00 грн"
+  },
+  {
+    "id": 77,
+    "name": "Чача KHAREBA",
+    "price": "669.00 грн"
+  },
+  {
+    "id": 78,
+    "name": "Ром Captain Morgan White",
+    "price": "519.00 грн"
+  },
+  {
+    "id": 79,
+    "name": "Кальвадос Прикарпатський",
+    "price": "209.00 грн"
+  },
+  {
+    "id": 80,
+    "name": "Diletta Grappa White",
+    "price": "649.00 грн"
+  },
+  {
+    "id": 81,
+    "name": "Джин Beefeater",
+    "price": "569.00 грн"
+  },
+  {
+    "id": 82,
+    "name": "Віскі Jim Beam White Label",
+    "price": "819.00 грн"
+  },
+  {
+    "id": 83,
+    "name": "Коньяк Hennessy V.S. в коробці",
+    "price": "1249.00 грн"
+  },
+  {
+    "id": 84,
+    "name": "Горілкa Staritsky & Levitsky Private Cellar в коробці",
+    "price": "1990.00 грн"
+  },
+  {
+    "id": 85,
+    "name": "Ром Havana Club Anejo",
+    "price": "667.00 грн"
+  },
+  {
+    "id": 86,
+    "name": "Арманьяк Saint-Vivant XO в коробці",
+    "price": "2669.00 грн"
+  },
+  {
+    "id": 87,
+    "name": "Чача KHAREBA",
+    "price": "669.00 грн"
+  },
+  {
+    "id": 88,
+    "name": "Ром Captain Morgan White",
+    "price": "519.00 грн"
+  },
+  {
+    "id": 89,
+    "name": "Кальвадос Прикарпатський",
+    "price": "209.00 грн"
+  },
+  {
+    "id": 90,
+    "name": "Diletta Grappa White",
+    "price": "649.00 грн"
+  },
+  {
+    "id": 91,
+    "name": "Коньяк Hennessy V.S. в коробці",
+    "price": "1249.00 грн"
+  },
+  {
+    "id": 92,
+    "name": "Горілкa Staritsky & Levitsky Private Cellar в коробці",
+    "price": "1990.00 грн"
+  },
+  {
+    "id": 93,
+    "name": "Ром Havana Club Anejo",
+    "price": "667.00 грн"
+  },
+  {
+    "id": 94,
+    "name": "Арманьяк Saint-Vivant XO в коробці",
+    "price": "2669.00 грн"
+  },
+  {
+    "id": 95,
+    "name": "Чача KHAREBA",
+    "price": "669.00 грн"
+  },
+  {
+    "id": 96,
+    "name": "Ром Captain Morgan White",
+    "price": "519.00 грн"
+  },
+  {
+    "id": 97,
+    "name": "Кальвадос Прикарпатський",
+    "price": "209.00 грн"
+  },
+  {
+    "id": 98,
+    "name": "Diletta Grappa White",
+    "price": "649.00 грн"
+  }
+]
