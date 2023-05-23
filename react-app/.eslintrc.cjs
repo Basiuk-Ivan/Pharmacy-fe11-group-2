@@ -19,6 +19,7 @@ module.exports = {
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'arrow-parens': ['error', 'as-needed'],
     'comma-dangle': 'off',
+    'import/prefer-default-export': 'off',
     'react/function-component-definition': [
       'error',
       {

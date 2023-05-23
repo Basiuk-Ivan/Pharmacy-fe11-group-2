@@ -3,10 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchPosts } from '../redux/todosSlice';
 
-const BlogPost = () => {
-  const posts = useSelector(state => state.posts.posts);
-
-  const { status, err } = useSelector(state => state.posts);
+const Products = () => {
+  const products = useSelector(state => state.products.products);
+  const { status, err } = useSelector(state => state.products.products);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -15,11 +14,12 @@ const BlogPost = () => {
 
   return (
     <>
-      <h2>Post</h2>
+      <h2>Products</h2>
 
-      {posts.map(post => (
-        <Link key={post.id} to={`/post/${post.id}`}>
-          <li>{post.title}</li>
+      {products.map(product => (
+        <Link key={product.id} to={`/products/${product.id}`}>
+          <li>{product.name}</li>
+          {/* <li>{product.title}</li> */}
         </Link>
       ))}
       {status === 'loading' && <h2>Loading</h2>}
@@ -28,4 +28,4 @@ const BlogPost = () => {
   );
 };
 
-export default BlogPost;
+export default Products;

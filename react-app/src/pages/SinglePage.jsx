@@ -1,23 +1,34 @@
-import { useParams, Link } from 'react-router-dom';
+import {
+  useParams
+  // Link
+} from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 const SinglePage = () => {
   const { id } = useParams();
-  const [posts, setPosts] = useState([]);
+  const [products, setProducts] = useState([]);
+
+  // useEffect(() => {
+  //   fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+  //     .then(res => res.json())
+  //     .then(data => setProducts(data));
+  // }, [id]);
 
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+    fetch('/products.json')
       .then(res => res.json())
-      .then(data => setPosts(data));
+      .then(data => {
+        const product = data.find(item => item.id === id);
+        setProducts(product);
+      });
   }, [id]);
 
   return (
     <div>
-      {posts && (
+      {products && (
         <>
-          <h2>{posts.title}</h2>
-          <div>{posts.body}</div>
-          <Link to={`/post/${id}/edit`}>Edit post</Link>
+          <h2>{products.name}</h2>
+          {/* <Link to={`/post/${id}/edit`}>Edit post</Link> */}
         </>
       )}
     </div>

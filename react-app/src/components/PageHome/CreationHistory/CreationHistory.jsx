@@ -1,20 +1,17 @@
 /* eslint-disable max-len */
 import { Box, Typography } from '@mui/material';
 import Card from './Card';
+import { mainBoxStyles, typographyCreatyHistory, typographyHistoryDesc } from './style';
 
 const CreationHistory = () => (
-  <Box sx={{ background: '#F7FAFB', padding: '88px 60px 50px', marginBottom: '30px', marginTop: '20px' }}>
+  <Box sx={mainBoxStyles}>
     <Box>
-      <Typography
-        fontFamily="Roboto"
-        component="div"
-        sx={{ fontSize: 36, fontWeight: 700, color: '#333333' }}
-      >
+      <Typography fontFamily="Roboto" component="div" sx={typographyCreatyHistory}>
         Історія створення
       </Typography>
     </Box>
     <Box>
-      <Typography fontFamily="Roboto" component="div" sx={{ fontSize: 18, color: '#828282' }}>
+      <Typography fontFamily="Roboto" component="div" sx={typographyHistoryDesc}>
         История ГК НЕОФАРМ начиналась в 2000 году как небольшой семейный бизнес – с открытия нескольких
         аптечных киосков в Красногорском районе Московской области. А возглавил его провизор, выпускник
         первого мед.института им. Сеченова - Евгений Нифантьев. А в 2013 году, на улице Толбухина, была

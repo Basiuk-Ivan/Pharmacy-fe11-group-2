@@ -1,7 +1,6 @@
 import { Box } from '@mui/material';
+import { wrapperForTestimonials } from './style';
 
-const Testimonials = () => (
-  <Box sx={{ background: '#F6FBFA', height: '500px', marginBottom: '30px' }}>Testimonials</Box>
-);
+const Testimonials = () => <Box sx={wrapperForTestimonials}>Testimonials</Box>;
 
 export default Testimonials;

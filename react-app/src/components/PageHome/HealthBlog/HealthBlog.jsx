@@ -1,30 +1,16 @@
 import { Box, Typography, Stack } from '@mui/material';
-import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
+import { healthBlogStyled, wrapperForItem, stack, Item } from './style';
 import selfTreatmentRisks from '../../../assets/healthBlog/samo.svg';
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-  width: '360px',
-  height: '375px'
-}));
 const HealthBlog = () => (
   <Box>
     <Box>
-      <Typography
-        fontFamily="Roboto"
-        component="div"
-        sx={{ fontSize: 36, fontWeight: 700, color: '#333333' }}
-      >
+      <Typography fontFamily="Roboto" component="div" sx={healthBlogStyled}>
         Блог про здоровʼя
       </Typography>
     </Box>
-    <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '30px' }}>
-      <Stack direction="row" spacing={2} sx={{ justifyContent: 'space-between', width: '100%' }}>
+    <Box sx={wrapperForItem}>
+      <Stack direction="row" spacing={2} sx={stack}>
         <Item>Item 1</Item>
         <Item>Item 2</Item>
         <Item>Item 3</Item>

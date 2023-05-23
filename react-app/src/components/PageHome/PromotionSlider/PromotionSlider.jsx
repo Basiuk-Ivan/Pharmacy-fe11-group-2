@@ -1,6 +1,7 @@
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Box, Typography } from '@mui/material';
 import { useSwiper, Swiper, SwiperSlide } from 'swiper/react';
+import { wrapperForPromotion, promotionStyles, swipper } from './style';
 import 'swiper/swiper-bundle.min.css';
 
 const SlideNextButton = () => {
@@ -25,18 +26,14 @@ const SlidePrevButton = () => {
 
 const PromotionSlider = () => (
   <Box>
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <Typography
-        fontFamily="Roboto"
-        component="div"
-        sx={{ fontSize: 36, fontWeight: 700, color: '#333333' }}
-      >
+    <Box sx={wrapperForPromotion}>
+      <Typography fontFamily="Roboto" component="div" sx={promotionStyles}>
         Акції місяця
       </Typography>
     </Box>
 
     <Swiper
-      style={{ height: '400px', backgroundColor: '#F6FBFA', marginBottom: '30px' }}
+      style={swipper}
       modules={[Navigation, Pagination, Scrollbar, A11y]}
       spaceBetween={50}
       slidesPerView={1}
