@@ -1,2 +1,3 @@
-import ProductCard from './ProductCard.jsx';
+import ProductCard from './ProductCard';
+
 export default ProductCard;

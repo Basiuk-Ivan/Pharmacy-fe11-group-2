@@ -14,6 +14,7 @@ module.exports = {
   settings: { react: { version: '18.2' } },
   plugins: ['react-refresh', 'prettier', 'jest'],
   rules: {
+    'react/prop-types': 'off',
     'react-refresh/only-export-components': 'warn',
     'react/react-in-jsx-scope': 0,
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
