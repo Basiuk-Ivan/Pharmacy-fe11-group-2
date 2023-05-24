@@ -10,7 +10,7 @@ const Layout = () => (
       <NavLink to="/post">Post</NavLink>
       <NavLink to="/cart">Cart</NavLink>
       {/*<Cart></Cart>*/}
-      {/*<AuthButton />*/}
+      <AuthButton />
     </header>
     <main>
       <Outlet />
