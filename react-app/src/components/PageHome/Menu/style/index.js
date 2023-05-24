@@ -16,7 +16,10 @@ export const menuStyles = {
 export const buttonStyles = {
   my: 2,
   color: 'white',
-  display: 'block'
+  display: 'block',
+  '&:hover': {
+    backgroundColor: 'rgb(47, 211, 189, 0.13)'
+  }
 };
 
 export const navLinkStyles = {

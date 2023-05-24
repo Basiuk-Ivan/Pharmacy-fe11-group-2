@@ -15,6 +15,7 @@ module.exports = {
   plugins: ['react-refresh', 'prettier', 'jest'],
   rules: {
     'react/prop-types': 'off',
+    'react/no-array-index-key': 'off',
     'react-refresh/only-export-components': 'warn',
     'react/react-in-jsx-scope': 0,
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
@@ -24,8 +25,8 @@ module.exports = {
     'react/function-component-definition': [
       'error',
       {
-        namedComponents: 'arrow-function',
-        unnamedComponents: 'arrow-function'
+        namedComponents: ['function-declaration', 'function-expression', 'arrow-function'],
+        unnamedComponents: ['function-expression', 'arrow-function']
       }
     ],
     'no-param-reassign': 'off',
