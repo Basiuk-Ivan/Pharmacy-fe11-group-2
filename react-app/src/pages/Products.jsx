@@ -22,15 +22,15 @@ const BlogPost = () => {
     setViewCards(response.slice((numPage - 1) * 24, (numPage - 1) * 24 + 24));
   }, [numPage]);
 
+  const wrap = {
+    width: 1200,
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: 'Roboto'
+  };
+
   return (
-    <Container
-      sx={{
-        width: 1200,
-        display: 'flex',
-        flexDirection: 'column',
-        fontFamily: 'Roboto'
-      }}
-    >
+    <Container sx={wrap}>
       <Box
         id="categoryCurrent"
         sx={{
@@ -170,7 +170,6 @@ const BlogPost = () => {
                 />
               </Box>
             </Box>
-
             <Box
               id="cardsWrapper"
               sx={{
