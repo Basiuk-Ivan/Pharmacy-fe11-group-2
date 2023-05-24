@@ -55,6 +55,7 @@ const ContactsForm = () => {
 
   useEffect(() => {
     formik.setFieldValue('paymentMethod', orderPaymentMethod);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderPaymentMethod]);
 
   return (
