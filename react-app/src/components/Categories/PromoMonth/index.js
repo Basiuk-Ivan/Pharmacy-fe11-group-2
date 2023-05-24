@@ -1,3 +1,3 @@
-import PromoMonth from "./PromoMonth";
+import PromoMonth from './PromoMonth';
 
 export default PromoMonth;
