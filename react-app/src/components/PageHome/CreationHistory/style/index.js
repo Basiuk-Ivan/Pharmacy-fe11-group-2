@@ -15,3 +15,16 @@ export const typographyHistoryDesc = {
   fontSize: 18,
   color: '#828282'
 };
+
+export const wrapForItemStyles = { marginTop: '20px' };
+
+export const textPeriodStyles = {
+  fontSize: '24px',
+  fontWeight: 700,
+  marginBottom: '10px'
+};
+
+export const textDescStyles = {
+  fontSize: '18px',
+  color: '#828282'
+};

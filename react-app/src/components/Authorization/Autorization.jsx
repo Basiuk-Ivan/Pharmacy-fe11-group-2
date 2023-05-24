@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-/* eslint-disable max-len */
 import React, { useState } from 'react';
 import { Modal, Tab, Tabs, TextField, Button, MenuItem, Typography } from '@mui/material';
 import { Formik, Form, ErrorMessage } from 'formik';
