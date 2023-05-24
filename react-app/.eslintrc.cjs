@@ -15,6 +15,7 @@ module.exports = {
   plugins: ['react-refresh', 'prettier', 'jest'],
   rules: {
     'react/prop-types': 'off',
+    'react/no-unescaped-entities': 'off',
     'react/no-array-index-key': 'off',
     'react-refresh/only-export-components': 'warn',
     'react/react-in-jsx-scope': 0,
