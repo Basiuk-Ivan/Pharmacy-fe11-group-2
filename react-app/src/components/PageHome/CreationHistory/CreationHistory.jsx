@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { Box, Typography } from '@mui/material';
 import Cards from './Cards';
 import { mainBoxStyles, typographyCreatyHistory, typographyHistoryDesc } from './style';

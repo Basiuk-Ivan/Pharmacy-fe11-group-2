@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 export const goods = {
   mainCategory: 'Ліки від кашлю, застуди та грипу',
   subCategory: 'Додаткова категорія',
