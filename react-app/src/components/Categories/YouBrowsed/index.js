@@ -1,3 +1,3 @@
-import YouBrowsed from "./YouBrowsed.jsx";
+import YouBrowsed from './YouBrowsed';
 
 export default YouBrowsed;

@@ -1,3 +1,3 @@
-import ChoiceCategory from "./ChoiceCategory.jsx";
+import ChoiceCategory from './ChoiceCategory';
 
 export default ChoiceCategory;

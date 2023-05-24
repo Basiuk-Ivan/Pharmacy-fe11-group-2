@@ -1,5 +1,9 @@
 import { Box, Typography, Stack } from '@mui/material';
-import { todayPharmacyStyles, itTypographyStyles, wrapperForItemStyles, stackStyles, Item } from './style';
+import { EmployeesOver5000 } from './Items/EmployeesOver5000';
+import { PharmaciesOver750 } from './Items/PharmaciesOver750';
+import { UkraineCities80 } from './Items/UkraineCities80';
+import { RealBigFamily } from './Items/RealBigFamily';
+import { todayPharmacyStyles, itTypographyStyles, wrapperForItemStyles, stackStyles } from './style';
 
 const TodayPharmacy = () => (
   <Box>
@@ -13,10 +17,10 @@ const TodayPharmacy = () => (
     </Box>
     <Box sx={wrapperForItemStyles}>
       <Stack direction="row" spacing={2} sx={stackStyles}>
-        <Item>Item 1</Item>
-        <Item>Item 2</Item>
-        <Item>Item 3</Item>
-        <Item>Item 4</Item>
+        <EmployeesOver5000 />
+        <PharmaciesOver750 />
+        <UkraineCities80 />
+        <RealBigFamily />
       </Stack>
     </Box>
   </Box>

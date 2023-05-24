@@ -1,15 +1,9 @@
 import { Box, Typography, Stack } from '@mui/material';
-import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
+import { ProductSelector } from './Items/ProductSelector';
+import { PharmacySelector } from './Items/PharmacySelector';
+import { OrderForm } from './Items/OrderForm';
+import { ReceiveProduct } from './Items/ReceiveProduct';
 import { howWeWorkStyled, wrapperForItemStyled, stack } from './style';
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary
-}));
 
 const HowWeWork = () => (
   <Box>
@@ -20,10 +14,10 @@ const HowWeWork = () => (
     </Box>
     <Box sx={wrapperForItemStyled}>
       <Stack direction="row" spacing={2} sx={stack}>
-        <Item>Item 1</Item>
-        <Item>Item 2</Item>
-        <Item>Item 3</Item>
-        <Item>Item 4</Item>
+        <ProductSelector />
+        <PharmacySelector />
+        <OrderForm />
+        <ReceiveProduct />
       </Stack>
     </Box>
   </Box>

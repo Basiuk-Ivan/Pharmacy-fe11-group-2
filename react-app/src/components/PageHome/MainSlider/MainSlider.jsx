@@ -1,32 +1,15 @@
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import { useSwiper, Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { SlidePrevButton } from './Button/SlidePrevButton';
+import { SlideNextButton } from './Button/SlideNextButton';
 import mainSlider1 from '../../../assets/mainSlider/mainSlider-1.png';
 import mainSlider2 from '../../../assets/mainSlider/mainSlider-2.png';
+import { swiperStyles } from './style';
 import 'swiper/swiper-bundle.min.css';
-
-const SlideNextButton = () => {
-  const swiper = useSwiper();
-
-  return (
-    <button type="button" onClick={() => swiper.slideNext()}>
-      Slide to the next slide
-    </button>
-  );
-};
-
-const SlidePrevButton = () => {
-  const swiper = useSwiper();
-
-  return (
-    <button type="button" onClick={() => swiper.slidePrev()}>
-      Slide to the PREV slide
-    </button>
-  );
-};
 
 const MainSlider = () => (
   <Swiper
-    style={{ height: '600px', marginBottom: '25px', backgroundColor: '#F6FBFA' }}
+    style={swiperStyles}
     modules={[Navigation, Pagination, Scrollbar, A11y]}
     spaceBetween={50}
     slidesPerView={1}

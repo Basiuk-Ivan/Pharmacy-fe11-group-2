@@ -1,16 +1,14 @@
 import { Box, Typography } from '@mui/material';
-import { experimentalStyled as styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import otpBank from '../../../assets/ourPartners/otpbank.png';
+import parisBank from '../../../assets/ourPartners/paribasbank.png';
+import paypal from '../../../assets/ourPartners/paypal.png';
+import raiffeisen from '../../../assets/ourPartners/raiffeisen.png';
+import yoomoney from '../../../assets/ourPartners/yoomoney.png';
+import ziraatbank from '../../../assets/ourPartners/ziraatbank.png';
 import { ourPartnersStyles, wrapperForGrid } from './style';
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: 'center',
-  color: theme.palette.text.secondary
-}));
+const imgOurPartners = [otpBank, parisBank, paypal, raiffeisen, yoomoney, ziraatbank];
 
 const OurPartners = () => (
   <Box>
@@ -21,10 +19,9 @@ const OurPartners = () => (
     </Box>
     <Box sx={wrapperForGrid}>
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 12, sm: 12, md: 12 }}>
-        {Array.from(Array(12)).map((_, index) => (
-          // eslint-disable-next-line react/no-array-index-key
+        {imgOurPartners.map((img, index) => (
           <Grid item xs={1} sm={1} md={2} key={index}>
-            <Item>xs=1</Item>
+            <img src={img} alt={`bank-${index}`} />
           </Grid>
         ))}
       </Grid>
