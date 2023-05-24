@@ -9,11 +9,13 @@ const UserActions = () => (
     <IconButton>
       <PermIdentityOutlinedIcon sx={{ fill: '#2FD3AE' }} />
     </IconButton>
+
     <NavLink to="/favourite">
       <IconButton>
         <FavoriteBorderOutlinedIcon sx={{ fill: '#2FD3AE' }} />
       </IconButton>
     </NavLink>
+
     <NavLink to="/cart">
       <IconButton size="large">
         <ShoppingCartOutlinedIcon sx={{ fill: '#2FD3AE' }} />

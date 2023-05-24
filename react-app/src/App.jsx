@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Home from './pages/Home';
 import Products from './pages/Products';
-import Cart from './pages/Cart';
+import Cart from './pages/Cart/Cart';
 import NotFound from './pages/NotFound';
 import SinglePage from './pages/SinglePage';
 import Layout from './components/Layout';

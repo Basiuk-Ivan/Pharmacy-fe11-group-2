@@ -1,4 +1,5 @@
-import { TextField, Grid, Typography, Button } from '@mui/material';
+/* eslint-disable no-console */
+import { TextField, Grid, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -41,7 +42,7 @@ const ContactsForm = () => {
       street: '',
       apartment: ''
     },
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit: values => {
       console.log(values);
     }
@@ -131,9 +132,6 @@ const ContactsForm = () => {
             />
           </Grid>
         </Grid>
-        <Button type="submit" variant="contained" color="primary" sx={{ marginTop: '20px' }}>
-          Submit
-        </Button>
       </form>
     </>
   );
