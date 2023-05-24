@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-export const fetchPosts = createAsyncThunk('post/fetchPosts', async (_, { rejectWithValue }) => {
+export const fetchPosts = createAsyncThunk('products/fetchPosts', async (_, { rejectWithValue }) => {
   try {
-    const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+    // const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const res = await fetch('/products.json');
 
     if (!res.ok) {
       throw new Error('Server Error');
@@ -15,17 +16,17 @@ export const fetchPosts = createAsyncThunk('post/fetchPosts', async (_, { reject
   }
 });
 
-const postsSlice = createSlice({
-  name: 'posts',
+const productsSlice = createSlice({
+  name: 'products',
   initialState: {
-    posts: [],
+    products: [],
     status: null,
     err: null
   },
   reducers: {
-    getPosts(state, action) {
-      state.posts.push(action.payload);
-      state.posts.reverse();
+    getProducts(state, action) {
+      state.products.push(action.payload);
+      state.products.reverse();
     }
   },
   extraReducers: builder => {
@@ -36,7 +37,7 @@ const postsSlice = createSlice({
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.status = 'resolved';
-        state.posts = action.payload;
+        state.products = action.payload;
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.status = 'rejected';
@@ -45,5 +46,5 @@ const postsSlice = createSlice({
   }
 });
 
-export const { getPosts } = postsSlice.actions;
-export default postsSlice.reducer;
+export const { getProducts } = productsSlice.actions;
+export default productsSlice.reducer;
