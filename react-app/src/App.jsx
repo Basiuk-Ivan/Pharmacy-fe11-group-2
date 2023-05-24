@@ -7,6 +7,7 @@ import NotFound from './pages/NotFound';
 import SinglePage from './pages/SinglePage';
 import Layout from './components/Layout';
 import Favourite from './pages/Favourite';
+import OrderProcess from './pages/OrderProcess';
 
 const theme = createTheme({
   direction: 'rtl'
@@ -21,6 +22,7 @@ const App = () => (
         <Route path="/products" element={<Products />} />
         <Route path="/favourite" element={<Favourite />} />
         <Route path="/products/:id" element={<SinglePage />} />
+        <Route path="/orderprocess" element={<OrderProcess />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
