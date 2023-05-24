@@ -17,7 +17,7 @@ import {
 
 const ContactInfo = () => (
   <Box sx={mainBoxStyles}>
-    <Box sx={wrapperBoxStyles}>
+    <Box sx={wrapperBoxStyles}>      
       <MailOutlineIcon sx={mailOutlineIconStyles} />
       <Box sx={wrapperForTextStyles}>
         <Typography fontFamily="Roboto" component="span" sx={emailStyles}>

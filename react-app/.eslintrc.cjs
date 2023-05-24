@@ -24,12 +24,13 @@ module.exports = {
     'react/function-component-definition': [
       'error',
       {
-        namedComponents: 'arrow-function',
-        unnamedComponents: 'arrow-function'
-      }
+        namedComponents: ['function-declaration', 'function-expression', 'arrow-function'],
+        unnamedComponents: ['function-expression', 'arrow-function'],
+      },
     ],
     'no-param-reassign': 'off',
     'react/jsx-one-expression-per-line': 'off',
     'object-curly-newline': 'off'
-  }
+  },
+
 };

@@ -39,9 +39,10 @@ const ContactsForm = () => {
       surname: '',
       phone: '',
       street: '',
-      apartment: ''
+      apartment: '',
+      paymentMethod: 'cash'
     },
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit: values => {
       console.log(values);
     }
@@ -131,9 +132,6 @@ const ContactsForm = () => {
             />
           </Grid>
         </Grid>
-        <Button type="submit" variant="contained" color="primary" sx={{ marginTop: '20px' }}>
-          Submit
-        </Button>
       </form>
     </>
   );
