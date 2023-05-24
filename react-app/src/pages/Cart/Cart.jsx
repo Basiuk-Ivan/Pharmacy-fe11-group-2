@@ -7,9 +7,9 @@ import {
   // fontSize,
   Stack
 } from '@mui/system';
-
+import { experimentalStyled as styled } from '@mui/material/styles';
 // import { removeItem } from '../../redux/cartSlice';
-import styled from 'styled-components';
+
 import './CartStyles.scss';
 
 const StyledBox = styled(Box)`
