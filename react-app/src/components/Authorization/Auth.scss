@@ -1,0 +1,76 @@
+.auth-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+}
+
+.auth-modal .MuiTabs-root {
+  width: 190px;
+}
+
+.auth-modal .MuiTab-root {
+  width: 50%;
+  text-align: center;
+}
+
+.auth-modal .MuiTabPanel-root {
+  padding: 20px;
+}
+
+.auth-modal .MuiFormControl-root {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.auth-modal .error-message {
+  color: red;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+}
+
+.auth-modal pre {
+  max-width: 90%;
+  overflow-x: auto;
+  background-color: #f7f7f7;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: left;
+  line-height: 1.4;
+  font-size: 14px;
+}
+#modal-modal-title{
+  font-family: 'Roboto', sans-serif;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  width: 450px;
+  height: 60px;
+}
+.auth-modal__container{
+  width: 600px;
+  background: white;
+  border-radius: 20px;
+  padding: 36px;
+}
+
+.footer_container{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  gap: 40px;
+}
+#modal-modal-footer{
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+
+}
+.auth-modal .MuiOutlinedInput-root{
+    border-radius: 26px;
+}
+
