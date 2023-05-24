@@ -2,7 +2,7 @@ import { Button, Grid } from '@mui/material';
 import PaymentMethodForm from './PaymentMethodForm/PaymentMethodForm';
 import TotalAmountForm from './TotalAmountForm/TotalAmountForm';
 
-const PaymentBlock = props => (
+const PaymentBlock = () => (
   <>
     <Grid
       container
