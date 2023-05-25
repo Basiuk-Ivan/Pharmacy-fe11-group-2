@@ -8,6 +8,7 @@ import SocialMediaButton from './SocialMediaButton/SocialMediaButton';
 import Menu from '../PageHome/Menu';
 import Footer from './Footer/Footer';
 import { appBarStyles, toolbarStyles } from './styleForLayout';
+import AuthButton from '../Authorization/Autorization.jsx';
 
 const Layout = () => (
   <Container maxWidth="100vh">
@@ -29,6 +30,7 @@ const Layout = () => (
       <Container position="relative" maxWidth="lg">
         <Menu />
         <Box>
+          <AuthButton />
           <Outlet />
         </Box>
       </Container>
