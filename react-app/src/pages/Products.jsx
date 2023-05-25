@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { Pagination, Box, Container } from '@mui/material';
+import { Pagination, Box, Container, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import SortIcon from '@mui/icons-material/Sort';
 
 import { CardTest } from '../components/PageProducts/cardTest';
@@ -17,6 +17,11 @@ const totalPage = Math.ceil(response.length / 24);
 function Products() {
   const [numPage, setNumPage] = useState(1);
   const [viewCards, setViewCards] = useState(response.slice(0, 24));
+  const [price, setPrice] = useState('');
+
+  const handleChange = event => {
+    setPrice(event.target.value);
+  };
 
   useEffect(() => {
     setViewCards(response.slice((numPage - 1) * 24, ((numPage - 1) * 24) + 24));
@@ -109,7 +114,7 @@ function Products() {
                     color: '#333333'
                   }}
                 >
-                  СОРТУВАТИ ПО
+                  СОРТУВАТИ ПО ЦІНІ
                 </Box>
 
                 <Box
@@ -131,28 +136,34 @@ function Products() {
                     <SortIcon />
                   </Box>
 
-                  <Box
-                    id="sortingTitlePrice"
-                    sx={{
-                      fontSize: '14px',
-                      fontWeight: '700',
-                      marginLeft: '8px'
-                    }}
-                  >
-                    По ціні
-                  </Box>
+                  <FormControl size="small" sx={{ m: 1, minWidth: 200, border: 'none' }}>
+                    <InputLabel id="demo-simple-select-label">Ціна</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={price}
+                      label="Ціна"
+                      onChange={handleChange}
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value={10}>Спочатку дешевші</MenuItem>
+                      <MenuItem value={20}>Спочатку дорожчі</MenuItem>
+                    </Select>
+                  </FormControl>
+                  {/* <Box */}
+                  {/*  id="sortingTitlePrice" */}
+                  {/*  sx={{ */}
+                  {/*    fontSize: '14px', */}
+                  {/*    fontWeight: '700', */}
+                  {/*    marginLeft: '8px' */}
+                  {/*  }} */}
+                  {/* > */}
+                  {/*  По ціні */}
+                  {/* </Box> */}
                 </Box>
 
-                <Box
-                  id="sortingTitlePopular"
-                  sx={{
-                    fontSize: '14px',
-                    fontWeight: '400',
-                    color: '#828282'
-                  }}
-                >
-                  По популярності
-                </Box>
               </Box>
 
               <Box
