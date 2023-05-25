@@ -1,11 +1,12 @@
 /* eslint-disable no-console */
-/* eslint-disable max-len */
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Modal, Tab, Tabs, TextField, Button, MenuItem, Typography } from '@mui/material';
 import { Formik, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import styled from 'styled-components';
-// import Auth from './Auth.scss';
+import { closeModal } from '../../redux/modalSlice';
+import './Auth.scss';
 
 const StyledButton = styled(Button)`
   width: 160px;
@@ -28,15 +29,14 @@ const CustomTextField = styled(TextField)`
 `;
 
 const AuthButton = () => {
-  const [showModal, setShowModal] = useState(false);
+  const isOpen = useSelector(state => state.openModal.openModal);
+  const dispatch = useDispatch();
+
   const [activeTab, setActiveTab] = useState('login');
 
-  // const handleModalOpen = () => {
-  //   setShowModal(true);
-  // };
-
-  const handleModalClose = () => {
-    setShowModal(false);
+  const handleCloseModal = () => {
+    dispatch(closeModal());
+    console.log('isOpen:', isOpen);
   };
 
   const handleTabChange = (event, newValue) => {
@@ -48,9 +48,9 @@ const AuthButton = () => {
   };
 
   return (
-    <Modal open={showModal} onClose={handleModalClose}>
+    <Modal open={isOpen} onClose={handleCloseModal}>
       <div className="auth-modal">
-        <container className="auth-modal__container">
+        <div className="auth-modal__container">
           <Tabs value={activeTab} onChange={handleTabChange}>
             <Tab label="Вхід" value="login" />
             <Tab label="Реєстрація" value="registration" />
@@ -116,7 +116,7 @@ const AuthButton = () => {
                       />
                       <ErrorMessage name="password" component="div" className="error-message" />
                     </div>
-                    <container className="footer_container">
+                    <div className="footer_container">
                       <StyledButton type="submit" variant="contained" color="success">
                         Вхід
                       </StyledButton>
@@ -126,7 +126,7 @@ const AuthButton = () => {
                           <HighlightSpan>персональних даних</HighlightSpan>
                         </UnderlineSpan>
                       </Typography>
-                    </container>
+                    </div>
                   </>
                 )}
 
@@ -233,7 +233,7 @@ const AuthButton = () => {
                       />
                       <ErrorMessage name="confirmPassword" component="div" className="error-message" />
                     </div>
-                    <container className="footer_container">
+                    <div className="footer_container">
                       <StyledButton type="submit" variant="contained" color="success">
                         Реєстрація
                       </StyledButton>
@@ -243,13 +243,13 @@ const AuthButton = () => {
                           <HighlightSpan>персональних даних</HighlightSpan>
                         </UnderlineSpan>
                       </Typography>
-                    </container>
+                    </div>
                   </>
                 )}
               </Form>
             )}
           </Formik>
-        </container>
+        </div>
       </div>
     </Modal>
   );

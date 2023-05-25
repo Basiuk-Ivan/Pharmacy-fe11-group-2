@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import {
@@ -18,7 +18,9 @@ import {
 const ContactInfo = () => (
   <Box sx={mainBoxStyles}>
     <Box sx={wrapperBoxStyles}>
-      <MailOutlineIcon sx={mailOutlineIconStyles} />
+      <IconButton>
+        <MailOutlineIcon sx={mailOutlineIconStyles} />
+      </IconButton>
       <Box sx={wrapperForTextStyles}>
         <Typography fontFamily="Roboto" component="span" sx={emailStyles}>
           info@restoll.UA
@@ -29,7 +31,9 @@ const ContactInfo = () => (
       </Box>
     </Box>
     <Box sx={wrapperForNumberPhoneStyles}>
-      <LocalPhoneIcon sx={localPhoneIconStyle} />
+      <IconButton>
+        <LocalPhoneIcon sx={localPhoneIconStyle} />
+      </IconButton>
       <Box sx={bodyForNumberPhoneStyles}>
         <Typography fontFamily="Roboto" component="span" sx={numberPhoneStyles}>
           8-800-777-22-33
