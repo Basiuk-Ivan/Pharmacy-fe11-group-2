@@ -1,11 +1,18 @@
-export const mainBoxStyles = {
+export const boxForDateStyles = {
   background: '#F7FAFB',
-  padding: '88px 60px 50px',
+  padding: '60px 60px 50px',
   marginBottom: '30px',
-  marginTop: '20px'
+  marginTop: '40px',
+  flexGrow: 1
+};
+
+export const historyTextStyles = {
+  fontSize: '30px',
+  fontWeight: 700
 };
 
 export const typographyCreatyHistory = {
+  marginTop: '20px',
   fontSize: 36,
   fontWeight: 700,
   color: '#333333'

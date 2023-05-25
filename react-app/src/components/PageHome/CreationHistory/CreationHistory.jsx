@@ -1,9 +1,9 @@
 import { Box, Typography } from '@mui/material';
 import Cards from './Cards';
-import { mainBoxStyles, typographyCreatyHistory, typographyHistoryDesc } from './style';
+import { typographyCreatyHistory, typographyHistoryDesc } from './style';
 
 const CreationHistory = () => (
-  <Box sx={mainBoxStyles}>
+  <Box>
     <Box>
       <Typography fontFamily="Roboto" component="div" sx={typographyCreatyHistory}>
         Історія створення
