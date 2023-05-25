@@ -1,6 +1,5 @@
 module.exports = {
   env: { browser: true, es2020: true, 'jest/globals': true },
-
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
@@ -15,6 +14,7 @@ module.exports = {
   plugins: ['react-refresh', 'prettier', 'jest'],
   rules: {
     'react/prop-types': 'off',
+    'max-len': ['error', { code: 110 }],
     'react/no-unescaped-entities': 'off',
     'react/no-array-index-key': 'off',
     'react-refresh/only-export-components': 'warn',
