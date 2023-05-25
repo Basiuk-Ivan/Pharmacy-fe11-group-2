@@ -6,16 +6,12 @@ import {
   Container
   // fontSize,
 } from '@mui/system';
-import { experimentalStyled as styled } from '@mui/material/styles';
-// import { removeItem } from '../../redux/cartSlice';
-<<<<<<< HEAD
 
-=======
+// import { removeItem } from '../../redux/cartSlice';
 import DeleteOutlineTwoToneIcon from '@mui/icons-material/DeleteOutlineTwoTone';
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 import styled from 'styled-components';
 import IconBreadcrumbs from './Breadcrums';
->>>>>>> d839c51c4c4c956566383427914a9ba5b0608ad0
 import './CartStyles.scss';
 
 const StyledBox = styled(Box)`
