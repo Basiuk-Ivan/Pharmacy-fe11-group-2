@@ -1,7 +1,13 @@
+export const containerStyles = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between'
+};
+
 export const appBarStyles = {
   boxShadow: 'none',
   backgroundColor: '#fff',
-  marginBottom: '85px',
+  marginBottom: '75px',
   marginTop: '5px'
 };
 

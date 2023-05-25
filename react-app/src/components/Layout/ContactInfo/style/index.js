@@ -8,8 +8,8 @@ export const mainBoxStyles = {
 export const wrapperBoxStyles = {
   display: 'flex',
   alignItems: 'center',
-  gap: '10px',
-  marginLeft: '20px'
+  gap: '10px'
+  // marginLeft: '20px'
 };
 
 export const mailOutlineIconStyles = { fill: '#2FD3AE' };
