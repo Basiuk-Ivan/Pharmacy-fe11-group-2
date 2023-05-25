@@ -36,7 +36,6 @@ const AuthButton = () => {
 
   const handleCloseModal = () => {
     dispatch(closeModal());
-    console.log('isOpen:', isOpen);
   };
 
   const handleTabChange = (event, newValue) => {
