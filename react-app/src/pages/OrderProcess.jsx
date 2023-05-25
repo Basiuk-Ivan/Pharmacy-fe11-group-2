@@ -16,7 +16,7 @@ const OrderProcess = () => (
       Оформити замовлення
     </Typography>
     <ContactsBlock />
-    <PaymentBlock handlePaymentMethod={handlePaymentMethod} />
+    <PaymentBlock />
     <Advantages />
   </Container>
 );

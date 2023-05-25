@@ -1,9 +1,9 @@
-import { Button, Grid } from '@mui/material';
+import { Button, Grid, Container } from '@mui/material';
 import PaymentMethodForm from './PaymentMethodForm/PaymentMethodForm';
 import TotalAmountForm from './TotalAmountForm/TotalAmountForm';
 
 const PaymentBlock = () => (
-  <>
+  <Container>
     <Grid
       container
       sx={{
@@ -55,7 +55,7 @@ const PaymentBlock = () => (
         </Button>
       </Grid>
     </Grid>
-  </>
+  </Container>
 );
 
 export default PaymentBlock;
