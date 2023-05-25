@@ -25,7 +25,7 @@ module.exports = {
       'error',
       {
         namedComponents: ['function-declaration', 'function-expression', 'arrow-function'],
-        unnamedComponents: ['function-expression', 'arrow-function'],
+        unnamedComponents: ['function-expression', 'arrow-function']
       }
     ],
     'no-param-reassign': 'off',
