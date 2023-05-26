@@ -75,7 +75,7 @@ function PromoMonth() {
               cursor: 'pointer'
             }}
           >
-              <ProductCard productItem={item} />
+            <ProductCard productItem={item} />
           </Box>
         ))}
       </Box>
