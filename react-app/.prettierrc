@@ -6,5 +6,6 @@
   "singleQuote": true,
   "arrowParens": "avoid",
   "bracketSpacing": true,
-  "newlineBeforeReturn": true
+  "newlineBeforeReturn": true,
+  "proseWrap": "always"
 }
