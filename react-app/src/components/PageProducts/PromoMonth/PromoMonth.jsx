@@ -1,13 +1,12 @@
 import { Box, Typography } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { CardTest } from '../cardTest';
-import { requestTest } from '../../../tools/requestTest';
-
-const response = await requestTest('./drinks.json');
+import { useSelector } from 'react-redux';
+import ProductCard from '../../ProductCard/ProductCard';
 
 function PromoMonth() {
-  const promoMonthCards = response.slice(0, 5);
+  const { products } = useSelector(state => state.products);
+  const promoMonthCards = products.slice(0, 5);
 
   return (
     <Box
@@ -76,7 +75,7 @@ function PromoMonth() {
               cursor: 'pointer'
             }}
           >
-            <CardTest id={item.id} name={item.name} price={item.price} />
+              <ProductCard productItem={item} />
           </Box>
         ))}
       </Box>

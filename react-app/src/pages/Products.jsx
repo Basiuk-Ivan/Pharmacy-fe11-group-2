@@ -4,8 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Pagination, Box, Container, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import SortIcon from '@mui/icons-material/Sort';
 
-// import { CardTest } from '../components/PageProducts/cardTest';
-// import { requestTest } from '../tools/requestTest';
 import ProductCard from '../components/ProductCard/ProductCard';
 
 import Filter from '../components/PageProducts/Filter';
@@ -14,14 +12,12 @@ import PromoMonth from '../components/PageProducts/PromoMonth';
 import YouBrowsed from '../components/PageProducts/YouBrowsed';
 import { fetchPosts } from '../redux/productsSlice';
 
-// const response = await requestTest('./drinks.json');
-
 function Products() {
   // const { products, status, err } = useSelector(state => state.products);
   const { products } = useSelector(state => state.products);
-  const totalPage = Math.ceil(products.length / 2);
+  const totalPage = Math.ceil(products.length / 4);
   const [numPage, setNumPage] = useState(1);
-  const [viewCards, setViewCards] = useState(products.slice(0, 2));
+  const [viewCards, setViewCards] = useState(products.slice(0, 4));
   const [price, setPrice] = useState('');
 
   const dispatch = useDispatch();
@@ -35,7 +31,7 @@ function Products() {
   }, [dispatch, products.length]);
 
   useEffect(() => {
-    setViewCards(products.slice((numPage - 1) * 2, ((numPage - 1) * 2) + 2));
+    setViewCards(products.slice((numPage - 1) * 4, ((numPage - 1) * 4) + 4));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [numPage]);
 
@@ -218,7 +214,6 @@ function Products() {
                   }}
                 >
                   <ProductCard productItem={item} />
-                  {/* <CardTest id={item.id} name={item.name} price={item.price} /> */}
                 </Box>
               ))}
             </Box>
