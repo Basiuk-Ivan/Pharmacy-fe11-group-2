@@ -1,54 +1,40 @@
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import { useSwiper, Swiper, SwiperSlide } from 'swiper/react';
-import mainSlider1 from '../../../assets/mainSlider/mainSlider-1.png';
-import mainSlider2 from '../../../assets/mainSlider/mainSlider-2.png';
+import { Swiper, SwiperSlide } from 'swiper/react';
+// import mainSlider2 from '../../../assets/mainSlider/mainSlider-2.png';
+import { swiperStyles } from './style';
+import { OralB } from './Item/OralB';
 import 'swiper/swiper-bundle.min.css';
-
-const SlideNextButton = () => {
-  const swiper = useSwiper();
-
-  return (
-    <button type="button" onClick={() => swiper.slideNext()}>
-      Slide to the next slide
-    </button>
-  );
-};
-
-const SlidePrevButton = () => {
-  const swiper = useSwiper();
-
-  return (
-    <button type="button" onClick={() => swiper.slidePrev()}>
-      Slide to the PREV slide
-    </button>
-  );
-};
+import './style/MainPaginationSlider.scss';
 
 const MainSlider = () => (
   <Swiper
-    style={{ height: '600px', marginBottom: '25px', backgroundColor: '#F6FBFA' }}
+    style={swiperStyles}
     modules={[Navigation, Pagination, Scrollbar, A11y]}
     spaceBetween={50}
     slidesPerView={1}
     loop
-    navigation
-    pagination={{ clickable: true }}
-    scrollbar={{ draggable: true }}
+    navigation={{
+      prevEl: '.swiper-button-prev',
+      nextEl: '.swiper-button-next'
+    }}
+    pagination={{ clickable: true, el: '.swiper-pagination' }}
+    scrollbar={false}
   >
-    <SlidePrevButton />
     <SwiperSlide>
-      <img src={mainSlider1} alt="1" />
+      <OralB />
     </SwiperSlide>
     <SwiperSlide>
-      <img src={mainSlider2} alt="2" />
+      <OralB />
     </SwiperSlide>
     <SwiperSlide>
-      <img src={mainSlider1} alt="1" />
+      <OralB />
     </SwiperSlide>
     <SwiperSlide>
-      <img src={mainSlider2} alt="2" />
+      <OralB />
     </SwiperSlide>
-    <SlideNextButton />
+    <div className="swiper-button-prev" />
+    <div className="swiper-button-next" />
+    <div className="swiper-pagination custom-pagination" />
   </Swiper>
 );
 

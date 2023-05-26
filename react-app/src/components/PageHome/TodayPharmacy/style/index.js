@@ -9,7 +9,47 @@ export const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary
 }));
 
-export const todayPharmacyStyles = { fontSize: 24, fontWeight: 700, color: '#333333' };
-export const itTypographyStyles = { fontSize: 18, color: '#828282' };
-export const wrapperForItemStyles = { display: 'flex', justifyContent: 'center', marginBottom: '30px' };
-export const stackStyles = { justifyContent: 'space-between', width: '100%' };
+export const todayPharmacyStyles = {
+  fontSize: 24,
+  fontWeight: 700,
+  color: '#333333'
+};
+
+export const itTypographyStyles = {
+  fontSize: 18,
+  color: '#828282',
+  marginBottom: '15px'
+};
+
+export const wrapperForItemStyles = {
+  display: 'flex',
+  justifyContent: 'center',
+  marginBottom: '30px'
+};
+
+export const stackStyles = {
+  justifyContent: 'space-between',
+  width: '100%'
+};
+
+export const wrapperForItem = {
+  display: 'flex',
+  alignItems: 'center',
+  width: '264px',
+  gap: '8px'
+};
+
+export const wrapperForImg = {
+  backgroundColor: '#2FD3AE',
+  borderRadius: '50%',
+  minWidth: '55px',
+  minHeight: '55px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center'
+};
+
+export const textStyles = {
+  color: '#4F4F4F',
+  fontSize: '15px'
+};

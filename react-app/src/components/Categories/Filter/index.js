@@ -1,3 +1,3 @@
-import Filter from "./Filter.jsx";
+import Filter from './Filter';
 
 export default Filter;
