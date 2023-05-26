@@ -1,25 +1,24 @@
 import {Box, Container, Typography} from '@mui/material';
-import {menuStyles, footer, footerImg, logoText, logoTextLt} from './style';
-import logo from "../../../assets/footer_logo.svg";
+import {
+  footer,
+ background
+} from './style';
+import {Logo} from "./items/Logo.jsx";
+import {AboutCompanyList} from "./items/AboutCompanyList.jsx";
+import {FeedBackList} from "./items/FeedBackList.jsx";
+import {FooterMail} from "./items/FooterMail.jsx";
+import {DescComp} from "./items/DescComp.jsx";
 
 const Footer = () => (
   <Box
-    sx={menuStyles}
+    sx={background}
   >
     <Container sx={footer}>
-    <Box>
-      <Typography component="img" alt="Логотип" src={logo} sx={footerImg}></Typography>
-      <Typography fontFamily="Roboto" component="p" sx={logoText}>
-        Аптека.онлайн
-      </Typography>
-      <Typography fontFamily="Roboto" component="p" sx={logoTextLt}>
-        Ваша онлайн аптека
-      </Typography>
-    </Box>
-    <Box>dhdhdghdghdhdffddhdhd</Box>
-    <Box></Box>
-    <Box></Box>
-    <Box></Box>
+    <Logo/>
+    <AboutCompanyList/>
+    <FeedBackList/>
+    <FooterMail/>
+    <DescComp/>
     </Container>
   </Box>
 );
