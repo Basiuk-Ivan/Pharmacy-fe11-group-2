@@ -126,11 +126,11 @@ function Filter() {
 
       <FormGroup sx={{ color: '#4F4F4F', padding: '0 9px' }}>
         {/* eslint-disable-next-line max-len */}
-        <FormControlLabel control={<Checkbox icon={<ReceiptLongIcon fontSize="small" sx={{ marginRight: '5px' }} />} checkedIcon={<ReceiptLongIcon fontSize="small" sx={{ color: '#12e00c', marginRight: '5px' }} />} />} label="Без рецепта" />
+        <FormControlLabel control={<Checkbox sx={{ ':hover': { color: '#1f1e1e', fontWeight: '600' } }} icon={<ReceiptLongIcon fontSize="small" sx={{ marginRight: '5px' }} />} checkedIcon={<ReceiptLongIcon fontSize="small" sx={{ color: '#12e00c', marginRight: '5px' }} />} />} label="Без рецепта" />
         {/* eslint-disable-next-line max-len */}
-        <FormControlLabel sx={{ marginRight: '0', fontSize: '10px' }} control={<Checkbox icon={<PregnantWomanIcon />} checkedIcon={<PregnantWomanIcon sx={{ color: '#12e00c' }} />} />} label="Дозволено вагітним" />
+        <FormControlLabel sx={{ marginRight: '0', fontSize: '10px' }} control={<Checkbox sx={{ ':hover': { color: '#1f1e1e', fontWeight: '600' } }} icon={<PregnantWomanIcon />} checkedIcon={<PregnantWomanIcon sx={{ color: '#12e00c' }} />} />} label="Дозволено вагітним" />
         {/* eslint-disable-next-line max-len */}
-        <FormControlLabel control={<Checkbox icon={<BabyChangingStationIcon />} checkedIcon={<BabyChangingStationIcon sx={{ color: '#12e00c' }} />} />} label="Дозволено дітям" />
+        <FormControlLabel control={<Checkbox sx={{ ':hover': { color: '#1f1e1e', fontWeight: '600' } }} icon={<BabyChangingStationIcon />} checkedIcon={<BabyChangingStationIcon sx={{ color: '#12e00c' }} />} />} label="Дозволено дітям" />
       </FormGroup>
 
       <Box
