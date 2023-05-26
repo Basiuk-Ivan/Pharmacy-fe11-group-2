@@ -1,6 +1,5 @@
-/* eslint-disable no-unused-vars */
 export function CardTest(props) {
-  const { id, name, price } = props;
+  const { id } = props;
 
   return (
     <div>

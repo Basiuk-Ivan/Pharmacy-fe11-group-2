@@ -1,19 +1,16 @@
-import {Box, IconButton, Typography} from "@mui/material";
-import {descMail, footerMail, mail, mailStyle, phone, social} from "../style/index.js";
-import MailOutlineIcon from "@mui/icons-material/MailOutline.js";
+import { Box, IconButton, Typography } from '@mui/material';
 import DraftsOutlinedIcon from '@mui/icons-material/DraftsOutlined';
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
-import {
- localPhoneIconStyle,
-  mailOutlineIconStyles,
-} from "../../ContactInfo/style/index.js";
-import LocalPhoneIcon from "@mui/icons-material/LocalPhone.js";
-import FacebookIcon from "@mui/icons-material/Facebook.js";
-import InstagramIcon from "@mui/icons-material/Instagram.js";
-import YouTubeIcon from "@mui/icons-material/YouTube.js";
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import YouTubeIcon from '@mui/icons-material/YouTube';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-
+import {
+  localPhoneIconStyle,
+  mailOutlineIconStyles,
+} from '../../ContactInfo/style/index';
+import { descMail, footerMail, mail, mailStyle, phone, social } from '../style/index';
 
 export const FooterMail = () => (
   <Box sx={footerMail}>

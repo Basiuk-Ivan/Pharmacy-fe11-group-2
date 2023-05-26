@@ -1,15 +1,12 @@
-/* eslint-disable no-unused-vars */
 import { Box, Typography } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { useState } from 'react';
-import { CardTest } from '../cardTest';
-import { requestTest } from '../../../tools/requestTest';
-
-const response = await requestTest('./drinks.json');
+import { useSelector } from 'react-redux';
+import ProductCard from '../../ProductCard/ProductCard';
 
 function PromoMonth() {
-  const [promoMonthCards, setPromoMonthCards] = useState(response.slice(0, 5));
+  const { products } = useSelector(state => state.products);
+  const promoMonthCards = products.slice(0, 5);
 
   return (
     <Box
@@ -17,9 +14,10 @@ function PromoMonth() {
       sx={{
         margin: '75px 0 35px 0',
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
       }}
     >
+
       <Box
         id="promoMonthTitleWrapper"
         sx={{
@@ -28,12 +26,11 @@ function PromoMonth() {
           alignItems: 'center'
         }}
       >
-        <Typography
-          sx={{
-            color: '#333333',
-            fontSize: '36px',
-            fontWeight: '700'
-          }}
+        <Typography sx={{
+          color: '#333333',
+          fontSize: '36px',
+          fontWeight: '700'
+        }}
         >
           Акції місяця
         </Typography>
@@ -61,6 +58,7 @@ function PromoMonth() {
           marginBottom: '30px'
         }}
       >
+
         {promoMonthCards.map(item => (
           <Box
             id="cardWrapper"
@@ -77,7 +75,7 @@ function PromoMonth() {
               cursor: 'pointer'
             }}
           >
-            <CardTest id={item.id} name={item.name} price={item.price} />
+            <ProductCard productItem={item} />
           </Box>
         ))}
       </Box>
