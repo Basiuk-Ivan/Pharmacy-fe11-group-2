@@ -1,9 +1,9 @@
-import { Button, Grid } from '@mui/material';
+import { Button, Grid, Container } from '@mui/material';
 import PaymentMethodForm from './PaymentMethodForm/PaymentMethodForm';
 import TotalAmountForm from './TotalAmountForm/TotalAmountForm';
 
 const PaymentBlock = () => (
-  <>
+  <Container>
     <Grid
       container
       sx={{
@@ -39,18 +39,23 @@ const PaymentBlock = () => (
       </Grid>
     </Grid>
 
-    <Button
-      variant="contained"
-      type="submit"
-      form="contacts"
-      sx={{
-        backgroundColor: '#2FD3AE',
-        borderRadius: 50,
-        mt: '50px'
-      }}
-    >
-      Підтвердити замовлення
-    </Button>
-  </>
+    <Grid container>
+      <Grid item md={7} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Button
+          variant="contained"
+          type="submit"
+          form="contacts"
+          sx={{
+            backgroundColor: '#2FD3AE',
+            borderRadius: 50,
+            mt: '50px',
+          }}
+        >
+          Підтвердити замовлення
+        </Button>
+      </Grid>
+    </Grid>
+  </Container>
 );
+
 export default PaymentBlock;
