@@ -1,14 +1,5 @@
 import { useState } from 'react';
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  IconButton,
-  Typography,
-  Box,
-  Rating,
-  Stack,
-} from '@mui/material';
+import { Card, CardContent, CardMedia, IconButton, Typography, Box, Rating, Stack } from '@mui/material';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import s from './ProductCard.module.scss';
 
@@ -17,12 +8,8 @@ const ProductCard = ({ productItem }) => {
 
   return (
     <Card sx={{ width: '278px', position: 'relative' }}>
-      <CardMedia
-        sx={{ height: 160 }}
-        image={productItem?.img[0]}
-        title="productImage"
-      />
-      <CardContent>
+      <CardMedia sx={{ height: 160 }} image={productItem?.img[0]} title="productImage" />
+      <CardContent sx={{ display: 'flex', flexDirection: 'column' }}>
         <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mt: '22px' }}>
           <Typography variant="p" gutterBottom sx={{ fontSize: '12px', fontWeight: 700, color: '#2FD3AE' }}>
             {productItem.quantity > 0 ? 'Є в наявності' : 'Товар відсутній'}
@@ -66,7 +53,7 @@ const ProductCard = ({ productItem }) => {
           </Stack>
         </Box>
 
-        <Stack spacing={2} direction="row" justifyContent="space-between" sx={{ mb: 1, }}>
+        <Stack spacing={2} direction="row" justifyContent="space-between" sx={{ mb: 1 }}>
           <Stack direction="column">
             <Typography variant="body1" sx={{ fontSize: '24px', fontWeight: 700, color: '#525A68' }}>
               {productItem.discount > 0
@@ -74,32 +61,32 @@ const ProductCard = ({ productItem }) => {
                 : `${productItem.price} ГРН.`}
             </Typography>
 
-            {productItem.discount > 0
-                            && (
-                            <Typography
-                              variant="body2"
-                              sx={{
-                                fontSize: '14px',
-                                fontWeight: 700,
-                                color: '#DD8888',
-                                textDecoration: 'line-through'
-                              }}
-                            >
-                              {productItem.price} ГРН.
-                            </Typography>
-                            )}
+            {productItem.discount > 0 && (
+              <Typography
+                variant="body2"
+                sx={{
+                  fontSize: '14px',
+                  fontWeight: 700,
+                  color: '#DD8888',
+                  textDecoration: 'line-through'
+                }}
+              >
+                {productItem.price} ГРН.
+              </Typography>
+            )}
           </Stack>
 
-          <IconButton sx={{
-            backgroundColor: '#2FD3AE',
-            borderRadius: '50%',
-            height: '50px',
-            width: '50px',
-            color: '#ffffff',
-            '&:hover': {
-              backgroundColor: 'orange'
-            }
-          }}
+          <IconButton
+            sx={{
+              backgroundColor: '#2FD3AE',
+              borderRadius: '50%',
+              height: '50px',
+              width: '50px',
+              color: '#ffffff',
+              '&:hover': {
+                backgroundColor: 'orange'
+              }
+            }}
           >
             <ShoppingCartOutlinedIcon />
           </IconButton>

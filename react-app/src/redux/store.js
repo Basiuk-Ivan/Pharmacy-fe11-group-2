@@ -1,12 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import orderProcessSlice from './orderProcessSlice';
-import productsSlice from './todosSlice';
 import orderReducer from './orderProcessSlice';
+import productsSlice from './productsSlice';
+import modalSlice from './modalSlice';
 
 const store = configureStore({
   reducer: {
     products: productsSlice,
     order: orderReducer,
+    openModal: modalSlice
   }
 });
 
