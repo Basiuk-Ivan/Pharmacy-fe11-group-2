@@ -1,12 +1,18 @@
 export const menuStyles = {
-  bottom: 0,
-  left: 0,
   background: 'linear-gradient(45deg, #011D71 30%, #2FD3BD 90%)',
-
-  flexGrow: 1,
-  display: { xs: 'none', md: 'flex' },
-  justifyContent: 'center',
+  display: 'flex',
+  justifyContent: 'space-between',
   gap: '100px',
   width: '100%',
-  height: '100px'
 };
+
+export const footer = {
+  marginTop: '164px'
+};
+
+export const footerImg = {
+
+}
+
+export const logoText = {}
+export const logoTextLt = {}

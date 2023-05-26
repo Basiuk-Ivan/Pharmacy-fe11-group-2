@@ -10,7 +10,7 @@ import Footer from './Footer/Footer';
 import { appBarStyles, toolbarStyles } from './styleForLayout';
 
 const Layout = () => (
-  <Container maxWidth="100vh">
+  <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100vh'}}>
     <Container
       sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
       position="relative"
@@ -34,7 +34,7 @@ const Layout = () => (
       </Container>
     </Container>
     <Footer />
-  </Container>
+  </Box>
 );
 
 export default Layout;
