@@ -1,7 +1,11 @@
-import {Box} from "@mui/material";
-import {descComp} from "../style/index.js";
-
-
+import { Box, Typography } from '@mui/material';
+import { descComp } from '../style/index';
+// Тут був видалений текст
 export const DescComp = () => (
-  <Box sx={descComp}>Общество с ограниченной ответственностью «еАптека»; Адрес: Москва, Фрунзенская набережная, дом 42, цокольный этаж, помещение I, комната 2; Лицензия: ЛО-50-02-007632 от 27 ноября 2020 г.; ЛО-77-02-011346 от 22 декабря 2020 г.; ОГРН: 1147746631988, ИНН 7704865540</Box>
+
+  <Box sx={descComp}>
+    <Typography>
+      Общество с ограниченной ответственностью «еАптека»;
+    </Typography>
+  </Box>
 );

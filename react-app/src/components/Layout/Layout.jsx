@@ -8,10 +8,10 @@ import UserActions from './UserActions';
 import SocialMediaButton from './SocialMediaButton/SocialMediaButton';
 import Menu from '../PageHome/Menu';
 import Footer from './Footer/Footer';
-import { appBarStyles, toolbarStyles, containerStyles } from './style';
+import { appBarStyles, toolbarStyles } from './style';
 
 const Layout = () => (
-  <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100vh'}}>
+  <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100vh' }}>
     <Container
       sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
       position="relative"
