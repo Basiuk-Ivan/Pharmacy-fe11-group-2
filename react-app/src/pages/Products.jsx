@@ -1,30 +1,42 @@
 import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Pagination, Box, Container, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import SortIcon from '@mui/icons-material/Sort';
 
-import { CardTest } from '../components/PageProducts/cardTest';
-import { requestTest } from '../tools/requestTest';
+// import { CardTest } from '../components/PageProducts/cardTest';
+// import { requestTest } from '../tools/requestTest';
+import ProductCard from '../components/ProductCard/ProductCard';
 
 import Filter from '../components/PageProducts/Filter';
 import ChoiceCategory from '../components/PageProducts/ChoiceCategory';
 import PromoMonth from '../components/PageProducts/PromoMonth';
 import YouBrowsed from '../components/PageProducts/YouBrowsed';
+import { fetchPosts } from '../redux/productsSlice';
 
-const response = await requestTest('./drinks.json');
-const totalPage = Math.ceil(response.length / 24);
+// const response = await requestTest('./drinks.json');
 
 function Products() {
+  // const { products, status, err } = useSelector(state => state.products);
+  const { products } = useSelector(state => state.products);
+  const totalPage = Math.ceil(products.length / 2);
   const [numPage, setNumPage] = useState(1);
-  const [viewCards, setViewCards] = useState(response.slice(0, 24));
+  const [viewCards, setViewCards] = useState(products.slice(0, 2));
   const [price, setPrice] = useState('');
+
+  const dispatch = useDispatch();
 
   const handleChange = event => {
     setPrice(event.target.value);
   };
 
   useEffect(() => {
-    setViewCards(response.slice((numPage - 1) * 24, ((numPage - 1) * 24) + 24));
+    dispatch(fetchPosts());
+  }, [dispatch, products.length]);
+
+  useEffect(() => {
+    setViewCards(products.slice((numPage - 1) * 2, ((numPage - 1) * 2) + 2));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [numPage]);
 
   return (
@@ -121,7 +133,7 @@ function Products() {
                   id="sortingTitlePriceWrapper"
                   sx={{
                     display: 'flex',
-                    color: '#71C476',
+                    color: '#2fd3ae',
                     alignItems: 'center'
                   }}
                 >
@@ -152,16 +164,6 @@ function Products() {
                       <MenuItem value={20}>Спочатку дорожчі</MenuItem>
                     </Select>
                   </FormControl>
-                  {/* <Box */}
-                  {/*  id="sortingTitlePrice" */}
-                  {/*  sx={{ */}
-                  {/*    fontSize: '14px', */}
-                  {/*    fontWeight: '700', */}
-                  {/*    marginLeft: '8px' */}
-                  {/*  }} */}
-                  {/* > */}
-                  {/*  По ціні */}
-                  {/* </Box> */}
                 </Box>
 
               </Box>
@@ -205,7 +207,7 @@ function Products() {
                   key={item.id}
                   sx={{
                     width: '206px',
-                    height: '300px',
+                    minHeight: '300px',
                     backgroundColor: '#c4c2cc',
                     display: 'flex',
                     justifyContent: 'center',
@@ -215,7 +217,8 @@ function Products() {
                     cursor: 'pointer'
                   }}
                 >
-                  <CardTest id={item.id} name={item.name} price={item.price} />
+                  <ProductCard productItem={item} />
+                  {/* <CardTest id={item.id} name={item.name} price={item.price} /> */}
                 </Box>
               ))}
             </Box>

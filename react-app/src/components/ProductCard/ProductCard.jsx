@@ -9,7 +9,7 @@ const ProductCard = ({ productItem }) => {
   return (
     <Card sx={{ width: '278px', position: 'relative' }}>
       <CardMedia sx={{ height: 160 }} image={productItem?.img[0]} title="productImage" />
-      <CardContent>
+      <CardContent sx={{ display: 'flex', flexDirection: 'column' }}>
         <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mt: '22px' }}>
           <Typography variant="p" gutterBottom sx={{ fontSize: '12px', fontWeight: 700, color: '#2FD3AE' }}>
             {productItem.quantity > 0 ? 'Є в наявності' : 'Товар відсутній'}

@@ -1,10 +1,5 @@
 import {
   Box,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Slider,
   TextField,
   Typography,
   FormGroup,
@@ -13,24 +8,23 @@ import {
   Button, Accordion, AccordionSummary, AccordionDetails
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Favorite, FavoriteBorder } from '@mui/icons-material';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import PregnantWomanIcon from '@mui/icons-material/PregnantWoman';
-import ChildCareIcon from '@mui/icons-material/ChildCare';
-import CheckIcon from '@mui/icons-material/Check';
 import BabyChangingStationIcon from '@mui/icons-material/BabyChangingStation';
+
+import FilterSlider from './FilterSlider/FilterSlider';
 
 function Filter() {
   return (
     <Box
-      title="filterWrapper"
+      id="filterWrapper"
       sx={{
         boxShadow: '0px 5px 20px 0px #0B361D1A',
         // padding: '0 9px'
       }}
     >
       <Box
-        title="titleCategory"
+        id="titleCategory"
         sx={{
           borderBottom: '1px solid #F5F5F5',
           height: '57px',
@@ -45,69 +39,45 @@ function Filter() {
         ФІЛЬТР
       </Box>
 
-      {/* <FormControl fullWidth> */}
-      {/*  <InputLabel id="demo-simple-select-label">Ціна</InputLabel> */}
-      {/*  <Select */}
-      {/*    labelId="demo-simple-select-label" */}
-      {/*    id="demo-simple-select" */}
-      {/*    value="" */}
-      {/*    label="Ціна" */}
-      {/*              // onChange={handleChange} */}
-      {/*    sx={{ border: 'none' }} */}
-      {/*  > */}
-      {/*    <MenuItem value={1}>Спочатку дешевші</MenuItem> */}
-      {/*    <MenuItem value={2}>Спочатку дорожчі</MenuItem> */}
-      {/*  </Select> */}
-      {/* </FormControl> */}
-
-      <Accordion sx={{marginBottom: '15px'}}>
+      <Accordion sx={{ marginBottom: '15px' }}>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={<ExpandMoreIcon sx={{ ':hover': { color: '#1f1e1e', fontWeight: '600' } }} />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography>Ціна</Typography>
+          {/* eslint-disable-next-line max-len */}
+          <Typography sx={{ color: '#4F4F4F', ':hover': { color: '#1f1e1e', fontWeight: '600', paddingRight: '10px' } }}>Ціна</Typography>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails sx={{ padding: '0 5px' }}>
           <Box
-            title="priceInputWrapper"
+            id="priceInputWrapper"
             sx={{
               display: 'flex',
-              margin: '20px 0',
-              padding: '0 10px',
+              margin: '10px 0 25px 0',
               gap: '10px',
 
             }}
           >
             <TextField
               id="outlined-basic"
-              label="Outlined"
+              label="Ціна від"
               variant="outlined"
               size="small"
-              sx={{
-                fontSize: '12px',
-                fontWeight: '400'
-              }}
             />
-            <TextField id="outlined-basic" label="Outlined" variant="outlined" size="small" />
+            <TextField id="outlined-basic" label="Ціна до" variant="outlined" size="small" />
           </Box>
-          <Slider
-            sx={{ marginBottom: '40px' }}
-            getAriaLabel={() => 'Temperature range'}
-              // value={value}
-              // onChange={handleChange}
-            valueLabelDisplay="auto"
-          />
+          <FilterSlider />
         </AccordionDetails>
       </Accordion>
 
-      <Accordion sx={{marginBottom: '15px'}}>
+      <Accordion sx={{ marginBottom: '15px' }}>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={<ExpandMoreIcon sx={{ ':hover': { color: '#1f1e1e', fontWeight: '600' } }} />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography>Виробник</Typography>
+          {/* eslint-disable-next-line max-len */}
+          <Typography sx={{ color: '#4F4F4F', ':hover': { color: '#1f1e1e', fontWeight: '600', paddingRight: '10px' } }}>Виробник</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <FormGroup sx={{
@@ -127,13 +97,14 @@ function Filter() {
         </AccordionDetails>
       </Accordion>
 
-      <Accordion sx={{marginBottom: '15px'}} >
+      <Accordion sx={{ marginBottom: '15px' }}>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={<ExpandMoreIcon sx={{ ':hover': { color: '#1f1e1e', fontWeight: '600' } }} />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography>Форма товару</Typography>
+          {/* eslint-disable-next-line max-len */}
+          <Typography sx={{ color: '#4F4F4F', ':hover': { color: '#1f1e1e', fontWeight: '600', paddingRight: '10px' } }}>Форма товару</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <FormGroup sx={{
@@ -153,28 +124,27 @@ function Filter() {
         </AccordionDetails>
       </Accordion>
 
-      <FormGroup sx={{padding: '0 9px'}}>
-        <FormControlLabel control={<Checkbox icon={<ReceiptLongIcon fontSize={"small"} sx={{marginRight: '5px'}} />} checkedIcon={<ReceiptLongIcon fontSize={"small"} sx={{ color: '#12e00c', marginRight: '5px' }} />} />} label="Без рецепта" />
-        <FormControlLabel sx={{marginRight: '0', fontSize: '10px'}} control={<Checkbox icon={<PregnantWomanIcon />} checkedIcon={<PregnantWomanIcon sx={{ color: '#12e00c' }} />} />} label="Дозволено вагітним" />
+      <FormGroup sx={{ color: '#4F4F4F', padding: '0 9px' }}>
+        {/* eslint-disable-next-line max-len */}
+        <FormControlLabel control={<Checkbox icon={<ReceiptLongIcon fontSize="small" sx={{ marginRight: '5px' }} />} checkedIcon={<ReceiptLongIcon fontSize="small" sx={{ color: '#12e00c', marginRight: '5px' }} />} />} label="Без рецепта" />
+        {/* eslint-disable-next-line max-len */}
+        <FormControlLabel sx={{ marginRight: '0', fontSize: '10px' }} control={<Checkbox icon={<PregnantWomanIcon />} checkedIcon={<PregnantWomanIcon sx={{ color: '#12e00c' }} />} />} label="Дозволено вагітним" />
+        {/* eslint-disable-next-line max-len */}
         <FormControlLabel control={<Checkbox icon={<BabyChangingStationIcon />} checkedIcon={<BabyChangingStationIcon sx={{ color: '#12e00c' }} />} />} label="Дозволено дітям" />
       </FormGroup>
-
-      {/* <Checkbox */}
-      {/*  {...label} */}
-      {/*  icon={<BookmarkBorderIcon />} */}
-      {/*  checkedIcon={<BookmarkIcon />} */}
-      {/* /> */}
 
       <Box
         id="buttonWrapper"
         sx={{
           display: 'flex',
           gap: '12px',
-          padding: '20px 0 50px 0'
+          padding: '20px 5px 50px 5px'
         }}
       >
-        <Button variant="contained">Показати</Button>
-        <Button variant="outlined">Скинути</Button>
+        {/* eslint-disable-next-line max-len */}
+        <Button variant="contained" sx={{ backgroundColor: '#2fd3ae', ':hover': { backgroundColor: '#1b7360' } }}>Показати</Button>
+        {/* eslint-disable-next-line max-len */}
+        <Button variant="outlined" sx={{ color: '#2fd3ae', borderColor: '#2fd3ae', ':hover': { color: '#1b7360', borderColor: '#1b7360' } }}>Скинути</Button>
       </Box>
     </Box>
   );
