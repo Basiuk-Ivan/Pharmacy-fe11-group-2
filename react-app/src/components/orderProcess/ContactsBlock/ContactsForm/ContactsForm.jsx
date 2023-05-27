@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 /* eslint-disable no-console */
-import { TextField, Grid, Typography } from '@mui/material';
+import { TextField, Grid, Typography, Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -7,13 +9,15 @@ import * as Yup from 'yup';
 const ChangedTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),
   '& .MuiInputBase-root': {
-    borderRadius: 30
+    borderRadius: 30,
   }
 }));
 
 const nameRegExp = /[a-zA-zа-яА-яёЁ]$/;
 
 const ContactsForm = () => {
+  const orderPaymentMethod = useSelector(state => state.order.PaymentMethodValue);
+
   const validationSchema = Yup.object().shape({
     name: Yup.string()
       .required("Введіть своє ім'я кирилицею")
@@ -40,22 +44,38 @@ const ContactsForm = () => {
       surname: '',
       phone: '',
       street: '',
-      apartment: ''
+      apartment: '',
+      paymentMethod: `${orderPaymentMethod}`
     },
     validationSchema,
-    onSubmit: values => {
+    onSubmit: (values, { resetForm }) => {
       console.log(values);
+      resetForm();
     }
   });
 
+  useEffect(() => {
+    formik.setFieldValue('paymentMethod', orderPaymentMethod);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [orderPaymentMethod]);
+
   return (
-    <>
-      <Typography variant="h5" sx={{ margin: '40px 0 40px 45px' }}>
+    <Container>
+      <Typography
+        variant="h5"
+        sx={{
+          margin: '40px 0 30px 0',
+          fontFamily: 'Raleway, sans-serif',
+          color: '#4F4F4F',
+          fontWeight: '700',
+          fontSize: '24px'
+        }}
+      >
         Контактні дані
       </Typography>
       <form id="contacts" onSubmit={formik.handleSubmit}>
-        <Grid container spacing={4} sx={{ justifyContent: 'center' }}>
-          <Grid item md={5}>
+        <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
+          <Grid item md={6} xl={6}>
             <ChangedTextField
               label="Ваше ім'я"
               fullWidth
@@ -93,7 +113,7 @@ const ContactsForm = () => {
               helperText={formik.touched.house && formik.errors.house}
             />
           </Grid>
-          <Grid item md={5}>
+          <Grid item md={6} xl={6}>
             <ChangedTextField
               label="Ваше прізвище"
               fullWidth
@@ -133,7 +153,7 @@ const ContactsForm = () => {
           </Grid>
         </Grid>
       </form>
-    </>
+    </Container>
   );
 };
 
