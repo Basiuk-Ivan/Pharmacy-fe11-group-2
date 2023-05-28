@@ -9,13 +9,12 @@ import ProductCardInstruction from '../../components/SinglePage/ProductCardInstr
 import ProductAnalogiesCardContainer from '../../components/SinglePage/ProductAnalogiesCardContainer';
 import ProductCardReviews from '../../components/SinglePage/ProductCardReviews';
 
-
 const TabPanel = props => {
   const { children, value, index, ...other } = props;
 
   return (
-      /* eslint-disable react/jsx-props-no-spreading */
-  /*eslint-disable-next-line no-undef*/
+  /* eslint-disable react/jsx-props-no-spreading */
+
     <div
       role="tabpanel"
       hidden={value !== index}
@@ -51,6 +50,7 @@ const ProductPage = () => {
       const result = await response.json();
       return result;
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log('Error fetching products:', error);
       return null;
     }
@@ -73,7 +73,7 @@ const ProductPage = () => {
   };
 
   return (
-<div>
+    <div>
       {!!goods && (
       <Container sx={{ width: '1200px' }}>
         <Grid container spacing={2}>
@@ -156,7 +156,7 @@ const ProductPage = () => {
         </Grid>
       </Container>
       )}
-</div>
+    </div>
   );
 };
 

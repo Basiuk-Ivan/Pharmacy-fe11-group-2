@@ -6,12 +6,13 @@ const TabPanel = props => {
   const { children, value, index, ...other } = props;
 
   return (
-      // eslint-disable react/jsx-props-no-spreading
+
     <div
       role="tabpanel"
       hidden={value !== index}
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
+        // eslint-disable react/jsx-props-no-spreading
       {...other}
     >
       {value === index && (
@@ -44,11 +45,16 @@ const VerticalImgTabPanel = ({ goods }) => {
         sx={{ height: '350px' }}
         indicatorColor="red"
       >
-        <Tab label={<img src={goods.img[0]} width="100" alt="product" />} {...a11yProps(0)} />
-        <Tab label={<img src={goods.img[1]} width="100" alt="product" />} {...a11yProps(1)} />
-        <Tab label={<img src={goods.img[2]} width="100" alt="product" />} {...a11yProps(2)} />
-        <Tab label={<img src={goods.img[3]} width="100" alt="product" />} {...a11yProps(3)} />
-        <Tab label={<img src={goods.img[4]} width="100" alt="product" />} {...a11yProps(4)} />
+        // eslint-disable react/jsx-props-no-spreading
+        <Tab label={<img src={goods.img[0]} width="100" />} {...a11yProps(0)} />
+        // eslint-disable react/jsx-props-no-spreading
+        <Tab label={<img src={goods.img[1]} width="100" />} {...a11yProps(1)} />
+        // eslint-disable react/jsx-props-no-spreading
+        <Tab label={<img src={goods.img[2]} width="100" />} {...a11yProps(2)} />
+        // eslint-disable react/jsx-props-no-spreading
+        <Tab label={<img src={goods.img[3]} width="100" />} {...a11yProps(3)} />
+        // eslint-disable react/jsx-props-no-spreading
+        <Tab label={<img src={goods.img[4]} width="100" />} {...a11yProps(4)} />
       </Tabs>
       <TabPanel value={value} index={0}>
         <Box sx={{ border: '1px solid #E7E9EB', padding: '10px' }}>
