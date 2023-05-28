@@ -46,7 +46,7 @@ const VerticalImgTabPanel = ({ goods }) => {
         indicatorColor="red"
       >
           {/* eslint-disable react/jsx-props-no-spreading */}
-        <Tab label={<img src={goods.img[0]} width="100" src="itm1"}/>} {...a11yProps(0)} />
+        <Tab label={<img src={goods.img[0]} width="100" src="itm1"/>} {...a11yProps(0)} />
           {/* eslint-disable react/jsx-props-no-spreading */}
         <Tab label={<img src={goods.img[1]} width="100" src="itm1"/>} {...a11yProps(1)} />
           {/* eslint-disable react/jsx-props-no-spreading */}
@@ -67,8 +67,8 @@ const VerticalImgTabPanel = ({ goods }) => {
         </Box>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <Box sx={{ border: '1px solid #E7E9EB', padding: '10px' src="itm2" }}>
-          <img src={goods.img[2]} width="294" height="294" />
+        <Box sx={{ border: '1px solid #E7E9EB', padding: '10px' }}>
+          <img src={goods.img[2]} width="294" height="294" src="itm2" />
         </Box>
       </TabPanel>
       <TabPanel value={value} index={3}>
