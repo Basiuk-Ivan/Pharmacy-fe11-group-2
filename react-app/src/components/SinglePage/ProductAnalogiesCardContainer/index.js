@@ -1,2 +1,3 @@
-import ProductAnalogiesCardContainer from './ProductAnalogiesCardContainer'
+import ProductAnalogiesCardContainer from './ProductAnalogiesCardContainer';
+
 export default ProductAnalogiesCardContainer;
