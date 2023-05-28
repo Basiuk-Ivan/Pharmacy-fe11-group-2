@@ -14,7 +14,7 @@ const TabPanel = props => {
   const { children, value, index, ...other } = props;
 
   return (
-      { /* eslint-disable react/jsx-props-no-spreading */ }
+      /* eslint-disable react/jsx-props-no-spreading */
   /*eslint-disable-next-line no-undef*/
     <div
       role="tabpanel"

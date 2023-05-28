@@ -2,13 +2,14 @@ import { Box, Grid, Typography } from '@mui/material';
 import ProductCard from '../../ProductCard/index';
 
 const ProductAnalogiesCardContainer = ({ goods }) =>
+
 // const [value, setValue] = useState(0);
 //
 // const handleChange = (event, newValue) => {
 //   setValue(newValue);
 // };
 
- return (
+  (
     <Box>
       <Typography variant="h4" component="h4" gutterBottom sx={{}}>
         Аналоги
@@ -35,4 +36,5 @@ const ProductAnalogiesCardContainer = ({ goods }) =>
       </Grid>
     </Box>
   );
+
 export default ProductAnalogiesCardContainer;
