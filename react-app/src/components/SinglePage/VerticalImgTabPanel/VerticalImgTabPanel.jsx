@@ -45,40 +45,40 @@ const VerticalImgTabPanel = ({ goods }) => {
         sx={{ height: '350px' }}
         indicatorColor="red"
       >
-          /* eslint-disable react/jsx-props-no-spreading */
-        <Tab label={<img src={goods.img[0]} width="100" />} {...a11yProps(0)} />
-          /* eslint-disable react/jsx-props-no-spreading */
-        <Tab label={<img src={goods.img[1]} width="100" />} {...a11yProps(1)} />
-          /* eslint-disable react/jsx-props-no-spreading */
-        <Tab label={<img src={goods.img[2]} width="100" />} {...a11yProps(2)} />
-          /* eslint-disable react/jsx-props-no-spreading */
-        <Tab label={<img src={goods.img[3]} width="100" />} {...a11yProps(3)} />
-          /* eslint-disable react/jsx-props-no-spreading */
-        <Tab label={<img src={goods.img[4]} width="100" />} {...a11yProps(4)} />
+          {/* eslint-disable react/jsx-props-no-spreading */}
+        <Tab label={<img src={goods.img[0]} width="100" src="itm1"}/>} {...a11yProps(0)} />
+          {/* eslint-disable react/jsx-props-no-spreading */}
+        <Tab label={<img src={goods.img[1]} width="100" src="itm1"/>} {...a11yProps(1)} />
+          {/* eslint-disable react/jsx-props-no-spreading */}
+        <Tab label={<img src={goods.img[2]} width="100" src="itm1"/>} {...a11yProps(2)} />
+          {/* eslint-disable react/jsx-props-no-spreading */}
+        <Tab label={<img src={goods.img[3]} width="100" src="itm1"/>} {...a11yProps(3)} />
+          {/* eslint-disable react/jsx-props-no-spreading */}
+        <Tab label={<img src={goods.img[4]} width="100" src="itm1"/>} {...a11yProps(4)} />
       </Tabs>
       <TabPanel value={value} index={0}>
         <Box sx={{ border: '1px solid #E7E9EB', padding: '10px' }}>
-          <img src={goods.img[0]} width="294" height="294"  />
+          <img src={goods.img[0]} width="294" height="294" src="itm2" />
         </Box>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Box sx={{ border: '1px solid #E7E9EB', padding: '10px' }}>
-          <img src={goods.img[1]} width="294" height="294"  />
+          <img src={goods.img[1]} width="294" height="294" src="itm2"/>
         </Box>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <Box sx={{ border: '1px solid #E7E9EB', padding: '10px' }}>
+        <Box sx={{ border: '1px solid #E7E9EB', padding: '10px' src="itm2" }}>
           <img src={goods.img[2]} width="294" height="294" />
         </Box>
       </TabPanel>
       <TabPanel value={value} index={3}>
         <Box sx={{ border: '1px solid #E7E9EB', padding: '10px' }}>
-          <img src={goods.img[3]} width="294" height="294"  />
+          <img src={goods.img[3]} width="294" height="294" src="itm2"/>
         </Box>
       </TabPanel>
       <TabPanel value={value} index={4}>
         <Box sx={{ border: '1px solid #E7E9EB', padding: '10px' }}>
-          <img src={goods.img[4]} width="294" height="294"  />
+          <img src={goods.img[4]} width="294" height="294" src="itm2" />
         </Box>
       </TabPanel>
     </Box>
