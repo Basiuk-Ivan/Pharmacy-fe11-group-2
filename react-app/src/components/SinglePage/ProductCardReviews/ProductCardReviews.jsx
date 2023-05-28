@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
 
-const ProductCardReviews = ({ goods }) => (
+const ProductCardReviews = () => (
   <Box>
     <Typography variant="h4" component="h4" gutterBottom sx={{}}>
       Відгуки

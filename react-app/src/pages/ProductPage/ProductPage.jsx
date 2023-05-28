@@ -9,10 +9,12 @@ import ProductCardInstruction from '../../components/SinglePage/ProductCardInstr
 import ProductAnalogiesCardContainer from '../../components/SinglePage/ProductAnalogiesCardContainer';
 import ProductCardReviews from '../../components/SinglePage/ProductCardReviews';
 
+
 const TabPanel = props => {
   const { children, value, index, ...other } = props;
 
   return (
+      { /* eslint-disable react/jsx-props-no-spreading */ }
     <div
       role="tabpanel"
       hidden={value !== index}
@@ -48,7 +50,7 @@ const ProductPage = () => {
       const result = await response.json();
       return result;
     } catch (error) {
-      console.error('Error fetching products:', error);
+      console.log('Error fetching products:', error);
       return null;
     }
   };
@@ -70,7 +72,7 @@ const ProductPage = () => {
   };
 
   return (
-    <>
+<div>
       {!!goods && (
       <Container sx={{ width: '1200px' }}>
         <Grid container spacing={2}>
@@ -111,7 +113,11 @@ const ProductPage = () => {
             </List>
           </Grid>
           <Grid item lg={12}>
-            <Typography variant="h4" sx={{ fontSize: '36px', fontWeight: 700, color: '#394045' }} gutterBottom>
+            <Typography
+              variant="h4"
+              sx={{ fontSize: '36px', fontWeight: 700, color: '#394045' }}
+              gutterBottom
+            >
               {goods?.name}
             </Typography>
           </Grid>
@@ -119,6 +125,7 @@ const ProductPage = () => {
             <Box sx={{ width: '100%' }}>
               <Box sx={{ borderBottom: 1, borderColor: 'divider', backgroundColor: '#F7FAFB' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                  {/* eslint-disable react/jsx-props-no-spreading */}
                   <Tab sx={{ flexGrow: 1 }} label="Все про товар" {...a11yProps(0)} />
                   <Tab sx={{ flexGrow: 1 }} label="Інструкція" {...a11yProps(1)} />
                   <Tab sx={{ flexGrow: 1 }} label="Аналоги" {...a11yProps(2)} />
@@ -148,7 +155,7 @@ const ProductPage = () => {
         </Grid>
       </Container>
       )}
-    </>
+</div>
   );
 };
 

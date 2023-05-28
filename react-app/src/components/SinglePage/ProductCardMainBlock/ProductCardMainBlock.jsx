@@ -12,6 +12,7 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 const IconCheckboxes = () => (
   <div>
+    {/* eslint-disable react/jsx-props-no-spreading */}
     <Checkbox {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
   </div>
 );
@@ -46,20 +47,20 @@ const ProductCardMainBlock = ({ goods }) => {
                 mb: '36px'
               }}
             >
-                <Box
-                    sx={{
-                        '& > legend': { mt: 2 },
-                    }}
-                >
-              <Rating
-                name="simple-controlled"
-                value={value}
-                onChange={(event, newValue) => {
-                  setValue(newValue);
+              <Box
+                sx={{
+                  '& > legend': { mt: 2 },
                 }}
-                sx={{ fontSize: '18px' }}
-              />
-                </Box>
+              >
+                <Rating
+                  name="simple-controlled"
+                  value={value}
+                  onChange={(event, newValue) => {
+                    setValue(newValue);
+                  }}
+                  sx={{ fontSize: '18px' }}
+                />
+              </Box>
               <Typography sx={{ fontSize: '14px', color: '#2FD3AE' }}>
                 {goods.quantity > 0 ? 'Є в наявності' : 'Товар відсутній'}
               </Typography>

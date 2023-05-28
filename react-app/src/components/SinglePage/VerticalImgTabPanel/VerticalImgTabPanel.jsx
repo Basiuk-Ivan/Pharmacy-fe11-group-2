@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Box, Tab, Tabs, Typography } from '@mui/material';
 
 const TabPanel = props => {
+  { /* eslint-disable react/jsx-props-no-spreading */ }
   const { children, value, index, ...other } = props;
 
   return (

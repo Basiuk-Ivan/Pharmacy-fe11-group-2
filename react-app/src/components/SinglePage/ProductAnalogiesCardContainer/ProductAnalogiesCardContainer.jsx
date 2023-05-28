@@ -1,15 +1,15 @@
-import { Box, Grid, Typography, Tabs, Tab } from '@mui/material';
-import React from 'react';
-import ProductCard from '../../ProductCard/index.js';
+import { Box, Grid, Typography } from '@mui/material';
+import { useState } from 'react';
+import ProductCard from '../../ProductCard/index';
 
-const ProductAnalogiesCardContainer = ({ goods }) => {
-  const [value, setValue] = React.useState(0);
+const ProductAnalogiesCardContainer = ({ goods }) =>
+// const [value, setValue] = useState(0);
+//
+// const handleChange = (event, newValue) => {
+//   setValue(newValue);
+// };
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  return (
+  (
     <Box>
       <Typography variant="h4" component="h4" gutterBottom sx={{}}>
         Аналоги
@@ -36,6 +36,4 @@ const ProductAnalogiesCardContainer = ({ goods }) => {
       </Grid>
     </Box>
   );
-};
-
 export default ProductAnalogiesCardContainer;
