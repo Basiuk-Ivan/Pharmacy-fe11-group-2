@@ -1,5 +1,4 @@
 import { Box, Grid, Typography } from '@mui/material';
-import { useState } from 'react';
 import ProductCard from '../../ProductCard/index';
 
 const ProductAnalogiesCardContainer = ({ goods }) =>
@@ -9,7 +8,7 @@ const ProductAnalogiesCardContainer = ({ goods }) =>
 //   setValue(newValue);
 // };
 
-  (
+ return (
     <Box>
       <Typography variant="h4" component="h4" gutterBottom sx={{}}>
         Аналоги

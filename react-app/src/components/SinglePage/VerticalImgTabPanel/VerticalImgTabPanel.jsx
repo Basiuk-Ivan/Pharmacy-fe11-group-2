@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Box, Tab, Tabs, Typography } from '@mui/material';
 
 const TabPanel = props => {
-  { /* eslint-disable react/jsx-props-no-spreading */ }
+  // eslint-disable react/jsx-props-no-spreading
   const { children, value, index, ...other } = props;
 
   return (
@@ -43,11 +43,11 @@ const VerticalImgTabPanel = ({ goods }) => {
         sx={{ height: '350px' }}
         indicatorColor="red"
       >
-        <Tab label={<img src={goods.img[0]} width="100" alt="Image" />} {...a11yProps(0)} />
-        <Tab label={<img src={goods.img[1]} width="100" alt="Image" />} {...a11yProps(1)} />
-        <Tab label={<img src={goods.img[2]} width="100" alt="Image" />} {...a11yProps(2)} />
-        <Tab label={<img src={goods.img[3]} width="100" alt="Image" />} {...a11yProps(3)} />
-        <Tab label={<img src={goods.img[4]} width="100" alt="Image" />} {...a11yProps(4)} />
+        <Tab label={<img src={goods.img[0]} width="100" alt="photo" />} {...a11yProps(0)} />
+        <Tab label={<img src={goods.img[1]} width="100" alt="photo" />} {...a11yProps(1)} />
+        <Tab label={<img src={goods.img[2]} width="100" alt="photo" />} {...a11yProps(2)} />
+        <Tab label={<img src={goods.img[3]} width="100" alt="photo" />} {...a11yProps(3)} />
+        <Tab label={<img src={goods.img[4]} width="100" alt="photo" />} {...a11yProps(4)} />
       </Tabs>
       <TabPanel value={value} index={0}>
         <Box sx={{ border: '1px solid #E7E9EB', padding: '10px' }}>

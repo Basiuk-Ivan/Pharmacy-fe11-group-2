@@ -15,7 +15,7 @@ const TabPanel = props => {
 
   return (
       { /* eslint-disable react/jsx-props-no-spreading */ }
-  {/*eslint-disable-next-line no-undef*/}
+  /*eslint-disable-next-line no-undef*/
     <div
       role="tabpanel"
       hidden={value !== index}
