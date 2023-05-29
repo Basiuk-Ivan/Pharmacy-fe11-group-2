@@ -4,7 +4,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useSelector } from 'react-redux';
 import ProductCard from '../../ProductCard/ProductCard';
 
-function YouBrowsed() {
+const YouBrowsed = () => {
   const { products } = useSelector(state => state.products);
   const youBrowsedCards = products.slice(5, 10);
 
@@ -65,7 +65,7 @@ function YouBrowsed() {
             key={item.id}
             sx={{
               width: '206px',
-              height: '300px',
+              minHeight: '300px',
               backgroundColor: '#c4c2cc',
               display: 'flex',
               justifyContent: 'center',
@@ -81,6 +81,6 @@ function YouBrowsed() {
       </Box>
     </Box>
   );
-}
+};
 
 export default YouBrowsed;

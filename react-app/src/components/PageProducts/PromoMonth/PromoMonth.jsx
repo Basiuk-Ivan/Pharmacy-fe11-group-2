@@ -65,7 +65,7 @@ const PromoMonth = () => {
             key={item.id}
             sx={{
               width: '206px',
-              height: '300px',
+              minHeight: '300px',
               backgroundColor: '#c4c2cc',
               display: 'flex',
               justifyContent: 'center',

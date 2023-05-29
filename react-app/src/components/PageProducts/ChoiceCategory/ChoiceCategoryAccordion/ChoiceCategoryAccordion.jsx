@@ -5,6 +5,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+// eslint-disable-next-line react/function-component-definition
 export default function ChoiceCategoryAccordion() {
   const [expanded, setExpanded] = React.useState(false);
 
