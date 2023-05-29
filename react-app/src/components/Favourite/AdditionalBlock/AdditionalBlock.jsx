@@ -1,4 +1,4 @@
-import { Container, Typography, Card, CardMedia, Grid } from '@mui/material';
+import { Container, Typography, Card, Grid } from '@mui/material';
 import ProductCard from '../../ProductCard/ProductCard';
 
 const AdditionalBlock = props => {
@@ -23,7 +23,6 @@ const AdditionalBlock = props => {
       >
         Завжди в пригоді
       </Typography>
-
       <Grid container spacing={2}>
         {productsSlice.map(item => (
           <Grid item md={3} key={item.id}>
@@ -45,7 +44,6 @@ const AdditionalBlock = props => {
           </Grid>
         ))}
       </Grid>
-
     </Container>
   );
 };

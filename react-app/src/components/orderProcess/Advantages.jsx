@@ -30,8 +30,8 @@ const Advantages = () => (
       }}
     >
       <img src="./orderprocessTest/im1.png" alt="" />
-      <TypographyTitle>Ассортимент</TypographyTitle>
-      <TypographyData>Оборудование, мебель, посуда и инвентарь</TypographyData>
+      <TypographyTitle>Асортимент</TypographyTitle>
+      <TypographyData>Широкий вибір товарів</TypographyData>
     </Grid>
     <Grid
       item
@@ -41,8 +41,8 @@ const Advantages = () => (
       }}
     >
       <img src="./orderprocessTest/im2.png" alt="" />
-      <TypographyTitle>Быстрая доставка</TypographyTitle>
-      <TypographyData>В любую точку России быстро</TypographyData>
+      <TypographyTitle>Швидка доставка</TypographyTitle>
+      <TypographyData>В будь-яке місто України</TypographyData>
     </Grid>
     <Grid
       item
@@ -52,8 +52,8 @@ const Advantages = () => (
       }}
     >
       <img src="./orderprocessTest/im3.png" alt="" />
-      <TypographyTitle>Гарантия</TypographyTitle>
-      <TypographyData>Вся продукция cертифицирована</TypographyData>
+      <TypographyTitle>Гарантія</TypographyTitle>
+      <TypographyData>Вся продукція сертифікована</TypographyData>
     </Grid>
     <Grid
       item
@@ -63,8 +63,8 @@ const Advantages = () => (
       }}
     >
       <img src="./orderprocessTest/im4.png" alt="" />
-      <TypographyTitle>Низкие цены</TypographyTitle>
-      <TypographyData>Мы стараемся держать самые низкие цены</TypographyData>
+      <TypographyTitle>Низькі ціни</TypographyTitle>
+      <TypographyData>Ми намагаємось тримати найнижчі ціни серед конкурентів</TypographyData>
     </Grid>
   </Grid>
 );
