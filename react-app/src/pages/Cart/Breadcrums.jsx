@@ -18,6 +18,7 @@ const IconBreadcrumbs = styled(Box)`
   }
 `;
 
+// eslint-disable-next-line react/function-component-definition
 export default function CustomSeparator() {
   const breadcrumbs = [
     <Box key="home" sx={{ display: 'flex' }}>
