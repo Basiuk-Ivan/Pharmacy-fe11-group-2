@@ -3,78 +3,32 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useSelector } from 'react-redux';
 import ProductCard from '../../ProductCard/ProductCard';
+import {
+  cardsWrapperStyle, cardWrapperStyle,
+  titleStyle,
+  youBrowsedStyle,
+  youBrowsedTitleSliderStyle,
+  youBrowsedTitleWrapperStyle
+} from './style';
 
 function YouBrowsed() {
   const { products } = useSelector(state => state.products);
   const youBrowsedCards = products.slice(5, 10);
 
   return (
-    <Box
-      id="youBrowsed"
-      sx={{
-        margin: '75px 0 35px 0',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
-
-      <Box
-        id="youBrowsedTitleWrapper"
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center'
-        }}
-      >
-        <Typography sx={{
-          color: '#333333',
-          fontSize: '36px',
-          fontWeight: '700'
-        }}
-        >
-          Ви переглядали
-        </Typography>
-
-        <Box
-          id="promoMonthTitleSlider"
-          sx={{
-            display: 'flex',
-            gap: '40px',
-            alignItems: 'center',
-            paddingRight: '20px'
-          }}
-        >
+    <Box id="youBrowsed" sx={youBrowsedStyle}>
+      <Box id="youBrowsedTitleWrapper" sx={youBrowsedTitleWrapperStyle}>
+        <Typography sx={titleStyle}>Ви переглядали</Typography>
+        <Box id="youBrowsedTitleSlider" sx={youBrowsedTitleSliderStyle}>
           <ArrowBackIosIcon fontSize="small" sx={{ cursor: 'pointer' }} />
           <ArrowForwardIosIcon fontSize="small" sx={{ cursor: 'pointer' }} />
         </Box>
       </Box>
 
-      <Box
-        id="cardsWrapper"
-        sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '30px',
-          marginBottom: '30px'
-        }}
-      >
+      <Box id="cardsWrapper" sx={cardsWrapperStyle}>
 
         {youBrowsedCards.map(item => (
-          <Box
-            id="cardWrapper"
-            key={item.id}
-            sx={{
-              width: '206px',
-              minHeight: '300px',
-              backgroundColor: '#c4c2cc',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              fontSize: 24,
-              fontWeight: 600,
-              cursor: 'pointer'
-            }}
-          >
+          <Box id="cardWrapper" key={item.id} sx={cardWrapperStyle}>
             <ProductCard productItem={item} />
           </Box>
         ))}

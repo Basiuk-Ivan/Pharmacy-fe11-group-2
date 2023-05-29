@@ -10,6 +10,7 @@ import YouBrowsed from '../../components/PageProducts/YouBrowsed';
 import SortingPrice from '../../components/PageProducts/SortingPrice';
 import PaginationProducts from '../../components/PageProducts/PaginationProducts';
 import Cards from '../../components/PageProducts/Cards';
+import TitleCategory from '../../components/PageProducts/TitleCategory';
 
 import {
   asideAndCardsStyles,
@@ -32,17 +33,7 @@ function Products() {
 
   return (
     <Container id="productsContainer" sx={productsContainerStyles}>
-      <Box
-        id="categoryCurrent"
-        sx={{
-          marginBottom: '68px',
-          color: '#394045',
-          fontSize: '36px',
-          fontWeight: '700',
-        }}
-      >
-        Ліки від кашлю, застуди та грипу
-      </Box>
+      <TitleCategory />
 
       <Box id="asideAndCards" sx={asideAndCardsStyles}>
 
