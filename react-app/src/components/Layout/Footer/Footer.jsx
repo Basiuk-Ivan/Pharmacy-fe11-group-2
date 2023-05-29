@@ -1,12 +1,25 @@
-import { Box } from '@mui/material';
-import { menuStyles } from './style';
+import { Box, Container } from '@mui/material';
+import {
+  footer,
+  background
+} from './style';
+import { Logo } from './items/Logo';
+import { AboutCompanyList } from './items/AboutCompanyList';
+import { FeedBackList } from './items/FeedBackList';
+import { FooterMail } from './items/FooterMail';
+import { DescComp } from './items/DescComp';
 
 const Footer = () => (
   <Box
-    // position="absolute"
-    sx={menuStyles}
+    sx={background}
   >
-    Footer
+    <Container sx={footer}>
+      <Logo />
+      <AboutCompanyList />
+      <FeedBackList />
+      <FooterMail />
+      <DescComp />
+    </Container>
   </Box>
 );
 

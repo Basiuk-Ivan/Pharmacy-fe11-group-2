@@ -8,11 +8,15 @@ import UserActions from './UserActions';
 import SocialMediaButton from './SocialMediaButton/SocialMediaButton';
 import Menu from '../PageHome/Menu';
 import Footer from './Footer/Footer';
-import { appBarStyles, toolbarStyles, containerStyles } from './style';
+import { appBarStyles, toolbarStyles } from './style';
 
 const Layout = () => (
-  <Container maxWidth="100vh">
-    <Container sx={containerStyles} position="relative" maxWidth="lg">
+  <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100vh' }}>
+    <Container
+      sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
+      position="relative"
+      maxWidth="lg"
+    >
       <AuthButton />
       <AppBar position="static" sx={appBarStyles}>
         <Toolbar sx={toolbarStyles}>
@@ -32,7 +36,7 @@ const Layout = () => (
       </Container>
     </Container>
     <Footer />
-  </Container>
+  </Box>
 );
 
 export default Layout;

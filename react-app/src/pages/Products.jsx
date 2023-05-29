@@ -1,43 +1,57 @@
 import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { Pagination, Box, Container } from '@mui/material';
+import { Pagination, Box, Container, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import SortIcon from '@mui/icons-material/Sort';
 
-import { CardTest } from '../components/Categories/cardTest';
-import { requestTest } from '../tools/requestTest';
+import ProductCard from '../components/ProductCard/ProductCard';
 
-import Filter from '../components/Categories/Filter';
-import ChoiceCategory from '../components/Categories/ChoiceCategory';
-import PromoMonth from '../components/Categories/PromoMonth';
-import YouBrowsed from '../components/Categories/YouBrowsed';
+import Filter from '../components/PageProducts/Filter';
+import ChoiceCategory from '../components/PageProducts/ChoiceCategory';
+import PromoMonth from '../components/PageProducts/PromoMonth';
+import YouBrowsed from '../components/PageProducts/YouBrowsed';
+import { fetchPosts } from '../redux/productsSlice';
 
-const response = await requestTest('./drinks.json');
-const totalPage = Math.ceil(response.length / 24);
-
-const BlogPost = () => {
+function Products() {
+  // const { products, status, err } = useSelector(state => state.products);
+  const { products } = useSelector(state => state.products);
+  const totalPage = Math.ceil(products.length / 4);
   const [numPage, setNumPage] = useState(1);
-  const [viewCards, setViewCards] = useState(response.slice(0, 24));
+  const [viewCards, setViewCards] = useState(products.slice(0, 4));
+  const [price, setPrice] = useState('');
 
-  useEffect(() => {
-    setViewCards(response.slice((numPage - 1) * 24, (numPage - 1) * 24 + 24));
-  }, [numPage]);
+  const dispatch = useDispatch();
 
-  const wrap = {
-    width: 1200,
-    display: 'flex',
-    flexDirection: 'column',
-    fontFamily: 'Roboto'
+  const handleChange = event => {
+    setPrice(event.target.value);
   };
 
+  useEffect(() => {
+    dispatch(fetchPosts());
+  }, [dispatch, products.length]);
+
+  useEffect(() => {
+    setViewCards(products.slice((numPage - 1) * 4, ((numPage - 1) * 4) + 4));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numPage]);
+
   return (
-    <Container sx={wrap}>
+    <Container
+      sx={{
+        width: 1200,
+        display: 'flex',
+        flexDirection: 'column',
+        fontFamily: 'Roboto'
+      }}
+    >
+
       <Box
         id="categoryCurrent"
         sx={{
           marginBottom: '68px',
           color: '#394045',
           fontSize: '36px',
-          fontWeight: '700'
+          fontWeight: '700',
         }}
       >
         Ліки від кашлю, застуди та грипу
@@ -50,6 +64,7 @@ const BlogPost = () => {
           flexDirection: 'column'
         }}
       >
+
         <Box
           id="aside&CardsWrapper"
           sx={{
@@ -57,6 +72,7 @@ const BlogPost = () => {
             gap: '30px'
           }}
         >
+
           <Box
             id="asideWrapper"
             sx={{
@@ -77,6 +93,7 @@ const BlogPost = () => {
               minWidth: '914px'
             }}
           >
+
             <Box
               id="sortingWrapper"
               sx={{
@@ -86,6 +103,7 @@ const BlogPost = () => {
                 marginBottom: '25px'
               }}
             >
+
               <Box
                 id="sorting"
                 sx={{
@@ -95,6 +113,7 @@ const BlogPost = () => {
                   paddingLeft: '20px'
                 }}
               >
+
                 <Box
                   id="sortingTitle"
                   sx={{
@@ -103,17 +122,18 @@ const BlogPost = () => {
                     color: '#333333'
                   }}
                 >
-                  СОРТУВАТИ ПО
+                  СОРТУВАТИ ПО ЦІНІ
                 </Box>
 
                 <Box
                   id="sortingTitlePriceWrapper"
                   sx={{
                     display: 'flex',
-                    color: '#71C476',
+                    color: '#2fd3ae',
                     alignItems: 'center'
                   }}
                 >
+
                   <Box
                     id="sortingTitlePriceIcon"
                     sx={{
@@ -124,28 +144,24 @@ const BlogPost = () => {
                     <SortIcon />
                   </Box>
 
-                  <Box
-                    id="sortingTitlePrice"
-                    sx={{
-                      fontSize: '14px',
-                      fontWeight: '700',
-                      marginLeft: '8px'
-                    }}
-                  >
-                    По ціні
-                  </Box>
+                  <FormControl size="small" sx={{ m: 1, minWidth: 200, border: 'none' }}>
+                    <InputLabel id="demo-simple-select-label">Ціна</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={price}
+                      label="Ціна"
+                      onChange={handleChange}
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value={10}>Спочатку дешевші</MenuItem>
+                      <MenuItem value={20}>Спочатку дорожчі</MenuItem>
+                    </Select>
+                  </FormControl>
                 </Box>
 
-                <Box
-                  id="sortingTitlePopular"
-                  sx={{
-                    fontSize: '14px',
-                    fontWeight: '400',
-                    color: '#828282'
-                  }}
-                >
-                  По популярності
-                </Box>
               </Box>
 
               <Box
@@ -170,6 +186,7 @@ const BlogPost = () => {
                 />
               </Box>
             </Box>
+
             <Box
               id="cardsWrapper"
               sx={{
@@ -179,13 +196,14 @@ const BlogPost = () => {
                 marginBottom: '30px'
               }}
             >
+
               {viewCards.map(item => (
                 <Box
                   id="cardWrapper"
                   key={item.id}
                   sx={{
                     width: '206px',
-                    height: '300px',
+                    minHeight: '300px',
                     backgroundColor: '#c4c2cc',
                     display: 'flex',
                     justifyContent: 'center',
@@ -195,7 +213,7 @@ const BlogPost = () => {
                     cursor: 'pointer'
                   }}
                 >
-                  <CardTest id={item.id} name={item.name} price={item.price} />
+                  <ProductCard productItem={item} />
                 </Box>
               ))}
             </Box>
@@ -225,9 +243,10 @@ const BlogPost = () => {
 
         <PromoMonth />
         <YouBrowsed />
+
       </Box>
     </Container>
   );
-};
+}
 
-export default BlogPost;
+export default Products;

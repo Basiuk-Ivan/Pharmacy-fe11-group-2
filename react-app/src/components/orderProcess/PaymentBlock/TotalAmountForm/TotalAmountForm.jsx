@@ -1,9 +1,9 @@
 import {
-  Table, TableBody, TableCell, TableRow, Typography
+  Table, TableBody, TableCell, TableRow, Typography, Container
 } from '@mui/material';
 
 const TotalAmountForm = () => (
-  <>
+  <Container>
     <Table
       sx={{
         mb: '40px'
@@ -32,18 +32,20 @@ const TotalAmountForm = () => (
           }}
         >
           <TableCell>Итого без доставки</TableCell>
-          <TableCell>548 руб</TableCell>
+          <TableCell>548 руб
+          </TableCell>
         </TableRow>
       </TableBody>
     </Table>
     <Typography
       sx={{
-        textAlign: 'end'
+        textAlign: 'end',
+        fontWeight: 700
       }}
     >
       Загальна сума: $198.65
     </Typography>
-  </>
+  </Container>
 );
 
 export default TotalAmountForm;

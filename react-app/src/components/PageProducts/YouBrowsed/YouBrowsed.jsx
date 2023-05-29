@@ -1,15 +1,12 @@
 import { Box, Typography } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { useState } from 'react';
-import { CardTest } from '../cardTest';
-import { requestTest } from '../../../tools/requestTest';
-
-const response = await requestTest('./drinks.json');
+import { useSelector } from 'react-redux';
+import ProductCard from '../../ProductCard/ProductCard';
 
 function YouBrowsed() {
-  // eslint-disable-next-line no-unused-vars
-  const [youBrowsedCards, setYouBrowsedCards] = useState(response.slice(5, 10));
+  const { products } = useSelector(state => state.products);
+  const youBrowsedCards = products.slice(5, 10);
 
   return (
     <Box
@@ -17,9 +14,10 @@ function YouBrowsed() {
       sx={{
         margin: '75px 0 35px 0',
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
       }}
     >
+
       <Box
         id="youBrowsedTitleWrapper"
         sx={{
@@ -28,12 +26,11 @@ function YouBrowsed() {
           alignItems: 'center'
         }}
       >
-        <Typography
-          sx={{
-            color: '#333333',
-            fontSize: '36px',
-            fontWeight: '700'
-          }}
+        <Typography sx={{
+          color: '#333333',
+          fontSize: '36px',
+          fontWeight: '700'
+        }}
         >
           Ви переглядали
         </Typography>
@@ -61,6 +58,7 @@ function YouBrowsed() {
           marginBottom: '30px'
         }}
       >
+
         {youBrowsedCards.map(item => (
           <Box
             id="cardWrapper"
@@ -77,7 +75,7 @@ function YouBrowsed() {
               cursor: 'pointer'
             }}
           >
-            <CardTest id={item.id} name={item.name} price={item.price} />
+            <ProductCard productItem={item} />
           </Box>
         ))}
       </Box>
