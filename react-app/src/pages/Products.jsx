@@ -13,7 +13,7 @@ import PromoMonth from '../components/PageProducts/PromoMonth';
 import YouBrowsed from '../components/PageProducts/YouBrowsed';
 import { fetchPosts } from '../redux/productsSlice';
 
-function Products() {
+const Products = () => {
   // const { products, status, err } = useSelector(state => state.products);
   const { products } = useSelector(state => state.products);
   const totalPage = Math.ceil(products.length / 4);
@@ -250,6 +250,6 @@ function Products() {
       </Box>
     </Container>
   );
-}
+};
 
 export default Products;
