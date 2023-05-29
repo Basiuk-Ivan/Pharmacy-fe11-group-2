@@ -1,12 +1,12 @@
 import { Container, Typography } from '@mui/material';
-import BreadTest from '../components/Favourite/BreadTest';
+import Bread from '../components/Favourite/Bread';
 import Advantages from '../components/orderProcess/Advantages';
 import ContactsBlock from '../components/orderProcess/ContactsBlock/ContactsBlock';
 import PaymentBlock from '../components/orderProcess/PaymentBlock/PaymentBlock';
 
 const OrderProcess = () => (
   <Container>
-    <BreadTest />
+    <Bread />
     <Typography
       variant="h4"
       sx={{

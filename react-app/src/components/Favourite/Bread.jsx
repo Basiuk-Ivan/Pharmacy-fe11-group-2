@@ -18,7 +18,7 @@ const IconBreadcrumbs = styled(Box)`
   }
 `;
 
-const BreadTest = () => {
+const Bread = () => {
   const values = {
     orderprocess: 'Оформлення замовлення',
     favourite: 'Обране',
@@ -54,4 +54,4 @@ const BreadTest = () => {
   );
 };
 
-export default BreadTest;
+export default Bread;

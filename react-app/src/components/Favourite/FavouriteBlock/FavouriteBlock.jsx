@@ -2,7 +2,7 @@ import { Container, Typography, Card, Grid, Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
 import ProductCard from '../../ProductCard/ProductCard';
-import BreadTest from '../BreadTest';
+import Bread from '../Bread';
 
 const FavouriteBlock = props => {
   const { products } = props;
@@ -15,7 +15,7 @@ const FavouriteBlock = props => {
         mb: '20px'
       }}
     >
-      <BreadTest />
+      <Bread />
       <Stack
         direction={{ xs: 'column', sm: 'row' }}
         spacing={{ xs: 1, sm: 2, md: 4 }}
