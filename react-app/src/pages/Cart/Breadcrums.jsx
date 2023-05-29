@@ -2,7 +2,6 @@ import * as React from 'react';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Typography from '@mui/material/Typography';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Box } from '@mui/system';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
@@ -36,12 +35,7 @@ export default function CustomSeparator() {
   `;
   return (
     <IconBreadcrumbs>
-      <Breadcrumbs
-        separator={<NavigateNextIcon color="rgba(47, 211, 174, 1)" fontSize="Medium" />}
-        aria-label="breadcrumb"
-      >
-        {breadcrumbs}
-      </Breadcrumbs>
+      <Breadcrumbs>{breadcrumbs}</Breadcrumbs>
     </IconBreadcrumbs>
   );
 }

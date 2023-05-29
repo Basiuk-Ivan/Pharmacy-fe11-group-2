@@ -1,155 +1,30 @@
 import React, { useState } from 'react';
 // import { useSelector, useDispatch } from 'react-redux';
-import { Card, CardContent, Typography, Button, TextField, InputAdornment, IconButton } from '@mui/material';
-import {
-  Box,
-  Container
-  // fontSize,
-} from '@mui/system';
-
-// import { removeItem } from '../../redux/cartSlice';
+import { Card, Typography, InputAdornment, IconButton } from '@mui/material';
 import DeleteOutlineTwoToneIcon from '@mui/icons-material/DeleteOutlineTwoTone';
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
-import styled from 'styled-components';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import IconBreadcrumbs from './Breadcrums';
 import './CartStyles.scss';
-
-const StyledBox = styled(Box)`
-  width: 258px;
-  height: 132px;
-  background: #2fd3ae;
-`;
-
-const CardContentStyled = styled(CardContent)`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-`;
-
-const ContentBox = styled(Box)`
-  width: 400px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-left: 30px;
-  line-height: 26px;
-`;
-
-const PriceBox = styled(Box)`
-  width: 60%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-`;
-
-const ButtonDecrement = styled(Button)`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: rgba(221, 136, 136, 1);
-  .MuiButtonBase-root {
-    min-width: 10px;
-  }
-`;
-
-const ButtonIncrement = styled(Button)`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: rgba(47, 211, 174, 1);
-  .MuiButtonBase-root {
-    min-width: 10px;
-  }
-`;
-
-const FormBox = styled(Box)`
-  width: 358px;
-  height: 456px;
-  margin-top: -40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid rgba(231, 233, 235, 1);
-`;
-
-const FormTitle = styled(Typography)`
-  font-size: 24px;
-  font-weight: 700;
-  width: 100%;
-  height: 78px;
-  display: flex;
-  align-items: center;
-  padding: 20px;
-  justify-content: flex-start;
-`;
-const FormTitlePromo = styled(Typography)`
-  font-size: 24px;
-  font-weight: 700;
-  width: 100%;
-  height: 78px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-`;
-
-const FormText = styled(Typography)`
-  font-size: 18px;
-  font-weight: 400;
-  padding: 20px;
-  height: 78px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const OrderButton = styled(Button)`
-  width: 318px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(231, 233, 235, 1);
-  border-radius: 26px;
-  padding: 10px;
-  color: white;
-  background: #2fd3ae;
-`;
-const SaleBox = styled(Box)`
-  width: 100%;
-  height: 78px;
-  display: flex;
-  justify-content: space-between;
-  background: rgba(247, 250, 251, 1);
-`;
-const TotalBox = styled(Box)`
-  width: 100%;
-  height: 78px;
-  display: flex;
-  justify-content: space-between;
-`;
-const PromoBox = styled(Box)`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  padding: 0 20px 0 20px;
-  flex-direction: column;
-  background: rgba(247, 250, 251, 1);
-  .MuiOutlinedInput-root {
-    border-radius: 26px;
-  }
-`;
-const HeaderBox = styled(Box)`
-  width: 805px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-const TextFieldPromo = styled(TextField)`
-  width: 100%;
-  border-radius: 50px;
-`;
+import {
+  StyledBox,
+  CardContentStyled,
+  ContentBox,
+  PriceBox,
+  FormBox,
+  FormTitle,
+  FormTitlePromo,
+  FormText,
+  OrderButton,
+  SaleBox,
+  TotalBox,
+  PromoBox,
+  HeaderBox,
+  TextFieldPromo
+} from './Style';
+// eslint-disable-next-line import/order
+import { Box, Container } from '@mui/system';
 
 const Cart = () => {
   // const cartItems = useSelector(state => state.cart.items);
@@ -248,9 +123,9 @@ const Cart = () => {
                   41 108 грн.
                 </Typography>
                 <Box display="flex" justifyContent="center" alignItems="center" sx={{ minWidth: '10px' }}>
-                  <ButtonDecrement onClick={handleDecrement}>-</ButtonDecrement>
+                  <RemoveCircleIcon onClick={handleDecrement} sx={{ fill: 'rgba(221, 136, 136, 1)' }} />
                   {count}
-                  <ButtonIncrement onClick={handleIncrement}>+</ButtonIncrement>
+                  <AddCircleIcon onClick={handleIncrement} sx={{ fill: 'rgba(47, 211, 174, 1)' }} />
                 </Box>
               </PriceBox>
             </CardContentStyled>
@@ -271,10 +146,10 @@ const Cart = () => {
                 <Typography variant="h6" color="textSecondary">
                   41 108 грн.
                 </Typography>
-                <Box display="flex" justifyContent="center" alignItems="center">
-                  <ButtonDecrement onClick={handleDecrement}>-</ButtonDecrement>
+                <Box display="flex" justifyContent="center" alignItems="center" sx={{ minWidth: '10px' }}>
+                  <RemoveCircleIcon onClick={handleDecrement} sx={{ fill: 'rgba(221, 136, 136, 1)' }} />
                   {count}
-                  <ButtonIncrement onClick={handleIncrement}>+</ButtonIncrement>
+                  <AddCircleIcon onClick={handleIncrement} sx={{ fill: 'rgba(47, 211, 174, 1)' }} />
                 </Box>
               </PriceBox>
             </CardContentStyled>
@@ -295,10 +170,10 @@ const Cart = () => {
                 <Typography variant="h6" color="textSecondary">
                   41 108 грн.
                 </Typography>
-                <Box display="flex" justifyContent="center" alignItems="center">
-                  <ButtonDecrement onClick={handleDecrement}>-</ButtonDecrement>
+                <Box display="flex" justifyContent="center" alignItems="center" sx={{ minWidth: '10px' }}>
+                  <RemoveCircleIcon onClick={handleDecrement} sx={{ fill: 'rgba(221, 136, 136, 1)' }} />
                   {count}
-                  <ButtonIncrement onClick={handleIncrement}>+</ButtonIncrement>
+                  <AddCircleIcon onClick={handleIncrement} sx={{ fill: 'rgba(47, 211, 174, 1)' }} />
                 </Box>
               </PriceBox>
             </CardContentStyled>

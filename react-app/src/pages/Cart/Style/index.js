@@ -1,0 +1,119 @@
+import styled from 'styled-components';
+import { Button, CardContent, TextField, Typography } from '@mui/material';
+import { Box } from '@mui/system';
+
+export const StyledBox = styled(Box)`
+  width: 258px;
+  height: 132px;
+  background: #2fd3ae;
+`;
+
+export const CardContentStyled = styled(CardContent)`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+`;
+
+export const ContentBox = styled(Box)`
+  width: 400px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 30px;
+  line-height: 26px;
+`;
+
+export const PriceBox = styled(Box)`
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+`;
+export const FormBox = styled(Box)`
+  width: 358px;
+  height: 456px;
+  margin-top: -40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(231, 233, 235, 1);
+`;
+
+export const FormTitle = styled(Typography)`
+  font-size: 24px;
+  font-weight: 700;
+  width: 100%;
+  height: 78px;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  justify-content: flex-start;
+`;
+export const FormTitlePromo = styled(Typography)`
+  font-size: 24px;
+  font-weight: 700;
+  width: 100%;
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+`;
+
+export const FormText = styled(Typography)`
+  font-size: 18px;
+  font-weight: 400;
+  padding: 20px;
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const OrderButton = styled(Button)`
+  width: 318px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(231, 233, 235, 1);
+  border-radius: 26px;
+  padding: 10px;
+  color: white;
+  background: #2fd3ae;
+`;
+export const SaleBox = styled(Box)`
+  width: 100%;
+  height: 78px;
+  display: flex;
+  justify-content: space-between;
+  background: rgba(247, 250, 251, 1);
+`;
+export const TotalBox = styled(Box)`
+  width: 100%;
+  height: 78px;
+  display: flex;
+  justify-content: space-between;
+`;
+export const PromoBox = styled(Box)`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding: 0 20px 0 20px;
+  flex-direction: column;
+  background: rgba(247, 250, 251, 1);
+  .MuiOutlinedInput-root {
+    border-radius: 26px;
+  }
+`;
+export const HeaderBox = styled(Box)`
+  width: 805px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+export const TextFieldPromo = styled(TextField)`
+  width: 100%;
+  border-radius: 50px;
+`;
