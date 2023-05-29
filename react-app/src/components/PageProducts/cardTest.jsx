@@ -1,4 +1,4 @@
-export function CardTest(props) {
+export const CardTest = props => {
   const { id } = props;
 
   return (
@@ -8,4 +8,4 @@ export function CardTest(props) {
       {/* <p>{price}</p> */}
     </div>
   );
-}
+};

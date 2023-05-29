@@ -20,7 +20,11 @@ const PaymentMethodForm = () => {
       >Спосіб Оплати
       </Typography>
       <FormControl>
-        <RadioGroup aria-labelledby="radio-buttons-group-label" defaultValue="cash" name="radio-buttons-group">
+        <RadioGroup
+          aria-labelledby="radio-buttons-group-label"
+          defaultValue="cash"
+          name="radio-buttons-group"
+        >
           <FormControlLabel
             value="cash"
             control={<Radio />}
