@@ -16,7 +16,9 @@ const TotalAmountForm = () => (
             sx={{
               backgroundColor: 'white',
               fontSize: '24px',
-              fontWeight: 700
+              fontWeight: 700,
+              fontFamily: 'Raleway, sans-serif',
+              color: '#4F4F4F'
             }}
           >
             Загальна сума

@@ -8,9 +8,12 @@ const OrderProcess = () => (
   <Container>
     <Bread />
     <Typography
-      variant="h4"
       sx={{
-        mb: '30px'
+        mb: '20px',
+        fontFamily: 'Raleway, sans-serif',
+        fontWeight: 700,
+        fontSize: '36px',
+        color: '#2E3A59',
       }}
     >
       Оформити замовлення
