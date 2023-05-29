@@ -6,7 +6,7 @@ import Bread from '../Bread';
 
 const FavouriteBlock = props => {
   const { products } = props;
-  const productsSlice = products.slice(0, 5);
+  const productsSlice = products.slice(0, 4);
 
   return (
     <Container
@@ -21,6 +21,9 @@ const FavouriteBlock = props => {
         spacing={{ xs: 1, sm: 2, md: 4 }}
         justifyContent="space-between"
         alignItems="center"
+        sx={{
+          mb: '20px'
+        }}
 
       >
         <Typography

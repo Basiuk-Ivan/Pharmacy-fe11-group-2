@@ -18,7 +18,8 @@ const Advantages = () => (
   <Grid
     container
     sx={{
-      mt: 20
+      mt: '110px',
+      mb: '110px'
     }}
   >
     <Grid

@@ -1,30 +1,53 @@
 import { Container, Typography, Card, CardMedia, Grid } from '@mui/material';
+import ProductCard from '../../ProductCard/ProductCard';
 
-const AdditionalBlock = () => (
-  <Container
-    sx={{
-      mt: '20px',
-      mb: '20px'
-    }}
-  >
-    <Typography
+const AdditionalBlock = props => {
+  const { products } = props;
+  const productsSlice = products.slice(0, 4);
+
+  return (
+    <Container
       sx={{
-        fontFamily: 'Raleway, sans-serif',
-        fontWeight: 700,
-        fontSize: '36px',
-        color: '#333333'
+        mt: '50px',
+        mb: '20px'
       }}
     >
-      Завжди в пригоді
-    </Typography>
-    <Grid container spacing={2}>
-      <Grid item md={4}>
-        <Card sx={{ width: '279px', position: 'relative' }}>
-          <CardMedia component="div" sx={{ height: '407px', backgroundColor: 'tomato' }} />
-        </Card>
+      <Typography
+        sx={{
+          fontFamily: 'Raleway, sans-serif',
+          fontWeight: 700,
+          fontSize: '36px',
+          color: '#333333',
+          mb: '10px'
+        }}
+      >
+        Завжди в пригоді
+      </Typography>
+
+      <Grid container spacing={2}>
+        {productsSlice.map(item => (
+          <Grid item md={3} key={item.id}>
+            <Card
+              sx={{
+                width: '259px',
+                position: 'relative',
+                backgroundColor: '#c4c2cc',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                fontSize: 24,
+                fontWeight: 600,
+                cursor: 'pointer'
+              }}
+            >
+              <ProductCard productItem={item} />
+            </Card>
+          </Grid>
+        ))}
       </Grid>
-    </Grid>
-  </Container>
-);
+
+    </Container>
+  );
+};
 
 export default AdditionalBlock;

@@ -9,7 +9,7 @@ const Favourite = () => {
   return (
     <>
       <FavouriteBlock products={products} />
-      <AdditionalBlock />
+      <AdditionalBlock products={products} />
       <Advantages />
     </>
   );
