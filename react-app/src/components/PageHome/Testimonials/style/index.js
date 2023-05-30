@@ -4,10 +4,10 @@ export const wrapperForTestimonials = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  gap: '50px',
+  gap: '4%',
+  flexWrap: 'wrap',
   background: '#F6FBFA',
-  height: '500px',
-  marginBottom: '30px'
+  padding: '5% 0'
 };
 
 export const mainFeedback = {
@@ -25,6 +25,7 @@ export const mainFeedback = {
 export const feedBack = {
   marginTop: '5px',
   flex: 2,
+  marginLeft: '2%',
 }
 export const ave = {
   display: 'flex',
@@ -47,12 +48,12 @@ export const totalRate = {
   textAlign: 'center'
 }
 export const feedBackItem = {
-  marginRight: '50px',
+  marginRight: '3%',
   marginBottom: '4%',
 }
 
 export const feedBackItemStar = {
-  width: '320px',
+  width: '300px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
