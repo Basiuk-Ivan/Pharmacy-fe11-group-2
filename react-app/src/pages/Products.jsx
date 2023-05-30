@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Pagination, Box, Container, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import SortIcon from '@mui/icons-material/Sort';
 
+import { Link } from 'react-router-dom';
 import ProductCard from '../components/ProductCard/ProductCard';
 
 import Filter from '../components/PageProducts/Filter';
@@ -12,7 +13,7 @@ import PromoMonth from '../components/PageProducts/PromoMonth';
 import YouBrowsed from '../components/PageProducts/YouBrowsed';
 import { fetchPosts } from '../redux/productsSlice';
 
-function Products() {
+const Products = () => {
   // const { products, status, err } = useSelector(state => state.products);
   const { products } = useSelector(state => state.products);
   const totalPage = Math.ceil(products.length / 4);
@@ -32,8 +33,7 @@ function Products() {
 
   useEffect(() => {
     setViewCards(products.slice((numPage - 1) * 4, ((numPage - 1) * 4) + 4));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [numPage]);
+  }, [numPage, products]);
 
   return (
     <Container
@@ -198,23 +198,26 @@ function Products() {
             >
 
               {viewCards.map(item => (
-                <Box
-                  id="cardWrapper"
-                  key={item.id}
-                  sx={{
-                    width: '206px',
-                    minHeight: '300px',
-                    backgroundColor: '#c4c2cc',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    fontSize: 24,
-                    fontWeight: 600,
-                    cursor: 'pointer'
-                  }}
-                >
-                  <ProductCard productItem={item} />
-                </Box>
+                <Link key={item.id} to={`/products/${item.id}`}>
+                  <Box
+                    id="cardWrapper"
+                    key={item.id}
+                    sx={{
+                      width: '206px',
+                      minHeight: '300px',
+                      backgroundColor: '#c4c2cc',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      fontSize: 24,
+                      fontWeight: 600,
+                      cursor: 'pointer'
+                    }}
+                  >
+                    <ProductCard productItem={item} />
+                  </Box>
+                </Link>
+
               ))}
             </Box>
 
@@ -247,6 +250,6 @@ function Products() {
       </Box>
     </Container>
   );
-}
+};
 
 export default Products;

@@ -16,23 +16,25 @@ const TotalAmountForm = () => (
             sx={{
               backgroundColor: 'white',
               fontSize: '24px',
-              fontWeight: 700
+              fontWeight: 700,
+              fontFamily: 'Raleway, sans-serif',
+              color: '#4F4F4F'
             }}
           >
             Загальна сума
           </TableCell>
         </TableRow>
         <TableRow>
-          <TableCell>Скидка</TableCell>
-          <TableCell>-32 руб</TableCell>
+          <TableCell>Знижка</TableCell>
+          <TableCell>25 грн</TableCell>
         </TableRow>
         <TableRow
           sx={{
             backgroundColor: 'white'
           }}
         >
-          <TableCell>Итого без доставки</TableCell>
-          <TableCell>548 руб
+          <TableCell>Без урахування доставки</TableCell>
+          <TableCell>548 грн
           </TableCell>
         </TableRow>
       </TableBody>
@@ -43,7 +45,7 @@ const TotalAmountForm = () => (
         fontWeight: 700
       }}
     >
-      Загальна сума: $198.65
+      Загальна сума: 198.65 грн
     </Typography>
   </Container>
 );

@@ -1,16 +1,19 @@
 import { Container, Typography } from '@mui/material';
+import Bread from '../components/Favourite/Bread';
 import Advantages from '../components/orderProcess/Advantages';
 import ContactsBlock from '../components/orderProcess/ContactsBlock/ContactsBlock';
 import PaymentBlock from '../components/orderProcess/PaymentBlock/PaymentBlock';
 
-const handlePaymentMethod = value => value;
-
 const OrderProcess = () => (
   <Container>
+    <Bread />
     <Typography
-      variant="h4"
       sx={{
-        mb: '30px'
+        mb: '20px',
+        fontFamily: 'Raleway, sans-serif',
+        fontWeight: 700,
+        fontSize: '36px',
+        color: '#2E3A59',
       }}
     >
       Оформити замовлення
