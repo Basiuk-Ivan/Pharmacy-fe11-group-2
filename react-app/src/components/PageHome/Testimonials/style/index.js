@@ -23,6 +23,7 @@ export const mainFeedback = {
 
 }
 export const feedBack = {
+  marginTop: '5px',
   flex: 2,
 }
 export const ave = {
@@ -45,12 +46,43 @@ export const totalRate = {
   color: '#4F4F4F',
   textAlign: 'center'
 }
-export const feedBackItem = {}
+export const feedBackItem = {
+  marginRight: '50px',
+  marginBottom: '4%',
+}
+
+export const feedBackItemStar = {
+  width: '320px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+}
+export const feedBackItemText = {
+  marginTop: '1%',
+  color: '#4F4F4F',
+  fontSize: '14px',
+}
+
+export const StarRateItem = {
+  color: '#F2C94C',
+  fontSize: '19px',
+}
+
+export const feedBackDate = {
+  fontSize: '18px',
+  color: '#828282',
+}
+
+export const feedBackName = {
+  fontSize: '18px',
+  fontWeight: '700',
+  color: '#333333',
+}
 export const totalCountFeed = {
   marginLeft: '25px',
   position: 'relative',
   color: '#2FD3AE',
-  fontSize: '16px',
+  fontSize: '14px',
   fontWeight: '700',
   textTransform: 'uppercase',
   '::before': {
@@ -80,3 +112,4 @@ export  const linkFeed = {
   textDecoration: 'none',
   color: '#2FD3AE',
 }
+

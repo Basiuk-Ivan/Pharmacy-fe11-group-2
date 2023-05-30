@@ -10,7 +10,9 @@ import {
   wrapperForTestimonials
 } from './style';
 import React from "react";
-import {Feed} from "./item/Feed.jsx";
+import {FeedKyiv} from "./item/FeedKyiv.jsx";
+import {FeedDnepr} from "./item/FeedDnepr.jsx";
+import {FeedLviv} from "./item/FeedLviv.jsx";
 
 const Testimonials = () => {
   return (<Box sx={wrapperForTestimonials}>
@@ -32,9 +34,9 @@ const Testimonials = () => {
 
   </Typography>
   <Typography fontFamily="Roboto" component="div" sx={feedBack}>
-    <Feed/>
-    <Feed/>
-    <Feed/>
+    <FeedKyiv/>
+    <FeedDnepr/>
+    <FeedLviv/>
     <Typography fontFamily="Roboto" component="div" sx={totalCountFeed}>
       <Link sx={linkFeed}>Все 4349 отзывов
       </Link>
