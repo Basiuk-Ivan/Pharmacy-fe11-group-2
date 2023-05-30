@@ -7,11 +7,11 @@ export const Logo = () => (
     <Typography fontFamily="Roboto" component="div" sx={logoFlex}>
       <Typography component="img" alt="Логотип" src={logo} sx={footerLogo} />
       <Typography fontFamily="Roboto" component="div" sx={logoFlexText}>
-        <Typography fontFamily="Roboto" component="p" sx={logoText}>
+        <Typography fontFamily="Roboto" component="div" sx={logoText}>
           <Typography fontFamily="Roboto" component="b" sx={logoWord}>
             Аптека.
           </Typography>онлайн
-          <Typography fontFamily="Roboto" component="p" sx={logoTextLt}>
+          <Typography fontFamily="Roboto" component="div" sx={logoTextLt}>
             Ваша онлайн аптека
           </Typography>
         </Typography>

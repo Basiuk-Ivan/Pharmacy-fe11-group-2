@@ -13,7 +13,7 @@ const HowWeWork = () => (
       </Typography>
     </Box>
     <Box sx={wrapperForItemStyled}>
-      <Stack direction="row" spacing={2} sx={stack}>
+      <Stack direction="row" spacing={1} sx={stack}>
         <ProductSelector />
         <PharmacySelector />
         <OrderForm />

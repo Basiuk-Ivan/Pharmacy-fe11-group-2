@@ -6,6 +6,7 @@ export const background = {
 export const footer = {
   marginTop: '164px',
   display: 'flex',
+  // flexWrap: 'wrap',
   gap: '35px',
   marginBottom: '78px'
 
