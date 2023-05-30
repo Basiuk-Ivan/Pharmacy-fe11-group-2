@@ -1,44 +1,49 @@
-import {Box, Typography} from '@mui/material';
+import {Box, Button, Link, Rating, Typography} from '@mui/material';
 import {
   ave,
   aveRate,
-  aveText,
-  feedBack,
-  feedBackItem,
-  mainFeedback,
+  aveText, btnFeed,
+  feedBack, linkFeed,
+  mainFeedback, StarRate,
   totalCountFeed,
   totalRate,
   wrapperForTestimonials
 } from './style';
-import {healthBlogStyled} from "../HealthBlog/style/index.js";
+import React from "react";
+import {Feed} from "./item/Feed.jsx";
 
-const Testimonials = () => <Box sx={wrapperForTestimonials}>
+const Testimonials = () => {
+  return (<Box sx={wrapperForTestimonials}>
   <Typography fontFamily="Roboto" component="div" sx={mainFeedback}>
     <Typography fontFamily="Roboto" component="div" sx={ave}>
-      <Typography fontFamily="Roboto" component="div" sx={aveText}>
+      <Typography fontFamily="Roboto" component="div" sx={aveText}>Середня <br/> оцінка <br/> аптеки
       </Typography>
-      <Typography fontFamily="Roboto" component="div" sx={aveRate}>
+      <Typography fontFamily="Roboto" component="div">
+      <Typography fontFamily="Roboto" component="div" sx={aveRate}>4.8
+      </Typography>
+      <Rating name="half-rating" defaultValue={4} sx={StarRate} readOnly  />
       </Typography>
     </Typography>
-    <Typography fontFamily="Roboto" component="div" sx={totalRate}>
+    <Typography fontFamily="Roboto" component="div" sx={totalRate}>Общий рейтинг на основе 4349 <br/> отзывов наших покупателей
     </Typography>
+    <Box>
+    <Button variant="contained" sx={btnFeed}>Залишити відгук</Button>
+    </Box>
 
   </Typography>
   <Typography fontFamily="Roboto" component="div" sx={feedBack}>
-    <Typography fontFamily="Roboto" component="div" sx={feedBackItem}>
-
-    </Typography>
-    <Typography fontFamily="Roboto" component="div" sx={feedBackItem}>
-
-    </Typography>
-    <Typography fontFamily="Roboto" component="div" sx={feedBackItem}>
-
-    </Typography>
+    <Feed/>
+    <Feed/>
+    <Feed/>
     <Typography fontFamily="Roboto" component="div" sx={totalCountFeed}>
-
+      <Link sx={linkFeed}>Все 4349 отзывов
+      </Link>
     </Typography>
 
   </Typography>
-</Box>;
+</Box>
+  );
+};
+
 
 export default Testimonials;

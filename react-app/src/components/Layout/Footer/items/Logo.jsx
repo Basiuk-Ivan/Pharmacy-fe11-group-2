@@ -11,7 +11,7 @@ export const Logo = () => (
           <Typography fontFamily="Roboto" component="b" sx={logoWord}>
             Аптека.
           </Typography>онлайн
-          <Typography fontFamily="Roboto" component="p" sx={logoTextLt}>
+          <Typography fontFamily="Roboto" component="div" sx={logoTextLt}>
             Ваша онлайн аптека
           </Typography>
         </Typography>
