@@ -23,7 +23,8 @@ import {
   priceInputWrapperStyle,
   titleCategoryStyle,
   resetButtonStyle,
-  showButtonStyle
+  showButtonStyle,
+  mainCategoryActiveStyle
 } from './style';
 
 function Filter() {
@@ -33,6 +34,7 @@ function Filter() {
 
       <Accordion sx={marginStyle}>
         <AccordionSummary
+          sx={mainCategoryActiveStyle}
           expandIcon={<ExpandMoreIcon sx={iconStyle} />}
           aria-controls="panel1a-content"
           id="panel1a-header"
@@ -53,6 +55,7 @@ function Filter() {
 
       <Accordion sx={marginStyle}>
         <AccordionSummary
+          sx={mainCategoryActiveStyle}
           expandIcon={<ExpandMoreIcon sx={iconStyle} />}
           aria-controls="panel1a-content"
           id="panel1a-header"
@@ -74,7 +77,8 @@ function Filter() {
 
       <Accordion sx={marginStyle}>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon sx={{ ':hover': { color: '#1f1e1e', fontWeight: '600' } }} />}
+          sx={mainCategoryActiveStyle}
+          expandIcon={<ExpandMoreIcon sx={iconStyle} />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
@@ -95,13 +99,13 @@ function Filter() {
 
       <FormGroup sx={formGroupCheckStyle}>
         {/* eslint-disable-next-line max-len */}
-        <FormControlLabel control={<Checkbox sx={checkboxStyle} icon={<ReceiptLongIcon fontSize="small" sx={{ marginRight: '5px' }} />} checkedIcon={<ReceiptLongIcon fontSize="small" sx={{ color: '#12e00c', marginRight: '5px' }} />} />} label="Без рецепта" />
+        <FormControlLabel control={<Checkbox sx={checkboxStyle} icon={<ReceiptLongIcon fontSize="small" sx={{ marginRight: '5px' }} />} checkedIcon={<ReceiptLongIcon fontSize="small" sx={{ color: '#2FD3AE', marginRight: '5px' }} />} />} label="Без рецепта" />
 
         {/* eslint-disable-next-line max-len */}
-        <FormControlLabel sx={{ marginRight: '0', fontSize: '10px' }} control={<Checkbox sx={checkboxStyle} icon={<PregnantWomanIcon />} checkedIcon={<PregnantWomanIcon sx={{ color: '#12e00c' }} />} />} label="Дозволено вагітним" />
+        <FormControlLabel sx={{ marginRight: '0', fontSize: '10px' }} control={<Checkbox sx={checkboxStyle} icon={<PregnantWomanIcon />} checkedIcon={<PregnantWomanIcon sx={{ color: '#2FD3AE' }} />} />} label="Дозволено вагітним" />
 
         {/* eslint-disable-next-line max-len */}
-        <FormControlLabel control={<Checkbox sx={checkboxStyle} icon={<BabyChangingStationIcon />} checkedIcon={<BabyChangingStationIcon sx={{ color: '#12e00c' }} />} />} label="Дозволено дітям" />
+        <FormControlLabel control={<Checkbox sx={checkboxStyle} icon={<BabyChangingStationIcon />} checkedIcon={<BabyChangingStationIcon sx={{ color: '#2FD3AE' }} />} />} label="Дозволено дітям" />
       </FormGroup>
 
       <Box id="buttonWrapper" sx={buttonWrapperStyle}>

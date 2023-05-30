@@ -11,6 +11,7 @@ function PaginationProducts() {
   const totalPage = Math.ceil(products.length / 4);
 
   function handleChange(num) {
+    sessionStorage.setItem('numPage', num);
     dispatch(changePage(num));
   }
 

@@ -15,7 +15,7 @@ export const titleCategoryStyle = {
 };
 
 export const iconStyle = {
-  ':hover': { color: '#1f1e1e', fontWeight: '600' }
+  ':hover': { color: '#1f1e1e', fontWeight: '600' },
 };
 
 export const marginStyle = {
@@ -23,9 +23,14 @@ export const marginStyle = {
 };
 
 export const mainCategoryStyle = {
+  ':hover': { fontWeight: '600', paddingRight: '10px'
+  }
+};
+
+export const mainCategoryActiveStyle = {
   color: '#4F4F4F',
-  ':hover': { color: '#1f1e1e', fontWeight: '600', paddingRight: '10px'
-  } };
+  '&.MuiAccordionSummary-root.Mui-expanded': { backgroundColor: '#2FD3AE', color: '#FFFFFF' }
+};
 
 export const priceInputWrapperStyle = {
   display: 'flex',

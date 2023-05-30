@@ -10,8 +10,8 @@ import {
   secondCategoryStyle,
   secondCategoryStyle4px,
   secondCategoryWrappStyle,
-  secondCategoryWrappStyleStart,
-  marginStyle
+  marginStyle,
+  mainCategoryActiveStyle
 } from './style';
 
 export default function ChoiceCategoryAccordion() {
@@ -26,6 +26,7 @@ export default function ChoiceCategoryAccordion() {
 
       <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')} sx={marginStyle}>
         <AccordionSummary
+          sx={mainCategoryActiveStyle}
           expandIcon={<ExpandMoreIcon sx={iconStyle} />}
         >
           <Typography sx={mainCategoryStyle}>
@@ -41,11 +42,12 @@ export default function ChoiceCategoryAccordion() {
 
       <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')} sx={marginStyle}>
         <AccordionSummary
+          sx={mainCategoryActiveStyle}
           expandIcon={<ExpandMoreIcon sx={iconStyle} />}
         >
           <Typography sx={mainCategoryStyle}>Знеболюючі</Typography>
         </AccordionSummary>
-        <AccordionDetails sx={secondCategoryWrappStyleStart}>
+        <AccordionDetails sx={secondCategoryWrappStyle}>
           <Typography sx={secondCategoryStyle}>Від спазму</Typography>
           <Typography sx={secondCategoryStyle}>Від болю при мігрені</Typography>
           <Typography sx={secondCategoryStyle}>Від болю у спині</Typography>
@@ -54,6 +56,7 @@ export default function ChoiceCategoryAccordion() {
 
       <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')} sx={marginStyle}>
         <AccordionSummary
+          sx={mainCategoryActiveStyle}
           expandIcon={<ExpandMoreIcon sx={iconStyle} />}
         >
           <Typography sx={mainCategoryStyle}>
@@ -68,6 +71,7 @@ export default function ChoiceCategoryAccordion() {
 
       <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
         <AccordionSummary
+          sx={mainCategoryActiveStyle}
           expandIcon={<ExpandMoreIcon sx={iconStyle} />}
         >
           <Typography sx={mainCategoryStyle}>Для серцево-судинної системи</Typography>
