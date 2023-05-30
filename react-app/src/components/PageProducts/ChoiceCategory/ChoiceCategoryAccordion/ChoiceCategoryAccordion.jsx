@@ -14,7 +14,6 @@ import {
   mainCategoryActiveStyle
 } from './style';
 
-// eslint-disable-next-line react/function-component-definition
 export default function ChoiceCategoryAccordion() {
   const [expanded, setExpanded] = React.useState(false);
 

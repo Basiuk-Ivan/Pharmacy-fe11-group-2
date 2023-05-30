@@ -1,4 +1,6 @@
-import {borderColor, color, fontWeight, minWidth, padding} from "@mui/system";
+// noinspection ES6UnusedImports
+// eslint-disable-next-line no-unused-vars
+import { borderColor, color, fontWeight, minWidth, padding } from '@mui/system';
 
 export const wrapperForTestimonials = {
   display: 'flex',
@@ -21,63 +23,63 @@ export const mainFeedback = {
   padding: '35px',
   marginLeft: '50px',
 
-}
+};
 export const feedBack = {
   marginTop: '5px',
   flex: 2,
-}
+};
 export const ave = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   gap: '50px',
   minWidth: '300px',
-}
+};
 export const aveText = {
   fontWeight: 'bold',
   fontSize: '24px',
-}
+};
 export const aveRate = {
   fontWeight: 'bold',
   fontSize: '64px',
-}
+};
 export const totalRate = {
   fontSize: '16px',
   color: '#4F4F4F',
   textAlign: 'center'
-}
+};
 export const feedBackItem = {
   marginRight: '50px',
   marginBottom: '4%',
-}
+};
 
 export const feedBackItemStar = {
   width: '320px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-}
+};
 export const feedBackItemText = {
   marginTop: '1%',
   color: '#4F4F4F',
   fontSize: '14px',
-}
+};
 
 export const StarRateItem = {
   color: '#F2C94C',
   fontSize: '19px',
-}
+};
 
 export const feedBackDate = {
   fontSize: '18px',
   color: '#828282',
-}
+};
 
 export const feedBackName = {
   fontSize: '18px',
   fontWeight: '700',
   color: '#333333',
-}
+};
 export const totalCountFeed = {
   marginLeft: '25px',
   position: 'relative',
@@ -90,9 +92,9 @@ export const totalCountFeed = {
     top: '-2px',
     left: '-25px',
     content: 'url("../../../../src/assets/right.png")',
-  width: '10px',
-  height: '10px',},
-}
+    width: '10px',
+    height: '10px', },
+};
 
 export const btnFeed = {
   background: '#2FD3AE',
@@ -100,16 +102,15 @@ export const btnFeed = {
   padding: '11px 31px',
   borderRadius: '31px',
   ':hover': { backgroundColor: '#26bea2' },
-}
+};
 
 export const StarRate = {
   color: '#F2C94C',
   fontSize: '19px',
-}
+};
 
-export  const linkFeed = {
+export const linkFeed = {
   cursor: 'pointer',
   textDecoration: 'none',
   color: '#2FD3AE',
-}
-
+};

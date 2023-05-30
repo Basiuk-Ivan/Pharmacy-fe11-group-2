@@ -7,7 +7,6 @@ function valuetext(value) {
   return `${value}грн`;
 }
 
-// eslint-disable-next-line react/function-component-definition
 export default function FilterSlider() {
   const [value, setValue] = useState([20, 37]);
 
