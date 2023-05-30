@@ -9,11 +9,14 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import './style/reset.scss';
+import {StyledEngineProvider} from "@mui/material";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <BrowserRouter>
+      <StyledEngineProvider injectFirst>
       <App />
+      </StyledEngineProvider>
     </BrowserRouter>
   </Provider>
 );
