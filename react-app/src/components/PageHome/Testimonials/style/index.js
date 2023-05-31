@@ -57,6 +57,7 @@ export const feedBackItem = {
 export const feedBackItemStar = {
   width: '300px',
   display: 'flex',
+  flexWrap: 'wrap',
   alignItems: 'center',
   justifyContent: 'space-between',
 };
