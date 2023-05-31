@@ -6,7 +6,7 @@ export const background = {
 export const footer = {
   marginTop: '164px',
   display: 'flex',
-  // flexWrap: 'wrap',
+  flexWrap: 'wrap',
   gap: '35px',
   marginBottom: '78px'
 
@@ -74,7 +74,7 @@ export const footerMail = {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  width: '250px',
+  // width: '250px',
 };
 
 export const mail = {
@@ -107,7 +107,7 @@ export const social = {
 
 export const descComp = {
   // flex: 1,
-  width: '300px',
+  width: '150px',
   fontFamily: 'Roboto',
   color: 'white',
   fontSize: '14px',
