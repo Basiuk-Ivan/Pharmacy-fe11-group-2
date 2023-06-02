@@ -4,5 +4,8 @@
   },
   "scripts": {
     "prepare": "husky install"
+  },
+  "dependencies": {
+    "react-scroll-into-view": "^1.12.1"
   }
 }

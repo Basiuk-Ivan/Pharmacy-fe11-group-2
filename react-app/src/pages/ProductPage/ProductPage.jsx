@@ -8,6 +8,32 @@ import ProductCardMainBlock from '../../components/SinglePage/ProductCardMainBlo
 import ProductCardInstruction from '../../components/SinglePage/ProductCardInstruction';
 import ProductAnalogiesCardContainer from '../../components/SinglePage/ProductAnalogiesCardContainer';
 import ProductCardReviews from '../../components/SinglePage/ProductCardReviews';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
+
+const AntTabs = styled(Tabs)({
+  '& .MuiTabs-indicator': {
+    backgroundColor: '#F2C94C',
+  }
+});
+
+
+const theme = createTheme({
+  typography: {
+    fontFamily: 'Roboto, sans-serif'
+  },
+  palette: {
+    primary: {
+      main: '#2FD3AE',
+    },
+    secondary: {
+      main: '#ffffff'
+    },
+    success: {
+      main: '#ed6c02'
+    }
+  }
+})
 
 const TabPanel = props => {
   const { children, value, index, ...other } = props;
@@ -73,6 +99,8 @@ const ProductPage = () => {
   };
 
   return (
+
+      <ThemeProvider theme={theme}>
     <div>
       {!!goods && (
       <Container sx={{ width: '1200px' }}>
@@ -125,13 +153,13 @@ const ProductPage = () => {
           <Grid item lg={12}>
             <Box sx={{ width: '100%' }}>
               <Box sx={{ borderBottom: 1, borderColor: 'divider', backgroundColor: '#F7FAFB' }}>
-                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                <AntTabs value={value} onChange={handleChange} aria-label="basic tabs example">
                   {/* eslint-disable react/jsx-props-no-spreading */}
                   <Tab sx={{ flexGrow: 1 }} label="Все про товар" {...a11yProps(0)} />
                   <Tab sx={{ flexGrow: 1 }} label="Інструкція" {...a11yProps(1)} />
                   <Tab sx={{ flexGrow: 1 }} label="Аналоги" {...a11yProps(2)} />
                   <Tab sx={{ flexGrow: 1 }} label="Відгуки" {...a11yProps(3)} />
-                </Tabs>
+                </AntTabs>
               </Box>
               <TabPanel value={value} index={0}>
                 <ProductCardMainBlock goods={goods} />
@@ -157,6 +185,7 @@ const ProductPage = () => {
       </Container>
       )}
     </div>
+      </ThemeProvider>
   );
 };
 

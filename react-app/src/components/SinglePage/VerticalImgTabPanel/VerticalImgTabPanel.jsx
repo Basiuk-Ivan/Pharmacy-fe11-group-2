@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Box, Tab, Tabs, Typography } from '@mui/material';
-
+import { tabsClasses } from '@mui/material/Tabs';
 const TabPanel = props => {
   // eslint-disable react/jsx-props-no-spreading
   const { children, value, index, ...other } = props;
@@ -42,8 +42,15 @@ const VerticalImgTabPanel = ({ goods }) => {
         value={value}
         onChange={handleChange}
         aria-label="Vertical tabs example"
-        sx={{ height: '350px' }}
+        sx={{
+            [`& .${tabsClasses.scrollButtons}`]: {
+                backgroundColor: '#F2C94C',
+                color:'#ffffff'
+            },
+            height:'350px'
+        }}
         indicatorColor="red"
+        scrollButtons
       >
         {/* eslint-disable react/jsx-props-no-spreading */}
         <Tab label={<img src={goods.img[0]} width="100" alt="itm1" />} {...a11yProps(0)} />
