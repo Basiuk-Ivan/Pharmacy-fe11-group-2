@@ -36,7 +36,6 @@ function Products() {
       <TitleCategory />
 
       <Box id="asideAndCards" sx={asideAndCardsStyles}>
-
         <Box id="aside" sx={asideStyles}>
           <ChoiceCategory />
           <Filter />
@@ -49,7 +48,6 @@ function Products() {
             <PaginationProducts />
           </Box>
         </Box>
-
       </Box>
       <PromoMonth />
       <YouBrowsed />

@@ -6,6 +6,7 @@ import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import IconBreadcrumbs from './Breadcrums';
+import ProductCard from '../../components/ProductCard';
 import './CartStyles.scss';
 import {
   StyledBox,
@@ -106,7 +107,8 @@ const Cart = () => {
             fontFamily: 'Roboto'
           }}
         >
-          <Card style={{ marginBottom: '1rem' }}>
+          {/* <ProductCard /> */}
+          {/* <Card style={{ marginBottom: '1rem' }}>
             <CardContentStyled>
               <StyledBox />
               <ContentBox>
@@ -177,7 +179,7 @@ const Cart = () => {
                 </Box>
               </PriceBox>
             </CardContentStyled>
-          </Card>
+          </Card> */}
         </Container>
       </Container>
     </div>
