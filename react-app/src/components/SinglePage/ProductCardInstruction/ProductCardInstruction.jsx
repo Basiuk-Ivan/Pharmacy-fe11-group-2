@@ -201,26 +201,56 @@ const ProductCardInstruction = ({ goods }) => {
         </ScrollIntoView>
       </Stack>
       <Box>
-        <TextComponent id="manufacturer" title={goods.instruction.manufacturer.title}
-                       value={goods.instruction.manufacturer.value} />
-        <TextComponent id="brieflyAbout" title={goods.instruction.brieflyAbout.title}
-                       value={goods.instruction.brieflyAbout.value} />
-        <TextComponent id="indications" title={goods.instruction.indications.title}
-                       value={goods.instruction.indications.value} />
-        <TextComponent id="howToTake" title={goods.instruction.howToTake.title}
-                       value={goods.instruction.howToTake.value} />
-        <TextComponent id="description" title={goods.instruction.description.title}
-                       value={goods.instruction.description.value} />
-        <TextComponent id="functionalBenefits" title={goods.instruction.functionalBenefits.title}
-                       value={goods.instruction.functionalBenefits.value} />
-        <TextComponent id="storageConditions" title={goods.instruction.storageConditions.title}
-                       value={goods.instruction.storageConditions.value} />
-        <TextComponent id="bestBeforeDate" title={goods.instruction.bestBeforeDate.title}
-                       value={goods.instruction.bestBeforeDate.value} />
-        <TextComponent id="activeSubstance" title={goods.instruction.activeSubstance.title}
-                       value={goods.instruction.activeSubstance.value} />
-        <TextComponent id="dosageForm" title={goods.instruction.dosageForm.title}
-                       value={goods.instruction.dosageForm.value} />
+        <TextComponent
+          id="manufacturer"
+          title={goods.instruction.manufacturer.title}
+          value={goods.instruction.manufacturer.value}
+        />
+        <TextComponent
+          id="brieflyAbout"
+          title={goods.instruction.brieflyAbout.title}
+          value={goods.instruction.brieflyAbout.value}
+        />
+        <TextComponent
+          id="indications"
+          title={goods.instruction.indications.title}
+          value={goods.instruction.indications.value}
+        />
+        <TextComponent
+          id="howToTake"
+          title={goods.instruction.howToTake.title}
+          value={goods.instruction.howToTake.value}
+        />
+        <TextComponent
+          id="description"
+          title={goods.instruction.description.title}
+          value={goods.instruction.description.value}
+        />
+        <TextComponent
+          id="functionalBenefits"
+          title={goods.instruction.functionalBenefits.title}
+          value={goods.instruction.functionalBenefits.value}
+        />
+        <TextComponent
+          id="storageConditions"
+          title={goods.instruction.storageConditions.title}
+          value={goods.instruction.storageConditions.value}
+        />
+        <TextComponent
+          id="bestBeforeDate"
+          title={goods.instruction.bestBeforeDate.title}
+          value={goods.instruction.bestBeforeDate.value}
+        />
+        <TextComponent
+          id="activeSubstance"
+          title={goods.instruction.activeSubstance.title}
+          value={goods.instruction.activeSubstance.value}
+        />
+        <TextComponent
+          id="dosageForm"
+          title={goods.instruction.dosageForm.title}
+          value={goods.instruction.dosageForm.value}
+        />
       </Box>
     </>
   );
