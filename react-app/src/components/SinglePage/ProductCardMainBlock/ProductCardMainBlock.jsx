@@ -195,10 +195,10 @@ const ProductCardMainBlock = ({ goods }) => {
                 >
                   -
                 </ButtonBase>
-                <Box sx={{ padding: '10px 12px',
+                <Box sx={{ padding: '4px 20px',
                   borderRadius: '50px',
                   backgroundColor: '#ffffff',
-                  width: '50px',
+                  // height:'32px',
                   textAlign: 'center',
                   fontFamily: '"Roboto", "san-serif"' }}
                 >
@@ -281,6 +281,7 @@ const ProductCardMainBlock = ({ goods }) => {
                   width: '158px',
                   color: '#ffffff',
                   borderRadius: '50px',
+                  border: 'none',
                   backgroundColor: '#2FD3AE',
                   '&:hover': {
                     color: '#2FD3AE',
