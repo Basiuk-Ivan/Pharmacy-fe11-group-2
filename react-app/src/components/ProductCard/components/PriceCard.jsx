@@ -7,7 +7,11 @@ import { priceStyles, discountStyles, cartStyles } from '../style';
 export const PriceCard = ({ productItem }) => {
   const dispatch = useDispatch();
 
-  const handleAddtoCart = item => dispatch(addItem(item));
+  const handleAddtoCart = event => {
+    event.preventDefault();
+    dispatch(addItem(productItem));
+  };
+
   return (
     <Stack spacing={2} direction="row" justifyContent="space-between">
       <Stack direction="column">
@@ -24,7 +28,7 @@ export const PriceCard = ({ productItem }) => {
         )}
       </Stack>
 
-      <IconButton onClick={() => handleAddtoCart(productItem)} sx={cartStyles}>
+      <IconButton onClick={handleAddtoCart} sx={cartStyles}>
         <ShoppingCartOutlinedIcon />
       </IconButton>
     </Stack>

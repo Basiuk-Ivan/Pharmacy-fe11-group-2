@@ -4,7 +4,8 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useSelector } from 'react-redux';
 import ProductCard from '../../ProductCard/ProductCard';
 import {
-  cardsWrapperStyle, cardWrapperStyle,
+  cardsWrapperStyle,
+  cardWrapperStyle,
   titleStyle,
   youBrowsedStyle,
   youBrowsedTitleSliderStyle,
@@ -14,6 +15,7 @@ import {
 function YouBrowsed() {
   const { products } = useSelector(state => state.products);
   const youBrowsedCards = products.slice(5, 10);
+  const isInCart = true;
 
   return (
     <Box id="youBrowsed" sx={youBrowsedStyle}>
@@ -26,10 +28,9 @@ function YouBrowsed() {
       </Box>
 
       <Box id="cardsWrapper" sx={cardsWrapperStyle}>
-
         {youBrowsedCards.map(item => (
           <Box id="cardWrapper" key={item.id} sx={cardWrapperStyle}>
-            <ProductCard productItem={item} />
+            <ProductCard productItem={item} isInCart={isInCart} />
           </Box>
         ))}
       </Box>

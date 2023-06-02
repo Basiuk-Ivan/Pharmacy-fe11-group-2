@@ -16,6 +16,7 @@ import {
 function PromoMonth() {
   const { products } = useSelector(state => state.products);
   const promoMonthCards = products.slice(0, 5);
+  const isInCart = true;
 
   return (
     <Box id="promoMonth" sx={promoMonthStyle}>
@@ -28,10 +29,9 @@ function PromoMonth() {
       </Box>
 
       <Box id="cardsWrapper" sx={cardsWrapperStyle}>
-
         {promoMonthCards.map(item => (
           <Box id="cardWrapper" key={item.id} sx={cardWrapperStyle}>
-            <ProductCard productItem={item} />
+            <ProductCard productItem={item} isInCart={isInCart} />
           </Box>
         ))}
       </Box>

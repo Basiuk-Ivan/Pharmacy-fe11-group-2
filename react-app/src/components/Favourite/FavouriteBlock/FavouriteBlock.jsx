@@ -11,6 +11,7 @@ const FavouriteBlock = props => {
   const { products } = props;
   const productsSlice = products.slice(0, 4);
   const dispatch = useDispatch();
+  const isInCart = true;
 
   useEffect(() => {
     dispatch(fetchPosts());
@@ -91,21 +92,22 @@ const FavouriteBlock = props => {
                     cursor: 'pointer'
                   }}
                 >
-                  <ProductCard productItem={item} />
+                  <ProductCard productItem={item} isInCart={isInCart} />
                 </Card>
               </Grid>
             ))}
           </Grid>
         </>
       ) : (
-        <Typography sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          fontSize: 24,
-          fontWeight: 400,
-          mt: '100px',
-          mb: '200px',
-        }}
+        <Typography
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            fontSize: 24,
+            fontWeight: 400,
+            mt: '100px',
+            mb: '200px'
+          }}
         >
           Додайте товар в обране для відображення на цій сторінці
         </Typography>
