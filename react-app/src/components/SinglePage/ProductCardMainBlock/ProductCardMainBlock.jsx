@@ -198,7 +198,7 @@ const ProductCardMainBlock = ({ goods }) => {
                 <Box sx={{ padding: '4px 20px',
                   borderRadius: '50px',
                   backgroundColor: '#ffffff',
-                    // height:'32px',
+                  // height:'32px',
                   textAlign: 'center',
                   fontFamily: '"Roboto", "san-serif"' }}
                 >

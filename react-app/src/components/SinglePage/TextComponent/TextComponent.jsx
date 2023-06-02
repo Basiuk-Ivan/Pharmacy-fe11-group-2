@@ -1,4 +1,4 @@
-import {Box, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 const TextComponent = ({ id, title, value }) => {
   const paragraphs = value.split('\n').map((paragraph, index) => (
