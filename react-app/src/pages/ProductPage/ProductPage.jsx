@@ -109,24 +109,24 @@ const ProductPage = () => {
                   <HomeOutlinedIcon sx={{ paddingRight: '12px', color: '#2FD3AE' }} />
                   <ListItemText
                     primaryTypographyProps={{
-                    style: {
-                      fontSize: '14px',
-                      paddingRight: '12px',
-                      color: '#2FD3AE'
-                    }
-                  }}
+                      style: {
+                        fontSize: '14px',
+                        paddingRight: '12px',
+                        color: '#2FD3AE'
+                      }
+                    }}
                     primary="Головна/ "
                   />
                 </ListItemButton>
                 <ListItemButton sx={{ flex: '0 0 auto', paddingLeft: '5px', paddingRight: 0 }}>
                   <ListItemText
                     primaryTypographyProps={{
-                    style: {
-                      fontSize: '14px',
-                      paddingRight: '12px',
-                      color: '#2FD3AE'
-                    }
-                  }}
+                      style: {
+                        fontSize: '14px',
+                        paddingRight: '12px',
+                        color: '#2FD3AE'
+                      }
+                    }}
                     primary={`${goods?.mainCategory} /`}
                   />
                 </ListItemButton>
