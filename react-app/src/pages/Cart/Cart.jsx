@@ -56,10 +56,11 @@ const Cart = () => {
           <Typography>Очистити корзину</Typography>
         </IconButton>
       </HeaderBox>
-      <Container
+      <Box
         sx={{
           width: 1200,
           display: 'flex',
+          gap: '20px',
           flexDirection: 'row-reverse',
           fontFamily: 'Roboto'
         }}
@@ -98,23 +99,24 @@ const Cart = () => {
             </PromoBox>
           </FormBox>
         </Box>
-        <Container
+        <Box
           sx={{
             width: 830,
             display: 'flex',
             flexDirection: 'column',
+            gap: '10px',
             fontFamily: 'Roboto'
           }}
         >
-          <Card style={{ marginBottom: '1rem' }}>
-            {/* <CardContentStyled> */}
-            {products.map(item => (
-              <ProductCard key={item.id} productItem={item} />
-            ))}
-            {/* </CardContentStyled> */}
-          </Card>
-        </Container>
-      </Container>
+          {/* <Card style={{ marginBottom: '1rem' }}> */}
+          {/* <CardContentStyled> */}
+          {products.map(item => (
+            <ProductCard key={item.id} productItem={item} />
+          ))}
+          {/* </CardContentStyled> */}
+          {/* </Card> */}
+        </Box>
+      </Box>
     </div>
   );
 };
