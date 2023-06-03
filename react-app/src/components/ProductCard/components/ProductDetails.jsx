@@ -1,8 +1,10 @@
 import { Box, Stack } from '@mui/material';
+import { wrappForDetails } from '../style';
+
 import s from '../style/ProductCard.module.scss';
 
 export const ProductDetails = ({ productItem }) => (
-  <Box>
+  <Box sx={wrappForDetails}>
     <Stack direction="column">
       <Stack direction="row" alignItems="center">
         <span className={s.bullet} />

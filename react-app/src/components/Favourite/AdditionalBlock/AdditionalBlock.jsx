@@ -4,7 +4,7 @@ import ProductCard from '../../ProductCard/ProductCard';
 const AdditionalBlock = props => {
   const { products } = props;
   const productsSlice = products.slice(0, 4);
-  const isInCart = true;
+  const isInCart = false;
 
   return (
     <Container

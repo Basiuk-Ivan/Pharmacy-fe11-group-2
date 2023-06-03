@@ -1,8 +1,6 @@
-import {
-  Box, FormControl, FormControlLabel, RadioGroup, Typography, Radio, Container
-} from '@mui/material';
+import { Box, FormControl, FormControlLabel, RadioGroup, Typography, Radio, Container } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { addPaymentMethod } from '../../../../redux/orderProcessSlice';
+import { addPaymentMethod } from '../../../../redux/slice/orderProcessSlice';
 
 const PaymentMethodForm = () => {
   const dispatch = useDispatch();
@@ -17,7 +15,8 @@ const PaymentMethodForm = () => {
           fontWeight: '700',
           fontSize: '24px'
         }}
-      >Спосіб Оплати
+      >
+        Спосіб Оплати
       </Typography>
       <FormControl>
         <RadioGroup
@@ -39,12 +38,12 @@ const PaymentMethodForm = () => {
             onChange={() => {
               dispatch(addPaymentMethod('card'));
             }}
-            label={(
+            label={
               <Box display="flex" alignItems="center">
                 <span>Карткою онлайн</span>
                 <img src="./orderprocessTest/cards.png" alt="Payment Method" style={{ marginLeft: '10px' }} />
               </Box>
-          )}
+            }
           />
         </RadioGroup>
       </FormControl>

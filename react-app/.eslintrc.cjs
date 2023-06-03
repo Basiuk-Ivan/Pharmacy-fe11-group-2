@@ -16,6 +16,7 @@ module.exports = {
     'react/prop-types': 'off',
     'max-len': ['error', { code: 110 }],
     'react/no-unescaped-entities': 'off',
+    'react/jsx-props-no-spreading': 'off',
     'react/no-array-index-key': 'off',
     'react-refresh/only-export-components': 'warn',
     'react/react-in-jsx-scope': 0,
@@ -33,6 +34,5 @@ module.exports = {
     'no-param-reassign': 'off',
     'react/jsx-one-expression-per-line': 'off',
     'object-curly-newline': 'off'
-  },
-
+  }
 };

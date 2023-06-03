@@ -8,7 +8,7 @@ import { cardsWrapperStyled, cardWrapperStyled } from './style';
 function Cards() {
   const { products } = useSelector(state => state.products);
   const { numPage } = useSelector(state => state.numPage);
-  const isInCart = true;
+  const isInCart = false;
 
   return (
     <Box id="cardsWrapper" sx={cardsWrapperStyled}>

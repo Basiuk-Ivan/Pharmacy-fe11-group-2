@@ -15,7 +15,7 @@ import {
 function YouBrowsed() {
   const { products } = useSelector(state => state.products);
   const youBrowsedCards = products.slice(5, 10);
-  const isInCart = true;
+  const isInCart = false;
 
   return (
     <Box id="youBrowsed" sx={youBrowsedStyle}>

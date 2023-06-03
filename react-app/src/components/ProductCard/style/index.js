@@ -1,19 +1,19 @@
 export const wrapForCardStyles = isInCart => ({
   position: 'relative',
-  maxWidth: isInCart ? '278px' : 'auto'
+  minWidth: isInCart ? 'auto' : '220px',
+  display: isInCart ? 'flex' : 'block'
 });
 
 export const cardMediaStyles = isInCart => ({
-  height: '160px',
-  width: isInCart ? 'auto' : '200px'
+  minHeight: '180px',
+  width: isInCart ? '220px' : 'auto'
 });
 
 export const cardContentStyles = isInCart => ({
   display: 'flex',
-  flexDirection: isInCart ? 'column' : 'row'
+  paddingTop: '0px',
+  flexDirection: isInCart ? 'row' : 'column'
 });
-
-export const bodyForquantityStyles = { mt: '22px' };
 
 export const textForquantityStyles = {
   fontSize: '12px',
@@ -22,6 +22,8 @@ export const textForquantityStyles = {
 };
 
 export const ratingStyles = { fontSize: '18px' };
+
+export const wrappForDetails = { marginBottom: '15px' };
 
 export const productNameStyles = {
   mt: '5px',
@@ -44,16 +46,17 @@ export const discountStyles = {
   textDecoration: 'line-through'
 };
 
-export const cartStyles = {
-  backgroundColor: '#2FD3AE',
+export const cartStyles = isCart => ({
   borderRadius: '50%',
   height: '50px',
   width: '50px',
   color: '#ffffff',
+  backgroundColor: isCart ? 'orange' : '#2FD3AE',
+
   '&:hover': {
     backgroundColor: 'orange'
   }
-};
+});
 
 export const productDayStyles = {
   position: 'absolute',
@@ -65,4 +68,17 @@ export const productDayStyles = {
   fontWeight: 500,
   color: '#FFFFFF',
   borderRadius: '20px'
+};
+
+export const favoriteIconStyles = {
+  position: 'absolute',
+  top: '2px',
+  right: '5px',
+  display: 'flex',
+  justifyContent: 'end',
+  color: 'rgba(0, 0, 0, 0.6)',
+
+  '&:hover': {
+    filter: 'invert(20%) sepia(51%) saturate(7402%) hue-rotate(353deg) brightness(92%) contrast(105%)'
+  }
 };

@@ -30,9 +30,7 @@ const Layout = () => (
 
       <Container position="relative" maxWidth="lg">
         <Menu />
-        {/* <Box> */}
         <Outlet />
-        {/* </Box> */}
       </Container>
     </Container>
     <Footer />

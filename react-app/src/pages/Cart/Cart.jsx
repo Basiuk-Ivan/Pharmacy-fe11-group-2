@@ -1,14 +1,22 @@
-// import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-
+import { useEffect, useState } from 'react';
 // import { useSelector, useDispatch } from 'react-redux';
-import { Card, Typography, InputAdornment, IconButton } from '@mui/material';
+// import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import {
+  Box
+  // Container
+} from '@mui/system';
+import {
+  // Card,
+  Typography,
+  InputAdornment,
+  IconButton
+} from '@mui/material';
 import DeleteOutlineTwoToneIcon from '@mui/icons-material/DeleteOutlineTwoTone';
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 import IconBreadcrumbs from './Breadcrums';
 import ProductCard from '../../components/ProductCard';
-import './CartStyles.scss';
+import './style/CartStyles.scss';
 import {
   FormBox,
   FormTitle,
@@ -20,12 +28,19 @@ import {
   PromoBox,
   HeaderBox,
   TextFieldPromo
-} from './Style';
-// eslint-disable-next-line import/order
-import { Box, Container } from '@mui/system';
+} from './style';
 
 const Cart = () => {
-  const products = useSelector(state => state.itemCards.items);
+  // const products = useSelector(state => state.itemCards.items);
+  const isInCart = true;
+
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    const savedItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    setCartItems(savedItems);
+  }, []);
+
   // const dispatch = useDispatch();
 
   // const handleRemoveItem = itemId => {
@@ -110,8 +125,8 @@ const Cart = () => {
         >
           {/* <Card style={{ marginBottom: '1rem' }}> */}
           {/* <CardContentStyled> */}
-          {products.map(item => (
-            <ProductCard key={item.id} productItem={item} />
+          {cartItems.map(item => (
+            <ProductCard key={item.id} productItem={item} isInCart={isInCart} />
           ))}
           {/* </CardContentStyled> */}
           {/* </Card> */}

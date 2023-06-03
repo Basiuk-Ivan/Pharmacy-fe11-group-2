@@ -5,13 +5,13 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import ProductCard from '../../ProductCard/ProductCard';
 import Bread from '../Bread';
-import { fetchPosts } from '../../../redux/productsSlice';
+import { fetchPosts } from '../../../redux/slice/productsSlice';
 
 const FavouriteBlock = props => {
   const { products } = props;
   const productsSlice = products.slice(0, 4);
   const dispatch = useDispatch();
-  const isInCart = true;
+  const isInCart = false;
 
   useEffect(() => {
     dispatch(fetchPosts());
