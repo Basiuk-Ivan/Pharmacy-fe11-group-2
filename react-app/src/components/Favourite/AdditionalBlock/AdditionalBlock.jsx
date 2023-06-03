@@ -4,7 +4,6 @@ import ProductCard from '../../ProductCard/ProductCard';
 const AdditionalBlock = props => {
   const { products } = props;
   const productsSlice = products.slice(0, 4);
-  const isInCart = false;
 
   return (
     <Container
@@ -40,7 +39,7 @@ const AdditionalBlock = props => {
                 cursor: 'pointer'
               }}
             >
-              <ProductCard productItem={item} isInCart={isInCart} />
+              <ProductCard productItem={item} />
             </Card>
           </Grid>
         ))}
