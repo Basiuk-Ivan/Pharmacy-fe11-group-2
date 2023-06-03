@@ -38,12 +38,12 @@ const PaymentMethodForm = () => {
             onChange={() => {
               dispatch(addPaymentMethod('card'));
             }}
-            label={
+            label={(
               <Box display="flex" alignItems="center">
                 <span>Карткою онлайн</span>
                 <img src="./orderprocessTest/cards.png" alt="Payment Method" style={{ marginLeft: '10px' }} />
               </Box>
-            }
+            )}
           />
         </RadioGroup>
       </FormControl>

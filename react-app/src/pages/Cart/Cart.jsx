@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 // import { useSelector, useDispatch } from 'react-redux';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import {
   Box
@@ -31,15 +31,9 @@ import {
 } from './style';
 
 const Cart = () => {
-  // const products = useSelector(state => state.itemCards.items);
+  const productItemCart = useSelector(state => state.itemCards.items);
+
   const isInCart = true;
-
-  const [cartItems, setCartItems] = useState([]);
-
-  useEffect(() => {
-    const savedItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    setCartItems(savedItems);
-  }, []);
 
   // const dispatch = useDispatch();
 
@@ -125,7 +119,7 @@ const Cart = () => {
         >
           {/* <Card style={{ marginBottom: '1rem' }}> */}
           {/* <CardContentStyled> */}
-          {cartItems.map(item => (
+          {productItemCart.map(item => (
             <ProductCard key={item.id} productItem={item} isInCart={isInCart} />
           ))}
           {/* </CardContentStyled> */}

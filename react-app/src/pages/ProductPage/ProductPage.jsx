@@ -46,7 +46,7 @@ const TabPanel = props => {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography component="div">{children}</Typography>
         </Box>
       )}
     </div>
@@ -86,7 +86,11 @@ const ProductPage = () => {
 
     fetchData();
 
-    const product = products.find(item => item.id === id);
+    const product = products.find(item => {
+      console.log(item.id);
+
+      return item.id === id;
+    });
     setGoods(product);
   }, [id, products]);
 
@@ -149,7 +153,7 @@ const ProductPage = () => {
                 <Box sx={{ width: '100%' }}>
                   <Box sx={{ borderBottom: 1, borderColor: 'divider', backgroundColor: '#F7FAFB' }}>
                     <AntTabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                      {/* eslint-disable react/jsx-props-no-spreading */}
+                      {}
                       <Tab sx={{ flexGrow: 1 }} label="Все про товар" {...a11yProps(0)} />
                       <Tab sx={{ flexGrow: 1 }} label="Інструкція" {...a11yProps(1)} />
                       <Tab sx={{ flexGrow: 1 }} label="Аналоги" {...a11yProps(2)} />
@@ -157,22 +161,22 @@ const ProductPage = () => {
                     </AntTabs>
                   </Box>
                   <TabPanel value={value} index={0}>
-                    <ProductCardMainBlock goods={goods} />
-                    <ProductCardInstruction goods={goods} />
-                    <ProductAnalogiesCardContainer goods={goods} />
-                    <ProductCardReviews goods={goods} />
+                    <ProductCardMainBlock productItem={goods} />
+                    <ProductCardInstruction productItem={goods} />
+                    <ProductAnalogiesCardContainer productItem={goods} />
+                    <ProductCardReviews productItem={goods} />
                   </TabPanel>
                   <TabPanel value={value} index={1}>
-                    <ProductCardMainBlock goods={goods} />
-                    <ProductCardInstruction goods={goods} />
+                    <ProductCardMainBlock productItem={goods} />
+                    <ProductCardInstruction productItem={goods} />
                   </TabPanel>
                   <TabPanel value={value} index={2}>
-                    <ProductCardMainBlock goods={goods} />
-                    <ProductAnalogiesCardContainer goods={goods} />
+                    <ProductCardMainBlock productItem={goods} />
+                    <ProductAnalogiesCardContainer productItem={goods} />
                   </TabPanel>
                   <TabPanel value={value} index={3}>
-                    <ProductCardMainBlock goods={goods} />
-                    <ProductCardReviews goods={goods} />
+                    <ProductCardMainBlock productItem={goods} />
+                    <ProductCardReviews productItem={goods} />
                   </TabPanel>
                 </Box>
               </Grid>

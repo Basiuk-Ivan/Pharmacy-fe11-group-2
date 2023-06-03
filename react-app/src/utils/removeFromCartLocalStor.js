@@ -1,4 +1,8 @@
-export const removeFromCartLocalStor = productItem => {
+import { removeItem } from '../redux/slice/cartItems';
+
+export const removeFromCartLocalStor = (productItem, dispatch) => {
+  dispatch(removeItem(productItem.id));
+
   const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
   const updatedItems = cartItems.filter(item => item.id !== productItem.id);
 

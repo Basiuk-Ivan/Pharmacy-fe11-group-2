@@ -1,13 +1,13 @@
 import { Box, Typography } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import ProductCard from '../../ProductCard/index';
+import ProductCard from '../../ProductCard';
 import s from './ProductAnalogiesCardContainer.module.scss';
 
 import 'swiper/swiper-bundle.min.css';
 
 const ProductAnalogiesCardContainer = ({ goods }) => {
-  const isInCart = true;
+  const isInCart = false;
 
   return (
     <Box>

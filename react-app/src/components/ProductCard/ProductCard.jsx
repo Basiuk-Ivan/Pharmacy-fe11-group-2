@@ -4,6 +4,7 @@ import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { NavLink } from 'react-router-dom';
 import { addToFavouriteLocalStor } from '../../utils/addToFavouriteLocalStor';
 import { removeFromFavouriteLocalStor } from '../../utils/removeFromFavouriteLocalStor';
 import { addToFavouriteItems, deleteFromFavouriteItems } from '../../redux/slice/favouriteItems';
@@ -60,7 +61,6 @@ const ProductCard = ({ productItem, isInCart }) => {
 
   useEffect(() => {
     const productItemFavourite = localStorage.getItem(`favouriteItem_${productItem.id}`);
-
     if (productItemFavourite) {
       const { isFavourite } = JSON.parse(productItemFavourite);
       setIsFavorite(isFavourite);
@@ -69,29 +69,32 @@ const ProductCard = ({ productItem, isInCart }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Card sx={cardWrapStyles}>
-        <Box sx={favoriteIconStyles} onClick={handleFavoriteClick}>
-          {isFavorite ? <FavoriteIcon sx={{ color: 'red' }} /> : <FavoriteBorderIcon />}
-        </Box>
-        <CardMedia sx={cardMediaStyle} image={productItem?.img[0]} title="productImage" />
-        <CardContent sx={cardContentStyle}>
-          <RatingCard productItem={productItem} />
-          <Typography
-            className={s.productName}
-            gutterBottom
-            variant="h5"
-            component="p"
-            sx={productNameStyles}
-          >
-            {productItem?.name}
-          </Typography>
-          <ProductDetails productItem={productItem} />
-          <PriceCard productItem={productItem} />
-          <Typography variant="span" gutterBottom sx={productDayStyles}>
-            Товар дня
-          </Typography>
-        </CardContent>
-      </Card>
+      {/* <NavLink to={productItem.id}> */}
+      <NavLink to={`/products/${productItem?.id}`}>
+        <Card sx={cardWrapStyles}>
+          <Box sx={favoriteIconStyles} onClick={handleFavoriteClick}>
+            {isFavorite ? <FavoriteIcon sx={{ color: 'red' }} /> : <FavoriteBorderIcon />}
+          </Box>
+          <CardMedia sx={cardMediaStyle} image={productItem?.img[0]} title="productImage" />
+          <CardContent sx={cardContentStyle}>
+            <RatingCard productItem={productItem} />
+            <Typography
+              className={s.productName}
+              gutterBottom
+              variant="h5"
+              component="p"
+              sx={productNameStyles}
+            >
+              {productItem?.name}
+            </Typography>
+            <ProductDetails productItem={productItem} />
+            <PriceCard productItem={productItem} />
+            <Typography variant="span" gutterBottom sx={productDayStyles}>
+              Товар дня
+            </Typography>
+          </CardContent>
+        </Card>
+      </NavLink>
     </ThemeProvider>
   );
 };

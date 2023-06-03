@@ -4,7 +4,7 @@ import { IconButton, Typography, Stack } from '@mui/material';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { addToCartLocalStor } from '../../../utils/addToCartLocalStor';
 import { removeFromCartLocalStor } from '../../../utils/removeFromCartLocalStor';
-import { addItem, removeItem } from '../../../redux/slice/cartItems';
+import { addItem } from '../../../redux/slice/cartItems';
 import { priceStyles, discountStyles, cartStyles } from '../style';
 
 export const PriceCard = ({ productItem }) => {
@@ -21,8 +21,7 @@ export const PriceCard = ({ productItem }) => {
       dispatch(addItem(productItem));
       addToCartLocalStor(productItem);
     } else {
-      dispatch(removeItem(productItem));
-      removeFromCartLocalStor(productItem);
+      removeFromCartLocalStor(productItem, dispatch);
     }
   };
 

@@ -12,7 +12,7 @@ const favouriteItems = createSlice({
       state.favouriteItems.push(action.payload);
     },
     deleteFromFavouriteItems: (state, action) => {
-      state.favouriteItems = state.favouriteItems.filter(item => item.article !== action.payload);
+      state.favouriteItems = state.favouriteItems.filter(item => item.id !== action.payload);
     }
   }
 });

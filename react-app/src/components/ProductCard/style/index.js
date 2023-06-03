@@ -1,6 +1,6 @@
 export const wrapForCardStyles = isInCart => ({
   position: 'relative',
-  minWidth: isInCart ? 'auto' : '220px',
+  width: isInCart ? 'auto' : '220px',
   display: isInCart ? 'flex' : 'block'
 });
 
