@@ -1,32 +1,27 @@
-import { Typography, Stack, Button, Box, Grid, Rating, ButtonBase } from '@mui/material';
+import * as React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Typography, Stack, Button, Box, Grid, Rating, ButtonBase } from '@mui/material';
 
-import * as React from 'react';
 import Checkbox from '@mui/material/Checkbox';
-import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
-import Favorite from '@mui/icons-material/Favorite';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import { addToFavouriteLocalStor } from '../../../utils/addToFavouriteLocalStor';
+
 import { addToFavouriteItems, deleteFromFavouriteItems } from '../../../redux/slice/favouriteItems';
 import { removeFromFavouriteLocalStor } from '../../../utils/removeFromFavouriteLocalStor';
-import s from './ProductCardMainBlock.module.scss';
 import VerticalImgTabPanel from '../VerticalImgTabPanel';
+import s from './ProductCardMainBlock.module.scss';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-// const IconCheckboxes = () => (
-//   <div>
-// eslint-disable-next-line max-len
-//     <Checkbox onClick={handleFavoriteClick} {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-//   </div>
-// );
-
 const ProductCardMainBlock = ({ productItem }) => {
-  const [isFavorite, setIsFavorite] = useState(false);
   const dispatch = useDispatch();
 
   const [quantity, setQuantity] = useState(1);
   const [value, setValue] = useState(2);
+
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const handleFavoriteClick = event => {
     event.preventDefault();
@@ -53,7 +48,7 @@ const ProductCardMainBlock = ({ productItem }) => {
   return (
     <Grid container>
       <Grid item lg={5}>
-        <VerticalImgTabPanel goods={productItem} />
+        <VerticalImgTabPanel productItem={productItem} />
       </Grid>
 
       <Grid item lg={7}>
@@ -88,7 +83,6 @@ const ProductCardMainBlock = ({ productItem }) => {
               <Box sx={{ display: 'flex', gap: '3px' }}>
                 <Typography
                   variant="body1"
-                  // component="div"
                   sx={{
                     fontSize: '14px',
                     color: '#7B818C',
@@ -100,7 +94,6 @@ const ProductCardMainBlock = ({ productItem }) => {
 
                 <Typography
                   variant="body1"
-                  // component="div"
                   sx={{
                     fontSize: '14px',
                     color: '#333333',
@@ -175,16 +168,14 @@ const ProductCardMainBlock = ({ productItem }) => {
                 </Typography>
               </Grid>
               <Grid item lg={3}>
-                {/* <IconCheckboxes /> */}
-                <div>
+                <Box onClick={handleFavoriteClick}>
                   <Checkbox
-                    onClick={handleFavoriteClick}
                     {...label}
-                    icon={<FavoriteBorder />}
-                    checkedIcon={<Favorite />}
+                    icon={<FavoriteBorderOutlinedIcon />}
+                    checkedIcon={<FavoriteIcon />}
+                    checked={isFavorite}
                   />
-                </div>
-                {/* <FavoriteBorderOutlinedIcon sx={{color: '#2FD3AE'}}/> */}
+                </Box>
               </Grid>
 
               <Box sx={{ position: 'relative', mb: '14px' }}>

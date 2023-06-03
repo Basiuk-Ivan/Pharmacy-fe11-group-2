@@ -69,7 +69,6 @@ const ProductCard = ({ productItem, isInCart }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <NavLink to={productItem.id}> */}
       <NavLink to={`/products/${productItem?.id}`}>
         <Card sx={cardWrapStyles}>
           <Box sx={favoriteIconStyles} onClick={handleFavoriteClick}>

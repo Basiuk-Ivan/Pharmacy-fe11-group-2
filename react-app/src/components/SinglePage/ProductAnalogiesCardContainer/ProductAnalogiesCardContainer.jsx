@@ -6,7 +6,7 @@ import s from './ProductAnalogiesCardContainer.module.scss';
 
 import 'swiper/swiper-bundle.min.css';
 
-const ProductAnalogiesCardContainer = ({ goods }) => {
+const ProductAnalogiesCardContainer = ({ productItem }) => {
   const isInCart = false;
 
   return (
@@ -31,28 +31,28 @@ const ProductAnalogiesCardContainer = ({ goods }) => {
         slidesOffsetBefore={45}
       >
         <SwiperSlide>
-          <ProductCard productItem={goods} isInCart={isInCart} />
+          <ProductCard productItem={productItem} isInCart={isInCart} />
         </SwiperSlide>
         <SwiperSlide>
-          <ProductCard productItem={goods} isInCart={isInCart} />
+          <ProductCard productItem={productItem} isInCart={isInCart} />
         </SwiperSlide>
         <SwiperSlide>
-          <ProductCard productItem={goods} isInCart={isInCart} />
+          <ProductCard productItem={productItem} isInCart={isInCart} />
         </SwiperSlide>
         <SwiperSlide>
-          <ProductCard productItem={goods} isInCart={isInCart} />
+          <ProductCard productItem={productItem} isInCart={isInCart} />
         </SwiperSlide>
         <SwiperSlide>
-          <ProductCard productItem={goods} isInCart={isInCart} />
+          <ProductCard productItem={productItem} isInCart={isInCart} />
         </SwiperSlide>
         <SwiperSlide>
-          <ProductCard productItem={goods} isInCart={isInCart} />
+          <ProductCard productItem={productItem} isInCart={isInCart} />
         </SwiperSlide>
         <SwiperSlide>
-          <ProductCard productItem={goods} isInCart={isInCart} />
+          <ProductCard productItem={productItem} isInCart={isInCart} />
         </SwiperSlide>
         <SwiperSlide>
-          <ProductCard productItem={goods} isInCart={isInCart} />
+          <ProductCard productItem={productItem} isInCart={isInCart} />
         </SwiperSlide>
       </Swiper>
 

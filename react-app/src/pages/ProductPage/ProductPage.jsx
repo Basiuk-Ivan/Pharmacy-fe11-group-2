@@ -87,6 +87,7 @@ const ProductPage = () => {
     fetchData();
 
     const product = products.find(item => item.id === id);
+
     setGoods(product);
   }, [id, products]);
 
