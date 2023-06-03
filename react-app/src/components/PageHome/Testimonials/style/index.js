@@ -1,7 +1,3 @@
-// noinspection ES6UnusedImports
-// eslint-disable-next-line no-unused-vars
-import { borderColor, color, fontWeight, minWidth, padding } from '@mui/system';
-
 export const wrapperForTestimonials = {
   display: 'flex',
   justifyContent: 'center',
@@ -21,28 +17,27 @@ export const mainFeedback = {
   gap: '45px',
   background: 'white',
   padding: '35px',
-  marginLeft: '50px',
-
+  marginLeft: '50px'
 };
 export const feedBack = {
   marginTop: '5px',
   flex: 2,
-  marginLeft: '2%',
+  marginLeft: '2%'
 };
 export const ave = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   gap: '50px',
-  minWidth: '300px',
+  minWidth: '300px'
 };
 export const aveText = {
   fontWeight: 'bold',
-  fontSize: '24px',
+  fontSize: '24px'
 };
 export const aveRate = {
   fontWeight: 'bold',
-  fontSize: '64px',
+  fontSize: '64px'
 };
 export const totalRate = {
   fontSize: '16px',
@@ -51,7 +46,7 @@ export const totalRate = {
 };
 export const feedBackItem = {
   marginRight: '3%',
-  marginBottom: '4%',
+  marginBottom: '4%'
 };
 
 export const feedBackItemStar = {
@@ -59,28 +54,28 @@ export const feedBackItemStar = {
   display: 'flex',
   flexWrap: 'wrap',
   alignItems: 'center',
-  justifyContent: 'space-between',
+  justifyContent: 'space-between'
 };
 export const feedBackItemText = {
   marginTop: '1%',
   color: '#4F4F4F',
-  fontSize: '14px',
+  fontSize: '14px'
 };
 
 export const StarRateItem = {
   color: '#F2C94C',
-  fontSize: '19px',
+  fontSize: '19px'
 };
 
 export const feedBackDate = {
   fontSize: '18px',
-  color: '#828282',
+  color: '#828282'
 };
 
 export const feedBackName = {
   fontSize: '18px',
   fontWeight: '700',
-  color: '#333333',
+  color: '#333333'
 };
 export const totalCountFeed = {
   marginLeft: '25px',
@@ -95,7 +90,8 @@ export const totalCountFeed = {
     left: '-25px',
     content: 'url("../../../../src/assets/right.png")',
     width: '10px',
-    height: '10px', },
+    height: '10px'
+  }
 };
 
 export const btnFeed = {
@@ -103,16 +99,16 @@ export const btnFeed = {
   fontSize: '14px',
   padding: '11px 31px',
   borderRadius: '31px',
-  ':hover': { backgroundColor: '#26bea2' },
+  ':hover': { backgroundColor: '#26bea2' }
 };
 
 export const StarRate = {
   color: '#F2C94C',
-  fontSize: '19px',
+  fontSize: '19px'
 };
 
 export const linkFeed = {
   cursor: 'pointer',
   textDecoration: 'none',
-  color: '#2FD3AE',
+  color: '#2FD3AE'
 };

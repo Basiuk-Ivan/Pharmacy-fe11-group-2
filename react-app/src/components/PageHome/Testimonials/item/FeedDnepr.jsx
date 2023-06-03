@@ -1,28 +1,29 @@
-import { Rating, Typography } from '@mui/material';
-import React from 'react';
+import { Rating, Typography, Box } from '@mui/material';
 import {
   feedBackDate,
   feedBackItem,
   feedBackItemStar,
-  feedBackItemText, feedBackName,
-  // eslint-disable-next-line no-unused-vars
-  StarRate,
+  feedBackItemText,
+  feedBackName,
   StarRateItem
-// eslint-disable-next-line import/extensions
-} from '../style/index.js';
+} from '../style';
 
 export const FeedDnepr = () => (
-  <Typography fontFamily="Roboto" component="div" sx={feedBackItem}>
-    <Typography fontFamily="Roboto" component="p" sx={feedBackItemStar}>
-      <Typography fontFamily="Roboto" component="div">
-        {/* eslint-disable-next-line max-len */}
-        <Typography fontFamily="Roboto" component="span" sx={feedBackName}>Ліана, Дніпро,</Typography>  <Typography fontFamily="Roboto" component="span" sx={feedBackDate}> 25 Июля</Typography>
-      </Typography>
+  <Box sx={feedBackItem}>
+    <Box sx={feedBackItemStar}>
+      <Box>
+        <Typography fontFamily="Roboto" component="span" sx={feedBackName}>
+          Ліана, Дніпро,
+        </Typography>
+        <Typography fontFamily="Roboto" component="span" sx={feedBackDate}>
+          25 Июля
+        </Typography>
+      </Box>
       <Rating name="half-rating" defaultValue={5} sx={StarRateItem} readOnly />
-    </Typography>
+    </Box>
     <Typography fontFamily="Roboto" component="p" sx={feedBackItemText}>
-      {/* eslint-disable-next-line max-len */}
-      Благодарим Викторию Сдобнову за все эти качества и желаем ей долгих лет жизни, ибо она очень помогает людям, всегда добро желательна, все объяснит, посоветует.
+      Дякуємо Вікторії Сдобновій за всі ці якості і бажаємо їй довгих років життя, бо вона дуже допомагає
+      людям, завжди добро бажана, все пояснить, порадить.
     </Typography>
-  </Typography>
+  </Box>
 );

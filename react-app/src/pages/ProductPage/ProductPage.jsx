@@ -12,7 +12,7 @@ import ProductCardReviews from '../../components/SinglePage/ProductCardReviews';
 
 const AntTabs = styled(Tabs)({
   '& .MuiTabs-indicator': {
-    backgroundColor: '#F2C94C',
+    backgroundColor: '#F2C94C'
   }
 });
 
@@ -22,7 +22,7 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      main: '#2FD3AE',
+      main: '#2FD3AE'
     },
     secondary: {
       main: '#ffffff'
@@ -37,8 +37,6 @@ const TabPanel = props => {
   const { children, value, index, ...other } = props;
 
   return (
-  /* eslint-disable react/jsx-props-no-spreading */
-
     <div
       role="tabpanel"
       hidden={value !== index}
@@ -48,7 +46,7 @@ const TabPanel = props => {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography component="div">{children}</Typography>
         </Box>
       )}
     </div>
@@ -56,7 +54,7 @@ const TabPanel = props => {
 };
 const a11yProps = index => ({
   id: `simple-tab-${index}`,
-  'aria-controls': `simple-tabpanel-${index}`,
+  'aria-controls': `simple-tabpanel-${index}`
 });
 
 const ProductPage = () => {
@@ -89,6 +87,7 @@ const ProductPage = () => {
     fetchData();
 
     const product = products.find(item => item.id === id);
+
     setGoods(product);
   }, [id, products]);
 
@@ -97,90 +96,89 @@ const ProductPage = () => {
   };
 
   return (
-
     <ThemeProvider theme={theme}>
       <div>
         {!!goods && (
-        <Container sx={{ width: '1200px' }}>
-          <Grid container spacing={2}>
-            <Grid item lg={12}>
-              <List sx={{ display: 'flex' }}>
-                <ListItemButton sx={{ flex: '0 0 auto', paddingLeft: '5px', paddingRight: 0 }}>
-                  <HomeOutlinedIcon sx={{ paddingRight: '12px', color: '#2FD3AE' }} />
-                  <ListItemText
-                    primaryTypographyProps={{
-                      style: {
-                        fontSize: '14px',
-                        paddingRight: '12px',
-                        color: '#2FD3AE'
-                      }
-                    }}
-                    primary="Головна/ "
-                  />
-                </ListItemButton>
-                <ListItemButton sx={{ flex: '0 0 auto', paddingLeft: '5px', paddingRight: 0 }}>
-                  <ListItemText
-                    primaryTypographyProps={{
-                      style: {
-                        fontSize: '14px',
-                        paddingRight: '12px',
-                        color: '#2FD3AE'
-                      }
-                    }}
-                    primary={`${goods?.mainCategory} /`}
-                  />
-                </ListItemButton>
-                <ListItemButton sx={{ flex: '0 0 auto', paddingLeft: '5px', paddingRight: 0 }}>
-                  <ListItemText
-                    sx={{ paddingRight: 0 }}
-                    primaryTypographyProps={{ style: { fontSize: '14px', paddingRight: '12px' } }}
-                    primary={`${goods?.subCategory}`}
-                  />
-                </ListItemButton>
-              </List>
-            </Grid>
-            <Grid item lg={12}>
-              <Typography
-                variant="h4"
-                sx={{ fontSize: '36px', fontWeight: 700, color: '#394045' }}
-                gutterBottom
-              >
-                {goods?.name}
-              </Typography>
-            </Grid>
-            <Grid item lg={12}>
-              <Box sx={{ width: '100%' }}>
-                <Box sx={{ borderBottom: 1, borderColor: 'divider', backgroundColor: '#F7FAFB' }}>
-                  <AntTabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                    {/* eslint-disable react/jsx-props-no-spreading */}
-                    <Tab sx={{ flexGrow: 1 }} label="Все про товар" {...a11yProps(0)} />
-                    <Tab sx={{ flexGrow: 1 }} label="Інструкція" {...a11yProps(1)} />
-                    <Tab sx={{ flexGrow: 1 }} label="Аналоги" {...a11yProps(2)} />
-                    <Tab sx={{ flexGrow: 1 }} label="Відгуки" {...a11yProps(3)} />
-                  </AntTabs>
+          <Container sx={{ width: '1200px' }}>
+            <Grid container spacing={2}>
+              <Grid item lg={12}>
+                <List sx={{ display: 'flex' }}>
+                  <ListItemButton sx={{ flex: '0 0 auto', paddingLeft: '5px', paddingRight: 0 }}>
+                    <HomeOutlinedIcon sx={{ paddingRight: '12px', color: '#2FD3AE' }} />
+                    <ListItemText
+                      primaryTypographyProps={{
+                        style: {
+                          fontSize: '14px',
+                          paddingRight: '12px',
+                          color: '#2FD3AE'
+                        }
+                      }}
+                      primary="Головна/ "
+                    />
+                  </ListItemButton>
+                  <ListItemButton sx={{ flex: '0 0 auto', paddingLeft: '5px', paddingRight: 0 }}>
+                    <ListItemText
+                      primaryTypographyProps={{
+                        style: {
+                          fontSize: '14px',
+                          paddingRight: '12px',
+                          color: '#2FD3AE'
+                        }
+                      }}
+                      primary={`${goods?.mainCategory} /`}
+                    />
+                  </ListItemButton>
+                  <ListItemButton sx={{ flex: '0 0 auto', paddingLeft: '5px', paddingRight: 0 }}>
+                    <ListItemText
+                      sx={{ paddingRight: 0 }}
+                      primaryTypographyProps={{ style: { fontSize: '14px', paddingRight: '12px' } }}
+                      primary={`${goods?.subCategory}`}
+                    />
+                  </ListItemButton>
+                </List>
+              </Grid>
+              <Grid item lg={12}>
+                <Typography
+                  variant="h4"
+                  sx={{ fontSize: '36px', fontWeight: 700, color: '#394045' }}
+                  gutterBottom
+                >
+                  {goods?.name}
+                </Typography>
+              </Grid>
+              <Grid item lg={12}>
+                <Box sx={{ width: '100%' }}>
+                  <Box sx={{ borderBottom: 1, borderColor: 'divider', backgroundColor: '#F7FAFB' }}>
+                    <AntTabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                      {}
+                      <Tab sx={{ flexGrow: 1 }} label="Все про товар" {...a11yProps(0)} />
+                      <Tab sx={{ flexGrow: 1 }} label="Інструкція" {...a11yProps(1)} />
+                      <Tab sx={{ flexGrow: 1 }} label="Аналоги" {...a11yProps(2)} />
+                      <Tab sx={{ flexGrow: 1 }} label="Відгуки" {...a11yProps(3)} />
+                    </AntTabs>
+                  </Box>
+                  <TabPanel value={value} index={0}>
+                    <ProductCardMainBlock productItem={goods} />
+                    <ProductCardInstruction productItem={goods} />
+                    <ProductAnalogiesCardContainer productItem={goods} />
+                    <ProductCardReviews productItem={goods} />
+                  </TabPanel>
+                  <TabPanel value={value} index={1}>
+                    <ProductCardMainBlock productItem={goods} />
+                    <ProductCardInstruction productItem={goods} />
+                  </TabPanel>
+                  <TabPanel value={value} index={2}>
+                    <ProductCardMainBlock productItem={goods} />
+                    <ProductAnalogiesCardContainer productItem={goods} />
+                  </TabPanel>
+                  <TabPanel value={value} index={3}>
+                    <ProductCardMainBlock productItem={goods} />
+                    <ProductCardReviews productItem={goods} />
+                  </TabPanel>
                 </Box>
-                <TabPanel value={value} index={0}>
-                  <ProductCardMainBlock goods={goods} />
-                  <ProductCardInstruction goods={goods} />
-                  <ProductAnalogiesCardContainer goods={goods} />
-                  <ProductCardReviews goods={goods} />
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                  <ProductCardMainBlock goods={goods} />
-                  <ProductCardInstruction goods={goods} />
-                </TabPanel>
-                <TabPanel value={value} index={2}>
-                  <ProductCardMainBlock goods={goods} />
-                  <ProductAnalogiesCardContainer goods={goods} />
-                </TabPanel>
-                <TabPanel value={value} index={3}>
-                  <ProductCardMainBlock goods={goods} />
-                  <ProductCardReviews goods={goods} />
-                </TabPanel>
-              </Box>
+              </Grid>
             </Grid>
-          </Grid>
-        </Container>
+          </Container>
         )}
       </div>
     </ThemeProvider>
