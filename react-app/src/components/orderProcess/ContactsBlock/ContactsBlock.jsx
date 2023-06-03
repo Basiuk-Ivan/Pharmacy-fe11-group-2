@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material';
 import ContactsForm from './ContactsForm/ContactsForm';
-import OrderList from './OrderList/OrderList';
+// import OrderList from './OrderList/OrderList';
 
 const ContactsBlock = () => (
   <Grid
@@ -31,7 +31,7 @@ const ContactsBlock = () => (
         padding: '10px'
       }}
     >
-      <OrderList />
+      {/* <OrderList /> */}
     </Grid>
   </Grid>
 );

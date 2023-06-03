@@ -20,7 +20,7 @@ import {
   sortingAndCardsStyles
 } from './style';
 
-import { fetchPosts } from '../../redux/productsSlice';
+import { fetchPosts } from '../../redux/slice/productsSlice';
 
 function Products() {
   const dispatch = useDispatch();
@@ -34,9 +34,7 @@ function Products() {
   return (
     <Container id="productsContainer" sx={productsContainerStyles}>
       <TitleCategory />
-
       <Box id="asideAndCards" sx={asideAndCardsStyles}>
-
         <Box id="aside" sx={asideStyles}>
           <ChoiceCategory />
           <Filter />
@@ -49,7 +47,6 @@ function Products() {
             <PaginationProducts />
           </Box>
         </Box>
-
       </Box>
       <PromoMonth />
       <YouBrowsed />

@@ -3,7 +3,7 @@ import ScrollIntoView from 'react-scroll-into-view';
 import { Box, Stack, Typography, Button } from '@mui/material';
 import TextComponent from '../TextComponent';
 
-const ProductCardInstruction = ({ goods }) => {
+const ProductCardInstruction = ({ productItem }) => {
   const [activeButton, setActiveButton] = useState(null);
 
   useEffect(() => {
@@ -41,9 +41,10 @@ const ProductCardInstruction = ({ goods }) => {
                 backgroundColor: '#2FD3AE',
                 color: '#ffffff',
                 border: 'none'
-              },
+              }
             })}
-          >{goods.instruction.manufacturer.title}
+          >
+            {productItem.instruction.manufacturer.title}
           </Button>
         </ScrollIntoView>
         <ScrollIntoView selector="#brieflyAbout">
@@ -60,9 +61,10 @@ const ProductCardInstruction = ({ goods }) => {
                 backgroundColor: '#2FD3AE',
                 color: '#ffffff',
                 border: 'none'
-              },
+              }
             })}
-          >{goods.instruction.brieflyAbout.title}
+          >
+            {productItem.instruction.brieflyAbout.title}
           </Button>
         </ScrollIntoView>
         <ScrollIntoView selector="#howToTake">
@@ -79,9 +81,10 @@ const ProductCardInstruction = ({ goods }) => {
                 backgroundColor: '#2FD3AE',
                 color: '#ffffff',
                 border: 'none'
-              },
+              }
             })}
-          >{goods.instruction.howToTake.title}
+          >
+            {productItem.instruction.howToTake.title}
           </Button>
         </ScrollIntoView>
         <ScrollIntoView selector="#description">
@@ -98,9 +101,10 @@ const ProductCardInstruction = ({ goods }) => {
                 backgroundColor: '#2FD3AE',
                 color: '#ffffff',
                 border: 'none'
-              },
+              }
             })}
-          >{goods.instruction.description.title}
+          >
+            {productItem.instruction.description.title}
           </Button>
         </ScrollIntoView>
 
@@ -118,9 +122,10 @@ const ProductCardInstruction = ({ goods }) => {
                 backgroundColor: '#2FD3AE',
                 color: '#ffffff',
                 border: 'none'
-              },
+              }
             })}
-          >{goods.instruction.functionalBenefits.title}
+          >
+            {productItem.instruction.functionalBenefits.title}
           </Button>
         </ScrollIntoView>
         <ScrollIntoView selector="#storageConditions">
@@ -137,9 +142,10 @@ const ProductCardInstruction = ({ goods }) => {
                 backgroundColor: '#2FD3AE',
                 color: '#ffffff',
                 border: 'none'
-              },
+              }
             })}
-          >{goods.instruction.storageConditions.title}
+          >
+            {productItem.instruction.storageConditions.title}
           </Button>
         </ScrollIntoView>
         <ScrollIntoView selector="#bestBeforeDate">
@@ -156,9 +162,10 @@ const ProductCardInstruction = ({ goods }) => {
                 backgroundColor: '#2FD3AE',
                 color: '#ffffff',
                 border: 'none'
-              },
+              }
             })}
-          >{goods.instruction.bestBeforeDate.title}
+          >
+            {productItem.instruction.bestBeforeDate.title}
           </Button>
         </ScrollIntoView>
         <ScrollIntoView selector="#activeSubstance">
@@ -175,9 +182,10 @@ const ProductCardInstruction = ({ goods }) => {
                 backgroundColor: '#2FD3AE',
                 color: '#ffffff',
                 border: 'none'
-              },
+              }
             })}
-          >{goods.instruction.activeSubstance.title}
+          >
+            {productItem.instruction.activeSubstance.title}
           </Button>
         </ScrollIntoView>
         <ScrollIntoView selector="#dosageForm">
@@ -194,62 +202,63 @@ const ProductCardInstruction = ({ goods }) => {
                 backgroundColor: '#2FD3AE',
                 color: '#ffffff',
                 border: 'none'
-              },
+              }
             })}
-          >{goods.instruction.dosageForm.title}
+          >
+            {productItem.instruction.dosageForm.title}
           </Button>
         </ScrollIntoView>
       </Stack>
       <Box>
         <TextComponent
           id="manufacturer"
-          title={goods.instruction.manufacturer.title}
-          value={goods.instruction.manufacturer.value}
+          title={productItem.instruction.manufacturer.title}
+          value={productItem.instruction.manufacturer.value}
         />
         <TextComponent
           id="brieflyAbout"
-          title={goods.instruction.brieflyAbout.title}
-          value={goods.instruction.brieflyAbout.value}
+          title={productItem.instruction.brieflyAbout.title}
+          value={productItem.instruction.brieflyAbout.value}
         />
         <TextComponent
           id="indications"
-          title={goods.instruction.indications.title}
-          value={goods.instruction.indications.value}
+          title={productItem.instruction.indications.title}
+          value={productItem.instruction.indications.value}
         />
         <TextComponent
           id="howToTake"
-          title={goods.instruction.howToTake.title}
-          value={goods.instruction.howToTake.value}
+          title={productItem.instruction.howToTake.title}
+          value={productItem.instruction.howToTake.value}
         />
         <TextComponent
           id="description"
-          title={goods.instruction.description.title}
-          value={goods.instruction.description.value}
+          title={productItem.instruction.description.title}
+          value={productItem.instruction.description.value}
         />
         <TextComponent
           id="functionalBenefits"
-          title={goods.instruction.functionalBenefits.title}
-          value={goods.instruction.functionalBenefits.value}
+          title={productItem.instruction.functionalBenefits.title}
+          value={productItem.instruction.functionalBenefits.value}
         />
         <TextComponent
           id="storageConditions"
-          title={goods.instruction.storageConditions.title}
-          value={goods.instruction.storageConditions.value}
+          title={productItem.instruction.storageConditions.title}
+          value={productItem.instruction.storageConditions.value}
         />
         <TextComponent
           id="bestBeforeDate"
-          title={goods.instruction.bestBeforeDate.title}
-          value={goods.instruction.bestBeforeDate.value}
+          title={productItem.instruction.bestBeforeDate.title}
+          value={productItem.instruction.bestBeforeDate.value}
         />
         <TextComponent
           id="activeSubstance"
-          title={goods.instruction.activeSubstance.title}
-          value={goods.instruction.activeSubstance.value}
+          title={productItem.instruction.activeSubstance.title}
+          value={productItem.instruction.activeSubstance.value}
         />
         <TextComponent
           id="dosageForm"
-          title={goods.instruction.dosageForm.title}
-          value={goods.instruction.dosageForm.value}
+          title={productItem.instruction.dosageForm.title}
+          value={productItem.instruction.dosageForm.value}
         />
       </Box>
     </>

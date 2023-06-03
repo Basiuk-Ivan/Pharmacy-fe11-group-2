@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
+// import { useEffect, useState } from 'react';
 // import { useSelector, useDispatch } from 'react-redux';
-import { Card, Typography, InputAdornment, IconButton } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import {
+  Box
+  // Container
+} from '@mui/system';
+import {
+  // Card,
+  Typography,
+  InputAdornment,
+  IconButton
+} from '@mui/material';
 import DeleteOutlineTwoToneIcon from '@mui/icons-material/DeleteOutlineTwoTone';
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import IconBreadcrumbs from './Breadcrums';
-import './CartStyles.scss';
+import ProductCard from '../../components/ProductCard';
+import './style/CartStyles.scss';
 import {
-  StyledBox,
-  CardContentStyled,
-  ContentBox,
-  PriceBox,
   FormBox,
   FormTitle,
   FormTitlePromo,
@@ -22,29 +28,30 @@ import {
   PromoBox,
   HeaderBox,
   TextFieldPromo
-} from './Style';
-// eslint-disable-next-line import/order
-import { Box, Container } from '@mui/system';
+} from './style';
 
 const Cart = () => {
-  // const cartItems = useSelector(state => state.cart.items);
+  const productItemCart = useSelector(state => state.itemCards.items);
+
+  const isInCart = true;
+
   // const dispatch = useDispatch();
 
   // const handleRemoveItem = itemId => {
   //   dispatch(removeItem(itemId));
   // };
 
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
 
-  const handleIncrement = () => {
-    setCount(prevCount => prevCount + 1);
-  };
+  // const handleIncrement = () => {
+  //   setCount(prevCount => prevCount + 1);
+  // };
 
-  const handleDecrement = () => {
-    if (count > 0) {
-      setCount(prevCount => prevCount - 1);
-    }
-  };
+  // const handleDecrement = () => {
+  //   if (count > 0) {
+  //     setCount(prevCount => prevCount - 1);
+  //   }
+  // };
 
   return (
     <div>
@@ -58,10 +65,11 @@ const Cart = () => {
           <Typography>Очистити корзину</Typography>
         </IconButton>
       </HeaderBox>
-      <Container
+      <Box
         sx={{
           width: 1200,
           display: 'flex',
+          gap: '20px',
           flexDirection: 'row-reverse',
           fontFamily: 'Roboto'
         }}
@@ -77,7 +85,9 @@ const Cart = () => {
               <FormText>Разом без доставки</FormText>
               <FormText> - 48грн</FormText>
             </TotalBox>
-            <OrderButton>Оформити замовлення</OrderButton>
+            <NavLink to="/orderprocess">
+              <OrderButton>Оформити замовлення</OrderButton>
+            </NavLink>
 
             <PromoBox mt={2}>
               <FormTitlePromo>Промокод</FormTitlePromo>
@@ -98,88 +108,24 @@ const Cart = () => {
             </PromoBox>
           </FormBox>
         </Box>
-        <Container
+        <Box
           sx={{
             width: 830,
             display: 'flex',
             flexDirection: 'column',
+            gap: '10px',
             fontFamily: 'Roboto'
           }}
         >
-          <Card style={{ marginBottom: '1rem' }}>
-            <CardContentStyled>
-              <StyledBox />
-              <ContentBox>
-                <Typography variant="body2">Є в наявності</Typography>
-                <Typography variant="h7" color="textSecondary">
-                  Велсон таблетки покрыт. плен. об. 3 мг, 30 шт.
-                </Typography>
-                <Typography variant="body2">Бренд: Lirina</Typography>
-                <Typography variant="body2">Количество в упаковке: 10 шт</Typography>
-                <Typography variant="body2">Код товара: 153249</Typography>
-              </ContentBox>
-              <PriceBox>
-                <Typography variant="h6" color="textSecondary">
-                  41 108 грн.
-                </Typography>
-                <Box display="flex" justifyContent="center" alignItems="center" sx={{ minWidth: '10px' }}>
-                  <RemoveCircleIcon onClick={handleDecrement} sx={{ fill: 'rgba(221, 136, 136, 1)' }} />
-                  {count}
-                  <AddCircleIcon onClick={handleIncrement} sx={{ fill: 'rgba(47, 211, 174, 1)' }} />
-                </Box>
-              </PriceBox>
-            </CardContentStyled>
-          </Card>
-          <Card style={{ marginBottom: '1rem' }}>
-            <CardContentStyled>
-              <StyledBox />
-              <ContentBox>
-                <Typography variant="body2">Є в наявності</Typography>
-                <Typography variant="h7" color="textSecondary">
-                  Велсон таблетки покрыт. плен. об. 3 мг, 30 шт.
-                </Typography>
-                <Typography variant="body2">Бренд: Lirina</Typography>
-                <Typography variant="body2">Количество в упаковке: 10 шт</Typography>
-                <Typography variant="body2">Код товара: 153249</Typography>
-              </ContentBox>
-              <PriceBox>
-                <Typography variant="h6" color="textSecondary">
-                  41 108 грн.
-                </Typography>
-                <Box display="flex" justifyContent="center" alignItems="center" sx={{ minWidth: '10px' }}>
-                  <RemoveCircleIcon onClick={handleDecrement} sx={{ fill: 'rgba(221, 136, 136, 1)' }} />
-                  {count}
-                  <AddCircleIcon onClick={handleIncrement} sx={{ fill: 'rgba(47, 211, 174, 1)' }} />
-                </Box>
-              </PriceBox>
-            </CardContentStyled>
-          </Card>
-          <Card style={{ marginBottom: '1rem' }}>
-            <CardContentStyled>
-              <StyledBox />
-              <ContentBox>
-                <Typography variant="body2">Є в наявності</Typography>
-                <Typography variant="h7" color="textSecondary">
-                  Велсон таблетки покрыт. плен. об. 3 мг, 30 шт.
-                </Typography>
-                <Typography variant="body2">Бренд: Lirina</Typography>
-                <Typography variant="body2">Количество в упаковке: 10 шт</Typography>
-                <Typography variant="body2">Код товара: 153249</Typography>
-              </ContentBox>
-              <PriceBox>
-                <Typography variant="h6" color="textSecondary">
-                  41 108 грн.
-                </Typography>
-                <Box display="flex" justifyContent="center" alignItems="center" sx={{ minWidth: '10px' }}>
-                  <RemoveCircleIcon onClick={handleDecrement} sx={{ fill: 'rgba(221, 136, 136, 1)' }} />
-                  {count}
-                  <AddCircleIcon onClick={handleIncrement} sx={{ fill: 'rgba(47, 211, 174, 1)' }} />
-                </Box>
-              </PriceBox>
-            </CardContentStyled>
-          </Card>
-        </Container>
-      </Container>
+          {/* <Card style={{ marginBottom: '1rem' }}> */}
+          {/* <CardContentStyled> */}
+          {productItemCart.map(item => (
+            <ProductCard key={item.id} productItem={item} isInCart={isInCart} />
+          ))}
+          {/* </CardContentStyled> */}
+          {/* </Card> */}
+        </Box>
+      </Box>
     </div>
   );
 };

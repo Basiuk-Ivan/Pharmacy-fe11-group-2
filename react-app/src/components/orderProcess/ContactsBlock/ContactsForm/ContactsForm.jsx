@@ -9,7 +9,7 @@ import * as Yup from 'yup';
 const ChangedTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),
   '& .MuiInputBase-root': {
-    borderRadius: 30,
+    borderRadius: 30
   }
 }));
 
@@ -56,7 +56,7 @@ const ContactsForm = () => {
 
   useEffect(() => {
     formik.setFieldValue('paymentMethod', orderPaymentMethod);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderPaymentMethod]);
 
   return (
