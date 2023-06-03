@@ -1,6 +1,5 @@
 export const filterWrapperStyle = {
   boxShadow: '0px 5px 20px 0px #0B361D1A',
-  // padding: '0 9px'
 };
 
 export const titleCategoryStyle = {
@@ -14,22 +13,16 @@ export const titleCategoryStyle = {
   color: '#4F4F4F'
 };
 
-export const iconStyle = {
-  ':hover': { color: '#1f1e1e', fontWeight: '600' },
-};
-
 export const marginStyle = {
   marginBottom: '15px'
 };
 
 export const mainCategoryStyle = {
-  ':hover': { fontWeight: '600', paddingRight: '10px'
-  }
-};
-
-export const mainCategoryActiveStyle = {
   color: '#4F4F4F',
-  '&.MuiAccordionSummary-root.Mui-expanded': { backgroundColor: '#2FD3AE', color: '#FFFFFF' }
+  // eslint-disable-next-line max-len
+  ':hover': { '& .MuiAccordionSummary-expandIconWrapper .MuiSvgIcon-root': { color: '#1f1e1e', width: '1.1em', height: '1.1em' }, '& .MuiTypography-root': { color: '#1f1e1e', fontWeight: '600' }, '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded .MuiSvgIcon-root': { color: '#FFFFFF', width: '1.1em', height: '1.1em' }, '&.MuiAccordionSummary-root.Mui-expanded .MuiTypography-root': { color: '#FFFFFF', fontWeight: '600' } },
+  '&.MuiAccordionSummary-root.Mui-expanded': { backgroundColor: '#2FD3AE', color: '#FFFFFF' },
+  '.MuiAccordionSummary-expandIconWrapper.Mui-expanded': { color: '#FFFFFF' }
 };
 
 export const priceInputWrapperStyle = {
@@ -39,7 +32,7 @@ export const priceInputWrapperStyle = {
 };
 
 export const formGroupStyle = {
-  color: '#828282',
+  color: '#4F4F4F',
   fontSize: '13px',
   fontWeight: '400'
 };
@@ -49,9 +42,13 @@ export const formGroupCheckStyle = {
   padding: '0 9px'
 };
 
-export const checkboxStyle = {
-  ':hover': { color: '#1f1e1e',
-    fontWeight: '600' }
+export const formCheckboxStyle = {
+  marginRight: '0',
+  fontSize: '10px',
+  ':hover': { '& .MuiFormControlLabel-label': { color: '#1f1e1e',
+    fontWeight: '600' },
+  '& .MuiCheckbox-root': { color: '#1f1e1e',
+    fontWeight: '600' } }
 };
 
 export const buttonWrapperStyle = {

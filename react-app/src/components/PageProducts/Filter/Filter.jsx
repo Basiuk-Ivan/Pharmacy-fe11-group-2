@@ -12,19 +12,17 @@ import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import PregnantWomanIcon from '@mui/icons-material/PregnantWoman';
 import BabyChangingStationIcon from '@mui/icons-material/BabyChangingStation';
 
-import FilterSlider from './FilterSlider/FilterSlider';
+// import FilterSlider from './FilterSlider/FilterSlider';
 import {
   buttonWrapperStyle,
-  checkboxStyle,
+  formCheckboxStyle,
   filterWrapperStyle, formGroupCheckStyle, formGroupStyle,
-  iconStyle,
   mainCategoryStyle,
   marginStyle,
   priceInputWrapperStyle,
   titleCategoryStyle,
   resetButtonStyle,
-  showButtonStyle,
-  mainCategoryActiveStyle
+  showButtonStyle
 } from './style';
 
 function Filter() {
@@ -34,12 +32,12 @@ function Filter() {
 
       <Accordion sx={marginStyle}>
         <AccordionSummary
-          sx={mainCategoryActiveStyle}
-          expandIcon={<ExpandMoreIcon sx={iconStyle} />}
+          sx={mainCategoryStyle}
+          expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography sx={mainCategoryStyle}>Ціна</Typography>
+          <Typography>Ціна</Typography>
         </AccordionSummary>
         <AccordionDetails sx={{ padding: '0 5px' }}>
           <Box
@@ -49,18 +47,18 @@ function Filter() {
             <TextField id="outlined-basic" label="Ціна від" variant="outlined" size="small" />
             <TextField id="outlined-basic" label="Ціна до" variant="outlined" size="small" />
           </Box>
-          <FilterSlider />
+          {/* <FilterSlider /> */}
         </AccordionDetails>
       </Accordion>
 
       <Accordion sx={marginStyle}>
         <AccordionSummary
-          sx={mainCategoryActiveStyle}
-          expandIcon={<ExpandMoreIcon sx={iconStyle} />}
+          sx={mainCategoryStyle}
+          expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography sx={mainCategoryStyle}>Виробник</Typography>
+          <Typography>Виробник</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <FormGroup sx={formGroupStyle}>
@@ -77,12 +75,12 @@ function Filter() {
 
       <Accordion sx={marginStyle}>
         <AccordionSummary
-          sx={mainCategoryActiveStyle}
-          expandIcon={<ExpandMoreIcon sx={iconStyle} />}
+          sx={mainCategoryStyle}
+          expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography sx={mainCategoryStyle}>Форма товару</Typography>
+          <Typography>Форма товару</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <FormGroup sx={formGroupStyle}>
@@ -99,13 +97,13 @@ function Filter() {
 
       <FormGroup sx={formGroupCheckStyle}>
         {/* eslint-disable-next-line max-len */}
-        <FormControlLabel control={<Checkbox sx={checkboxStyle} icon={<ReceiptLongIcon fontSize="small" sx={{ marginRight: '5px' }} />} checkedIcon={<ReceiptLongIcon fontSize="small" sx={{ color: '#2FD3AE', marginRight: '5px' }} />} />} label="Без рецепта" />
+        <FormControlLabel sx={formCheckboxStyle} control={<Checkbox icon={<ReceiptLongIcon fontSize="small" sx={{ marginRight: '5px' }} />} checkedIcon={<ReceiptLongIcon fontSize="small" sx={{ color: '#2FD3AE', marginRight: '5px' }} />} />} label="Без рецепта" />
 
         {/* eslint-disable-next-line max-len */}
-        <FormControlLabel sx={{ marginRight: '0', fontSize: '10px' }} control={<Checkbox sx={checkboxStyle} icon={<PregnantWomanIcon />} checkedIcon={<PregnantWomanIcon sx={{ color: '#2FD3AE' }} />} />} label="Дозволено вагітним" />
+        <FormControlLabel sx={formCheckboxStyle} control={<Checkbox icon={<PregnantWomanIcon />} checkedIcon={<PregnantWomanIcon sx={{ color: '#2FD3AE' }} />} />} label="Дозволено вагітним" />
 
         {/* eslint-disable-next-line max-len */}
-        <FormControlLabel control={<Checkbox sx={checkboxStyle} icon={<BabyChangingStationIcon />} checkedIcon={<BabyChangingStationIcon sx={{ color: '#2FD3AE' }} />} />} label="Дозволено дітям" />
+        <FormControlLabel sx={formCheckboxStyle} control={<Checkbox icon={<BabyChangingStationIcon />} checkedIcon={<BabyChangingStationIcon sx={{ color: '#2FD3AE' }} />} />} label="Дозволено дітям" />
       </FormGroup>
 
       <Box id="buttonWrapper" sx={buttonWrapperStyle}>
