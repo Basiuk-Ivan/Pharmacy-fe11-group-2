@@ -1,7 +1,7 @@
 export const youBrowsedStyle = {
   margin: '75px 0 35px 0',
   display: 'flex',
-  flexDirection: 'column',
+  flexDirection: 'column'
 };
 
 export const youBrowsedTitleWrapperStyle = {

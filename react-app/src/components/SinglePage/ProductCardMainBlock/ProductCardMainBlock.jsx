@@ -1,25 +1,40 @@
-import { Typography, Stack, Button, Box, Grid, Rating, ButtonBase } from '@mui/material';
-import { useState } from 'react';
-
 import * as React from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Typography, Stack, Button, Box, Grid, Rating, ButtonBase } from '@mui/material';
+
 import Checkbox from '@mui/material/Checkbox';
-import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
-import Favorite from '@mui/icons-material/Favorite';
-import s from './ProductCardMainBlock.module.scss';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import { addToFavouriteLocalStor } from '../../../utils/addToFavouriteLocalStor';
+
+import { addToFavouriteItems, deleteFromFavouriteItems } from '../../../redux/slice/favouriteItems';
+import { removeFromFavouriteLocalStor } from '../../../utils/removeFromFavouriteLocalStor';
 import VerticalImgTabPanel from '../VerticalImgTabPanel';
+import s from './ProductCardMainBlock.module.scss';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-const IconCheckboxes = () => (
-  <div>
-    {/* eslint-disable react/jsx-props-no-spreading */}
-    <Checkbox {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-  </div>
-);
+const ProductCardMainBlock = ({ productItem }) => {
+  const dispatch = useDispatch();
 
-const ProductCardMainBlock = ({ goods }) => {
   const [quantity, setQuantity] = useState(1);
   const [value, setValue] = useState(2);
+
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const handleFavoriteClick = event => {
+    event.preventDefault();
+    setIsFavorite(!isFavorite);
+
+    if (!isFavorite) {
+      addToFavouriteLocalStor(productItem);
+      dispatch(addToFavouriteItems(productItem));
+    } else {
+      removeFromFavouriteLocalStor(productItem);
+      dispatch(deleteFromFavouriteItems(productItem.id));
+    }
+  };
 
   const handleIncrement = () => {
     setQuantity(quantity + 1);
@@ -33,7 +48,7 @@ const ProductCardMainBlock = ({ goods }) => {
   return (
     <Grid container>
       <Grid item lg={5}>
-        <VerticalImgTabPanel goods={goods} />
+        <VerticalImgTabPanel productItem={productItem} />
       </Grid>
 
       <Grid item lg={7}>
@@ -49,7 +64,7 @@ const ProductCardMainBlock = ({ goods }) => {
             >
               <Box
                 sx={{
-                  '& > legend': { mt: 2 },
+                  '& > legend': { mt: 2 }
                 }}
               >
                 <Rating
@@ -62,11 +77,10 @@ const ProductCardMainBlock = ({ goods }) => {
                 />
               </Box>
               <Typography sx={{ fontSize: '14px', color: '#2FD3AE' }}>
-                {goods.quantity > 0 ? 'Є в наявності' : 'Товар відсутній'}
+                {productItem?.quantity > 0 ? 'Є в наявності' : 'Товар відсутній'}
               </Typography>
 
               <Box sx={{ display: 'flex', gap: '3px' }}>
-
                 <Typography
                   variant="body1"
                   sx={{
@@ -86,11 +100,9 @@ const ProductCardMainBlock = ({ goods }) => {
                     lineHeight: '16px'
                   }}
                 >
-                  {goods.article}
+                  {productItem?.article}
                 </Typography>
-
               </Box>
-
             </Box>
 
             <Box sx={{ width: '100%' }}>
@@ -117,18 +129,12 @@ const ProductCardMainBlock = ({ goods }) => {
                   >
                     <span className={s.bullet} />
                     <span className={s.brandTitle}> Виробник: </span>
-                    <span
-                      className={s.brandValue}
-                    >{goods?.instruction?.manufacturer.value}
-                    </span>
+                    <span className={s.brandValue}>{productItem?.instruction?.manufacturer.value}</span>
                   </Stack>
                   <Stack direction="row" alignItems="center" sx={{ width: '100%' }}>
                     <span className={s.bullet} />
                     <span className={s.brandTitle}>Діюча речовина:</span>
-                    <span
-                      className={s.brandValue}
-                    >{goods.instruction.activeSubstance.value}
-                    </span>
+                    <span className={s.brandValue}>{productItem.instruction.activeSubstance.value}</span>
                   </Stack>
                   <Stack
                     direction="row"
@@ -137,10 +143,7 @@ const ProductCardMainBlock = ({ goods }) => {
                   >
                     <span className={s.bullet} />
                     <span className={s.brandTitle}>Термін придатності:</span>
-                    <span
-                      className={s.brandValue}
-                    >{goods.instruction.bestBeforeDate.value}
-                    </span>
+                    <span className={s.brandValue}>{productItem.instruction.bestBeforeDate.value}</span>
                   </Stack>
                 </Stack>
               </Box>
@@ -148,27 +151,31 @@ const ProductCardMainBlock = ({ goods }) => {
           </Grid>
 
           <Grid item lg={5} sx={{ border: '1px solid #E7E9EB', width: '100%' }}>
-
             <Grid
               container
               sx={{
                 paddingLeft: '30px',
                 backgroundColor: '#F7FAFB',
                 paddingTop: '65px',
-                mb: '10px',
-
+                mb: '10px'
               }}
             >
               <Grid item lg={9} sx={{ paddingLeft: '0px' }}>
                 <Typography variant="h5" gutterBottom sx={{ paddingLeft: '0px' }}>
-                  {goods.discount > 0
-                    ? `${goods.price * ((100 - goods.discount) / 100)} ГРН.`
-                    : `${goods.price} ГРН.`}
+                  {productItem.discount > 0
+                    ? `${productItem.price * ((100 - productItem.discount) / 100)} ГРН.`
+                    : `${productItem.price} ГРН.`}
                 </Typography>
               </Grid>
               <Grid item lg={3}>
-                <IconCheckboxes />
-                {/* <FavoriteBorderOutlinedIcon sx={{color: '#2FD3AE'}}/> */}
+                <Box onClick={handleFavoriteClick}>
+                  <Checkbox
+                    {...label}
+                    icon={<FavoriteBorderOutlinedIcon />}
+                    checkedIcon={<FavoriteIcon />}
+                    checked={isFavorite}
+                  />
+                </Box>
               </Grid>
 
               <Box sx={{ position: 'relative', mb: '14px' }}>
@@ -195,12 +202,15 @@ const ProductCardMainBlock = ({ goods }) => {
                 >
                   -
                 </ButtonBase>
-                <Box sx={{ padding: '4px 20px',
-                  borderRadius: '50px',
-                  backgroundColor: '#ffffff',
-                  // height:'32px',
-                  textAlign: 'center',
-                  fontFamily: '"Roboto", "san-serif"' }}
+                <Box
+                  sx={{
+                    padding: '4px 20px',
+                    borderRadius: '50px',
+                    backgroundColor: '#ffffff',
+                    // height:'32px',
+                    textAlign: 'center',
+                    fontFamily: '"Roboto", "san-serif"'
+                  }}
                 >
                   {quantity}
                 </Box>
@@ -222,12 +232,11 @@ const ProductCardMainBlock = ({ goods }) => {
                     justifyContent: 'center',
                     borderRadius: '50px',
                     border: 'none',
-                    cursor: 'pointer',
+                    cursor: 'pointer'
                   }}
                 >
                   +
                 </ButtonBase>
-
               </Box>
             </Grid>
 
@@ -252,7 +261,7 @@ const ProductCardMainBlock = ({ goods }) => {
                 textDecoration: 'line-through'
               }}
             >
-              {goods.price} ГРН.
+              {productItem.price} ГРН.
             </Typography>
 
             <Stack
@@ -269,7 +278,7 @@ const ProductCardMainBlock = ({ goods }) => {
                   margin: '25px 0 17px',
                   color: '#525A68',
                   borderRadius: '50px',
-                  width: '240px',
+                  width: '240px'
                 }}
               >
                 Купити в один клік
@@ -284,8 +293,8 @@ const ProductCardMainBlock = ({ goods }) => {
                   border: 'none',
                   backgroundColor: '#2FD3AE',
                   '&:hover': {
-                    color: '#2FD3AE',
-                  },
+                    color: '#2FD3AE'
+                  }
                 }}
               >
                 До корзини

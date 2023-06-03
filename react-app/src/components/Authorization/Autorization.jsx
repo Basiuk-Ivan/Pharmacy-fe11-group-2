@@ -4,7 +4,7 @@ import { Modal, Tab, Tabs, TextField, MenuItem, Typography } from '@mui/material
 import Box from '@mui/material/Box';
 import { Formik, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { closeModal } from '../../redux/modalSlice';
+import { closeModal } from '../../redux/slice/modalSlice';
 import './Auth.scss';
 import { style, StyledButton, UnderlineSpan, HighlightSpan, CustomTextField } from './Style';
 
