@@ -22,7 +22,6 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 // );
 
 const ProductCardMainBlock = ({ productItem }) => {
-  console.log('productItem:', productItem);
   const [isFavorite, setIsFavorite] = useState(false);
   const dispatch = useDispatch();
 
