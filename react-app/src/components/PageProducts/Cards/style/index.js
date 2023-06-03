@@ -6,7 +6,7 @@ export const cardsWrapperStyled = {
 };
 
 export const cardWrapperStyled = {
-  width: '206px',
+  width: '220px',
   minHeight: '300px',
   backgroundColor: '#c4c2cc',
   display: 'flex',

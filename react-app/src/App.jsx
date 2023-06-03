@@ -10,7 +10,21 @@ import OrderProcess from './pages/OrderProcess';
 import ProductPage from './pages/ProductPage';
 
 const theme = createTheme({
-  direction: 'rtl'
+  direction: 'rtl',
+  typography: {
+    fontFamily: 'Roboto, sans-serif'
+  },
+  palette: {
+    primary: {
+      main: '#2FD3AE'
+    },
+    secondary: {
+      main: '#ffffff'
+    },
+    success: {
+      main: '#ed6c02'
+    }
+  }
 });
 
 const App = () => (

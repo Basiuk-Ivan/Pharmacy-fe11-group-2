@@ -4,9 +4,12 @@ import React from 'react';
 import {
   ave,
   aveRate,
-  aveText, btnFeed,
-  feedBack, linkFeed,
-  mainFeedback, StarRate,
+  aveText,
+  btnFeed,
+  feedBack,
+  linkFeed,
+  mainFeedback,
+  StarRate,
   totalCountFeed,
   totalRate,
   wrapperForTestimonials
@@ -17,33 +20,35 @@ import { FeedLviv } from './item/FeedLviv.jsx';
 
 const Testimonials = () => (
   <Box sx={wrapperForTestimonials}>
-    <Typography fontFamily="Roboto" component="div" sx={mainFeedback}>
-      <Typography fontFamily="Roboto" component="div" sx={ave}>
-        <Typography fontFamily="Roboto" component="div" sx={aveText}>Середня <br /> оцінка <br /> аптеки
+    <Box sx={mainFeedback}>
+      <Box sx={ave}>
+        <Typography fontFamily="Roboto" component="div" sx={aveText}>
+          Середня <br /> оцінка <br /> аптеки
         </Typography>
-        <Typography fontFamily="Roboto" component="div">
-          <Typography fontFamily="Roboto" component="div" sx={aveRate}>4.8
+        <Box>
+          <Typography fontFamily="Roboto" component="div" sx={aveRate}>
+            4.8
           </Typography>
           <Rating name="half-rating" defaultValue={4} sx={StarRate} readOnly />
-        </Typography>
-      </Typography>
-      <Typography fontFamily="Roboto" component="div" sx={totalRate}>Общий рейтинг на основе 4349 <br /> отзывов наших покупателей
+        </Box>
+      </Box>
+      <Typography fontFamily="Roboto" component="div" sx={totalRate}>
+        Загальний рейтинг на основі 4349 <br /> відгуків наших покупців
       </Typography>
       <Box>
-        <Button variant="contained" sx={btnFeed}>Залишити відгук</Button>
+        <Button variant="contained" sx={btnFeed}>
+          Залишити відгук
+        </Button>
       </Box>
-
-    </Typography>
-    <Typography fontFamily="Roboto" component="div" sx={feedBack}>
+    </Box>
+    <Box sx={feedBack}>
       <FeedKyiv />
       <FeedDnepr />
       <FeedLviv />
       <Typography fontFamily="Roboto" component="div" sx={totalCountFeed}>
-        <Link sx={linkFeed}>Все 4349 отзывов
-        </Link>
+        <Link sx={linkFeed}>Всі 4349 відгуків</Link>
       </Typography>
-
-    </Typography>
+    </Box>
   </Box>
 );
 

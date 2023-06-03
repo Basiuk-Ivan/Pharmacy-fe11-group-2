@@ -5,10 +5,12 @@ import AdditionalBlock from '../components/Favourite/AdditionalBlock/AdditionalB
 
 const Favourite = () => {
   const { products } = useSelector(state => state.products);
+  const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
+  // const savedItems = JSON.parse(localStorage.getItem('favouriteItems')) || [];
 
   return (
     <>
-      <FavouriteBlock products={products} />
+      <FavouriteBlock products={favoriteItems} />
       <AdditionalBlock products={products} />
       <Advantages />
     </>

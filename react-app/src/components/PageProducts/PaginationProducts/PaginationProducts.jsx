@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Pagination } from '@mui/material';
-import { changePage } from '../../../redux/numPageSlice';
+import { changePage } from '../../../redux/slice/numPageSlice';
 
 function PaginationProducts() {
   const dispatch = useDispatch();
