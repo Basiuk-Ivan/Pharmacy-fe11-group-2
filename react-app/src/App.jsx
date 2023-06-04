@@ -32,10 +32,16 @@ const App = () => (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/products" element={<Products />} />
+        {/* <Route path="/products" element={<Products />} /> */}
+        <Route path="/:category/*" element={<Products />} />
+
         <Route path="/favourite" element={<Favourite />} />
+        <Route path="/cart" element={<Cart />} />
+
         <Route path="/products/:id" element={<ProductPage />} />
+
+        {/* Маршрут для сторінки товару, з урахуванням категорії */}
+        {/* <Route path="/:category/* /:id" element={<ProductPage />} /> */}
         <Route path="/orderprocess" element={<OrderProcess />} />
         <Route path="*" element={<NotFound />} />
       </Route>

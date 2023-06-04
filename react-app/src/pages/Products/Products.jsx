@@ -32,7 +32,7 @@ function Products() {
   }, [dispatch, products.length]);
 
   return (
-    <Container id="productsContainer" sx={productsContainerStyles}>
+    <Container disableGutters id="productsContainer" sx={productsContainerStyles}>
       <TitleCategory />
       <Box id="asideAndCards" sx={asideAndCardsStyles}>
         <Box id="aside" sx={asideStyles}>

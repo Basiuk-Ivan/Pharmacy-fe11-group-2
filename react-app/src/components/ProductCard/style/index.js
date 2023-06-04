@@ -1,18 +1,25 @@
 export const wrapForCardStyles = isInCart => ({
   position: 'relative',
+  overflow: 'visible',
   width: isInCart ? 'auto' : '220px',
   display: isInCart ? 'flex' : 'block'
 });
 
 export const cardMediaStyles = isInCart => ({
-  minHeight: '180px',
-  width: isInCart ? '220px' : 'auto'
+  minHeight: isInCart ? '150px' : '180px',
+  minWidth: isInCart ? '220px' : 'auto'
 });
 
 export const cardContentStyles = isInCart => ({
+  padding: isInCart ? 0 : undefined,
+  width: '100%',
   display: 'flex',
-  paddingTop: '0px',
-  flexDirection: isInCart ? 'row' : 'column'
+  flexDirection: isInCart ? 'row' : 'column',
+  marginLeft: isInCart ? '20px' : undefined,
+  '&:last-child': {
+    paddingBottom: isInCart ? 0 : undefined,
+    paddingTop: isInCart ? '13px' : undefined
+  }
 });
 
 export const textForquantityStyles = {
@@ -23,15 +30,17 @@ export const textForquantityStyles = {
 
 export const ratingStyles = { fontSize: '18px' };
 
-export const wrappForDetails = { marginBottom: '15px' };
+export const wrappForDetailsStyles = isInCart => ({
+  marginBottom: isInCart ? undefined : '15px'
+});
 
-export const productNameStyles = {
+export const productNameStyles = isInCart => ({
   mt: '5px',
-  mb: '20px',
+  mb: isInCart ? 0 : '20px',
   fontSize: '16px',
   fontWeight: 500,
   color: '#525A68'
-};
+});
 
 export const priceStyles = {
   fontSize: '24px',
@@ -70,10 +79,10 @@ export const productDayStyles = {
   borderRadius: '20px'
 };
 
-export const favoriteIconStyles = {
+export const favoriteIconStyles = isCart => ({
   position: 'absolute',
-  top: '2px',
-  right: '5px',
+  top: isCart ? '9px' : '1px',
+  right: isCart ? '27px' : '4px',
   display: 'flex',
   justifyContent: 'end',
   color: 'rgba(0, 0, 0, 0.6)',
@@ -81,4 +90,4 @@ export const favoriteIconStyles = {
   '&:hover': {
     filter: 'invert(20%) sepia(51%) saturate(7402%) hue-rotate(353deg) brightness(92%) contrast(105%)'
   }
-};
+});

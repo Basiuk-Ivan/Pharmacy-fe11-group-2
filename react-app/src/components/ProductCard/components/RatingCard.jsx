@@ -12,7 +12,8 @@ export const RatingCard = ({ productItem }) => {
   return (
     <Stack
       direction="row"
-      justifyContent="space-between"
+      // justifyContent="space-between"
+      sx={{ gap: '10px' }}
       alignItems="center"
       // sx={bodyForquantityStyles}
     >

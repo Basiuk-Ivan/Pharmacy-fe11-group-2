@@ -5,6 +5,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { NavLink } from 'react-router-dom';
+import Checkbox from '@mui/material/Checkbox';
 import { addToFavouriteLocalStor } from '../../utils/addToFavouriteLocalStor';
 import { removeFromFavouriteLocalStor } from '../../utils/removeFromFavouriteLocalStor';
 import { addToFavouriteItems, deleteFromFavouriteItems } from '../../redux/slice/favouriteItems';
@@ -38,13 +39,18 @@ const theme = createTheme({
   }
 });
 
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
 const ProductCard = ({ productItem, isInCart }) => {
   const [isFavorite, setIsFavorite] = useState(false);
+
   const dispatch = useDispatch();
 
   const cardWrapStyles = wrapForCardStyles(isInCart);
   const cardMediaStyle = cardMediaStyles(isInCart);
   const cardContentStyle = cardContentStyles(isInCart);
+  const productNameStyle = productNameStyles(isInCart);
+  const favoriteIconStyle = favoriteIconStyles(isInCart);
 
   const handleFavoriteClick = event => {
     event.preventDefault();
@@ -70,24 +76,33 @@ const ProductCard = ({ productItem, isInCart }) => {
   return (
     <ThemeProvider theme={theme}>
       <NavLink to={`/products/${productItem?.id}`}>
+        {/* <NavLink to={`/${category}/${productItem?.id}`}> */}
         <Card sx={cardWrapStyles}>
-          <Box sx={favoriteIconStyles} onClick={handleFavoriteClick}>
-            {isFavorite ? <FavoriteIcon sx={{ color: 'red' }} /> : <FavoriteBorderIcon />}
+          <Box sx={favoriteIconStyle} onClick={handleFavoriteClick}>
+            <Checkbox
+              sx={{ padding: '3px' }}
+              {...label}
+              icon={<FavoriteBorderIcon />}
+              checkedIcon={<FavoriteIcon sx={{ color: 'red' }} />}
+              checked={isFavorite}
+            />
           </Box>
           <CardMedia sx={cardMediaStyle} image={productItem?.img[0]} title="productImage" />
           <CardContent sx={cardContentStyle}>
-            <RatingCard productItem={productItem} />
-            <Typography
-              className={s.productName}
-              gutterBottom
-              variant="h5"
-              component="p"
-              sx={productNameStyles}
-            >
-              {productItem?.name}
-            </Typography>
-            <ProductDetails productItem={productItem} />
-            <PriceCard productItem={productItem} />
+            <Box sx={{ flex: '1 1 50%' }}>
+              <RatingCard productItem={productItem} />
+              <Typography
+                className={s.productName}
+                gutterBottom
+                variant="h5"
+                component="p"
+                sx={productNameStyle}
+              >
+                {productItem?.name}
+              </Typography>
+              <ProductDetails productItem={productItem} isInCart={isInCart} />
+            </Box>
+            <PriceCard productItem={productItem} isInCart={isInCart} />
             <Typography variant="span" gutterBottom sx={productDayStyles}>
               Товар дня
             </Typography>
