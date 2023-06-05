@@ -1,4 +1,4 @@
-import { Container, Typography, Card, Grid } from '@mui/material';
+import { Container, Typography, Grid } from '@mui/material';
 import ProductCard from '../../ProductCard/ProductCard';
 
 const AdditionalBlock = props => {
