@@ -3,11 +3,11 @@ import ProductCard from '../../ProductCard/ProductCard';
 
 const AdditionalBlock = props => {
   const { products } = props;
-  const productsSlice = products.slice(0, 4);
-  const isInCart = false;
+  const productsSlice = products.slice(0, 5);
 
   return (
     <Container
+      disableGutters
       sx={{
         mt: '50px',
         mb: '20px'
@@ -26,22 +26,8 @@ const AdditionalBlock = props => {
       </Typography>
       <Grid container spacing={2}>
         {productsSlice.map(item => (
-          <Grid item md={3} key={item.id}>
-            <Card
-              sx={{
-                width: '259px',
-                position: 'relative',
-                backgroundColor: '#c4c2cc',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                fontSize: 24,
-                fontWeight: 600,
-                cursor: 'pointer'
-              }}
-            >
-              <ProductCard productItem={item} isInCart={isInCart} />
-            </Card>
+          <Grid item md={2.4} key={item.id}>
+            <ProductCard productItem={item} />
           </Grid>
         ))}
       </Grid>
