@@ -16,6 +16,7 @@ const Layout = () => (
       sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
       position="relative"
       maxWidth="lg"
+      disableGutters
     >
       <AuthButton />
       <AppBar position="static" sx={appBarStyles}>
@@ -28,7 +29,7 @@ const Layout = () => (
         </Toolbar>
       </AppBar>
 
-      <Container position="relative" maxWidth="lg">
+      <Container position="relative" maxWidth="lg" disableGutters>
         <Menu />
         <Outlet />
       </Container>
