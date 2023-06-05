@@ -172,7 +172,7 @@ const ProductCardMainBlock = ({ productItem }) => {
                   <Checkbox
                     {...label}
                     icon={<FavoriteBorderOutlinedIcon />}
-                    checkedIcon={<FavoriteIcon />}
+                    checkedIcon={<FavoriteIcon sx={{ color: 'red' }} />}
                     checked={isFavorite}
                   />
                 </Box>

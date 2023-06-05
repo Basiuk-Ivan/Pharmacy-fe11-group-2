@@ -20,7 +20,7 @@ import {
   sortingAndCardsStyles
 } from './style';
 
-import { fetchPosts } from '../../redux/slice/productsSlice';
+import { fetchProductsData } from '../../redux/slice/productsSlice';
 
 function Products() {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ function Products() {
   const { products } = useSelector(state => state.products);
 
   useEffect(() => {
-    dispatch(fetchPosts());
+    dispatch(fetchProductsData());
   }, [dispatch, products.length]);
 
   return (

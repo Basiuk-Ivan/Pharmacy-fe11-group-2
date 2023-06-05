@@ -1,24 +1,46 @@
-import { Container, Typography, Card, Grid, Button } from '@mui/material';
+import { Container, Typography, Grid, Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import ProductCard from '../../ProductCard/ProductCard';
 import Bread from '../Bread';
-import { fetchPosts } from '../../../redux/slice/productsSlice';
+import { fetchProductsData } from '../../../redux/slice/productsSlice';
+import { addItem } from '../../../redux/slice/cartItems';
+import { addToCartLocalStor } from '../../../utils/addToCartLocalStor';
+import { removeFromFavouriteLocalStor } from '../../../utils/removeFromFavouriteLocalStor';
+import { deleteFromFavouriteItems } from '../../../redux/slice/favouriteItems';
 
 const FavouriteBlock = props => {
   const { products } = props;
-  const productsSlice = products.slice(0, 4);
+  const cartItems = useSelector(state => state.itemCards);
   const dispatch = useDispatch();
   const isInCart = false;
 
   useEffect(() => {
-    dispatch(fetchPosts());
+    dispatch(fetchProductsData());
   }, [dispatch, products.length]);
+
+  const delFromFav = prods => {
+    prods.forEach(el => {
+      removeFromFavouriteLocalStor(el);
+    });
+    dispatch(deleteFromFavouriteItems('all'));
+  };
+
+  const handleAddToCart = items => {
+    items.forEach(element => {
+      if (!cartItems.items.find(item => item.id === element.id)) {
+        dispatch(addItem(element));
+        addToCartLocalStor(element);
+      }
+    });
+  };
 
   return (
     <Container
+      disableGutters
       sx={{
         mt: '20px',
         mb: '20px'
@@ -50,6 +72,7 @@ const FavouriteBlock = props => {
               <DeleteIcon color="success" />
               <Button
                 variant="text"
+                onClick={() => delFromFav(products)}
                 sx={{
                   fontFamily: 'Raleway, sans-serif',
                   fontWeight: 700,
@@ -63,6 +86,11 @@ const FavouriteBlock = props => {
                 variant="contained"
                 type="submit"
                 form="contacts"
+                onClick={() => handleAddToCart(products)}
+                component={Link}
+                to={{
+                  pathname: '/cart'
+                }}
                 sx={{
                   backgroundColor: '#2FD3AE',
                   borderRadius: 50,
@@ -77,23 +105,9 @@ const FavouriteBlock = props => {
             </Stack>
           </Stack>
           <Grid container spacing={2}>
-            {productsSlice.map(item => (
-              <Grid item md={3} key={item.id}>
-                <Card
-                  sx={{
-                    width: '259px',
-                    position: 'relative',
-                    backgroundColor: '#c4c2cc',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    fontSize: 24,
-                    fontWeight: 600,
-                    cursor: 'pointer'
-                  }}
-                >
-                  <ProductCard productItem={item} isInCart={isInCart} />
-                </Card>
+            {products.map(item => (
+              <Grid item md={2.4} key={item.id}>
+                <ProductCard productItem={item} isInCart={isInCart} />
               </Grid>
             ))}
           </Grid>
