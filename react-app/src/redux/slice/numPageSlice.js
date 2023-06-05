@@ -5,7 +5,7 @@ const numPageSlice = createSlice({
   initialState: {
     numPage: Number(sessionStorage.getItem('numPage')) || 1 },
   reducers: {
-    changePage(state, action) {
+    changePage: (state, action) => {
       state.numPage = action.payload;
     },
   }
