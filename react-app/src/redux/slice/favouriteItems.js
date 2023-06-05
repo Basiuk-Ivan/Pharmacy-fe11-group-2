@@ -12,6 +12,12 @@ const favouriteItems = createSlice({
       state.favouriteItems.push(action.payload);
     },
     deleteFromFavouriteItems: (state, action) => {
+      if (action.payload === 'all') {
+        return {
+          ...state,
+          favouriteItems: []
+        };
+      }
       state.favouriteItems = state.favouriteItems.filter(item => item.id !== action.payload);
     }
   }

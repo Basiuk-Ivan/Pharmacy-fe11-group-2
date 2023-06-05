@@ -1,9 +1,11 @@
 import { Box, FormControl, FormControlLabel, RadioGroup, Typography, Radio, Container } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addPaymentMethod } from '../../../../redux/slice/orderProcessSlice';
+import CardPaymentData from '../../CardPaymentData';
 
 const PaymentMethodForm = () => {
   const dispatch = useDispatch();
+  const paymentValue = useSelector(state => state.order.PaymentMethodValue);
 
   return (
     <Container>
@@ -46,6 +48,7 @@ const PaymentMethodForm = () => {
             )}
           />
         </RadioGroup>
+        {paymentValue === 'card' && <CardPaymentData />}
       </FormControl>
     </Container>
   );
