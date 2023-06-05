@@ -1,22 +1,12 @@
 import { useState } from 'react';
 import { Typography, Rating, Stack } from '@mui/material';
-import {
-  // bodyForquantityStyles,
-  textForquantityStyles,
-  ratingStyles
-} from '../style';
+import { textForquantityStyles, ratingStyles } from '../../../style';
 
 export const RatingCard = ({ productItem }) => {
   const [value, setValue] = useState(productItem?.rating || 0);
 
   return (
-    <Stack
-      direction="row"
-      // justifyContent="space-between"
-      sx={{ gap: '10px' }}
-      alignItems="center"
-      // sx={bodyForquantityStyles}
-    >
+    <Stack direction="row" sx={{ gap: '10px' }} alignItems="center">
       <Typography variant="p" gutterBottom sx={textForquantityStyles}>
         {productItem?.quantity > 0 ? 'Є в наявності' : 'Товар відсутній'}
       </Typography>

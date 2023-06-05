@@ -67,6 +67,10 @@ export const cartStyles = isCart => ({
   }
 });
 
+export const checkBoxStyles = { padding: '3px' };
+
+export const favoriteIcon = { color: 'red' };
+
 export const productDayStyles = {
   position: 'absolute',
   top: 12,
@@ -91,3 +95,77 @@ export const favoriteIconStyles = isCart => ({
     filter: 'invert(20%) sepia(51%) saturate(7402%) hue-rotate(353deg) brightness(92%) contrast(105%)'
   }
 });
+
+export const buttonBasePlusStyles = {
+  position: 'absolute',
+  width: '20px',
+  height: '14px',
+  top: '10px',
+  right: '-5px',
+  padding: 0,
+  margin: 0,
+  backgroundColor: ' #2FD3AE',
+  fontSize: '18px',
+  color: '#ffffff',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: '50px',
+  border: 'none',
+  cursor: 'pointer'
+};
+
+export const buttonBaseMinusStyles = {
+  width: '20px',
+  padding: '0',
+  height: '14px',
+  position: 'absolute',
+  top: '10px',
+  left: '-5px',
+  backgroundColor: '#DD8888',
+  fontSize: '18px',
+  color: '#ffffff',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: '50px',
+  border: 'none',
+  cursor: 'pointer',
+  fontFamily: '"Roboto", "san-serif"'
+};
+
+export const iconButtonStyles = {
+  position: 'absolute',
+  top: '-11px',
+  right: '-12px',
+  display: 'flex',
+  justifyContent: 'end',
+  background: '#828282',
+  color: 'white',
+  width: '25px',
+  height: '25px',
+  padding: 0,
+  '&:hover': {
+    color: '#828282'
+  }
+};
+
+export const wrappForQuantityStyles = {
+  padding: '4px 20px',
+  borderRadius: '50px',
+  backgroundColor: '#ffffff',
+  textAlign: 'center',
+  fontFamily: '"Roboto", "san-serif"',
+  boxShadow: '0px 0px 40px rgba(11, 54, 29, 0.1)'
+};
+
+export const stackStyles = isInCart => ({
+  flex: isInCart ? '1 1 50%' : undefined,
+  paddingTop: isInCart ? '20px' : undefined,
+  gap: isInCart ? '50px' : undefined
+});
+
+export const boxForButtonBaseStyles = {
+  position: 'relative',
+  mb: '14px'
+};

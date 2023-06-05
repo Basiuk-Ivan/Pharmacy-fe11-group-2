@@ -1,7 +1,7 @@
 import { Box, Stack } from '@mui/material';
-import { wrappForDetailsStyles } from '../style';
+import { wrappForDetailsStyles } from '../../../style';
 
-import s from '../style/ProductCard.module.scss';
+import s from '../../../style/ProductCard.module.scss';
 
 export const ProductDetails = ({ productItem, isInCart }) => {
   const wrappForDetails = wrappForDetailsStyles(isInCart);

@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import ProductCard from '../../ProductCard/ProductCard';
 import Bread from '../Bread';
-import { fetchPosts } from '../../../redux/slice/productsSlice';
+import { fetchProductsData } from '../../../redux/slice/productsSlice';
 
 const FavouriteBlock = props => {
   const { products } = props;
@@ -14,7 +14,7 @@ const FavouriteBlock = props => {
   const isInCart = false;
 
   useEffect(() => {
-    dispatch(fetchPosts());
+    dispatch(fetchProductsData());
   }, [dispatch, products.length]);
 
   return (
