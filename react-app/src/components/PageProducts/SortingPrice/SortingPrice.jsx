@@ -38,7 +38,6 @@ function SortingPrice() {
               label="Ціна"
               onChange={handleChange}
             >
-              <MenuItem value="" />
               <MenuItem value={1}>Спочатку дешевші</MenuItem>
               <MenuItem value={2}>Спочатку дорожчі</MenuItem>
             </Select>

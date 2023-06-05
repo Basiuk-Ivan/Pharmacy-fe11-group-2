@@ -1,7 +1,7 @@
 export const cardsWrapperStyled = {
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '30px',
+  gap: '8px',
   marginBottom: '30px'
 };
 
