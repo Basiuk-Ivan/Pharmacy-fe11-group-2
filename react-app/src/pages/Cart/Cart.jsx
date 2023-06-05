@@ -35,26 +35,8 @@ const Cart = () => {
 
   const isInCart = true;
 
-  // const dispatch = useDispatch();
-
-  // const handleRemoveItem = itemId => {
-  //   dispatch(removeItem(itemId));
-  // };
-
-  // const [count, setCount] = useState(0);
-
-  // const handleIncrement = () => {
-  //   setCount(prevCount => prevCount + 1);
-  // };
-
-  // const handleDecrement = () => {
-  //   if (count > 0) {
-  //     setCount(prevCount => prevCount - 1);
-  //   }
-  // };
-
   return (
-    <div>
+    <Box>
       <IconBreadcrumbs />
       <HeaderBox>
         <Typography variant="h4" gutterBottom>
@@ -113,20 +95,17 @@ const Cart = () => {
             width: 830,
             display: 'flex',
             flexDirection: 'column',
-            gap: '10px',
-            fontFamily: 'Roboto'
+            gap: '20px',
+            fontFamily: 'Roboto',
+            marginBottom: '50px'
           }}
         >
-          {/* <Card style={{ marginBottom: '1rem' }}> */}
-          {/* <CardContentStyled> */}
           {productItemCart.map(item => (
             <ProductCard key={item.id} productItem={item} isInCart={isInCart} />
           ))}
-          {/* </CardContentStyled> */}
-          {/* </Card> */}
         </Box>
       </Box>
-    </div>
+    </Box>
   );
 };
 

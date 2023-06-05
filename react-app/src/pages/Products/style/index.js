@@ -1,5 +1,5 @@
 export const productsContainerStyles = {
-  width: 1200,
+  width: '100%',
   display: 'flex',
   flexDirection: 'column',
   fontFamily: 'Roboto'
