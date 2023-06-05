@@ -162,7 +162,8 @@ export const wrappForQuantityStyles = {
 export const stackStyles = isInCart => ({
   flex: isInCart ? '1 1 50%' : undefined,
   paddingTop: isInCart ? '20px' : undefined,
-  gap: isInCart ? '50px' : undefined
+  gap: isInCart ? '50px' : undefined,
+  justifyContent: isInCart ? undefined : 'space-between'
 });
 
 export const boxForButtonBaseStyles = {
