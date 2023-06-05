@@ -53,6 +53,7 @@ export const formCheckboxStyle = {
 
 export const buttonWrapperStyle = {
   display: 'flex',
+  justifyContent: 'center',
   gap: '12px',
   padding: '20px 5px 50px 5px'
 };

@@ -28,7 +28,7 @@ const Layout = () => (
         </Toolbar>
       </AppBar>
 
-      <Container position="relative" maxWidth="lg">
+      <Container position="relative" maxWidth="lg" disableGutters>
         <Menu />
         <Outlet />
       </Container>

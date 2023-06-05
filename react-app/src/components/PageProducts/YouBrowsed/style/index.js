@@ -26,12 +26,12 @@ export const youBrowsedTitleSliderStyle = {
 export const cardsWrapperStyle = {
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '30px',
+  gap: '13px',
   marginBottom: '30px'
 };
 
 export const cardWrapperStyle = {
-  width: '206px',
+  width: '220px',
   minHeight: '300px',
   backgroundColor: '#c4c2cc',
   display: 'flex',
