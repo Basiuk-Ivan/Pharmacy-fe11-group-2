@@ -12,6 +12,7 @@ const Review = ({ item }) => {
   const [itemLike, setItemLike] = useState(Number(item.countLike));
   const [itemDislike, setItemDisLike] = useState(Number(item.countDislike));
 
+  const numericValue = parseInt(item.rating, 10);
   const handleClickLike = () => {
     if (!clickLike && !clickDisLike) {
       setItemLike(prev => prev + 1);
@@ -70,7 +71,7 @@ const Review = ({ item }) => {
           </Typography>
         </Stack>
         <Stack direction="row" spacing={2} alignItems="center" sx={{ paddingRight: '10px' }}>
-          <Rating name="read-only" value={item.rating} readOnly />
+          <Rating name="read-only" value={numericValue} readOnly />
           <Typography
             variant="p"
             component="p"
