@@ -1,0 +1,43 @@
+[
+  {
+    "id": "1",
+    "reviews": [
+      {
+        "userId": "20",
+        "authorName": "Олександр",
+        "icon": "https://img.freepik.com/premium-vector/mans-head-avatar-vector_83738-354.jpg",
+        "rating": "5",
+        "mainText": "Приймав Креон. У принципі, препарат мені допоміг. Стала почуватися краще вже через дві доби. Були проблеми з підшлунковою залозою та лікар призначив 10-ти денний курс лікування. Раджу не ігнорувати \"протипоказання\" в інструкції і все-таки порадитися з лікарем перед тим, як почати приймати Креон.",
+        "dateReview": "1676083200000",
+        "countLike": "1",
+        "countDislike": "1",
+        "answers": [
+          {
+            "userId": "15",
+            "authorName": "Діана",
+            "icon": "https://w7.pngwing.com/pngs/272/184/png-transparent-businessperson-avatar-woman-business-avatar-microphone-black-hair-woman-thumbnail.png",
+            "answerText": "Все вірно написано"
+          }
+        ]
+      },
+      {
+        "userId": "5",
+        "authorName": "Інна",
+        "icon": "https://img.freepik.com/premium-vector/3d-graphic-avatar-woman-profile-picture_541075-1055.jpg",
+        "rating": "2",
+        "mainText": "Не рекомендую цей припарат. Лікар приписала дитині, дитині 6 років, почався сильний та болючий висип по всьому тілі, починаючи з ніг.",
+        "dateReview": "1689657600000",
+        "countLike": "2",
+        "countDislike": "2",
+        "answers": [
+          {
+            "userId": "12",
+            "authorName": "Матвій",
+            "icon": "https://img.freepik.com/premium-vector/man-avatar-portrait-of-a-man-minimalist-flat-illustration_186332-435.jpg",
+            "answerText": "Все вірно написано"
+          }
+        ]
+      }
+    ]
+  }
+]
