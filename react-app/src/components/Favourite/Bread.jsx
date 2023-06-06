@@ -22,7 +22,7 @@ const Bread = () => {
   const values = {
     orderprocess: 'Оформлення замовлення',
     favourite: 'Обране',
-    products: '333'
+    cabinet: 'Особистий кабінет',
   };
   const { pathname } = window.location;
   const pathArray = pathname.substring(1).split('/');
