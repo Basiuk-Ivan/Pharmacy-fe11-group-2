@@ -53,7 +53,7 @@ const Review = ({ item }) => {
 
   useEffect(() => {
     setDate(item.dateReview);
-  }, []);
+  }, [item.dateReview]);
 
   return (
     <Stack sx={{ mb: '40px' }}>
