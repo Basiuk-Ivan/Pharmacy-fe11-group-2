@@ -1,7 +1,7 @@
 import { Avatar, Box, Rating, Stack, Typography } from '@mui/material';
-import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined.js';
+import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined.js';
+import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import { useState, useEffect } from 'react';
 
@@ -83,8 +83,8 @@ const Review = ({ item }) => {
         <Stack direction="row" spacing={2} alignItems="center" sx={{ paddingRight: '10px' }}>
           <Stack direction="row" spacing={2} alignItems="center">
             {clickLike
-                ? <ThumbUpIcon onClick={handleClickLike} />
-                : <ThumbUpOutlinedIcon onClick={handleClickLike} />}
+              ? <ThumbUpIcon onClick={handleClickLike} />
+              : <ThumbUpOutlinedIcon onClick={handleClickLike} />}
             <Typography
               variant="p"
               component="p"
@@ -96,8 +96,8 @@ const Review = ({ item }) => {
           </Stack>
           <Stack direction="row" spacing={2} alignItems="center">
             {clickDisLike
-                ? <ThumbDownAltIcon onClick={handleClickDisLike} />
-                : <ThumbDownOutlinedIcon onClick={handleClickDisLike} />}
+              ? <ThumbDownAltIcon onClick={handleClickDisLike} />
+              : <ThumbDownOutlinedIcon onClick={handleClickDisLike} />}
             <Typography
               variant="p"
               component="p"

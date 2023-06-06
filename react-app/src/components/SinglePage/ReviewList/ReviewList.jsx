@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
-import Review from "../Review";
+import Review from '../Review';
 
 const ReviewList = () => {
   const { id } = useParams();
@@ -35,7 +35,7 @@ const ReviewList = () => {
 
   return (
     <Box sx={{ mt: '40px' }}>
-      {!!productReviews && productReviews.reviews.map((item, index) => <Review key={index} item={item}/>)}
+      {!!productReviews && productReviews.reviews.map((item, index) => <Review key={index} item={item} />)}
     </Box>
   );
 };

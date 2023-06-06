@@ -1,2 +1,3 @@
-import ReviewForm from './ReviewForm'
-export default ReviewForm
+import ReviewForm from './ReviewForm';
+
+export default ReviewForm;
