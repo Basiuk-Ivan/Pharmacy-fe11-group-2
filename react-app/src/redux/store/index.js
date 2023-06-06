@@ -5,6 +5,7 @@ import modalSlice from '../slice/modalSlice';
 import numPageSlice from '../slice/numPageSlice';
 import itemCardsSlice from '../slice/cartItems';
 import favouriteItemsSlice from '../slice/favouriteItems';
+import filterBaseSlice from '../slice/filterBaseSlice';
 
 const store = configureStore({
   reducer: {
@@ -13,7 +14,8 @@ const store = configureStore({
     openModal: modalSlice,
     numPage: numPageSlice,
     favouriteItems: favouriteItemsSlice,
-    itemCards: itemCardsSlice
+    itemCards: itemCardsSlice,
+    filterBase: filterBaseSlice
   }
 });
 

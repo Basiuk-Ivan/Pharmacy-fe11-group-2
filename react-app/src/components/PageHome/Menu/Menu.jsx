@@ -17,7 +17,8 @@ const pages = [
   },
   {
     title: 'Серцево-судинна система',
-    path: '/cardiovascular-system'
+    path: '/cardiovascular-system',
+    // path: '/cardiovascularSystem',
   }
 ];
 

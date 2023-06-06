@@ -1,3 +1,5 @@
+import { useDispatch, useSelector } from 'react-redux';
+
 import {
   Box,
   TextField,
@@ -13,6 +15,8 @@ import PregnantWomanIcon from '@mui/icons-material/PregnantWoman';
 import BabyChangingStationIcon from '@mui/icons-material/BabyChangingStation';
 
 // import FilterSlider from './FilterSlider/FilterSlider';
+
+import { useEffect } from 'react';
 import {
   buttonWrapperStyle,
   formCheckboxStyle,
@@ -25,7 +29,36 @@ import {
   showButtonStyle
 } from './style';
 
+import { addManufacture, removeManufacture, addDosageForm, removeDosageForm, recipe, pregnant, children } from '../../../redux/slice/filterBaseSlice';
+
 function Filter() {
+  const dispatch = useDispatch();
+  const filterBase = useSelector(state => state.filterBase);
+
+  const changeManufacturer = event => {
+    event.target.checked ? dispatch(addManufacture(event.target.value)) : dispatch(removeManufacture(event.target.value));
+  };
+
+  const changeDosageForm = event => {
+    event.target.checked ? dispatch(addDosageForm(event.target.value)) : dispatch(removeDosageForm(event.target.value));
+  };
+
+  const changeRecipe = () => {
+    dispatch(recipe());
+  };
+
+  const changePregnant = () => {
+    dispatch(pregnant());
+  };
+
+  const changeChildren = () => {
+    dispatch(children());
+  };
+
+  useEffect(() => {
+    console.log(filterBase);
+  }, [filterBase]);
+
   return (
     <Box id="filterWrapper" sx={filterWrapperStyle}>
       <Box id="titleCategory" sx={titleCategoryStyle}>ФІЛЬТР</Box>
@@ -62,13 +95,14 @@ function Filter() {
         </AccordionSummary>
         <AccordionDetails>
           <FormGroup sx={formGroupStyle}>
-            <FormControlLabel control={<Checkbox />} label="Україна" />
-            <FormControlLabel control={<Checkbox />} label="Німеччина" />
-            <FormControlLabel control={<Checkbox />} label="Греція" />
-            <FormControlLabel control={<Checkbox />} label="Польща" />
-            <FormControlLabel control={<Checkbox />} label="Італія" />
-            <FormControlLabel control={<Checkbox />} label="Великобританія" />
-            <FormControlLabel control={<Checkbox />} label="Індія" />
+
+            <FormControlLabel onChange={changeManufacturer} value="Ukraine" control={<Checkbox />} label="Україна" />
+            <FormControlLabel onChange={changeManufacturer} value="Germany" control={<Checkbox />} label="Німеччина" />
+            <FormControlLabel onChange={changeManufacturer} value="Greece" control={<Checkbox />} label="Греція" />
+            <FormControlLabel onChange={changeManufacturer} value="Poland" control={<Checkbox />} label="Польща" />
+            <FormControlLabel onChange={changeManufacturer} value="Italy" control={<Checkbox />} label="Італія" />
+            <FormControlLabel onChange={changeManufacturer} value="GB" control={<Checkbox />} label="Великобританія" />
+            <FormControlLabel onChange={changeManufacturer} value="India" control={<Checkbox />} label="Індія" />
           </FormGroup>
         </AccordionDetails>
       </Accordion>
@@ -84,26 +118,26 @@ function Filter() {
         </AccordionSummary>
         <AccordionDetails>
           <FormGroup sx={formGroupStyle}>
-            <FormControlLabel control={<Checkbox />} label="Таблетки" />
-            <FormControlLabel control={<Checkbox />} label="Ампули" />
-            <FormControlLabel control={<Checkbox />} label="Спреї" />
-            <FormControlLabel control={<Checkbox />} label="Сиропи" />
-            <FormControlLabel control={<Checkbox />} label="Краплі" />
-            <FormControlLabel control={<Checkbox />} label="Капсули" />
-            <FormControlLabel control={<Checkbox />} label="Мазі" />
+            <FormControlLabel onChange={changeDosageForm} value="Pills" control={<Checkbox />} label="Таблетки" />
+            <FormControlLabel onChange={changeDosageForm} value="Ampoules" control={<Checkbox />} label="Ампули" />
+            <FormControlLabel onChange={changeDosageForm} value="Spray" control={<Checkbox />} label="Спреї" />
+            <FormControlLabel onChange={changeDosageForm} value="Syrup" control={<Checkbox />} label="Сиропи" />
+            <FormControlLabel onChange={changeDosageForm} value="Drops" control={<Checkbox />} label="Краплі" />
+            <FormControlLabel onChange={changeDosageForm} value="Capsules" control={<Checkbox />} label="Капсули" />
+            <FormControlLabel onChange={changeDosageForm} value="Salve" control={<Checkbox />} label="Мазі" />
           </FormGroup>
         </AccordionDetails>
       </Accordion>
 
       <FormGroup sx={formGroupCheckStyle}>
         {/* eslint-disable-next-line max-len */}
-        <FormControlLabel sx={formCheckboxStyle} control={<Checkbox icon={<ReceiptLongIcon fontSize="small" sx={{ marginRight: '5px' }} />} checkedIcon={<ReceiptLongIcon fontSize="small" sx={{ color: '#2FD3AE', marginRight: '5px' }} />} />} label="Без рецепта" />
+        <FormControlLabel sx={formCheckboxStyle} onChange={changeRecipe} control={<Checkbox icon={<ReceiptLongIcon fontSize="small" sx={{ marginRight: '5px' }} />} checkedIcon={<ReceiptLongIcon fontSize="small" sx={{ color: '#2FD3AE', marginRight: '5px' }} />} />} label="Без рецепта" />
 
         {/* eslint-disable-next-line max-len */}
-        <FormControlLabel sx={formCheckboxStyle} control={<Checkbox icon={<PregnantWomanIcon />} checkedIcon={<PregnantWomanIcon sx={{ color: '#2FD3AE' }} />} />} label="Дозволено вагітним" />
+        <FormControlLabel onChange={changePregnant} sx={formCheckboxStyle} control={<Checkbox icon={<PregnantWomanIcon />} checkedIcon={<PregnantWomanIcon sx={{ color: '#2FD3AE' }} />} />} label="Дозволено вагітним" />
 
         {/* eslint-disable-next-line max-len */}
-        <FormControlLabel sx={formCheckboxStyle} control={<Checkbox icon={<BabyChangingStationIcon />} checkedIcon={<BabyChangingStationIcon sx={{ color: '#2FD3AE' }} />} />} label="Дозволено дітям" />
+        <FormControlLabel onChange={changeChildren} sx={formCheckboxStyle} control={<Checkbox icon={<BabyChangingStationIcon />} checkedIcon={<BabyChangingStationIcon sx={{ color: '#2FD3AE' }} />} />} label="Дозволено дітям" />
       </FormGroup>
 
       <Box id="buttonWrapper" sx={buttonWrapperStyle}>

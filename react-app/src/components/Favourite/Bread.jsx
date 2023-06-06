@@ -22,7 +22,9 @@ const Bread = () => {
   const values = {
     orderprocess: 'Оформлення замовлення',
     favourite: 'Обране',
-    products: '333'
+    products: '333',
+    painkillers: 'Знеболюючі',
+    cardiovascularSystem: 'Серцево-судинна система'
   };
   const { pathname } = window.location;
   const pathArray = pathname.substring(1).split('/');
