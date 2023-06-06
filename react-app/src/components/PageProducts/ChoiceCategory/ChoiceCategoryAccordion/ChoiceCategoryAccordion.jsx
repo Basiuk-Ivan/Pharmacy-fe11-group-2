@@ -5,13 +5,11 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
-  iconStyle,
   mainCategoryStyle,
   secondCategoryStyle,
   secondCategoryStyle4px,
   secondCategoryWrappStyle,
-  marginStyle,
-  mainCategoryActiveStyle
+  marginStyle
 } from './style';
 
 export default function ChoiceCategoryAccordion() {
@@ -26,10 +24,10 @@ export default function ChoiceCategoryAccordion() {
 
       <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')} sx={marginStyle}>
         <AccordionSummary
-          sx={mainCategoryActiveStyle}
-          expandIcon={<ExpandMoreIcon sx={iconStyle} />}
+          sx={mainCategoryStyle}
+          expandIcon={<ExpandMoreIcon />}
         >
-          <Typography sx={mainCategoryStyle}>
+          <Typography>
             Ліки від кашлю , застуди та грипу
           </Typography>
         </AccordionSummary>
@@ -42,10 +40,10 @@ export default function ChoiceCategoryAccordion() {
 
       <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')} sx={marginStyle}>
         <AccordionSummary
-          sx={mainCategoryActiveStyle}
-          expandIcon={<ExpandMoreIcon sx={iconStyle} />}
+          sx={mainCategoryStyle}
+          expandIcon={<ExpandMoreIcon />}
         >
-          <Typography sx={mainCategoryStyle}>Знеболюючі</Typography>
+          <Typography>Знеболюючі</Typography>
         </AccordionSummary>
         <AccordionDetails sx={secondCategoryWrappStyle}>
           <Typography sx={secondCategoryStyle}>Від спазму</Typography>
@@ -56,10 +54,10 @@ export default function ChoiceCategoryAccordion() {
 
       <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')} sx={marginStyle}>
         <AccordionSummary
-          sx={mainCategoryActiveStyle}
-          expandIcon={<ExpandMoreIcon sx={iconStyle} />}
+          sx={mainCategoryStyle}
+          expandIcon={<ExpandMoreIcon />}
         >
-          <Typography sx={mainCategoryStyle}>
+          <Typography>
             Для нервової системи
           </Typography>
         </AccordionSummary>
@@ -71,10 +69,10 @@ export default function ChoiceCategoryAccordion() {
 
       <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
         <AccordionSummary
-          sx={mainCategoryActiveStyle}
-          expandIcon={<ExpandMoreIcon sx={iconStyle} />}
+          sx={mainCategoryStyle}
+          expandIcon={<ExpandMoreIcon />}
         >
-          <Typography sx={mainCategoryStyle}>Для серцево-судинної системи</Typography>
+          <Typography>Для серцево-судинної системи</Typography>
         </AccordionSummary>
         <AccordionDetails sx={secondCategoryWrappStyle}>
           <Typography sx={secondCategoryStyle}>Гіпертонія</Typography>

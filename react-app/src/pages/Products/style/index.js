@@ -1,5 +1,5 @@
 export const productsContainerStyles = {
-  width: 1200,
+  width: '100%',
   display: 'flex',
   flexDirection: 'column',
   fontFamily: 'Roboto'
@@ -7,13 +7,13 @@ export const productsContainerStyles = {
 
 export const asideAndCardsStyles = {
   display: 'flex',
-  gap: '30px'
+  gap: '8px'
 };
 
 export const asideStyles = {
   display: 'flex',
   flexDirection: 'column',
-  minWidth: '206px'
+  minWidth: '240px'
 };
 
 export const sortingAndCardsStyles = {

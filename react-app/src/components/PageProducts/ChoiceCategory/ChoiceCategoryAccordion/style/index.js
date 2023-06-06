@@ -1,9 +1,9 @@
 export const mainCategoryStyle = {
-  ':hover': { fontWeight: '600', paddingRight: '10px' }
-};
-
-export const mainCategoryActiveStyle = {
-  '&.MuiAccordionSummary-root.Mui-expanded': { backgroundColor: '#2FD3AE', color: '#FFFFFF' }
+  color: '#4F4F4F',
+  // eslint-disable-next-line max-len
+  ':hover': { '& .MuiAccordionSummary-expandIconWrapper .MuiSvgIcon-root': { color: '#1f1e1e', width: '1.1em', height: '1.1em' }, '& .MuiTypography-root': { color: '#1f1e1e', fontWeight: '600' }, '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded .MuiSvgIcon-root': { color: '#FFFFFF', width: '1.1em', height: '1.1em' }, '&.MuiAccordionSummary-root.Mui-expanded .MuiTypography-root': { color: '#FFFFFF', fontWeight: '600' } },
+  '&.MuiAccordionSummary-root.Mui-expanded': { backgroundColor: '#2FD3AE', color: '#FFFFFF' },
+  '.MuiAccordionSummary-expandIconWrapper.Mui-expanded': { color: '#FFFFFF' }
 };
 
 export const secondCategoryWrappStyle = {
@@ -18,10 +18,6 @@ export const secondCategoryStyle4px = {
   fontSize: '14px', cursor: 'pointer', ':hover': { color: '#1f1e1e', fontWeight: '600', paddingRight: '4px' }
 };
 
-export const iconStyle = {
-  ':hover': { color: '#1f1e1e', fontWeight: '600' }
-};
-
 export const marginStyle = {
-  marginBottom: '15px'
+  marginBottom: '15px',
 };
