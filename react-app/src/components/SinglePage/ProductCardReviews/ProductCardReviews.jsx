@@ -2,20 +2,16 @@ import {Box, Button, Rating, Stack, TextField, Typography} from '@mui/material';
 import React, {useState} from 'react';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
-import Review from "../Review/index.js";
+import Review from '../Review/index';
 
 const Form = () => {
-
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [review, setReview] = useState('');
 
-    const handleSubmit = (event) => {
+    const handleSubmit = event => {
         event.preventDefault();
         // Действия при отправке формы
-        console.log('Name:', name);
-        console.log('Email:', email);
-        console.log('Review:', review);
     };
 
     const formik = useFormik({
@@ -41,57 +37,68 @@ const Form = () => {
     });
 
     return (
-        <>
-            <form onSubmit={handleSubmit}>
-                <Stack direction="row" useFlexGap flexWrap="wrap"  justifyContent="space-between"   spacing={3}>
-                    <TextField
-                        label="Ваше ім'я"
-                        value={name}
-                        onChange={(event) => setName(event.target.value)}
-                        fullWidth
-                        margin="normal"
-                        sx={{width: '47%', '& .MuiOutlinedInput-root': {
-                                borderRadius: '20px',
-                            },}}
-                    />
-                    <TextField
-                        label="Ваш email"
-                        value={email}
-                        onChange={(event) => setEmail(event.target.value)}
-                        fullWidth
-                        margin="normal"
-                        sx={{width: '47%', '& .MuiOutlinedInput-root': {
-                                borderRadius: '20px',
-                            },}}
-                    />
+        <form onSubmit={handleSubmit}>
+            <Stack direction="row" useFlexGap flexWrap="wrap" justifyContent="space-between" spacing={3}>
+                <TextField
+                    id="name" name="name"
+                    label="Ваше ім'я"
+                    value={formik.values.name}
+                    onChange={event => setName(event.target.value)}
+                    fullWidth
+                    margin="normal"
+                    sx={{
+                        width: '47%',
+                        '& .MuiOutlinedInput-root': {
+                            borderRadius: '20px',
+                        },
+                    }}
+                />
+                <TextField
+                    id="email" name="email"
+                    label="Ваш email"
+                    value={formik.values.email}
+                    onChange={event => setEmail(event.target.value)}
+                    fullWidth
+                    margin="normal"
+                    sx={{
+                        width: '47%',
+                        '& .MuiOutlinedInput-root': {
+                            borderRadius: '20px',
+                        },
+                    }}
+                />
 
-                    <TextField
-                        label="Відгук"
-                        value={review}
-                        onChange={(event) => setReview(event.target.value)}
-                        fullWidth
-                        margin="normal"
-                        multiline
-                        rows={4}
-                        sx={{'& .MuiOutlinedInput-root': {
-                                borderRadius: '20px',
-                            },}}
+                <TextField
+                    label="Відгук"
+                    value={review}
+                    onChange={event => setReview(event.target.value)}
+                    fullWidth
+                    margin="normal"
+                    multiline
+                    rows={4}
+                    sx={{
+                        '& .MuiOutlinedInput-root': {
+                            borderRadius: '20px',
+                        },
+                    }}
+                />
+                <Button type="submit" variant="contained" color="primary" sx={{
+                    padding: '18px 61px',
+                    fontSize: '12px',
+                    color: '#ffffff',
+                    fontWeight: '700',
+                    borderRadius: '50px'
+                }}>
+                    Відправити
+                </Button>
+            </Stack>
 
-                    />
-                    <Button type="submit" variant="contained" color="primary" sx={{padding:"18px 61px", fontSize:'12px', color:'#ffffff', fontWeight: '700', borderRadius:'50px'}}>
-                        Відправити
-                    </Button>
-                </Stack>
-
-
-            </form>
-        </>
-    )
+        </form>
+    );
 };
 
 const ProductCardReviews = ({productItem}) => {
     const [value, setValue] = useState(2);
-
 
     return (
         <Box>
@@ -145,8 +152,6 @@ const ProductCardReviews = ({productItem}) => {
 
             </Box>
         </Box>
-    )
-
-
+    );
 };
 export default ProductCardReviews;
