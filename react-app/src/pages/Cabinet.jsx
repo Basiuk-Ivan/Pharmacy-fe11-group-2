@@ -1,4 +1,5 @@
 import { Container, Typography, Grid } from '@mui/material';
+import { useState } from 'react';
 import Contacts from '../components/Cabinet/Contacts';
 import Orders from '../components/Cabinet/Orders';
 import PersonalData from '../components/Cabinet/PersonalData';
@@ -6,7 +7,12 @@ import SectionsMenu from '../components/Cabinet/SectionsMenu';
 import Bread from '../components/Favourite/Bread';
 
 const Cabinet = () => {
-  const ttt = 'asd';
+  const [activeSection, setActiveSection] = useState('personalData');
+
+  const handleSectionClick = section => {
+    setActiveSection(section);
+  };
+
   return (
     <Container disableGutters>
       <Bread />
@@ -20,29 +26,18 @@ const Cabinet = () => {
       >
         Особистий кабінет
       </Typography>
-      <Grid
-        container
-        sx={{
-          gap: '30px'
-        }}
-      >
-        <Grid
-          item
-          md={3}
-        ><SectionsMenu />
+      <Grid container sx={{ gap: '30px' }}>
+        <Grid item md={3}>
+          <SectionsMenu handleSectionClick={handleSectionClick} />
         </Grid>
 
-        <Grid
-          item
-          md={8}
-        >
-          <PersonalData />
+        <Grid item md={8}>
+          {activeSection === 'personalData' && <PersonalData />}
+          {activeSection === 'orders' && <Orders />}
+          {activeSection === 'feedback' && <Contacts />}
         </Grid>
       </Grid>
-      <Orders />
-      <Contacts />
     </Container>
-
   );
 };
 

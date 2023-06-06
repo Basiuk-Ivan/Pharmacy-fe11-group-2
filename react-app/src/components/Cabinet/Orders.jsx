@@ -11,7 +11,7 @@ const Orders = () => (
     <Grid item md={8}>
       <Typography
         sx={{
-          margin: '40px 0 20px 0',
+          margin: '0 0 20px 0',
           fontFamily: 'Raleway, sans-serif',
           color: '#4F4F4F',
           fontWeight: '700',
@@ -22,7 +22,7 @@ const Orders = () => (
         Ваші замовлення
       </Typography>
       <Grid container sx={{ overflowY: 'auto', maxHeight: '300px' }}>
-        {[1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4].map(id => (
+        {[1, 2, 3].map(id => (
           <Grid container key={id}>
             <Grid item md={3}>
               <img src={`./orderprocessTest/${id}.png`} alt="" />
@@ -44,7 +44,8 @@ const Orders = () => (
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        gap: '50px'
+        gap: '10px',
+        mb: '60px'
       }}
       >
         <Button
@@ -55,10 +56,10 @@ const Orders = () => (
             borderRadius: 50,
             mt: '20px',
             color: '#FFFFFF',
-            padding: '13px 68px 10px 68px'
+            padding: '13px 30px 10px 30px'
           }}
         >
-          Зберегти зміни
+          Залишити відгук
         </Button>
         <Button
           variant="contained"
@@ -68,10 +69,10 @@ const Orders = () => (
             borderRadius: 50,
             mt: '20px',
             color: '#FFFFFF',
-            padding: '13px 68px 10px 68px'
+            padding: '13px 38px 10px 38px'
           }}
         >
-          Зберегти зміни
+          Повторити замовлення
         </Button>
       </Container>
     </Grid>

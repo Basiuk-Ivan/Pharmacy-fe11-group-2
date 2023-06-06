@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 /* eslint-disable no-console */
 import { TextField, Grid, Typography, Container, MenuItem, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -44,9 +42,45 @@ const PersonalData = () => {
     }
   });
 
+  const daysDate = () => {
+    const items = [];
+    // eslint-disable-next-line no-plusplus
+    for (let x = 1; x < 32; x++) {
+      items.push(
+        <MenuItem key={x + 9} value={`${x}`}>
+          {x}
+        </MenuItem>
+      );
+    }
+    return items;
+  };
+
+  const monthsDate = () => {
+    // eslint-disable-next-line max-len
+    const items = ['січень', 'лютий', 'березень', 'квітень', 'травень', 'червень', 'липень', 'серпень', 'вересень', 'жовтень', 'листопад', 'грудень'];
+    return items.map(el => (
+      <MenuItem key={el} value={`${el}`}>
+        {el}
+      </MenuItem>
+    ));
+  };
+
+  const yearsDate = () => {
+    const items = [];
+    // eslint-disable-next-line no-plusplus
+    for (let x = 2023; x > 1900; x--) {
+      items.push(
+        <MenuItem key={x + 9} value={`${x}`}>
+          {x}
+        </MenuItem>
+      );
+    }
+    return items;
+  };
+
   return (
-    <Container>
-      <form id="contacts" onSubmit={formik.handleSubmit}>
+    <Container sx={{ mb: '60px' }}>
+      <form onSubmit={formik.handleSubmit}>
         <ChangedTextField
           label="Прізвище"
           fullWidth
@@ -80,8 +114,7 @@ const PersonalData = () => {
               error={Boolean(formik.touched.day && formik.errors.day)}
               helperText={formik.touched.day && formik.errors.day}
             >
-              <MenuItem value="item1">Элемент 1</MenuItem>
-              <MenuItem value="item2">Элемент 2</MenuItem>
+              {daysDate()}
             </ChangedTextField>
           </Grid>
           <Grid item md={3}>
@@ -95,8 +128,7 @@ const PersonalData = () => {
               error={Boolean(formik.touched.month && formik.errors.month)}
               helperText={formik.touched.month && formik.errors.month}
             >
-              <MenuItem value="item1">Элемент 1</MenuItem>
-              <MenuItem value="item2">Элемент 2</MenuItem>
+              {monthsDate()}
             </ChangedTextField>
           </Grid>
           <Grid item md={3}>
@@ -110,8 +142,7 @@ const PersonalData = () => {
               error={Boolean(formik.touched.year && formik.errors.year)}
               helperText={formik.touched.year && formik.errors.year}
             >
-              <MenuItem value="item1">Элемент 1</MenuItem>
-              <MenuItem value="item2">Элемент 2</MenuItem>
+              {yearsDate()}
             </ChangedTextField>
           </Grid>
           <Grid item md={3}>

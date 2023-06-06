@@ -11,35 +11,41 @@ const ChangedTableCell = styled(TableCell)(() => ({
 }
 ));
 
-const SectionsMenu = () => (
-  <Table
-    sx={{
-      mb: '40px',
-      border: '1px solid #E7E9EB',
-    }}
-  >
-    <TableBody>
-      <TableRow>
-        <ChangedTableCell>
-          Особисті дані
-        </ChangedTableCell>
-      </TableRow>
-      <TableRow>
-        <ChangedTableCell sx={{
-          backgroundColor: '#F7FAFB'
-        }}
-        >Ваші замовлення
-        </ChangedTableCell>
-      </TableRow>
-      <TableRow
-        sx={{
-          backgroundColor: 'white'
-        }}
-      >
-        <ChangedTableCell>Зворотній Зв'язок</ChangedTableCell>
-      </TableRow>
-    </TableBody>
-  </Table>
-);
+const SectionsMenu = props => {
+  const { handleSectionClick } = props;
+  return (
+    <Table
+      sx={{
+        mb: '40px',
+        border: '1px solid #E7E9EB',
+      }}
+    >
+      <TableBody>
+        <TableRow>
+          <ChangedTableCell onClick={() => handleSectionClick('personalData')}>
+            Особисті дані
+          </ChangedTableCell>
+        </TableRow>
+        <TableRow>
+          <ChangedTableCell
+            onClick={() => handleSectionClick('orders')}
+            sx={{
+              backgroundColor: '#F7FAFB'
+            }}
+          >Ваші замовлення
+          </ChangedTableCell>
+        </TableRow>
+        <TableRow
+          onClick={() => handleSectionClick('feedback')}
+          sx={{
+            backgroundColor: 'white'
+          }}
+        >
+          <ChangedTableCell>Зворотній Зв'язок</ChangedTableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+};
 
 export default SectionsMenu;
