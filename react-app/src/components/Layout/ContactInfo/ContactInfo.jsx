@@ -3,30 +3,44 @@ import IconButton from '@mui/material/IconButton';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 
+import {
+  mainBoxStyles,
+  wrapperBoxStyles,
+  mailOutlineIconStyles,
+  wrapperForTextStyles,
+  emailStyles,
+  descriptionStyles,
+  wrapperForNumberPhoneStyles,
+  localPhoneIconStyle,
+  bodyForNumberPhoneStyles,
+  numberPhoneStyles,
+  numberPhoneDescStyles
+} from './style';
+
 const ContactInfo = () => (
-  <Box sx={{ display: { xs: 'none', md: 'flex', flexWrap: 'wrap', gap: '10px' } }}>
-    <Box sx={{ display: 'flex' }}>
+  <Box sx={mainBoxStyles}>
+    <Box sx={wrapperBoxStyles}>
       <IconButton>
-        <MailOutlineIcon sx={{ fill: '#2FD3AE' }} />
+        <MailOutlineIcon sx={mailOutlineIconStyles} />
       </IconButton>
-      <Box sx={{ display: { xs: 'flex', flexDirection: 'column' } }}>
-        <Typography sx={{ fontSize: 18, color: '#011D71' }} fontFamily="Roboto" component="span">
+      <Box sx={wrapperForTextStyles}>
+        <Typography sx={emailStyles} fontFamily="Roboto" component="span">
           info@restoll.UA
         </Typography>
-        <Typography sx={{ fontSize: 11, color: '#7894A4' }} fontFamily="Roboto" component="span">
+        <Typography sx={descriptionStyles} fontFamily="Roboto" component="span">
           Напишіть нам
         </Typography>
       </Box>
     </Box>
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={wrapperForNumberPhoneStyles}>
       <IconButton>
-        <LocalPhoneIcon sx={{ fill: '#2FD3AE' }} />
+        <LocalPhoneIcon sx={localPhoneIconStyle} />
       </IconButton>
-      <Box sx={{ display: { xs: 'flex', flexDirection: 'column' } }}>
-        <Typography sx={{ fontSize: 18, color: '#011D71' }} fontFamily="Roboto" component="span">
+      <Box sx={bodyForNumberPhoneStyles}>
+        <Typography sx={numberPhoneStyles} fontFamily="Roboto" component="span">
           8-800-777-22-33
         </Typography>
-        <Typography sx={{ fontSize: 11, color: '#7894A4' }} fontFamily="Roboto" component="span">
+        <Typography sx={numberPhoneDescStyles} fontFamily="Roboto" component="span">
           Цілодобово
         </Typography>
       </Box>

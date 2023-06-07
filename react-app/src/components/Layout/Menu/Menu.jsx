@@ -24,7 +24,7 @@ const pages = [
 
 const Menu = () => (
   <Box sx={menuStyles}>
-    <Container disableGutters sx={{ display: 'flex', justifyContent: 'space-between' }}>
+    <Container sx={{ display: 'flex', justifyContent: 'space-between' }}>
       {pages.map(page => (
         <NavLink key={page.title} to={page.path} style={navLinkStyles}>
           <Button sx={buttonStyles}>{page.title}</Button>
