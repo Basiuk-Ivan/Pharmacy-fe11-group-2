@@ -1,44 +1,32 @@
-import { Box, IconButton, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import {
-  mainBoxStyles,
-  wrapperBoxStyles,
-  mailOutlineIconStyles,
-  wrapperForTextStyles,
-  emailStyles,
-  descriptionStyles,
-  wrapperForNumberPhoneStyles,
-  localPhoneIconStyle,
-  bodyForNumberPhoneStyles,
-  numberPhoneStyles,
-  numberPhoneDescStyles
-} from './style';
 
 const ContactInfo = () => (
-  <Box sx={mainBoxStyles}>
-    <Box sx={wrapperBoxStyles}>
+  <Box sx={{ display: { xs: 'none', md: 'flex', flexWrap: 'wrap', gap: '10px' } }}>
+    <Box sx={{ display: 'flex' }}>
       <IconButton>
-        <MailOutlineIcon sx={mailOutlineIconStyles} />
+        <MailOutlineIcon sx={{ fill: '#2FD3AE' }} />
       </IconButton>
-      <Box sx={wrapperForTextStyles}>
-        <Typography fontFamily="Roboto" component="span" sx={emailStyles}>
+      <Box sx={{ display: { xs: 'flex', flexDirection: 'column' } }}>
+        <Typography sx={{ fontSize: 18, color: '#011D71' }} fontFamily="Roboto" component="span">
           info@restoll.UA
         </Typography>
-        <Typography fontFamily="Roboto" component="span" sx={descriptionStyles}>
+        <Typography sx={{ fontSize: 11, color: '#7894A4' }} fontFamily="Roboto" component="span">
           Напишіть нам
         </Typography>
       </Box>
     </Box>
-    <Box sx={wrapperForNumberPhoneStyles}>
+    <Box sx={{ display: 'flex' }}>
       <IconButton>
-        <LocalPhoneIcon sx={localPhoneIconStyle} />
+        <LocalPhoneIcon sx={{ fill: '#2FD3AE' }} />
       </IconButton>
-      <Box sx={bodyForNumberPhoneStyles}>
-        <Typography fontFamily="Roboto" component="span" sx={numberPhoneStyles}>
+      <Box sx={{ display: { xs: 'flex', flexDirection: 'column' } }}>
+        <Typography sx={{ fontSize: 18, color: '#011D71' }} fontFamily="Roboto" component="span">
           8-800-777-22-33
         </Typography>
-        <Typography fontFamily="Roboto" component="span" sx={numberPhoneDescStyles}>
+        <Typography sx={{ fontSize: 11, color: '#7894A4' }} fontFamily="Roboto" component="span">
           Цілодобово
         </Typography>
       </Box>

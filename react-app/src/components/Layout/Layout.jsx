@@ -1,41 +1,38 @@
 import { Outlet } from 'react-router-dom';
-import { AppBar, Container, Toolbar, Box } from '@mui/material';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Container from '@mui/material/Container';
+import Logo from './Logo/Logo';
+import MenuMenu from '../PageHome/Menu';
 import AuthButton from '../Authorization/Autorization';
-import ContactInfo from './ContactInfo';
-import Logo from './Logo';
-import SearchActions from './Search';
-import UserActions from './UserActions';
 import SocialMediaButton from './SocialMediaButton/SocialMediaButton';
-import Menu from '../PageHome/Menu';
+import ContactInfo from './ContactInfo/ContactInfo';
+import SearchActions from './Search/Search';
+import MobileLogo from './Logo/Mobile/MobileLogo';
+import UserActions from './UserActions/UserActions';
 import Footer from './Footer/Footer';
-import { appBarStyles, toolbarStyles } from './style';
 
 const Layout = () => (
-  <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100vh' }}>
-    <Container
-      sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
-      position="relative"
-      maxWidth="lg"
-      disableGutters
-    >
+  <>
+    <AppBar position="fixed">
       <AuthButton />
-      <AppBar position="static" sx={appBarStyles}>
-        <Toolbar sx={toolbarStyles}>
+      <Container disableGutters maxWidth="lg">
+        <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
           <Logo />
           <SocialMediaButton />
           <ContactInfo />
+          <MobileLogo />
           <SearchActions />
           <UserActions />
         </Toolbar>
-      </AppBar>
-
-      <Container position="relative" maxWidth="lg" disableGutters>
-        <Menu />
-        <Outlet />
       </Container>
+      <MenuMenu />
+    </AppBar>
+    <Container sx={{ marginTop: '133px' }} position="relative" maxWidth="lg" disableGutters>
+      <Outlet />
     </Container>
     <Footer />
-  </Box>
+  </>
 );
 
 export default Layout;

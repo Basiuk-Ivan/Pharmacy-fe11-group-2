@@ -16,15 +16,20 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      main: '#2FD3AE'
-    },
-    secondary: {
-      main: '#ffffff'
-    },
-    success: {
-      main: '#ed6c02'
+      main: '#fff'
     }
   }
+  // palette: {
+  //   primary: {
+  //     main: '#2FD3AE'
+  //   },
+  //   secondary: {
+  //     main: '#ffffff'
+  //   },
+  //   success: {
+  //     main: '#ed6c02'
+  //   }
+  // }
 });
 
 const App = () => (

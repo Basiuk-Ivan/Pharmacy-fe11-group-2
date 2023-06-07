@@ -1,3 +1,16 @@
+export const wrapperStyles = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  height: '100vh'
+};
+
+export const containerMainStyles = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between'
+};
+
 export const containerStyles = {
   display: 'flex',
   flexDirection: 'column',
