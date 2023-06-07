@@ -3,6 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const filterBaseSlice = createSlice({
   name: 'filterBase',
   initialState: {
+    filterMinPrice: '',
+    filterMaxPrice: '',
+    filterSortingPrice: '',
     filterManufacture: [],
     filterDosageForm: [],
     filterRecipe: false,
@@ -31,9 +34,18 @@ const filterBaseSlice = createSlice({
     children: state => {
       state.filterChildren = !state.filterChildren;
     },
+    minPrice: (state, action) => {
+      state.filterMinPrice = action.payload;
+    },
+    maxPrice: (state, action) => {
+      state.filterMaxPrice = action.payload;
+    },
+    sortingPrice: (state, action) => {
+      state.sortingPrice = action.payload;
+    }
   }
 });
 
-export const { addManufacture, removeManufacture, addDosageForm, removeDosageForm, recipe, pregnant, children } = filterBaseSlice.actions;
+export const { addManufacture, removeManufacture, addDosageForm, removeDosageForm, recipe, pregnant, children, minPrice, maxPrice, sortingPrice } = filterBaseSlice.actions;
 
 export default filterBaseSlice.reducer;

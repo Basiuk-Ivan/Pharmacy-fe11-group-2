@@ -29,7 +29,7 @@ import {
   showButtonStyle
 } from './style';
 
-import { addManufacture, removeManufacture, addDosageForm, removeDosageForm, recipe, pregnant, children } from '../../../redux/slice/filterBaseSlice';
+import { addManufacture, removeManufacture, addDosageForm, removeDosageForm, recipe, pregnant, children, minPrice, maxPrice } from '../../../redux/slice/filterBaseSlice';
 
 function Filter() {
   const dispatch = useDispatch();
@@ -55,6 +55,14 @@ function Filter() {
     dispatch(children());
   };
 
+  const changeMinPrice = event => {
+    dispatch(minPrice(event.target.value));
+  };
+
+  const changeMaxPrice = event => {
+    dispatch(maxPrice(event.target.value));
+  };
+
   useEffect(() => {
     console.log(filterBase);
   }, [filterBase]);
@@ -77,8 +85,8 @@ function Filter() {
             id="priceInputWrapper"
             sx={priceInputWrapperStyle}
           >
-            <TextField id="outlined-basic" label="Ціна від" variant="outlined" size="small" />
-            <TextField id="outlined-basic" label="Ціна до" variant="outlined" size="small" />
+            <TextField type="number" onWheel={event => event.target.blur()} onChange={changeMinPrice} id="outlined-basic" label="Ціна від" variant="outlined" size="small" />
+            <TextField type="number" onWheel={event => event.target.blur()} onChange={changeMaxPrice} id="outlined-basic" label="Ціна до" variant="outlined" size="small" />
           </Box>
           {/* <FilterSlider /> */}
         </AccordionDetails>

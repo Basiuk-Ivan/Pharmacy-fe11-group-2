@@ -22,11 +22,16 @@ const pages = [
   }
 ];
 
+// const xxx = event => {
+//   console.log(event);
+// };
+
 const Menu = () => (
   <Box position="absolute" sx={menuStyles}>
     {pages.map(page => (
       <NavLink key={page.title} to={page.path} style={navLinkStyles}>
         <Button sx={buttonStyles}>{page.title}</Button>
+        {/* <Button onClick={() => xxx(page.path)} sx={buttonStyles}>{page.title}</Button> */}
       </NavLink>
     ))}
   </Box>

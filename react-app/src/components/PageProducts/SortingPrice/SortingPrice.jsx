@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import SortIcon from '@mui/icons-material/Sort';
@@ -13,12 +14,21 @@ import {
 } from './style';
 
 import PaginationProducts from '../PaginationProducts';
+import { sortingPrice } from '../../../redux/slice/filterBaseSlice';
 
 function SortingPrice() {
+  const dispatch = useDispatch();
+  const filterBase = useSelector(state => state.filterBase);
   const [price, setPrice] = useState('');
+
   const handleChange = event => {
     setPrice(event.target.value);
+    dispatch(sortingPrice(event.target.value));
   };
+
+  useEffect(() => {
+    console.log(filterBase);
+  }, [filterBase]);
 
   return (
     <Box id="sortingWrapper" sx={sortingWrapperStyles}>
@@ -38,8 +48,8 @@ function SortingPrice() {
               label="Ціна"
               onChange={handleChange}
             >
-              <MenuItem value={1}>Спочатку дешевші</MenuItem>
-              <MenuItem value={2}>Спочатку дорожчі</MenuItem>
+              <MenuItem value>Спочатку дешевші</MenuItem>
+              <MenuItem value={false}>Спочатку дорожчі</MenuItem>
             </Select>
           </FormControl>
 
