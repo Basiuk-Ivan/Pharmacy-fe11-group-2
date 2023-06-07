@@ -41,7 +41,7 @@ const filterBaseSlice = createSlice({
       state.filterMaxPrice = action.payload;
     },
     sortingPrice: (state, action) => {
-      state.sortingPrice = action.payload;
+      state.filterSortingPrice = action.payload;
     }
   }
 });
