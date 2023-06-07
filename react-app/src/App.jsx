@@ -8,6 +8,7 @@ import Layout from './components/Layout';
 import Favourite from './pages/Favourite';
 import OrderProcess from './pages/OrderProcess';
 import ProductPage from './pages/ProductPage';
+import Cabinet from './pages/Cabinet';
 
 const theme = createTheme({
   direction: 'rtl',
@@ -37,6 +38,7 @@ const App = () => (
         <Route path="/cart" element={<Cart />} />
         <Route path="/:category/:id" element={<ProductPage />} />
         <Route path="/orderprocess" element={<OrderProcess />} />
+        <Route path="/cabinet" element={<Cabinet />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
