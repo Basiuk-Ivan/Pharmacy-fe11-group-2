@@ -69,7 +69,8 @@ export const StarRateItem = {
 
 export const feedBackDate = {
   fontSize: '18px',
-  color: '#828282'
+  color: '#828282',
+  marginLeft: '7px',
 };
 
 export const feedBackName = {

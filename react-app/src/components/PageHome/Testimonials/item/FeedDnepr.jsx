@@ -16,7 +16,7 @@ export const FeedDnepr = () => (
           Ліана, Дніпро,
         </Typography>
         <Typography fontFamily="Roboto" component="span" sx={feedBackDate}>
-          25 Июля
+           25 Июля
         </Typography>
       </Box>
       <Rating name="half-rating" defaultValue={5} sx={StarRateItem} readOnly />
