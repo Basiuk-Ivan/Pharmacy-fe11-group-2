@@ -5,22 +5,22 @@ export const FeedBackList = () => (
   <Box>
     <List sx={listStyle}>
       <ListItemButton sx={listItemStyle}>
-        <ListItemText primary="Обратная связь" />
+        <ListItemText primary="Зворотній зв'язок" />
       </ListItemButton>
       <ListItemButton sx={listItemStyle}>
-        <ListItemText primary="Реклама на сайте" />
+        <ListItemText primary="Реклама на сайті" />
       </ListItemButton>
       <ListItemButton sx={listItemStyle}>
         <ListItemText primary="Франшиза" />
       </ListItemButton>
       <ListItemButton sx={listItemStyle}>
-        <ListItemText primary="Вакансии" />
+        <ListItemText primary="Вакансії" />
       </ListItemButton>
       <ListItemButton sx={listItemStyle}>
-        <ListItemText primary="Политика конфиденциальности" />
+        <ListItemText primary="Політика конфіденційності" />
       </ListItemButton>
       <ListItemButton sx={listItemStyle}>
-        <ListItemText primary="Пользовательское соглашение" />
+        <ListItemText primary="Користувача угода" />
       </ListItemButton>
     </List>
   </Box>

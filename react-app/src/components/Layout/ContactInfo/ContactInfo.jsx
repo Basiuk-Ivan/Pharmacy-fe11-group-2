@@ -1,6 +1,8 @@
-import { Box, IconButton, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+
 import {
   mainBoxStyles,
   wrapperBoxStyles,
@@ -22,10 +24,10 @@ const ContactInfo = () => (
         <MailOutlineIcon sx={mailOutlineIconStyles} />
       </IconButton>
       <Box sx={wrapperForTextStyles}>
-        <Typography fontFamily="Roboto" component="span" sx={emailStyles}>
+        <Typography sx={emailStyles} fontFamily="Roboto" component="span">
           info@restoll.UA
         </Typography>
-        <Typography fontFamily="Roboto" component="span" sx={descriptionStyles}>
+        <Typography sx={descriptionStyles} fontFamily="Roboto" component="span">
           Напишіть нам
         </Typography>
       </Box>
@@ -35,10 +37,10 @@ const ContactInfo = () => (
         <LocalPhoneIcon sx={localPhoneIconStyle} />
       </IconButton>
       <Box sx={bodyForNumberPhoneStyles}>
-        <Typography fontFamily="Roboto" component="span" sx={numberPhoneStyles}>
+        <Typography sx={numberPhoneStyles} fontFamily="Roboto" component="span">
           8-800-777-22-33
         </Typography>
-        <Typography fontFamily="Roboto" component="span" sx={numberPhoneDescStyles}>
+        <Typography sx={numberPhoneDescStyles} fontFamily="Roboto" component="span">
           Цілодобово
         </Typography>
       </Box>

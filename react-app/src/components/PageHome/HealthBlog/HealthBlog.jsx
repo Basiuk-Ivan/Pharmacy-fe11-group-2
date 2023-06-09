@@ -1,17 +1,14 @@
 import { Box, Typography } from '@mui/material';
-import { healthBlogStyled, wrapperForItem, stack, toBlog, blogTitle, Title, AfterBlogImg } from './style';
+import { healthBlogStyled, wrapperForItem, stack, toBlog, Title, AfterBlogImg } from './style';
 import selfTreatmentRisks from '../../../assets/healthBlog/samo.svg';
 import doctor from '../../../assets/healthBlog/doctor.svg';
-import BlogItem from './BlogItem.jsx';
+import BlogItem from './BlogItem';
 import hand from '../../../assets/healthBlog/hand.png';
 import pigs from '../../../assets/healthBlog/pigs.png';
 import jar from '../../../assets/healthBlog/jar.png';
 import aveJar from '../../../assets/healthBlog/aveJar.png';
 
-const blogImgs = { hand,
-  pigs,
-  jar,
-  aveJar };
+const blogImgs = { hand, pigs, jar, aveJar };
 
 const HealthBlog = () => (
   <Box>
@@ -26,7 +23,7 @@ const HealthBlog = () => (
     <Box sx={wrapperForItem}>
       <Box sx={stack}>
         {Object.entries(blogImgs).map(([key, value]) => (
-          <BlogItem BlogImg={value} BlogImgName={key} />
+          <BlogItem key={key} BlogImg={value} BlogImgName={key} />
         ))}
       </Box>
     </Box>

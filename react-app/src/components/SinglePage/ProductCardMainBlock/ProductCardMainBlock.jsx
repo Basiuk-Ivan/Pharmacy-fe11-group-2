@@ -129,7 +129,7 @@ const ProductCardMainBlock = ({ productItem }) => {
                   >
                     <span className={s.bullet} />
                     <span className={s.brandTitle}> Виробник: </span>
-                    <span className={s.brandValue}>{productItem?.instruction?.manufacturer.value}</span>
+                    <span className={s.brandValue}>{productItem?.manufacturer}</span>
                   </Stack>
                   <Stack direction="row" alignItems="center" sx={{ width: '100%' }}>
                     <span className={s.bullet} />

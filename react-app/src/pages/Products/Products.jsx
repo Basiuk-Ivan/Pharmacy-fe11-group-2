@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-
 import { Box, Container } from '@mui/material';
-
 import Filter from '../../components/PageProducts/Filter';
 import ChoiceCategory from '../../components/PageProducts/ChoiceCategory';
 import PromoMonth from '../../components/PageProducts/PromoMonth';
@@ -25,12 +24,13 @@ import { fetchProductsData } from '../../redux/slice/productsSlice';
 
 function Products() {
   const dispatch = useDispatch();
-  // const { products, status, err } = useSelector(state => state.products);
   const { products } = useSelector(state => state.products);
 
+  const { category } = useParams();
+
   useEffect(() => {
-    dispatch(fetchProductsData());
-  }, [dispatch, products.length]);
+    dispatch(fetchProductsData(category));
+  }, [category, dispatch, products.length]);
 
   return (
     <Container disableGutters id="productsContainer" sx={productsContainerStyles}>

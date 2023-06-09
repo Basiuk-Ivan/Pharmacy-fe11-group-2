@@ -1,22 +1,30 @@
 export const mainBoxStyles = {
-  display: 'flex',
-  flexGrow: 1,
-  justifyContent: 'space-between',
-  alignItems: 'center'
+  display: {
+    xs: 'none',
+    sm: 'flex',
+    md: 'flex',
+    flexWrap: 'wrap',
+    gap: '10px'
+  },
+  '@media (max-width: 705px)': {
+    display: 'none'
+  }
 };
 
 export const wrapperBoxStyles = {
-  display: 'flex',
-  alignItems: 'center',
-  gap: '10px'
-  // marginLeft: '20px'
+  display: 'flex'
 };
 
 export const mailOutlineIconStyles = { fill: '#2FD3AE' };
 
 export const wrapperForTextStyles = {
-  display: 'flex',
-  flexDirection: 'column'
+  display: {
+    xs: 'flex',
+    flexDirection: 'column'
+  },
+  '@media (max-width: 1120px)': {
+    display: 'none'
+  }
 };
 
 export const emailStyles = {
@@ -30,16 +38,19 @@ export const descriptionStyles = {
 };
 
 export const wrapperForNumberPhoneStyles = {
-  display: 'flex',
-  alignItems: 'center',
-  gap: '10px'
+  display: 'flex'
 };
 
 export const localPhoneIconStyle = { fill: '#2FD3AE' };
 
 export const bodyForNumberPhoneStyles = {
-  display: 'flex',
-  flexDirection: 'column'
+  display: {
+    xs: 'flex',
+    flexDirection: 'column',
+    '@media (max-width: 974px)': {
+      display: 'none'
+    }
+  }
 };
 
 export const numberPhoneStyles = {
