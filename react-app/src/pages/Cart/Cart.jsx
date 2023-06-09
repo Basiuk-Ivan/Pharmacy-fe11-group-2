@@ -16,6 +16,7 @@ import DeleteOutlineTwoToneIcon from '@mui/icons-material/DeleteOutlineTwoTone';
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 import IconBreadcrumbs from './Breadcrums';
 import ProductCard from '../../components/ProductCard';
+// eslint-disable-next-line import/no-unresolved
 import './style/CartStyles.scss';
 import {
   FormBox,
@@ -28,6 +29,7 @@ import {
   PromoBox,
   HeaderBox,
   TextFieldPromo
+// eslint-disable-next-line import/no-unresolved
 } from './style';
 
 const Cart = () => {

@@ -10,6 +10,7 @@ import SortingPrice from '../../components/PageProducts/SortingPrice';
 import PaginationProducts from '../../components/PageProducts/PaginationProducts';
 import Cards from '../../components/PageProducts/Cards';
 import TitleCategory from '../../components/PageProducts/TitleCategory';
+import Bread from '../../components/Favourite/Bread';
 
 import {
   asideAndCardsStyles,
@@ -33,6 +34,9 @@ function Products() {
 
   return (
     <Container disableGutters id="productsContainer" sx={productsContainerStyles}>
+      <Box sx={{ mt: '-20px' }}>
+        <Bread />
+      </Box>
       <TitleCategory />
       <Box id="asideAndCards" sx={asideAndCardsStyles}>
         <Box id="aside" sx={asideStyles}>
