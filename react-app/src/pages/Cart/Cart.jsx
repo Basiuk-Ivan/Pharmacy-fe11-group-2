@@ -27,9 +27,7 @@ import {
   TotalBox,
   PromoBox,
   HeaderBox,
-  TextFieldPromo,
-  ContainerBox,
-  CardBox
+  TextFieldPromo
 } from './Style';
 
 const Cart = () => {

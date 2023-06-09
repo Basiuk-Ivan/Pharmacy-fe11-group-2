@@ -12,7 +12,7 @@ export const ProductDetails = ({ productItem, isInCart }) => {
         <Stack direction="row" alignItems="center">
           <span className={s.bullet} />
           <span className={s.brandTitle}>Бренд:</span>
-          <span className={s.brandValue}>{productItem?.characteristics?.brand}</span>
+          <span className={s.brandValue}>{productItem?.brand}</span>
         </Stack>
         <Stack direction="row" alignItems="center">
           <span className={s.bullet} />
