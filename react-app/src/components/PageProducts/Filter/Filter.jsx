@@ -34,7 +34,6 @@ import {
   showButtonStyle
 } from './style';
 
-// eslint-disable-next-line max-len
 import {
   addManufacture,
   removeManufacture,
@@ -52,14 +51,14 @@ function Filter() {
   // const filterBase = useSelector(state => state.filterBase);
 
   const changeManufacturer = event => {
-    // eslint-disable-next-line max-len,no-unused-expressions
+    // eslint-disable-next-line no-unused-expressions
     event.target.checked
       ? dispatch(addManufacture(event.target.value))
       : dispatch(removeManufacture(event.target.value));
   };
 
   const changeDosageForm = event => {
-    // eslint-disable-next-line max-len,no-unused-expressions
+    // eslint-disable-next-line no-unused-expressions
     event.target.checked
       ? dispatch(addDosageForm(event.target.value))
       : dispatch(removeDosageForm(event.target.value));
@@ -106,7 +105,7 @@ function Filter() {
         </AccordionSummary>
         <AccordionDetails sx={{ padding: '0 5px' }}>
           <Box id="priceInputWrapper" sx={priceInputWrapperStyle}>
-            {/* eslint-disable-next-line max-len */}
+            { }
             <TextField
               type="number"
               onWheel={event => event.target.blur()}
@@ -116,7 +115,7 @@ function Filter() {
               variant="outlined"
               size="small"
             />
-            {/* eslint-disable-next-line max-len */}
+            { }
             <TextField
               type="number"
               onWheel={event => event.target.blur()}
@@ -142,49 +141,49 @@ function Filter() {
         </AccordionSummary>
         <AccordionDetails>
           <FormGroup sx={formGroupStyle}>
-            {/* eslint-disable-next-line max-len */}
+            { }
             <FormControlLabel
               onChange={changeManufacturer}
               value="Ukraine"
               control={<Checkbox />}
               label="Україна"
             />
-            {/* eslint-disable-next-line max-len */}
+            { }
             <FormControlLabel
               onChange={changeManufacturer}
               value="Germany"
               control={<Checkbox />}
               label="Німеччина"
             />
-            {/* eslint-disable-next-line max-len */}
+            { }
             <FormControlLabel
               onChange={changeManufacturer}
               value="Greece"
               control={<Checkbox />}
               label="Греція"
             />
-            {/* eslint-disable-next-line max-len */}
+            { }
             <FormControlLabel
               onChange={changeManufacturer}
               value="Poland"
               control={<Checkbox />}
               label="Польща"
             />
-            {/* eslint-disable-next-line max-len */}
+            { }
             <FormControlLabel
               onChange={changeManufacturer}
               value="Italy"
               control={<Checkbox />}
               label="Італія"
             />
-            {/* eslint-disable-next-line max-len */}
+            { }
             <FormControlLabel
               onChange={changeManufacturer}
               value="GB"
               control={<Checkbox />}
               label="Великобританія"
             />
-            {/* eslint-disable-next-line max-len */}
+            { }
             <FormControlLabel
               onChange={changeManufacturer}
               value="India"
@@ -206,42 +205,42 @@ function Filter() {
         </AccordionSummary>
         <AccordionDetails>
           <FormGroup sx={formGroupStyle}>
-            {/* eslint-disable-next-line max-len */}
+            { }
             <FormControlLabel
               onChange={changeDosageForm}
               value="Pills"
               control={<Checkbox />}
               label="Таблетки"
             />
-            {/* eslint-disable-next-line max-len */}
+            { }
             <FormControlLabel
               onChange={changeDosageForm}
               value="Ampoules"
               control={<Checkbox />}
               label="Ампули"
             />
-            {/* eslint-disable-next-line max-len */}
+            { }
             <FormControlLabel
               onChange={changeDosageForm}
               value="Spray"
               control={<Checkbox />}
               label="Спреї"
             />
-            {/* eslint-disable-next-line max-len */}
+            { }
             <FormControlLabel
               onChange={changeDosageForm}
               value="Syrup"
               control={<Checkbox />}
               label="Сиропи"
             />
-            {/* eslint-disable-next-line max-len */}
+            { }
             <FormControlLabel
               onChange={changeDosageForm}
               value="Drops"
               control={<Checkbox />}
               label="Краплі"
             />
-            {/* eslint-disable-next-line max-len */}
+            { }
             <FormControlLabel
               onChange={changeDosageForm}
               value="Capsules"
@@ -254,42 +253,42 @@ function Filter() {
       </Accordion>
 
       <FormGroup sx={formGroupCheckStyle}>
-        {/* eslint-disable-next-line max-len */}
+        { }
         <FormControlLabel
           sx={formCheckboxStyle}
           onChange={changeRecipe}
-          control={
+          control={(
             <Checkbox
               icon={<ReceiptLongIcon fontSize="small" sx={{ marginRight: '5px' }} />}
               checkedIcon={<ReceiptLongIcon fontSize="small" sx={{ color: '#2FD3AE', marginRight: '5px' }} />}
             />
-          }
+          )}
           label="Без рецепта"
         />
 
-        {/* eslint-disable-next-line max-len */}
+        { }
         <FormControlLabel
           onChange={changePregnant}
           sx={formCheckboxStyle}
-          control={
+          control={(
             <Checkbox
               icon={<PregnantWomanIcon />}
               checkedIcon={<PregnantWomanIcon sx={{ color: '#2FD3AE' }} />}
             />
-          }
+          )}
           label="Дозволено вагітним"
         />
 
-        {/* eslint-disable-next-line max-len */}
+        { }
         <FormControlLabel
           onChange={changeChildren}
           sx={formCheckboxStyle}
-          control={
+          control={(
             <Checkbox
               icon={<BabyChangingStationIcon />}
               checkedIcon={<BabyChangingStationIcon sx={{ color: '#2FD3AE' }} />}
             />
-          }
+          )}
           label="Дозволено дітям"
         />
       </FormGroup>

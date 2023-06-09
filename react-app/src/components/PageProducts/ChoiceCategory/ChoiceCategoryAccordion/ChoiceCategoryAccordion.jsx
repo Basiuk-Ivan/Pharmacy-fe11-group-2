@@ -44,7 +44,7 @@ export default function ChoiceCategoryAccordion() {
   };
 
   useEffect(() => {
-    // eslint-disable-next-line no-console
+
     // console.log(filterBase);
   }, [filterBase]);
 
@@ -78,7 +78,7 @@ export default function ChoiceCategoryAccordion() {
   return (
     <div>
       {accordions.map(item => (
-        // eslint-disable-next-line max-len
+
         <Accordion
           key={item.panel}
           expanded={expanded === item.panel}
