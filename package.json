@@ -3,6 +3,7 @@
     "husky": "^8.0.3"
   },
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "dev": "cd api && npm run dev & cd .. & cd react-app && npm run dev"
   }
 }
