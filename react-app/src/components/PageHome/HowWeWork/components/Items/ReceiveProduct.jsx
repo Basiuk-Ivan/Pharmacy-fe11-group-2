@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
-import shoppingBags from '../../../../assets/howWeWork/shopping-bags.svg';
-import { wrapperForItem, wrapperForImg } from '../style';
+import shoppingBags from '../../../../../assets/howWeWork/shopping-bags.svg';
+import { wrapperForItem, wrapperForImg } from '../../style';
 
 export const ReceiveProduct = () => (
   <Box sx={wrapperForItem}>

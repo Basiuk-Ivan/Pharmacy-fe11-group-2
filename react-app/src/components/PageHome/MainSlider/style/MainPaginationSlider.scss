@@ -5,6 +5,10 @@
   margin-top: 20px;
   margin-bottom: 20px;
   margin-left: 40px;
+
+  @media (max-width: 900px) {
+    margin-left: 0px;
+  }
 }
 
 .custom-pagination .swiper-pagination-bullet {
@@ -12,6 +16,10 @@
   height: 2px;
   border-radius: 0%;
   margin: 0 5px;
+
+  @media (max-width: 900px) {
+    max-width: 120px;
+  }
 }
 
 .custom-pagination .swiper-pagination-bullet-active {

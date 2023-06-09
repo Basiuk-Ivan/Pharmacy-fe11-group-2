@@ -29,7 +29,8 @@ export const wrapperForItemStyles = {
 
 export const stackStyles = {
   justifyContent: 'space-between',
-  width: '100%'
+  width: '100%',
+  rowGap: '20px'
 };
 
 export const wrapperForItem = {
