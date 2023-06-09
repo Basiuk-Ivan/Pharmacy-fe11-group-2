@@ -43,7 +43,7 @@ export const productNameStyles = isInCart => ({
 });
 
 export const priceStyles = {
-  fontSize: '24px',
+  fontSize: '21px',
   fontWeight: 700,
   color: '#525A68'
 };

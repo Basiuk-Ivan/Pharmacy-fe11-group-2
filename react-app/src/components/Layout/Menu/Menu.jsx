@@ -6,7 +6,7 @@ import { menuStyles, buttonStyles, navLinkStyles } from './style';
 const pages = [
   {
     title: 'Ліки від кашлю, застуди та грипу',
-    path: '/cough-cold-flu'
+    path: '/coughColdFlu'
   },
   {
     title: 'Знеболюючі',
@@ -18,7 +18,7 @@ const pages = [
   },
   {
     title: 'Серцево-судинна система',
-    path: '/cardiovascular-system'
+    path: '/cardiovascularSystem'
   }
 ];
 

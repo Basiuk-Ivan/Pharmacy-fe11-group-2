@@ -14,7 +14,7 @@ import { wrapperStyles, navLinkStyles, avatarXSStyles, menuStyles, menuItemStyle
 const pages = [
   {
     title: 'Ліки від кашлю, застуди та грипу',
-    path: '/cough-cold-flu'
+    path: '/coughColdFlu'
   },
   {
     title: 'Знеболюючі',
