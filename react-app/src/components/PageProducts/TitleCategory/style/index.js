@@ -1,5 +1,5 @@
-export const linkAndCurrentCategoryStyle = {
-  display: 'flex', flexDirection: 'column', marginBottom: '68px'
+export const wrappCurrentCategoryStyle = {
+  display: 'flex', flexDirection: 'column', marginBottom: '30px'
 };
 
 export const linkStyle = {
@@ -10,7 +10,7 @@ export const currentPageStyle = {
   display: 'flex', alignItems: 'center', color: '#BDBDBD'
 };
 
-export const categoryCurrentStyle = {
+export const currentCategoryStyle = {
   marginTop: '10px',
   color: '#394045',
   fontSize: '36px',
