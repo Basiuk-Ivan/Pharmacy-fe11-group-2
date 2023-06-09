@@ -10,6 +10,7 @@ export const healthBlogStyled = {
 
 export const toBlog = {
   position: 'relative',
+  marginTop: '5px',
   fontSize: 14,
   color: '#2FD3AE',
   alignSelf: 'center',
@@ -25,13 +26,14 @@ export const toBlog = {
 export const Title = {
   display: 'flex',
   gap: '35px',
+  marginBottom: '30px',
 };
 
 export const wrapperForItem = {
   display: 'flex',
   justifyContent: 'center',
   width: '100%',
-  marginBottom: '30px'
+  marginBottom: '70px'
 };
 
 export const stack = {
@@ -64,6 +66,7 @@ export const AfterBlogImg = {
   display: 'flex',
   alignItems: 'center',
   flexDirection: 'column',
+  marginBottom: '80px',
 }
 
 export const Item = styled(Paper)(({ theme }) => ({
