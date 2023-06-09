@@ -39,7 +39,7 @@ export const wrapperForItem = {
 export const stack = {
   display: 'flex',
   justifyContent: 'center',
-  gap:'1.2%',
+  gap: '1.2%',
   width: '100%',
   flexWrap: 'wrap'
 };
@@ -60,8 +60,8 @@ export const blogDesc = {
 export const blogImg = {
   overflow: 'hidden',
   width: '280px',
-  marginLeft: '-9px',
-}
+  marginLeft: '-9px'
+};
 
 export const AfterBlogImg = {
   display: 'flex',
@@ -80,5 +80,5 @@ export const Item = styled(Paper)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   gap: '20px',
-  marginBottom: '5px',
+  marginBottom: '5px'
 }));
