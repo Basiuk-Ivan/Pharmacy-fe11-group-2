@@ -4,7 +4,7 @@ import Contacts from '../components/Cabinet/Contacts';
 import Orders from '../components/Cabinet/Orders';
 import PersonalData from '../components/Cabinet/PersonalData';
 import SectionsMenu from '../components/Cabinet/SectionsMenu';
-import Bread from '../components/Favourite/Bread';
+import Bread from '../components/Bread';
 
 const Cabinet = () => {
   const [activeSection, setActiveSection] = useState('personalData');

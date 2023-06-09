@@ -5,11 +5,11 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProductCard from '../../ProductCard/ProductCard';
-import Bread from '../Bread';
+import Bread from '../../Bread';
 import { fetchProductsData } from '../../../redux/slice/productsSlice';
 import { addItem } from '../../../redux/slice/cartItems';
-import { addToCartLocalStor } from '../../../utils/addToCartLocalStor';
-import { removeFromFavouriteLocalStor } from '../../../utils/removeFromFavouriteLocalStor';
+import { addToCartLocalStor } from '../../../utils/LocalStore/addToCartLocalStor';
+import { removeFromFavouriteLocalStor } from '../../../utils/LocalStore/removeFromFavouriteLocalStor';
 import { deleteFromFavouriteItems } from '../../../redux/slice/favouriteItems';
 
 const FavouriteBlock = props => {

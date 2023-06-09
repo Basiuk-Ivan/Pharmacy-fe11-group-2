@@ -6,10 +6,10 @@ import { Typography, Stack, Button, Box, Grid, Rating, ButtonBase } from '@mui/m
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import { addToFavouriteLocalStor } from '../../../utils/addToFavouriteLocalStor';
+import { addToFavouriteLocalStor } from '../../../utils/LocalStore/addToFavouriteLocalStor';
 
 import { addToFavouriteItems, deleteFromFavouriteItems } from '../../../redux/slice/favouriteItems';
-import { removeFromFavouriteLocalStor } from '../../../utils/removeFromFavouriteLocalStor';
+import { removeFromFavouriteLocalStor } from '../../../utils/LocalStore/removeFromFavouriteLocalStor';
 import VerticalImgTabPanel from '../VerticalImgTabPanel';
 import s from './ProductCardMainBlock.module.scss';
 

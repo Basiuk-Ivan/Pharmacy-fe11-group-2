@@ -1,5 +1,5 @@
 import { Container, Typography } from '@mui/material';
-import Bread from '../components/Favourite/Bread';
+import Bread from '../components/Bread';
 import Advantages from '../components/orderProcess/Advantages';
 import ContactsBlock from '../components/orderProcess/ContactsBlock/ContactsBlock';
 import PaymentBlock from '../components/orderProcess/PaymentBlock/PaymentBlock';

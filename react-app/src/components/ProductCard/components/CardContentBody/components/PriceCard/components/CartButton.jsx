@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import { IconButton } from '@mui/material';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import CloseIcon from '@mui/icons-material/Close';
-import { addToCartLocalStor } from '../../../../../../../utils/addToCartLocalStor';
-import { removeFromCartLocalStor } from '../../../../../../../utils/removeFromCartLocalStor';
+import { addToCartLocalStor } from '../../../../../../../utils/LocalStore/addToCartLocalStor';
+import { removeFromCartLocalStor } from '../../../../../../../utils/LocalStore/removeFromCartLocalStor';
 import { addItem } from '../../../../../../../redux/slice/cartItems';
 import { cartStyles, iconButtonStyles } from '../../../../../style';
 
