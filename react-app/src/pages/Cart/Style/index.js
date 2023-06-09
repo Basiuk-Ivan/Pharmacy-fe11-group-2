@@ -1,36 +1,57 @@
 import styled from 'styled-components';
 import { Button, CardContent, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-
-export const StyledBox = styled(Box)`
-  width: 258px;
-  height: 132px;
-  background: #2fd3ae;
-`;
-
-export const CardContentStyled = styled(CardContent)`
+export const ContainerBox = styled(Box)`
   display: flex;
-  flex-direction: row;
+  max-width: 1200px;
+  gap: 20px;
+  flex-direction: row-reverse;
+  font-family: Roboto, sans-serif;
+  @media (max-width: 805px) {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 5%;
+  } ;
+`;
+export const CardBox = styled(Box)`
+  display: flex;
   width: 100%;
-`;
-
-export const ContentBox = styled(Box)`
-  width: 400px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-left: 30px;
-  line-height: 26px;
-`;
-
-export const PriceBox = styled(Box)`
-  width: 60%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-`;
+  flex-direction:column;
+  gap:20px;
+  font-family:Roboto,sans-serif;
+  margin-bottom:50px;
+ 
+}
+// export const StyledBox = styled(Box)`;
+//   display: flex;
+//   width: 258px;
+//   height: 132px;
+//   background: #2fd3ae;
+// `;
+//
+// export const CardContentStyled = styled(CardContent)`
+//   display: flex;
+//   flex-direction: row;
+//   width: 100%;
+// `;
+//
+// export const ContentBox = styled(Box)`
+//   width: 400px;
+//   height: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   margin-left: 30px;
+//   line-height: 26px;
+// `;
+//
+// export const PriceBox = styled(Box)`
+//   width: 60%;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   font-size: 14px;
+// `;
 export const FormBox = styled(Box)`
   width: 358px;
   height: 456px;
@@ -39,6 +60,9 @@ export const FormBox = styled(Box)`
   flex-direction: column;
   align-items: center;
   border: 1px solid rgba(231, 233, 235, 1);
+  @media (max-width: 940px) {
+    width: 100%;
+  } ;
 `;
 
 export const FormTitle = styled(Typography)`
@@ -82,6 +106,9 @@ export const OrderButton = styled(Button)`
   padding: 10px;
   color: white;
   background: #2fd3ae;
+  @media (max-width: 940px) {
+    width: 100%;
+  } ;
 `;
 export const SaleBox = styled(Box)`
   width: 100%;
@@ -112,6 +139,9 @@ export const HeaderBox = styled(Box)`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 805px) {
+    width: 100%;
+  } ;
 `;
 export const TextFieldPromo = styled(TextField)`
   width: 100%;

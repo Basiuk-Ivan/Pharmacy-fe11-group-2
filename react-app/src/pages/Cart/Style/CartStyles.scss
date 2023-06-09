@@ -4,3 +4,13 @@
 .formTitle{
   font-size: 34px;
 }
+.css-1izx9v0-MuiPaper-root-MuiCard-root {
+  @media (max-width: 630px) {
+    display: block;
+  }
+}
+.css-1bnosxa-MuiStack-root {
+  @media (max-width: 630px) {
+    gap: 1px;
+  }
+}

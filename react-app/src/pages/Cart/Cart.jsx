@@ -27,7 +27,9 @@ import {
   TotalBox,
   PromoBox,
   HeaderBox,
-  TextFieldPromo
+  TextFieldPromo,
+  ContainerBox,
+  CardBox
 } from './Style';
 
 const Cart = () => {
@@ -47,15 +49,7 @@ const Cart = () => {
           <Typography>Очистити корзину</Typography>
         </IconButton>
       </HeaderBox>
-      <Box
-        sx={{
-          width: 1200,
-          display: 'flex',
-          gap: '20px',
-          flexDirection: 'row-reverse',
-          fontFamily: 'Roboto'
-        }}
-      >
+      <ContainerBox>
         <Box>
           <FormBox>
             <FormTitle>Ваше Замовлення</FormTitle>
@@ -67,9 +61,10 @@ const Cart = () => {
               <FormText>Разом без доставки</FormText>
               <FormText> - 48грн</FormText>
             </TotalBox>
-            <NavLink to="/orderprocess">
-              <OrderButton>Оформити замовлення</OrderButton>
-            </NavLink>
+
+            <OrderButton>
+              <NavLink to="/orderprocess">Оформити замовлення</NavLink>
+            </OrderButton>
 
             <PromoBox mt={2}>
               <FormTitlePromo>Промокод</FormTitlePromo>
@@ -90,21 +85,12 @@ const Cart = () => {
             </PromoBox>
           </FormBox>
         </Box>
-        <Box
-          sx={{
-            width: 830,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '20px',
-            fontFamily: 'Roboto',
-            marginBottom: '50px'
-          }}
-        >
+        <CardBox>
           {productItemCart.map(item => (
             <ProductCard key={item.id} productItem={item} isInCart={isInCart} />
           ))}
-        </Box>
-      </Box>
+        </CardBox>
+      </ContainerBox>
     </Box>
   );
 };
