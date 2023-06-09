@@ -91,6 +91,7 @@ const ProductPage = () => {
         const selectedProduct = productData.find(item => item.id === id);
         setProduct(selectedProduct);
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Error fetching product:', error);
       }
     };
