@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import {
   Box,
@@ -16,7 +16,7 @@ import BabyChangingStationIcon from '@mui/icons-material/BabyChangingStation';
 
 // import FilterSlider from './FilterSlider/FilterSlider';
 
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import {
   buttonWrapperStyle,
   formCheckboxStyle,
@@ -29,17 +29,20 @@ import {
   showButtonStyle
 } from './style';
 
+// eslint-disable-next-line max-len
 import { addManufacture, removeManufacture, addDosageForm, removeDosageForm, recipe, pregnant, children, minPrice, maxPrice } from '../../../redux/slice/filterBaseSlice';
 
 function Filter() {
   const dispatch = useDispatch();
-  const filterBase = useSelector(state => state.filterBase);
+  // const filterBase = useSelector(state => state.filterBase);
 
   const changeManufacturer = event => {
+    // eslint-disable-next-line max-len,no-unused-expressions
     event.target.checked ? dispatch(addManufacture(event.target.value)) : dispatch(removeManufacture(event.target.value));
   };
 
   const changeDosageForm = event => {
+    // eslint-disable-next-line max-len,no-unused-expressions
     event.target.checked ? dispatch(addDosageForm(event.target.value)) : dispatch(removeDosageForm(event.target.value));
   };
 
@@ -63,9 +66,9 @@ function Filter() {
     dispatch(maxPrice(event.target.value));
   };
 
-  useEffect(() => {
-    console.log(filterBase);
-  }, [filterBase]);
+  // useEffect(() => {
+  //   console.log(filterBase);
+  // }, [filterBase]);
 
   return (
     <Box id="filterWrapper" sx={filterWrapperStyle}>
@@ -85,7 +88,9 @@ function Filter() {
             id="priceInputWrapper"
             sx={priceInputWrapperStyle}
           >
+            {/* eslint-disable-next-line max-len */}
             <TextField type="number" onWheel={event => event.target.blur()} onChange={changeMinPrice} id="outlined-basic" label="Ціна від" variant="outlined" size="small" />
+            {/* eslint-disable-next-line max-len */}
             <TextField type="number" onWheel={event => event.target.blur()} onChange={changeMaxPrice} id="outlined-basic" label="Ціна до" variant="outlined" size="small" />
           </Box>
           {/* <FilterSlider /> */}
@@ -104,12 +109,19 @@ function Filter() {
         <AccordionDetails>
           <FormGroup sx={formGroupStyle}>
 
+            {/* eslint-disable-next-line max-len */}
             <FormControlLabel onChange={changeManufacturer} value="Ukraine" control={<Checkbox />} label="Україна" />
+            {/* eslint-disable-next-line max-len */}
             <FormControlLabel onChange={changeManufacturer} value="Germany" control={<Checkbox />} label="Німеччина" />
+            {/* eslint-disable-next-line max-len */}
             <FormControlLabel onChange={changeManufacturer} value="Greece" control={<Checkbox />} label="Греція" />
+            {/* eslint-disable-next-line max-len */}
             <FormControlLabel onChange={changeManufacturer} value="Poland" control={<Checkbox />} label="Польща" />
+            {/* eslint-disable-next-line max-len */}
             <FormControlLabel onChange={changeManufacturer} value="Italy" control={<Checkbox />} label="Італія" />
+            {/* eslint-disable-next-line max-len */}
             <FormControlLabel onChange={changeManufacturer} value="GB" control={<Checkbox />} label="Великобританія" />
+            {/* eslint-disable-next-line max-len */}
             <FormControlLabel onChange={changeManufacturer} value="India" control={<Checkbox />} label="Індія" />
           </FormGroup>
         </AccordionDetails>
@@ -126,11 +138,17 @@ function Filter() {
         </AccordionSummary>
         <AccordionDetails>
           <FormGroup sx={formGroupStyle}>
+            {/* eslint-disable-next-line max-len */}
             <FormControlLabel onChange={changeDosageForm} value="Pills" control={<Checkbox />} label="Таблетки" />
+            {/* eslint-disable-next-line max-len */}
             <FormControlLabel onChange={changeDosageForm} value="Ampoules" control={<Checkbox />} label="Ампули" />
+            {/* eslint-disable-next-line max-len */}
             <FormControlLabel onChange={changeDosageForm} value="Spray" control={<Checkbox />} label="Спреї" />
+            {/* eslint-disable-next-line max-len */}
             <FormControlLabel onChange={changeDosageForm} value="Syrup" control={<Checkbox />} label="Сиропи" />
+            {/* eslint-disable-next-line max-len */}
             <FormControlLabel onChange={changeDosageForm} value="Drops" control={<Checkbox />} label="Краплі" />
+            {/* eslint-disable-next-line max-len */}
             <FormControlLabel onChange={changeDosageForm} value="Capsules" control={<Checkbox />} label="Капсули" />
             <FormControlLabel onChange={changeDosageForm} value="Salve" control={<Checkbox />} label="Мазі" />
           </FormGroup>

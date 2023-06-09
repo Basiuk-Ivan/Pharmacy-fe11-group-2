@@ -37,7 +37,7 @@ export const wrapperForItem = {
 export const stack = {
   display: 'flex',
   justifyContent: 'center',
-  gap:'1.1%',
+  gap: '1.1%',
   width: '100%',
   flexWrap: 'wrap',
 };
@@ -58,13 +58,13 @@ export const blogDesc = {
 
 export const blogImg = {
   marginLeft: '-9px',
-}
+};
 
 export const AfterBlogImg = {
   display: 'flex',
   alignItems: 'center',
   flexDirection: 'column',
-}
+};
 
 export const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',

@@ -3,6 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const filterBaseSlice = createSlice({
   name: 'filterBase',
   initialState: {
+    filterSearch: '',
+    filterMainCategory: '',
+    filterSubCategory: '',
     filterMinPrice: '',
     filterMaxPrice: '',
     filterSortingPrice: '',
@@ -13,6 +16,9 @@ const filterBaseSlice = createSlice({
     filterChildren: false
   },
   reducers: {
+    mainCategory: (state, action) => {
+      state.filterMainCategory = action.payload;
+    },
     addManufacture: (state, action) => {
       state.filterManufacture.push(action.payload);
     },
@@ -46,6 +52,7 @@ const filterBaseSlice = createSlice({
   }
 });
 
-export const { addManufacture, removeManufacture, addDosageForm, removeDosageForm, recipe, pregnant, children, minPrice, maxPrice, sortingPrice } = filterBaseSlice.actions;
+// eslint-disable-next-line max-len
+export const { addManufacture, removeManufacture, addDosageForm, removeDosageForm, recipe, pregnant, children, minPrice, maxPrice, sortingPrice, mainCategory } = filterBaseSlice.actions;
 
 export default filterBaseSlice.reducer;

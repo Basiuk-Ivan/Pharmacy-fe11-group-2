@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import SortIcon from '@mui/icons-material/Sort';
@@ -18,17 +18,12 @@ import { sortingPrice } from '../../../redux/slice/filterBaseSlice';
 
 function SortingPrice() {
   const dispatch = useDispatch();
-  const filterBase = useSelector(state => state.filterBase);
   const [price, setPrice] = useState('');
 
   const handleChange = event => {
     setPrice(event.target.value);
     dispatch(sortingPrice(event.target.value));
   };
-
-  useEffect(() => {
-    console.log(filterBase);
-  }, [filterBase]);
 
   return (
     <Box id="sortingWrapper" sx={sortingWrapperStyles}>
