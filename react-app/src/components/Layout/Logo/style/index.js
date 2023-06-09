@@ -16,8 +16,6 @@ export const avatarXSStyles = {
 
 export const avatarMDStyles = { display: { xs: 'none', sm: 'none', md: 'flex' }, mr: 2 };
 
-export const navLinkStyles = { display: 'flex' };
-
 export const menuStyles = {
   display: {
     xs: 'block',

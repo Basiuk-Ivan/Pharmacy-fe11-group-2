@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Avatar from '@mui/material/Avatar';
 import logo from '../../../../../assets/logo.svg';
 
-import { wrapperStyles, navLinkStyles, avatarXSStyles, menuStyles, menuItemStyles } from '../../style';
+import { wrapperStyles, avatarXSStyles, menuStyles, menuItemStyles } from '../../style';
 
 const pages = [
   {
@@ -53,7 +53,7 @@ export const MenuAppBar = () => {
         >
           <MenuIcon />
         </IconButton>
-        <NavLink to="/" style={navLinkStyles}>
+        <NavLink to="/">
           <Avatar sx={avatarXSStyles} alt="Логотип" src={logo} />
         </NavLink>
       </Box>

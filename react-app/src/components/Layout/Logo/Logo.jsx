@@ -5,28 +5,24 @@ import Avatar from '@mui/material/Avatar';
 import { MenuAppBar } from './components/MenuAppBar/MenuAppBar';
 import logo from '../../../assets/logo.svg';
 
-import {
-  navLinkStyles,
-  avatarMDStyles,
-  wrapForTextStyles,
-  healthTextMainStyles,
-  healthTextSecondStyles
-} from './style';
+import { avatarMDStyles, wrapForTextStyles, healthTextMainStyles, healthTextSecondStyles } from './style';
 
 const Logo = () => (
   <>
     <MenuAppBar />
 
-    <NavLink to="/" style={navLinkStyles}>
-      <Avatar sx={avatarMDStyles} alt="Логотип" src={logo} />
-      <Box sx={wrapForTextStyles}>
-        <Box>
-          <Typography fontFamily="Roboto" noWrap sx={healthTextMainStyles}>
-            Аптека.онлайн
-          </Typography>
-          <Typography fontFamily="Roboto" noWrap href="/" sx={healthTextSecondStyles}>
-            Ваша онлайн аптека
-          </Typography>
+    <NavLink to="/">
+      <Box sx={{ display: 'flex' }}>
+        <Avatar sx={avatarMDStyles} alt="Логотип" src={logo} />
+        <Box sx={wrapForTextStyles}>
+          <Box>
+            <Typography fontFamily="Roboto" noWrap sx={healthTextMainStyles}>
+              Аптека.онлайн
+            </Typography>
+            <Typography fontFamily="Roboto" noWrap href="/" sx={healthTextSecondStyles}>
+              Ваша онлайн аптека
+            </Typography>
+          </Box>
         </Box>
       </Box>
     </NavLink>
