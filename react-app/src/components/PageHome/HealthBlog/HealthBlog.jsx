@@ -1,24 +1,38 @@
-import { Box, Typography, Stack } from '@mui/material';
-import { healthBlogStyled, wrapperForItem, stack, Item } from './style';
+import { Box, Typography } from '@mui/material';
+import {healthBlogStyled, wrapperForItem, stack, toBlog, blogTitle, Title, AfterBlogImg} from './style';
 import selfTreatmentRisks from '../../../assets/healthBlog/samo.svg';
+import doctor from '../../../assets/healthBlog/doctor.svg';
+import BlogItem from "./BlogItem.jsx";
+import hand from "../../../assets/healthBlog/hand.png";
+import pigs from "../../../assets/healthBlog/pigs.png";
+import jar from "../../../assets/healthBlog/jar.png";
+import aveJar from "../../../assets/healthBlog/aveJar.png";
+
+const blogImgs = {hand:hand,
+                  pigs: pigs,
+                    jar: jar,
+                    aveJar: aveJar};
 
 const HealthBlog = () => (
   <Box>
-    <Box>
+    <Box sx={Title}>
       <Typography fontFamily="Roboto" component="div" sx={healthBlogStyled}>
         Блог про здоровʼя
       </Typography>
+      <Typography fontFamily="Roboto" sx={toBlog}>
+        Нещодавні записи
+      </Typography>
     </Box>
     <Box sx={wrapperForItem}>
-      <Stack direction="row" spacing={2} sx={stack}>
-        <Item>Item 1</Item>
-        <Item>Item 2</Item>
-        <Item>Item 3</Item>
-        <Item>Item 4</Item>
-      </Stack>
+      <Box sx={stack}>
+        {Object.entries(blogImgs).map(([key, value]) => (
+        <BlogItem BlogImg={value} BlogImgName={key}/>
+        ))}
+      </Box>
     </Box>
-    <Box>
-      <img style={{ width: '100%' }} src={selfTreatmentRisks} alt="Samo" />
+    <Box sx={AfterBlogImg}>
+      <img style={{ width: '80%' }} src={selfTreatmentRisks} alt="Samo" />
+      <img style={{ width: '80%' }} src={doctor} alt="doctor" />
     </Box>
   </Box>
 );
