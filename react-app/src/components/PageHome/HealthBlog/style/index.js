@@ -39,7 +39,7 @@ export const wrapperForItem = {
 export const stack = {
   display: 'flex',
   justifyContent: 'center',
-  gap: '1.1%',
+  gap:'1.2%',
   width: '100%',
   flexWrap: 'wrap'
 };
@@ -58,8 +58,10 @@ export const blogDesc = {
 };
 
 export const blogImg = {
-  marginLeft: '-9px'
-};
+  overflow: 'hidden',
+  width: '280px',
+  marginLeft: '-9px',
+}
 
 export const AfterBlogImg = {
   display: 'flex',
@@ -73,9 +75,10 @@ export const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
   color: theme.palette.text.secondary,
-  width: '290px',
-  height: '375px',
+  width: '280px',
+  // height: '375px',
   display: 'flex',
   flexDirection: 'column',
-  gap: '20px'
+  gap: '20px',
+  marginBottom: '5px',
 }));
