@@ -12,11 +12,9 @@ import { mainCategory } from '../../../../redux/slice/filterBaseSlice';
 import {
   mainCategoryStyle,
   secondCategoryStyle,
-  secondCategoryStyle4px,
   secondCategoryWrappStyle,
   marginStyle
 } from './style';
-// import { navLinkStyles } from '../../../PageHome/Menu/style';
 
 export default function ChoiceCategoryAccordion() {
   const location = useLocation();
@@ -25,18 +23,16 @@ export default function ChoiceCategoryAccordion() {
   const dispatch = useDispatch();
   const [expanded, setExpanded] = React.useState(false);
 
-  // const { filterMainCategory } = useSelector(state => state.filterBase);
   const filterBase = useSelector(state => state.filterBase);
 
   useEffect(() => {
-    // eslint-disable-next-line no-unused-expressions
-    currentCategory === 'cough-cold-flu' && setExpanded('panel1');
-    // eslint-disable-next-line no-unused-expressions
-    currentCategory === 'painkillers' && setExpanded('panel2');
-    // eslint-disable-next-line no-unused-expressions
-    currentCategory === 'nervous-system' && setExpanded('panel3');
-    // eslint-disable-next-line no-unused-expressions
-    currentCategory === 'cardiovascular-system' && setExpanded('panel4');
+    const values = {
+      coughColdFlu: 'panel1',
+      painkillers: 'panel2',
+      nervousSystem: 'panel3',
+      cardiovascularSystem: 'panel4'
+    };
+    setExpanded(values[currentCategory]);
   }, [currentCategory, expanded]);
 
   useEffect(() => {
@@ -48,91 +44,67 @@ export default function ChoiceCategoryAccordion() {
   };
 
   const changeSubCategory = event => {
+    // eslint-disable-next-line no-console
     console.log(event.target.innerText);
   };
 
   useEffect(() => {
+    // eslint-disable-next-line no-console
     console.log(filterBase);
   }, [filterBase]);
 
-  // useEffect(() => {
-  //   console.log(currentCategory);
-  // }, [currentCategory]);
+  const accordions = [
+    {
+      path: '/coughColdFlu',
+      panel: 'panel1',
+      title: 'Ліки від кашлю , застуди та грипу',
+      sub: ['Жарознижуючі', 'Кашель та біль у горлі', 'Назальна терапія']
+    },
+    {
+      path: '/painkillers',
+      panel: 'panel2',
+      title: 'Знеболюючі',
+      sub: ['Від спазму', 'Від болю при мігрені', 'Від болю у спині']
+    },
+    {
+      path: '/nervousSystem',
+      panel: 'panel3',
+      title: 'Для нервової системи',
+      sub: ['Седативні (заспокійливі)', 'Антидепресанти']
+    },
+    {
+      path: '/cardiovascularSystem',
+      panel: 'panel4',
+      title: 'Для серцево-судинної системи',
+      sub: ['Гіпертонія', 'Для розрідження крові', 'Тромбоз', 'Варикоз']
+    }
+  ];
 
   return (
     <div>
 
-      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')} sx={marginStyle}>
-        <NavLink to="/cough-cold-flu">
-          <AccordionSummary
-            sx={mainCategoryStyle}
-            expandIcon={<ExpandMoreIcon />}
-          >
-            <Typography>
-              Ліки від кашлю , застуди та грипу
-            </Typography>
-          </AccordionSummary>
-        </NavLink>
-        <AccordionDetails sx={secondCategoryWrappStyle}>
-          <ButtonBase onClick={changeSubCategory}>
-            <Typography sx={secondCategoryStyle}>Жарознижуючі</Typography>
-          </ButtonBase>
-          {/* eslint-disable-next-line max-len */}
-          <Typography component="button" onClick={changeSubCategory} sx={secondCategoryStyle}>Кашель та біль у горлі</Typography>
-          <Typography sx={secondCategoryStyle}>Назальна терапія</Typography>
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')} sx={marginStyle}>
-        <NavLink to="/painkillers">
-          <AccordionSummary
-            sx={mainCategoryStyle}
-            expandIcon={<ExpandMoreIcon />}
-          >
-            <Typography>Знеболюючі</Typography>
-          </AccordionSummary>
-        </NavLink>
-        <AccordionDetails sx={secondCategoryWrappStyle}>
-          <Typography sx={secondCategoryStyle}>Від спазму</Typography>
-          <Typography sx={secondCategoryStyle}>Від болю при мігрені</Typography>
-          <Typography sx={secondCategoryStyle}>Від болю у спині</Typography>
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')} sx={marginStyle}>
-        <NavLink to="/nervous-system">
-          <AccordionSummary
-            sx={mainCategoryStyle}
-            expandIcon={<ExpandMoreIcon />}
-          >
-            <Typography>
-              Для нервової системи
-            </Typography>
-          </AccordionSummary>
-        </NavLink>
-        <AccordionDetails sx={secondCategoryWrappStyle}>
-          <Typography sx={secondCategoryStyle4px}>Седативні (заспокійливі)</Typography>
-          <Typography sx={secondCategoryStyle}>Антидепресанти</Typography>
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
-        <NavLink to="/cardiovascular-system">
-          <AccordionSummary
-            sx={mainCategoryStyle}
-            expandIcon={<ExpandMoreIcon />}
-          >
-            <Typography>Для серцево-судинної системи</Typography>
-          </AccordionSummary>
-        </NavLink>
-        <AccordionDetails sx={secondCategoryWrappStyle}>
-          <Typography sx={secondCategoryStyle}>Гіпертонія</Typography>
-          <Typography sx={secondCategoryStyle}>Для розрідження крові</Typography>
-          <Typography sx={secondCategoryStyle}>Тромбоз</Typography>
-          <Typography sx={secondCategoryStyle}>Варикоз</Typography>
-        </AccordionDetails>
-      </Accordion>
-
+      {accordions.map(item => (
+        // eslint-disable-next-line max-len
+        <Accordion key={item.panel} expanded={expanded === item.panel} onChange={handleChange(item.panel)} sx={marginStyle}>
+          <NavLink to={item.path}>
+            <AccordionSummary
+              sx={mainCategoryStyle}
+              expandIcon={<ExpandMoreIcon />}
+            >
+              <Typography>
+                {item.title}
+              </Typography>
+            </AccordionSummary>
+          </NavLink>
+          <AccordionDetails sx={secondCategoryWrappStyle}>
+            {item.sub.map(itemSub => (
+              <ButtonBase key={itemSub} onClick={changeSubCategory}>
+                <Typography sx={secondCategoryStyle}>{itemSub}</Typography>
+              </ButtonBase>
+            ))}
+          </AccordionDetails>
+        </Accordion>
+      ))}
     </div>
   );
 }

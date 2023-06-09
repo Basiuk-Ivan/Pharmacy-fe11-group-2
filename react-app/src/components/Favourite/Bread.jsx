@@ -24,7 +24,9 @@ const Bread = () => {
     favourite: 'Обране',
     cabinet: 'Особистий кабінет',
     painkillers: 'Знеболюючі',
-    cardiovascularSystem: 'Серцево-судинна система'
+    cardiovascularSystem: 'Серцево-судинна система',
+    coughColdFlu: 'Ліки від кашлю, застуди та грипу',
+    nervousSystem: 'Для нервової системи'
   };
   const { pathname } = window.location;
   const pathArray = pathname.substring(1).split('/');
@@ -37,15 +39,15 @@ const Bread = () => {
           <NavLink to="/">
             <Box sx={{ display: 'flex' }}>
               <HomeOutlinedIcon sx={{ mr: 0.5, color: 'rgba(47, 211, 174, 1)' }} fontSize="small" />
-              <Typography sx={{ color: 'rgba(47, 211, 174, 1)' }}>Головна </Typography>
+              <Typography sx={{ color: 'rgba(47, 211, 174, 1)', marginRight: '12px' }}>Головна </Typography>
             </Box>
           </NavLink>
           {finalData.map((item, index) => (
             <React.Fragment key={index}>
               <Box>
-                <KeyboardDoubleArrowRightTwoToneIcon sx={{ fill: 'rgba(47, 211, 174, 1)' }} />
+                <KeyboardDoubleArrowRightTwoToneIcon sx={{ fill: '#BDBDBD', marginRight: '12px' }} />
               </Box>
-              <Typography key={index} sx={{ color: 'rgba(47, 211, 174, 1)' }}>
+              <Typography key={index} sx={{ color: '#BDBDBD' }}>
                 {item}
               </Typography>
             </React.Fragment>
