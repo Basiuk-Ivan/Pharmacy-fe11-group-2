@@ -1,12 +1,13 @@
 import SearchIcon from '@mui/icons-material/Search';
-import { Search, SearchIconWrapper, StyledInputBase, searchIconStyle } from './style';
+
+import { Search, SearchIconWrapper, StyledInputBase, searchIconStyle, inputStyles } from './style';
 
 const SearchActions = () => (
   <Search>
     <SearchIconWrapper>
       <SearchIcon sx={searchIconStyle} />
     </SearchIconWrapper>
-    <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
+    <StyledInputBase sx={inputStyles} placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
   </Search>
 );
 

@@ -1,52 +1,122 @@
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { Box, IconButton } from '@mui/material';
+import { Box, Typography, Menu, IconButton, Tooltip, MenuItem } from '@mui/material';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import Badge from '@mui/material/Badge';
-import { styled } from '@mui/material/styles';
+import { MobileMenu } from './components/MobileMenu';
+import { StyledBadge, wrapForActionsStyles, fillForIcon, colorForBadge } from './style';
 import { openModal } from '../../../redux/slice/modalSlice';
+// import { setToken } from '../../../redux/slice/isToken';
 
-const StyledBadge = styled(Badge)(() => ({
-  '& .MuiBadge-badge': {
-    right: -3,
-    top: 13,
-    padding: '0 4px'
-  }
-}));
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const UserActions = () => {
   const dispatch = useDispatch();
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
   const cartItems = useSelector(state => state.itemCards.items);
+  // const isToken = useSelector(state => state.isToken.isToken);
+  // console.log('isToken:', isToken);
+
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [hasToken, setHasToken] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setHasToken(!!token);
+    // dispatch(setToken())
+  }, []);
+
+  const handleOpenUserMenu = event => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
   const handleOpenModal = () => {
     dispatch(openModal());
   };
 
   return (
-    <Box>
-      <IconButton onClick={handleOpenModal}>
-        <PermIdentityOutlinedIcon sx={{ fill: '#2FD3AE' }} />
-      </IconButton>
+    <>
+      <Box sx={wrapForActionsStyles}>
+        {hasToken ? (
+          <>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <PermIdentityOutlinedIcon sx={fillForIcon} />
+              </IconButton>
+            </Tooltip>
+            <NavLink to="/favourite">
+              <IconButton aria-label="favorite">
+                <StyledBadge badgeContent={favoriteItems.length} sx={colorForBadge}>
+                  <FavoriteBorderOutlinedIcon sx={colorForBadge} />
+                </StyledBadge>
+              </IconButton>
+            </NavLink>
 
-      <NavLink to="/favourite">
-        <IconButton aria-label="favorite">
-          <StyledBadge badgeContent={favoriteItems.length} sx={{ color: '#2FD3AE' }}>
-            <FavoriteBorderOutlinedIcon sx={{ color: '#2FD3AE' }} />
-          </StyledBadge>
-        </IconButton>
-      </NavLink>
+            <NavLink to="/cart">
+              <IconButton aria-label="cart">
+                <StyledBadge badgeContent={cartItems.length} sx={colorForBadge}>
+                  <ShoppingCartOutlinedIcon sx={colorForBadge} />
+                </StyledBadge>
+              </IconButton>
+            </NavLink>
 
-      <NavLink to="/cart">
-        <IconButton aria-label="cart">
-          <StyledBadge badgeContent={cartItems.length} sx={{ color: '#2FD3AE' }}>
-            <ShoppingCartOutlinedIcon sx={{ color: '#2FD3AE' }} />
-          </StyledBadge>
-        </IconButton>
-      </NavLink>
-    </Box>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right'
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right'
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map(setting => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">{setting}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </>
+        ) : (
+          <>
+            <Tooltip title="Open modal">
+              <IconButton onClick={handleOpenModal} sx={{ p: 0 }}>
+                <PermIdentityOutlinedIcon sx={fillForIcon} />
+              </IconButton>
+            </Tooltip>
+            <NavLink to="/favourite">
+              <IconButton aria-label="favorite">
+                <StyledBadge badgeContent={favoriteItems.length} sx={colorForBadge}>
+                  <FavoriteBorderOutlinedIcon sx={colorForBadge} />
+                </StyledBadge>
+              </IconButton>
+            </NavLink>
+
+            <NavLink to="/cart">
+              <IconButton aria-label="cart">
+                <StyledBadge badgeContent={cartItems.length} sx={colorForBadge}>
+                  <ShoppingCartOutlinedIcon sx={colorForBadge} />
+                </StyledBadge>
+              </IconButton>
+            </NavLink>
+          </>
+        )}
+      </Box>
+
+      <MobileMenu />
+    </>
   );
 };
 
