@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import Cart from './pages/Cart/Cart';
@@ -8,24 +8,7 @@ import Layout from './components/Layout';
 import Favourite from './pages/Favourite';
 import OrderProcess from './pages/OrderProcess';
 import ProductPage from './pages/ProductPage';
-
-const theme = createTheme({
-  direction: 'rtl',
-  typography: {
-    fontFamily: 'Roboto, sans-serif'
-  },
-  palette: {
-    primary: {
-      main: '#2FD3AE'
-    },
-    secondary: {
-      main: '#ffffff'
-    },
-    success: {
-      main: '#ed6c02'
-    }
-  }
-});
+import { theme } from './tools/muiTheme';
 
 const App = () => (
   <ThemeProvider theme={theme}>
