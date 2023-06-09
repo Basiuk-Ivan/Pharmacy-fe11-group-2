@@ -62,6 +62,9 @@ export const blogImg = {
   overflow: 'hidden',
   width: '280px',
   marginLeft: '-9px',
+  '@media (max-width: 1180px)': {
+    width: '250px'
+  }
 }
 
 export const AfterBlogImg = {
@@ -82,4 +85,7 @@ export const Item = styled(Paper)(({ theme }) => ({
   flexDirection: 'column',
   gap: '20px',
   marginBottom: '5px',
+  '@media (max-width: 1180px)': {
+    width: '250px'
+  }
 }));
