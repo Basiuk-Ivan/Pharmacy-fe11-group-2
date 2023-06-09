@@ -1,31 +1,32 @@
 import { NavLink } from 'react-router-dom';
-import { Box, Avatar, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
+import { MenuAppBar } from './components/MenuAppBar/MenuAppBar';
 import logo from '../../../assets/logo.svg';
-import {
-  wrapperStyles,
-  navLinkStyles,
-  bodyStyle,
-  healthOnlineWrappStyle,
-  logoTextStyle,
-  logoText2Style
-} from './style';
+
+import { avatarMDStyles, wrapForTextStyles, healthTextMainStyles, healthTextSecondStyles } from './style';
 
 const Logo = () => (
-  <Box sx={wrapperStyles}>
-    <NavLink to="/" style={navLinkStyles}>
-      <Box sx={bodyStyle}>
-        <Avatar alt="Логотип" src={logo} />
-        <Typography component="div" sx={healthOnlineWrappStyle}>
-          <Typography fontFamily="Roboto" component="span" sx={logoTextStyle}>
-            Аптека.онлайн
-          </Typography>
-          <Typography fontFamily="Roboto" component="span" sx={logoText2Style}>
-            Ваша онлайн аптека
-          </Typography>
-        </Typography>
+  <>
+    <MenuAppBar />
+
+    <NavLink to="/">
+      <Box sx={{ display: 'flex' }}>
+        <Avatar sx={avatarMDStyles} alt="Логотип" src={logo} />
+        <Box sx={wrapForTextStyles}>
+          <Box>
+            <Typography fontFamily="Roboto" noWrap sx={healthTextMainStyles}>
+              Аптека.онлайн
+            </Typography>
+            <Typography fontFamily="Roboto" noWrap href="/" sx={healthTextSecondStyles}>
+              Ваша онлайн аптека
+            </Typography>
+          </Box>
+        </Box>
       </Box>
     </NavLink>
-  </Box>
+  </>
 );
 
 export default Logo;

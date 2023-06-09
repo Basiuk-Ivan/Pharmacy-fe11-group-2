@@ -19,7 +19,7 @@ function PaginationProducts() {
     <Pagination
       count={totalPage}
       page={numPage}
-      color="primary"
+      color="success"
       variant="outlined"
       shape="rounded"
       hidePrevButton

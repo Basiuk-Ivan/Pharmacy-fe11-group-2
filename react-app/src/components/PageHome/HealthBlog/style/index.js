@@ -5,7 +5,7 @@ export const healthBlogStyled = {
   fontSize: 36,
   fontWeight: 700,
   color: '#333333',
-  textAlign: 'left',
+  textAlign: 'left'
 };
 
 export const toBlog = {
@@ -26,7 +26,7 @@ export const toBlog = {
 export const Title = {
   display: 'flex',
   gap: '35px',
-  marginBottom: '30px',
+  marginBottom: '30px'
 };
 
 export const wrapperForItem = {
@@ -39,23 +39,22 @@ export const wrapperForItem = {
 export const stack = {
   display: 'flex',
   justifyContent: 'center',
-  gap:'1.2%',
+  gap: '1.2%',
   width: '100%',
-  flexWrap: 'wrap',
+  flexWrap: 'wrap'
 };
 
 export const blogTitle = {
   fontWeight: 700,
   fontSize: 18,
   textAlign: 'left',
-  color: '#333333',
-
+  color: '#333333'
 };
 
 export const blogDesc = {
   fontSize: 14,
   textAlign: 'left',
-  color: '#828282',
+  color: '#828282'
 };
 
 export const blogImg = {
@@ -65,14 +64,14 @@ export const blogImg = {
   '@media (max-width: 1180px)': {
     width: '250px'
   }
-}
+};
 
 export const AfterBlogImg = {
   display: 'flex',
   alignItems: 'center',
   flexDirection: 'column',
-  marginBottom: '80px',
-}
+  marginBottom: '80px'
+};
 
 export const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
