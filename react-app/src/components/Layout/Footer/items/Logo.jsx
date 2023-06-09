@@ -16,7 +16,7 @@ export const Logo = () => (
           </Typography>
         </Typography>
         {/* eslint-disable-next-line max-len */}
-        <Typography fontFamily="Roboto" component="p" sx={Right}>Все права защищены и<br /> охраняются законом</Typography>
+        <Typography fontFamily="Roboto" component="p" sx={Right}>Усі права захищені та<br /> охороняються законом</Typography>
       </Typography>
     </Typography>
   </Box>

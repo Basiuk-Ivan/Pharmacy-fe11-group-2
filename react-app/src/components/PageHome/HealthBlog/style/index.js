@@ -10,6 +10,7 @@ export const healthBlogStyled = {
 
 export const toBlog = {
   position: 'relative',
+  marginTop: '5px',
   fontSize: 14,
   color: '#2FD3AE',
   alignSelf: 'center',
