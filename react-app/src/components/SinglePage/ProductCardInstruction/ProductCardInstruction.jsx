@@ -20,6 +20,10 @@ const ProductCardInstruction = ({ productItem }) => {
     setActiveButton(buttonId);
   };
 
+    const handleScroll = () => {
+        window.scrollBy(0, -20); // Adjust the scroll position by subtracting 20 pixels
+    };
+
   return (
     <Box>
       <Typography
@@ -31,7 +35,7 @@ const ProductCardInstruction = ({ productItem }) => {
         Інструкція
       </Typography>
       <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
-        <ScrollIntoView selector="#manufacturer">
+        <ScrollIntoView selector="#manufacturer" >
           <Button
             variant="outlined"
             onClick={() => handleClick('button1')}
@@ -50,7 +54,7 @@ const ProductCardInstruction = ({ productItem }) => {
             Виробник
           </Button>
         </ScrollIntoView>
-        <ScrollIntoView selector="#brieflyAbout">
+        <ScrollIntoView selector="#brieflyAbout" >
           <Button
             variant="outlined"
             color={activeButton === 'button2' ? 'secondary' : 'primary'}
@@ -70,7 +74,7 @@ const ProductCardInstruction = ({ productItem }) => {
             Коротко про товар
           </Button>
         </ScrollIntoView>
-        <ScrollIntoView selector="#indications">
+        <ScrollIntoView selector="#indications" >
           <Button
             variant="outlined"
             color={activeButton === 'button3' ? 'secondary' : 'primary'}
@@ -90,7 +94,7 @@ const ProductCardInstruction = ({ productItem }) => {
             Показання
           </Button>
         </ScrollIntoView>
-        <ScrollIntoView selector="#howToTake">
+        <ScrollIntoView selector="#howToTake" >
           <Button
             variant="outlined"
             color={activeButton === 'button4' ? 'secondary' : 'primary'}
@@ -110,11 +114,11 @@ const ProductCardInstruction = ({ productItem }) => {
             Як приймати, курс прийому та дозування
           </Button>
         </ScrollIntoView>
-        <ScrollIntoView selector="#description">
+        <ScrollIntoView selector="#description" >
           <Button
             variant="outlined"
             color={activeButton === 'button5' ? 'secondary' : 'primary'}
-            onClick={() => handleClick('button4')}
+            onClick={() => handleClick('button5')}
             sx={() => ({
               color: activeButton === 'button5' ? '#ffffff' : '#2FD3AE',
               borderRadius: '50px',
@@ -130,7 +134,7 @@ const ProductCardInstruction = ({ productItem }) => {
             Опис
           </Button>
         </ScrollIntoView>
-        <ScrollIntoView selector="#functionalBenefits">
+        <ScrollIntoView selector="#functionalBenefits" >
           <Button
             variant="outlined"
             color={activeButton === 'button6' ? 'secondary' : 'primary'}
@@ -150,11 +154,11 @@ const ProductCardInstruction = ({ productItem }) => {
             Функціональні переваги
           </Button>
         </ScrollIntoView>
-        <ScrollIntoView selector="#storageConditions">
+        <ScrollIntoView selector="#storageConditions" >
           <Button
             variant="outlined"
             color={activeButton === 'button7' ? 'secondary' : 'primary'}
-            onClick={() => handleClick('button6')}
+            onClick={() => handleClick('button7')}
             sx={() => ({
               color: activeButton === 'button7' ? '#ffffff' : '#2FD3AE',
               borderRadius: '50px',
@@ -170,11 +174,11 @@ const ProductCardInstruction = ({ productItem }) => {
             Умови зберігання
           </Button>
         </ScrollIntoView>
-        <ScrollIntoView selector="#bestBeforeDate">
+        <ScrollIntoView selector="#bestBeforeDate" >
           <Button
             variant="outlined"
             color={activeButton === 'button8' ? 'secondary' : 'primary'}
-            onClick={() => handleClick('button7')}
+            onClick={() => handleClick('button8')}
             sx={() => ({
               color: activeButton === 'button8' ? '#ffffff' : '#2FD3AE',
               borderRadius: '50px',
@@ -190,7 +194,7 @@ const ProductCardInstruction = ({ productItem }) => {
             Термін придатності
           </Button>
         </ScrollIntoView>
-        <ScrollIntoView selector="#activeSubstance">
+        <ScrollIntoView selector="#activeSubstance" >
           <Button
             variant="outlined"
             color={activeButton === 'button9' ? 'secondary' : 'primary'}
@@ -210,7 +214,7 @@ const ProductCardInstruction = ({ productItem }) => {
             Діюча речовина
           </Button>
         </ScrollIntoView>
-        <ScrollIntoView selector="#dosageForm">
+        <ScrollIntoView selector="#dosageForm" >
           <Button
             variant="outlined"
             color={activeButton === 'button10' ? 'secondary' : 'primary'}
