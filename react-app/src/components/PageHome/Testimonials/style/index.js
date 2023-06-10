@@ -5,7 +5,7 @@ export const wrapperForTestimonials = {
   gap: '4%',
   flexWrap: 'wrap',
   background: '#F6FBFA',
-  padding: '5% 0'
+  padding: '5% 5%'
 };
 
 export const mainFeedback = {
@@ -16,8 +16,7 @@ export const mainFeedback = {
   alignItems: 'center',
   gap: '45px',
   background: 'white',
-  padding: '35px',
-  marginLeft: '50px'
+  padding: '4%'
 };
 export const feedBack = {
   marginTop: '5px',
@@ -50,11 +49,14 @@ export const feedBackItem = {
 };
 
 export const feedBackItemStar = {
-  width: '300px',
+  width: '370px',
   display: 'flex',
   flexWrap: 'wrap',
   alignItems: 'center',
-  justifyContent: 'space-between'
+  justifyContent: 'space-between',
+  '@media (max-width: 400px)': {
+    width: '100%'
+  }
 };
 export const feedBackItemText = {
   marginTop: '1%',
@@ -100,6 +102,7 @@ export const btnFeed = {
   fontSize: '14px',
   padding: '11px 31px',
   borderRadius: '31px',
+  color: 'white',
   ':hover': { backgroundColor: '#26bea2' }
 };
 

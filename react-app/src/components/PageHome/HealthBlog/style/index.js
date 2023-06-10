@@ -60,7 +60,10 @@ export const blogDesc = {
 export const blogImg = {
   overflow: 'hidden',
   width: '280px',
-  marginLeft: '-9px'
+  marginLeft: '-9px',
+  '@media (max-width: 1205px)': {
+    width: '250px'
+  }
 };
 
 export const AfterBlogImg = {
@@ -75,10 +78,13 @@ export const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
   color: theme.palette.text.secondary,
-  width: '280px',
+  width: '275px',
   // height: '375px',
   display: 'flex',
   flexDirection: 'column',
   gap: '20px',
-  marginBottom: '5px'
+  marginBottom: '5px',
+  '@media (max-width: 1205px)': {
+    width: '250px'
+  }
 }));
