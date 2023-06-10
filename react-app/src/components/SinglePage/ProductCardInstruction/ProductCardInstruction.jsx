@@ -73,26 +73,6 @@ const ProductCardInstruction = ({ productItem }) => {
         <ScrollIntoView selector="#indications">
           <Button
             variant="outlined"
-            color={activeButton === 'button2' ? 'secondary' : 'primary'}
-            onClick={() => handleClick('button2')}
-            sx={() => ({
-              color: activeButton === 'button2' ? '#ffffff' : '#2FD3AE',
-              borderRadius: '50px',
-              border: 'none',
-              backgroundColor: activeButton === 'button2' ? '#2FD3AE' : '#f7fafb',
-              '&:hover': {
-                backgroundColor: '#2FD3AE',
-                color: '#ffffff',
-                border: 'none'
-              }
-            })}
-          >
-            Показання
-          </Button>
-        </ScrollIntoView>
-        <ScrollIntoView selector="#howToTake">
-          <Button
-            variant="outlined"
             color={activeButton === 'button3' ? 'secondary' : 'primary'}
             onClick={() => handleClick('button3')}
             sx={() => ({
@@ -107,10 +87,10 @@ const ProductCardInstruction = ({ productItem }) => {
               }
             })}
           >
-            Як приймати, курс прийому та дозування
+            Показання
           </Button>
         </ScrollIntoView>
-        <ScrollIntoView selector="#description">
+        <ScrollIntoView selector="#howToTake">
           <Button
             variant="outlined"
             color={activeButton === 'button4' ? 'secondary' : 'primary'}
@@ -127,14 +107,14 @@ const ProductCardInstruction = ({ productItem }) => {
               }
             })}
           >
-            Опис
+            Як приймати, курс прийому та дозування
           </Button>
         </ScrollIntoView>
-        <ScrollIntoView selector="#functionalBenefits">
+        <ScrollIntoView selector="#description">
           <Button
             variant="outlined"
             color={activeButton === 'button5' ? 'secondary' : 'primary'}
-            onClick={() => handleClick('button5')}
+            onClick={() => handleClick('button4')}
             sx={() => ({
               color: activeButton === 'button5' ? '#ffffff' : '#2FD3AE',
               borderRadius: '50px',
@@ -147,10 +127,10 @@ const ProductCardInstruction = ({ productItem }) => {
               }
             })}
           >
-            Функціональні переваги
+            Опис
           </Button>
         </ScrollIntoView>
-        <ScrollIntoView selector="#storageConditions">
+        <ScrollIntoView selector="#functionalBenefits">
           <Button
             variant="outlined"
             color={activeButton === 'button6' ? 'secondary' : 'primary'}
@@ -167,19 +147,39 @@ const ProductCardInstruction = ({ productItem }) => {
               }
             })}
           >
+            Функціональні переваги
+          </Button>
+        </ScrollIntoView>
+        <ScrollIntoView selector="#storageConditions">
+          <Button
+            variant="outlined"
+            color={activeButton === 'button7' ? 'secondary' : 'primary'}
+            onClick={() => handleClick('button6')}
+            sx={() => ({
+              color: activeButton === 'button7' ? '#ffffff' : '#2FD3AE',
+              borderRadius: '50px',
+              border: 'none',
+              backgroundColor: activeButton === 'button7' ? '#2FD3AE' : '#f7fafb',
+              '&:hover': {
+                backgroundColor: '#2FD3AE',
+                color: '#ffffff',
+                border: 'none'
+              }
+            })}
+          >
             Умови зберігання
           </Button>
         </ScrollIntoView>
         <ScrollIntoView selector="#bestBeforeDate">
           <Button
             variant="outlined"
-            color={activeButton === 'button7' ? 'secondary' : 'primary'}
+            color={activeButton === 'button8' ? 'secondary' : 'primary'}
             onClick={() => handleClick('button7')}
             sx={() => ({
-              color: activeButton === 'button7' ? '#ffffff' : '#2FD3AE',
+              color: activeButton === 'button8' ? '#ffffff' : '#2FD3AE',
               borderRadius: '50px',
               border: 'none',
-              backgroundColor: activeButton === 'button7' ? '#2FD3AE' : '#f7fafb',
+              backgroundColor: activeButton === 'button8' ? '#2FD3AE' : '#f7fafb',
               '&:hover': {
                 backgroundColor: '#2FD3AE',
                 color: '#ffffff',
@@ -193,13 +193,13 @@ const ProductCardInstruction = ({ productItem }) => {
         <ScrollIntoView selector="#activeSubstance">
           <Button
             variant="outlined"
-            color={activeButton === 'button8' ? 'secondary' : 'primary'}
-            onClick={() => handleClick('button8')}
+            color={activeButton === 'button9' ? 'secondary' : 'primary'}
+            onClick={() => handleClick('button9')}
             sx={() => ({
-              color: activeButton === 'button8' ? '#ffffff' : '#2FD3AE',
+              color: activeButton === 'button9' ? '#ffffff' : '#2FD3AE',
               borderRadius: '50px',
               border: 'none',
-              backgroundColor: activeButton === 'button8' ? '#2FD3AE' : '#f7fafb',
+              backgroundColor: activeButton === 'button9' ? '#2FD3AE' : '#f7fafb',
               '&:hover': {
                 backgroundColor: '#2FD3AE',
                 color: '#ffffff',
@@ -213,13 +213,13 @@ const ProductCardInstruction = ({ productItem }) => {
         <ScrollIntoView selector="#dosageForm">
           <Button
             variant="outlined"
-            color={activeButton === 'button9' ? 'secondary' : 'primary'}
-            onClick={() => handleClick('button9')}
+            color={activeButton === 'button10' ? 'secondary' : 'primary'}
+            onClick={() => handleClick('button10')}
             sx={() => ({
-              color: activeButton === 'button9' ? '#ffffff' : '#2FD3AE',
+              color: activeButton === 'button10' ? '#ffffff' : '#2FD3AE',
               borderRadius: '50px',
               border: 'none',
-              backgroundColor: activeButton === 'button9' ? '#2FD3AE' : '#f7fafb',
+              backgroundColor: activeButton === 'button10' ? '#2FD3AE' : '#f7fafb',
               '&:hover': {
                 backgroundColor: '#2FD3AE',
                 color: '#ffffff',

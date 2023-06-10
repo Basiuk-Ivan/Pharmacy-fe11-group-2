@@ -2,17 +2,27 @@
   border: none!important;
 }
 
+.tabImg {
+  width: 100px;
+
+  @media(max-width: 469px) {
+    width: 60px;
+    object-fit: contain;
+  }
+
+}
+
 .activeImg {
   width: 294px;
   height: 294px;
 
-  @media(max-width: 469px) {
-    width: 130px;
-    object-fit: contain;
+  @media(max-width: 400px) {
+    width: 110px;
+    height: 110px;
   }
 
-  @media (min-width: 470px) and (max-width: 600px) {
+  @media (min-width: 400px) and (max-width: 600px) {
     width: 200px;
-    object-fit: contain;
+    height: 200px;
   }
 }

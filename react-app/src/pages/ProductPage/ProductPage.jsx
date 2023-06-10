@@ -5,17 +5,14 @@ import {
   Typography,
   Box,
   Grid,
-  List,
-  ListItemText,
-  ListItemButton
+  Tabs,
+  Tab
 } from '@mui/material';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+
 import {
   useParams
-  // useLocation
 } from 'react-router-dom';
+
 import {
   ThemeProvider,
   createTheme,
@@ -26,12 +23,12 @@ import ProductCardMainBlock from '../../components/SinglePage/ProductCardMainBlo
 import ProductCardInstruction from '../../components/SinglePage/ProductCardInstruction';
 import ProductAnalogiesCardContainer from '../../components/SinglePage/ProductAnalogiesCardContainer';
 import ProductCardReviews from '../../components/SinglePage/ProductCardReviews';
-import BreadProduct from "../../components/SinglePage/BreadProduct/index.js";
+import BreadProduct from '../../components/SinglePage/BreadProduct/index.js';
 
 const AntTabs = styled(Tabs)({
   '& .MuiTabs-indicator': {
     backgroundColor: '#F2C94C',
-    maxWidth:'150px',
+    maxWidth: '150px',
   }
 });
 
@@ -128,29 +125,37 @@ const ProductPage = () => {
           <Container>
             <Grid container spacing={2}>
               <Grid item lg={12}>
-                <BreadProduct category={category} name={product.name}/>
+                <BreadProduct category={category} name={product.name} />
               </Grid>
               <Grid item lg={12}>
                 <Typography
                   variant="h4"
-                  sx={{ fontSize: { xs: '28px', sm: '32px', md: '34px', lg: '36px'}, fontWeight: 700, color: '#394045' }}
+                  sx={{ fontSize: { xs: '26px', sm: '30px', md: '32px', lg: '36px' },
+                    mt:{xs: '10px', sm: '5px', mx:0},
+                    fontWeight: 700,
+                    color: '#394045' }}
                   gutterBottom
                 >
                   {product?.name}
                 </Typography>
               </Grid>
               <Grid item lg={12}>
-                <Box sx={{ width: '100%' }}>
-                  <Box sx={{ width:{xs:'288px', sm: '100%', md: '100%', lg: '100%'}, borderBottom: 1, borderColor: 'divider', backgroundColor: '#F7FAFB' }}>
-                    <AntTabs value={value} onChange={handleChange} variant="scrollable"
-                             scrollButtons
-                             allowScrollButtonsMobile
-                             aria-label="scrollable auto tabs example"
-                             sx={{width:{xs:'250px', sm: '100%', md: '100%', lg: '100%'}}}>
-                      <Tab sx={{width:{xs:'150px'}}} label="Все про товар" {...a11yProps(0)} />
-                      <Tab sx={{width:{xs:'150px'}}} label="Інструкція" {...a11yProps(1)} />
-                      <Tab sx={{width:{xs:'150px'}}} label="Аналоги" {...a11yProps(2)} />
-                      <Tab sx={{width:{xs:'150px'}}} label="Відгуки" {...a11yProps(3)} />
+                <Box sx={{ width: '100%'}}>
+                  <Box sx={{ width: { xs: '288px', sm: '100%', md: '100%', lg: '100%' },
+                    borderBottom: 1, borderColor: 'divider', backgroundColor: '#F7FAFB' }}>
+                    <AntTabs
+                      value={value}
+                      onChange={handleChange}
+                      variant="scrollable"
+                      scrollButtons
+                      allowScrollButtonsMobile
+                      aria-label="scrollable auto tabs example"
+                      sx={{ width: { xs: '250px', sm: '100%', md: '100%', lg: '100%' } }}
+                    >
+                      <Tab sx={{ width: { xs: '150px' } }} label="Все про товар" {...a11yProps(0)} />
+                      <Tab sx={{ width: { xs: '150px' } }} label="Інструкція" {...a11yProps(1)} />
+                      <Tab sx={{ width: { xs: '150px' } }} label="Аналоги" {...a11yProps(2)} />
+                      <Tab sx={{ width: { xs: '150px' } }} label="Відгуки" {...a11yProps(3)} />
                     </AntTabs>
                   </Box>
                   <TabPanel value={value} index={0}>
