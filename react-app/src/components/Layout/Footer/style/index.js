@@ -1,15 +1,14 @@
 export const background = {
-  background: 'linear-gradient(45deg, #011D71 30%, #2FD3BD 90%)',
   width: '100%',
+  padding: '9% 4% 5%',
+  // paddingBottom: '5%',
+  background: 'linear-gradient(45deg, #011D71 30%, #2FD3BD 90%)'
 };
 
 export const footer = {
-  marginTop: '164px',
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '35px',
-  marginBottom: '78px'
-
+  gap: '35px'
 };
 
 export const footerLogo = {
