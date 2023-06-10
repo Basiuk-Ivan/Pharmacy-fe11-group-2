@@ -7,6 +7,7 @@ import { CardContentBody } from './components/CardContentBody/CardContentBody';
 import { wrapForCardStyles, cardMediaStyles } from './style';
 
 const ProductCard = ({ productItem, isInCart }) => {
+  console.log('productItem:', productItem);
   const cardWrapStyles = wrapForCardStyles(isInCart);
   const cardMediaStyle = cardMediaStyles(isInCart);
 
