@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Typography, Stack, Button, Box, Grid, Rating, ButtonBase } from '@mui/material';
 
@@ -20,8 +20,14 @@ const ProductCardMainBlock = ({ productItem }) => {
 
   const [quantity, setQuantity] = useState(1);
   const [value, setValue] = useState(2);
+  const [activeSubstance, setActiveSubstance] = useState('');
 
   const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    const arr = productItem.activeSubstance;
+    setActiveSubstance(arr.join(', '));
+  }, [productItem.activeSubstance]);
 
   const handleFavoriteClick = event => {
     event.preventDefault();
@@ -134,7 +140,7 @@ const ProductCardMainBlock = ({ productItem }) => {
                   <Stack direction="row" alignItems="center" sx={{ width: '100%' }}>
                     <span className={s.bullet} />
                     <span className={s.brandTitle}>Діюча речовина:</span>
-                    <span className={s.brandValue}>{productItem.instruction.activeSubstance.value}</span>
+                    <span className={s.brandValue}>{activeSubstance}</span>
                   </Stack>
                   <Stack
                     direction="row"
@@ -143,7 +149,7 @@ const ProductCardMainBlock = ({ productItem }) => {
                   >
                     <span className={s.bullet} />
                     <span className={s.brandTitle}>Термін придатності:</span>
-                    <span className={s.brandValue}>{productItem.instruction.bestBeforeDate.value}</span>
+                    <span className={s.brandValue}>{productItem?.bestBeforeDate}</span>
                   </Stack>
                 </Stack>
               </Box>

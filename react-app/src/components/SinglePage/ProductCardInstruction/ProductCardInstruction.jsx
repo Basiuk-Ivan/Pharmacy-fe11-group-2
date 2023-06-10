@@ -5,20 +5,23 @@ import TextComponent from '../TextComponent';
 
 const ProductCardInstruction = ({ productItem }) => {
   const [activeButton, setActiveButton] = useState(null);
+  const [activeSubstance, setActiveSubstance] = useState('');
 
   useEffect(() => {
+    const arr = productItem.activeSubstance;
+    setActiveSubstance(arr.join(', '));
     window.addEventListener('scroll', () => setActiveButton(false));
 
     return () => {
       window.removeEventListener('scroll', () => setActiveButton(false));
     };
-  }, []);
+  }, [productItem.activeSubstance]);
   const handleClick = buttonId => {
     setActiveButton(buttonId);
   };
 
   return (
-    <>
+    <Box>
       <Typography
         variant="h4"
         component="h4"
@@ -44,7 +47,7 @@ const ProductCardInstruction = ({ productItem }) => {
               }
             })}
           >
-            {productItem.instruction.manufacturer.title}
+            Виробник
           </Button>
         </ScrollIntoView>
         <ScrollIntoView selector="#brieflyAbout">
@@ -64,7 +67,27 @@ const ProductCardInstruction = ({ productItem }) => {
               }
             })}
           >
-            {productItem.instruction.brieflyAbout.title}
+            Коротко про товар
+          </Button>
+        </ScrollIntoView>
+        <ScrollIntoView selector="#indications">
+          <Button
+            variant="outlined"
+            color={activeButton === 'button2' ? 'secondary' : 'primary'}
+            onClick={() => handleClick('button2')}
+            sx={() => ({
+              color: activeButton === 'button2' ? '#ffffff' : '#2FD3AE',
+              borderRadius: '50px',
+              border: 'none',
+              backgroundColor: activeButton === 'button2' ? '#2FD3AE' : '#f7fafb',
+              '&:hover': {
+                backgroundColor: '#2FD3AE',
+                color: '#ffffff',
+                border: 'none'
+              }
+            })}
+          >
+            Показання
           </Button>
         </ScrollIntoView>
         <ScrollIntoView selector="#howToTake">
@@ -84,7 +107,7 @@ const ProductCardInstruction = ({ productItem }) => {
               }
             })}
           >
-            {productItem.instruction.howToTake.title}
+            Як приймати, курс прийому та дозування
           </Button>
         </ScrollIntoView>
         <ScrollIntoView selector="#description">
@@ -104,10 +127,9 @@ const ProductCardInstruction = ({ productItem }) => {
               }
             })}
           >
-            {productItem.instruction.description.title}
+            Опис
           </Button>
         </ScrollIntoView>
-
         <ScrollIntoView selector="#functionalBenefits">
           <Button
             variant="outlined"
@@ -125,7 +147,7 @@ const ProductCardInstruction = ({ productItem }) => {
               }
             })}
           >
-            {productItem.instruction.functionalBenefits.title}
+            Функціональні переваги
           </Button>
         </ScrollIntoView>
         <ScrollIntoView selector="#storageConditions">
@@ -145,7 +167,7 @@ const ProductCardInstruction = ({ productItem }) => {
               }
             })}
           >
-            {productItem.instruction.storageConditions.title}
+            Умови зберігання
           </Button>
         </ScrollIntoView>
         <ScrollIntoView selector="#bestBeforeDate">
@@ -165,7 +187,7 @@ const ProductCardInstruction = ({ productItem }) => {
               }
             })}
           >
-            {productItem.instruction.bestBeforeDate.title}
+            Термін придатності
           </Button>
         </ScrollIntoView>
         <ScrollIntoView selector="#activeSubstance">
@@ -185,7 +207,7 @@ const ProductCardInstruction = ({ productItem }) => {
               }
             })}
           >
-            {productItem.instruction.activeSubstance.title}
+            Діюча речовина
           </Button>
         </ScrollIntoView>
         <ScrollIntoView selector="#dosageForm">
@@ -205,63 +227,60 @@ const ProductCardInstruction = ({ productItem }) => {
               }
             })}
           >
-            {productItem.instruction.dosageForm.title}
+            Лікарська форма
           </Button>
         </ScrollIntoView>
       </Stack>
       <Box>
-        <TextComponent
-          id="manufacturer"
-          title={productItem.instruction.manufacturer.title}
-          value={productItem.instruction.manufacturer.value}
+        <TextComponent id="manufacturer"
+                       title="Виробник"
+                       value={productItem?.manufacturer}
         />
-        <TextComponent
-          id="brieflyAbout"
-          title={productItem.instruction.brieflyAbout.title}
-          value={productItem.instruction.brieflyAbout.value}
+        <TextComponent id="brieflyAbout"
+                       title="Коротко про товар"
+                       value={productItem?.instruction?.brieflyAbout}
         />
         <TextComponent
           id="indications"
-          title={productItem.instruction.indications.title}
-          value={productItem.instruction.indications.value}
+          title="Показання"
+          value={productItem.instruction.indications}
+        />
+        <TextComponent id="howToTake"
+                       title="Як приймати, курс прийому та дозування"
+                       value={productItem?.instruction?.howToTake}
+        />
+        <TextComponent id="description"
+                       title="Опис"
+                       value={productItem?.instruction?.description}
         />
         <TextComponent
-          id="howToTake"
-          title={productItem.instruction.howToTake.title}
-          value={productItem.instruction.howToTake.value}
+            id="functionalBenefits"
+            title="Функціональні переваги"
+            value={productItem?.instruction?.functionalBenefits}
         />
         <TextComponent
-          id="description"
-          title={productItem.instruction.description.title}
-          value={productItem.instruction.description.value}
+            id="storageConditions"
+            title="Умови зберігання"
+            value={productItem?.instruction?.storageConditions}
         />
         <TextComponent
-          id="functionalBenefits"
-          title={productItem.instruction.functionalBenefits.title}
-          value={productItem.instruction.functionalBenefits.value}
+            id="bestBeforeDate"
+            title="Термін придатності"
+            value={productItem?.bestBeforeDate}
         />
         <TextComponent
-          id="storageConditions"
-          title={productItem.instruction.storageConditions.title}
-          value={productItem.instruction.storageConditions.value}
+            id="activeSubstance"
+            title="Діюча речовина"
+            value={activeSubstance}
         />
         <TextComponent
-          id="bestBeforeDate"
-          title={productItem.instruction.bestBeforeDate.title}
-          value={productItem.instruction.bestBeforeDate.value}
-        />
-        <TextComponent
-          id="activeSubstance"
-          title={productItem.instruction.activeSubstance.title}
-          value={productItem.instruction.activeSubstance.value}
-        />
-        <TextComponent
-          id="dosageForm"
-          title={productItem.instruction.dosageForm.title}
-          value={productItem.instruction.dosageForm.value}
+            id="dosageForm"
+            title="Лікарська форма"
+            value={productItem?.productForm}
         />
       </Box>
-    </>
+
+    </Box>
   );
 };
 
