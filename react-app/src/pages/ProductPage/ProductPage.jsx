@@ -3,34 +3,35 @@ import { useState, useEffect } from 'react';
 import {
   Container,
   Typography,
-  // Box,
+  Box,
   Grid,
   List,
   ListItemText,
   ListItemButton
 } from '@mui/material';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-// import Tabs from '@mui/material/Tabs';
-// import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 import {
   useParams
   // useLocation
 } from 'react-router-dom';
 import {
   ThemeProvider,
-  createTheme
-  // styled
+  createTheme,
+  styled
 } from '@mui/material/styles';
-// import ProductCardMainBlock from '../../components/SinglePage/ProductCardMainBlock';
-// import ProductCardInstruction from '../../components/SinglePage/ProductCardInstruction';
-// import ProductAnalogiesCardContainer from '../../components/SinglePage/ProductAnalogiesCardContainer';
-// import ProductCardReviews from '../../components/SinglePage/ProductCardReviews';
 
-// const AntTabs = styled(Tabs)({
-//   '& .MuiTabs-indicator': {
-//     backgroundColor: '#F2C94C'
-//   }
-// });
+import ProductCardMainBlock from '../../components/SinglePage/ProductCardMainBlock';
+import ProductCardInstruction from '../../components/SinglePage/ProductCardInstruction';
+import ProductAnalogiesCardContainer from '../../components/SinglePage/ProductAnalogiesCardContainer';
+import ProductCardReviews from '../../components/SinglePage/ProductCardReviews';
+
+const AntTabs = styled(Tabs)({
+  '& .MuiTabs-indicator': {
+    backgroundColor: '#F2C94C'
+  }
+});
 
 const theme = createTheme({
   typography: {
@@ -49,39 +50,38 @@ const theme = createTheme({
   }
 });
 
-// const TabPanel = props => {
-//   const { children, value, index, ...other } = props;
+const TabPanel = props => {
+  const { children, value, index, ...other } = props;
 
-//   return (
-//     <div
-//       role="tabpanel"
-//       hidden={value !== index}
-//       id={`simple-tabpanel-${index}`}
-//       aria-labelledby={`simple-tab-${index}`}
-//       {...other}
-//     >
-//       {value === index && (
-//         <Box sx={{ p: 3 }}>
-//           <Typography component="div">{children}</Typography>
-//         </Box>
-//       )}
-//     </div>
-//   );
-// };
-// const a11yProps = index => ({
-//   id: `simple-tab-${index}`,
-//   'aria-controls': `simple-tabpanel-${index}`
-// });
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography component="div">{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+};
+const a11yProps = index => ({
+  id: `simple-tab-${index}`,
+  'aria-controls': `simple-tabpanel-${index}`
+});
 
 const ProductPage = () => {
   const { id, category } = useParams();
   const [product, setProduct] = useState(null);
-  // const [value, setValue] = useState(0);
+  const [value, setValue] = useState(0);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        // const response = await fetch('../products.json');
         const response = await fetch(`http://localhost:3004/api/product?categories=${category}`);
 
         if (!response.ok) {
@@ -99,9 +99,9 @@ const ProductPage = () => {
     fetchProduct();
   }, [category, id]);
 
-  // const handleChange = (event, newValue) => {
-  //   setValue(newValue);
-  // };
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -133,7 +133,7 @@ const ProductPage = () => {
                           color: '#2FD3AE'
                         }
                       }}
-                      primary={`${product?.mainCategory} /`}
+                      primary={`${category} /`}
                     />
                   </ListItemButton>
                   <ListItemButton sx={{ flex: '0 0 auto', paddingLeft: '5px', paddingRight: 0 }}>
@@ -154,7 +154,7 @@ const ProductPage = () => {
                   {product?.name}
                 </Typography>
               </Grid>
-              {/* <Grid item lg={12}>
+              <Grid item lg={12}>
                 <Box sx={{ width: '100%' }}>
                   <Box sx={{ borderBottom: 1, borderColor: 'divider', backgroundColor: '#F7FAFB' }}>
                     <AntTabs value={value} onChange={handleChange} aria-label="basic tabs example">
@@ -184,7 +184,7 @@ const ProductPage = () => {
                     <ProductCardReviews productItem={product} />
                   </TabPanel>
                 </Box>
-              </Grid> */}
+              </Grid>
             </Grid>
           </Container>
         )}
