@@ -232,51 +232,55 @@ const ProductCardInstruction = ({ productItem }) => {
         </ScrollIntoView>
       </Stack>
       <Box>
-        <TextComponent id="manufacturer"
-                       title="Виробник"
-                       value={productItem?.manufacturer}
+        <TextComponent
+          id="manufacturer"
+          title="Виробник"
+          value={productItem?.manufacturer}
         />
-        <TextComponent id="brieflyAbout"
-                       title="Коротко про товар"
-                       value={productItem?.instruction?.brieflyAbout}
+        <TextComponent
+          id="brieflyAbout"
+          title="Коротко про товар"
+          value={productItem?.instruction?.brieflyAbout}
         />
         <TextComponent
           id="indications"
           title="Показання"
           value={productItem.instruction.indications}
         />
-        <TextComponent id="howToTake"
-                       title="Як приймати, курс прийому та дозування"
-                       value={productItem?.instruction?.howToTake}
-        />
-        <TextComponent id="description"
-                       title="Опис"
-                       value={productItem?.instruction?.description}
+        <TextComponent
+          id="howToTake"
+          title="Як приймати, курс прийому та дозування"
+          value={productItem?.instruction?.howToTake}
         />
         <TextComponent
-            id="functionalBenefits"
-            title="Функціональні переваги"
-            value={productItem?.instruction?.functionalBenefits}
+          id="description"
+          title="Опис"
+          value={productItem?.instruction?.description}
         />
         <TextComponent
-            id="storageConditions"
-            title="Умови зберігання"
-            value={productItem?.instruction?.storageConditions}
+          id="functionalBenefits"
+          title="Функціональні переваги"
+          value={productItem?.instruction?.functionalBenefits}
         />
         <TextComponent
-            id="bestBeforeDate"
-            title="Термін придатності"
-            value={productItem?.bestBeforeDate}
+          id="storageConditions"
+          title="Умови зберігання"
+          value={productItem?.instruction?.storageConditions}
         />
         <TextComponent
-            id="activeSubstance"
-            title="Діюча речовина"
-            value={activeSubstance}
+          id="bestBeforeDate"
+          title="Термін придатності"
+          value={productItem?.bestBeforeDate}
         />
         <TextComponent
-            id="dosageForm"
-            title="Лікарська форма"
-            value={productItem?.productForm}
+          id="activeSubstance"
+          title="Діюча речовина"
+          value={activeSubstance}
+        />
+        <TextComponent
+          id="dosageForm"
+          title="Лікарська форма"
+          value={productItem?.productForm}
         />
       </Box>
 
