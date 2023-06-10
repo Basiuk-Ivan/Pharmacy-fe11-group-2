@@ -1,7 +1,9 @@
 import { Box, Button, Container } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { menuStyles, buttonStyles, navLinkStyles } from './style';
-// import { Container } from '@mui/system';
+
+import { mainCategory } from '../../../redux/slice/filterBaseSlice';
 
 const pages = [
   {
@@ -14,7 +16,7 @@ const pages = [
   },
   {
     title: 'Для нервової системи',
-    path: '/nervous-system'
+    path: '/nervousSystem'
   },
   {
     title: 'Серцево-судинна система',
@@ -22,16 +24,22 @@ const pages = [
   }
 ];
 
-const Menu = () => (
-  <Box sx={menuStyles}>
-    <Container sx={{ display: 'flex', justifyContent: 'space-between' }}>
-      {pages.map(page => (
-        <NavLink key={page.title} to={page.path} style={navLinkStyles}>
-          <Button sx={buttonStyles}>{page.title}</Button>
-        </NavLink>
-      ))}
-    </Container>
-  </Box>
-);
+const Menu = () => {
+  const dispatch = useDispatch();
 
+  const choiceMainCategory = path => {
+    dispatch(mainCategory(path.slice(1)));
+  };
+  return (
+    <Box sx={menuStyles}>
+      <Container sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        {pages.map(page => (
+          <NavLink key={page.title} to={page.path} style={navLinkStyles}>
+            <Button onClick={() => choiceMainCategory(page.path)} sx={buttonStyles}>{page.title}</Button>
+          </NavLink>
+        ))}
+      </Container>
+    </Box>
+  );
+};
 export default Menu;
