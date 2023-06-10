@@ -1,3 +1,18 @@
 .Mui-selected {
   border: none!important;
 }
+
+.activeImg {
+  width: 294px;
+  height: 294px;
+
+  @media(max-width: 469px) {
+    width: 130px;
+    object-fit: contain;
+  }
+
+  @media (min-width: 470px) and (max-width: 600px) {
+    width: 200px;
+    object-fit: contain;
+  }
+}
