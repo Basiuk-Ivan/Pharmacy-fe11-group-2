@@ -97,7 +97,9 @@ const ProductCardMainBlock = ({ productItem }) => {
                 />
               </Box>
               <Typography sx={{ fontSize:
-                      { xs: '14px', sm: '14px', md: '14px', lg: '14px' }, color: '#2FD3AE' }}>
+                      { xs: '14px', sm: '14px', md: '14px', lg: '14px' },
+              color: '#2FD3AE' }}
+              >
                 {productItem?.quantity > 0 ? 'Є в наявності' : 'Товар відсутній'}
               </Typography>
 

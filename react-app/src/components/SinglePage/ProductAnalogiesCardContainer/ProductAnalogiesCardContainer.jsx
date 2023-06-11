@@ -6,7 +6,6 @@ import ProductCard from '../../ProductCard';
 import 'swiper/swiper-bundle.min.css';
 import './CustomSwiper.scss';
 
-
 const ProductAnalogiesCardContainer = ({ productItem }) => {
   const isInCart = false;
   const theme = useTheme();
