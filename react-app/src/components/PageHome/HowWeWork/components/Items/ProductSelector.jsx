@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
-import checkList from '../../../../assets/howWeWork/checklist.svg';
-import { wrapperForItem, wrapperForImg } from '../style';
+import checkList from '../../../../../assets/howWeWork/checklist.svg';
+import { wrapperForItem, wrapperForImg } from '../../style';
 
 export const ProductSelector = () => (
   <Box sx={wrapperForItem}>

@@ -16,7 +16,7 @@ const TodayPharmacy = () => (
       </Typography>
     </Box>
     <Box sx={wrapperForItemStyles}>
-      <Stack direction="row" spacing={2} sx={stackStyles} flexWrap="wrap">
+      <Stack direction="row" sx={stackStyles} flexWrap="wrap">
         <EmployeesOver5000 />
         <PharmaciesOver750 />
         <UkraineCities80 />

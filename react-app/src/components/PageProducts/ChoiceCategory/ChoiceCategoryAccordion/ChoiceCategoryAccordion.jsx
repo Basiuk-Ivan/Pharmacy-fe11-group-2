@@ -9,12 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { mainCategory } from '../../../../redux/slice/filterBaseSlice';
-import {
-  mainCategoryStyle,
-  secondCategoryStyle,
-  secondCategoryWrappStyle,
-  marginStyle
-} from './style';
+import { mainCategoryStyle, secondCategoryStyle, secondCategoryWrappStyle, marginStyle } from './style';
 
 export default function ChoiceCategoryAccordion() {
   const location = useLocation();
@@ -49,8 +44,8 @@ export default function ChoiceCategoryAccordion() {
   };
 
   useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(filterBase);
+
+    // console.log(filterBase);
   }, [filterBase]);
 
   const accordions = [
@@ -82,18 +77,17 @@ export default function ChoiceCategoryAccordion() {
 
   return (
     <div>
-
       {accordions.map(item => (
-        // eslint-disable-next-line max-len
-        <Accordion key={item.panel} expanded={expanded === item.panel} onChange={handleChange(item.panel)} sx={marginStyle}>
+
+        <Accordion
+          key={item.panel}
+          expanded={expanded === item.panel}
+          onChange={handleChange(item.panel)}
+          sx={marginStyle}
+        >
           <NavLink to={item.path}>
-            <AccordionSummary
-              sx={mainCategoryStyle}
-              expandIcon={<ExpandMoreIcon />}
-            >
-              <Typography>
-                {item.title}
-              </Typography>
+            <AccordionSummary sx={mainCategoryStyle} expandIcon={<ExpandMoreIcon />}>
+              <Typography>{item.title}</Typography>
             </AccordionSummary>
           </NavLink>
           <AccordionDetails sx={secondCategoryWrappStyle}>
