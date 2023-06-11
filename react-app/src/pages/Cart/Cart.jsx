@@ -16,7 +16,8 @@ import DeleteOutlineTwoToneIcon from '@mui/icons-material/DeleteOutlineTwoTone';
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 import IconBreadcrumbs from './Breadcrums';
 import ProductCard from '../../components/ProductCard';
-import './Style/CartStyles.scss';
+
+import './style/CartStyles.scss';
 import {
   FormBox,
   FormTitle,
@@ -28,7 +29,8 @@ import {
   PromoBox,
   HeaderBox,
   TextFieldPromo
-} from './Style';
+
+} from './style';
 
 const Cart = () => {
   const productItemCart = useSelector(state => state.itemCards.items);

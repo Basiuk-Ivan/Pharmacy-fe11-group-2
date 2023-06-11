@@ -1,8 +1,9 @@
 import { Box, Typography, Stack } from '@mui/material';
-import { ProductSelector } from './Items/ProductSelector';
-import { PharmacySelector } from './Items/PharmacySelector';
-import { OrderForm } from './Items/OrderForm';
-import { ReceiveProduct } from './Items/ReceiveProduct';
+import { ProductSelector } from './components/Items/ProductSelector';
+import { PharmacySelector } from './components/Items/PharmacySelector';
+import { OrderForm } from './components/Items/OrderForm';
+import { ReceiveProduct } from './components/Items/ReceiveProduct';
+import { SliderWorks } from './components/SliderWork';
 import { howWeWorkStyled, wrapperForItemStyled, stack } from './style';
 
 const HowWeWork = () => (
@@ -13,7 +14,8 @@ const HowWeWork = () => (
       </Typography>
     </Box>
     <Box sx={wrapperForItemStyled}>
-      <Stack direction="row" spacing={1} sx={stack}>
+      <SliderWorks />
+      <Stack direction="row" sx={stack} flexWrap="wrap">
         <ProductSelector />
         <PharmacySelector />
         <OrderForm />

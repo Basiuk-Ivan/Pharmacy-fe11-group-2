@@ -1,7 +1,11 @@
 export const howWeWorkStyled = {
   fontSize: 36,
   fontWeight: 700,
-  color: '#333333'
+  color: '#333333',
+  marginBottom: '15px',
+  '@media (max-width: 600px)': {
+    fontSize: 28
+  }
 };
 
 export const wrapperForItemStyled = {
@@ -12,13 +16,15 @@ export const wrapperForItemStyled = {
 
 export const stack = {
   justifyContent: 'space-between',
-  width: '100%'
+  width: '100%',
+  rowGap: '20px',
+  display: { xs: 'none', sm: 'flex', md: 'flex', lg: 'flex' }
 };
 
 export const wrapperForItem = {
   display: 'flex',
   alignItems: 'center',
-  width: '264px',
+  maxWidth: '264px',
   gap: '8px'
 };
 
