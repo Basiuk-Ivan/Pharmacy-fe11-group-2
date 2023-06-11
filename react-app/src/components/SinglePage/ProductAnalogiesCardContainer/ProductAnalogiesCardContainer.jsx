@@ -1,13 +1,29 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Navigation, Pagination } from 'swiper';
+import { useEffect, useState } from 'react';
 import ProductCard from '../../ProductCard';
-import s from './ProductAnalogiesCardContainer.module.scss';
-
 import 'swiper/swiper-bundle.min.css';
+import './CustomSwiper.scss';
+
 
 const ProductAnalogiesCardContainer = ({ productItem }) => {
   const isInCart = false;
+  const theme = useTheme();
+  const isXs = useMediaQuery(theme.breakpoints.only('xs'));
+  const isSm = useMediaQuery(theme.breakpoints.only('sm'));
+
+  const [slidesPerView, setslidesPerView] = useState(null);
+
+  useEffect(() => {
+    if (isXs) {
+      setslidesPerView(1);
+    } else if (isSm) {
+      setslidesPerView(2);
+    } else {
+      setslidesPerView(3);
+    }
+  }, [isXs, isSm]);
 
   return (
     <Box>
@@ -20,15 +36,11 @@ const ProductAnalogiesCardContainer = ({ productItem }) => {
         Аналоги
       </Typography>
       <Swiper
-        modules={[Navigation, Pagination, Scrollbar, A11y]}
-        scrollbar={false}
-        spaceBetween={10}
-        slidesPerView={3}
+        modules={[Navigation, Pagination]}
+        slidesPerView={slidesPerView}
         navigation
-        centeredSlides
         loop
-        className={s.container}
-        slidesOffsetBefore={45}
+        className="product-analogies-slider"
       >
         <SwiperSlide>
           <ProductCard productItem={productItem} isInCart={isInCart} />
@@ -55,26 +67,6 @@ const ProductAnalogiesCardContainer = ({ productItem }) => {
           <ProductCard productItem={productItem} isInCart={isInCart} />
         </SwiperSlide>
       </Swiper>
-
-      {/* <Grid container sx={{}}> */}
-      {/*  <Grid item lg={12}> */}
-      {/*    <Grid container spacing={4} sx={{}}> */}
-      {/*      <Grid item lg={3}> */}
-      {/*        <ProductCard productItem={goods} /> */}
-      {/*      </Grid> */}
-      {/*      <Grid item lg={3}> */}
-      {/*        <ProductCard productItem={goods} /> */}
-      {/*      </Grid> */}
-      {/*      <Grid item lg={3}> */}
-      {/*        <ProductCard productItem={goods} /> */}
-      {/*      </Grid> */}
-      {/*      <Grid item lg={3}> */}
-      {/*        <ProductCard productItem={goods} /> */}
-      {/*      </Grid> */}
-      {/*    </Grid> */}
-
-      {/*  </Grid> */}
-      {/* </Grid> */}
     </Box>
   );
 };
