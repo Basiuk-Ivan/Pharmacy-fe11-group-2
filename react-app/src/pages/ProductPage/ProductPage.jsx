@@ -23,7 +23,7 @@ import ProductCardMainBlock from '../../components/SinglePage/ProductCardMainBlo
 import ProductCardInstruction from '../../components/SinglePage/ProductCardInstruction';
 import ProductAnalogiesCardContainer from '../../components/SinglePage/ProductAnalogiesCardContainer';
 import ProductCardReviews from '../../components/SinglePage/ProductCardReviews';
-import BreadProduct from '../../components/SinglePage/BreadProduct/index.js';
+import BreadProduct from '../../components/SinglePage/BreadProduct';
 
 const AntTabs = styled(Tabs)({
   '& .MuiTabs-indicator': {
@@ -131,7 +131,7 @@ const ProductPage = () => {
                 <Typography
                   variant="h4"
                   sx={{ fontSize: { xs: '26px', sm: '30px', md: '32px', lg: '36px' },
-                    mt:{xs: '10px', sm: '5px', mx:0},
+                    mt: { xs: '10px', sm: '5px', mx: 0 },
                     fontWeight: 700,
                     color: '#394045' }}
                   gutterBottom
@@ -140,9 +140,12 @@ const ProductPage = () => {
                 </Typography>
               </Grid>
               <Grid item lg={12}>
-                <Box sx={{ width: '100%'}}>
+                <Box sx={{ width: '100%' }}>
                   <Box sx={{ width: { xs: '288px', sm: '100%', md: '100%', lg: '100%' },
-                    borderBottom: 1, borderColor: 'divider', backgroundColor: '#F7FAFB' }}>
+                    borderBottom: 1,
+                    borderColor: 'divider',
+                    backgroundColor: '#F7FAFB' }}
+                  >
                     <AntTabs
                       value={value}
                       onChange={handleChange}

@@ -1,10 +1,11 @@
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper';
+import { useEffect, useState } from 'react';
 import ProductCard from '../../ProductCard';
 import 'swiper/swiper-bundle.min.css';
 import './CustomSwiper.scss';
-import {useEffect, useState} from "react";
+
 
 const ProductAnalogiesCardContainer = ({ productItem }) => {
   const isInCart = false;
@@ -12,21 +13,17 @@ const ProductAnalogiesCardContainer = ({ productItem }) => {
   const isXs = useMediaQuery(theme.breakpoints.only('xs'));
   const isSm = useMediaQuery(theme.breakpoints.only('sm'));
 
-  const[slidesPerView, setslidesPerView] = useState(null);
-  const setSlides = () => {
-      if (isXs) {
-          setslidesPerView(1)
-      } else if (isSm) {
-          setslidesPerView(2)
-      }  else {
-          setslidesPerView(3)
-      }
-  }
+  const [slidesPerView, setslidesPerView] = useState(null);
 
-    useEffect(() => {
-        setSlides()
-    }, [isXs, isSm]);
-
+  useEffect(() => {
+    if (isXs) {
+      setslidesPerView(1);
+    } else if (isSm) {
+      setslidesPerView(2);
+    } else {
+      setslidesPerView(3);
+    }
+  }, [isXs, isSm]);
 
   return (
     <Box>

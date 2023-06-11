@@ -58,8 +58,9 @@ const Review = ({ item }) => {
 
   return (
     <Stack sx={{ mb: '40px', minWidth: '280px' }}>
-      <Stack flexWrap="wrap" direction="row" justifyContent="center" sx={{ mb: '20px', rowGap:"10px"}}>
-        <Stack direction="row" spacing={2} alignItems="center" sx={{ minWidth: '200px', flexGrow:1, rowGap:"10px"  }}>
+      <Stack flexWrap="wrap" direction="row" justifyContent="center" sx={{ mb: '20px', rowGap: '10px' }}>
+        <Stack direction="row" spacing={2} alignItems="center"
+               sx={{ minWidth: '200px', flexGrow: 1, rowGap: '10px' }}>
           <Avatar alt="Remy Sharp" src={item.icon} sx={{ width: 56, height: 56 }} />
           <Typography
             variant="p"
@@ -70,7 +71,8 @@ const Review = ({ item }) => {
             {item.authorName}
           </Typography>
         </Stack>
-        <Stack flexWrap="wrap" direction="row" spacing={2} alignItems="center" sx={{ minWidth: '200px', paddingRight: '10px', flexGrow:1, rowGap:"10px"  }}>
+        <Stack flexWrap="wrap" direction="row" spacing={2}
+               alignItems="center" sx={{ minWidth: '200px', paddingRight: '10px', flexGrow: 1, rowGap: '10px' }}>
           <Rating name="read-only" value={numericValue} readOnly />
           <Typography
             variant="p"
@@ -81,8 +83,9 @@ const Review = ({ item }) => {
             {formattedDate}
           </Typography>
         </Stack>
-        <Stack flexWrap="wrap" direction="row" spacing={2} alignItems="center" sx={{ minWidth: '200px', paddingRight: '10px', flexGrow:1, rowGap:"10px"  }}>
-          <Stack direction="row" spacing={2} alignItems="center" sx={{cursor:'pointer'}}>
+        <Stack flexWrap="wrap" direction="row" spacing={2}
+               alignItems="center" sx={{ minWidth: '200px', paddingRight: '10px', flexGrow: 1, rowGap: '10px' }}>
+          <Stack direction="row" spacing={2} alignItems="center" sx={{ cursor: 'pointer' }}>
             {clickLike
               ? <ThumbUpIcon onClick={handleClickLike} />
               : <ThumbUpOutlinedIcon onClick={handleClickLike} />}
@@ -95,7 +98,7 @@ const Review = ({ item }) => {
               {itemLike}
             </Typography>
           </Stack>
-          <Stack direction="row" spacing={2} alignItems="center" sx={{cursor:'pointer'}}>
+          <Stack direction="row" spacing={2} alignItems="center" sx={{ cursor: 'pointer' }}>
             {clickDisLike
               ? <ThumbDownAltIcon onClick={handleClickDisLike} />
               : <ThumbDownOutlinedIcon onClick={handleClickDisLike} />}

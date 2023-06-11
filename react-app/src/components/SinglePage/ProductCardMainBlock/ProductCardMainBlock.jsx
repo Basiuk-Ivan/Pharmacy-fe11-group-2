@@ -3,14 +3,14 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import {
-    Typography,
-    Stack,
-    Button,
-    Box,
-    Grid,
-    Rating,
-    ButtonBase,
-    Checkbox
+  Typography,
+  Stack,
+  Button,
+  Box,
+  Grid,
+  Rating,
+  ButtonBase,
+  Checkbox
 } from '@mui/material';
 
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -63,12 +63,12 @@ const ProductCardMainBlock = ({ productItem }) => {
     }
   };
   return (
-    <Grid container sx={{rowGap:"15px"}}>
-      <Grid item xs={12} sm={12} lg={5} >
+    <Grid container sx={{ rowGap: '15px' }}>
+      <Grid item xs={12} sm={12} lg={5}>
         <VerticalImgTabPanel productItem={productItem} />
       </Grid>
 
-      <Grid item xs={12} sm={7} lg={4} >
+      <Grid item xs={12} sm={7} lg={4}>
         <Grid container sx={{ justifyContent: 'space-around' }}>
           <Grid item lg={7} sx={{ padding: '0 10px' }}>
             <Box
@@ -77,7 +77,9 @@ const ProductCardMainBlock = ({ productItem }) => {
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 mb: '36px',
-                  flexWrap:'wrap', rowGap:'10px', columnGap:"3px"
+                flexWrap: 'wrap',
+                rowGap: '10px',
+                columnGap: '3px'
               }}
             >
               <Box
@@ -89,12 +91,13 @@ const ProductCardMainBlock = ({ productItem }) => {
                   name="simple-controlled"
                   value={value}
                   onChange={(event, newValue) => {
-                      setValue(newValue);
-                    }}
+                    setValue(newValue);
+                  }}
                   sx={{ fontSize: { xs: '16px', sm: '16px', md: '18px', lg: '18px' } }}
                 />
               </Box>
-              <Typography sx={{ fontSize: { xs: '14px', sm: '14px', md: '14px', lg: '14px' }, color: '#2FD3AE' }}>
+              <Typography sx={{ fontSize:
+                      { xs: '14px', sm: '14px', md: '14px', lg: '14px' }, color: '#2FD3AE' }}>
                 {productItem?.quantity > 0 ? 'Є в наявності' : 'Товар відсутній'}
               </Typography>
 
@@ -102,19 +105,19 @@ const ProductCardMainBlock = ({ productItem }) => {
                 <Typography
                   variant="body1"
                   sx={{
-                      fontSize: { xs: '14px', sm: '14px', md: '14px', lg: '14px' },
-                      color: '#7B818C',
-                    }}
+                    fontSize: { xs: '14px', sm: '14px', md: '14px', lg: '14px' },
+                    color: '#7B818C',
+                  }}
                 >
-                      Артикул:
+                  Артикул:
                 </Typography>
 
                 <Typography
                   variant="body1"
                   sx={{
-                      fontSize: { xs: '14px', sm: '14px', md: '14px', lg: '14px' },
-                      color: '#333333',
-                    }}
+                    fontSize: { xs: '14px', sm: '14px', md: '14px', lg: '14px' },
+                    color: '#333333',
+                  }}
                 >
                   {productItem?.article}
                 </Typography>
@@ -125,7 +128,7 @@ const ProductCardMainBlock = ({ productItem }) => {
               <Typography
                 variant="h4"
                 sx={{
-                  fontSize: '14px' ,
+                  fontSize: '14px',
                   color: '#333333',
                   lineHeight: '16px',
                   textTransform: 'uppercase',
@@ -137,130 +140,130 @@ const ProductCardMainBlock = ({ productItem }) => {
                 Характеристики
               </Typography>
               <Box>
-                <Grid container sx={{rowGap:'5px'}}>
+                <Grid container sx={{ rowGap: '5px' }}>
 
                   <Grid item xs={12} sx={{ backgroundColor: '#F7FAFB', mb: '5px' }}>
-                      <Grid
-                          container
-                          justifyContent="flex-start"
-                          alignItems="flex-start"
-                          gap={0.5}
-                          sx={{ ml: '10px' }}
-                        >
+                    <Grid
+                      container
+                      justifyContent="flex-start"
+                      alignItems="flex-start"
+                      gap={0.5}
+                      sx={{ ml: '10px' }}
+                    >
 
-                          <Grid item>
-                            <Stack direction="row" spacing={0.5} alignItems="center">
+                      <Grid item>
+                        <Stack direction="row" spacing={0.5} alignItems="center">
 
-                                  <Typography
-                                      component="span"
-                                      variant="body1"
-                                      sx={{ width: '4px',
-                                        height: '4px',
-                                        mr: '8px',
-                                        borderRadius: '50%',
-                                        backgroundColor: '#F2C94C' }}
-                                    />
+                          <Typography
+                            component="span"
+                            variant="body1"
+                            sx={{ width: '4px',
+                              height: '4px',
+                              mr: '8px',
+                              borderRadius: '50%',
+                              backgroundColor: '#F2C94C' }}
+                          />
 
-                                  <Typography
-                                      component="span"
-                                      variant="body1"
-                                      sx={{ fontSize: '14px',
-                                        color: '#7B818C'
-                                      }}
-                                    >
-                                      Виробник:
-                                    </Typography>
+                          <Typography
+                            component="span"
+                            variant="body1"
+                            sx={{ fontSize: '14px',
+                              color: '#7B818C'
+                            }}
+                          >
+                            Виробник:
+                          </Typography>
 
-                                </Stack>
-                          </Grid>
+                        </Stack>
+                      </Grid>
 
-                          <Grid item sx={{ fontSize: '14px' }}>
-                            {productItem?.manufacturer}
-                          </Grid>
-                        </Grid>
+                      <Grid item sx={{ fontSize: '14px' }}>
+                        {productItem?.manufacturer}
+                      </Grid>
                     </Grid>
+                  </Grid>
 
                   <Grid item xs={12} sx={{ mb: '5px' }}>
-                      <Grid
-                          container
-                          justifyContent="flex-start"
-                          alignItems="flex-start"
-                          gap={0.5}
-                          sx={{ ml: '10px' }}
-                        >
+                    <Grid
+                      container
+                      justifyContent="flex-start"
+                      alignItems="flex-start"
+                      gap={0.5}
+                      sx={{ ml: '10px' }}
+                    >
 
-                          <Grid item>
-                            <Stack direction="row" spacing={0.5} alignItems="center">
+                      <Grid item>
+                        <Stack direction="row" spacing={0.5} alignItems="center">
 
-                                  <Typography
-                                      component="span"
-                                      variant="body1"
-                                      sx={{ width: '4px',
-                                        height: '4px',
-                                        mr: '8px',
-                                        borderRadius: '50%',
-                                        backgroundColor: '#F2C94C' }}
-                                    />
+                          <Typography
+                            component="span"
+                            variant="body1"
+                            sx={{ width: '4px',
+                              height: '4px',
+                              mr: '8px',
+                              borderRadius: '50%',
+                              backgroundColor: '#F2C94C' }}
+                          />
 
-                                  <Typography
-                                      component="span"
-                                      variant="body1"
-                                      sx={{ fontSize: '14px',
-                                        color: '#7B818C'
-                                      }}
-                                    >
-                                      Діюча речовинаі:
-                                    </Typography>
+                          <Typography
+                            component="span"
+                            variant="body1"
+                            sx={{ fontSize: '14px',
+                              color: '#7B818C'
+                            }}
+                          >
+                            Діюча речовинаі:
+                          </Typography>
 
-                                </Stack>
-                          </Grid>
+                        </Stack>
+                      </Grid>
 
-                          <Grid item sx={{ fontSize: '14px' }}>
-                            {activeSubstance}
-                          </Grid>
-                        </Grid>
+                      <Grid item sx={{ fontSize: '14px' }}>
+                        {activeSubstance}
+                      </Grid>
                     </Grid>
+                  </Grid>
 
                   <Grid item xs={12} sx={{ backgroundColor: '#F7FAFB', mb: '5px' }}>
-                      <Grid
-                          container
-                          justifyContent="flex-start"
-                          alignItems="flex-start"
-                          gap={0.5}
-                          sx={{ ml: '10px' }}
-                        >
+                    <Grid
+                      container
+                      justifyContent="flex-start"
+                      alignItems="flex-start"
+                      gap={0.5}
+                      sx={{ ml: '10px' }}
+                    >
 
-                          <Grid item>
-                            <Stack direction="row" spacing={0.5} alignItems="center">
+                      <Grid item>
+                        <Stack direction="row" spacing={0.5} alignItems="center">
 
-                                  <Typography
-                                      component="span"
-                                      variant="body1"
-                                      sx={{ width: '4px',
-                                        height: '4px',
-                                        mr: '8px',
-                                        borderRadius: '50%',
-                                        backgroundColor: '#F2C94C' }}
-                                    />
+                          <Typography
+                            component="span"
+                            variant="body1"
+                            sx={{ width: '4px',
+                              height: '4px',
+                              mr: '8px',
+                              borderRadius: '50%',
+                              backgroundColor: '#F2C94C' }}
+                          />
 
-                                  <Typography
-                                      component="span"
-                                      variant="body1"
-                                      sx={{ fontSize: '14px',
-                                        color: '#7B818C'
-                                      }}
-                                    >
-                                      Термін придатності:
-                                    </Typography>
+                          <Typography
+                            component="span"
+                            variant="body1"
+                            sx={{ fontSize: '14px',
+                              color: '#7B818C'
+                            }}
+                          >
+                            Термін придатності:
+                          </Typography>
 
-                                </Stack>
-                          </Grid>
+                        </Stack>
+                      </Grid>
 
-                          <Grid item sx={{ fontSize: '14px' }}>
-                            {productItem?.bestBeforeDate}
-                          </Grid>
-                        </Grid>
+                      <Grid item sx={{ fontSize: '14px' }}>
+                        {productItem?.bestBeforeDate}
+                      </Grid>
                     </Grid>
+                  </Grid>
 
                 </Grid>
 

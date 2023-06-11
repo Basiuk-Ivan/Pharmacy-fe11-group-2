@@ -28,7 +28,8 @@ const BreadProduct = ({ category, name }) => {
   return (
     <IconBreadcrumbs sx={{ mt: '30px' }}>
       <Breadcrumbs>
-        <Stack sx={{ display: 'flex', rowGap:'10px',  flexDirection: { xs: 'column', sm: 'row' } }} key="home">
+        <Stack sx={{ display: 'flex', rowGap: '10px',
+          flexDirection: { xs: 'column', sm: 'row' } }} key="home">
           <NavLink to="/">
             <Box sx={{ display: 'flex', height: '30px' }}>
               <HomeOutlinedIcon sx={{ mr: 0.5, color: '#2FD3AE' }} fontSize="small" />
@@ -45,7 +46,7 @@ const BreadProduct = ({ category, name }) => {
               </Typography>
             </Stack>
           </NavLink>
-          <Stack direction="row" sx={{  minHeight: '30px' }}>
+          <Stack direction="row" sx={{ minHeight: '30px' }}>
             <Box>
               <KeyboardDoubleArrowRightTwoToneIcon sx={{ fill: '#BDBDBD', mr: '12px' }} />
             </Box>
