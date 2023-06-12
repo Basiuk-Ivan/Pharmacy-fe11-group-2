@@ -4,8 +4,8 @@ import { Box } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Checkbox from '@mui/material/Checkbox';
-import { addToFavouriteLocalStor } from '../../../utils/addToFavouriteLocalStor';
-import { removeFromFavouriteLocalStor } from '../../../utils/removeFromFavouriteLocalStor';
+import { addToFavouriteLocalStor } from '../../../utils/LocalStore/addToFavouriteLocalStor';
+import { removeFromFavouriteLocalStor } from '../../../utils/LocalStore/removeFromFavouriteLocalStor';
 import { addToFavouriteItems, deleteFromFavouriteItems } from '../../../redux/slice/favouriteItems';
 import { favoriteIconStyles, checkBoxStyles, favoriteIcon } from '../style';
 

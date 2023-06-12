@@ -1,4 +1,4 @@
-import { removeItem } from '../redux/slice/cartItems';
+import { removeItem } from '../../redux/slice/cartItems';
 
 export const removeFromCartLocalStor = (productItem, dispatch, arg) => {
   if (arg === 'all') {
