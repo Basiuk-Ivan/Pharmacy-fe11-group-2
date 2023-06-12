@@ -1,3 +1,5 @@
+import {maxWidth} from "@mui/system";
+
 export const sortingWrapperStyles = {
   display: 'flex',
   justifyContent: 'space-between',
@@ -9,7 +11,10 @@ export const sortingStyles = {
   display: 'flex',
   alignItems: 'center',
   gap: '40px',
-  paddingLeft: '20px'
+  paddingLeft: '20px',
+  '@media (max-width: 899px)': {
+    flexDirection: 'column'
+  }
 };
 
 export const sortingTitleStyles = {

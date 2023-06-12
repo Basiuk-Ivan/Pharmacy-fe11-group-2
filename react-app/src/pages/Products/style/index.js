@@ -13,13 +13,15 @@ export const asideAndCardsStyles = {
 export const asideStyles = {
   display: 'flex',
   flexDirection: 'column',
-  width: '240px'
+  '@media (min-width: 1200px)': {
+    width: '240px',
+  }
 };
 
 export const sortingAndCardsStyles = {
   display: 'flex',
   flexDirection: 'column',
-  // width: '914px'
+  // width: '100%',
 };
 
 export const paginationWrapperStyles = {

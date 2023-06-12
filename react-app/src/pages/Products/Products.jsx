@@ -52,8 +52,8 @@ function Products() {
           </Box>
         </Box>
       </Box>
-      <PromoMonth />
-      <YouBrowsed />
+      {/*<PromoMonth />*/}
+      {/*<YouBrowsed />*/}
     </Container>
   );
 }
