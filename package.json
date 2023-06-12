@@ -3,6 +3,10 @@
     "husky": "^8.0.3"
   },
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "start": "concurrently \"npm start --prefix api\" \"npm run dev --prefix react-app\""
+  },
+  "dependencies": {
+    "concurrently": "^8.2.0"
   }
 }

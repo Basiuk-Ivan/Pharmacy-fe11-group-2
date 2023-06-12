@@ -5,15 +5,17 @@ import modalSlice from '../slice/modalSlice';
 import numPageSlice from '../slice/numPageSlice';
 import itemCardsSlice from '../slice/cartItems';
 import favouriteItemsSlice from '../slice/favouriteItems';
+import filterBaseSlice from '../slice/filterBaseSlice';
 import tokenSlise from '../slice/isToken';
 
 const store = configureStore({
   reducer: {
     products: productsSlice,
     order: orderReducer,
-    openModal: modalSlice,
+    modalSlice,
     numPage: numPageSlice,
     favouriteItems: favouriteItemsSlice,
+    filterBase: filterBaseSlice,
     itemCards: itemCardsSlice,
     isToken: tokenSlise
   }

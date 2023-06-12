@@ -14,7 +14,7 @@ import {
 
 function YouBrowsed() {
   const { products } = useSelector(state => state.products);
-  const youBrowsedCards = products.slice(5, 10);
+  const youBrowsedCards = products.slice(0, 5);
   const isInCart = false;
 
   return (

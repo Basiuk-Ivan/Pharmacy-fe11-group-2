@@ -1,23 +1,26 @@
-import { Box, Link } from '@mui/material';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import KeyboardDoubleArrowRightTwoToneIcon from '@mui/icons-material/KeyboardDoubleArrowRightTwoTone';
-import { categoryCurrentStyle, currentPageStyle, linkAndCurrentCategoryStyle, linkStyle } from './style';
+import React from 'react';
+import { currentCategoryStyle, wrappCurrentCategoryStyle } from './style';
 
 function TitleCategory() {
+  const values = {
+    painkillers: 'Знеболюючі',
+    cardiovascularSystem: 'Серцево-судинна система',
+    coughColdFlu: 'Ліки від кашлю, застуди та грипу',
+    nervousSystem: 'Для нервової системи'
+  };
+  const { pathname } = window.location;
+  const pathArray = pathname.slice(1).split('/');
+  const finalData = pathArray.map(item => values[item]);
+
   return (
-    <Box id="link&CurrentCategory" sx={linkAndCurrentCategoryStyle}>
-      <Box id="linkWrapper" sx={{ display: 'flex' }}>
-        <Link href="/" sx={linkStyle}>
-          <HomeOutlinedIcon fontSize="medium" sx={{ marginRight: '13px' }} />
-          <Typography>Головна</Typography>
-        </Link>
-        <Box id="currentPage" sx={currentPageStyle}>
-          <KeyboardDoubleArrowRightTwoToneIcon sx={{ marginRight: '11px' }} />
-          <Typography>Пошук по категорії</Typography>
-        </Box>
-      </Box>
-      <Box id="categoryCurrent" sx={categoryCurrentStyle}>Ліки від кашлю, застуди та грипу</Box>
+    <Box sx={wrappCurrentCategoryStyle}>
+      {finalData.map((item, index) => (
+        <Typography sx={currentCategoryStyle} key={index}>
+          {item}
+        </Typography>
+      ))}
     </Box>
   );
 }

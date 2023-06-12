@@ -2,6 +2,7 @@ export const wrapForCardStyles = isInCart => ({
   position: 'relative',
   overflow: 'visible',
   width: isInCart ? 'auto' : '220px',
+  height: isInCart ? 'auto' : '430px',
   display: isInCart ? 'flex' : 'block'
 });
 

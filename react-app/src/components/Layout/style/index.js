@@ -15,7 +15,7 @@ export const theme = createTheme({
 export const containerMainStyles = {
   marginTop: '133px',
   '@media (max-width: 899px)': {
-    marginTop: '65px'
+    marginTop: '58px'
   }
 };
 

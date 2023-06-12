@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
-import paymentPoint from '../../../../assets/howWeWork/payment-point.svg';
-import { wrapperForItem, wrapperForImg } from '../style';
+import paymentPoint from '../../../../../assets/howWeWork/payment-point.svg';
+import { wrapperForItem, wrapperForImg } from '../../style';
 
 export const OrderForm = () => (
   <Box sx={wrapperForItem}>

@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
-import building from '../../../../assets/howWeWork/building.svg';
-import { wrapperForItem, wrapperForImg } from '../style';
+import building from '../../../../../assets/howWeWork/building.svg';
+import { wrapperForItem, wrapperForImg } from '../../style';
 
 export const PharmacySelector = () => (
   <Box sx={wrapperForItem}>
