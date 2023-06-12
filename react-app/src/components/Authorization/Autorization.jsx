@@ -52,6 +52,7 @@ const AuthButton = () => {
                   initialValues={{
                     email: '',
                     password: '',
+                    confirmPassword: '',
                     firstName: '',
                     lastName: '',
                     phone: '',
