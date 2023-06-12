@@ -2,9 +2,15 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeModal, deleteFromFavouriteItems } from '../redux/slice/favouriteItems';
+import { removeFromFavouriteLocalStor } from '../utils/LocalStore/removeFromFavouriteLocalStor';
 
 const style = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
   position: 'absolute',
   top: '50%',
   left: '50%',
@@ -18,27 +24,42 @@ const style = {
 };
 
 const ModalWindow = () => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const dispatch = useDispatch();
+  const isOpened = useSelector(state => state.favouriteItems.isOpened);
+  const favourites = useSelector(state => state.favouriteItems.favouriteItems);
+
+  const handleClose = () => {
+    dispatch(closeModal());
+  };
+
+  const removeFromLocalStorage = () => {
+    favourites.forEach(element => {
+      removeFromFavouriteLocalStor(element);
+    });
+  };
+
+  const handleClick = () => {
+    dispatch(deleteFromFavouriteItems('all'));
+    removeFromLocalStorage();
+    dispatch(closeModal());
+  };
 
   return (
-    <>
-      <Button onClick={handleOpen}>Open modal</Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2" />
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+    <Modal
+      open={isOpened}
+      onClose={handleClose}
+    >
+      <Box sx={style}>
+        <Typography>Видалити всі товари з кошика?</Typography>
+        <Typography sx={{ mt: 2 }}>
+          Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+        </Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+          <Button onClick={handleClick} sx={{ color: 'black' }}>Підтвердити</Button>
+          <Button onClick={handleClose} sx={{ color: 'black' }}>Відміна</Button>
         </Box>
-      </Modal>
-    </>
+      </Box>
+    </Modal>
   );
 };
 

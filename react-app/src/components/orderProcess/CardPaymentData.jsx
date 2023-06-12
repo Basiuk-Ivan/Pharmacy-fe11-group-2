@@ -28,13 +28,12 @@ const CardPaymentData = () => {
     validationSchema,
     onSubmit: (values, { resetForm }) => {
       // eslint-disable-next-line no-console
-      console.log(values);
       resetForm();
     }
   });
   return (
     <Container>
-      <form id="contacts" onSubmit={formik.handleSubmit}>
+      <form id="cardpay" onSubmit={formik.handleSubmit}>
         <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
           <Grid item md={12}>
             <ChangedTextField
@@ -81,7 +80,6 @@ const CardPaymentData = () => {
             />
           </Grid>
         </Grid>
-        <button type="submit">asd</button>
       </form>
     </Container>
   );
