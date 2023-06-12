@@ -11,7 +11,7 @@ import './Auth.scss';
 import { style, StyledButton, UnderlineSpan, HighlightSpan, CustomTextField } from './Style';
 
 const AuthButton = () => {
-  const isOpen = useSelector(state => state.openModal.openModal);
+  const isOpen = useSelector(state => state.modalSlice.openModal);
   const dispatch = useDispatch();
 
   const handleCloseModal = () => dispatch(closeModal());
@@ -52,6 +52,7 @@ const AuthButton = () => {
                   initialValues={{
                     email: '',
                     password: '',
+                    confirmPassword: '',
                     firstName: '',
                     lastName: '',
                     phone: '',
