@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { Button, CardContent, TextField, Typography } from '@mui/material';
+import { Button, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
+
 export const ContainerBox = styled(Box)`
   display: flex;
   max-width: 1200px;
