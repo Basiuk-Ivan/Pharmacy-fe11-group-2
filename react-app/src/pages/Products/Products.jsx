@@ -10,7 +10,7 @@ import SortingPrice from '../../components/PageProducts/SortingPrice';
 import PaginationProducts from '../../components/PageProducts/PaginationProducts';
 import Cards from '../../components/PageProducts/Cards';
 import TitleCategory from '../../components/PageProducts/TitleCategory';
-import Bread from '../../components/Favourite/Bread';
+import Bread from '../../components/Bread';
 
 import {
   asideAndCardsStyles,

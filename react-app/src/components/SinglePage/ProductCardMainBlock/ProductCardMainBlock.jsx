@@ -16,13 +16,9 @@ import {
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-
-import { addToFavouriteLocalStor } from '../../../utils/addToFavouriteLocalStor';
-
+import { addToFavouriteLocalStor } from '../../../utils/LocalStore/addToFavouriteLocalStor';
+import { removeFromFavouriteLocalStor } from '../../../utils/LocalStore/removeFromFavouriteLocalStor';
 import { addToFavouriteItems, deleteFromFavouriteItems } from '../../../redux/slice/favouriteItems';
-
-import { removeFromFavouriteLocalStor } from '../../../utils/removeFromFavouriteLocalStor';
-
 import VerticalImgTabPanel from '../VerticalImgTabPanel';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
