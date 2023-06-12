@@ -2,6 +2,7 @@ export const wrapForCardStyles = isInCart => ({
   position: 'relative',
   overflow: 'visible',
   width: isInCart ? 'auto' : '220px',
+  height: isInCart ? 'auto' : '430px',
   display: isInCart ? 'flex' : 'block'
 });
 
@@ -43,7 +44,7 @@ export const productNameStyles = isInCart => ({
 });
 
 export const priceStyles = {
-  fontSize: '24px',
+  fontSize: '21px',
   fontWeight: 700,
   color: '#525A68'
 };

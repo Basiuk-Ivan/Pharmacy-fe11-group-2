@@ -1,0 +1,26 @@
+.product-analogies-slider {
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 15px;
+    height: 25px;
+    &::after {
+      font-size: 15px;
+      color: #809c9c;
+    }
+  }
+
+  .swiper-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+

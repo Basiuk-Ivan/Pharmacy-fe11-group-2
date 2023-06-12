@@ -12,7 +12,10 @@ export const Item = styled(Paper)(({ theme }) => ({
 export const todayPharmacyStyles = {
   fontSize: 24,
   fontWeight: 700,
-  color: '#333333'
+  color: '#333333',
+  '@media (max-width: 600px)': {
+    fontSize: 20
+  }
 };
 
 export const itTypographyStyles = {
@@ -29,7 +32,8 @@ export const wrapperForItemStyles = {
 
 export const stackStyles = {
   justifyContent: 'space-between',
-  width: '100%'
+  width: '100%',
+  rowGap: '20px'
 };
 
 export const wrapperForItem = {

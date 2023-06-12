@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { ThemeProvider } from '@mui/material/styles';
 import { Pagination } from '@mui/material';
+import { theme } from '../../../tools/muiTheme';
 import { changePage } from '../../../redux/slice/numPageSlice';
 
 function PaginationProducts() {
@@ -16,18 +18,20 @@ function PaginationProducts() {
   }
 
   return (
-    <Pagination
-      count={totalPage}
-      page={numPage}
-      color="primary"
-      variant="outlined"
-      shape="rounded"
-      hidePrevButton
-      hideNextButton
-      boundaryCount={2}
-      siblingCount={1}
-      onChange={(_, num) => handleChange(num)}
-    />
+    <ThemeProvider theme={theme}>
+      <Pagination
+        count={totalPage}
+        page={numPage}
+        color="primary"
+        variant="outlined"
+        shape="rounded"
+        hidePrevButton
+        hideNextButton
+        boundaryCount={2}
+        siblingCount={1}
+        onChange={(_, num) => handleChange(num)}
+      />
+    </ThemeProvider>
   );
 }
 

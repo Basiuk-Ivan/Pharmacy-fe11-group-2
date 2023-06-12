@@ -1,41 +1,41 @@
 import { Outlet } from 'react-router-dom';
-import { AppBar, Container, Toolbar, Box } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Container from '@mui/material/Container';
+import Logo from './Logo/Logo';
+import Menu from './Menu';
 import AuthButton from '../Authorization/Autorization';
-import ContactInfo from './ContactInfo';
-import Logo from './Logo';
-import SearchActions from './Search';
-import UserActions from './UserActions';
 import SocialMediaButton from './SocialMediaButton/SocialMediaButton';
-import Menu from '../PageHome/Menu';
+import ContactInfo from './ContactInfo/ContactInfo';
+import SearchActions from './Search/Search';
+import { MobileLogo } from './Logo/components/MobileLogo/MobileLogo';
+import UserActions from './UserActions/UserActions';
 import Footer from './Footer/Footer';
-import { appBarStyles, toolbarStyles } from './style';
+
+import { theme, containerMainStyles, toolBarStyles } from './style';
 
 const Layout = () => (
-  <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100vh' }}>
-    <Container
-      sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
-      position="relative"
-      maxWidth="lg"
-      disableGutters
-    >
+  <ThemeProvider theme={theme}>
+    <AppBar position="fixed">
       <AuthButton />
-      <AppBar position="static" sx={appBarStyles}>
-        <Toolbar sx={toolbarStyles}>
+      <Container maxWidth="lg">
+        <Toolbar disableGutters sx={toolBarStyles}>
           <Logo />
+          <MobileLogo />
           <SocialMediaButton />
           <ContactInfo />
           <SearchActions />
           <UserActions />
         </Toolbar>
-      </AppBar>
-
-      <Container position="relative" maxWidth="lg" disableGutters>
-        <Menu />
-        <Outlet />
       </Container>
+      <Menu />
+    </AppBar>
+    <Container position="relative" maxWidth="lg" sx={containerMainStyles}>
+      <Outlet />
     </Container>
     <Footer />
-  </Box>
+  </ThemeProvider>
 );
 
 export default Layout;

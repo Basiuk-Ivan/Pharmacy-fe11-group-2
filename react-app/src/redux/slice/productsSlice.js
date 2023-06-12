@@ -2,9 +2,10 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchProductsData = createAsyncThunk(
   'products/fetchProductsData',
-  async (_, { rejectWithValue }) => {
+  async (category, { rejectWithValue }) => {
     try {
-      const res = await fetch('/products.json');
+      // const res = await fetch('/products.json');
+      const res = await fetch(`http://localhost:3004/api/product?categories=${category}`);
 
       if (!res.ok) {
         throw new Error('Server Error');
