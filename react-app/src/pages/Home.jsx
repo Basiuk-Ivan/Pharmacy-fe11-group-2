@@ -12,9 +12,9 @@ const Home = () => (
     <MainSlider />
     <PromotionSlider />
     <HowWeWork />
-     <Testimonials />
+    <Testimonials />
     <OurPartners />
-     <HealthBlog />
+    <HealthBlog />
     <CreationHistory />
     <TodayPharmacy />
   </>
