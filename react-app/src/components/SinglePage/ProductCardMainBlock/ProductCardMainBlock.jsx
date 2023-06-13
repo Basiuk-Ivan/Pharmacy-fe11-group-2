@@ -2,22 +2,13 @@ import { useEffect, useState } from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import {
-  Typography,
-  Stack,
-  Button,
-  Box,
-  Grid,
-  Rating,
-  ButtonBase,
-  Checkbox
-} from '@mui/material';
+import { Typography, Stack, Button, Box, Grid, Rating, ButtonBase, Checkbox } from '@mui/material';
 
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import { addToFavouriteLocalStor } from '../../../utils/LocalStore/addToFavouriteLocalStor';
-import { removeFromFavouriteLocalStor } from '../../../utils/LocalStore/removeFromFavouriteLocalStor';
+import { addToFavouriteLocalStorage } from '../../../utils/LocalStorage/addToFavouriteLocalStorage';
+import { removeFromFavouriteLocalStorage } from '../../../utils/LocalStorage/removeFromFavouriteLocalStorage';
 import { addToFavouriteItems, deleteFromFavouriteItems } from '../../../redux/slice/favouriteItems';
 import VerticalImgTabPanel from '../VerticalImgTabPanel';
 
@@ -41,10 +32,10 @@ const ProductCardMainBlock = ({ productItem }) => {
     setIsFavorite(!isFavorite);
 
     if (!isFavorite) {
-      addToFavouriteLocalStor(productItem);
+      addToFavouriteLocalStorage(productItem);
       dispatch(addToFavouriteItems(productItem));
     } else {
-      removeFromFavouriteLocalStor(productItem);
+      removeFromFavouriteLocalStorage(productItem);
       dispatch(deleteFromFavouriteItems(productItem.id));
     }
   };
@@ -92,9 +83,8 @@ const ProductCardMainBlock = ({ productItem }) => {
                   sx={{ fontSize: { xs: '16px', sm: '16px', md: '18px', lg: '18px' } }}
                 />
               </Box>
-              <Typography sx={{ fontSize:
-                      { xs: '14px', sm: '14px', md: '14px', lg: '14px' },
-              color: '#2FD3AE' }}
+              <Typography
+                sx={{ fontSize: { xs: '14px', sm: '14px', md: '14px', lg: '14px' }, color: '#2FD3AE' }}
               >
                 {productItem?.quantity > 0 ? 'Є в наявності' : 'Товар відсутній'}
               </Typography>
@@ -104,7 +94,7 @@ const ProductCardMainBlock = ({ productItem }) => {
                   variant="body1"
                   sx={{
                     fontSize: { xs: '14px', sm: '14px', md: '14px', lg: '14px' },
-                    color: '#7B818C',
+                    color: '#7B818C'
                   }}
                 >
                   Артикул:
@@ -114,7 +104,7 @@ const ProductCardMainBlock = ({ productItem }) => {
                   variant="body1"
                   sx={{
                     fontSize: { xs: '14px', sm: '14px', md: '14px', lg: '14px' },
-                    color: '#333333',
+                    color: '#333333'
                   }}
                 >
                   {productItem?.article}
@@ -139,7 +129,6 @@ const ProductCardMainBlock = ({ productItem }) => {
               </Typography>
               <Box>
                 <Grid container sx={{ rowGap: '5px' }}>
-
                   <Grid item xs={12} sx={{ backgroundColor: '#F7FAFB', mb: '5px' }}>
                     <Grid
                       container
@@ -148,30 +137,27 @@ const ProductCardMainBlock = ({ productItem }) => {
                       gap={0.5}
                       sx={{ ml: '10px' }}
                     >
-
                       <Grid item>
                         <Stack direction="row" spacing={0.5} alignItems="center">
-
                           <Typography
                             component="span"
                             variant="body1"
-                            sx={{ width: '4px',
+                            sx={{
+                              width: '4px',
                               height: '4px',
                               mr: '8px',
                               borderRadius: '50%',
-                              backgroundColor: '#F2C94C' }}
+                              backgroundColor: '#F2C94C'
+                            }}
                           />
 
                           <Typography
                             component="span"
                             variant="body1"
-                            sx={{ fontSize: '14px',
-                              color: '#7B818C'
-                            }}
+                            sx={{ fontSize: '14px', color: '#7B818C' }}
                           >
                             Виробник:
                           </Typography>
-
                         </Stack>
                       </Grid>
 
@@ -189,30 +175,27 @@ const ProductCardMainBlock = ({ productItem }) => {
                       gap={0.5}
                       sx={{ ml: '10px' }}
                     >
-
                       <Grid item>
                         <Stack direction="row" spacing={0.5} alignItems="center">
-
                           <Typography
                             component="span"
                             variant="body1"
-                            sx={{ width: '4px',
+                            sx={{
+                              width: '4px',
                               height: '4px',
                               mr: '8px',
                               borderRadius: '50%',
-                              backgroundColor: '#F2C94C' }}
+                              backgroundColor: '#F2C94C'
+                            }}
                           />
 
                           <Typography
                             component="span"
                             variant="body1"
-                            sx={{ fontSize: '14px',
-                              color: '#7B818C'
-                            }}
+                            sx={{ fontSize: '14px', color: '#7B818C' }}
                           >
                             Діюча речовинаі:
                           </Typography>
-
                         </Stack>
                       </Grid>
 
@@ -230,30 +213,27 @@ const ProductCardMainBlock = ({ productItem }) => {
                       gap={0.5}
                       sx={{ ml: '10px' }}
                     >
-
                       <Grid item>
                         <Stack direction="row" spacing={0.5} alignItems="center">
-
                           <Typography
                             component="span"
                             variant="body1"
-                            sx={{ width: '4px',
+                            sx={{
+                              width: '4px',
                               height: '4px',
                               mr: '8px',
                               borderRadius: '50%',
-                              backgroundColor: '#F2C94C' }}
+                              backgroundColor: '#F2C94C'
+                            }}
                           />
 
                           <Typography
                             component="span"
                             variant="body1"
-                            sx={{ fontSize: '14px',
-                              color: '#7B818C'
-                            }}
+                            sx={{ fontSize: '14px', color: '#7B818C' }}
                           >
                             Термін придатності:
                           </Typography>
-
                         </Stack>
                       </Grid>
 
@@ -262,9 +242,7 @@ const ProductCardMainBlock = ({ productItem }) => {
                       </Grid>
                     </Grid>
                   </Grid>
-
                 </Grid>
-
               </Box>
             </Box>
           </Grid>
@@ -277,7 +255,7 @@ const ProductCardMainBlock = ({ productItem }) => {
             paddingLeft: '30px',
             backgroundColor: '#F7FAFB',
             paddingTop: '65px',
-            mb: '10px',
+            mb: '10px'
           }}
         >
           <Grid item xs={12} lg={9} sx={{ paddingLeft: '0px' }}>
@@ -384,13 +362,7 @@ const ProductCardMainBlock = ({ productItem }) => {
           {productItem.price} ГРН.
         </Typography>
 
-        <Stack
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-          spacing={2}
-          sx={{ mb: '12px' }}
-        >
+        <Stack direction="column" justifyContent="center" alignItems="center" spacing={2} sx={{ mb: '12px' }}>
           <Button
             variant="outlined"
             onClick={handleDecrement}
