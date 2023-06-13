@@ -4,18 +4,17 @@ import TextComponent from '../TextComponent';
 
 const ProductCardInstruction = ({ productItem }) => {
   const [activeButton, setActiveButton] = useState(null);
-  const [activeSubstanceText, setActiveSubstanceText] = useState('');
 
-  const manufacturerRef = useRef(null);
-  const brieflyAboutRef = useRef(null);
-  const indicationsRef = useRef(null);
-  const howToTakeRef = useRef(null);
-  const descriptionRef = useRef(null);
-  const functionalBenefitsRef = useRef(null);
-  const storageConditionsRef = useRef(null);
-  const bestBeforeDateRef = useRef(null);
-  const activeSubstanceRef = useRef(null);
+  const compoundRef = useRef(null);
   const dosageFormRef = useRef(null);
+  const pharmGroupRef = useRef(null);
+  const indicationsRef = useRef(null);
+  const contraindicationsRef = useRef(null);
+  const howToTakeRef = useRef(null);
+  const adverseReactionsRef = useRef(null);
+  const bestBeforeDateRef = useRef(null);
+  const storageConditionsRef = useRef(null);
+  const manufacturerRef = useRef(null);
 
   const scrollToElement = elementId => {
     const element = document.getElementById(elementId);
@@ -28,34 +27,34 @@ const ProductCardInstruction = ({ productItem }) => {
   const handleClick = buttonId => {
     switch (buttonId) {
       case 'button1':
-        scrollToElement('manufacturer');
+        scrollToElement('compound');
         break;
       case 'button2':
-        scrollToElement('brieflyAbout');
+        scrollToElement('dosageForm');
         break;
       case 'button3':
-        scrollToElement('indications');
+        scrollToElement('pharmGroup');
         break;
       case 'button4':
-        scrollToElement('howToTake');
+        scrollToElement('indications');
         break;
       case 'button5':
-        scrollToElement('description');
+        scrollToElement('contraindications');
         break;
       case 'button6':
-        scrollToElement('functionalBenefits');
+        scrollToElement('howToTake');
         break;
       case 'button7':
-        scrollToElement('storageConditions');
+        scrollToElement('adverseReactions');
         break;
       case 'button8':
         scrollToElement('bestBeforeDate');
         break;
       case 'button9':
-        scrollToElement('activeSubstance');
+        scrollToElement('storageConditions');
         break;
       case 'button10':
-        scrollToElement('dosageForm');
+        scrollToElement('manufacturer');
         break;
       default:
         break;
@@ -63,8 +62,7 @@ const ProductCardInstruction = ({ productItem }) => {
   };
 
   useEffect(() => {
-    const arr = productItem.activeSubstance;
-    setActiveSubstanceText(arr.join(', '));
+
     window.addEventListener('scroll', () => setActiveButton(false));
 
     return () => {
@@ -86,7 +84,7 @@ const ProductCardInstruction = ({ productItem }) => {
         <Button
           variant="outlined"
           onClick={() => handleClick('button1')}
-          ref={manufacturerRef}
+          ref={compoundRef}
           sx={() => ({
             color: activeButton === 'button1' ? '#ffffff' : '#2FD3AE',
             borderRadius: '50px',
@@ -99,13 +97,13 @@ const ProductCardInstruction = ({ productItem }) => {
             }
           })}
         >
-          Виробник
+          Cклад
         </Button>
         <Button
           variant="outlined"
           color={activeButton === 'button2' ? 'secondary' : 'primary'}
           onClick={() => handleClick('button2')}
-          ref={brieflyAboutRef}
+          ref={dosageFormRef}
           sx={() => ({
             color: activeButton === 'button2' ? '#ffffff' : '#2FD3AE',
             borderRadius: '50px',
@@ -118,13 +116,13 @@ const ProductCardInstruction = ({ productItem }) => {
             }
           })}
         >
-          Коротко про товар
+          Лікарська форма
         </Button>
         <Button
           variant="outlined"
           color={activeButton === 'button3' ? 'secondary' : 'primary'}
           onClick={() => handleClick('button3')}
-          ref={indicationsRef}
+          ref={pharmGroupRef}
           sx={() => ({
             color: activeButton === 'button3' ? '#ffffff' : '#2FD3AE',
             borderRadius: '50px',
@@ -137,13 +135,13 @@ const ProductCardInstruction = ({ productItem }) => {
             }
           })}
         >
-          Показання
+          Фармакотерапевтична група
         </Button>
         <Button
           variant="outlined"
           color={activeButton === 'button4' ? 'secondary' : 'primary'}
           onClick={() => handleClick('button4')}
-          ref={howToTakeRef}
+          ref={indicationsRef}
           sx={() => ({
             color: activeButton === 'button4' ? '#ffffff' : '#2FD3AE',
             borderRadius: '50px',
@@ -156,13 +154,13 @@ const ProductCardInstruction = ({ productItem }) => {
             }
           })}
         >
-          Як приймати, курс прийому та дозування
+          Показання
         </Button>
         <Button
           variant="outlined"
           color={activeButton === 'button5' ? 'secondary' : 'primary'}
           onClick={() => handleClick('button5')}
-          ref={descriptionRef}
+          ref={contraindicationsRef}
           sx={() => ({
             color: activeButton === 'button5' ? '#ffffff' : '#2FD3AE',
             borderRadius: '50px',
@@ -175,13 +173,13 @@ const ProductCardInstruction = ({ productItem }) => {
             }
           })}
         >
-          Опис
+          Противопоказання
         </Button>
         <Button
           variant="outlined"
           color={activeButton === 'button6' ? 'secondary' : 'primary'}
           onClick={() => handleClick('button6')}
-          ref={functionalBenefitsRef}
+          ref={howToTakeRef}
           sx={() => ({
             color: activeButton === 'button6' ? '#ffffff' : '#2FD3AE',
             borderRadius: '50px',
@@ -194,14 +192,14 @@ const ProductCardInstruction = ({ productItem }) => {
             }
           })}
         >
-          Функціональні переваги
+          Спосіб застосування
         </Button>
 
         <Button
           variant="outlined"
           color={activeButton === 'button7' ? 'secondary' : 'primary'}
           onClick={() => handleClick('button7')}
-          ref={storageConditionsRef}
+          ref={adverseReactionsRef}
           sx={() => ({
             color: activeButton === 'button7' ? '#ffffff' : '#2FD3AE',
             borderRadius: '50px',
@@ -214,7 +212,7 @@ const ProductCardInstruction = ({ productItem }) => {
             }
           })}
         >
-          Умови зберігання
+          Побічні реакціі
         </Button>
         <Button
           variant="outlined"
@@ -239,7 +237,7 @@ const ProductCardInstruction = ({ productItem }) => {
           variant="outlined"
           color={activeButton === 'button9' ? 'secondary' : 'primary'}
           onClick={() => handleClick('button9')}
-          ref={activeSubstanceRef}
+          ref={storageConditionsRef}
           sx={() => ({
             color: activeButton === 'button9' ? '#ffffff' : '#2FD3AE',
             borderRadius: '50px',
@@ -252,13 +250,13 @@ const ProductCardInstruction = ({ productItem }) => {
             }
           })}
         >
-          Діюча речовина
+          Умови зберігання
         </Button>
         <Button
           variant="outlined"
           color={activeButton === 'button10' ? 'secondary' : 'primary'}
           onClick={() => handleClick('button10')}
-          ref={dosageFormRef}
+          ref={manufacturerRef}
           sx={() => ({
             color: activeButton === 'button10' ? '#ffffff' : '#2FD3AE',
             borderRadius: '50px',
@@ -271,44 +269,44 @@ const ProductCardInstruction = ({ productItem }) => {
             }
           })}
         >
-          Лікарська форма
+          Виробник
         </Button>
       </Stack>
       <Box>
         <TextComponent
-          id="manufacturer"
-          title="Виробник"
-          value={productItem?.manufacturer}
+          id="compound"
+          title="Склад"
+          value={productItem?.instruction?.compound}
         />
         <TextComponent
-          id="brieflyAbout"
-          title="Коротко про товар"
-          value={productItem?.instruction?.brieflyAbout}
+          id="dosageForm"
+          title="Лікарська форма"
+          value={productItem?.productForm}
+        />
+        <TextComponent
+          id="pharmGroup"
+          title="Фармакотерапевтична група"
+          value={productItem?.instruction?.pharmGroup}
         />
         <TextComponent
           id="indications"
           title="Показання"
-          value={productItem.instruction.indications}
+          value={productItem?.instruction?.indications}
+        />
+        <TextComponent
+          id="contraindications"
+          title="Противопоказання"
+          value={productItem?.instruction?.contraindications}
         />
         <TextComponent
           id="howToTake"
-          title="Як приймати, курс прийому та дозування"
+          title="Спосіб застосування"
           value={productItem?.instruction?.howToTake}
         />
         <TextComponent
-          id="description"
-          title="Опис"
-          value={productItem?.instruction?.description}
-        />
-        <TextComponent
-          id="functionalBenefits"
-          title="Функціональні переваги"
-          value={productItem?.instruction?.functionalBenefits}
-        />
-        <TextComponent
-          id="storageConditions"
-          title="Умови зберігання"
-          value={productItem?.instruction?.storageConditions}
+          id="adverseReactions"
+          title="Побочні реакції"
+          value={productItem?.instruction?.adverseReactions}
         />
         <TextComponent
           id="bestBeforeDate"
@@ -316,14 +314,14 @@ const ProductCardInstruction = ({ productItem }) => {
           value={productItem?.bestBeforeDate}
         />
         <TextComponent
-          id="activeSubstance"
-          title="Діюча речовина"
-          value={activeSubstanceText}
+          id="storageConditions"
+          title="Умови зберігання"
+          value={productItem?.instruction?.storageConditions}
         />
         <TextComponent
-          id="dosageForm"
-          title="Лікарська форма"
-          value={productItem?.productForm}
+          id="manufacturer"
+          title="Виробник"
+          value={productItem?.manufacturer}
         />
       </Box>
 

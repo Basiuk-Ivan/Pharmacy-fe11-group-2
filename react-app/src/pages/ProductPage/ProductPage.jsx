@@ -102,8 +102,8 @@ const ProductPage = () => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        const productData = await response.json();
-        const selectedProduct = productData.find(item => item.id === id);
+        const { prods } = await response.json();
+        const selectedProduct = prods.find(item => item.id === id);
         setProduct(selectedProduct);
       } catch (error) {
         // eslint-disable-next-line no-console
