@@ -8,11 +8,12 @@ import ProductCard from '../../ProductCard/ProductCard';
 import Bread from '../../Bread';
 import { fetchProductsData } from '../../../redux/slice/productsSlice';
 import { addItem } from '../../../redux/slice/cartItems';
-import { addToCartLocalStor } from '../../../utils/LocalStore/addToCartLocalStor';
+import { addToCartLocalStorage } from '../../../utils/LocalStorage/addToCartLocalStorage';
 import { openModal } from '../../../redux/slice/favouriteItems';
 
 const FavouriteBlock = props => {
   const { products } = props;
+
   const cartItems = useSelector(state => state.itemCards);
   const dispatch = useDispatch();
   const isInCart = false;
@@ -29,7 +30,7 @@ const FavouriteBlock = props => {
     items.forEach(element => {
       if (!cartItems.items.find(item => item.id === element.id)) {
         dispatch(addItem(element));
-        addToCartLocalStor(element);
+        addToCartLocalStorage(element);
       }
     });
   };

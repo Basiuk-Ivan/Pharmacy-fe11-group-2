@@ -23,14 +23,16 @@ import {
 import { fetchProductsData } from '../../redux/slice/productsSlice';
 
 function Products() {
-  const dispatch = useDispatch();
-  const { products } = useSelector(state => state.products);
+  // const { products } = useSelector(state => state.products);
 
+  const dispatch = useDispatch();
+  const { numPage } = useSelector(state => state.numPage);
   const { category } = useParams();
 
   useEffect(() => {
-    dispatch(fetchProductsData(category));
-  }, [category, dispatch, products.length]);
+    dispatch(fetchProductsData({ category, numPage }));
+    // dispatch(fetchProductsData(category));
+  }, [category, dispatch, numPage]);
 
   return (
     <Container disableGutters id="productsContainer" sx={productsContainerStyles}>
@@ -48,7 +50,7 @@ function Products() {
           <SortingPrice />
           <Cards />
           <Box id="paginationDownWrapper" sx={paginationWrapperStyles}>
-            <PaginationProducts />
+            <PaginationProducts category={category} />
           </Box>
         </Box>
       </Box>

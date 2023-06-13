@@ -51,24 +51,13 @@ const AuthButton = () => {
                 <Formik
                   initialValues={{
                     email: '',
-                    password: '',
-                    confirmPassword: '',
-                    firstName: '',
-                    lastName: '',
-                    phone: '',
-                    gender: ''
+                    password: ''
                   }}
                   validationSchema={Yup.object().shape({
                     email: Yup.string().email('Невірний формат email').required('Обовязкове поле'),
                     password: Yup.string()
                       .required('Обовязкове поле')
-                      .min(6, 'Мінімальна довжина пароля - 6 символів'),
-                    confirmPassword: Yup.string()
-                      .required('Обовязкове поле')
-                      .oneOf([Yup.ref('password'), null], 'Паролі повинні співпадати'),
-                    phone: Yup.string()
-                      .required('Обовязкове поле')
-                      .matches(/^[0-9]*$/, 'Можна вводити тільки цифри')
+                      .min(6, 'Мінімальна довжина пароля - 6 символів')
                   })}
                   onSubmit={handleFormSubmit}
                   // eslint-disable-next-line no-unused-vars
@@ -120,7 +109,40 @@ const AuthButton = () => {
                           </div>
                         </>
                       )}
-
+                    </Form>
+                  )}
+                </Formik>
+                <Formik
+                  initialValues={{
+                    email: '',
+                    password: '',
+                    confirmPassword: '',
+                    firstName: '',
+                    lastName: '',
+                    phone: '',
+                    gender: ''
+                  }}
+                  validationSchema={Yup.object().shape({
+                    email: Yup.string().email('Невірний формат email').required('Обовязкове поле'),
+                    password: Yup.string()
+                      .required('Обовязкове поле')
+                      .min(6, 'Мінімальна довжина пароля - 6 символів'),
+                    confirmPassword: Yup.string()
+                      .required('Обовязкове поле')
+                      .oneOf([Yup.ref('password'), null], 'Паролі повинні співпадати'),
+                    phone: Yup.string()
+                      .required('Обовязкове поле')
+                      .matches(/^[0-9]*$/, 'Можна вводити тільки цифри')
+                  })}
+                  onSubmit={handleFormSubmit}
+                  // eslint-disable-next-line no-unused-vars
+                  validate={values => {
+                    const errors = {};
+                    return errors;
+                  }}
+                >
+                  {({ values, handleChange, handleBlur }) => (
+                    <Form>
                       {activeTab === 'registration' && (
                         <>
                           <div className="form-group">
