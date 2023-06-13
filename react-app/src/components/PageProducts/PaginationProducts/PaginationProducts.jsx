@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-
 import { ThemeProvider } from '@mui/material/styles';
 import { Pagination } from '@mui/material';
 import { theme } from '../../../tools/muiTheme';

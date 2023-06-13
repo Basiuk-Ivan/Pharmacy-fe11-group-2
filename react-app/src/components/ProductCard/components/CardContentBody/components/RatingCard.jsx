@@ -6,8 +6,8 @@ export const RatingCard = ({ productItem }) => {
   const [value, setValue] = useState(0);
 
   useEffect(() => {
-    setValue(Math.round(productItem?.ratingTotal / productItem.ratingClick));
-  }, [productItem.ratingClick]);
+    setValue(Math.round(productItem.ratingTotal / productItem.ratingClick));
+  }, [productItem.ratingClick, productItem.ratingTotal]);
 
   return (
     <Stack direction="row" sx={{ gap: '10px' }} alignItems="center">

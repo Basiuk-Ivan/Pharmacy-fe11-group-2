@@ -62,7 +62,6 @@ const ProductCardInstruction = ({ productItem }) => {
   };
 
   useEffect(() => {
-
     window.addEventListener('scroll', () => setActiveButton(false));
 
     return () => {
