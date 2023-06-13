@@ -12,7 +12,7 @@ const store = configureStore({
   reducer: {
     products: productsSlice,
     order: orderReducer,
-    modalSlice: modalSlice,
+    modalSlice,
     numPage: numPageSlice,
     favouriteItems: favouriteItemsSlice,
     filterBase: filterBaseSlice,

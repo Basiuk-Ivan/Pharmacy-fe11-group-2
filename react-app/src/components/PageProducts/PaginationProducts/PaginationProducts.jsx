@@ -1,20 +1,33 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+
 import { ThemeProvider } from '@mui/material/styles';
 import { Pagination } from '@mui/material';
 import { theme } from '../../../tools/muiTheme';
+import { fetchProductsData } from '../../../redux/slice/productsSlice';
 import { changePage } from '../../../redux/slice/numPageSlice';
 
 function PaginationProducts() {
   const dispatch = useDispatch();
+  const { category } = useParams();
+  // const { category } = useSelector(state => state.category);
+
   // const { products, status, err } = useSelector(state => state.products);
-  const { products } = useSelector(state => state.products);
+  // const { products } = useSelector(state => state.products);
+  // console.log('products:', products);
+  // const { numPage, products } = useSelector(selectProductsData);
+
+  const { totalFound } = useSelector(state => state.products);
+
   const { numPage } = useSelector(state => state.numPage);
 
-  const totalPage = Math.ceil(products.length / 4);
+  const totalPage = Math.ceil(totalFound / 2);
 
   function handleChange(num) {
     sessionStorage.setItem('numPage', num);
     dispatch(changePage(num));
+
+    dispatch(fetchProductsData({ category, numPage }));
   }
 
   return (

@@ -11,10 +11,21 @@ const createProduct = async (req, res) => {
 
 const getAllProduct = async (req, res) => {
     try {
-        const  category  = req.query;
+        const { page, limit, priceMin, priceMax, sort,...searchString } = req.query;
+        const perPage = parseInt(limit) || 20;
+        const skip = ((parseInt(page) || 1) - 1) * perPage;
+        const minPrice = parseInt(priceMin) || 0;
+        const maxPrice = parseInt(priceMax) || 9007199254740992;
+        const sortPrice = parseInt(priceMin) || 0;
+        searchString.price = { $gte: minPrice, $lte: maxPrice };
+console.log(searchString);
+        const totalFound = await ProductDB.countDocuments(searchString);
+        const prods = await ProductDB.find( searchString )
+            .limit(perPage)
+            .skip(skip)
+            .sort({'price': 1 });
 
-        const prods = await ProductDB.find( category );
-        return res.json(prods);
+        return res.json({totalFound, prods});
     } catch (e) {
         res.status(500).json(e.message);
     }
@@ -23,7 +34,7 @@ const getAllProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
     try {
-        const updatedProd = await ProductDB.findByIdAndUpdate(req.id, req, { new: true });;
+        const updatedProd = await ProductDB.findByIdAndUpdate(req.id, req, { new: true });
         return res.json(updatedProd);
     } catch (e) {
         res.status(500).json(e.message);

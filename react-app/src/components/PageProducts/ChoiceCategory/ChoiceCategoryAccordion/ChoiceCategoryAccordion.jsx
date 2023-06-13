@@ -7,8 +7,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { ButtonBase } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useParams } from 'react-router-dom';
 import { mainCategory } from '../../../../redux/slice/filterBaseSlice';
+import { fetchProductsData } from '../../../../redux/slice/productsSlice';
+
 import { mainCategoryStyle, secondCategoryStyle, secondCategoryWrappStyle, marginStyle } from './style';
 
 export default function ChoiceCategoryAccordion() {
@@ -37,14 +39,17 @@ export default function ChoiceCategoryAccordion() {
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+  const { category } = useParams();
+
+  const { numPage } = useSelector(state => state.numPage);
 
   const changeSubCategory = event => {
     // eslint-disable-next-line no-console
     console.log(event.target.innerText);
+    fetchProductsData({ category, numPage });
   };
 
   useEffect(() => {
-
     // console.log(filterBase);
   }, [filterBase]);
 
@@ -78,7 +83,6 @@ export default function ChoiceCategoryAccordion() {
   return (
     <div>
       {accordions.map(item => (
-
         <Accordion
           key={item.panel}
           expanded={expanded === item.panel}
