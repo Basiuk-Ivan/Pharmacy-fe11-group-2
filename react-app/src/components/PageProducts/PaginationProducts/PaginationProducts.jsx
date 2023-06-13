@@ -20,15 +20,16 @@ function PaginationProducts() {
   return (
     <ThemeProvider theme={theme}>
       <Pagination
+        size="medium"
         count={totalPage}
         page={numPage}
         color="primary"
         variant="outlined"
         shape="rounded"
-        hidePrevButton
-        hideNextButton
-        boundaryCount={2}
-        siblingCount={1}
+        // hidePrevButton
+        // hideNextButton
+        boundaryCount={1}
+        siblingCount={0}
         onChange={(_, num) => handleChange(num)}
       />
     </ThemeProvider>

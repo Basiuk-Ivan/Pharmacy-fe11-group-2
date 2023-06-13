@@ -5,6 +5,7 @@ import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import SortIcon from '@mui/icons-material/Sort';
 
 import {
+  formControlStyle,
   paginationWrapperStyles,
   sortingStyles,
   sortingTitlePriceIconStyles,
@@ -34,7 +35,7 @@ function SortingPrice() {
             <SortIcon />
           </Box>
 
-          <FormControl size="small" sx={{ m: 1, minWidth: 200, border: 'none' }}>
+          <FormControl size="small" sx={formControlStyle}>
             <InputLabel id="selectPrice">Ціна</InputLabel>
             <Select
               labelId="selectPriceLabel"
