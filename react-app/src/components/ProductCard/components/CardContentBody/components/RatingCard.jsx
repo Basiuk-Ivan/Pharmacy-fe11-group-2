@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Typography, Rating, Stack } from '@mui/material';
 import { textForquantityStyles, ratingStyles } from '../../../style';
 
 export const RatingCard = ({ productItem }) => {
-  const [value, setValue] = useState(productItem?.rating || 0);
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    setValue(Math.round(productItem.ratingTotal / productItem.ratingClick));
+  }, [productItem.ratingClick, productItem.ratingTotal]);
 
   return (
     <Stack direction="row" sx={{ gap: '10px' }} alignItems="center">
@@ -12,11 +16,9 @@ export const RatingCard = ({ productItem }) => {
       </Typography>
       <Rating
         sx={ratingStyles}
-        name="simple-controlled"
-        value={parseFloat(value)}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
+        name="read-only"
+        value={value}
+        readOnly
       />
     </Stack>
   );

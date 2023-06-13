@@ -22,7 +22,8 @@ const Prod = new mongoose.Schema(
             whoCanChildren: { type: Boolean, required: true }, // ++
             whoCanPregnant: { type: Boolean, required: true }, // ++
             ratingClick: { type: Number, required: true }, // ++
-            ratingTotal: { type: Number, required: true }, // ++
+            ratingTotal: { type: Number, required: true },
+            packageQuantity:{type: String, required: true }// ++
     },
     {
             timestamps: false,
