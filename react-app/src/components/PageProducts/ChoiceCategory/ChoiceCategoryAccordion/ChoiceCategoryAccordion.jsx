@@ -50,7 +50,7 @@ export default function ChoiceCategoryAccordion() {
   };
 
   useEffect(() => {
-    // console.log(filterBase);
+    console.log(filterBase);
   }, [filterBase]);
 
   const accordions = [
