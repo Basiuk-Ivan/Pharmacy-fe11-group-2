@@ -33,6 +33,6 @@ const favouriteItems = createSlice({
 
 export default favouriteItems.reducer;
 
-// eslint-disable-next-line max-len, operator-linebreak
+// eslint-disable-next-line operator-linebreak
 export const { addToFavouriteItems, deleteFromFavouriteItems, openModal, closeModal } =
   favouriteItems.actions;
