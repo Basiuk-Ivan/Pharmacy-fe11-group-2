@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal, deleteFromFavouriteItems } from '../redux/slice/favouriteItems';
-import { removeFromFavouriteLocalStor } from '../utils/LocalStore/removeFromFavouriteLocalStor';
+import { removeFromFavouriteLocalStorage } from '../utils/LocalStorage/removeFromFavouriteLocalStorage';
 
 const style = {
   display: 'flex',
@@ -34,7 +34,7 @@ const ModalWindow = () => {
 
   const removeFromLocalStorage = () => {
     favourites.forEach(element => {
-      removeFromFavouriteLocalStor(element);
+      removeFromFavouriteLocalStorage(element);
     });
   };
 
@@ -45,18 +45,19 @@ const ModalWindow = () => {
   };
 
   return (
-    <Modal
-      open={isOpened}
-      onClose={handleClose}
-    >
+    <Modal open={isOpened} onClose={handleClose}>
       <Box sx={style}>
         <Typography>Видалити всі товари з кошика?</Typography>
         <Typography sx={{ mt: 2 }}>
           Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
         </Typography>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-          <Button onClick={handleClick} sx={{ color: 'black' }}>Підтвердити</Button>
-          <Button onClick={handleClose} sx={{ color: 'black' }}>Відміна</Button>
+          <Button onClick={handleClick} sx={{ color: 'black' }}>
+            Підтвердити
+          </Button>
+          <Button onClick={handleClose} sx={{ color: 'black' }}>
+            Відміна
+          </Button>
         </Box>
       </Box>
     </Modal>

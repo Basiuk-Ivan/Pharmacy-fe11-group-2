@@ -4,8 +4,8 @@ import { Box } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Checkbox from '@mui/material/Checkbox';
-import { addToFavouriteLocalStor } from '../../../utils/LocalStore/addToFavouriteLocalStor';
-import { removeFromFavouriteLocalStor } from '../../../utils/LocalStore/removeFromFavouriteLocalStor';
+import { addToFavouriteLocalStorage } from '../../../utils/LocalStorage/addToFavouriteLocalStorage';
+import { removeFromFavouriteLocalStorage } from '../../../utils/LocalStorage/removeFromFavouriteLocalStorage';
 import { addToFavouriteItems, deleteFromFavouriteItems } from '../../../redux/slice/favouriteItems';
 import { favoriteIconStyles, checkBoxStyles, favoriteIcon } from '../style';
 
@@ -21,10 +21,10 @@ export const FavoriteCheckbox = ({ isInCart, productItem }) => {
     setIsFavorite(!isFavorite);
 
     if (!isFavorite) {
-      addToFavouriteLocalStor(productItem);
+      addToFavouriteLocalStorage(productItem);
       dispatch(addToFavouriteItems(productItem));
     } else {
-      removeFromFavouriteLocalStor(productItem);
+      removeFromFavouriteLocalStorage(productItem);
       dispatch(deleteFromFavouriteItems(productItem.id));
     }
   };

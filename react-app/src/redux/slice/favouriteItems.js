@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   favouriteItems: JSON.parse(localStorage.getItem('favouriteItems')) || [],
-  isOpened: false,
+  isOpened: false
 };
 
 const favouriteItems = createSlice({
@@ -33,4 +33,6 @@ const favouriteItems = createSlice({
 
 export default favouriteItems.reducer;
 
-export const { addToFavouriteItems, deleteFromFavouriteItems, openModal, closeModal } = favouriteItems.actions;
+// eslint-disable-next-line operator-linebreak
+export const { addToFavouriteItems, deleteFromFavouriteItems, openModal, closeModal } =
+  favouriteItems.actions;

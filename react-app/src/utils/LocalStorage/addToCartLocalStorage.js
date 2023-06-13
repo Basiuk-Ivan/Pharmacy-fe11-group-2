@@ -1,4 +1,4 @@
-export const addToCartLocalStor = productItem => {
+export const addToCartLocalStorage = productItem => {
   const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
   cartItems.push(productItem);
 

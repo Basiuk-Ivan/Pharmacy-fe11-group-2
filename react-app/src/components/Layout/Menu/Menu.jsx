@@ -30,12 +30,15 @@ const Menu = () => {
   const choiceMainCategory = path => {
     dispatch(mainCategory(path.slice(1)));
   };
+
   return (
     <Box sx={menuStyles}>
       <Container sx={{ display: 'flex', justifyContent: 'space-between' }}>
         {pages.map(page => (
           <NavLink key={page.title} to={page.path} style={navLinkStyles}>
-            <Button onClick={() => choiceMainCategory(page.path)} sx={buttonStyles}>{page.title}</Button>
+            <Button onClick={() => choiceMainCategory(page.path)} sx={buttonStyles}>
+              {page.title}
+            </Button>
           </NavLink>
         ))}
       </Container>

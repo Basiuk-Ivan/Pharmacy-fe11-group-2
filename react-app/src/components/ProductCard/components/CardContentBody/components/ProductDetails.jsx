@@ -17,7 +17,7 @@ export const ProductDetails = ({ productItem, isInCart }) => {
         <Stack direction="row" alignItems="center">
           <span className={s.bullet} />
           <span className={s.brandTitle}>Кількість в упаковці:</span>
-          <span className={s.brandValue}>{productItem?.quantity}</span>
+          <span className={s.brandValue}>{productItem?.packageQuantity}</span>
         </Stack>
         <Stack direction="row" alignItems="center">
           <span className={s.bullet} />

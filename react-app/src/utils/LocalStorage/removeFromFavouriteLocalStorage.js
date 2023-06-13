@@ -1,4 +1,4 @@
-export const removeFromFavouriteLocalStor = productItem => {
+export const removeFromFavouriteLocalStorage = productItem => {
   localStorage.removeItem(`favouriteItem_${productItem.id}`);
 
   const favouriteItems = JSON.parse(localStorage.getItem('favouriteItems')) || [];
