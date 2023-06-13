@@ -27,7 +27,6 @@ const CardPaymentData = () => {
     },
     validationSchema,
     onSubmit: (values, { resetForm }) => {
-      // eslint-disable-next-line no-console
       resetForm();
     }
   });
