@@ -25,7 +25,8 @@ const ProductCardMainBlock = ({ productItem }) => {
   useEffect(() => {
     const arr = productItem.activeSubstance;
     setActiveSubstance(arr.join(', '));
-  }, [productItem.activeSubstance]);
+    setValue(Math.round(Number(productItem.ratingTotal) / Number(productItem.ratingClick)));
+  }, [productItem.activeSubstance, productItem.ratingClick, productItem.ratingTotal]);
 
   const handleFavoriteClick = event => {
     event.preventDefault();
