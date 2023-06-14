@@ -56,42 +56,21 @@ const VerticalImgTabPanel = ({ productItem }) => {
         }}
         scrollButtons
       >
-        {}
-        <Tab label={<img src={productItem.img[0]} className={s.tabImg} alt="itm1" />} {...a11yProps(0)} />
-        {}
-        <Tab label={<img src={productItem.img[1]} className={s.tabImg} alt="itm2" />} {...a11yProps(1)} />
-        {}
-        <Tab label={<img src={productItem.img[2]} className={s.tabImg} alt="itm3" />} {...a11yProps(2)} />
-        {}
-        <Tab label={<img src={productItem.img[3]} className={s.tabImg} alt="itm4" />} {...a11yProps(3)} />
-        {}
-        <Tab label={<img src={productItem.img[4]} className={s.tabImg} alt="itm5" />} {...a11yProps(4)} />
+        {productItem.img.map((imgSrc, index) => (
+          <Tab
+            key={index}
+            label={<img src={imgSrc} className={s.tabImg} alt={`itm${index + 1}`} />}
+            {...a11yProps(index)}
+          />
+        ))}
       </Tabs>
-      <TabPanel value={value} index={0}>
-        <Box sx={{ border: '1px solid #E7E9EB', padding: '10px' }}>
-          <img src={productItem.img[0]} className={s.activeImg} alt="itm6" />
-        </Box>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <Box sx={{ border: '1px solid #E7E9EB', padding: '10px' }}>
-          <img src={productItem.img[1]} className={s.activeImg} alt="itm7" />
-        </Box>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <Box sx={{ border: '1px solid #E7E9EB', padding: '10px' }}>
-          <img src={productItem.img[2]} className={s.activeImg} alt="itm8" />
-        </Box>
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        <Box sx={{ border: '1px solid #E7E9EB', padding: '10px' }}>
-          <img src={productItem.img[3]} className={s.activeImg} alt="itm9" />
-        </Box>
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        <Box sx={{ border: '1px solid #E7E9EB', padding: '10px' }}>
-          <img src={productItem.img[4]} className={s.activeImg} alt="itm10" />
-        </Box>
-      </TabPanel>
+      {productItem.img.map((imgSrc, index) => (
+        <TabPanel key={index} value={value} index={index}>
+          <Box sx={{ border: '1px solid #E7E9EB', padding: '10px' }}>
+            <img src={imgSrc} className={s.activeImg} alt={`itm${index + 6}`} />
+          </Box>
+        </TabPanel>
+      ))}
     </Box>
   );
 };

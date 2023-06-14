@@ -9,5 +9,6 @@ export const productDefaultPath = '/api/product';
 
 productRouter.post('/', validateSchema(productValidateSchema), ProductController.createProduct);
 productRouter.get('/', ProductController.getAllProduct);
-productRouter.put('/', ProductController.updateProduct);
+productRouter.get('/:id', ProductController.getOneProduct);
+productRouter.put('/:id', ProductController.updateProduct);
 productRouter.delete('/:id', ProductController.deleteProduct);
