@@ -2,11 +2,14 @@ import { useEffect, useState } from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import { Typography, Stack, Button, Box, Grid, Rating, ButtonBase, Checkbox } from '@mui/material';
+import { Typography, Stack, Button, Box, Grid, Rating, Checkbox } from '@mui/material';
 
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { NavLink, useParams } from 'react-router-dom';
 import { addToFavouriteLocalStorage } from '../../../utils/LocalStore/addToFavouriteLocalStorage';
 import { removeFromFavouriteLocalStorage } from '../../../utils/LocalStore/removeFromFavouriteLocalStorage';
 import { addToFavouriteItems, deleteFromFavouriteItems } from '../../../redux/slice/favouriteItems';
@@ -15,10 +18,17 @@ import VerticalImgTabPanel from '../VerticalImgTabPanel';
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const ProductCardMainBlock = ({ productItem }) => {
   const dispatch = useDispatch();
+  const { id } = useParams();
 
   const [quantity, setQuantity] = useState(1);
-  const [value, setValue] = useState(2);
+  const [value, setValue] = useState(null);
   const [activeSubstance, setActiveSubstance] = useState('');
+  const [mainPrice, setMainPrice] = useState('');
+  const [ratingClick, setRatingClick] = useState(true);
+  const roundPrice = (price, discount) => {
+    const result = price * ((100 - discount) / 100);
+    setMainPrice(Math.round(result));
+  };
 
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -26,7 +36,9 @@ const ProductCardMainBlock = ({ productItem }) => {
     const arr = productItem.activeSubstance;
     setActiveSubstance(arr.join(', '));
     setValue(Math.round(Number(productItem.ratingTotal) / Number(productItem.ratingClick)));
-  }, [productItem.activeSubstance, productItem.ratingClick, productItem.ratingTotal]);
+    roundPrice(productItem.price, productItem.discount);
+  }, [productItem.activeSubstance, productItem.ratingClick,
+    productItem.ratingTotal, productItem.discount, productItem.price]);
 
   const handleFavoriteClick = event => {
     event.preventDefault();
@@ -50,8 +62,23 @@ const ProductCardMainBlock = ({ productItem }) => {
       setQuantity(quantity - 1);
     }
   };
+
+  const updateRating = async newValue => {
+    const res = await fetch(`http://localhost:3004/api/product/${id}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        ratingTotal: (productItem.ratingTotal + newValue),
+        ratingClick: (productItem.ratingClick + 1)
+      }),
+    });
+    return res.json();
+  };
+
   return (
-    <Grid container sx={{ rowGap: '15px' }}>
+    <Grid container sx={{ rowGap: '15px', mt: '10px' }}>
       <Grid item xs={12} sm={12} lg={5}>
         <VerticalImgTabPanel productItem={productItem} />
       </Grid>
@@ -80,12 +107,18 @@ const ProductCardMainBlock = ({ productItem }) => {
                   value={value}
                   onChange={(event, newValue) => {
                     setValue(newValue);
+                    if (ratingClick && newValue > 0) {
+                      updateRating(newValue);
+                      setRatingClick(false);
+                    }
                   }}
                   sx={{ fontSize: { xs: '16px', sm: '16px', md: '18px', lg: '18px' } }}
+                  disabled={!ratingClick}
                 />
               </Box>
               <Typography
-                sx={{ fontSize: { xs: '14px', sm: '14px', md: '14px', lg: '14px' }, color: '#2FD3AE' }}
+                color={productItem?.quantity > 0 ? '#2FD3AE' : '#910808'}
+                sx={{ fontSize: { xs: '14px', sm: '14px', md: '14px', lg: '14px' }, fontWeight: '500' }}
               >
                 {productItem?.quantity > 0 ? 'Є в наявності' : 'Товар відсутній'}
               </Typography>
@@ -162,7 +195,7 @@ const ProductCardMainBlock = ({ productItem }) => {
                         </Stack>
                       </Grid>
 
-                      <Grid item sx={{ fontSize: '14px' }}>
+                      <Grid item fontFamily="Roboto" sx={{ fontSize: '14px' }}>
                         {productItem?.manufacturer}
                       </Grid>
                     </Grid>
@@ -200,7 +233,7 @@ const ProductCardMainBlock = ({ productItem }) => {
                         </Stack>
                       </Grid>
 
-                      <Grid item sx={{ fontSize: '14px' }}>
+                      <Grid item fontFamily="Roboto" sx={{ fontSize: '14px' }}>
                         {activeSubstance}
                       </Grid>
                     </Grid>
@@ -238,7 +271,7 @@ const ProductCardMainBlock = ({ productItem }) => {
                         </Stack>
                       </Grid>
 
-                      <Grid item sx={{ fontSize: '14px' }}>
+                      <Grid item fontFamily="Roboto" sx={{ fontSize: '14px' }}>
                         {productItem?.bestBeforeDate}
                       </Grid>
                     </Grid>
@@ -262,7 +295,7 @@ const ProductCardMainBlock = ({ productItem }) => {
           <Grid item xs={12} lg={9} sx={{ paddingLeft: '0px' }}>
             <Typography variant="h5" gutterBottom sx={{ paddingLeft: '0px' }}>
               {productItem.discount > 0
-                ? `${productItem.price * ((100 - productItem.discount) / 100)} ГРН.`
+                ? `${mainPrice} ГРН. `
                 : `${productItem.price} ГРН.`}
             </Typography>
           </Grid>
@@ -278,34 +311,23 @@ const ProductCardMainBlock = ({ productItem }) => {
           </Grid>
 
           <Box sx={{ position: 'relative', mb: '14px' }}>
-            <ButtonBase
+            <RemoveCircleIcon
               sx={{
-                width: '20px',
-                padding: '0',
-                height: '14px',
                 position: 'absolute',
-                top: '10px',
-                left: '-5px',
-                backgroundColor: '#2FD3AE',
+                top: '5px',
+                left: '-6px',
                 fontSize: '18px',
-                color: '#ffffff',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: '50px',
-                border: 'none',
-                cursor: 'pointer',
-                fontFamily: '"Roboto", "san-serif"'
+                color: '#2db496',
+                cursor: 'pointer'
+
               }}
               onClick={handleDecrement}
-            >
-              -
-            </ButtonBase>
+            />
             <Box
               sx={{
                 padding: '4px 20px',
                 borderRadius: '50px',
-                backgroundColor: '#ffffff',
+                backgroundColor: '#d6eaf5',
                 // height:'32px',
                 textAlign: 'center',
                 fontFamily: '"Roboto", "san-serif"'
@@ -313,55 +335,66 @@ const ProductCardMainBlock = ({ productItem }) => {
             >
               {quantity}
             </Box>
-            <ButtonBase
-              onClick={handleIncrement}
+            <AddCircleIcon
+              onClick={() => {
+                if (quantity >= productItem?.quantity) {
+                  return;
+                }
+                handleIncrement();
+              }}
               sx={{
                 position: 'absolute',
-                width: '20px',
-                height: '14px',
-                top: '10px',
-                right: '-5px',
-                padding: 0,
-                margin: 0,
-                backgroundColor: '#DD8888',
-                fontSize: '14px',
-                color: '#ffffff',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: '50px',
-                border: 'none',
+                top: '5px',
+                right: '-6px',
+                fontSize: '18px',
+                color: '#d34747',
                 cursor: 'pointer'
               }}
-            >
-              +
-            </ButtonBase>
+            />
+
           </Box>
+          <Grid item xs={12} lg={12} sx={{ mb: '10px' }}>
+            {quantity >= productItem?.quantity
+                            && (
+                            <Typography
+                              component="span"
+                              variant="body1"
+                              sx={{ color: '#dd8888', fontSize: '12px' }}
+                            >
+                              Обрано максимальну кількість
+                            </Typography>
+                            )}
+          </Grid>
+
         </Grid>
 
-        <Typography
-          variant="h4"
-          sx={{
-            paddingLeft: '30px',
-            fontSize: '14px',
-            color: '828282',
-            textDecoration: 'line-through'
-          }}
-        >
-          Актуальна ціна
-        </Typography>
-        <Typography
-          variant="body2"
-          sx={{
-            paddingLeft: '30px',
-            fontSize: '14px',
-            fontWeight: 700,
-            color: '#DD8888',
-            textDecoration: 'line-through'
-          }}
-        >
-          {productItem.price} ГРН.
-        </Typography>
+        {(productItem.price !== mainPrice) && (
+        <>
+          <Typography
+            variant="h4"
+            sx={{
+              paddingLeft: '30px',
+              fontSize: '14px',
+              color: '828282',
+              textDecoration: 'line-through'
+            }}
+          >
+            Актуальна ціна
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              paddingLeft: '30px',
+              fontSize: '14px',
+              fontWeight: 700,
+              color: '#DD8888',
+              textDecoration: 'line-through'
+            }}
+          >
+            {productItem.price} ГРН.
+          </Typography>
+        </>
+        )}
 
         <Stack direction="column" justifyContent="center" alignItems="center" spacing={2} sx={{ mb: '12px' }}>
           <Button
@@ -376,22 +409,24 @@ const ProductCardMainBlock = ({ productItem }) => {
           >
             Купити в один клік
           </Button>
-          <Button
-            variant="outlined"
-            onClick={handleDecrement}
-            sx={{
-              width: '158px',
-              color: '#ffffff',
-              borderRadius: '50px',
-              border: 'none',
-              backgroundColor: '#2FD3AE',
-              '&:hover': {
-                color: '#2FD3AE'
-              }
-            }}
-          >
-            До корзини
-          </Button>
+          <NavLink to="/cart">
+            <Button
+              variant="outlined"
+              onClick={handleDecrement}
+              sx={{
+                width: '200px',
+                color: '#ffffff',
+                borderRadius: '50px',
+                border: 'none',
+                backgroundColor: '#2FD3AE',
+                '&:hover': {
+                  color: '#2FD3AE'
+                }
+              }}
+            >
+              Перейти до корзини
+            </Button>
+          </NavLink>
         </Stack>
       </Grid>
     </Grid>

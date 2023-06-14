@@ -47,7 +47,6 @@ const AuthButton = () => {
                   Залиште ваші дані, і ми зв'яжемося з вами. Ми не займаємося розсилкою рекламних повідомлень,
                   а також не передаємо контактні дані третім особам
                 </Typography>
-
                 <Formik
                   initialValues={{
                     email: '',
@@ -118,8 +117,8 @@ const AuthButton = () => {
                     password: '',
                     confirmPassword: '',
                     firstName: '',
-                    lastName: '',
-                    phone: '',
+                    secondName: '',
+                    phoneNumber: '',
                     gender: ''
                   }}
                   validationSchema={Yup.object().shape({
@@ -130,7 +129,7 @@ const AuthButton = () => {
                     confirmPassword: Yup.string()
                       .required('Обовязкове поле')
                       .oneOf([Yup.ref('password'), null], 'Паролі повинні співпадати'),
-                    phone: Yup.string()
+                    phoneNumber: Yup.string()
                       .required('Обовязкове поле')
                       .matches(/^[0-9]*$/, 'Можна вводити тільки цифри')
                   })}
@@ -162,8 +161,8 @@ const AuthButton = () => {
                           <div className="form-group">
                             <CustomTextField
                               type="text"
-                              id="lastName"
-                              name="lastName"
+                              id="secondName"
+                              name="secondName"
                               label="Введіть Прізвище"
                               variant="outlined"
                               value={values.lastName}
@@ -175,8 +174,8 @@ const AuthButton = () => {
                           <div className="form-group">
                             <CustomTextField
                               type="text"
-                              id="phone"
-                              name="phone"
+                              id="phoneNumber"
+                              name="phoneNumber"
                               label="Введіть Телефон"
                               variant="outlined"
                               as={TextField}
@@ -187,7 +186,7 @@ const AuthButton = () => {
                                 pattern: '[0-9]*'
                               }}
                             />
-                            <ErrorMessage name="phone" component="div" className="error-message" />
+                            <ErrorMessage name="phoneNumber" component="div" className="error-message" />
                           </div>
                           <div className="form-group">
                             <CustomTextField
@@ -219,7 +218,6 @@ const AuthButton = () => {
                             />
                             <ErrorMessage name="email" component="div" className="error-message" />
                           </div>
-
                           <div className="form-group">
                             <CustomTextField
                               type="password"
