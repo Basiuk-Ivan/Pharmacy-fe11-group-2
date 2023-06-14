@@ -23,6 +23,7 @@ function PaginationProducts() {
   function handleChange(num) {
     sessionStorage.setItem('numPage', num);
     dispatch(changePage(num));
+    // dispatch(changePage(1));
 
     // Coment this line
     // dispatch(fetchProductsData({ category, numPage }));

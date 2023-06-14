@@ -8,7 +8,8 @@ import ProductCard from '../../ProductCard/ProductCard';
 import Bread from '../../Bread';
 import { fetchProductsData } from '../../../redux/slice/productsSlice';
 import { addItem } from '../../../redux/slice/cartItems';
-import { addToCartLocalStorage } from '../../../utils/LocalStorage/addToCartLocalStorage';
+// import { addToCartLocalStorage } from '../../../utils/LocalStorage/addToCartLocalStorage';
+import { addToCartLocalStorage } from '../../../utils/LocalStore/addToCartLocalStorage';
 import { openModal } from '../../../redux/slice/favouriteItems';
 
 const FavouriteBlock = props => {

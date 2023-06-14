@@ -34,7 +34,7 @@ import {
   ContainerBox
 } from './style';
 
-import { removeFromCartLocalStorage } from '../../utils/LocalStorage/removeFromCartLocalStorage';
+import { removeFromCartLocalStorage } from '../../utils/LocalStore/removeFromCartLocalStorage';
 
 // import { fetchProductsData } from '../../redux/slice/productsSlice';
 
@@ -59,15 +59,7 @@ const Cart = () => {
   return (
     <Box>
       <IconBreadcrumbs />
-      <HeaderBox>
-        <Typography variant="h4" gutterBottom>
-          Корзина
-        </Typography>
-        <IconButton onClick={() => delFromCart(productItemCart)}>
-          <DeleteOutlineTwoToneIcon />
-          <Typography>Очистити корзину</Typography>
-        </IconButton>
-      </HeaderBox>
+
       <ContainerBox>
         <Box>
           <FormBox>
@@ -108,9 +100,35 @@ const Cart = () => {
           </FormBox>
         </Box>
         <CardBox>
-          {productItemCart.map(item => (
-            <ProductCard key={item.id} productItem={item} isInCart={isInCart} />
-          ))}
+          <HeaderBox>
+            <Typography variant="h4" gutterBottom>
+              Корзина
+            </Typography>
+            <IconButton onClick={() => delFromCart(productItemCart)}>
+              <DeleteOutlineTwoToneIcon />
+              <Typography>Очистити корзину</Typography>
+            </IconButton>
+          </HeaderBox>
+          {!!productItemCart.length > 0 ? (
+            <>
+              {productItemCart.map(item => (
+                <ProductCard key={item.id} productItem={item} isInCart={isInCart} />
+              ))}
+            </>
+          ) : (
+            <Typography
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                fontSize: 24,
+                fontWeight: 400,
+                mt: '100px',
+                mb: '200px'
+              }}
+            >
+              Додайте товар в корзину для відображення на цій сторінці
+            </Typography>
+          )}
         </CardBox>
       </ContainerBox>
     </Box>

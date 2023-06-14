@@ -56,7 +56,6 @@ export const CardBox = styled(Box)`
 export const FormBox = styled(Box)`
   width: 358px;
   height: 456px;
-  margin-top: -40px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -136,13 +135,12 @@ export const PromoBox = styled(Box)`
   }
 `;
 export const HeaderBox = styled(Box)`
-  width: 805px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  @media (max-width: 805px) {
-    width: 100%;
-  } ;
+  //@media (max-width: 805px) {
+  //  width: 100%;
+  //} ;
 `;
 export const TextFieldPromo = styled(TextField)`
   width: 100%;
