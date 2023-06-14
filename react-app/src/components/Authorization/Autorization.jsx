@@ -47,28 +47,16 @@ const AuthButton = () => {
                   Залиште ваші дані, і ми зв'яжемося з вами. Ми не займаємося розсилкою рекламних повідомлень,
                   а також не передаємо контактні дані третім особам
                 </Typography>
-
                 <Formik
                   initialValues={{
                     email: '',
-                    password: '',
-                    confirmPassword: '',
-                    firstName: '',
-                    lastName: '',
-                    phone: '',
-                    gender: ''
+                    password: ''
                   }}
                   validationSchema={Yup.object().shape({
                     email: Yup.string().email('Невірний формат email').required('Обовязкове поле'),
                     password: Yup.string()
                       .required('Обовязкове поле')
-                      .min(6, 'Мінімальна довжина пароля - 6 символів'),
-                    confirmPassword: Yup.string()
-                      .required('Обовязкове поле')
-                      .oneOf([Yup.ref('password'), null], 'Паролі повинні співпадати'),
-                    phone: Yup.string()
-                      .required('Обовязкове поле')
-                      .matches(/^[0-9]*$/, 'Можна вводити тільки цифри')
+                      .min(6, 'Мінімальна довжина пароля - 6 символів')
                   })}
                   onSubmit={handleFormSubmit}
                   // eslint-disable-next-line no-unused-vars
@@ -120,7 +108,40 @@ const AuthButton = () => {
                           </div>
                         </>
                       )}
-
+                    </Form>
+                  )}
+                </Formik>
+                <Formik
+                  initialValues={{
+                    email: '',
+                    password: '',
+                    confirmPassword: '',
+                    firstName: '',
+                    secondName: '',
+                    phoneNumber: '',
+                    gender: ''
+                  }}
+                  validationSchema={Yup.object().shape({
+                    email: Yup.string().email('Невірний формат email').required('Обовязкове поле'),
+                    password: Yup.string()
+                      .required('Обовязкове поле')
+                      .min(6, 'Мінімальна довжина пароля - 6 символів'),
+                    confirmPassword: Yup.string()
+                      .required('Обовязкове поле')
+                      .oneOf([Yup.ref('password'), null], 'Паролі повинні співпадати'),
+                    phoneNumber: Yup.string()
+                      .required('Обовязкове поле')
+                      .matches(/^[0-9]*$/, 'Можна вводити тільки цифри')
+                  })}
+                  onSubmit={handleFormSubmit}
+                  // eslint-disable-next-line no-unused-vars
+                  validate={values => {
+                    const errors = {};
+                    return errors;
+                  }}
+                >
+                  {({ values, handleChange, handleBlur }) => (
+                    <Form>
                       {activeTab === 'registration' && (
                         <>
                           <div className="form-group">
@@ -140,8 +161,8 @@ const AuthButton = () => {
                           <div className="form-group">
                             <CustomTextField
                               type="text"
-                              id="lastName"
-                              name="lastName"
+                              id="secondName"
+                              name="secondName"
                               label="Введіть Прізвище"
                               variant="outlined"
                               value={values.lastName}
@@ -153,8 +174,8 @@ const AuthButton = () => {
                           <div className="form-group">
                             <CustomTextField
                               type="text"
-                              id="phone"
-                              name="phone"
+                              id="phoneNumber"
+                              name="phoneNumber"
                               label="Введіть Телефон"
                               variant="outlined"
                               as={TextField}
@@ -165,7 +186,7 @@ const AuthButton = () => {
                                 pattern: '[0-9]*'
                               }}
                             />
-                            <ErrorMessage name="phone" component="div" className="error-message" />
+                            <ErrorMessage name="phoneNumber" component="div" className="error-message" />
                           </div>
                           <div className="form-group">
                             <CustomTextField
@@ -197,7 +218,6 @@ const AuthButton = () => {
                             />
                             <ErrorMessage name="email" component="div" className="error-message" />
                           </div>
-
                           <div className="form-group">
                             <CustomTextField
                               type="password"
