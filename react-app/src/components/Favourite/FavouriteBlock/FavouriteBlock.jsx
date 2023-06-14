@@ -38,6 +38,7 @@ const FavouriteBlock = props => {
           setProducts(selectedProduct);
         }
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Error fetching products:', error);
       }
     };
