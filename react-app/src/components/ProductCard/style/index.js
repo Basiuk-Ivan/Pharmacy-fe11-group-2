@@ -3,7 +3,8 @@ export const wrapForCardStyles = isInCart => ({
   overflow: 'visible',
   width: isInCart ? 'auto' : '220px',
   height: isInCart ? 'auto' : '430px',
-  display: isInCart ? 'flex' : 'block'
+  display: isInCart ? 'flex' : 'block',
+  cursor: 'auto'
 });
 
 export const cardMediaStyles = isInCart => ({
@@ -40,7 +41,11 @@ export const productNameStyles = isInCart => ({
   mb: isInCart ? 0 : '20px',
   fontSize: '16px',
   fontWeight: 500,
-  color: '#525A68'
+  color: '#525A68',
+  '&:hover': {
+    cursor: 'pointer',
+    color: '#46baa0'
+  }
 });
 
 export const priceStyles = {
@@ -74,7 +79,7 @@ export const favoriteIcon = { color: 'red' };
 
 export const productDayStyles = {
   position: 'absolute',
-  top: 12,
+  top: -12,
   left: 10,
   padding: '5px 10px',
   backgroundColor: '#2FD3AE',

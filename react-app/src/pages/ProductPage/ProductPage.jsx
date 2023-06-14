@@ -1,23 +1,10 @@
 import { useState, useEffect } from 'react';
 
-import {
-  Container,
-  Typography,
-  Box,
-  Grid,
-  Tabs,
-  Tab
-} from '@mui/material';
+import { Container, Typography, Box, Grid, Tabs, Tab } from '@mui/material';
 
-import {
-  useParams
-} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-import {
-  ThemeProvider,
-  createTheme,
-  styled
-} from '@mui/material/styles';
+import { ThemeProvider, createTheme, styled } from '@mui/material/styles';
 
 import ProductCardMainBlock from '../../components/SinglePage/ProductCardMainBlock';
 import ProductCardInstruction from '../../components/SinglePage/ProductCardInstruction';
@@ -28,7 +15,7 @@ import BreadProduct from '../../components/SinglePage/BreadProduct';
 const AntTabs = styled(Tabs)({
   '& .MuiTabs-indicator': {
     backgroundColor: '#F2C94C',
-    maxWidth: '150px',
+    maxWidth: '150px'
   }
 });
 
@@ -51,17 +38,17 @@ const theme = createTheme({
     MuiGrid: {
       styleOverrides: {
         root: {
-          minWidth: '0',
+          minWidth: '0'
         }
       }
     },
     MuiContainer: {
       styleOverrides: {
         root: {
-          padding: '5px',
+          padding: '5px'
         }
       }
-    },
+    }
   }
 });
 
@@ -130,10 +117,12 @@ const ProductPage = () => {
               <Grid item lg={12}>
                 <Typography
                   variant="h4"
-                  sx={{ fontSize: { xs: '26px', sm: '30px', md: '32px', lg: '36px' },
+                  sx={{
+                    fontSize: { xs: '26px', sm: '30px', md: '32px', lg: '36px' },
                     mt: { xs: '10px', sm: '5px', mx: 0 },
                     fontWeight: 700,
-                    color: '#394045' }}
+                    color: '#394045'
+                  }}
                   gutterBottom
                 >
                   {product?.name}
@@ -141,10 +130,13 @@ const ProductPage = () => {
               </Grid>
               <Grid item lg={12}>
                 <Box sx={{ width: '100%' }}>
-                  <Box sx={{ width: { xs: '288px', sm: '100%', md: '100%', lg: '100%' },
-                    borderBottom: 1,
-                    borderColor: 'divider',
-                    backgroundColor: '#F7FAFB' }}
+                  <Box
+                    sx={{
+                      width: { xs: '288px', sm: '100%', md: '100%', lg: '100%' },
+                      borderBottom: 1,
+                      borderColor: 'divider',
+                      backgroundColor: '#F7FAFB'
+                    }}
                   >
                     <AntTabs
                       value={value}

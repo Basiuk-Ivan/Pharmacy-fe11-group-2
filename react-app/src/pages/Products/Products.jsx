@@ -24,8 +24,6 @@ import {
 import { fetchProductsData } from '../../redux/slice/productsSlice';
 
 function Products() {
-  // const { products } = useSelector(state => state.products);
-
   const dispatch = useDispatch();
   const { numPage } = useSelector(state => state.numPage);
   const filterBase = useSelector(state => state.filterBase);

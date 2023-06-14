@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal, deleteFromFavouriteItems } from '../redux/slice/favouriteItems';
-import { removeFromFavouriteLocalStorage } from '../utils/LocalStorage/removeFromFavouriteLocalStorage';
+import { removeFromFavouriteLocalStorage } from '../utils/LocalStore/removeFromFavouriteLocalStorage';
 
 const style = {
   display: 'flex',

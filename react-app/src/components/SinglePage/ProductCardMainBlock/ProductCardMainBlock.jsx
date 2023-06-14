@@ -7,8 +7,8 @@ import { Typography, Stack, Button, Box, Grid, Rating, ButtonBase, Checkbox } fr
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import { addToFavouriteLocalStorage } from '../../../utils/LocalStorage/addToFavouriteLocalStorage';
-import { removeFromFavouriteLocalStorage } from '../../../utils/LocalStorage/removeFromFavouriteLocalStorage';
+import { addToFavouriteLocalStorage } from '../../../utils/LocalStore/addToFavouriteLocalStorage';
+import { removeFromFavouriteLocalStorage } from '../../../utils/LocalStore/removeFromFavouriteLocalStorage';
 import { addToFavouriteItems, deleteFromFavouriteItems } from '../../../redux/slice/favouriteItems';
 import VerticalImgTabPanel from '../VerticalImgTabPanel';
 
