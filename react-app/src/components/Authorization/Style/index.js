@@ -17,6 +17,9 @@ export const StyledButton = styled(Button)`
   height: 50px;
   border-radius: 26px;
   background: #2fd3ae;
+  @media (max-width: 360px) {
+    font-size: 10px;
+  }
 `;
 
 export const UnderlineSpan = styled.span`
