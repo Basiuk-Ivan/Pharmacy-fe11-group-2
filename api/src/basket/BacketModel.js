@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 const product = new mongoose.Schema(
   {
     productID: { type: mongoose.Types.ObjectId, ref: "ProductDB" },
-    price: Number,
     amount: { type: Number, required: true },
   },{
         timestamps: false,
@@ -23,8 +22,6 @@ const product = new mongoose.Schema(
 export const Backet = new mongoose.Schema(
   {
     products: [product],
-    totalPrice: Number,
-    email: String,
     user: { type: mongoose.Types.ObjectId, ref: "UserDB" },
   },{
         timestamps: false,
