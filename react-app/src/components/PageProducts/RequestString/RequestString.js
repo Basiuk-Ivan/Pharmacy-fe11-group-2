@@ -1,11 +1,17 @@
-import { useSelector } from 'react-redux';
+function RequestString(filterBase, numPage) {
+  let requestString = `page=${numPage}&limit=4`;
 
-function RequestString() {
-  const filterBase = useSelector(state => state.filterBase);
-  const { numPage } = useSelector(state => state.numPage);
-
-  const requestString = `categories=${filterBase.filterMainCategory}&page=${numPage}&limit=2`;
-
+  // eslint-disable-next-line guard-for-in,no-restricted-syntax
+  for (const key in filterBase) {
+    if (Array.isArray(filterBase[key])) {
+      if (filterBase[key].length > 0) {
+        requestString += `&${key}=${filterBase[key]}`;
+      }
+    }
+    if (!Array.isArray(filterBase[key]) && filterBase[key]) {
+      requestString += `&${key}=${filterBase[key]}`;
+    }
+  }
   return requestString;
 }
 

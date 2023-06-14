@@ -2,10 +2,12 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchProductsData = createAsyncThunk(
   'products/fetchProductsData',
-  async ({ category, numPage }, { rejectWithValue }) => {
+  async (requestString, { rejectWithValue }) => {
     try {
+      console.log('productSlice', requestString);
       const res = await fetch(
-        `http://localhost:3004/api/product?categories=${category}&page=${numPage}&limit=2`
+        // `http://localhost:3004/api/product?categories=${category}&page=${numPage}&limit=4`
+        `http://localhost:3004/api/product?${requestString}`
       );
 
       if (!res.ok) {

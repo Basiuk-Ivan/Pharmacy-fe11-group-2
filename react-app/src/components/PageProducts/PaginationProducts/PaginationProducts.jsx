@@ -18,7 +18,7 @@ function PaginationProducts() {
 
   const { numPage } = useSelector(state => state.numPage);
 
-  const totalPage = Math.ceil(totalFound / 2);
+  const totalPage = Math.ceil(totalFound / 4);
 
   function handleChange(num) {
     sessionStorage.setItem('numPage', num);

@@ -144,49 +144,49 @@ function Filter() {
             { }
             <FormControlLabel
               onChange={changeManufacturer}
-              value="Ukraine"
+              value="Україна"
               control={<Checkbox />}
               label="Україна"
             />
             { }
             <FormControlLabel
               onChange={changeManufacturer}
-              value="Germany"
+              value="Німеччина"
               control={<Checkbox />}
               label="Німеччина"
             />
             { }
             <FormControlLabel
               onChange={changeManufacturer}
-              value="Greece"
+              value="Греція"
               control={<Checkbox />}
               label="Греція"
             />
             { }
             <FormControlLabel
               onChange={changeManufacturer}
-              value="Poland"
+              value="Польща"
               control={<Checkbox />}
               label="Польща"
             />
             { }
             <FormControlLabel
               onChange={changeManufacturer}
-              value="Italy"
+              value="Італія"
               control={<Checkbox />}
               label="Італія"
             />
             { }
             <FormControlLabel
               onChange={changeManufacturer}
-              value="GB"
+              value="Великобританія"
               control={<Checkbox />}
               label="Великобританія"
             />
             { }
             <FormControlLabel
               onChange={changeManufacturer}
-              value="India"
+              value="Індія"
               control={<Checkbox />}
               label="Індія"
             />
@@ -208,42 +208,42 @@ function Filter() {
             { }
             <FormControlLabel
               onChange={changeDosageForm}
-              value="Pills"
+              value="Таблетки"
               control={<Checkbox />}
               label="Таблетки"
             />
             { }
             <FormControlLabel
               onChange={changeDosageForm}
-              value="Ampoules"
+              value="Ампули"
               control={<Checkbox />}
               label="Ампули"
             />
             { }
             <FormControlLabel
               onChange={changeDosageForm}
-              value="Spray"
+              value="Спреї"
               control={<Checkbox />}
               label="Спреї"
             />
             { }
             <FormControlLabel
               onChange={changeDosageForm}
-              value="Syrup"
+              value="Сиропи"
               control={<Checkbox />}
               label="Сиропи"
             />
             { }
             <FormControlLabel
               onChange={changeDosageForm}
-              value="Drops"
+              value="Краплі"
               control={<Checkbox />}
               label="Краплі"
             />
             { }
             <FormControlLabel
               onChange={changeDosageForm}
-              value="Capsules"
+              value="Капсули"
               control={<Checkbox />}
               label="Капсули"
             />

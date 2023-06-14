@@ -4,32 +4,32 @@ const filterBaseSlice = createSlice({
   name: 'filterBase',
   initialState: {
     filterSearch: '',
-    filterMainCategory: '',
+    categories: '',
     filterSubCategory: '',
     filterMinPrice: '',
     filterMaxPrice: '',
     filterSortingPrice: '',
-    filterManufacture: [],
-    filterDosageForm: [],
+    country: [],
+    productForm: [],
     filterRecipe: false,
     filterPregnant: false,
     filterChildren: false
   },
   reducers: {
     mainCategory: (state, action) => {
-      state.filterMainCategory = action.payload;
+      state.categories = action.payload;
     },
     addManufacture: (state, action) => {
-      state.filterManufacture.push(action.payload);
+      state.country.push(action.payload);
     },
     removeManufacture: (state, action) => {
-      state.filterManufacture = state.filterManufacture.filter(item => item !== action.payload);
+      state.country = state.country.filter(item => item !== action.payload);
     },
     addDosageForm: (state, action) => {
-      state.filterDosageForm.push(action.payload);
+      state.productForm.push(action.payload);
     },
     removeDosageForm: (state, action) => {
-      state.filterDosageForm = state.filterDosageForm.filter(item => item !== action.payload);
+      state.productForm = state.productForm.filter(item => item !== action.payload);
     },
     recipe: state => {
       state.filterRecipe = !state.filterRecipe;

@@ -32,13 +32,8 @@ function Products() {
   const { category } = useParams();
 
   useEffect(() => {
-    dispatch(fetchProductsData({ category, numPage }));
-  }, [category, dispatch, numPage]);
-
-  // useEffect(() => {
-  //   const requestString = `categories=${filterBase.filterMainCategory}&page=${numPage}&limit=2`;
-  //   dispatch(fetchProductsData(requestString));
-  // }, [category, dispatch, numPage]);
+    dispatch(fetchProductsData(RequestString(filterBase, numPage)));
+  }, [filterBase, dispatch, numPage]);
 
   return (
     <Container disableGutters id="productsContainer" sx={productsContainerStyles}>
@@ -60,8 +55,8 @@ function Products() {
           </Box>
         </Box>
       </Box>
-      {/*<PromoMonth />*/}
-      {/*<YouBrowsed />*/}
+      {/* <PromoMonth /> */}
+      {/* <YouBrowsed /> */}
     </Container>
   );
 }
