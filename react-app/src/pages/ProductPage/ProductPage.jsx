@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Container, Typography, Box, Grid, Tabs, Tab } from '@mui/material';
+import { Container, Typography, Box, Grid, Tabs, Tab, Skeleton, Stack } from '@mui/material';
 
 import { useParams } from 'react-router-dom';
 
@@ -53,7 +53,7 @@ const theme = createTheme({
 });
 
 const TabPanel = props => {
-  const { children, value, index, ...other } = props;
+  const { children, value, index, product, ...other } = props;
 
   return (
     <div
@@ -64,9 +64,9 @@ const TabPanel = props => {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 0.5 }}>
-          <Typography component="div">{children}</Typography>
-        </Box>
+      <Box sx={{ p: 0.5 }}>
+        <Typography component="div">{children}</Typography>
+      </Box>
       )}
     </div>
   );
@@ -84,14 +84,16 @@ const ProductPage = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:3004/api/product?categories=${category}`);
+        // const response = await fetch(`http://localhost:3004/api/product?categories=${category}`);
+        const response = await fetch(`http://localhost:3004/api/product/${id}`);
 
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        const { prods } = await response.json();
-        const selectedProduct = prods.find(item => item.id === id);
-        setProduct(selectedProduct);
+        // const { prods } = await response.json();
+        // const selectedProduct = prods.find(item => item.id === id);
+        const singleProduct = await response.json();
+        setProduct(singleProduct);
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Error fetching product:', error);
@@ -108,7 +110,7 @@ const ProductPage = () => {
   return (
     <ThemeProvider theme={theme}>
       <div>
-        {!!product && (
+        {product ? (
           <Container>
             <Grid container spacing={2}>
               <Grid item lg={12}>
@@ -152,29 +154,40 @@ const ProductPage = () => {
                       <Tab sx={{ width: { xs: '150px' } }} label="Аналоги" {...a11yProps(2)} />
                       <Tab sx={{ width: { xs: '150px' } }} label="Відгуки" {...a11yProps(3)} />
                     </AntTabs>
-                  </Box>
-                  <TabPanel value={value} index={0}>
                     <ProductCardMainBlock productItem={product} />
+                  </Box>
+                  <TabPanel value={value} index={0} product={product}>
                     <ProductCardInstruction productItem={product} />
                     <ProductAnalogiesCardContainer productItem={product} />
                     <ProductCardReviews productItem={product} />
                   </TabPanel>
-                  <TabPanel value={value} index={1}>
-                    <ProductCardMainBlock productItem={product} />
+                  <TabPanel value={value} index={1} product={product}>
                     <ProductCardInstruction productItem={product} />
                   </TabPanel>
-                  <TabPanel value={value} index={2}>
-                    <ProductCardMainBlock productItem={product} />
+                  <TabPanel value={value} index={2} product={product}>
                     <ProductAnalogiesCardContainer productItem={product} />
                   </TabPanel>
-                  <TabPanel value={value} index={3}>
-                    <ProductCardMainBlock productItem={product} />
+                  <TabPanel value={value} index={3} product={product}>
                     <ProductCardReviews productItem={product} />
                   </TabPanel>
                 </Box>
               </Grid>
             </Grid>
           </Container>
+        ) : (
+          <Box>
+            <Skeleton variant="text" sx={{ fontSize: '16px', mt: '160px', mb: '20px' }} />
+            <Skeleton variant="text" sx={{ fontSize: '32px', mb: '20px' }} />
+            <Skeleton variant="text" sx={{ fontSize: '100px', mb: '5px' }} />
+            <Stack
+              direction={{ xs: 'column', sm: 'row' }}
+              spacing={{ xs: 1, sm: 2, md: 4 }}
+            >
+              <Skeleton variant="rectangular" height="300px" sx={{ flexGrow: '2', mb: '30px' }} />
+              <Skeleton variant="rectangular" height="300px" sx={{ flexGrow: '1', mb: '30px' }} />
+              <Skeleton variant="rectangular" height="300px" sx={{ flexGrow: '1', mb: '30px' }} />
+            </Stack>
+          </Box>
         )}
       </div>
     </ThemeProvider>
