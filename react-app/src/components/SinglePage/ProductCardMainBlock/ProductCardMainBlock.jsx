@@ -37,7 +37,8 @@ const ProductCardMainBlock = ({ productItem }) => {
     setActiveSubstance(arr.join(', '));
     setValue(Math.round(Number(productItem.ratingTotal) / Number(productItem.ratingClick)));
     roundPrice(productItem.price, productItem.discount);
-  }, [productItem.activeSubstance, productItem.ratingClick, productItem.ratingTotal, productItem.discount, productItem.price ]);
+  }, [productItem.activeSubstance, productItem.ratingClick,
+      productItem.ratingTotal, productItem.discount, productItem.price]);
 
   const handleFavoriteClick = event => {
     event.preventDefault();
@@ -63,17 +64,17 @@ const ProductCardMainBlock = ({ productItem }) => {
   };
 
   const updateRating = async newValue => {
-      const res = await fetch(`http://localhost:3004/api/product/${id}`, {
-        method: 'PUT',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify({
-          ratingTotal: (productItem.ratingTotal + newValue),
-          ratingClick: (productItem.ratingClick + 1)
-        }),
-      });
-      return res.json();
+    const res = await fetch(`http://localhost:3004/api/product/${id}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        ratingTotal: (productItem.ratingTotal + newValue),
+        ratingClick: (productItem.ratingClick + 1)
+      }),
+    });
+    return res.json();
   };
 
   return (
@@ -355,8 +356,11 @@ const ProductCardMainBlock = ({ productItem }) => {
           <Grid item xs={12} lg={12} sx={{ mb: '10px' }}>
             {quantity >= productItem?.quantity
                             && (
-                            <Typography component="span" variant="body1"
-                                        sx={{ color: '#dd8888', fontSize: '12px' }}>
+                            <Typography
+                              component="span"
+                              variant="body1"
+                              sx={{ color: '#dd8888', fontSize: '12px' }}
+                            >
                               Обрано максимальну кількість
                             </Typography>
                             )}
