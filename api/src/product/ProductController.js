@@ -16,14 +16,15 @@ const getAllProduct = async (req, res) => {
         const skip = ((parseInt(page) || 1) - 1) * perPage;
         const minPrice = parseInt(priceMin) || 0;
         const maxPrice = parseInt(priceMax) || 9007199254740992;
-        const sortPrice = parseInt(priceMin) || 0;
+        const sortStr = sort || '1';
         searchString.price = { $gte: minPrice, $lte: maxPrice };
+
 console.log(searchString);
         const totalFound = await ProductDB.countDocuments(searchString);
         const prods = await ProductDB.find( searchString )
             .limit(perPage)
             .skip(skip)
-            .sort({'price': 1 });
+            .sort({'price': sortStr });
 
         return res.json({totalFound, prods});
     } catch (e) {
