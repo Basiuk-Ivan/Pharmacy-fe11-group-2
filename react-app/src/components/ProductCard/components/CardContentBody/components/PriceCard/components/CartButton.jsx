@@ -3,8 +3,9 @@ import { useDispatch } from 'react-redux';
 import { IconButton } from '@mui/material';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import CloseIcon from '@mui/icons-material/Close';
-import { addToCartLocalStor } from '../../../../../../../utils/addToCartLocalStor';
-import { removeFromCartLocalStor } from '../../../../../../../utils/removeFromCartLocalStor';
+import { addToCartLocalStorage } from '../../../../../../../utils/LocalStore/addToCartLocalStorage';
+
+import { removeFromCartLocalStorage } from '../../../../../../../utils/LocalStore/removeFromCartLocalStorage';
 import { addItem } from '../../../../../../../redux/slice/cartItems';
 import { cartStyles, iconButtonStyles } from '../../../../../style';
 
@@ -18,9 +19,9 @@ export const CartButton = ({ productItem, isInCart }) => {
 
     if (!isCart) {
       dispatch(addItem(productItem));
-      addToCartLocalStor(productItem);
+      addToCartLocalStorage(productItem);
     } else {
-      removeFromCartLocalStor(productItem, dispatch);
+      removeFromCartLocalStorage(productItem, dispatch);
     }
   };
 

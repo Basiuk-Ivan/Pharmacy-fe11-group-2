@@ -34,7 +34,8 @@ import {
   ContainerBox
 } from './style';
 
-import { removeFromCartLocalStor } from '../../utils/removeFromCartLocalStor';
+import { removeFromCartLocalStorage } from '../../utils/LocalStore/removeFromCartLocalStorage';
+
 // import { fetchProductsData } from '../../redux/slice/productsSlice';
 
 const Cart = () => {
@@ -44,12 +45,13 @@ const Cart = () => {
   const discount = productItemCart.reduce((acum, product) => acum + product.discount, 0);
   const totalValue = generalPrice - discount;
   const dispatch = useDispatch();
+
   // useEffect(() => {
   //   dispatch(fetchProductsData());
   // }, [dispatch, products.length]);
   const delFromCart = prods => {
     prods.forEach(el => {
-      removeFromCartLocalStor(el, dispatch, 'all');
+      removeFromCartLocalStorage(el, dispatch, 'all');
     });
     // dispatch(removeItem('all'));
   };

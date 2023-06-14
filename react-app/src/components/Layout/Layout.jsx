@@ -12,7 +12,6 @@ import SearchActions from './Search/Search';
 import { MobileLogo } from './Logo/components/MobileLogo/MobileLogo';
 import UserActions from './UserActions/UserActions';
 import Footer from './Footer/Footer';
-
 import { theme, containerMainStyles, toolBarStyles } from './style';
 
 const Layout = () => (

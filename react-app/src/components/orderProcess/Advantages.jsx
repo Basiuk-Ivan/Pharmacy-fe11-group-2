@@ -24,6 +24,7 @@ const Advantages = () => (
   >
     <Grid
       item
+      xs={12}
       md={3}
       sx={{
         textAlign: 'center'
@@ -35,6 +36,7 @@ const Advantages = () => (
     </Grid>
     <Grid
       item
+      xs={12}
       md={3}
       sx={{
         textAlign: 'center'
@@ -46,6 +48,7 @@ const Advantages = () => (
     </Grid>
     <Grid
       item
+      xs={12}
       md={3}
       sx={{
         textAlign: 'center'
@@ -57,6 +60,7 @@ const Advantages = () => (
     </Grid>
     <Grid
       item
+      xs={12}
       md={3}
       sx={{
         textAlign: 'center'

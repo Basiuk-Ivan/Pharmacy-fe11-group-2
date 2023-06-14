@@ -5,15 +5,16 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProductCard from '../../ProductCard/ProductCard';
-import Bread from '../Bread';
+import Bread from '../../Bread';
 import { fetchProductsData } from '../../../redux/slice/productsSlice';
 import { addItem } from '../../../redux/slice/cartItems';
-import { addToCartLocalStor } from '../../../utils/addToCartLocalStor';
-import { removeFromFavouriteLocalStor } from '../../../utils/removeFromFavouriteLocalStor';
-import { deleteFromFavouriteItems } from '../../../redux/slice/favouriteItems';
+// import { addToCartLocalStorage } from '../../../utils/LocalStorage/addToCartLocalStorage';
+import { addToCartLocalStorage } from '../../../utils/LocalStore/addToCartLocalStorage';
+import { openModal } from '../../../redux/slice/favouriteItems';
 
 const FavouriteBlock = props => {
   const { products } = props;
+
   const cartItems = useSelector(state => state.itemCards);
   const dispatch = useDispatch();
   const isInCart = false;
@@ -22,18 +23,15 @@ const FavouriteBlock = props => {
     dispatch(fetchProductsData());
   }, [dispatch, products.length]);
 
-  const delFromFav = prods => {
-    prods.forEach(el => {
-      removeFromFavouriteLocalStor(el);
-    });
-    dispatch(deleteFromFavouriteItems('all'));
+  const delFromFav = () => {
+    dispatch(openModal());
   };
 
   const handleAddToCart = items => {
     items.forEach(element => {
       if (!cartItems.items.find(item => item.id === element.id)) {
         dispatch(addItem(element));
-        addToCartLocalStor(element);
+        addToCartLocalStorage(element);
       }
     });
   };
@@ -42,7 +40,7 @@ const FavouriteBlock = props => {
     <Container
       disableGutters
       sx={{
-        mt: '20px',
+        mt: '140px',
         mb: '20px'
       }}
     >
@@ -72,7 +70,7 @@ const FavouriteBlock = props => {
               <DeleteIcon color="success" />
               <Button
                 variant="text"
-                onClick={() => delFromFav(products)}
+                onClick={() => delFromFav()}
                 sx={{
                   fontFamily: 'Raleway, sans-serif',
                   fontWeight: 700,
@@ -106,7 +104,7 @@ const FavouriteBlock = props => {
           </Stack>
           <Grid container spacing={2}>
             {products.map(item => (
-              <Grid item md={2.4} key={item.id}>
+              <Grid item key={item.id}>
                 <ProductCard productItem={item} isInCart={isInCart} />
               </Grid>
             ))}
