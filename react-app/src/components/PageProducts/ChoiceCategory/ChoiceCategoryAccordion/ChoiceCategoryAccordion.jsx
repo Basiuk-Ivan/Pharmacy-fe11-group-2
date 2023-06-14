@@ -1,4 +1,10 @@
 import * as React from 'react';
+import {
+  NavLink,
+  useLocation
+  // useParams
+} from 'react-router-dom';
+
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -7,13 +13,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { ButtonBase } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import {
-  NavLink,
-  useLocation
-  // useParams
-} from 'react-router-dom';
 import { mainCategory } from '../../../../redux/slice/filterBaseSlice';
 // import { fetchProductsData } from '../../../../redux/slice/productsSlice';
+import { changePage } from '../../../../redux/slice/numPageSlice';
 
 import { mainCategoryStyle, secondCategoryStyle, secondCategoryWrappStyle, marginStyle } from './style';
 
@@ -93,6 +95,7 @@ export default function ChoiceCategoryAccordion() {
 
   useEffect(() => {
     dispatch(mainCategory(currentCategory));
+    dispatch(changePage(1));
   }, [currentCategory, dispatch]);
 
   const handleChange = panel => (event, isExpanded) => {

@@ -34,7 +34,7 @@ import {
   ContainerBox
 } from './style';
 
-import { removeFromCartLocalStorage } from '../../utils/LocalStorage/removeFromCartLocalStorage';
+import { removeFromCartLocalStorage } from '../../utils/LocalStore/removeFromCartLocalStorage';
 
 // import { fetchProductsData } from '../../redux/slice/productsSlice';
 
