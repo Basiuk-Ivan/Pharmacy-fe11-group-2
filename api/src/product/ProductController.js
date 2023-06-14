@@ -32,10 +32,20 @@ console.log(searchString);
     }
 };
 
+const getOneProduct = async (req, res) => {
+    try {
+        const oneProd = await ProductDB.findById( req.params.id);
+        return res.json(oneProd);
+    } catch (e) {
+        res.status(500).json(e.message);
+    }
+}
+
 
 const updateProduct = async (req, res) => {
     try {
-        const updatedProd = await ProductDB.findByIdAndUpdate(req.id, req, { new: true });
+        const updatedFields = { ...req.body };
+        const updatedProd = await ProductDB.findByIdAndUpdate(req.params.id, updatedFields, { new: true });
         return res.json(updatedProd);
     } catch (e) {
         res.status(500).json(e.message);
@@ -57,6 +67,7 @@ const deleteProduct = async (req, res) => {
 export const ProductController = {
     createProduct,
     getAllProduct,
+    getOneProduct,
     updateProduct,
     deleteProduct,
 };
