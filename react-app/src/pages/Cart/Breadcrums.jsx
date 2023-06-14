@@ -12,6 +12,7 @@ const IconBreadcrumbs = styled(Box)`
   align-items: center;
   justify-content: flex-start;
   width: 100%;
+  padding: 10px;
   color: rgba(47, 211, 174, 1);
   .Muibox-root {
     display: flex;
@@ -24,13 +25,13 @@ export default function CustomSeparator() {
       <NavLink to="/">
         <Box sx={{ display: 'flex' }}>
           <HomeOutlinedIcon sx={{ mr: 0.5, color: 'rgba(47, 211, 174, 1)' }} fontSize="small" />
-          <Typography sx={{ color: 'rgba(47, 211, 174, 1)' }}>Головна </Typography>
+          <Typography sx={{ color: 'rgba(47, 211, 174, 1)', marginRight: '12px' }}>Головна </Typography>
         </Box>
       </NavLink>
       <Box>
-        <KeyboardDoubleArrowRightTwoToneIcon sx={{ fill: 'rgba(47, 211, 174, 1)' }} />
+        <KeyboardDoubleArrowRightTwoToneIcon sx={{ fill: 'rgba(47, 211, 174, 1)', marginRight: '12px' }} />
       </Box>
-      <Typography sx={{ color: 'rgba(47, 211, 174, 1)' }}> Корзина</Typography>
+      <Typography sx={{ color: '#BDBDBD' }}> Корзина</Typography>
     </Box>
   ];
 
