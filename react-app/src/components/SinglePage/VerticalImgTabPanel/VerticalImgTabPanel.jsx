@@ -56,20 +56,21 @@ const VerticalImgTabPanel = ({ productItem }) => {
         }}
         scrollButtons
       >
-          {productItem.img.map((imgSrc, index) => (
-              <Tab
-                  key={index}
-                  label={<img src={imgSrc} className={s.tabImg} alt={`itm${index + 1}`} />}
-                  {...a11yProps(index)}
-              />
-          ))}
-      </Tabs>
         {productItem.img.map((imgSrc, index) => (
-            <TabPanel key={index} value={value} index={index}>
-                <Box sx={{ border: '1px solid #E7E9EB', padding: '10px' }}>
-                    <img src={imgSrc} className={s.activeImg} alt={`itm${index + 6}`} />
-                </Box>
-            </TabPanel>))}
+          <Tab
+            key={index}
+            label={<img src={imgSrc} className={s.tabImg} alt={`itm${index + 1}`} />}
+            {...a11yProps(index)}
+          />
+        ))}
+      </Tabs>
+      {productItem.img.map((imgSrc, index) => (
+        <TabPanel key={index} value={value} index={index}>
+          <Box sx={{ border: '1px solid #E7E9EB', padding: '10px' }}>
+            <img src={imgSrc} className={s.activeImg} alt={`itm${index + 6}`} />
+          </Box>
+        </TabPanel>
+      ))}
     </Box>
   );
 };
