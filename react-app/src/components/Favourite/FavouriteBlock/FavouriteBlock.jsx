@@ -1,18 +1,19 @@
 import { Container, Typography, Grid, Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProductCard from '../../ProductCard/ProductCard';
 import Bread from '../../Bread';
-import { fetchProductsData } from '../../../redux/slice/productsSlice';
+// import { fetchProductsData } from '../../../redux/slice/productsSlice';
 import { addItem } from '../../../redux/slice/cartItems';
 // import { addToCartLocalStorage } from '../../../utils/LocalStorage/addToCartLocalStorage';
 import { addToCartLocalStorage } from '../../../utils/LocalStore/addToCartLocalStorage';
 import { openModal } from '../../../redux/slice/favouriteItems';
 
 const FavouriteBlock = props => {
+  const [produsct, setProducts] = useState([]);
   const { products } = props;
 
   const cartItems = useSelector(state => state.itemCards);
@@ -20,8 +21,33 @@ const FavouriteBlock = props => {
   const isInCart = false;
 
   useEffect(() => {
-    dispatch(fetchProductsData());
-  }, [dispatch, products.length]);
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('http://localhost:3004/api/product');
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const { prods } = await response.json();
+        const favoriteString = localStorage.getItem('favouriteItems');
+        if (favoriteString) {
+          const favouriteItems = JSON.parse(favoriteString);
+          const favoriteIds = favouriteItems.map(item => item.id);
+
+          const selectedProduct = prods.filter(item => favoriteIds.includes(item.id));
+          setProducts(selectedProduct);
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    fetchProducts();
+  }, [products]);
+
+  // useEffect(() => {
+  //   dispatch(fetchProductsData());
+  // }, [dispatch, products.length]);
 
   const delFromFav = () => {
     dispatch(openModal());
@@ -45,7 +71,7 @@ const FavouriteBlock = props => {
       }}
     >
       <Bread />
-      {!!products.length > 0 ? (
+      {!!produsct.length > 0 ? (
         <>
           <Stack
             direction={{ xs: 'column', sm: 'row' }}
@@ -84,7 +110,7 @@ const FavouriteBlock = props => {
                 variant="contained"
                 type="submit"
                 form="contacts"
-                onClick={() => handleAddToCart(products)}
+                onClick={() => handleAddToCart(produsct)}
                 component={Link}
                 to={{
                   pathname: '/cart'
@@ -103,7 +129,7 @@ const FavouriteBlock = props => {
             </Stack>
           </Stack>
           <Grid container spacing={2}>
-            {products.map(item => (
+            {produsct.map(item => (
               <Grid item key={item.id}>
                 <ProductCard productItem={item} isInCart={isInCart} />
               </Grid>
