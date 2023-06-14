@@ -8,7 +8,6 @@ import ProductCard from '../../ProductCard/ProductCard';
 import Bread from '../../Bread';
 import { fetchProductsData } from '../../../redux/slice/productsSlice';
 import { addItem } from '../../../redux/slice/cartItems';
-// import { addToCartLocalStorage } from '../../../utils/LocalStorage/addToCartLocalStorage';
 import { addToCartLocalStorage } from '../../../utils/LocalStore/addToCartLocalStorage';
 import { openModal } from '../../../redux/slice/favouriteItems';
 
@@ -102,9 +101,12 @@ const FavouriteBlock = props => {
               </Button>
             </Stack>
           </Stack>
-          <Grid container spacing={2}>
+          <Grid container spacing={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
             {products.map(item => (
-              <Grid item key={item.id}>
+              <Grid
+                item
+                key={item.id}
+              >
                 <ProductCard productItem={item} isInCart={isInCart} />
               </Grid>
             ))}
