@@ -38,7 +38,7 @@ const ProductCardMainBlock = ({ productItem }) => {
     setValue(Math.round(Number(productItem.ratingTotal) / Number(productItem.ratingClick)));
     roundPrice(productItem.price, productItem.discount);
   }, [productItem.activeSubstance, productItem.ratingClick,
-      productItem.ratingTotal, productItem.discount, productItem.price]);
+    productItem.ratingTotal, productItem.discount, productItem.price]);
 
   const handleFavoriteClick = event => {
     event.preventDefault();
