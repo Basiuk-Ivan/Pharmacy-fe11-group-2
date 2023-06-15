@@ -19,9 +19,6 @@ export const FeedBackList = () => (
       <ListItemButton sx={listItemStyle}>
         <ListItemText primary="Політика конфіденційності" />
       </ListItemButton>
-      <ListItemButton sx={listItemStyle}>
-        <ListItemText primary="Користувача угода" />
-      </ListItemButton>
     </List>
   </Box>
 );
