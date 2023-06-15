@@ -1,7 +1,8 @@
 import { Box, Typography } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { useSelector } from 'react-redux';
+import { useEffect, useState, useMemo } from 'react';
+import axios from 'axios';
 import ProductCard from '../../ProductCard/ProductCard';
 import {
   cardsWrapperStyle,
@@ -13,9 +14,30 @@ import {
 } from './style';
 
 function YouBrowsed() {
-  const { products } = useSelector(state => state.products);
-  const youBrowsedCards = products.slice(0, 5);
   const isInCart = false;
+  const viewedItems = useMemo(() => JSON.parse(localStorage.getItem('viewedProducts')) || [], []);
+
+  const [viewedProducts, setViewedProducts] = useState([]);
+
+  const getViewedProducts = items => {
+    const params = {
+      _id: items.join(',')
+    };
+
+    axios.get('http://localhost:3004/api/product', { params })
+      .then(response => {
+        // Handle the response
+        const viewedProd = response.data.prods;
+        setViewedProducts(viewedProd);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
+  useEffect(() => {
+    getViewedProducts(viewedItems);
+  }, [viewedItems]);
 
   return (
     <Box id="youBrowsed" sx={youBrowsedStyle}>
@@ -28,7 +50,7 @@ function YouBrowsed() {
       </Box>
 
       <Box id="cardsWrapper" sx={cardsWrapperStyle}>
-        {youBrowsedCards.map(item => (
+        {viewedProducts.map(item => (
           <Box id="cardWrapper" key={item.id} sx={cardWrapperStyle}>
             <ProductCard productItem={item} isInCart={isInCart} />
           </Box>
