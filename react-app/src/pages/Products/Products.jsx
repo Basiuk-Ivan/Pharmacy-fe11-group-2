@@ -31,7 +31,7 @@ function Products() {
 
   useEffect(() => {
     dispatch(fetchProductsData(RequestString(filterBase, numPage)));
-  }, [filterBase, dispatch, numPage]);
+  }, [filterBase.categories, filterBase.sort, numPage]);
 
   return (
     <Container disableGutters id="productsContainer" sx={productsContainerStyles}>
