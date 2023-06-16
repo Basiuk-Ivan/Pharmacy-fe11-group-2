@@ -52,7 +52,6 @@ const filterBaseSlice = createSlice({
   }
 });
 
-// eslint-disable-next-line max-len
 export const { addManufacture, removeManufacture, addDosageForm, removeDosageForm, recipe, pregnant, children, minPrice, maxPrice, sortingPrice, mainCategory } = filterBaseSlice.actions;
 
 export default filterBaseSlice.reducer;

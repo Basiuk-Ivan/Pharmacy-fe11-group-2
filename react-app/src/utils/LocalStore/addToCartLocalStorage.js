@@ -1,5 +1,5 @@
-export const addToCartLocalStorage = (productItem) => {
-  const cartItem = {id: productItem.id, quantity: 1 };
+export const addToCartLocalStorage = productItem => {
+  const cartItem = { id: productItem.id, quantity: 1 };
   const existingCart = JSON.parse(localStorage.getItem('cartItems')) || [];
   const existingCartItemIndex = existingCart.findIndex(item => item.id === cartItem.id);
   if (existingCartItemIndex !== -1) {

@@ -8,16 +8,16 @@ import { addToFavouriteLocalStorage } from '../../../utils/LocalStore/addToFavou
 import { removeFromFavouriteLocalStorage } from '../../../utils/LocalStore/removeFromFavouriteLocalStorage';
 import { addToFavouriteItems, deleteFromFavouriteItems } from '../../../redux/slice/favouriteItems';
 import VerticalImgTabPanel from '../VerticalImgTabPanel';
-import { addToCart } from '../../../redux/slice/cartItems.js';
-import { updateRating } from '../../../utils/ActionsWithProduct/updateRating.js';
-import { addToCartLocalStorage } from '../../../utils/LocalStore/addToCartLocalStorage.js';
-import { roundRating } from '../../../utils/ActionsWithProduct/roundRating.js';
-import { roundPrice } from '../../../utils/ActionsWithProduct/roundPrice.js';
+import { addToCart } from '../../../redux/slice/cartItems';
+import { updateRating } from '../../../utils/ActionsWithProduct/updateRating';
+import { addToCartLocalStorage } from '../../../utils/LocalStore/addToCartLocalStorage';
+import { roundRating } from '../../../utils/ActionsWithProduct/roundRating';
+import { roundPrice } from '../../../utils/ActionsWithProduct/roundPrice';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const ProductCardMainBlock = ({ productItem }) => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  // const { id } = useParams();
 
   const [value, setValue] = useState(null);
   const [activeSubstance, setActiveSubstance] = useState('');
@@ -35,7 +35,7 @@ const ProductCardMainBlock = ({ productItem }) => {
     } else {
       setIsInCart(false);
     }
-  }, [cartItems]);
+  }, [cartItems, productItem.id)]);
 
   useEffect(() => {
     const arr = productItem.activeSubstance;
@@ -62,7 +62,6 @@ const ProductCardMainBlock = ({ productItem }) => {
   };
 
   const handleAddToCart = productItem => {
-    event.preventDefault();
     dispatch(addToCart({ id: productItem.id }));
     addToCartLocalStorage(productItem);
   };
@@ -155,116 +154,116 @@ const ProductCardMainBlock = ({ productItem }) => {
                 <Grid container sx={{ rowGap: '5px' }}>
                   <Grid item xs={12} sx={{ backgroundColor: '#F7FAFB', mb: '5px' }}>
                     <Grid
-                        container
-                        justifyContent="flex-start"
-                        alignItems="flex-start"
-                        gap={0.5}
-                        sx={{ ml: '10px' }}
-                      >
-                        <Grid item>
-                            <Stack direction="row" spacing={0.5} alignItems="center">
-                                <Typography
-                                    component="span"
-                                    variant="body1"
-                                    sx={{
-                                        width: '4px',
-                                        height: '4px',
-                                        mr: '8px',
-                                        borderRadius: '50%',
-                                        backgroundColor: '#F2C94C'
-                                      }}
-                                  />
+                      container
+                      justifyContent="flex-start"
+                      alignItems="flex-start"
+                      gap={0.5}
+                      sx={{ ml: '10px' }}
+                    >
+                      <Grid item>
+                        <Stack direction="row" spacing={0.5} alignItems="center">
+                          <Typography
+                            component="span"
+                            variant="body1"
+                            sx={{
+                              width: '4px',
+                              height: '4px',
+                              mr: '8px',
+                              borderRadius: '50%',
+                              backgroundColor: '#F2C94C'
+                            }}
+                          />
 
-                                <Typography
-                                    component="span"
-                                    variant="body1"
-                                    sx={{ fontSize: '14px', color: '#7B818C' }}
-                                  >
-                                    Виробник:
-                                  </Typography>
-                              </Stack>
-                          </Grid>
-
-                        <Grid item fontFamily="Roboto" sx={{ fontSize: '14px' }}>
-                            {productItem?.manufacturer}
-                          </Grid>
+                          <Typography
+                            component="span"
+                            variant="body1"
+                            sx={{ fontSize: '14px', color: '#7B818C' }}
+                          >
+                            Виробник:
+                          </Typography>
+                        </Stack>
                       </Grid>
+
+                      <Grid item fontFamily="Roboto" sx={{ fontSize: '14px' }}>
+                        {productItem?.manufacturer}
+                      </Grid>
+                    </Grid>
                   </Grid>
 
                   <Grid item xs={12} sx={{ mb: '5px' }}>
                     <Grid
-                        container
-                        justifyContent="flex-start"
-                        alignItems="flex-start"
-                        gap={0.5}
-                        sx={{ ml: '10px' }}
-                      >
-                        <Grid item>
-                            <Stack direction="row" spacing={0.5} alignItems="center">
-                                <Typography
-                                    component="span"
-                                    variant="body1"
-                                    sx={{
-                                        width: '4px',
-                                        height: '4px',
-                                        mr: '8px',
-                                        borderRadius: '50%',
-                                        backgroundColor: '#F2C94C'
-                                      }}
-                                  />
+                      container
+                      justifyContent="flex-start"
+                      alignItems="flex-start"
+                      gap={0.5}
+                      sx={{ ml: '10px' }}
+                    >
+                      <Grid item>
+                        <Stack direction="row" spacing={0.5} alignItems="center">
+                          <Typography
+                            component="span"
+                            variant="body1"
+                            sx={{
+                              width: '4px',
+                              height: '4px',
+                              mr: '8px',
+                              borderRadius: '50%',
+                              backgroundColor: '#F2C94C'
+                            }}
+                          />
 
-                                <Typography
-                                    component="span"
-                                    variant="body1"
-                                    sx={{ fontSize: '14px', color: '#7B818C' }}
-                                  >
-                                    Діюча речовинаі:
-                                  </Typography>
-                              </Stack>
-                          </Grid>
-
-                        <Grid item fontFamily="Roboto" sx={{ fontSize: '14px' }}>
-                            {activeSubstance}
-                          </Grid>
+                          <Typography
+                            component="span"
+                            variant="body1"
+                            sx={{ fontSize: '14px', color: '#7B818C' }}
+                          >
+                            Діюча речовинаі:
+                          </Typography>
+                        </Stack>
                       </Grid>
+
+                      <Grid item fontFamily="Roboto" sx={{ fontSize: '14px' }}>
+                        {activeSubstance}
+                      </Grid>
+                    </Grid>
                   </Grid>
 
                   <Grid item xs={12} sx={{ backgroundColor: '#F7FAFB', mb: '5px' }}>
                     <Grid
-                        container
-                        justifyContent="flex-start"
-                        alignItems="flex-start"
-                        gap={0.5}
-                        sx={{ ml: '10px' }}
-                      >
-                        <Grid item>
-                            <Stack direction="row" spacing={0.5} alignItems="center">
-                                <Typography
-                                    component="span"
-                                    variant="body1"
-                                    sx={{
-                                        width: '4px',
-                                        height: '4px',
-                                        mr: '8px',
-                                        borderRadius: '50%',
-                                        backgroundColor: '#F2C94C'
-                                      }}
-                                  />
+                      container
+                      justifyContent="flex-start"
+                      alignItems="flex-start"
+                      gap={0.5}
+                      sx={{ ml: '10px' }}
+                    >
+                      <Grid item>
+                        <Stack direction="row" spacing={0.5} alignItems="center">
+                          <Typography
+                            component="span"
+                            variant="body1"
+                            sx={{
+                              width: '4px',
+                              height: '4px',
+                              mr: '8px',
+                              borderRadius: '50%',
+                              backgroundColor: '#F2C94C'
+                            }}
+                          />
 
-                                <Typography
-                                    component="span"
-                                    variant="body1"
-                                    sx={{ fontSize: '14px', color: '#7B818C' }}
-                                  >
-                                    Термін придатності:
-                                  </Typography>
-                              </Stack>
-                          </Grid>
-
-                        <Grid item fontFamily="Roboto" sx={{ fontSize: '14px' }}>
-                            {productItem?.bestBeforeDate}
-                          </Grid>
+                          <Typography
+                            component="span"
+                            variant="body1"
+                            sx={{ fontSize: '14px', color: '#7B818C' }}
+                          >
+                            Термін придатності:
+                          </Typography>
+                        </Stack>
                       </Grid>
+
+                      <Grid item fontFamily="Roboto" sx={{ fontSize: '14px' }}>
+                        {productItem?.bestBeforeDate}
+                      </Grid>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Box>
@@ -374,24 +373,24 @@ const ProductCardMainBlock = ({ productItem }) => {
                     variant="body1"
                     sx={{ color: '#2FD3AE', fontSize: '16px', m: '10px 0' }}
                   >
-                      Товар додано до корзини
+                    Товар додано до корзини
                   </Typography>
                   <NavLink to="/cart">
                     <Button
-                        variant="outlined"
-                        sx={{
-                            width: '200px',
-                            color: '#ffffff',
-                            borderRadius: '50px',
-                            border: 'none',
-                            backgroundColor: '#12608d',
-                            '&:hover': {
-                              color: '#12608d'
-                            }
-                          }}
-                      >
-                        Перейти до корзини
-                      </Button>
+                      variant="outlined"
+                      sx={{
+                        width: '200px',
+                        color: '#ffffff',
+                        borderRadius: '50px',
+                        border: 'none',
+                        backgroundColor: '#12608d',
+                        '&:hover': {
+                          color: '#12608d'
+                        }
+                      }}
+                    >
+                      Перейти до корзини
+                    </Button>
                   </NavLink>
 
                 </Stack>

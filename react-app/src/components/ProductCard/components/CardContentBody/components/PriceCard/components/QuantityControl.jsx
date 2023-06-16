@@ -1,22 +1,15 @@
-import { useEffect, useState } from 'react';
-import { Box, ButtonBase } from '@mui/material';
+import {  useState } from 'react';
+import { Box } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import * as PropTypes from 'prop-types';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { addToCart, removeFromCart } from '../../../../../../../redux/slice/cartItems.js';
-import {
-  buttonBasePlusStyles,
-  buttonBaseMinusStyles,
-  wrappForQuantityStyles,
-  boxForButtonBaseStyles
-} from '../../../../../style';
 import { addToCartLocalStorage } from '../../../../../../../utils/LocalStore/addToCartLocalStorage.js';
 import { removeCartItemFromLocalStorage } from '../../../../../../../utils/LocalStore/removeCartItemFromLocalStorage.js';
 
 export const QuantityControl = ({ productItem, isInCart }) => {
   const [quantity, setQuantity] = useState(1);
-  const cartItems = useSelector(state => state.itemCards.items);
+  // const cartItems = useSelector(state => state.itemCards.items);
   const dispatch = useDispatch();
 
   // useEffect(() => {
