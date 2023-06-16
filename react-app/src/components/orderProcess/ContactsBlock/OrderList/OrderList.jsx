@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 
 import { Typography, Container, Grid } from '@mui/material';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 const OrderList = () => {
   const [products, setProducts] = useState([]);
 
-  const productItemCart = useSelector(state => state.itemCards.items);
+  // const productItemCart = useSelector(state => state.itemCards.items);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -35,7 +35,6 @@ const OrderList = () => {
       }
     };
     fetchProducts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
