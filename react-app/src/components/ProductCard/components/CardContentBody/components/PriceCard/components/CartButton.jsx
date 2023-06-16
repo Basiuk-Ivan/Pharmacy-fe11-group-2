@@ -4,26 +4,23 @@ import { IconButton } from '@mui/material';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import { addToCartLocalStorage } from '../../../../../../../utils/LocalStore/addToCartLocalStorage';
-
 import { removeFromCartLocalStorage } from '../../../../../../../utils/LocalStore/removeFromCartLocalStorage';
-import { addItem, removeItem } from '../../../../../../../redux/slice/cartItems';
+import { addToCart, removeItem } from '../../../../../../../redux/slice/cartItems';
 import { cartStyles, iconButtonStyles } from '../../../../../style';
 
 export const CartButton = ({ productItem, isInCart }) => {
   const dispatch = useDispatch();
   const [isCart, setIsCart] = useState(false);
 
-  const handleAddtoCart = event => {
-    event.preventDefault();
-    setIsCart(!isCart);
-
+  const handleAddtoCart = () => {
     if (!isCart) {
-      dispatch(addItem(productItem.id));
+      dispatch(addToCart({ id: productItem.id }));
       addToCartLocalStorage(productItem);
     } else {
       dispatch(removeItem(productItem));
-      removeFromCartLocalStorage(productItem, dispatch);
+      removeFromCartLocalStorage(productItem);
     }
+    setIsCart(!isCart);
   };
 
   const delItem = prod => {
