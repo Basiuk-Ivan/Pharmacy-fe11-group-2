@@ -1,6 +1,4 @@
-import {
-  Table, TableBody, TableCell, TableRow, Typography, Container
-} from '@mui/material';
+import { Table, TableBody, TableCell, TableRow, Typography, Container } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 const TotalAmountForm = () => {
@@ -46,8 +44,7 @@ const TotalAmountForm = () => {
             }}
           >
             <TableCell>Без урахування доставки</TableCell>
-            <TableCell>{`${totalAmount()} грн.`}
-            </TableCell>
+            <TableCell>{`${totalAmount()} грн.`}</TableCell>
           </TableRow>
         </TableBody>
       </Table>

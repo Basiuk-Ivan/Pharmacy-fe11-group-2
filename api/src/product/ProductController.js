@@ -1,4 +1,5 @@
 import ProductDB from './ProductModel.js';
+import mongoose from "mongoose";
 
 const createProduct = async (req, res) => {
     try {
@@ -18,7 +19,23 @@ const getAllProduct = async (req, res) => {
         const maxPrice = parseInt(priceMax) || 9007199254740992;
         const sortStr = sort || '1';
         searchString.price = { $gte: minPrice, $lte: maxPrice };
-
+        if (!!searchString.country){
+            searchString.country = { $in : searchString.country?.split(",")};
+        }
+        if (!!searchString.productForm){
+            searchString.productForm = { $in : searchString.productForm?.split(",")};
+        }
+        if (!!searchString._id){
+            let searchTxt = searchString._id?.toString();
+            console.log(searchTxt.split(","));
+            searchString._id = { $in : searchTxt.split(",")};
+        }
+        if (searchString.search) {
+            const regexp = new RegExp(searchString.search, "i");
+            console.log(regexp);
+            searchString.name = regexp;
+            delete searchString.search;
+        }
 console.log(searchString);
         const totalFound = await ProductDB.countDocuments(searchString);
         const prods = await ProductDB.find( searchString )

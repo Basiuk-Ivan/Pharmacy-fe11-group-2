@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import {bool, boolean, number} from "joi";
+// import { boolean, number} from "joi";
 
 const product = new mongoose.Schema(
   {
@@ -23,11 +23,12 @@ const product = new mongoose.Schema(
 
 export const Order = new mongoose.Schema(
   {
-    orderID: number,
+    orderID: { type: Number, required: true },
     orderStatus: String,
     totalPrice: Number,
     email: String,
-    orderPaid: boolean,
+    phone: String,
+    orderPaid: Boolean,
     products: [product],
     user: { type: mongoose.Types.ObjectId, ref: "UserDB" },
   },{
