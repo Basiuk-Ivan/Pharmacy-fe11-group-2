@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Box } from '@mui/system';
-import { Typography, IconButton } from '@mui/material';
+import {Typography, IconButton, Skeleton} from '@mui/material';
 import DeleteOutlineTwoToneIcon from '@mui/icons-material/DeleteOutlineTwoTone';
 import IconBreadcrumbs from './Breadcrums';
 import ProductCard from '../../components/ProductCard';
@@ -27,12 +27,24 @@ import { removeAllFromCart } from '../../utils/LocalStore/removeAllFromCart';
 const Cart = () => {
   const [products, setProducts] = useState([]);
   const productItemCart = useSelector(state => state.itemCards.items);
+  const [showSkeleton, setShowSkeleton] = useState(true);
+
 
   const isInCart = true;
   const generalPrice = products.reduce((acum, product) => acum + product.price, 0);
   const discount = products.reduce((acum, product) => acum + product.discount, 0);
   const totalValue = generalPrice - discount;
   const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSkeleton(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -127,25 +139,40 @@ const Cart = () => {
               <Typography>Очистити корзину</Typography>
             </IconButton>
           </HeaderBox>
-          {!!products.length > 0 ? (
-            <>
-              {products.map(item => (
-                <ProductCard key={item.id} productItem={item} isInCart={isInCart} />
-              ))}
-            </>
+          {showSkeleton ? (
+              <>
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+              </>
+          ) : products.length > 0 ? (
+              <>
+                {products.map(item => (
+                    <ProductCard key={item.id} productItem={item} isInCart={isInCart} />
+                ))}
+              </>
           ) : (
-            <Typography
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                fontSize: 24,
-                fontWeight: 400,
-                mt: '100px',
-                mb: '200px'
-              }}
-            >
-              Додайте товар в корзину для відображення на цій сторінці
-            </Typography>
+              <Typography
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    fontSize: 24,
+                    fontWeight: 400,
+                    mt: '100px',
+                    mb: '400px'
+                  }}
+              >
+                Додайте товар в корзину для відображення на цій сторінці
+              </Typography>
           )}
         </CardBox>
       </ContainerBox>
