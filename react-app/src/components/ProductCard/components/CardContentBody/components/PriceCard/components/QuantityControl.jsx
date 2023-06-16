@@ -1,11 +1,11 @@
-import {  useState } from 'react';
+import { useState } from 'react';
 import { Box } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { addToCart, removeFromCart } from '../../../../../../../redux/slice/cartItems.js';
-import { addToCartLocalStorage } from '../../../../../../../utils/LocalStore/addToCartLocalStorage.js';
-import { removeCartItemFromLocalStorage } from '../../../../../../../utils/LocalStore/removeCartItemFromLocalStorage.js';
+import { addToCart, removeFromCart } from '../../../../../../../redux/slice/cartItems';
+import { addToCartLocalStorage } from '../../../../../../../utils/LocalStore/addToCartLocalStorage';
+import { removeCartItemFromLocalStorage } from '../../../../../../../utils/LocalStore/removeCartItemFromLocalStorage';
 
 export const QuantityControl = ({ productItem, isInCart }) => {
   const [quantity, setQuantity] = useState(1);
@@ -19,13 +19,13 @@ export const QuantityControl = ({ productItem, isInCart }) => {
   //   // }
   // }, [cartItems]);
 
-  const handleIncrement = productItem => {
+  const handleIncrement = (productItem) => {
     setQuantity(prev => prev + 1);
     dispatch(addToCart({ id: productItem.id }));
     addToCartLocalStorage(productItem);
   };
 
-  const handleDecrement = productItem => {
+  const handleDecrement = (productItem) => {
     setQuantity(prev => prev - 1);
     dispatch(removeFromCart({ id: productItem.id }));
     removeCartItemFromLocalStorage(productItem);

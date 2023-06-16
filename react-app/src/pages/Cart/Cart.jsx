@@ -82,6 +82,7 @@ const Cart = () => {
           setProducts(prods);
         }
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Error fetching products:', error);
       }
     };
@@ -125,7 +126,7 @@ const Cart = () => {
             <Typography variant="h4" gutterBottom>
               Корзина
             </Typography>
-            <IconButton onClick={() => delFromCart(productItemCart)}>
+            <IconButton onClick={() => delFromCart()}>
               <DeleteOutlineTwoToneIcon />
               <Typography>Очистити корзину</Typography>
             </IconButton>

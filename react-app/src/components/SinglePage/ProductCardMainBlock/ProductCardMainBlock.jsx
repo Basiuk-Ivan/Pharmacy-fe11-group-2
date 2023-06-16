@@ -35,7 +35,7 @@ const ProductCardMainBlock = ({ productItem }) => {
     } else {
       setIsInCart(false);
     }
-  }, [cartItems, productItem.id)]);
+  }, [cartItems, productItem.id]);
 
   useEffect(() => {
     const arr = productItem.activeSubstance;
