@@ -10,7 +10,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { mainCategory, reset } from '../../../../redux/slice/filterBaseSlice';
 import { changePage } from '../../../../redux/slice/numPageSlice';
@@ -67,7 +67,7 @@ export default function ChoiceCategoryAccordion() {
   const dispatch = useDispatch();
   const [expanded, setExpanded] = React.useState(false);
 
-  const filterBase = useSelector(state => state.filterBase);
+  // const filterBase = useSelector(state => state.filterBase);
 
   useEffect(() => {
     const values = {
@@ -101,9 +101,9 @@ export default function ChoiceCategoryAccordion() {
     setExpanded(isExpanded ? panel : false);
   };
 
-  useEffect(() => {
-    console.log(filterBase);
-  }, [filterBase]);
+  // useEffect(() => {
+  //   console.log(filterBase);
+  // }, [filterBase]);
 
   return (
     <div>

@@ -4,7 +4,7 @@ export const fetchProductsData = createAsyncThunk(
   'products/fetchProductsData',
   async (requestString, { rejectWithValue }) => {
     try {
-      console.log('productSlice', requestString);
+      // console.log('productSlice', requestString);
       const res = await fetch(
         // `http://localhost:3004/api/product?categories=${category}&page=${numPage}&limit=4`
         `http://localhost:3004/api/product?${requestString}`

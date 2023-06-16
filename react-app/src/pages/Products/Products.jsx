@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Box, Container } from '@mui/material';
 import Filter from '../../components/PageProducts/Filter';
 import ChoiceCategory from '../../components/PageProducts/ChoiceCategory';
-import PromoMonth from '../../components/PageProducts/PromoMonth';
-import YouBrowsed from '../../components/PageProducts/YouBrowsed';
+// import PromoMonth from '../../components/PageProducts/PromoMonth';
+// import YouBrowsed from '../../components/PageProducts/YouBrowsed';
 import SortingPrice from '../../components/PageProducts/SortingPrice';
 import PaginationProducts from '../../components/PageProducts/PaginationProducts';
 import Cards from '../../components/PageProducts/Cards';
@@ -31,6 +31,7 @@ function Products() {
 
   useEffect(() => {
     dispatch(fetchProductsData(RequestString(filterBase, numPage)));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterBase.categories, filterBase.sort, numPage]);
 
   return (

@@ -82,7 +82,7 @@ function Filter() {
     // eslint-disable-next-line no-unused-expressions
     checked ? dispatch(addManufacture(value))
       : dispatch(removeManufacture(value));
-    // eslint-disable-next-line max-len
+
     setCheckedCountry(prevChecked => prevChecked.map(item => (item.title === value ? { ...item, checked } : item)));
   };
 
@@ -92,7 +92,7 @@ function Filter() {
     checked
       ? dispatch(addDosageForm(event.target.value))
       : dispatch(removeDosageForm(event.target.value));
-    // eslint-disable-next-line max-len
+
     setCheckedForm(prevChecked => prevChecked.map(item => (item.title === value ? { ...item, checked } : item)));
   };
 
