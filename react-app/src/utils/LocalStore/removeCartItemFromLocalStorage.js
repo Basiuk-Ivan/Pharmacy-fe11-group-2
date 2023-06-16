@@ -1,6 +1,5 @@
 export const removeCartItemFromLocalStorage = productItem => {
   const { id } = productItem;
-  console.log(id, "local");
   const existingCart = JSON.parse(localStorage.getItem('cartItems')) || [];
   const existingCartItemIndex = existingCart.findIndex(item => item.id === id);
   const updatedCart = [...existingCart];

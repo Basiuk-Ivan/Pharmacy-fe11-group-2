@@ -26,11 +26,10 @@ export const CartButton = ({ productItem, isInCart }) => {
     }
   };
 
-
-  const delItem = (productItem) => {
+  const delItem = productItem => {
     dispatch(removeItem(productItem));
     removeFromCartLocalStorage(productItem);
-  }
+  };
 
   useEffect(() => {
     const cartString = localStorage.getItem('cartItems');
@@ -46,7 +45,7 @@ export const CartButton = ({ productItem, isInCart }) => {
 
   if (isInCart) {
     return (
-      <IconButton sx={iconButtonStyles} onClick={()=> delItem(productItem)}>
+      <IconButton sx={iconButtonStyles} onClick={() => delItem(productItem)}>
         <CloseIcon />
       </IconButton>
     );

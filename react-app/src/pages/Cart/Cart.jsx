@@ -7,7 +7,6 @@ import DeleteOutlineTwoToneIcon from '@mui/icons-material/DeleteOutlineTwoTone';
 import IconBreadcrumbs from './Breadcrums';
 import ProductCard from '../../components/ProductCard';
 import { removeItem } from '../../redux/slice/cartItems';
-import { removeFromCartLocalStorage } from '../../utils/LocalStore/removeFromCartLocalStorage';
 import {
   FormBox,
   FormTitle,
@@ -23,7 +22,7 @@ import {
 } from './style';
 
 import './style/CartStyles.scss';
-import {removeAllFromCart} from "../../utils/LocalStore/removeAllFromCart.js";
+import { removeAllFromCart } from '../../utils/LocalStore/removeAllFromCart';
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
@@ -56,7 +55,7 @@ const Cart = () => {
       }
     };
     fetchProducts();
-  }, [dispatch]);
+  }, [dispatch, productItemCart]);
   useEffect(() => {
     // eslint-disable-next-line arrow-body-style
     const updatedProducts = products.filter(item => {
