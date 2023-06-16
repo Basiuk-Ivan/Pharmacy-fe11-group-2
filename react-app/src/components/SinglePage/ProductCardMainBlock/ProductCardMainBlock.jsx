@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Typography, Stack, Button, Box, Grid, Rating, Checkbox } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
 import { addToFavouriteLocalStorage } from '../../../utils/LocalStore/addToFavouriteLocalStorage';
 import { removeFromFavouriteLocalStorage } from '../../../utils/LocalStore/removeFromFavouriteLocalStorage';
 import { addToFavouriteItems, deleteFromFavouriteItems } from '../../../redux/slice/favouriteItems';
@@ -61,9 +61,9 @@ const ProductCardMainBlock = ({ productItem }) => {
     }
   };
 
-  const handleAddToCart = productItem => {
+  const handleAddToCart = product => {
     dispatch(addToCart({ id: productItem.id }));
-    addToCartLocalStorage(productItem);
+    addToCartLocalStorage(product);
   };
 
   return (

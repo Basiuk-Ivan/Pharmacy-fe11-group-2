@@ -19,13 +19,13 @@ export const QuantityControl = ({ productItem, isInCart }) => {
   //   // }
   // }, [cartItems]);
 
-  const handleIncrement = (productItem) => {
+  const handleIncrement = product => {
     setQuantity(prev => prev + 1);
-    dispatch(addToCart({ id: productItem.id }));
-    addToCartLocalStorage(productItem);
+    dispatch(addToCart({ id: product.id }));
+    addToCartLocalStorage(product);
   };
 
-  const handleDecrement = (productItem) => {
+  const handleDecrement = productItem => {
     setQuantity(prev => prev - 1);
     dispatch(removeFromCart({ id: productItem.id }));
     removeCartItemFromLocalStorage(productItem);
