@@ -23,6 +23,7 @@ import {
 } from './style';
 
 import './style/CartStyles.scss';
+import {removeAllFromCart} from "../../utils/LocalStore/removeAllFromCart.js";
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
@@ -37,23 +38,17 @@ const Cart = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const cartString = localStorage.getItem('cartItems');
+        if (productItemCart.length > 0) {
+          const cartIds = productItemCart.map(item => item.id);
+          const url = `http://localhost:3004/api/product/?_id=${cartIds}`;
+          const response = await fetch(url);
 
-        if (cartString) {
-          const cartItems = JSON.parse(cartString);
-
-          if (cartItems.length > 0) {
-            const cartIds = cartItems.map(item => item.id);
-            const url = `http://localhost:3004/api/product/?_id=${cartIds}`;
-            const response = await fetch(url);
-
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-
-            const { prods } = await response.json();
-            setProducts(prods);
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
           }
+
+          const { prods } = await response.json();
+          setProducts(prods);
         }
       } catch (error) {
         // eslint-disable-next-line no-console
@@ -62,7 +57,6 @@ const Cart = () => {
     };
     fetchProducts();
   }, [dispatch]);
-
   useEffect(() => {
     // eslint-disable-next-line arrow-body-style
     const updatedProducts = products.filter(item => {
@@ -73,11 +67,12 @@ const Cart = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productItemCart]);
 
-  const delFromCart = prods => {
-    prods.forEach(el => {
-      removeFromCartLocalStorage(el, dispatch, 'all');
-    });
+  const delFromCart = () => {
+    // prods.forEach(el => {
+    //   removeFromCartLocalStorage(el, dispatch, 'all');
+    // });
     dispatch(removeItem('all'));
+    removeAllFromCart();
   };
 
   return (
@@ -113,7 +108,7 @@ const Cart = () => {
             {/*      endAdornment: ( */}
             {/*        <InputAdornment position="end"> */}
             {/*          <IconButton> */}
-            { }
+            {}
             {/*            <ExpandCircleDownIcon sx={{ fill: 'rgba(47, 211, 174, 1)', rotate: '-90deg' }} /> */}
             {/*          </IconButton> */}
             {/*        </InputAdornment> */}
@@ -128,7 +123,7 @@ const Cart = () => {
             <Typography variant="h4" gutterBottom>
               Корзина
             </Typography>
-            <IconButton onClick={() => delFromCart(productItemCart)}>
+            <IconButton onClick={() => delFromCart()}>
               <DeleteOutlineTwoToneIcon />
               <Typography>Очистити корзину</Typography>
             </IconButton>
@@ -158,5 +153,4 @@ const Cart = () => {
     </Box>
   );
 };
-
 export default Cart;
