@@ -1,25 +1,41 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, ButtonBase } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import * as PropTypes from 'prop-types';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { addToCart, removeFromCart } from '../../../../../../../redux/slice/cartItems.js';
 import {
   buttonBasePlusStyles,
   buttonBaseMinusStyles,
   wrappForQuantityStyles,
   boxForButtonBaseStyles
 } from '../../../../../style';
+import { addToCartLocalStorage } from '../../../../../../../utils/LocalStore/addToCartLocalStorage.js';
+import { removeCartItemFromLocalStorage } from '../../../../../../../utils/LocalStore/removeCartItemFromLocalStorage.js';
 
-export const QuantityControl = ({ isInCart }) => {
+export const QuantityControl = ({ productItem, isInCart }) => {
   const [quantity, setQuantity] = useState(1);
+  const cartItems = useSelector(state => state.itemCards.items);
+  const dispatch = useDispatch();
 
-  const handleIncrement = event => {
-    event.preventDefault();
-    setQuantity(quantity + 1);
+  // useEffect(() => {
+  //   // if(!!productItem && cartItems.length>0) {
+  //   //   const order = cartItems.find(({id}) => id == productItem.id);
+  //   //   setQuantity(order.quantity);
+  //   // }
+  // }, [cartItems]);
+
+  const handleIncrement = productItem => {
+    setQuantity(prev => prev + 1);
+    dispatch(addToCart({ id: productItem.id }));
+    addToCartLocalStorage(productItem);
   };
 
-  const handleDecrement = event => {
-    event.preventDefault();
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
+  const handleDecrement = productItem => {
+    setQuantity(prev => prev - 1);
+    dispatch(removeFromCart({ id: productItem.id }));
+    removeCartItemFromLocalStorage(productItem);
   };
 
   if (!isInCart) {
@@ -27,14 +43,55 @@ export const QuantityControl = ({ isInCart }) => {
   }
 
   return (
-    <Box sx={boxForButtonBaseStyles}>
-      <ButtonBase sx={buttonBaseMinusStyles} onClick={handleDecrement}>
-        -
-      </ButtonBase>
-      <Box sx={wrappForQuantityStyles}>{quantity}</Box>
-      <ButtonBase onClick={handleIncrement} sx={buttonBasePlusStyles}>
-        +
-      </ButtonBase>
+
+    <Box sx={{ position: 'relative', mb: '14px' }}>
+      <RemoveCircleIcon
+        sx={{
+          position: 'absolute',
+          top: '5px',
+          left: '-6px',
+          fontSize: '18px',
+          color: '#d34747',
+          cursor: 'pointer'
+        }}
+        onClick={
+                () => {
+                  if (quantity === 1) {
+                    return;
+                  }
+                  handleDecrement(productItem);
+                }
+}
+      />
+      <Box
+        sx={{
+          padding: '4px 20px',
+          borderRadius: '50px',
+          backgroundColor: '#d6eaf5',
+          // height:'32px',
+          textAlign: 'center',
+          fontFamily: '"Roboto", "san-serif"',
+          userSelect: 'none'
+        }}
+      >
+        {quantity}
+      </Box>
+      <AddCircleIcon
+        onClick={() => {
+          if (quantity >= productItem?.quantity) {
+            return;
+          }
+          handleIncrement(productItem);
+        }}
+        sx={{
+          position: 'absolute',
+          top: '5px',
+          right: '-6px',
+          fontSize: '18px',
+          color: '#2db496',
+          cursor: 'pointer'
+        }}
+      />
     </Box>
   );
 };

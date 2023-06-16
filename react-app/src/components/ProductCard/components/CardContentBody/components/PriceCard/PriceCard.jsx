@@ -11,7 +11,7 @@ export const PriceCard = ({ productItem, isInCart }) => {
     <Stack spacing={2} sx={stackWrappStyles} direction="row">
       <ProductPrice productItem={productItem} />
       <CartButton productItem={productItem} isInCart={isInCart} />
-      <QuantityControl isInCart={isInCart} />
+      <QuantityControl isInCart={isInCart} productItem={productItem} />
     </Stack>
   );
 };
