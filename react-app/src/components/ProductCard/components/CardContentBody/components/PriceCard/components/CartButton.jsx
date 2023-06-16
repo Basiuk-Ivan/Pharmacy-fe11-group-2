@@ -6,7 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { addToCartLocalStorage } from '../../../../../../../utils/LocalStore/addToCartLocalStorage';
 
 import { removeFromCartLocalStorage } from '../../../../../../../utils/LocalStore/removeFromCartLocalStorage';
-import { addItem } from '../../../../../../../redux/slice/cartItems';
+import { addItem, removeItem } from '../../../../../../../redux/slice/cartItems';
 import { cartStyles, iconButtonStyles } from '../../../../../style';
 
 export const CartButton = ({ productItem, isInCart }) => {
@@ -21,8 +21,14 @@ export const CartButton = ({ productItem, isInCart }) => {
       dispatch(addItem(productItem.id));
       addToCartLocalStorage(productItem);
     } else {
+      dispatch(removeItem(productItem));
       removeFromCartLocalStorage(productItem, dispatch);
     }
+  };
+
+  const delItem = prod => {
+    dispatch(removeItem(prod));
+    removeFromCartLocalStorage(prod);
   };
 
   useEffect(() => {
@@ -39,7 +45,7 @@ export const CartButton = ({ productItem, isInCart }) => {
 
   if (isInCart) {
     return (
-      <IconButton sx={iconButtonStyles} onClick={handleAddtoCart}>
+      <IconButton sx={iconButtonStyles} onClick={() => delItem(productItem)}>
         <CloseIcon />
       </IconButton>
     );
