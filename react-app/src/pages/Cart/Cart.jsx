@@ -1,24 +1,13 @@
-// import { useEffect, useState } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import {
-  Box
-  // Container
-} from '@mui/system';
-import {
-  // Card,
-  Typography,
-  // InputAdornment,
-  IconButton
-  // Button
-} from '@mui/material';
+import { Box } from '@mui/system';
+import { Typography, IconButton } from '@mui/material';
 import DeleteOutlineTwoToneIcon from '@mui/icons-material/DeleteOutlineTwoTone';
-// import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 import IconBreadcrumbs from './Breadcrums';
 import ProductCard from '../../components/ProductCard';
-import './style/CartStyles.scss';
+import { removeItem } from '../../redux/slice/cartItems';
+import { removeFromCartLocalStorage } from '../../utils/LocalStore/removeFromCartLocalStorage';
 import {
   FormBox,
   FormTitle,
@@ -29,57 +18,42 @@ import {
   TotalBox,
   PromoBox,
   HeaderBox,
-  // TextFieldPromo,
   CardBox,
   ContainerBox
 } from './style';
 
-import { removeFromCartLocalStorage } from '../../utils/LocalStore/removeFromCartLocalStorage';
-
-// import { fetchProductsData } from '../../redux/slice/productsSlice';
+import './style/CartStyles.scss';
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
+  const productItemCart = useSelector(state => state.itemCards.items);
 
-  const cartItems = useSelector(state => state.itemCards.items);
   const isInCart = true;
   const generalPrice = products.reduce((acum, product) => acum + product.price, 0);
   const discount = products.reduce((acum, product) => acum + product.discount, 0);
   const totalValue = generalPrice - discount;
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   const fetchProduct = async ({id}) => {
-  //     try {
-  //       const response = await fetch(`http://localhost:3004/api/product/${id}`);
-  //       if (!response.ok) {
-  //         throw new Error('Network response was not ok');
-  //       }
-  //       const singleProduct = await response.json();
-  //       setProducts(prev => [...prev, singleProduct]);
-  //     } catch (error) {
-  //       // eslint-disable-next-line no-console
-  //       console.error('Error fetching product:', error);
-  //     }
-  //   };
-  //
-  //   cartItems.forEach((item) => fetchProduct(item))
-  // }, [cartItems]);
-
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        if (cartItems) {
-          const cartItemsId = cartItems.map(item => item.id);
-          const url = `http://localhost:3004/api/product/?_id=${cartItemsId}`;
-          const response = await fetch(url);
+        const cartString = localStorage.getItem('cartItems');
 
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
+        if (cartString) {
+          const cartItems = JSON.parse(cartString);
+
+          if (cartItems.length > 0) {
+            const cartIds = cartItems.map(item => item.id);
+            const url = `http://localhost:3004/api/product/?_id=${cartIds}`;
+            const response = await fetch(url);
+
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+
+            const { prods } = await response.json();
+            setProducts(prods);
           }
-
-          const { prods } = await response.json();
-          setProducts(prods);
         }
       } catch (error) {
         // eslint-disable-next-line no-console
@@ -87,13 +61,23 @@ const Cart = () => {
       }
     };
     fetchProducts();
-  }, [cartItems]);
+  }, [dispatch]);
+
+  useEffect(() => {
+    // eslint-disable-next-line arrow-body-style
+    const updatedProducts = products.filter(item => {
+      return productItemCart.find(cartItem => cartItem.id === item.id);
+    });
+
+    setProducts(updatedProducts);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [productItemCart]);
 
   const delFromCart = prods => {
     prods.forEach(el => {
       removeFromCartLocalStorage(el, dispatch, 'all');
     });
-    // dispatch(removeItem('all'));
+    dispatch(removeItem('all'));
   };
 
   return (
@@ -119,6 +103,24 @@ const Cart = () => {
                 <NavLink to="/orderprocess">Оформити замовлення</NavLink>
               </OrderButton>
             </PromoBox>
+            {/* <PromoBox mt={2}> */}
+            {/*  <FormTitlePromo>Промокод</FormTitlePromo> */}
+            {/*  <TextFieldPromo */}
+            {/*    id="promo-code" */}
+            {/*    label="Введіть промокод" */}
+            {/*    variant="outlined" */}
+            {/*    InputProps={{ */}
+            {/*      endAdornment: ( */}
+            {/*        <InputAdornment position="end"> */}
+            {/*          <IconButton> */}
+            { }
+            {/*            <ExpandCircleDownIcon sx={{ fill: 'rgba(47, 211, 174, 1)', rotate: '-90deg' }} /> */}
+            {/*          </IconButton> */}
+            {/*        </InputAdornment> */}
+            {/*      ) */}
+            {/*    }} */}
+            {/*  /> */}
+            {/* </PromoBox> */}
           </FormBox>
         </Box>
         <CardBox>
@@ -126,7 +128,7 @@ const Cart = () => {
             <Typography variant="h4" gutterBottom>
               Корзина
             </Typography>
-            <IconButton onClick={() => delFromCart()}>
+            <IconButton onClick={() => delFromCart(productItemCart)}>
               <DeleteOutlineTwoToneIcon />
               <Typography>Очистити корзину</Typography>
             </IconButton>

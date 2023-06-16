@@ -18,7 +18,7 @@ export const CartButton = ({ productItem, isInCart }) => {
     setIsCart(!isCart);
 
     if (!isCart) {
-      dispatch(addItem(productItem));
+      dispatch(addItem(productItem.id));
       addToCartLocalStorage(productItem);
     } else {
       removeFromCartLocalStorage(productItem, dispatch);
@@ -26,14 +26,14 @@ export const CartButton = ({ productItem, isInCart }) => {
   };
 
   useEffect(() => {
-    const productItemCart = localStorage.getItem(`cartItem_${productItem.id}`);
+    const cartString = localStorage.getItem('cartItems');
 
-    if (productItemCart) {
-      // eslint-disable-next-line no-shadow
-      const isInCart = JSON.parse(productItemCart);
-      setIsCart(isInCart);
+    if (cartString) {
+      const cartItems = JSON.parse(cartString);
+      const isItemCart = cartItems.some(elem => elem.id === productItem.id);
+      setIsCart(isItemCart);
     }
-  }, [productItem.id]);
+  }, [isCart, productItem.id]);
 
   const cartStyle = cartStyles(isCart);
 
