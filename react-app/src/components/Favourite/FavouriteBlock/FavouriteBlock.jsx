@@ -1,27 +1,64 @@
 import { Container, Typography, Grid, Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProductCard from '../../ProductCard/ProductCard';
 import Bread from '../../Bread';
-import { fetchProductsData } from '../../../redux/slice/productsSlice';
 import { addItem } from '../../../redux/slice/cartItems';
-// import { addToCartLocalStorage } from '../../../utils/LocalStorage/addToCartLocalStorage';
 import { addToCartLocalStorage } from '../../../utils/LocalStore/addToCartLocalStorage';
 import { openModal } from '../../../redux/slice/favouriteItems';
 
-const FavouriteBlock = props => {
-  const { products } = props;
+const FavouriteBlock = () => {
+  const [products, setProducts] = useState([]);
 
   const cartItems = useSelector(state => state.itemCards);
+  const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
+
   const dispatch = useDispatch();
-  const isInCart = false;
+  // const isInCart = false;
 
   useEffect(() => {
-    dispatch(fetchProductsData());
-  }, [dispatch, products.length]);
+    const fetchProducts = async () => {
+      try {
+        const favoriteString = localStorage.getItem('favouriteItems');
+
+        if (favoriteItems) {
+          const favouriteItems = JSON.parse(favoriteString);
+
+          if (favouriteItems.length > 0) {
+            const favoriteIds = favouriteItems.map(item => item.id);
+            const url = `http://localhost:3004/api/product/?_id=${favoriteIds}`;
+            const response = await fetch(url);
+
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+
+            const { prods } = await response.json();
+
+            setProducts(prods);
+          }
+        }
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Error fetching products:', error);
+      }
+    };
+    fetchProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
+
+  useEffect(() => {
+    // eslint-disable-next-line arrow-body-style
+    const updatedProducts = products.filter(item => {
+      return favoriteItems.find(favoriteItem => favoriteItem.id === item.id);
+    });
+
+    setProducts(updatedProducts);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [favoriteItems]);
 
   const delFromFav = () => {
     dispatch(openModal());
@@ -105,7 +142,10 @@ const FavouriteBlock = props => {
           <Grid container spacing={2}>
             {products.map(item => (
               <Grid item key={item.id}>
-                <ProductCard productItem={item} isInCart={isInCart} />
+                <ProductCard
+                  productItem={item}
+                  // isInCart={isInCart}
+                />
               </Grid>
             ))}
           </Grid>

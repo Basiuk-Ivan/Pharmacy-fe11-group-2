@@ -1,24 +1,13 @@
-// import { useEffect, useState } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import {
-  Box
-  // Container
-} from '@mui/system';
-import {
-  // Card,
-  Typography,
-  // InputAdornment,
-  IconButton
-  // Button
-} from '@mui/material';
+import { Box } from '@mui/system';
+import { Typography, IconButton } from '@mui/material';
 import DeleteOutlineTwoToneIcon from '@mui/icons-material/DeleteOutlineTwoTone';
-// import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 import IconBreadcrumbs from './Breadcrums';
 import ProductCard from '../../components/ProductCard';
-import './style/CartStyles.scss';
+import { removeItem } from '../../redux/slice/cartItems';
+import { removeFromCartLocalStorage } from '../../utils/LocalStore/removeFromCartLocalStorage';
 import {
   FormBox,
   FormTitle,
@@ -29,31 +18,66 @@ import {
   TotalBox,
   PromoBox,
   HeaderBox,
-  // TextFieldPromo,
   CardBox,
   ContainerBox
 } from './style';
 
-import { removeFromCartLocalStorage } from '../../utils/LocalStore/removeFromCartLocalStorage';
-
-// import { fetchProductsData } from '../../redux/slice/productsSlice';
+import './style/CartStyles.scss';
 
 const Cart = () => {
+  const [products, setProducts] = useState([]);
   const productItemCart = useSelector(state => state.itemCards.items);
+
   const isInCart = true;
-  const generalPrice = productItemCart.reduce((acum, product) => acum + product.price, 0);
-  const discount = productItemCart.reduce((acum, product) => acum + product.discount, 0);
+  const generalPrice = products.reduce((acum, product) => acum + product.price, 0);
+  const discount = products.reduce((acum, product) => acum + product.discount, 0);
   const totalValue = generalPrice - discount;
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(fetchProductsData());
-  // }, [dispatch, products.length]);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const cartString = localStorage.getItem('cartItems');
+
+        if (cartString) {
+          const cartItems = JSON.parse(cartString);
+
+          if (cartItems.length > 0) {
+            const cartIds = cartItems.map(item => item.id);
+            const url = `http://localhost:3004/api/product/?_id=${cartIds}`;
+            const response = await fetch(url);
+
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+
+            const { prods } = await response.json();
+            setProducts(prods);
+          }
+        }
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Error fetching products:', error);
+      }
+    };
+    fetchProducts();
+  }, [dispatch]);
+
+  useEffect(() => {
+    // eslint-disable-next-line arrow-body-style
+    const updatedProducts = products.filter(item => {
+      return productItemCart.find(cartItem => cartItem.id === item.id);
+    });
+
+    setProducts(updatedProducts);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [productItemCart]);
+
   const delFromCart = prods => {
     prods.forEach(el => {
       removeFromCartLocalStorage(el, dispatch, 'all');
     });
-    // dispatch(removeItem('all'));
+    dispatch(removeItem('all'));
   };
 
   return (
@@ -89,7 +113,7 @@ const Cart = () => {
             {/*      endAdornment: ( */}
             {/*        <InputAdornment position="end"> */}
             {/*          <IconButton> */}
-            {/* eslint-disable-next-line max-len */}
+            { }
             {/*            <ExpandCircleDownIcon sx={{ fill: 'rgba(47, 211, 174, 1)', rotate: '-90deg' }} /> */}
             {/*          </IconButton> */}
             {/*        </InputAdornment> */}
@@ -109,9 +133,9 @@ const Cart = () => {
               <Typography>Очистити корзину</Typography>
             </IconButton>
           </HeaderBox>
-          {!!productItemCart.length > 0 ? (
+          {!!products.length > 0 ? (
             <>
-              {productItemCart.map(item => (
+              {products.map(item => (
                 <ProductCard key={item.id} productItem={item} isInCart={isInCart} />
               ))}
             </>

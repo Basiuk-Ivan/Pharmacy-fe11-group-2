@@ -7,11 +7,6 @@ export const wrapForCardStyles = isInCart => ({
   cursor: 'auto'
 });
 
-export const cardMediaStyles = isInCart => ({
-  minHeight: isInCart ? '150px' : '180px',
-  minWidth: isInCart ? '220px' : 'auto'
-});
-
 export const cardContentStyles = isInCart => ({
   padding: isInCart ? 0 : undefined,
   width: '100%',
