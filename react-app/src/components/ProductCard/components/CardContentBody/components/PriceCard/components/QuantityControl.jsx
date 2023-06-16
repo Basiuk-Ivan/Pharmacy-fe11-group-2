@@ -21,7 +21,7 @@ export const QuantityControl = ({ productItem, isInCart }) => {
         setQuantity(null);
       }
     }
-  }, [cartItems]);
+  }, [cartItems, isInCart]);
   const handleIncrement = product => {
     setQuantity(prev => prev + 1);
     dispatch(addToCart({ id: product.id }));
@@ -29,7 +29,7 @@ export const QuantityControl = ({ productItem, isInCart }) => {
   };
 
   const handleDecrement = prod => {
-    console.log(prod);
+
     setQuantity(prev => prev - 1);
     dispatch(removeFromCart({ id: prod.id }));
     removeCartItemFromLocalStorage(prod);
