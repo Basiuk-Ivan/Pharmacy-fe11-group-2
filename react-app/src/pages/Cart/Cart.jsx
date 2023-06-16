@@ -56,6 +56,7 @@ const Cart = () => {
     };
     fetchProducts();
   }, [dispatch, productItemCart]);
+
   useEffect(() => {
     // eslint-disable-next-line arrow-body-style
     const updatedProducts = products.filter(item => {
