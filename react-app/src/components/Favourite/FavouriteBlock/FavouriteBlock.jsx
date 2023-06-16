@@ -1,4 +1,4 @@
-import { Container, Typography, Grid, Button } from '@mui/material';
+import { Container, Typography, Grid, Button, Skeleton,Box  } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
 import { useEffect, useState } from 'react';
@@ -12,12 +12,23 @@ import { openModal } from '../../../redux/slice/favouriteItems';
 
 const FavouriteBlock = () => {
   const [products, setProducts] = useState([]);
+  const [showSkeleton, setShowSkeleton] = useState(true);
 
   const cartItems = useSelector(state => state.itemCards);
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
 
   const dispatch = useDispatch();
   // const isInCart = false;
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSkeleton(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -82,7 +93,16 @@ const FavouriteBlock = () => {
       }}
     >
       <Bread />
-      {!!products.length > 0 ? (
+      {/* eslint-disable-next-line no-nested-ternary */}
+      {showSkeleton ? (
+          <Stack  direction="row" spacing={2}>
+            <Box><Skeleton variant="rectangular" width={220} height={430} /></Box>
+            <Box><Skeleton variant="rectangular" width={220} height={430} /></Box>
+            <Box><Skeleton variant="rectangular" width={220} height={430} /></Box>
+            <Box><Skeleton variant="rectangular" width={220} height={430} /></Box>
+            <Box><Skeleton variant="rectangular" width={220} height={430} /></Box>
+          </Stack>
+          ) : products.length > 0 ? (
         <>
           <Stack
             direction={{ xs: 'column', sm: 'row' }}
