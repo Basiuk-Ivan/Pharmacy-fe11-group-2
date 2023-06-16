@@ -6,11 +6,10 @@ import ModalWindow from '../components/ModalWindow';
 
 const Favourite = () => {
   const { products } = useSelector(state => state.products);
-  const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
 
   return (
     <>
-      <FavouriteBlock products={favoriteItems} />
+      <FavouriteBlock />
       <AdditionalBlock products={products} />
       <Advantages />
       <ModalWindow />

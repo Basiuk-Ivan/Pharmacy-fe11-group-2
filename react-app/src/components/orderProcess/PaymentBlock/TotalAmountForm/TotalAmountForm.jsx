@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { Table, TableBody, TableCell, TableRow, Typography, Container } from '@mui/material';
 import { useSelector } from 'react-redux';
 
@@ -27,12 +26,17 @@ const TotalAmountForm = () => {
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell>Сума без знижки</TableCell>
-            <TableCell>{`${total} грн.`}</TableCell>
-          </TableRow>
-          <TableRow>
             <TableCell>Знижка</TableCell>
-            <TableCell>{`${itemDiscount} грн.`}</TableCell>
+            <TableCell>0 грн</TableCell>
+          </TableRow>
+          <TableRow
+            sx={{
+              backgroundColor: 'white'
+            }}
+          >
+            <TableCell>Без урахування доставки</TableCell>
+            <TableCell>{`${totalAmount()} грн.`}
+            </TableCell>
           </TableRow>
         </TableBody>
       </Table>

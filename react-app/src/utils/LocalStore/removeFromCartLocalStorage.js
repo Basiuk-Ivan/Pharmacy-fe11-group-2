@@ -11,5 +11,4 @@ export const removeFromCartLocalStorage = (productItem, dispatch, arg) => {
   const updatedItems = cartItems.filter(item => item.id !== productItem.id);
 
   localStorage.setItem('cartItems', JSON.stringify(updatedItems));
-  localStorage.removeItem(`cartItem_${productItem.id}`);
 };
