@@ -2,6 +2,7 @@ import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 import ProductCard from '../../ProductCard';
 import 'swiper/swiper-bundle.min.css';
 import './CustomSwiper.scss';
@@ -12,17 +13,36 @@ const ProductAnalogiesCardContainer = ({ productItem }) => {
   const isXs = useMediaQuery(theme.breakpoints.only('xs'));
   const isSm = useMediaQuery(theme.breakpoints.only('sm'));
 
-  const [slidesPerView, setslidesPerView] = useState(null);
+  const [slidesPerView, setSlidesPerView] = useState(null);
+  const [analogProducts, setAnalogProducts] = useState([]);
 
   useEffect(() => {
     if (isXs) {
-      setslidesPerView(1);
+      setSlidesPerView(1);
     } else if (isSm) {
-      setslidesPerView(2);
+      setSlidesPerView(2);
     } else {
-      setslidesPerView(3);
+      setSlidesPerView(3);
     }
   }, [isXs, isSm]);
+
+  const getAnalogsProducts = item => {
+    const params = {
+      analogs: item.analogs
+    };
+    axios.get('http://localhost:3004/api/product', { params })
+      .then(response => {
+        const analogsProducts = response.data.prods;
+        setAnalogProducts(analogsProducts);
+      })
+      .catch(error => {
+        throw error;
+      });
+  };
+
+  useEffect(() => {
+    getAnalogsProducts(productItem);
+  }, [productItem]);
 
   return (
     <Box>
@@ -34,38 +54,25 @@ const ProductAnalogiesCardContainer = ({ productItem }) => {
       >
         Аналоги
       </Typography>
-      <Swiper
-        modules={[Navigation, Pagination]}
-        slidesPerView={slidesPerView}
-        navigation
-        loop
-        className="product-analogies-slider"
-      >
-        <SwiperSlide>
-          <ProductCard productItem={productItem} isInCart={isInCart} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductCard productItem={productItem} isInCart={isInCart} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductCard productItem={productItem} isInCart={isInCart} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductCard productItem={productItem} isInCart={isInCart} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductCard productItem={productItem} isInCart={isInCart} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductCard productItem={productItem} isInCart={isInCart} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductCard productItem={productItem} isInCart={isInCart} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductCard productItem={productItem} isInCart={isInCart} />
-        </SwiperSlide>
-      </Swiper>
+      {analogProducts.length > 0 ? (
+        <Swiper
+          modules={[Navigation, Pagination]}
+          slidesPerView={slidesPerView}
+          navigation
+          loop
+          className="product-analogies-slider"
+        >
+          {analogProducts
+            .filter(element => element.id !== productItem.id)
+            .map(element => (
+              <SwiperSlide key={element.id}>
+                <ProductCard productItem={element} isInCart={isInCart} />
+              </SwiperSlide>
+            ))}
+        </Swiper>
+      ) : (
+        <Typography variant="body1">No analog products found.</Typography>
+      )}
     </Box>
   );
 };

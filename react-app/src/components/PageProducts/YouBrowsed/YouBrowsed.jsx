@@ -18,6 +18,7 @@ function YouBrowsed() {
   const viewedItems = useMemo(() => JSON.parse(localStorage.getItem('viewedProducts')) || [], []);
 
   const [viewedProducts, setViewedProducts] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const getViewedProducts = items => {
     const params = {
@@ -26,12 +27,11 @@ function YouBrowsed() {
 
     axios.get('http://localhost:3004/api/product', { params })
       .then(response => {
-        // Handle the response
         const viewedProd = response.data.prods;
         setViewedProducts(viewedProd);
       })
       .catch(error => {
-        console.error(error);
+        throw error;
       });
   };
 
@@ -39,19 +39,47 @@ function YouBrowsed() {
     getViewedProducts(viewedItems);
   }, [viewedItems]);
 
+  const handlePreviousClick = () => {
+    setCurrentIndex(prevIndex => {
+      const nextIndex = prevIndex - 5;
+      return nextIndex >= 0 ? nextIndex : viewedProducts.length - 5;
+    });
+  };
+
+  const handleNextClick = () => {
+    setCurrentIndex(prevIndex => {
+      const nextIndex = prevIndex + 5;
+      return nextIndex < viewedProducts.length ? nextIndex : 0;
+    });
+  };
+
+  const displayedProducts = viewedProducts.slice(currentIndex, currentIndex + 5);
+
   return (
     <Box id="youBrowsed" sx={youBrowsedStyle}>
       <Box id="youBrowsedTitleWrapper" sx={youBrowsedTitleWrapperStyle}>
         <Typography sx={titleStyle}>Ви переглядали</Typography>
         <Box id="youBrowsedTitleSlider" sx={youBrowsedTitleSliderStyle}>
-          <ArrowBackIosIcon fontSize="small" sx={{ cursor: 'pointer' }} />
-          <ArrowForwardIosIcon fontSize="small" sx={{ cursor: 'pointer' }} />
+          <ArrowBackIosIcon
+            fontSize="small"
+            sx={{ cursor: 'pointer' }}
+            onClick={handlePreviousClick}
+          />
+          <ArrowForwardIosIcon
+            fontSize="small"
+            sx={{ cursor: 'pointer' }}
+            onClick={handleNextClick}
+          />
         </Box>
       </Box>
 
       <Box id="cardsWrapper" sx={cardsWrapperStyle}>
-        {viewedProducts.map(item => (
-          <Box id="cardWrapper" key={item.id} sx={cardWrapperStyle}>
+        {displayedProducts.map(item => (
+          <Box
+            id="cardWrapper"
+            key={item.id}
+            sx={cardWrapperStyle}
+          >
             <ProductCard productItem={item} isInCart={isInCart} />
           </Box>
         ))}
