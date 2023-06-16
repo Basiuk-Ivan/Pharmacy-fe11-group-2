@@ -136,6 +136,7 @@ const Cart = () => {
               <Typography>Очистити корзину</Typography>
             </IconButton>
           </HeaderBox>
+          {/* eslint-disable-next-line no-nested-ternary */}
           {showSkeleton ? (
             <>
               <Skeleton />
