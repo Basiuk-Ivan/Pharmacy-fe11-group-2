@@ -25,10 +25,10 @@ export const QuantityControl = ({ productItem, isInCart }) => {
     addToCartLocalStorage(product);
   };
 
-  const handleDecrement = productItem => {
+  const handleDecrement = prod => {
     setQuantity(prev => prev - 1);
-    dispatch(removeFromCart({ id: productItem.id }));
-    removeCartItemFromLocalStorage(productItem);
+    dispatch(removeFromCart({ id: prod.id }));
+    removeCartItemFromLocalStorage(prod);
   };
 
   if (!isInCart) {
