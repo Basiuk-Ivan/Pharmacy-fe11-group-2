@@ -5,7 +5,7 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import { addToCartLocalStorage } from '../../../../../../../utils/LocalStore/addToCartLocalStorage';
 import { removeFromCartLocalStorage } from '../../../../../../../utils/LocalStore/removeFromCartLocalStorage';
-import {addToCart, removeItem} from '../../../../../../../redux/slice/cartItems';
+import { addToCart, removeItem } from '../../../../../../../redux/slice/cartItems';
 import { cartStyles, iconButtonStyles } from '../../../../../style';
 
 export const CartButton = ({ productItem, isInCart }) => {
