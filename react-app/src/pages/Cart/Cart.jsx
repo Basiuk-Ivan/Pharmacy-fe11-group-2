@@ -71,7 +71,6 @@ const Cart = () => {
             try {
                 if (cartItems) {
                     const cartItemsId = cartItems.map(item => item.id);
-                    console.log(cartItemsId);
                     const url = `http://localhost:3004/api/product/?_id=${cartItemsId}`;
                     const response = await fetch(url);
 
