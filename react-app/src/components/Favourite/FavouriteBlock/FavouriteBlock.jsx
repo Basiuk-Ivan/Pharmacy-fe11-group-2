@@ -24,7 +24,7 @@ const FavouriteBlock = () => {
       try {
         const favoriteString = localStorage.getItem('favouriteItems');
 
-        if (favoriteItems) {
+        if (favoriteItems && favoriteItems.length > 0) {
           const favouriteItems = JSON.parse(favoriteString);
 
           if (favouriteItems.length > 0) {
