@@ -2,8 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   favouriteItems: JSON.parse(localStorage.getItem('favouriteItems')) || [],
-  isOpened: false,
-  singleFavoriteItemDeleted: JSON.parse(localStorage.getItem('singleFavoriteItemDeleted')) || ''
+  isOpened: false
 };
 
 const favouriteItems = createSlice({
@@ -23,7 +22,6 @@ const favouriteItems = createSlice({
         };
       }
       state.favouriteItems = state.favouriteItems.filter(item => item.id !== action.payload);
-      state.singleFavoriteItemDeleted = action.payload;
     },
     openModal: state => {
       state.isOpened = true;
@@ -38,7 +36,7 @@ export default favouriteItems.reducer;
 
 export const {
   addToFavouriteItems,
-  // deleteSingleFavoriteItem,
+  addToFavouriteItemsProducts,
   deleteFromFavouriteItems,
   openModal,
   closeModal

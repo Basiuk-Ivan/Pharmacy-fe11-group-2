@@ -14,11 +14,10 @@ const FavouriteBlock = () => {
   const [products, setProducts] = useState([]);
 
   const cartItems = useSelector(state => state.itemCards);
-  const singleFavoriteItemDeleted = useSelector(state => state.favouriteItems.singleFavoriteItemDeleted);
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
 
   const dispatch = useDispatch();
-  const isInCart = false;
+  // const isInCart = false;
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -38,6 +37,7 @@ const FavouriteBlock = () => {
             }
 
             const { prods } = await response.json();
+
             setProducts(prods);
           }
         }
@@ -50,16 +50,19 @@ const FavouriteBlock = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
+  useEffect(() => {
+    // eslint-disable-next-line arrow-body-style
+    const updatedProducts = products.filter(item => {
+      return favoriteItems.find(favoriteItem => favoriteItem.id === item.id);
+    });
+
+    setProducts(updatedProducts);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [favoriteItems]);
+
   const delFromFav = () => {
     dispatch(openModal());
   };
-
-  useEffect(() => {
-    const prods2 = products.filter(item => item.id !== singleFavoriteItemDeleted);
-
-    setProducts(prods2);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [singleFavoriteItemDeleted]);
 
   const handleAddToCart = items => {
     items.forEach(element => {
@@ -139,7 +142,10 @@ const FavouriteBlock = () => {
           <Grid container spacing={2}>
             {products.map(item => (
               <Grid item key={item.id}>
-                <ProductCard productItem={item} isInCart={isInCart} />
+                <ProductCard
+                  productItem={item}
+                  // isInCart={isInCart}
+                />
               </Grid>
             ))}
           </Grid>

@@ -1,12 +1,8 @@
 import { useEffect, useState } from 'react';
-
 import { Typography, Container, Grid } from '@mui/material';
-// import { useSelector } from 'react-redux';
 
 const OrderList = () => {
   const [products, setProducts] = useState([]);
-
-  // const productItemCart = useSelector(state => state.itemCards.items);
 
   useEffect(() => {
     const fetchProducts = async () => {

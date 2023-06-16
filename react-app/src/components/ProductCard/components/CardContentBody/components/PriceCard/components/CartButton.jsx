@@ -23,7 +23,6 @@ export const CartButton = ({ productItem, isInCart }) => {
     } else {
       removeFromCartLocalStorage(productItem, dispatch);
     }
-    window.localStorage.setItem('singleCartItemDeleted', JSON.stringify(productItem.id));
   };
 
   useEffect(() => {

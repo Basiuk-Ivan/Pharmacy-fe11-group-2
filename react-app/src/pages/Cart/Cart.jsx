@@ -27,7 +27,6 @@ import './style/CartStyles.scss';
 const Cart = () => {
   const [products, setProducts] = useState([]);
   const productItemCart = useSelector(state => state.itemCards.items);
-  const singleCartItemDeleted = useSelector(state => state.itemCards.singleCartItemDeleted);
 
   const isInCart = true;
   const generalPrice = products.reduce((acum, product) => acum + product.price, 0);
@@ -65,11 +64,14 @@ const Cart = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const prods2 = products.filter(item => item.id !== singleCartItemDeleted);
+    // eslint-disable-next-line arrow-body-style
+    const updatedProducts = products.filter(item => {
+      return productItemCart.find(cartItem => cartItem.id === item.id);
+    });
 
-    setProducts(prods2);
+    setProducts(updatedProducts);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [singleCartItemDeleted]);
+  }, [productItemCart]);
 
   const delFromCart = prods => {
     prods.forEach(el => {

@@ -6,14 +6,10 @@ import ModalWindow from '../components/ModalWindow';
 
 const Favourite = () => {
   const { products } = useSelector(state => state.products);
-  // const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
 
   return (
     <>
-      <FavouriteBlock
-      // products={favoriteItems}
-      // eslint-disable-next-line react/jsx-closing-bracket-location
-      />
+      <FavouriteBlock />
       <AdditionalBlock products={products} />
       <Advantages />
       <ModalWindow />
