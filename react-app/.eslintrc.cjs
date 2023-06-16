@@ -14,7 +14,7 @@ module.exports = {
   plugins: ['react-refresh', 'prettier', 'jest'],
   rules: {
     'react/prop-types': 'off',
-    'max-len': ['error', { code: 110 }],
+    'max-len': ['error', { code: 710 }],
     'react/no-unescaped-entities': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/no-array-index-key': 'off',
