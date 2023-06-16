@@ -1,4 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material/styles';
 
 import {
   Box,
@@ -16,13 +19,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import PregnantWomanIcon from '@mui/icons-material/PregnantWoman';
 import BabyChangingStationIcon from '@mui/icons-material/BabyChangingStation';
+import { Country, Form } from './FilterData/FilterData';
 
 // import FilterSlider from './FilterSlider/FilterSlider';
-
-// import { useEffect } from 'react';
-// import { useEffect, useState } from 'react';
-// import { useLocation } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material/styles';
 import {
   buttonWrapperStyle,
   formCheckboxStyle,
@@ -56,42 +55,60 @@ function Filter() {
   const dispatch = useDispatch();
   const filterBase = useSelector(state => state.filterBase);
   const { numPage } = useSelector(state => state.numPage);
-  // const location = useLocation();
-  // const currentCategory = location.pathname.slice(1);
-  // const [checked, setChecked] = useState(false);
-  //
-  // useEffect(() => {
-  //   setChecked(false);
-  // }, [currentCategory]);
+  const location = useLocation();
+  const currentCategory = location.pathname.slice(1);
+  const [checkedCountry, setCheckedCountry] = useState(Country);
+  const [checkedForm, setCheckedForm] = useState(Form);
+  // const [checkedRecept, setCheckedRecept] = useState({ title: 'Без рецепта',
+  //   checked: false });
+  // const [checkedPregnant, setCheckedPregnant] = useState({ title: 'Дозволено вагітним', checked: false });
+  // const [checkedChildren, setCheckedChildren] = useState({ title: 'Дозволено дітям',
+  //   checked: false });
+
+  useEffect(() => {
+    setCheckedCountry(Country);
+    setCheckedForm(Form);
+    // setCheckedRecept({ title: 'Без рецепта', checked: false });
+    // setCheckedPregnant({ title: 'Дозволено вагітним', checked: false });
+    // setCheckedChildren({ title: 'Дозволено дітям', checked: false });
+  }, [currentCategory]);
 
   function receiveGoods() {
     dispatch(fetchProductsData(RequestString(filterBase, numPage)));
   }
 
   const changeManufacturer = event => {
+    const { value, checked } = event.target;
     // eslint-disable-next-line no-unused-expressions
-    event.target.checked
-      ? dispatch(addManufacture(event.target.value))
-      : dispatch(removeManufacture(event.target.value));
+    checked ? dispatch(addManufacture(value))
+      : dispatch(removeManufacture(value));
+    // eslint-disable-next-line max-len
+    setCheckedCountry(prevChecked => prevChecked.map(item => (item.title === value ? { ...item, checked } : item)));
   };
 
   const changeDosageForm = event => {
+    const { value, checked } = event.target;
     // eslint-disable-next-line no-unused-expressions
-    event.target.checked
+    checked
       ? dispatch(addDosageForm(event.target.value))
       : dispatch(removeDosageForm(event.target.value));
+    // eslint-disable-next-line max-len
+    setCheckedForm(prevChecked => prevChecked.map(item => (item.title === value ? { ...item, checked } : item)));
   };
 
   const changeRecipe = () => {
     dispatch(recipe());
+    // setCheckedRecept(checkedRecept.checked = !checkedRecept.checked);
   };
 
   const changePregnant = () => {
     dispatch(pregnant());
+    // setCheckedPregnant(checkedPregnant.checked = !checkedPregnant.checked);
   };
 
   const changeChildren = () => {
     dispatch(children());
+    // setCheckedChildren(checkedChildren.checked = !checkedChildren.checked);
   };
 
   const changeMinPrice = event => {
@@ -156,55 +173,16 @@ function Filter() {
           </AccordionSummary>
           <AccordionDetails>
             <FormGroup sx={formGroupStyle}>
-              { }
-              <FormControlLabel
-                onChange={changeManufacturer}
-                value="Україна"
-                control={<Checkbox />}
-                label="Україна"
-              />
-              { }
-              <FormControlLabel
-                onChange={changeManufacturer}
-                value="Німеччина"
-                control={<Checkbox />}
-                label="Німеччина"
-              />
-              { }
-              <FormControlLabel
-                onChange={changeManufacturer}
-                value="Греція"
-                control={<Checkbox />}
-                label="Греція"
-              />
-              { }
-              <FormControlLabel
-                onChange={changeManufacturer}
-                value="Польща"
-                control={<Checkbox />}
-                label="Польща"
-              />
-              { }
-              <FormControlLabel
-                onChange={changeManufacturer}
-                value="Італія"
-                control={<Checkbox />}
-                label="Італія"
-              />
-              { }
-              <FormControlLabel
-                onChange={changeManufacturer}
-                value="Великобританія"
-                control={<Checkbox />}
-                label="Великобританія"
-              />
-              { }
-              <FormControlLabel
-                onChange={changeManufacturer}
-                value="Індія"
-                control={<Checkbox />}
-                label="Індія"
-              />
+              { checkedCountry.map(item => (
+                <FormControlLabel
+                  key={item.title}
+                  checked={item.checked}
+                  onChange={changeManufacturer}
+                  value={item.title}
+                  control={<Checkbox />}
+                  label={item.title}
+                />
+              ))}
             </FormGroup>
           </AccordionDetails>
         </Accordion>
@@ -220,49 +198,16 @@ function Filter() {
           </AccordionSummary>
           <AccordionDetails>
             <FormGroup sx={formGroupStyle}>
-              { }
-              <FormControlLabel
-                onChange={changeDosageForm}
-                value="Таблетки"
-                control={<Checkbox />}
-                label="Таблетки"
-              />
-              { }
-              <FormControlLabel
-                onChange={changeDosageForm}
-                value="Ампули"
-                control={<Checkbox />}
-                label="Ампули"
-              />
-              { }
-              <FormControlLabel
-                onChange={changeDosageForm}
-                value="Спреї"
-                control={<Checkbox />}
-                label="Спреї"
-              />
-              { }
-              <FormControlLabel
-                onChange={changeDosageForm}
-                value="Сиропи"
-                control={<Checkbox />}
-                label="Сиропи"
-              />
-              { }
-              <FormControlLabel
-                onChange={changeDosageForm}
-                value="Краплі"
-                control={<Checkbox />}
-                label="Краплі"
-              />
-              { }
-              <FormControlLabel
-                onChange={changeDosageForm}
-                value="Капсули"
-                control={<Checkbox />}
-                label="Капсули"
-              />
-              <FormControlLabel onChange={changeDosageForm} value="Salve" control={<Checkbox />} label="Мазі" />
+              { checkedForm.map(item => (
+                <FormControlLabel
+                  key={item.title}
+                  checked={item.checked}
+                  onChange={changeDosageForm}
+                  value={item.title}
+                  control={<Checkbox />}
+                  label={item.title}
+                />
+              ))}
             </FormGroup>
           </AccordionDetails>
         </Accordion>

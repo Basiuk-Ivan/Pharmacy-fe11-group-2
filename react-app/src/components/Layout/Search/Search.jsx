@@ -26,7 +26,7 @@ const SearchActions = () => {
       timer = setTimeout(() => {
         const requestString = `limit=4&search=${inputValue}`;
         dispatch(fetchProductsData(requestString));
-      }, 500);
+      }, 300);
     }
   }
 

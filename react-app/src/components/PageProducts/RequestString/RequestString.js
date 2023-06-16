@@ -1,12 +1,9 @@
 function RequestString(filterBase, numPage) {
   let requestString = `page=${numPage}&limit=4`;
-
   // eslint-disable-next-line guard-for-in,no-restricted-syntax
   for (const key in filterBase) {
-    if (Array.isArray(filterBase[key])) {
-      if (filterBase[key].length > 0) {
-        requestString += `&${key}=${filterBase[key]}`;
-      }
+    if (Array.isArray(filterBase[key]) && filterBase[key].length > 0) {
+      requestString += `&${key}=${filterBase[key]}`;
     }
     if (!Array.isArray(filterBase[key]) && filterBase[key]) {
       requestString += `&${key}=${filterBase[key]}`;
