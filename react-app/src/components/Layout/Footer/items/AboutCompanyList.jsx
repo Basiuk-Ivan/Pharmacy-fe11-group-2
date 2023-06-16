@@ -27,7 +27,7 @@ export const AboutCompanyList = () => (
       </ListItemButton>
       <ListItemButton sx={listItemStyle}>
         <NavLink to="/editorial-policy">
-        <ListItemText sx={listItemText} primary="Редакційна політика" />
+          <ListItemText sx={listItemText} primary="Редакційна політика" />
         </NavLink>
       </ListItemButton>
     </List>

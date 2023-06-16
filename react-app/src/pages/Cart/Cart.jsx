@@ -113,7 +113,7 @@ const Cart = () => {
             {/*      endAdornment: ( */}
             {/*        <InputAdornment position="end"> */}
             {/*          <IconButton> */}
-            {/* eslint-disable-next-line max-len */}
+            { }
             {/*            <ExpandCircleDownIcon sx={{ fill: 'rgba(47, 211, 174, 1)', rotate: '-90deg' }} /> */}
             {/*          </IconButton> */}
             {/*        </InputAdornment> */}

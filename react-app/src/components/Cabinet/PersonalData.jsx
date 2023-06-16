@@ -18,7 +18,7 @@ const PersonalData = () => {
     email: Yup.string().email('Невірний формат email').required('Обовязкове поле'),
     phone: Yup.string().required('Обовязкове поле').matches(/^[0-9]*$/, 'Можна вводити тільки цифри'),
     newpassword: Yup.string().required('Обовязкове поле').min(6, 'Мінімальна довжина пароля - 6 символів'),
-    // eslint-disable-next-line max-len
+
     confirmpassword: Yup.string().required('Обовязкове поле').oneOf([Yup.ref('newpassword'), null], 'Паролі повинні співпадати'),
   });
 
@@ -56,7 +56,6 @@ const PersonalData = () => {
   };
 
   const monthsDate = () => {
-    // eslint-disable-next-line max-len
     const items = ['січень', 'лютий', 'березень', 'квітень', 'травень', 'червень', 'липень', 'серпень', 'вересень', 'жовтень', 'листопад', 'грудень'];
     return items.map(el => (
       <MenuItem key={el} value={`${el}`}>

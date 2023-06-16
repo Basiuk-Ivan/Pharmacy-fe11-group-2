@@ -12,9 +12,9 @@ import { theme } from './tools/muiTheme';
 import Cabinet from './pages/Cabinet';
 import { Company } from './pages/Company';
 import { Delivery } from './pages/Delivery';
-import { Pay} from './pages/Pay.jsx';
-import { Agreement} from './pages/Agreement.jsx';
-import { EditorialPolicy } from './pages/EditorialPolicy.jsx';
+import { Pay } from './pages/Pay';
+import { Agreement } from './pages/Agreement';
+import { EditorialPolicy } from './pages/EditorialPolicy';
 
 const App = () => (
   <ThemeProvider theme={theme}>
