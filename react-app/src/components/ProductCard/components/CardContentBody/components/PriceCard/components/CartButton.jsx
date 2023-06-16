@@ -26,9 +26,9 @@ export const CartButton = ({ productItem, isInCart }) => {
     }
   };
 
-  const delItem = productItem => {
-    dispatch(removeItem(productItem));
-    removeFromCartLocalStorage(productItem);
+  const delItem = prod => {
+    dispatch(removeItem(prod));
+    removeFromCartLocalStorage(prod);
   };
 
   useEffect(() => {
