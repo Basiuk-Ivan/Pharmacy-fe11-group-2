@@ -18,7 +18,7 @@ function PaginationProducts() {
 
   const { numPage } = useSelector(state => state.numPage);
 
-  const totalPage = Math.ceil(totalFound / 2);
+  const totalPage = Math.ceil(totalFound / 4);
 
   function handleChange(num) {
     sessionStorage.setItem('numPage', num);
@@ -32,15 +32,16 @@ function PaginationProducts() {
   return (
     <ThemeProvider theme={theme}>
       <Pagination
+        size="medium"
         count={totalPage}
         page={numPage}
         color="primary"
         variant="outlined"
         shape="rounded"
-        hidePrevButton
-        hideNextButton
-        boundaryCount={2}
-        siblingCount={1}
+        // hidePrevButton
+        // hideNextButton
+        boundaryCount={1}
+        siblingCount={0}
         onChange={(_, num) => handleChange(num)}
       />
     </ThemeProvider>

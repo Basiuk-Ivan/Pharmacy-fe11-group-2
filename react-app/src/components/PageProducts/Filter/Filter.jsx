@@ -1,4 +1,7 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material/styles';
 
 import {
   Box,
@@ -16,10 +19,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import PregnantWomanIcon from '@mui/icons-material/PregnantWoman';
 import BabyChangingStationIcon from '@mui/icons-material/BabyChangingStation';
+import { Country, Form } from './FilterData/FilterData';
 
 // import FilterSlider from './FilterSlider/FilterSlider';
-
-// import { useEffect } from 'react';
 import {
   buttonWrapperStyle,
   formCheckboxStyle,
@@ -45,35 +47,68 @@ import {
   minPrice,
   maxPrice
 } from '../../../redux/slice/filterBaseSlice';
+import { fetchProductsData } from '../../../redux/slice/productsSlice';
+import RequestString from '../RequestString';
+import { theme } from '../../../tools/muiTheme';
 
 function Filter() {
   const dispatch = useDispatch();
-  // const filterBase = useSelector(state => state.filterBase);
+  const filterBase = useSelector(state => state.filterBase);
+  const { numPage } = useSelector(state => state.numPage);
+  const location = useLocation();
+  const currentCategory = location.pathname.slice(1);
+  const [checkedCountry, setCheckedCountry] = useState(Country);
+  const [checkedForm, setCheckedForm] = useState(Form);
+  // const [checkedRecept, setCheckedRecept] = useState({ title: 'Без рецепта',
+  //   checked: false });
+  // const [checkedPregnant, setCheckedPregnant] = useState({ title: 'Дозволено вагітним', checked: false });
+  // const [checkedChildren, setCheckedChildren] = useState({ title: 'Дозволено дітям',
+  //   checked: false });
+
+  useEffect(() => {
+    setCheckedCountry(Country);
+    setCheckedForm(Form);
+    // setCheckedRecept({ title: 'Без рецепта', checked: false });
+    // setCheckedPregnant({ title: 'Дозволено вагітним', checked: false });
+    // setCheckedChildren({ title: 'Дозволено дітям', checked: false });
+  }, [currentCategory]);
+
+  function receiveGoods() {
+    dispatch(fetchProductsData(RequestString(filterBase, numPage)));
+  }
 
   const changeManufacturer = event => {
+    const { value, checked } = event.target;
     // eslint-disable-next-line no-unused-expressions
-    event.target.checked
-      ? dispatch(addManufacture(event.target.value))
-      : dispatch(removeManufacture(event.target.value));
+    checked ? dispatch(addManufacture(value))
+      : dispatch(removeManufacture(value));
+
+    setCheckedCountry(prevChecked => prevChecked.map(item => (item.title === value ? { ...item, checked } : item)));
   };
 
   const changeDosageForm = event => {
+    const { value, checked } = event.target;
     // eslint-disable-next-line no-unused-expressions
-    event.target.checked
+    checked
       ? dispatch(addDosageForm(event.target.value))
       : dispatch(removeDosageForm(event.target.value));
+
+    setCheckedForm(prevChecked => prevChecked.map(item => (item.title === value ? { ...item, checked } : item)));
   };
 
   const changeRecipe = () => {
     dispatch(recipe());
+    // setCheckedRecept(checkedRecept.checked = !checkedRecept.checked);
   };
 
   const changePregnant = () => {
     dispatch(pregnant());
+    // setCheckedPregnant(checkedPregnant.checked = !checkedPregnant.checked);
   };
 
   const changeChildren = () => {
     dispatch(children());
+    // setCheckedChildren(checkedChildren.checked = !checkedChildren.checked);
   };
 
   const changeMinPrice = event => {
@@ -84,224 +119,151 @@ function Filter() {
     dispatch(maxPrice(event.target.value));
   };
 
-  // useEffect(() => {
-  //   console.log(filterBase);
-  // }, [filterBase]);
-
   return (
-    <Box id="filterWrapper" sx={filterWrapperStyle}>
-      <Box id="titleCategory" sx={titleCategoryStyle}>
-        ФІЛЬТР
+    <ThemeProvider theme={theme}>
+      <Box id="filterWrapper" sx={filterWrapperStyle}>
+        <Box id="titleCategory" sx={titleCategoryStyle}>
+          ФІЛЬТР
+        </Box>
+
+        <Accordion sx={marginStyle}>
+          <AccordionSummary
+            sx={mainCategoryStyle}
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography>Ціна</Typography>
+          </AccordionSummary>
+          <AccordionDetails sx={{ padding: '0 5px' }}>
+            <Box id="priceInputWrapper" sx={priceInputWrapperStyle}>
+              { }
+              <TextField
+                type="number"
+                onWheel={event => event.target.blur()}
+                onChange={changeMinPrice}
+                id="outlined-basic"
+                label="Ціна від"
+                variant="outlined"
+                size="small"
+              />
+              { }
+              <TextField
+                type="number"
+                onWheel={event => event.target.blur()}
+                onChange={changeMaxPrice}
+                id="outlined-basic"
+                label="Ціна до"
+                variant="outlined"
+                size="small"
+              />
+            </Box>
+            {/* <FilterSlider /> */}
+          </AccordionDetails>
+        </Accordion>
+
+        <Accordion sx={marginStyle}>
+          <AccordionSummary
+            sx={mainCategoryStyle}
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography>Виробник</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <FormGroup sx={formGroupStyle}>
+              { checkedCountry.map(item => (
+                <FormControlLabel
+                  key={item.title}
+                  checked={item.checked}
+                  onChange={changeManufacturer}
+                  value={item.title}
+                  control={<Checkbox />}
+                  label={item.title}
+                />
+              ))}
+            </FormGroup>
+          </AccordionDetails>
+        </Accordion>
+
+        <Accordion sx={marginStyle}>
+          <AccordionSummary
+            sx={mainCategoryStyle}
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography>Форма товару</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <FormGroup sx={formGroupStyle}>
+              { checkedForm.map(item => (
+                <FormControlLabel
+                  key={item.title}
+                  checked={item.checked}
+                  onChange={changeDosageForm}
+                  value={item.title}
+                  control={<Checkbox />}
+                  label={item.title}
+                />
+              ))}
+            </FormGroup>
+          </AccordionDetails>
+        </Accordion>
+
+        <FormGroup sx={formGroupCheckStyle}>
+          { }
+          <FormControlLabel
+            sx={formCheckboxStyle}
+            onChange={changeRecipe}
+            control={(
+              <Checkbox
+                icon={<ReceiptLongIcon fontSize="small" sx={{ marginRight: '5px' }} />}
+                checkedIcon={<ReceiptLongIcon fontSize="small" sx={{ color: '#2FD3AE', marginRight: '5px' }} />}
+              />
+          )}
+            label="Без рецепта"
+          />
+
+          { }
+          <FormControlLabel
+            onChange={changePregnant}
+            sx={formCheckboxStyle}
+            control={(
+              <Checkbox
+                icon={<PregnantWomanIcon />}
+                checkedIcon={<PregnantWomanIcon sx={{ color: '#2FD3AE' }} />}
+              />
+          )}
+            label="Дозволено вагітним"
+          />
+
+          { }
+          <FormControlLabel
+            onChange={changeChildren}
+            sx={formCheckboxStyle}
+            control={(
+              <Checkbox
+                icon={<BabyChangingStationIcon />}
+                checkedIcon={<BabyChangingStationIcon sx={{ color: '#2FD3AE' }} />}
+              />
+          )}
+            label="Дозволено дітям"
+          />
+        </FormGroup>
+
+        <Box id="buttonWrapper" sx={buttonWrapperStyle}>
+          {/* eslint-disable-next-line react/jsx-no-bind */}
+          <Button variant="contained" sx={showButtonStyle} onClick={receiveGoods}>
+            Показати
+          </Button>
+          <Button variant="outlined" sx={resetButtonStyle}>
+            Скинути
+          </Button>
+        </Box>
       </Box>
-
-      <Accordion sx={marginStyle}>
-        <AccordionSummary
-          sx={mainCategoryStyle}
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>Ціна</Typography>
-        </AccordionSummary>
-        <AccordionDetails sx={{ padding: '0 5px' }}>
-          <Box id="priceInputWrapper" sx={priceInputWrapperStyle}>
-            { }
-            <TextField
-              type="number"
-              onWheel={event => event.target.blur()}
-              onChange={changeMinPrice}
-              id="outlined-basic"
-              label="Ціна від"
-              variant="outlined"
-              size="small"
-            />
-            { }
-            <TextField
-              type="number"
-              onWheel={event => event.target.blur()}
-              onChange={changeMaxPrice}
-              id="outlined-basic"
-              label="Ціна до"
-              variant="outlined"
-              size="small"
-            />
-          </Box>
-          {/* <FilterSlider /> */}
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion sx={marginStyle}>
-        <AccordionSummary
-          sx={mainCategoryStyle}
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>Виробник</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <FormGroup sx={formGroupStyle}>
-            { }
-            <FormControlLabel
-              onChange={changeManufacturer}
-              value="Ukraine"
-              control={<Checkbox />}
-              label="Україна"
-            />
-            { }
-            <FormControlLabel
-              onChange={changeManufacturer}
-              value="Germany"
-              control={<Checkbox />}
-              label="Німеччина"
-            />
-            { }
-            <FormControlLabel
-              onChange={changeManufacturer}
-              value="Greece"
-              control={<Checkbox />}
-              label="Греція"
-            />
-            { }
-            <FormControlLabel
-              onChange={changeManufacturer}
-              value="Poland"
-              control={<Checkbox />}
-              label="Польща"
-            />
-            { }
-            <FormControlLabel
-              onChange={changeManufacturer}
-              value="Italy"
-              control={<Checkbox />}
-              label="Італія"
-            />
-            { }
-            <FormControlLabel
-              onChange={changeManufacturer}
-              value="GB"
-              control={<Checkbox />}
-              label="Великобританія"
-            />
-            { }
-            <FormControlLabel
-              onChange={changeManufacturer}
-              value="India"
-              control={<Checkbox />}
-              label="Індія"
-            />
-          </FormGroup>
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion sx={marginStyle}>
-        <AccordionSummary
-          sx={mainCategoryStyle}
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>Форма товару</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <FormGroup sx={formGroupStyle}>
-            { }
-            <FormControlLabel
-              onChange={changeDosageForm}
-              value="Pills"
-              control={<Checkbox />}
-              label="Таблетки"
-            />
-            { }
-            <FormControlLabel
-              onChange={changeDosageForm}
-              value="Ampoules"
-              control={<Checkbox />}
-              label="Ампули"
-            />
-            { }
-            <FormControlLabel
-              onChange={changeDosageForm}
-              value="Spray"
-              control={<Checkbox />}
-              label="Спреї"
-            />
-            { }
-            <FormControlLabel
-              onChange={changeDosageForm}
-              value="Syrup"
-              control={<Checkbox />}
-              label="Сиропи"
-            />
-            { }
-            <FormControlLabel
-              onChange={changeDosageForm}
-              value="Drops"
-              control={<Checkbox />}
-              label="Краплі"
-            />
-            { }
-            <FormControlLabel
-              onChange={changeDosageForm}
-              value="Capsules"
-              control={<Checkbox />}
-              label="Капсули"
-            />
-            <FormControlLabel onChange={changeDosageForm} value="Salve" control={<Checkbox />} label="Мазі" />
-          </FormGroup>
-        </AccordionDetails>
-      </Accordion>
-
-      <FormGroup sx={formGroupCheckStyle}>
-        { }
-        <FormControlLabel
-          sx={formCheckboxStyle}
-          onChange={changeRecipe}
-          control={(
-            <Checkbox
-              icon={<ReceiptLongIcon fontSize="small" sx={{ marginRight: '5px' }} />}
-              checkedIcon={<ReceiptLongIcon fontSize="small" sx={{ color: '#2FD3AE', marginRight: '5px' }} />}
-            />
-          )}
-          label="Без рецепта"
-        />
-
-        { }
-        <FormControlLabel
-          onChange={changePregnant}
-          sx={formCheckboxStyle}
-          control={(
-            <Checkbox
-              icon={<PregnantWomanIcon />}
-              checkedIcon={<PregnantWomanIcon sx={{ color: '#2FD3AE' }} />}
-            />
-          )}
-          label="Дозволено вагітним"
-        />
-
-        { }
-        <FormControlLabel
-          onChange={changeChildren}
-          sx={formCheckboxStyle}
-          control={(
-            <Checkbox
-              icon={<BabyChangingStationIcon />}
-              checkedIcon={<BabyChangingStationIcon sx={{ color: '#2FD3AE' }} />}
-            />
-          )}
-          label="Дозволено дітям"
-        />
-      </FormGroup>
-
-      <Box id="buttonWrapper" sx={buttonWrapperStyle}>
-        <Button variant="contained" sx={showButtonStyle}>
-          Показати
-        </Button>
-        <Button variant="outlined" sx={resetButtonStyle}>
-          Скинути
-        </Button>
-      </Box>
-    </Box>
+    </ThemeProvider>
   );
 }
 

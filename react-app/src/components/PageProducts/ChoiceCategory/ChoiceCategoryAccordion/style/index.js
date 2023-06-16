@@ -11,7 +11,13 @@ export const secondCategoryWrappStyle = {
 };
 
 export const secondCategoryStyle = {
-  fontSize: '14px', cursor: 'pointer', ':hover': { color: '#1f1e1e', fontWeight: '600', paddingRight: '10px' }
+  fontSize: '14px',
+  cursor: 'pointer',
+  ':hover': { color: '#1f1e1e', fontWeight: '600', paddingRight: '10px' }
+};
+
+export const secondCategoryStyleCheck = {
+  color: '#cb0a0a'
 };
 
 export const secondCategoryStyle4px = {
