@@ -136,7 +136,6 @@ const Cart = () => {
               <Typography>Очистити корзину</Typography>
             </IconButton>
           </HeaderBox>
-          {// "no-nested-ternary": "error"}
           {showSkeleton ? (
             <>
               <Skeleton />
