@@ -6,53 +6,60 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProductCard from '../../ProductCard/ProductCard';
 import Bread from '../../Bread';
-// import { fetchProductsData } from '../../../redux/slice/productsSlice';
 import { addItem } from '../../../redux/slice/cartItems';
-// import { addToCartLocalStorage } from '../../../utils/LocalStorage/addToCartLocalStorage';
 import { addToCartLocalStorage } from '../../../utils/LocalStore/addToCartLocalStorage';
 import { openModal } from '../../../redux/slice/favouriteItems';
 
-const FavouriteBlock = props => {
-  const [produsct, setProducts] = useState([]);
-  const { products } = props;
+const FavouriteBlock = () => {
+  const [products, setProducts] = useState([]);
 
   const cartItems = useSelector(state => state.itemCards);
+  const singleFavoriteItemDeleted = useSelector(state => state.favouriteItems.singleFavoriteItemDeleted);
+  const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
+
   const dispatch = useDispatch();
   const isInCart = false;
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:3004/api/product');
-
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const { prods } = await response.json();
         const favoriteString = localStorage.getItem('favouriteItems');
-        if (favoriteString) {
-          const favouriteItems = JSON.parse(favoriteString);
-          const favoriteIds = favouriteItems.map(item => item.id);
 
-          const selectedProduct = prods.filter(item => favoriteIds.includes(item.id));
-          setProducts(selectedProduct);
+        if (favoriteItems) {
+          const favouriteItems = JSON.parse(favoriteString);
+
+          if (favouriteItems.length > 0) {
+            const favoriteIds = favouriteItems.map(item => item.id);
+            const url = `http://localhost:3004/api/product/?_id=${favoriteIds}`;
+            const response = await fetch(url);
+
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+
+            const { prods } = await response.json();
+            setProducts(prods);
+          }
         }
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Error fetching products:', error);
       }
     };
-
     fetchProducts();
-  }, [products]);
-
-  // useEffect(() => {
-  //   dispatch(fetchProductsData());
-  // }, [dispatch, products.length]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
   const delFromFav = () => {
     dispatch(openModal());
   };
+
+  useEffect(() => {
+    const prods2 = products.filter(item => item.id !== singleFavoriteItemDeleted);
+
+    setProducts(prods2);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [singleFavoriteItemDeleted]);
 
   const handleAddToCart = items => {
     items.forEach(element => {
@@ -72,7 +79,7 @@ const FavouriteBlock = props => {
       }}
     >
       <Bread />
-      {!!produsct.length > 0 ? (
+      {!!products.length > 0 ? (
         <>
           <Stack
             direction={{ xs: 'column', sm: 'row' }}
@@ -111,7 +118,7 @@ const FavouriteBlock = props => {
                 variant="contained"
                 type="submit"
                 form="contacts"
-                onClick={() => handleAddToCart(produsct)}
+                onClick={() => handleAddToCart(products)}
                 component={Link}
                 to={{
                   pathname: '/cart'
@@ -130,7 +137,7 @@ const FavouriteBlock = props => {
             </Stack>
           </Stack>
           <Grid container spacing={2}>
-            {produsct.map(item => (
+            {products.map(item => (
               <Grid item key={item.id}>
                 <ProductCard productItem={item} isInCart={isInCart} />
               </Grid>

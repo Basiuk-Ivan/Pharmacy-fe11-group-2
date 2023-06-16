@@ -3,18 +3,19 @@ import { createSlice } from '@reduxjs/toolkit';
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
-    items: JSON.parse(localStorage.getItem('cartItems')) || []
+    items: JSON.parse(localStorage.getItem('cartItems')) || [],
+    singleCartItemDeleted: JSON.parse(localStorage.getItem('singleCartItemDeleted')) || ''
   },
   reducers: {
     addItem: (state, action) => {
-      state.items.push(action.payload);
+      state.items.push({ id: action.payload });
     },
     removeItem: (state, action) => {
       if (action.payload === 'all') {
         state.items = [];
-      } else {
-        state.items = state.items.filter(item => item.id !== action.payload);
       }
+      state.items = state.items.filter(item => item.id !== action.payload);
+      state.singleCartItemDeleted = action.payload;
     }
   }
 });

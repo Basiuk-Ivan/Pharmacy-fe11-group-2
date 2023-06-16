@@ -33,10 +33,12 @@ export const FavoriteCheckbox = ({ isInCart, productItem }) => {
 
     if (!isFavorite) {
       addToFavouriteLocalStorage(productItem);
-      dispatch(addToFavouriteItems(productItem));
+      dispatch(addToFavouriteItems(productItem.id));
     } else {
       removeFromFavouriteLocalStorage(productItem);
       dispatch(deleteFromFavouriteItems(productItem.id));
+
+      window.localStorage.setItem('singleFavoriteItemDeleted', JSON.stringify(productItem.id));
     }
   };
 

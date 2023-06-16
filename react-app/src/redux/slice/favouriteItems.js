@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   favouriteItems: JSON.parse(localStorage.getItem('favouriteItems')) || [],
-  isOpened: false
+  isOpened: false,
+  singleFavoriteItemDeleted: JSON.parse(localStorage.getItem('singleFavoriteItemDeleted')) || ''
 };
 
 const favouriteItems = createSlice({
@@ -10,8 +11,9 @@ const favouriteItems = createSlice({
   initialState,
   reducers: {
     addToFavouriteItems: (state, action) => {
-      state.favouriteItems.push(action.payload);
+      state.favouriteItems.push({ id: action.payload });
     },
+
     // eslint-disable-next-line consistent-return
     deleteFromFavouriteItems: (state, action) => {
       if (action.payload === 'all') {
@@ -21,6 +23,7 @@ const favouriteItems = createSlice({
         };
       }
       state.favouriteItems = state.favouriteItems.filter(item => item.id !== action.payload);
+      state.singleFavoriteItemDeleted = action.payload;
     },
     openModal: state => {
       state.isOpened = true;
@@ -34,5 +37,10 @@ const favouriteItems = createSlice({
 export default favouriteItems.reducer;
 
 // eslint-disable-next-line operator-linebreak
-export const { addToFavouriteItems, deleteFromFavouriteItems, openModal, closeModal } =
-  favouriteItems.actions;
+export const {
+  addToFavouriteItems,
+  // deleteSingleFavoriteItem,
+  deleteFromFavouriteItems,
+  openModal,
+  closeModal
+} = favouriteItems.actions;
