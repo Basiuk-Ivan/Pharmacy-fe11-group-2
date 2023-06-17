@@ -65,6 +65,7 @@ const Cart = () => {
     };
     fetchProducts();
   }, [dispatch, productItemCart]);
+
   useEffect(() => {
     // eslint-disable-next-line arrow-body-style
     const updatedProducts = products.filter(item => {
@@ -76,9 +77,6 @@ const Cart = () => {
   }, [productItemCart]);
 
   const delFromCart = () => {
-    // prods.forEach(el => {
-    //   removeFromCartLocalStorage(el, dispatch, 'all');
-    // });
     dispatch(removeItem('all'));
     removeAllFromCart();
   };
@@ -106,24 +104,6 @@ const Cart = () => {
                 <NavLink to="/orderprocess">Оформити замовлення</NavLink>
               </OrderButton>
             </PromoBox>
-            {/* <PromoBox mt={2}> */}
-            {/*  <FormTitlePromo>Промокод</FormTitlePromo> */}
-            {/*  <TextFieldPromo */}
-            {/*    id="promo-code" */}
-            {/*    label="Введіть промокод" */}
-            {/*    variant="outlined" */}
-            {/*    InputProps={{ */}
-            {/*      endAdornment: ( */}
-            {/*        <InputAdornment position="end"> */}
-            {/*          <IconButton> */}
-            {}
-            {/*            <ExpandCircleDownIcon sx={{ fill: 'rgba(47, 211, 174, 1)', rotate: '-90deg' }} /> */}
-            {/*          </IconButton> */}
-            {/*        </InputAdornment> */}
-            {/*      ) */}
-            {/*    }} */}
-            {/*  /> */}
-            {/* </PromoBox> */}
           </FormBox>
         </Box>
         <CardBox>

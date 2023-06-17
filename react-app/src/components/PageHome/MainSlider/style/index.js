@@ -68,17 +68,19 @@ export const wrapForImgStyles = {
   width: '325px',
   height: '329px',
   '@media (max-width: 900px)': {
-    maxWidth: '345px',
+    maxWidth: '220px',
     marginBottom: '40px'
   },
   '@media (max-width: 520px)': {
-    width: '210px',
+    width: '170px',
     marginBottom: '40px'
   }
 };
 
 export const imgStyles = {
-  width: '100%'
+  width: '100%',
+  height: '100%',
+  objectFit: 'contain'
 };
 
 export const buttonStyles = {
@@ -93,6 +95,9 @@ export const buttonStyles = {
     background: '#e3e3e369'
   },
   '@media (max-width: 520px)': {
-    boxShadow: '0px 20px 40px rgba(1, 29, 113, 0.2)'
+    boxShadow: '0px 20px 40px rgba(1, 29, 113, 0.2)',
+    width: '150px',
+    height: '46px',
+    fontSize: '12px'
   }
 };

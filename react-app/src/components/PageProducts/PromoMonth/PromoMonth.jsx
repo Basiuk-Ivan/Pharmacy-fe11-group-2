@@ -1,42 +1,134 @@
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
-import { Box, Typography } from '@mui/material';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ProductCard from '../../ProductCard/ProductCard';
-import {
-  cardsWrapperStyle,
-  cardWrapperStyle,
-  promoMonthStyle,
-  promoMonthTitleSliderStyle,
-  promoMonthTitleWrapperStyle,
-  titleStyle
-} from './style';
+// import { Box, Typography } from '@mui/material';
+// import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+// import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+// import ProductCard from '../../ProductCard/ProductCard';
+// import {
+//   cardsWrapperStyle,
+//   cardWrapperStyle,
+//   promoMonthStyle,
+//   promoMonthTitleSliderStyle,
+//   promoMonthTitleWrapperStyle,
+//   titleStyle
+// } from './style';
 
-function PromoMonth() {
-  const { products } = useSelector(state => state.products);
-  const promoMonthCards = products.slice(0, 5);
-  const isInCart = false;
+// function PromoMonth() {
+//   const { products } = useSelector(state => state.products);
+//   const promoMonthCards = products.slice(0, 5);
+//   const isInCart = false;
+//   return (
+//     <Box id="promoMonth" sx={promoMonthStyle}>
+//       <Box id="promoMonthTitleWrapper" sx={promoMonthTitleWrapperStyle}>
+//         <Typography sx={titleStyle}>Акції місяця</Typography>
+//         <Box id="promoMonthTitleSlider" sx={promoMonthTitleSliderStyle}>
+//           <ArrowBackIosIcon fontSize="small" sx={{ cursor: 'pointer' }} />
+//           <ArrowForwardIosIcon fontSize="small" sx={{ cursor: 'pointer' }} />
+//         </Box>
+//       </Box>
+//       <Box id="cardsWrapper" sx={cardsWrapperStyle}>
+//         {promoMonthCards.map(item => (
+//           <Box id="cardWrapper" key={item.id} sx={cardWrapperStyle}>
+//             <ProductCard productItem={item} isInCart={isInCart} />
+//           </Box>
+//         ))}
+//       </Box>
+//     </Box>
+//   );
+// }
+
+// export default PromoMonth;
+
+import { useEffect, useState } from 'react';
+// import { NavLink } from 'react-router-dom';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import ProductCard from '../../ProductCard';
+import { wrapperForPromotion, promotionStyles } from './style';
+import 'swiper/swiper-bundle.min.css';
+import './style/CustomSlider.scss';
+
+const PromoMonth = () => {
+  const [products, setProducts] = useState([]);
+  const [slidesPerView, setslidesPerView] = useState(null);
+  // const { id, category } = useParams();
+
+  const theme = useTheme();
+  const isXs = useMediaQuery(theme.breakpoints.only('xs'));
+  const isSm = useMediaQuery(theme.breakpoints.only('sm'));
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const url = 'http://localhost:3004/api/product';
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const { prods } = await response.json();
+
+        const promotionProducts = prods.filter(item => {
+          const discount = (item.discount / item.price) * 100;
+          return discount >= 5;
+        });
+
+        setProducts(promotionProducts);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Error fetching products:', error);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  useEffect(() => {
+    if (isXs) {
+      setslidesPerView(1);
+    } else if (isSm) {
+      setslidesPerView(2);
+    } else {
+      setslidesPerView(3);
+    }
+  }, [isXs, isSm]);
+
+  if (products.length === 0) {
+    return null;
+  }
+
+  const randomIndexes = Array.from({ length: 8 }, () => Math.floor(Math.random() * products.length));
+
+  const productItems = randomIndexes.map(index => products[index]);
 
   return (
-    <Box id="promoMonth" sx={promoMonthStyle}>
-      <Box id="promoMonthTitleWrapper" sx={promoMonthTitleWrapperStyle}>
-        <Typography sx={titleStyle}>Акції місяця</Typography>
-        <Box id="promoMonthTitleSlider" sx={promoMonthTitleSliderStyle}>
-          <ArrowBackIosIcon fontSize="small" sx={{ cursor: 'pointer' }} />
-          <ArrowForwardIosIcon fontSize="small" sx={{ cursor: 'pointer' }} />
-        </Box>
+    <Box>
+      <Box sx={wrapperForPromotion}>
+        <Typography fontFamily="Roboto" component="div" sx={promotionStyles}>
+          Акції місяця
+        </Typography>
       </Box>
 
-      <Box id="cardsWrapper" sx={cardsWrapperStyle}>
-        {promoMonthCards.map(item => (
-          <Box id="cardWrapper" key={item.id} sx={cardWrapperStyle}>
-            <ProductCard productItem={item} isInCart={isInCart} />
-          </Box>
+      <Swiper
+        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        spaceBetween={50}
+        slidesPerView={slidesPerView}
+        loop
+        navigation
+        pagination={{ clickable: true }}
+        className="product-analogies-slider-promotion"
+      >
+        {productItems.map((product, index) => (
+          <SwiperSlide key={index}>
+            {/* <NavLink to={`/product/${product.id}`}> */}
+            <ProductCard productItem={product} />
+            {/* </NavLink> */}
+          </SwiperSlide>
         ))}
-      </Box>
+      </Swiper>
     </Box>
   );
-}
+};
 
 export default PromoMonth;
