@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 
 const getAll = async (req, res) => {
   try {
+    console.log(req.query);
     const users = await UserDB.find(req.query);
     res.json(users);
   } catch (err) {
@@ -38,8 +39,9 @@ const update = async (req, res) => {
 
 const create = async (req, res) => {
   try {
+    console.log(req.body);
     req.body.password = await bcrypt.hash(req.body.password, 4);
-   const data = await new UserDB(req.body).save();
+   const data = await UserDB.create((req.body));
 
     res.json({ data: "Успішна реєстрація" });
   } catch (err) {
@@ -49,6 +51,7 @@ const create = async (req, res) => {
 
 const login = async (req, res) => {
   try {
+    console.log(req.query);
     const user = await UserDB.findOne({email: req.query.email});
     if (user) {
       const isPasswordEqual = await bcrypt.compare( req.query.password, user.password );

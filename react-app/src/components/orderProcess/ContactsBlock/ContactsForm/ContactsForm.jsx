@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 /* eslint-disable no-console */

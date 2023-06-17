@@ -92,7 +92,7 @@ const UserActions = () => {
         ) : (
           <>
             <Tooltip title="Open modal">
-              <IconButton onClick={handleOpenModal} sx={{ p: 0 }}>
+              <IconButton onClick={handleOpenModal}>
                 <PermIdentityOutlinedIcon sx={fillForIcon} />
               </IconButton>
             </Tooltip>

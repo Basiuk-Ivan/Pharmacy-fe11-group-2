@@ -8,7 +8,7 @@ export const OrderForm = () => (
       <img src={paymentPoint} alt="paymentPoint" />
     </Box>
     <Box>
-      <Typography fontFamily="Roboto" sx={{ fontWeight: 700, fontSize: '18px' }}>
+      <Typography fontFamily="Roboto" sx={{ fontWeight: 700, fontSize: '15px' }}>
         Оформити замовлення
       </Typography>
       <Typography sx={{ color: '#828282', fontSize: '14px' }}>
