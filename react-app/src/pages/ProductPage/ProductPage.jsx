@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { useState, useEffect } from 'react';
 
 import { Container, Typography, Box, Grid, Tabs, Tab, Skeleton, Stack } from '@mui/material';
@@ -80,7 +79,7 @@ const a11yProps = index => ({
 
 const ProductPage = () => {
   const { id, category } = useParams();
-  console.log('id:', id);
+
   const [product, setProduct] = useState(null);
   const [value, setValue] = useState(0);
 
@@ -157,7 +156,10 @@ const ProductPage = () => {
                       <Tab sx={{ width: { xs: '150px' } }} label="Аналоги" {...a11yProps(2)} />
                       <Tab sx={{ width: { xs: '150px' } }} label="Відгуки" {...a11yProps(3)} />
                     </AntTabs>
-                    <ProductCardMainBlock productItem={product} onChange={recentlyViewedProducts(product.id)} />
+                    <ProductCardMainBlock
+                      productItem={product}
+                      onChange={recentlyViewedProducts(product.id)}
+                    />
                   </Box>
                   <TabPanel value={value} index={0} product={product}>
                     <ProductCardInstruction productItem={product} />

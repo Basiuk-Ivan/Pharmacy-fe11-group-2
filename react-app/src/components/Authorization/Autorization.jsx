@@ -22,6 +22,7 @@ const AuthButton = () => {
   };
 
   const handleFormSubmit = async values => {
+    // eslint-disable-next-line no-console
     console.log(values);
     try {
       const url = 'http://localhost:3004/api/users/create';
@@ -36,8 +37,10 @@ const AuthButton = () => {
         throw new Error('Network response was not ok');
       }
       const user = await response.json();
+      // eslint-disable-next-line no-console
       console.log('user:', user);
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error('Error fetching products:', err);
     }
   };
