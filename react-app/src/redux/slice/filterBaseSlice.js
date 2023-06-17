@@ -11,7 +11,8 @@ const initialState = {
   productForm: [],
   prescriptionLeave: false,
   whoCanPregnant: false,
-  whoCanChildren: false
+  whoCanChildren: false,
+  limit: 4
 };
 
 const filterBaseSlice = createSlice({
