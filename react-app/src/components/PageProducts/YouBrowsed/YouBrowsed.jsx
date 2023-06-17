@@ -16,7 +16,7 @@ import {
 function YouBrowsed() {
   const isInCart = false;
   const viewedItems = useMemo(() => JSON.parse(localStorage.getItem('viewedProducts')) || [], []);
-
+  console.log(viewedItems);
   const [viewedProducts, setViewedProducts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
