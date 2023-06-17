@@ -5,7 +5,7 @@ import {
   // useParams
 } from 'react-router-dom';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
 import Accordion from '@mui/material/Accordion';
@@ -27,11 +27,10 @@ export default function ChoiceCategoryAccordion() {
   const dispatch = useDispatch();
   const [expanded, setExpanded] = React.useState(false);
 
-  const filterBase = useSelector(state => state.filterBase);
+  // const filterBase = useSelector(state => state.filterBase);
 
   useEffect(() => {
     setExpanded(values[currentCategory]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentCategory, expanded]);
 
   useEffect(() => {
@@ -44,9 +43,9 @@ export default function ChoiceCategoryAccordion() {
     setExpanded(isExpanded ? panel : false);
   };
 
-  useEffect(() => {
-    console.log(filterBase);
-  }, [filterBase]);
+  // useEffect(() => {
+  //   console.log(filterBase);
+  // }, [filterBase]);
 
   return (
     <div>
