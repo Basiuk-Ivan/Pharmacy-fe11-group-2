@@ -6,11 +6,25 @@ import axios from 'axios';
 import ProductCard from '../../ProductCard';
 import 'swiper/swiper-bundle.min.css';
 import './CustomSwiper.scss';
-import { Container } from '@mui/system';
 
 const ProductAnalogiesCardContainer = ({ productItem }) => {
   const isInCart = false;
- 
+  const theme = useTheme();
+  const isXs = useMediaQuery(theme.breakpoints.only('xs'));
+  const isSm = useMediaQuery(theme.breakpoints.only('sm'));
+
+  const [slidesPerView, setSlidesPerView] = useState(null);
+  const [analogProducts, setAnalogProducts] = useState([]);
+
+  useEffect(() => {
+    if (isXs) {
+      setSlidesPerView(1);
+    } else if (isSm) {
+      setSlidesPerView(2);
+    } else {
+      setSlidesPerView(3);
+    }
+  }, [isXs, isSm]);
 
   const getAnalogsProducts = item => {
     if (item.analogs) {
@@ -20,7 +34,6 @@ const ProductAnalogiesCardContainer = ({ productItem }) => {
       axios.get('http://localhost:3004/api/product', { params })
         .then(response => {
           const analogsProducts = response.data.prods;
-
           setAnalogProducts(analogsProducts);
         })
         .catch(error => {
@@ -30,6 +43,7 @@ const ProductAnalogiesCardContainer = ({ productItem }) => {
   };
   useEffect(() => {
     getAnalogsProducts(productItem);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productItem]);
 
   return (
@@ -43,13 +57,21 @@ const ProductAnalogiesCardContainer = ({ productItem }) => {
         Аналоги
       </Typography>
       {analogProducts.length > 0 ? (
+        <Swiper
+          modules={[Navigation, Pagination]}
+          slidesPerView={slidesPerView}
+          navigation
+          loop
+          className="product-analogies-slider"
+        >
           {analogProducts
             .filter(element => element.id !== productItem.id)
             .map(element => (
-              <Container>
-                <ProductCard productItem={element} isInCart={isInCart} />
-                </Container>
+              <SwiperSlide key={element.id}>
+                <ProductCard productItem={element} isInCart={isInCart} parent={productItem.id} />
+              </SwiperSlide>
             ))}
+        </Swiper>
       ) : (
         <Typography variant="body1">Наразі аналоги відсутні.</Typography>
       )}
