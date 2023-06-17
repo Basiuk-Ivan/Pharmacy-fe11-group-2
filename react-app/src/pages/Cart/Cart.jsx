@@ -116,9 +116,11 @@ const Cart = () => {
 
                 <PromoBox mt={2}>
                   <FormTitlePromo>Загальна сума: {sumWithDiscount} грн</FormTitlePromo>
-                  <OrderButton>
-                    <NavLink to="/orderprocess">Оформити замовлення</NavLink>
-                  </OrderButton>
+                  <NavLink to="/orderprocess">
+                    <OrderButton>
+                      Оформити замовлення
+                    </OrderButton>
+                  </NavLink>
                 </PromoBox>
               </FormBox>
             </Box>

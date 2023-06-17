@@ -2,7 +2,6 @@ import { Table, TableBody, TableCell, TableRow, Typography, Container } from '@m
 import { useSelector } from 'react-redux';
 
 const TotalAmountForm = () => {
-
   const sumDiscount = useSelector(state => state.itemCards.sumDiscount);
   const sumWithDiscount = useSelector(state => state.itemCards.sumWithDiscount);
 
