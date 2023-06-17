@@ -6,25 +6,11 @@ import axios from 'axios';
 import ProductCard from '../../ProductCard';
 import 'swiper/swiper-bundle.min.css';
 import './CustomSwiper.scss';
+import { Container } from '@mui/system';
 
 const ProductAnalogiesCardContainer = ({ productItem }) => {
   const isInCart = false;
-  const theme = useTheme();
-  const isXs = useMediaQuery(theme.breakpoints.only('xs'));
-  const isSm = useMediaQuery(theme.breakpoints.only('sm'));
-
-  const [slidesPerView, setSlidesPerView] = useState(null);
-  const [analogProducts, setAnalogProducts] = useState([]);
-
-  useEffect(() => {
-    if (isXs) {
-      setSlidesPerView(1);
-    } else if (isSm) {
-      setSlidesPerView(2);
-    } else {
-      setSlidesPerView(3);
-    }
-  }, [isXs, isSm]);
+ 
 
   const getAnalogsProducts = item => {
     if (item.analogs) {
@@ -34,6 +20,7 @@ const ProductAnalogiesCardContainer = ({ productItem }) => {
       axios.get('http://localhost:3004/api/product', { params })
         .then(response => {
           const analogsProducts = response.data.prods;
+
           setAnalogProducts(analogsProducts);
         })
         .catch(error => {
@@ -56,23 +43,15 @@ const ProductAnalogiesCardContainer = ({ productItem }) => {
         Аналоги
       </Typography>
       {analogProducts.length > 0 ? (
-        <Swiper
-          modules={[Navigation, Pagination]}
-          slidesPerView={slidesPerView}
-          navigation
-          loop
-          className="product-analogies-slider"
-        >
           {analogProducts
             .filter(element => element.id !== productItem.id)
             .map(element => (
-              <SwiperSlide key={element.id}>
+              <Container>
                 <ProductCard productItem={element} isInCart={isInCart} />
-              </SwiperSlide>
+                </Container>
             ))}
-        </Swiper>
       ) : (
-        <Typography variant="body1">Наразі аналоги відсутні</Typography>
+        <Typography variant="body1">Наразі аналоги відсутні.</Typography>
       )}
     </Box>
   );

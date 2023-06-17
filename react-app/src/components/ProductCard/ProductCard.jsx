@@ -10,7 +10,6 @@ const ProductCard = ({ productItem, isInCart }) => {
   const { pathname } = useLocation();
 
   const cardWrapStyles = wrapForCardStyles(isInCart);
-
   return (
     <ThemeProvider theme={theme}>
       <Card sx={cardWrapStyles}>
