@@ -72,7 +72,7 @@ const ProductAnalogiesCardContainer = ({ productItem }) => {
             ))}
         </Swiper>
       ) : (
-        <Typography variant="body1">No analog products found.</Typography>
+        <Typography variant="body1">Наразі аналоги відсутні</Typography>
       )}
     </Box>
   );
