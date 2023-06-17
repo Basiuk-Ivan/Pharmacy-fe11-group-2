@@ -10,11 +10,11 @@ import OrderProcess from './pages/OrderProcess';
 import ProductPage from './pages/ProductPage';
 import { theme } from './tools/muiTheme';
 import Cabinet from './pages/Cabinet';
-import { Company } from './pages/Company';
-import { Delivery } from './pages/Delivery';
-import { Pay } from './pages/Pay';
-import { Agreement } from './pages/Agreement';
-import { EditorialPolicy } from './pages/EditorialPolicy';
+import { Company } from './pages/FooterPage/Company';
+import { Delivery } from './pages/FooterPage/Delivery';
+import { Pay } from './pages/FooterPage/Pay';
+import { Agreement } from './pages/FooterPage/Agreement';
+import { EditorialPolicy } from './pages/FooterPage/EditorialPolicy';
 
 const App = () => (
   <ThemeProvider theme={theme}>
