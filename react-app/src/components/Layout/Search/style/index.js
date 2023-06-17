@@ -43,7 +43,7 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export const inputStyles = {
   border: '1px solid #E0E0E0',
   borderRadius: '20px',
-  paddingRight:"25px"
+  paddingRight: '25px'
 };
 
 export const searchIconStyle = { fill: '#2FD3AE' };
