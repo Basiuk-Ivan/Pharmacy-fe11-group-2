@@ -3,6 +3,9 @@ import { useSelector } from 'react-redux';
 
 const TotalAmountForm = () => {
   const productItemCart = useSelector(state => state.itemCards.items);
+  const cartSumWithoutDiscount = useSelector(state => state.itemCards.cartSumWithoutDiscount);
+  const sumDiscount = useSelector(state => state.itemCards.sumDiscount);
+  const sumWithDiscount = useSelector(state => state.itemCards.sumWithDiscount);
 
   const totalAmount = () => {
     let total = 0;
@@ -27,7 +30,7 @@ const TotalAmountForm = () => {
           </TableRow>
           <TableRow>
             <TableCell>Знижка</TableCell>
-            <TableCell>0 грн</TableCell>
+            <TableCell>{sumDiscount}</TableCell>
           </TableRow>
           <TableRow
             sx={{
@@ -35,13 +38,13 @@ const TotalAmountForm = () => {
             }}
           >
             <TableCell>Без урахування доставки</TableCell>
-            <TableCell>{`${totalAmount()} грн.`}
+            <TableCell>{sumWithDiscount} грн.
             </TableCell>
           </TableRow>
         </TableBody>
       </Table>
       <Typography sx={{ textAlign: 'end', fontWeight: 700 }}>
-        Загальна сума: {total - itemDiscount} грн.
+        Загальна сума: {sumWithDiscount} грн.
       </Typography>
     </Container>
   );
