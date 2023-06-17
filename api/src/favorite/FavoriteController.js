@@ -3,7 +3,9 @@ import mongoose from "mongoose";
 
 export const createFavorite = async (req, res) => {
     try {
+        console.log(req.body);
         const createdFavorite = await FavoriteDB.create(req.body);
+        console.log(createdFavorite);
         res.json(createdFavorite);
     } catch (e) {
         res.status(500).json(e.message);

@@ -30,9 +30,9 @@ const ContactsForm = () => {
       .required('Введіть своє прізвище кирилицею')
       .matches(nameRegExp, 'Введіть своє прізвище кирилицею')
       .min(2, 'Мінімум два символи'),
-    phone: Yup.number().required('Введіть номер мобільного телефону'),
+    phone: Yup.number().required('Введіть номер мобільного телефону').typeError('Введіть номер мобільного телефону'),
     street: Yup.string().required('Введіть назву вулиці'),
-    apartment: Yup.number().required('Введіть номер квартири')
+    apartment: Yup.number().required('Введіть номер квартири').typeError('Введіть номер квартири')
   });
 
   const formik = useFormik({

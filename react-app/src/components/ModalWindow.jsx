@@ -47,15 +47,48 @@ const ModalWindow = () => {
   return (
     <Modal open={isOpened} onClose={handleClose}>
       <Box sx={style}>
-        <Typography>Видалити всі товари з кошика?</Typography>
-        <Typography sx={{ mt: 2 }}>
-          Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+        <Typography sx={{
+          mb: '30px',
+          fontFamily: 'Raleway, sans-serif',
+          fontWeight: 700,
+          fontSize: '21px',
+        }}
+        >Видалити всі товари з кошика?
         </Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-          <Button onClick={handleClick} sx={{ color: 'black' }}>
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          mt: 2,
+          gap: '30px',
+
+        }}
+        >
+          <Button
+            variant="contained"
+            onClick={handleClick}
+            sx={{
+              backgroundColor: '#2FD3AE',
+              borderRadius: 50,
+              fontFamily: 'Raleway, sans-serif',
+              fontWeight: 700,
+              fontSize: '14px',
+              color: '#FFFFFF'
+            }}
+          >
             Підтвердити
           </Button>
-          <Button onClick={handleClose} sx={{ color: 'black' }}>
+          <Button
+            variant="contained"
+            onClick={handleClose}
+            sx={{
+              backgroundColor: '#2FD3AE',
+              borderRadius: 50,
+              fontFamily: 'Raleway, sans-serif',
+              fontWeight: 700,
+              fontSize: '14px',
+              color: '#FFFFFF'
+            }}
+          >
             Відміна
           </Button>
         </Box>

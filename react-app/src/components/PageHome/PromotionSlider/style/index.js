@@ -8,8 +8,3 @@ export const promotionStyles = {
   fontWeight: 700,
   color: '#333333'
 };
-export const swipper = {
-  height: '400px',
-  backgroundColor: '#F6FBFA',
-  marginBottom: '30px'
-};

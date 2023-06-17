@@ -5,36 +5,30 @@ import { PharmacySelector } from './Items/PharmacySelector';
 import { ProductSelector } from './Items/ProductSelector';
 import { ReceiveProduct } from './Items/ReceiveProduct';
 import 'swiper/swiper-bundle.min.css';
-import './slider.scss';
+import './CustomSlider.scss';
 
 export const SliderWorks = () => (
   <Swiper
-    className="swiper-wrap"
+    className="product-analogies-slider-work"
     modules={[Navigation, Pagination, Scrollbar, A11y]}
     spaceBetween={50}
     slidesPerView={1}
     loop
-    navigation={{
-      prevEl: '.swiper-button-prev',
-      nextEl: '.swiper-button-next'
-    }}
-    pagination={{ clickable: true, el: '.swiper-pagination' }}
+    navigation
     scrollbar={false}
   >
-    <SwiperSlide className="swiper-slide-custom">
+    <SwiperSlide>
       <OrderForm />
     </SwiperSlide>
-    <SwiperSlide className="swiper-slide-custom">
+    <SwiperSlide>
       <PharmacySelector />
     </SwiperSlide>
-    <SwiperSlide className="swiper-slide-custom">
+    <SwiperSlide>
       <ProductSelector />
     </SwiperSlide>
-    <SwiperSlide className="swiper-slide-custom">
+    <SwiperSlide>
       <ReceiveProduct />
     </SwiperSlide>
-    <div className="swiper-button-prev" />
-    <div className="swiper-button-next" />
     <div className="swiper-pagination custom-pagination2" />
   </Swiper>
 );

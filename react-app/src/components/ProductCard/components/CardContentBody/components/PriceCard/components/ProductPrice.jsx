@@ -10,7 +10,7 @@ export const ProductPrice = ({ productItem }) => {
         {productItem.discount > 0 ? `${discountedPrice} ГРН.` : `${productItem.price} ГРН.`}
       </Typography>
 
-      {productItem.discount > 0 && (
+      {productItem.discount > 0 && discountedPrice !== productItem.price && (
         <Typography variant="body2" sx={discountStyles}>
           {productItem.price} ГРН.
         </Typography>

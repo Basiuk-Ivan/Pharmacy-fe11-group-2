@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Box } from '@mui/system';
-import { Typography, IconButton } from '@mui/material';
+import { Typography, IconButton, Skeleton } from '@mui/material';
 import DeleteOutlineTwoToneIcon from '@mui/icons-material/DeleteOutlineTwoTone';
 import IconBreadcrumbs from './Breadcrums';
 import ProductCard from '../../components/ProductCard';
@@ -27,12 +27,21 @@ import { removeAllFromCart } from '../../utils/LocalStore/removeAllFromCart';
 const Cart = () => {
   const [products, setProducts] = useState([]);
   const productItemCart = useSelector(state => state.itemCards.items);
+  const [showSkeleton, setShowSkeleton] = useState(true);
 
   const isInCart = true;
   const generalPrice = products.reduce((acum, product) => acum + product.price, 0);
   const discount = products.reduce((acum, product) => acum + product.discount, 0);
   const totalValue = generalPrice - discount;
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSkeleton(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -56,6 +65,7 @@ const Cart = () => {
     };
     fetchProducts();
   }, [dispatch, productItemCart]);
+
   useEffect(() => {
     // eslint-disable-next-line arrow-body-style
     const updatedProducts = products.filter(item => {
@@ -67,9 +77,6 @@ const Cart = () => {
   }, [productItemCart]);
 
   const delFromCart = () => {
-    // prods.forEach(el => {
-    //   removeFromCartLocalStorage(el, dispatch, 'all');
-    // });
     dispatch(removeItem('all'));
     removeAllFromCart();
   };
@@ -97,24 +104,6 @@ const Cart = () => {
                 <NavLink to="/orderprocess">Оформити замовлення</NavLink>
               </OrderButton>
             </PromoBox>
-            {/* <PromoBox mt={2}> */}
-            {/*  <FormTitlePromo>Промокод</FormTitlePromo> */}
-            {/*  <TextFieldPromo */}
-            {/*    id="promo-code" */}
-            {/*    label="Введіть промокод" */}
-            {/*    variant="outlined" */}
-            {/*    InputProps={{ */}
-            {/*      endAdornment: ( */}
-            {/*        <InputAdornment position="end"> */}
-            {/*          <IconButton> */}
-            {}
-            {/*            <ExpandCircleDownIcon sx={{ fill: 'rgba(47, 211, 174, 1)', rotate: '-90deg' }} /> */}
-            {/*          </IconButton> */}
-            {/*        </InputAdornment> */}
-            {/*      ) */}
-            {/*    }} */}
-            {/*  /> */}
-            {/* </PromoBox> */}
           </FormBox>
         </Box>
         <CardBox>
@@ -127,7 +116,23 @@ const Cart = () => {
               <Typography>Очистити корзину</Typography>
             </IconButton>
           </HeaderBox>
-          {!!products.length > 0 ? (
+          {/* eslint-disable-next-line no-nested-ternary */}
+          {showSkeleton ? (
+            <>
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+            </>
+          ) : products.length > 0 ? (
             <>
               {products.map(item => (
                 <ProductCard key={item.id} productItem={item} isInCart={isInCart} />
@@ -141,7 +146,7 @@ const Cart = () => {
                 fontSize: 24,
                 fontWeight: 400,
                 mt: '100px',
-                mb: '200px'
+                mb: '400px'
               }}
             >
               Додайте товар в корзину для відображення на цій сторінці

@@ -1,5 +1,12 @@
 import { Box, Typography } from '@mui/material';
-import { healthBlogStyled, wrapperForItem, stack, toBlog, Title, AfterBlogImg } from './style';
+import {
+  healthBlogStyled,
+  wrapperForItem,
+  stack,
+  // toBlog,
+  Title,
+  AfterBlogImg
+} from './style';
 import selfTreatmentRisks from '../../../assets/healthBlog/samo.svg';
 import doctor from '../../../assets/healthBlog/doctor.svg';
 import BlogItem from './BlogItem';
@@ -16,9 +23,9 @@ const HealthBlog = () => (
       <Typography fontFamily="Roboto" component="div" sx={healthBlogStyled}>
         Блог про здоровʼя
       </Typography>
-      <Typography fontFamily="Roboto" sx={toBlog}>
+      {/* <Typography fontFamily="Roboto" sx={toBlog}>
         Нещодавні записи
-      </Typography>
+      </Typography> */}
     </Box>
     <Box sx={wrapperForItem}>
       <Box sx={stack}>

@@ -8,7 +8,7 @@ export const PharmacySelector = () => (
       <img src={building} alt="building" />
     </Box>
     <Box>
-      <Typography fontFamily="Roboto" sx={{ fontWeight: 700, fontSize: '18px' }}>
+      <Typography fontFamily="Roboto" sx={{ fontWeight: 700, fontSize: '15px' }}>
         Оберіть аптеку
       </Typography>
       <Typography sx={{ color: '#828282', fontSize: '14px' }}>

@@ -22,7 +22,7 @@ export const wrapperForTextStyles = {
     xs: 'flex',
     flexDirection: 'column'
   },
-  '@media (max-width: 1120px)': {
+  '@media (max-width: 1136px)': {
     display: 'none'
   }
 };
@@ -47,7 +47,7 @@ export const bodyForNumberPhoneStyles = {
   display: {
     xs: 'flex',
     flexDirection: 'column',
-    '@media (max-width: 974px)': {
+    '@media (max-width: 1012px)': {
       display: 'none'
     }
   }
