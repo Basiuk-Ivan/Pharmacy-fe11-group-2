@@ -30,8 +30,8 @@ export const SearchIconWrapper = styled('div')(({ theme }) => ({
 export const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    padding: theme.spacing(1, 0, 1, 0),
+    paddingLeft: `calc(1em + ${theme.spacing(3)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
@@ -42,7 +42,8 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export const inputStyles = {
   border: '1px solid #E0E0E0',
-  borderRadius: '20px'
+  borderRadius: '20px',
+  paddingRight:"25px"
 };
 
 export const searchIconStyle = { fill: '#2FD3AE' };
