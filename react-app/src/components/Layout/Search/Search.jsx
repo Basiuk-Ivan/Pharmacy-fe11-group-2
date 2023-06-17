@@ -5,7 +5,7 @@ import Divider from '@mui/material/Divider';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 
-import { Stack} from '@mui/material';
+import { Stack } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { Search, SearchIconWrapper, StyledInputBase, searchIconStyle, inputStyles } from './style';
 
