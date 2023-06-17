@@ -64,9 +64,9 @@ const TabPanel = props => {
       {...other}
     >
       {value === index && (
-      <Box sx={{ p: 0.5 }}>
-        <Typography component="div">{children}</Typography>
-      </Box>
+        <Box sx={{ p: 0.5 }}>
+          <Typography component="div">{children}</Typography>
+        </Box>
       )}
     </div>
   );
@@ -78,6 +78,7 @@ const a11yProps = index => ({
 
 const ProductPage = () => {
   const { id, category } = useParams();
+  console.log('id:', id);
   const [product, setProduct] = useState(null);
   const [value, setValue] = useState(0);
 
@@ -179,10 +180,7 @@ const ProductPage = () => {
             <Skeleton variant="text" sx={{ fontSize: '16px', mt: '160px', mb: '20px' }} />
             <Skeleton variant="text" sx={{ fontSize: '32px', mb: '20px' }} />
             <Skeleton variant="text" sx={{ fontSize: '100px', mb: '5px' }} />
-            <Stack
-              direction={{ xs: 'column', sm: 'row' }}
-              spacing={{ xs: 1, sm: 2, md: 4 }}
-            >
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1, sm: 2, md: 4 }}>
               <Skeleton variant="rectangular" height="300px" sx={{ flexGrow: '2', mb: '30px' }} />
               <Skeleton variant="rectangular" height="300px" sx={{ flexGrow: '1', mb: '30px' }} />
               <Skeleton variant="rectangular" height="300px" sx={{ flexGrow: '1', mb: '30px' }} />

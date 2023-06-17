@@ -26,7 +26,8 @@ export const toBlog = {
 export const Title = {
   display: 'flex',
   gap: '35px',
-  marginBottom: '30px'
+  marginBottom: '30px',
+  marginTop: '20px'
 };
 
 export const wrapperForItem = {
