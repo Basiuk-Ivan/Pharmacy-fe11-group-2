@@ -13,7 +13,8 @@ export const youBrowsedTitleWrapperStyle = {
 export const titleStyle = {
   color: '#333333',
   fontSize: '36px',
-  fontWeight: '700'
+  fontWeight: '700',
+  mb: '20px'
 };
 
 export const youBrowsedTitleSliderStyle = {

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { useState, useEffect } from 'react';
 
 import { Container, Typography, Box, Grid, Tabs, Tab, Skeleton, Stack } from '@mui/material';
@@ -11,6 +12,7 @@ import ProductCardInstruction from '../../components/SinglePage/ProductCardInstr
 import ProductAnalogiesCardContainer from '../../components/SinglePage/ProductAnalogiesCardContainer';
 import ProductCardReviews from '../../components/SinglePage/ProductCardReviews';
 import BreadProduct from '../../components/SinglePage/BreadProduct';
+import recentlyViewedProducts from '../../tools/recentlyViewedProducts';
 
 const AntTabs = styled(Tabs)({
   '& .MuiTabs-indicator': {
@@ -155,7 +157,7 @@ const ProductPage = () => {
                       <Tab sx={{ width: { xs: '150px' } }} label="Аналоги" {...a11yProps(2)} />
                       <Tab sx={{ width: { xs: '150px' } }} label="Відгуки" {...a11yProps(3)} />
                     </AntTabs>
-                    <ProductCardMainBlock productItem={product} />
+                    <ProductCardMainBlock productItem={product} onChange={recentlyViewedProducts(product.id)} />
                   </Box>
                   <TabPanel value={value} index={0} product={product}>
                     <ProductCardInstruction productItem={product} />

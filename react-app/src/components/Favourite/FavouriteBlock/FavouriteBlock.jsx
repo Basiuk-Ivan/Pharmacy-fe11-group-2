@@ -167,7 +167,7 @@ const FavouriteBlock = () => {
               </Button>
             </Stack>
           </Stack>
-          <Grid container spacing={2}>
+          <Grid container spacing={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
             {products.map(item => (
               <Grid item key={item.id}>
                 <ProductCard
