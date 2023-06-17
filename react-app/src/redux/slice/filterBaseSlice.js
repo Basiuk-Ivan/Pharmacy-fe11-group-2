@@ -1,57 +1,60 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const initialState = {
+  // filterSearch: '',
+  categories: '',
+  // filterSubCategory: '',
+  priceMin: '',
+  priceMax: '',
+  sort: 1,
+  country: [],
+  productForm: [],
+  prescriptionLeave: false,
+  whoCanPregnant: false,
+  whoCanChildren: false
+};
+
 const filterBaseSlice = createSlice({
   name: 'filterBase',
-  initialState: {
-    filterSearch: '',
-    filterMainCategory: '',
-    filterSubCategory: '',
-    filterMinPrice: '',
-    filterMaxPrice: '',
-    filterSortingPrice: '',
-    filterManufacture: [],
-    filterDosageForm: [],
-    filterRecipe: false,
-    filterPregnant: false,
-    filterChildren: false
-  },
+  initialState,
   reducers: {
+    reset: () => initialState,
     mainCategory: (state, action) => {
-      state.filterMainCategory = action.payload;
+      state.categories = action.payload;
     },
     addManufacture: (state, action) => {
-      state.filterManufacture.push(action.payload);
+      state.country.push(action.payload);
     },
     removeManufacture: (state, action) => {
-      state.filterManufacture = state.filterManufacture.filter(item => item !== action.payload);
+      state.country = state.country.filter(item => item !== action.payload);
     },
     addDosageForm: (state, action) => {
-      state.filterDosageForm.push(action.payload);
+      state.productForm.push(action.payload);
     },
     removeDosageForm: (state, action) => {
-      state.filterDosageForm = state.filterDosageForm.filter(item => item !== action.payload);
+      state.productForm = state.productForm.filter(item => item !== action.payload);
     },
     recipe: state => {
-      state.filterRecipe = !state.filterRecipe;
+      state.prescriptionLeave = !state.prescriptionLeave;
     },
     pregnant: state => {
-      state.filterPregnant = !state.filterPregnant;
+      state.whoCanPregnant = !state.whoCanPregnant;
     },
     children: state => {
-      state.filterChildren = !state.filterChildren;
+      state.whoCanChildren = !state.whoCanChildren;
     },
     minPrice: (state, action) => {
-      state.filterMinPrice = action.payload;
+      state.priceMin = action.payload;
     },
     maxPrice: (state, action) => {
-      state.filterMaxPrice = action.payload;
+      state.priceMax = action.payload;
     },
     sortingPrice: (state, action) => {
-      state.filterSortingPrice = action.payload;
+      state.sort = action.payload;
     }
   }
 });
 
-export const { addManufacture, removeManufacture, addDosageForm, removeDosageForm, recipe, pregnant, children, minPrice, maxPrice, sortingPrice, mainCategory } = filterBaseSlice.actions;
+export const { addManufacture, removeManufacture, addDosageForm, removeDosageForm, recipe, pregnant, children, minPrice, maxPrice, sortingPrice, mainCategory, reset } = filterBaseSlice.actions;
 
 export default filterBaseSlice.reducer;

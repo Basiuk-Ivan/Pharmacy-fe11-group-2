@@ -10,11 +10,9 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { ButtonBase } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { mainCategory } from '../../../../redux/slice/filterBaseSlice';
-// import { fetchProductsData } from '../../../../redux/slice/productsSlice';
+import { mainCategory, reset } from '../../../../redux/slice/filterBaseSlice';
 import { changePage } from '../../../../redux/slice/numPageSlice';
 
 import { mainCategoryStyle, secondCategoryStyle, secondCategoryWrappStyle, marginStyle } from './style';
@@ -69,7 +67,7 @@ export default function ChoiceCategoryAccordion() {
   const dispatch = useDispatch();
   const [expanded, setExpanded] = React.useState(false);
 
-  const filterBase = useSelector(state => state.filterBase);
+  // const filterBase = useSelector(state => state.filterBase);
 
   useEffect(() => {
     const values = {
@@ -94,6 +92,7 @@ export default function ChoiceCategoryAccordion() {
   }, [currentCategory, expanded]);
 
   useEffect(() => {
+    dispatch(reset());
     dispatch(mainCategory(currentCategory));
     dispatch(changePage(1));
   }, [currentCategory, dispatch]);
@@ -101,19 +100,10 @@ export default function ChoiceCategoryAccordion() {
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  // const { category } = useParams();
 
-  // const { numPage } = useSelector(state => state.numPage);
-
-  // const changeSubCategory = event => {
-  //   // eslint-disable-next-line no-console
-  //   // const cat = event.target.innerText;
-  //   dispatch(fetchProductsData({ category, numPage }));
-  // };
-
-  useEffect(() => {
-    // console.log(filterBase);
-  }, [filterBase]);
+  // useEffect(() => {
+  //   console.log(filterBase);
+  // }, [filterBase]);
 
   return (
     <div>
@@ -132,12 +122,7 @@ export default function ChoiceCategoryAccordion() {
           <AccordionDetails sx={secondCategoryWrappStyle}>
             {item.sub.map(itemSub => (
               <NavLink key={itemSub.title} to={`/${itemSub.path}`}>
-                <ButtonBase
-                  key={itemSub.title}
-                  // onClick={changeSubCategory}
-                >
-                  <Typography sx={secondCategoryStyle}>{itemSub.title}</Typography>
-                </ButtonBase>
+                <Typography key={itemSub.title} sx={secondCategoryStyle}>{itemSub.title}</Typography>
               </NavLink>
             ))}
           </AccordionDetails>

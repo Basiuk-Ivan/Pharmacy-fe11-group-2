@@ -1,44 +1,52 @@
 import { useEffect, useState } from 'react';
-
-import { useDispatch } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
 import { Typography, Stack, Button, Box, Grid, Rating, Checkbox } from '@mui/material';
-
 import FavoriteIcon from '@mui/icons-material/Favorite';
-
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { addToFavouriteLocalStorage } from '../../../utils/LocalStore/addToFavouriteLocalStorage';
 import { removeFromFavouriteLocalStorage } from '../../../utils/LocalStore/removeFromFavouriteLocalStorage';
 import { addToFavouriteItems, deleteFromFavouriteItems } from '../../../redux/slice/favouriteItems';
 import VerticalImgTabPanel from '../VerticalImgTabPanel';
+import { addToCart } from '../../../redux/slice/cartItems';
+import { updateRating } from '../../../utils/ActionsWithProduct/updateRating';
+import { addToCartLocalStorage } from '../../../utils/LocalStore/addToCartLocalStorage';
+import { roundRating } from '../../../utils/ActionsWithProduct/roundRating';
+import { roundPrice } from '../../../utils/ActionsWithProduct/roundPrice';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const ProductCardMainBlock = ({ productItem }) => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  // const { id } = useParams();
 
-  const [quantity, setQuantity] = useState(1);
   const [value, setValue] = useState(null);
   const [activeSubstance, setActiveSubstance] = useState('');
   const [mainPrice, setMainPrice] = useState('');
   const [ratingClick, setRatingClick] = useState(true);
-  const roundPrice = (price, discount) => {
-    const result = price * ((100 - discount) / 100);
-    setMainPrice(Math.round(result));
-  };
-
+  const [isInCart, setIsInCart] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+
+  const cartItems = useSelector(state => state.itemCards.items);
+
+  useEffect(() => {
+    const productItemIndex = cartItems.findIndex(item => item.id === productItem.id);
+    if (productItemIndex !== -1) {
+      setIsInCart(true);
+    } else {
+      setIsInCart(false);
+    }
+  }, [cartItems, productItem.id]);
 
   useEffect(() => {
     const arr = productItem.activeSubstance;
     setActiveSubstance(arr.join(', '));
-    setValue(Math.round(Number(productItem.ratingTotal) / Number(productItem.ratingClick)));
-    roundPrice(productItem.price, productItem.discount);
-  }, [productItem.activeSubstance, productItem.ratingClick,
-    productItem.ratingTotal, productItem.discount, productItem.price]);
+
+    const roundedRating = roundRating(productItem);
+    setValue(roundedRating);
+
+    const roundedPrice = roundPrice(productItem);
+    setMainPrice(roundedPrice);
+  }, [productItem]);
 
   const handleFavoriteClick = event => {
     event.preventDefault();
@@ -53,28 +61,9 @@ const ProductCardMainBlock = ({ productItem }) => {
     }
   };
 
-  const handleIncrement = () => {
-    setQuantity(quantity + 1);
-  };
-
-  const handleDecrement = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  };
-
-  const updateRating = async newValue => {
-    const res = await fetch(`http://localhost:3004/api/product/${id}`, {
-      method: 'PUT',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        ratingTotal: (productItem.ratingTotal + newValue),
-        ratingClick: (productItem.ratingClick + 1)
-      }),
-    });
-    return res.json();
+  const handleAddToCart = product => {
+    dispatch(addToCart({ id: productItem.id }));
+    addToCartLocalStorage(product);
   };
 
   return (
@@ -108,7 +97,7 @@ const ProductCardMainBlock = ({ productItem }) => {
                   onChange={(event, newValue) => {
                     setValue(newValue);
                     if (ratingClick && newValue > 0) {
-                      updateRating(newValue);
+                      updateRating(productItem, newValue);
                       setRatingClick(false);
                     }
                   }}
@@ -309,63 +298,6 @@ const ProductCardMainBlock = ({ productItem }) => {
               />
             </Box>
           </Grid>
-
-          <Box sx={{ position: 'relative', mb: '14px' }}>
-            <RemoveCircleIcon
-              sx={{
-                position: 'absolute',
-                top: '5px',
-                left: '-6px',
-                fontSize: '18px',
-                color: '#2db496',
-                cursor: 'pointer'
-
-              }}
-              onClick={handleDecrement}
-            />
-            <Box
-              sx={{
-                padding: '4px 20px',
-                borderRadius: '50px',
-                backgroundColor: '#d6eaf5',
-                // height:'32px',
-                textAlign: 'center',
-                fontFamily: '"Roboto", "san-serif"'
-              }}
-            >
-              {quantity}
-            </Box>
-            <AddCircleIcon
-              onClick={() => {
-                if (quantity >= productItem?.quantity) {
-                  return;
-                }
-                handleIncrement();
-              }}
-              sx={{
-                position: 'absolute',
-                top: '5px',
-                right: '-6px',
-                fontSize: '18px',
-                color: '#d34747',
-                cursor: 'pointer'
-              }}
-            />
-
-          </Box>
-          <Grid item xs={12} lg={12} sx={{ mb: '10px' }}>
-            {quantity >= productItem?.quantity
-                            && (
-                            <Typography
-                              component="span"
-                              variant="body1"
-                              sx={{ color: '#dd8888', fontSize: '12px' }}
-                            >
-                              Обрано максимальну кількість
-                            </Typography>
-                            )}
-          </Grid>
-
         </Grid>
 
         {(productItem.price !== mainPrice) && (
@@ -397,36 +329,73 @@ const ProductCardMainBlock = ({ productItem }) => {
         )}
 
         <Stack direction="column" justifyContent="center" alignItems="center" spacing={2} sx={{ mb: '12px' }}>
-          <Button
-            variant="outlined"
-            onClick={handleDecrement}
-            sx={{
-              margin: '25px 0 17px',
-              color: '#525A68',
-              borderRadius: '50px',
-              width: { xs: '200px', sm: '240px' }
-            }}
-          >
-            Купити в один клік
-          </Button>
-          <NavLink to="/cart">
-            <Button
-              variant="outlined"
-              onClick={handleDecrement}
-              sx={{
-                width: '200px',
-                color: '#ffffff',
-                borderRadius: '50px',
-                border: 'none',
-                backgroundColor: '#2FD3AE',
-                '&:hover': {
-                  color: '#2FD3AE'
-                }
-              }}
-            >
-              Перейти до корзини
-            </Button>
-          </NavLink>
+          {!isInCart
+                        && (
+                        <Button
+                          variant="outlined"
+                          disabled={(productItem.quantity < 1)}
+                          sx={{
+                            margin: '25px 0 17px',
+                            color: '#525A68',
+                            borderRadius: '50px',
+                            width: { xs: '200px', sm: '240px' }
+                          }}
+                        >
+                          Купити в один клік
+                        </Button>
+                        )}
+          <Stack>
+            {!isInCart
+              ? (
+                <Button
+                  variant="outlined"
+                  onClick={() => handleAddToCart(productItem)}
+                  disabled={(productItem.quantity < 1)}
+                  sx={{
+                    width: '200px',
+                    color: '#ffffff',
+                    borderRadius: '50px',
+                    border: 'none',
+                    backgroundColor: '#2FD3AE',
+                    '&:hover': {
+                      color: '#2FD3AE'
+                    }
+                  }}
+                >
+                  Додати до корзини
+                </Button>
+              )
+
+              : (
+                <Stack alignItems="center">
+                  <Typography
+                    component="span"
+                    variant="body1"
+                    sx={{ color: '#2FD3AE', fontSize: '16px', m: '10px 0' }}
+                  >
+                    Товар додано до корзини
+                  </Typography>
+                  <NavLink to="/cart">
+                    <Button
+                      variant="outlined"
+                      sx={{
+                        width: '200px',
+                        color: '#ffffff',
+                        borderRadius: '50px',
+                        border: 'none',
+                        backgroundColor: '#12608d',
+                        '&:hover': {
+                          color: '#12608d'
+                        }
+                      }}
+                    >
+                      Перейти до корзини
+                    </Button>
+                  </NavLink>
+
+                </Stack>
+              )}
+          </Stack>
         </Stack>
       </Grid>
     </Grid>

@@ -26,7 +26,19 @@ const Bread = () => {
     painkillers: 'Знеболюючі',
     cardiovascularSystem: 'Серцево-судинна система',
     coughColdFlu: 'Ліки від кашлю, застуди та грипу',
-    nervousSystem: 'Для нервової системи'
+    nervousSystem: 'Для нервової системи',
+    antipyretic: 'Жарознижуючі',
+    cough: 'Кашель та біль у горлі',
+    nasal: 'Назальна терапія',
+    spasm: 'Від спазму',
+    migraine: 'Від болю при мігрені',
+    backPain: 'Від болю у спині',
+    sedatives: 'Седативні(заспокійливі)',
+    antidepressants: 'Антидепресанти',
+    hypertension: 'Гіпертонія',
+    bloodThinning: 'Для розрідження крові',
+    thrombosis: 'Тромбоз',
+    varicosity: 'Варікоз'
   };
   const { pathname } = window.location;
   const pathArray = pathname.substring(1).split('/');
