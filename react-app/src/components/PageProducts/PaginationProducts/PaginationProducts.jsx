@@ -7,26 +7,17 @@ import { changePage } from '../../../redux/slice/numPageSlice';
 
 function PaginationProducts() {
   const dispatch = useDispatch();
-  // const { category } = useSelector(state => state.category);
-
-  // const { products, status, err } = useSelector(state => state.products);
-  // const { products } = useSelector(state => state.products);
-  // console.log('products:', products);
-  // const { numPage, products } = useSelector(selectProductsData);
+  const filterBase = useSelector(state => state.filterBase);
 
   const { totalFound } = useSelector(state => state.products);
 
   const { numPage } = useSelector(state => state.numPage);
 
-  const totalPage = Math.ceil(totalFound / 4);
+  const totalPage = Math.ceil(totalFound / filterBase.limit);
 
   function handleChange(num) {
     sessionStorage.setItem('numPage', num);
     dispatch(changePage(num));
-    // dispatch(changePage(1));
-
-    // Coment this line
-    // dispatch(fetchProductsData({ category, numPage }));
   }
 
   return (
