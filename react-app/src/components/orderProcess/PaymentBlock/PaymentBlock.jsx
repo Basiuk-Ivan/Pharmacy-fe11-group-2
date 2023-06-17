@@ -8,8 +8,9 @@ const PaymentBlock = () => (
       container
       sx={{
         mt: '63px',
-        justifyContent: 'space-between'
       }}
+      justifyContent={{ xs: 'center', md: 'space-between' }}
+      marginTop={{ xs: '30px' }}
     >
       <Grid
         item
@@ -34,12 +35,13 @@ const PaymentBlock = () => (
           boxShadow: '0px 10px 40px rgba(11, 54, 29, 0.05)',
           backgroundColor: '#F7FAFB'
         }}
+        marginTop={{ xs: '30px' }}
       >
         <TotalAmountForm />
       </Grid>
     </Grid>
 
-    <Grid container>
+    <Grid container justifyContent={{ xs: 'center', md: 'flex-start' }}>
       <Grid item md={7} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button
           variant="contained"

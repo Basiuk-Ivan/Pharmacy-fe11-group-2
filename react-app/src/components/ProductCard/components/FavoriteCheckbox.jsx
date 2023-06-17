@@ -16,26 +16,29 @@ export const FavoriteCheckbox = ({ isInCart, productItem }) => {
 
   const [isFavorite, setIsFavorite] = useState(false);
 
+  useEffect(() => {
+    const favoriteString = localStorage.getItem('favouriteItems');
+
+    if (favoriteString) {
+      const favouriteItems = JSON.parse(favoriteString);
+
+      const isItemFavorite = favouriteItems.some(elem => elem.id === productItem.id);
+      setIsFavorite(isItemFavorite);
+    }
+  }, [productItem.id]);
+
   const handleFavoriteClick = event => {
     event.preventDefault();
     setIsFavorite(!isFavorite);
 
     if (!isFavorite) {
       addToFavouriteLocalStorage(productItem);
-      dispatch(addToFavouriteItems(productItem));
+      dispatch(addToFavouriteItems(productItem.id));
     } else {
       removeFromFavouriteLocalStorage(productItem);
       dispatch(deleteFromFavouriteItems(productItem.id));
     }
   };
-
-  useEffect(() => {
-    const productItemFavourite = localStorage.getItem(`favouriteItem_${productItem.id}`);
-    if (productItemFavourite) {
-      const { isFavourite } = JSON.parse(productItemFavourite);
-      setIsFavorite(isFavourite);
-    }
-  }, [productItem.id]);
 
   const favoriteIconStyle = favoriteIconStyles(isInCart);
 

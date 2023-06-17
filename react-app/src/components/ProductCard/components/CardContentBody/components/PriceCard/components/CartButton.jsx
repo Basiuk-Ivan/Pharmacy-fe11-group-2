@@ -4,42 +4,45 @@ import { IconButton } from '@mui/material';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import { addToCartLocalStorage } from '../../../../../../../utils/LocalStore/addToCartLocalStorage';
-
 import { removeFromCartLocalStorage } from '../../../../../../../utils/LocalStore/removeFromCartLocalStorage';
-import { addItem } from '../../../../../../../redux/slice/cartItems';
+import { addToCart, removeItem } from '../../../../../../../redux/slice/cartItems';
 import { cartStyles, iconButtonStyles } from '../../../../../style';
 
 export const CartButton = ({ productItem, isInCart }) => {
   const dispatch = useDispatch();
   const [isCart, setIsCart] = useState(false);
 
-  const handleAddtoCart = event => {
-    event.preventDefault();
-    setIsCart(!isCart);
-
+  const handleAddtoCart = () => {
     if (!isCart) {
-      dispatch(addItem(productItem));
+      dispatch(addToCart({ id: productItem.id }));
       addToCartLocalStorage(productItem);
     } else {
-      removeFromCartLocalStorage(productItem, dispatch);
+      dispatch(removeItem(productItem));
+      removeFromCartLocalStorage(productItem);
     }
+    setIsCart(!isCart);
+  };
+
+  const delItem = prod => {
+    dispatch(removeItem(prod));
+    removeFromCartLocalStorage(prod);
   };
 
   useEffect(() => {
-    const productItemCart = localStorage.getItem(`cartItem_${productItem.id}`);
+    const cartString = localStorage.getItem('cartItems');
 
-    if (productItemCart) {
-      // eslint-disable-next-line no-shadow
-      const isInCart = JSON.parse(productItemCart);
-      setIsCart(isInCart);
+    if (cartString) {
+      const cartItems = JSON.parse(cartString);
+      const isItemCart = cartItems.some(elem => elem.id === productItem.id);
+      setIsCart(isItemCart);
     }
-  }, [productItem.id]);
+  }, [isCart, productItem.id]);
 
   const cartStyle = cartStyles(isCart);
 
   if (isInCart) {
     return (
-      <IconButton sx={iconButtonStyles} onClick={handleAddtoCart}>
+      <IconButton sx={iconButtonStyles} onClick={() => delItem(productItem)}>
         <CloseIcon />
       </IconButton>
     );
