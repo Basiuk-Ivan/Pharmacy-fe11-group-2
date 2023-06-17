@@ -6,16 +6,6 @@ const TotalAmountForm = () => {
   const sumDiscount = useSelector(state => state.itemCards.sumDiscount);
   const sumWithDiscount = useSelector(state => state.itemCards.sumWithDiscount);
 
-  const totalAmount = () => {
-    let total = 0;
-    let itemDiscount = 0; // Изменено на let
-    productItemCart.forEach(element => {
-      total += element.price;
-      itemDiscount += element.discount; // Изменено на itemDiscount
-    });
-    return { total, itemDiscount }; // Возвращаем объект с обоими значениями
-  };
-
 
   return (
     <Container>

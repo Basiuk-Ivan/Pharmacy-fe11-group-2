@@ -21,8 +21,8 @@ const OrderList = () => {
 
           const { prods } = await response.json();
           const combinedArray = productItemCart.map(item1 => {
-            const item2 = prods.find(item2 => item2.id === item1.id);
-            return { ...item1, ...item2, quantity: item1.quantity };
+            const arr2 = prods.find(item2 => item2.id === item1.id);
+            return { ...item1, ...arr2, quantity: item1.quantity };
           });
 
           setProducts(combinedArray);
