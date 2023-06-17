@@ -4,8 +4,9 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState: {
     items: JSON.parse(localStorage.getItem('cartItems')) || [],
-    sum: 0,
-
+    cartSumWithoutDiscount: 0,
+    sumDiscount: 0,
+    sumWithDiscount: 0,
   },
   reducers: {
     addToCart: (state, action) => {
@@ -40,9 +41,14 @@ const cartSlice = createSlice({
         state.items = state.items.filter(item => item.id !== action.payload.id);
       }
     },
+    setSum: (state, action) => {
+      state.cartSumWithoutDiscount = action.payload.cartSumWithoutDiscount;
+      state.sumDiscount = action.payload.sumDiscount;
+      state.sumWithDiscount = action.payload.sumWithDiscount;
+    },
   }
 });
 
-export const { addToCart, addItem, removeItem, removeFromCart } = cartSlice.actions;
+export const { addToCart, addItem, removeItem, removeFromCart, setSum } = cartSlice.actions;
 
 export default cartSlice.reducer;

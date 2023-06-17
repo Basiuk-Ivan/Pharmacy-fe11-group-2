@@ -2,19 +2,9 @@ import { Table, TableBody, TableCell, TableRow, Typography, Container } from '@m
 import { useSelector } from 'react-redux';
 
 const TotalAmountForm = () => {
-  const productItemCart = useSelector(state => state.itemCards.items);
 
-  const totalAmount = () => {
-    let total = 0;
-    let itemDiscount = 0; // Изменено на let
-    productItemCart.forEach(element => {
-      total += element.price;
-      itemDiscount += element.discount; // Изменено на itemDiscount
-    });
-    return { total, itemDiscount }; // Возвращаем объект с обоими значениями
-  };
-
-  const { total, itemDiscount } = totalAmount(); // Деструктурируем значения из функции
+  const sumDiscount = useSelector(state => state.itemCards.sumDiscount);
+  const sumWithDiscount = useSelector(state => state.itemCards.sumWithDiscount);
 
   return (
     <Container>
@@ -27,7 +17,7 @@ const TotalAmountForm = () => {
           </TableRow>
           <TableRow>
             <TableCell>Знижка</TableCell>
-            <TableCell>0 грн</TableCell>
+            <TableCell>{sumDiscount}</TableCell>
           </TableRow>
           <TableRow
             sx={{
@@ -35,13 +25,13 @@ const TotalAmountForm = () => {
             }}
           >
             <TableCell>Без урахування доставки</TableCell>
-            <TableCell>{`${totalAmount()} грн.`}
+            <TableCell>{sumWithDiscount} грн.
             </TableCell>
           </TableRow>
         </TableBody>
       </Table>
       <Typography sx={{ textAlign: 'end', fontWeight: 700 }}>
-        Загальна сума: {total - itemDiscount} грн.
+        Загальна сума: {sumWithDiscount} грн.
       </Typography>
     </Container>
   );
