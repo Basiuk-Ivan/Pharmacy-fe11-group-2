@@ -45,7 +45,7 @@ import {
   pregnant,
   children,
   minPrice,
-  maxPrice
+  maxPrice, reset
 } from '../../../redux/slice/filterBaseSlice';
 import { fetchProductsData } from '../../../redux/slice/productsSlice';
 import RequestString from '../RequestString';
@@ -59,6 +59,7 @@ function Filter() {
   const currentCategory = location.pathname.slice(1);
   const [checkedCountry, setCheckedCountry] = useState(Country);
   const [checkedForm, setCheckedForm] = useState(Form);
+  const [clearFilter, setClearFilter] = useState(true);
   // const [checkedRecept, setCheckedRecept] = useState({ title: 'Без рецепта',
   //   checked: false });
   // const [checkedPregnant, setCheckedPregnant] = useState({ title: 'Дозволено вагітним', checked: false });
@@ -68,13 +69,20 @@ function Filter() {
   useEffect(() => {
     setCheckedCountry(Country);
     setCheckedForm(Form);
+    dispatch(minPrice(''));
+    dispatch(maxPrice(''));
     // setCheckedRecept({ title: 'Без рецепта', checked: false });
     // setCheckedPregnant({ title: 'Дозволено вагітним', checked: false });
     // setCheckedChildren({ title: 'Дозволено дітям', checked: false });
-  }, [currentCategory]);
+  }, [currentCategory, clearFilter, dispatch]);
 
   function receiveGoods() {
     dispatch(fetchProductsData(RequestString(filterBase, numPage)));
+  }
+
+  function cleaningFilter() {
+    setClearFilter(prevState => !prevState);
+    dispatch(reset());
   }
 
   const changeManufacturer = event => {
@@ -146,6 +154,7 @@ function Filter() {
                 label="Ціна від"
                 variant="outlined"
                 size="small"
+                value={filterBase.priceMin}
               />
               { }
               <TextField
@@ -156,6 +165,7 @@ function Filter() {
                 label="Ціна до"
                 variant="outlined"
                 size="small"
+                value={filterBase.priceMax}
               />
             </Box>
             {/* <FilterSlider /> */}
@@ -258,7 +268,8 @@ function Filter() {
           <Button variant="contained" sx={showButtonStyle} onClick={receiveGoods}>
             Показати
           </Button>
-          <Button variant="outlined" sx={resetButtonStyle}>
+          {/* eslint-disable-next-line react/jsx-no-bind */}
+          <Button variant="outlined" sx={resetButtonStyle} onClick={cleaningFilter}>
             Скинути
           </Button>
         </Box>
