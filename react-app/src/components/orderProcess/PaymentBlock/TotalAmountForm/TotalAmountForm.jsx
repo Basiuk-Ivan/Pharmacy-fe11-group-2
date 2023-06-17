@@ -6,31 +6,22 @@ const TotalAmountForm = () => {
 
   const totalAmount = () => {
     let total = 0;
+    let itemDiscount = 0; // Изменено на let
     productItemCart.forEach(element => {
       total += element.price;
+      itemDiscount += element.discount; // Изменено на itemDiscount
     });
-    return total;
+    return { total, itemDiscount }; // Возвращаем объект с обоими значениями
   };
+
+  const { total, itemDiscount } = totalAmount(); // Деструктурируем значения из функции
 
   return (
     <Container>
-      <Table
-        sx={{
-          mb: '40px'
-        }}
-      >
-        <TableBody sx={{}}>
+      <Table sx={{ mb: '40px' }}>
+        <TableBody>
           <TableRow>
-            <TableCell
-              colSpan={2}
-              sx={{
-                backgroundColor: 'white',
-                fontSize: '24px',
-                fontWeight: 700,
-                fontFamily: 'Raleway, sans-serif',
-                color: '#4F4F4F'
-              }}
-            >
+            <TableCell colSpan={2} sx={{ backgroundColor: 'white', fontSize: '24px', fontWeight: 700, fontFamily: 'Raleway, sans-serif', color: '#4F4F4F' }}>
               Загальна сума
             </TableCell>
           </TableRow>
@@ -44,17 +35,13 @@ const TotalAmountForm = () => {
             }}
           >
             <TableCell>Без урахування доставки</TableCell>
-            <TableCell>{`${totalAmount()} грн.`}</TableCell>
+            <TableCell>{`${totalAmount()} грн.`}
+            </TableCell>
           </TableRow>
         </TableBody>
       </Table>
-      <Typography
-        sx={{
-          textAlign: 'end',
-          fontWeight: 700
-        }}
-      >
-        `Загальна сума: {totalAmount()} грн.`
+      <Typography sx={{ textAlign: 'end', fontWeight: 700 }}>
+        Загальна сума: {total - itemDiscount} грн.
       </Typography>
     </Container>
   );
