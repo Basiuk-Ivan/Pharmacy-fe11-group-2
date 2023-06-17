@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 
 const TotalAmountForm = () => {
   const productItemCart = useSelector(state => state.itemCards.items);
-  const cartSumWithoutDiscount = useSelector(state => state.itemCards.cartSumWithoutDiscount);
   const sumDiscount = useSelector(state => state.itemCards.sumDiscount);
   const sumWithDiscount = useSelector(state => state.itemCards.sumWithDiscount);
 
@@ -17,7 +16,6 @@ const TotalAmountForm = () => {
     return { total, itemDiscount }; // Возвращаем объект с обоими значениями
   };
 
-  const { total, itemDiscount } = totalAmount(); // Деструктурируем значения из функции
 
   return (
     <Container>

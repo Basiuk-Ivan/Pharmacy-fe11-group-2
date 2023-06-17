@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Box } from '@mui/system';
-import {Typography, IconButton, Skeleton, Stack} from '@mui/material';
+import { Typography, IconButton, Skeleton, Stack } from '@mui/material';
 import DeleteOutlineTwoToneIcon from '@mui/icons-material/DeleteOutlineTwoTone';
 import IconBreadcrumbs from './Breadcrums';
 import ProductCard from '../../components/ProductCard';
@@ -23,7 +23,7 @@ import {
 
 import './style/CartStyles.scss';
 import { removeAllFromCart } from '../../utils/LocalStore/removeAllFromCart';
-import {countSum} from "../../utils/ActionsWithProduct/countSum";
+import { countSum } from '../../utils/ActionsWithProduct/countSum';
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
@@ -38,7 +38,6 @@ const Cart = () => {
   // const generalPrice = products.reduce((acum, product) => acum + product.price, 0);
   // const discount = products.reduce((acum, product) => acum + product.discount, 0);
   // const totalValue = generalPrice - discount;
-
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -55,8 +54,6 @@ const Cart = () => {
           const cartIds = productItemCart.map(item => item.id);
           const url = `http://localhost:3004/api/product/?_id=${cartIds}`;
           const response = await fetch(url);
-
-
 
           if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -98,33 +95,34 @@ const Cart = () => {
       <IconBreadcrumbs />
 
       <ContainerBox>
-        {/* eslint-disable-next-line no-nested-ternary */}
+        { }
         {showSkeleton ? (
-                <Stack direction="column" spacing={2}>
-                  <Skeleton variant="rectangular" width={270} height={400} />
-                </Stack>
-            ) :
+          <Stack direction="column" spacing={2}>
+            <Skeleton variant="rectangular" width={270} height={400} />
+          </Stack>
+        )
+          : (
             <Box>
-          <FormBox>
-            <FormTitle>Ваше Замовлення</FormTitle>
-            <SaleBox>
-              <FormText>Знижка </FormText>
-              <FormText>- {sumDiscount} грн</FormText>
-            </SaleBox>
-            <TotalBox>
-              <FormText>Без урахуваня знижки</FormText>
-              <FormText> {cartSumWithoutDiscount} грн</FormText>
-            </TotalBox>
+              <FormBox>
+                <FormTitle>Ваше Замовлення</FormTitle>
+                <SaleBox>
+                  <FormText>Знижка </FormText>
+                  <FormText>- {sumDiscount} грн</FormText>
+                </SaleBox>
+                <TotalBox>
+                  <FormText>Без урахуваня знижки</FormText>
+                  <FormText> {cartSumWithoutDiscount} грн</FormText>
+                </TotalBox>
 
-            <PromoBox mt={2}>
-              <FormTitlePromo>Загальна сума: {sumWithDiscount} грн</FormTitlePromo>
-              <OrderButton>
-                <NavLink to="/orderprocess">Оформити замовлення</NavLink>
-              </OrderButton>
-            </PromoBox>
-          </FormBox>
-        </Box>
-        }
+                <PromoBox mt={2}>
+                  <FormTitlePromo>Загальна сума: {sumWithDiscount} грн</FormTitlePromo>
+                  <OrderButton>
+                    <NavLink to="/orderprocess">Оформити замовлення</NavLink>
+                  </OrderButton>
+                </PromoBox>
+              </FormBox>
+            </Box>
+          )}
         <CardBox>
           <HeaderBox>
             <Typography variant="h4" gutterBottom>
