@@ -27,7 +27,7 @@ export const mainCategoryStyle = {
 
 export const priceInputWrapperStyle = {
   display: 'flex',
-  margin: '10px 0 25px 0',
+  margin: '10px 0',
   gap: '10px'
 };
 

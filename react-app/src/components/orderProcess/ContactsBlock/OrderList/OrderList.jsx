@@ -1,29 +1,31 @@
 import { useEffect, useState } from 'react';
 import { Typography, Container, Grid } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { roundPrice } from '../../../../utils/ActionsWithProduct/roundPrice';
 
 const OrderList = () => {
   const [products, setProducts] = useState([]);
+  const productItemCart = useSelector(state => state.itemCards.items);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const cartString = localStorage.getItem('cartItems');
+        if (productItemCart.length > 0) {
+          const cartIds = productItemCart.map(item => item.id);
+          const url = `http://localhost:3004/api/product/?_id=${cartIds}`;
+          const response = await fetch(url);
 
-        if (cartString) {
-          const cartItems = JSON.parse(cartString);
-
-          if (cartItems.length > 0) {
-            const cartIds = cartItems.map(item => item.id);
-            const url = `http://localhost:3004/api/product/?_id=${cartIds}`;
-            const response = await fetch(url);
-
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-
-            const { data } = await response.json();
-            setProducts(data);
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
           }
+
+          const { data } = await response.json();
+          const combinedArray = productItemCart.map(item1 => {
+            const arr2 = data.find(item2 => item2.id === item1.id);
+            return { ...item1, ...arr2, quantity: item1.quantity };
+          });
+
+          setProducts(combinedArray);
         }
       } catch (error) {
         // eslint-disable-next-line no-console
@@ -31,8 +33,7 @@ const OrderList = () => {
       }
     };
     fetchProducts();
-  }, []);
-
+  }, [productItemCart]);
   return (
     <Container disableGutters>
       <Typography
@@ -48,22 +49,36 @@ const OrderList = () => {
         Ваше замовлення
       </Typography>
       <Grid container sx={{ overflowY: 'auto', maxHeight: '300px' }}>
-        {products.map(el => (
-          <Grid container key={el.id} alignItems="center">
-            <Grid item md={3}>
-              <img src={`${el.img[0]}`} width="70px" height="60px" alt="" />
+        {products.map(el => {
+          const currentPrice = roundPrice(el) * el.quantity;
+          return (
+            <Grid container key={el.id} alignItems="center">
+              <Grid item md={3}>
+                <img src={`${el.img[0]}`} width="70px" height="60px" alt="" />
+              </Grid>
+              <Grid item md={5}>
+                <Typography sx={{ textAlign: 'left' }}>{`${el.name}`}</Typography>
+              </Grid>
+              <Grid item md={1}>
+                <Typography
+                  sx={{
+                    textAlign: 'center',
+                    borderRadius: '50px',
+                    padding: '2px',
+                    backgroundColor: '#2fd3ae'
+                  }}
+                >
+                  {`${el.quantity}`}
+                </Typography>
+              </Grid>
+              <Grid item md={3}>
+                <Typography sx={{ textAlign: 'center' }}>{`${currentPrice} грн.`}</Typography>
+              </Grid>
             </Grid>
-            <Grid item md={6}>
-              <Typography sx={{ textAlign: 'left' }}>{`${el.name}`}</Typography>
-            </Grid>
-            <Grid item md={3}>
-              <Typography sx={{ textAlign: 'center' }}>{`${el.price} грн.`}</Typography>
-            </Grid>
-          </Grid>
-        ))}
+          );
+        })}
       </Grid>
     </Container>
   );
 };
-
 export default OrderList;

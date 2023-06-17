@@ -3,78 +3,47 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 
-import {
-  Box,
-  TextField,
-  Typography,
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
-  Button,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails
-} from '@mui/material';
+import { Box, TextField, Typography, FormGroup, FormControlLabel, Checkbox, Button, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import PregnantWomanIcon from '@mui/icons-material/PregnantWoman';
 import BabyChangingStationIcon from '@mui/icons-material/BabyChangingStation';
-import { Country, Form } from './FilterData/FilterData';
 
-// import FilterSlider from './FilterSlider/FilterSlider';
-import {
-  buttonWrapperStyle,
-  formCheckboxStyle,
-  filterWrapperStyle,
-  formGroupCheckStyle,
-  formGroupStyle,
-  mainCategoryStyle,
-  marginStyle,
-  priceInputWrapperStyle,
-  titleCategoryStyle,
-  resetButtonStyle,
-  showButtonStyle
-} from './style';
-
-import {
-  addManufacture,
-  removeManufacture,
-  addDosageForm,
-  removeDosageForm,
-  recipe,
-  pregnant,
-  children,
-  minPrice,
-  maxPrice
-} from '../../../redux/slice/filterBaseSlice';
-import { fetchProductsData } from '../../../redux/slice/productsSlice';
-import RequestString from '../RequestString';
+import { changePage } from '../../../redux/slice/numPageSlice';
 import { theme } from '../../../tools/muiTheme';
+import RequestString from '../RequestString';
+import { fetchProductsData } from '../../../redux/slice/productsSlice';
+import { Country, Form } from './FilterData/FilterData';
+// import FilterSlider from './FilterSlider/FilterSlider';
+import { buttonWrapperStyle, formCheckboxStyle, filterWrapperStyle, formGroupCheckStyle, formGroupStyle, mainCategoryStyle, marginStyle, priceInputWrapperStyle, titleCategoryStyle, resetButtonStyle, showButtonStyle } from './style';
+
+import { addManufacture, removeManufacture, addDosageForm, removeDosageForm, recipe, pregnant, children, minPrice, maxPrice, reset, mainCategory } from '../../../redux/slice/filterBaseSlice';
 
 function Filter() {
   const dispatch = useDispatch();
   const filterBase = useSelector(state => state.filterBase);
-  const { numPage } = useSelector(state => state.numPage);
   const location = useLocation();
   const currentCategory = location.pathname.slice(1);
   const [checkedCountry, setCheckedCountry] = useState(Country);
   const [checkedForm, setCheckedForm] = useState(Form);
-  // const [checkedRecept, setCheckedRecept] = useState({ title: 'Без рецепта',
-  //   checked: false });
-  // const [checkedPregnant, setCheckedPregnant] = useState({ title: 'Дозволено вагітним', checked: false });
-  // const [checkedChildren, setCheckedChildren] = useState({ title: 'Дозволено дітям',
-  //   checked: false });
+  const [clearFilter, setClearFilter] = useState(true);
 
   useEffect(() => {
-    setCheckedCountry(Country);
-    setCheckedForm(Form);
-    // setCheckedRecept({ title: 'Без рецепта', checked: false });
-    // setCheckedPregnant({ title: 'Дозволено вагітним', checked: false });
-    // setCheckedChildren({ title: 'Дозволено дітям', checked: false });
-  }, [currentCategory]);
+    dispatch(fetchProductsData(RequestString(filterBase, 1)));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [clearFilter]);
 
   function receiveGoods() {
-    dispatch(fetchProductsData(RequestString(filterBase, numPage)));
+    dispatch(fetchProductsData(RequestString(filterBase, 1)));
+  }
+
+  function cleaningFilter() {
+    setClearFilter(prevState => !prevState);
+    setCheckedCountry(Country);
+    setCheckedForm(Form);
+    dispatch(reset());
+    dispatch(changePage(1));
+    dispatch(mainCategory(currentCategory));
   }
 
   const changeManufacturer = event => {
@@ -98,17 +67,14 @@ function Filter() {
 
   const changeRecipe = () => {
     dispatch(recipe());
-    // setCheckedRecept(checkedRecept.checked = !checkedRecept.checked);
   };
 
   const changePregnant = () => {
     dispatch(pregnant());
-    // setCheckedPregnant(checkedPregnant.checked = !checkedPregnant.checked);
   };
 
   const changeChildren = () => {
     dispatch(children());
-    // setCheckedChildren(checkedChildren.checked = !checkedChildren.checked);
   };
 
   const changeMinPrice = event => {
@@ -146,6 +112,7 @@ function Filter() {
                 label="Ціна від"
                 variant="outlined"
                 size="small"
+                value={filterBase.priceMin}
               />
               { }
               <TextField
@@ -156,6 +123,7 @@ function Filter() {
                 label="Ціна до"
                 variant="outlined"
                 size="small"
+                value={filterBase.priceMax}
               />
             </Box>
             {/* <FilterSlider /> */}
@@ -217,6 +185,7 @@ function Filter() {
           <FormControlLabel
             sx={formCheckboxStyle}
             onChange={changeRecipe}
+            checked={filterBase.prescriptionLeave}
             control={(
               <Checkbox
                 icon={<ReceiptLongIcon fontSize="small" sx={{ marginRight: '5px' }} />}
@@ -229,6 +198,7 @@ function Filter() {
           { }
           <FormControlLabel
             onChange={changePregnant}
+            checked={filterBase.whoCanPregnant}
             sx={formCheckboxStyle}
             control={(
               <Checkbox
@@ -242,6 +212,7 @@ function Filter() {
           { }
           <FormControlLabel
             onChange={changeChildren}
+            checked={filterBase.whoCanChildren}
             sx={formCheckboxStyle}
             control={(
               <Checkbox
@@ -258,7 +229,8 @@ function Filter() {
           <Button variant="contained" sx={showButtonStyle} onClick={receiveGoods}>
             Показати
           </Button>
-          <Button variant="outlined" sx={resetButtonStyle}>
+          {/* eslint-disable-next-line react/jsx-no-bind */}
+          <Button variant="outlined" sx={resetButtonStyle} onClick={cleaningFilter}>
             Скинути
           </Button>
         </Box>

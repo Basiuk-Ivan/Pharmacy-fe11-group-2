@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Box } from '@mui/system';
-import { Typography, IconButton, Skeleton } from '@mui/material';
+import { Typography, IconButton, Skeleton, Stack } from '@mui/material';
 import DeleteOutlineTwoToneIcon from '@mui/icons-material/DeleteOutlineTwoTone';
 import IconBreadcrumbs from './Breadcrums';
 import ProductCard from '../../components/ProductCard';
-import { removeItem } from '../../redux/slice/cartItems';
+import { removeItem, setSum } from '../../redux/slice/cartItems';
 import {
   FormBox,
   FormTitle,
@@ -23,17 +23,21 @@ import {
 
 import './style/CartStyles.scss';
 import { removeAllFromCart } from '../../utils/LocalStore/removeAllFromCart';
+import { countSum } from '../../utils/ActionsWithProduct/countSum';
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
   const productItemCart = useSelector(state => state.itemCards.items);
+  const cartSumWithoutDiscount = useSelector(state => state.itemCards.cartSumWithoutDiscount);
+  const sumDiscount = useSelector(state => state.itemCards.sumDiscount);
+  const sumWithDiscount = useSelector(state => state.itemCards.sumWithDiscount);
   const [showSkeleton, setShowSkeleton] = useState(true);
+  const dispatch = useDispatch();
 
   const isInCart = true;
-  const generalPrice = products.reduce((acum, product) => acum + product.price, 0);
-  const discount = products.reduce((acum, product) => acum + product.discount, 0);
-  const totalValue = generalPrice - discount;
-  const dispatch = useDispatch();
+  // const generalPrice = products.reduce((acum, product) => acum + product.price, 0);
+  // const discount = products.reduce((acum, product) => acum + product.discount, 0);
+  // const totalValue = generalPrice - discount;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -57,6 +61,8 @@ const Cart = () => {
 
           const { data } = await response.json();
           setProducts(data);
+          const sumObj = countSum(productItemCart, data);
+          dispatch(setSum(sumObj));
         }
       } catch (error) {
         // eslint-disable-next-line no-console
@@ -73,6 +79,9 @@ const Cart = () => {
     });
 
     setProducts(updatedProducts);
+    const sumObj = countSum(productItemCart, updatedProducts);
+    dispatch(setSum(sumObj));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productItemCart]);
 
@@ -86,26 +95,33 @@ const Cart = () => {
       <IconBreadcrumbs />
 
       <ContainerBox>
-        <Box>
-          <FormBox>
-            <FormTitle>Ваше Замовлення</FormTitle>
-            <SaleBox>
-              <FormText>Знижка </FormText>
-              <FormText>- {discount}грн</FormText>
-            </SaleBox>
-            <TotalBox>
-              <FormText>Без урахуваня знижки</FormText>
-              <FormText> {generalPrice}грн</FormText>
-            </TotalBox>
+        {}
+        {showSkeleton ? (
+          <Stack direction="column" spacing={2}>
+            <Skeleton variant="rectangular" width={270} height={400} />
+          </Stack>
+        ) : (
+          <Box>
+            <FormBox>
+              <FormTitle>Ваше Замовлення</FormTitle>
+              <SaleBox>
+                <FormText>Знижка </FormText>
+                <FormText>- {sumDiscount} грн</FormText>
+              </SaleBox>
+              <TotalBox>
+                <FormText>Без урахуваня знижки</FormText>
+                <FormText> {cartSumWithoutDiscount} грн</FormText>
+              </TotalBox>
 
-            <PromoBox mt={2}>
-              <FormTitlePromo>Загальна сума: {totalValue} грн</FormTitlePromo>
-              <OrderButton>
-                <NavLink to="/orderprocess">Оформити замовлення</NavLink>
-              </OrderButton>
-            </PromoBox>
-          </FormBox>
-        </Box>
+              <PromoBox mt={2}>
+                <FormTitlePromo>Загальна сума: {sumWithDiscount} грн</FormTitlePromo>
+                <NavLink to="/orderprocess">
+                  <OrderButton>Оформити замовлення</OrderButton>
+                </NavLink>
+              </PromoBox>
+            </FormBox>
+          </Box>
+        )}
         <CardBox>
           <HeaderBox>
             <Typography variant="h4" gutterBottom>
