@@ -55,8 +55,8 @@ const Cart = () => {
             throw new Error('Network response was not ok');
           }
 
-          const { prods } = await response.json();
-          setProducts(prods);
+          const { data } = await response.json();
+          setProducts(data);
         }
       } catch (error) {
         // eslint-disable-next-line no-console

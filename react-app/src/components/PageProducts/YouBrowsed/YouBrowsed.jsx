@@ -25,9 +25,10 @@ function YouBrowsed() {
       _id: items.join(',')
     };
 
-    axios.get('http://localhost:3004/api/product', { params })
+    axios
+      .get('http://localhost:3004/api/product', { params })
       .then(response => {
-        const viewedProd = response.data.prods;
+        const viewedProd = response.data.data;
         setViewedProducts(viewedProd);
       })
       .catch(error => {
@@ -60,26 +61,14 @@ function YouBrowsed() {
       <Box id="youBrowsedTitleWrapper" sx={youBrowsedTitleWrapperStyle}>
         <Typography sx={titleStyle}>Ви переглядали</Typography>
         <Box id="youBrowsedTitleSlider" sx={youBrowsedTitleSliderStyle}>
-          <ArrowBackIosIcon
-            fontSize="small"
-            sx={{ cursor: 'pointer' }}
-            onClick={handlePreviousClick}
-          />
-          <ArrowForwardIosIcon
-            fontSize="small"
-            sx={{ cursor: 'pointer' }}
-            onClick={handleNextClick}
-          />
+          <ArrowBackIosIcon fontSize="small" sx={{ cursor: 'pointer' }} onClick={handlePreviousClick} />
+          <ArrowForwardIosIcon fontSize="small" sx={{ cursor: 'pointer' }} onClick={handleNextClick} />
         </Box>
       </Box>
 
       <Box id="cardsWrapper" sx={cardsWrapperStyle}>
         {displayedProducts.map(item => (
-          <Box
-            id="cardWrapper"
-            key={item.id}
-            sx={cardWrapperStyle}
-          >
+          <Box id="cardWrapper" key={item.id} sx={cardWrapperStyle}>
             <ProductCard productItem={item} isInCart={isInCart} />
           </Box>
         ))}

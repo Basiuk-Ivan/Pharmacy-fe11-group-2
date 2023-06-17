@@ -17,7 +17,7 @@ export const fetchProductsData = createAsyncThunk(
 
       const { totalFound } = data;
 
-      return { products: data.prods, totalFound };
+      return { products: data.data, totalFound };
     } catch (error) {
       return rejectWithValue(error.message);
     }

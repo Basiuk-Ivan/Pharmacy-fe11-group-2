@@ -61,21 +61,21 @@ const PromoMonth = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const url = 'http://localhost:3004/api/product';
+        const url = 'http://localhost:3004/api/product?promotionOfTheMonth=true';
         const response = await fetch(url);
 
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
 
-        const { prods } = await response.json();
+        const { data } = await response.json();
 
-        const promotionProducts = prods.filter(item => {
-          const discount = (item.discount / item.price) * 100;
-          return discount >= 5;
-        });
+        // const promotionProducts = prods.filter(item => {
+        //   const discount = (item.discount / item.price) * 100;
+        //   return discount >= 5;
+        // });
 
-        setProducts(promotionProducts);
+        setProducts(data);
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Error fetching products:', error);

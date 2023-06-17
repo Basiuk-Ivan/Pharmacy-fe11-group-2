@@ -26,8 +26,8 @@ const SearchActions = () => {
           throw new Error('Network response was not ok');
         }
 
-        const { prods } = await response.json();
-        setproducts(prods);
+        const { data } = await response.json();
+        setproducts(data);
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Error fetching data:', error);

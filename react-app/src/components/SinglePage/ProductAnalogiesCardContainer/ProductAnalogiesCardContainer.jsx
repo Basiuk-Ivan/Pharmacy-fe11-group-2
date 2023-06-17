@@ -31,9 +31,10 @@ const ProductAnalogiesCardContainer = ({ productItem }) => {
       const params = {
         analogs: item.analogs
       };
-      axios.get('http://localhost:3004/api/product', { params })
+      axios
+        .get('http://localhost:3004/api/product', { params })
         .then(response => {
-          const analogsProducts = response.data.prods;
+          const analogsProducts = response.data.data;
           setAnalogProducts(analogsProducts);
         })
         .catch(error => {

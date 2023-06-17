@@ -15,6 +15,7 @@ import { Delivery } from './pages/FooterPage/Delivery';
 import { Pay } from './pages/FooterPage/Pay';
 import { Agreement } from './pages/FooterPage/Agreement';
 import { EditorialPolicy } from './pages/FooterPage/EditorialPolicy';
+// import PromotionSlider from './components/PageHome/PromotionSlider';
 
 const App = () => (
   <ThemeProvider theme={theme}>
@@ -29,6 +30,7 @@ const App = () => (
         <Route path="/pay" element={<Pay />} />
         <Route path="/agreement" element={<Agreement />} />
         <Route path="/editorial-policy" element={<EditorialPolicy />} />
+        {/* <Route path="/:id" element={<ProductPage />} /> */}
         <Route path="/:category/:id" element={<ProductPage />} />
         <Route path="/orderprocess" element={<OrderProcess />} />
         <Route path="/cabinet" element={<Cabinet />} />

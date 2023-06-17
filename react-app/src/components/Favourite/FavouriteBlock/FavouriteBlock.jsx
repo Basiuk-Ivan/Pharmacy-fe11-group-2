@@ -45,9 +45,9 @@ const FavouriteBlock = () => {
               throw new Error('Network response was not ok');
             }
 
-            const { prods } = await response.json();
+            const { data } = await response.json();
 
-            setProducts(prods);
+            setProducts(data);
           }
         }
       } catch (error) {
