@@ -42,6 +42,7 @@ const SearchActions = () => {
           isFetchIdRef.current = setTimeout(() => setIsFetch(true), noItemsDelay);
         }
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Error fetching data:', error);
       }
     };
@@ -54,7 +55,7 @@ const SearchActions = () => {
       clearTimeout(timeoutIdRef.current);
       clearTimeout(isFetchIdRef.current);
     };
-  }, [text]);
+  }, [text, isFetch]);
 
   const handleInputChange = event => {
     clearTimeout(timeoutIdRef.current);
@@ -64,59 +65,60 @@ const SearchActions = () => {
   };
 
   return (
-      <Search>
-        <SearchIconWrapper>
-          <SearchIcon sx={searchIconStyle} />
-        </SearchIconWrapper>
-        <StyledInputBase
-            sx={inputStyles}
-            placeholder=" Пошук . . ."
-            inputProps={{ 'aria-label': 'search' }}
-            value={text}
-            onChange={handleInputChange}
-        />
+    <Search>
+      <SearchIconWrapper>
+        <SearchIcon sx={searchIconStyle} />
+      </SearchIconWrapper>
+      <StyledInputBase
+        sx={inputStyles}
+        placeholder=" Пошук . . ."
+        inputProps={{ 'aria-label': 'search' }}
+        value={text}
+        onChange={handleInputChange}
+      />
 
-        {text !== '' && (
-            <Box sx={searchBlockStyle}>
-              <Stack
-                  divider={<Divider orientation="horizontal" sx={{ color: 'black' }} flexItem />}
-                  sx={searchBlockInnerStyle}
-              >
-                {products.length > 0 ? (
-                    products.map(item => (
-                        <NavLink key={item.id} to={`/${item?.categories[0]}/${item?.id}`}>
-                          <Stack
-                              key={item.id}
-                              direction="row"
-                              justifyContent="flex-start"
-                              alignItems="center"
-                              spacing={1}
-                          >
-                            <ListItemIcon sx={listIconStyle}>
-                              <img
-                                  style={productImageStyle}
-                                  src={item?.img[0]}
-                                  alt="productImage"
-                              />
-                            </ListItemIcon>
-                            <Box sx={boxNameStyle}>{item.name}</Box>
-                          </Stack>
-                        </NavLink>
-                    ))
-                ) : isFetch ? (
-                    <Box sx={boxResultStyle}>За даним запитом нічого не знайдено. Уточніть свій запит.</Box>
-                ) : (
-                    <Box sx={boxResultStyle}>
-                      <CircularProgress color="success" />
-                    </Box>
-                )}
-              </Stack>
-            </Box>
-        )}
-        {text !== '' && (
-            <ClearIcon onClick={() => setText('')} sx={clearIconStyle} />
-        )}
-      </Search>
+      {text !== '' && (
+        <Box sx={searchBlockStyle}>
+          <Stack
+            divider={<Divider orientation="horizontal" sx={{ color: 'black' }} flexItem />}
+            sx={searchBlockInnerStyle}
+          >
+            {/* eslint-disable-next-line */}
+            {products.length > 0 ? (
+              products.map(item => (
+                <NavLink key={item.id} to={`/${item?.categories[0]}/${item?.id}`}>
+                  <Stack
+                    key={item.id}
+                    direction="row"
+                    justifyContent="flex-start"
+                    alignItems="center"
+                    spacing={1}
+                  >
+                    <ListItemIcon sx={listIconStyle}>
+                      <img
+                        style={productImageStyle}
+                        src={item?.img[0]}
+                        alt="productImage"
+                      />
+                    </ListItemIcon>
+                    <Box sx={boxNameStyle}>{item.name}</Box>
+                  </Stack>
+                </NavLink>
+              ))
+            ) : isFetch ? (
+              <Box sx={boxResultStyle}>За даним запитом нічого не знайдено. Уточніть свій запит.</Box>
+            ) : (
+              <Box sx={boxResultStyle}>
+                <CircularProgress color="success" />
+              </Box>
+            )}
+          </Stack>
+        </Box>
+      )}
+      {text !== '' && (
+        <ClearIcon onClick={() => setText('')} sx={clearIconStyle} />
+      )}
+    </Search>
   );
 };
 
