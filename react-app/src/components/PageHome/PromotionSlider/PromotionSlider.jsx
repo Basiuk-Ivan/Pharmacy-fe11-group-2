@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-// import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
@@ -27,11 +27,6 @@ const PromotionSlider = () => {
         }
 
         const { data } = await response.json();
-
-        // const promotionProducts = prods.filter(item => {
-        //   const discount = (item.discount / item.price) * 100;
-        //   return discount >= 5;
-        // });
 
         setProducts(data);
       } catch (error) {
@@ -79,9 +74,9 @@ const PromotionSlider = () => {
       >
         {productItems.map((product, index) => (
           <SwiperSlide key={index}>
-            {/* <NavLink to={`/${product.id}`}> */}
-            <ProductCard productItem={product} />
-            {/* </NavLink> */}
+            <NavLink to={`/${product?.categories[0]}/${product?.id}`}>
+              <ProductCard productItem={product} />
+            </NavLink>
           </SwiperSlide>
         ))}
       </Swiper>

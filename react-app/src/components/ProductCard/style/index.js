@@ -25,6 +25,17 @@ export const textForquantityStyles = {
   color: '#2FD3AE'
 };
 
+export const boxForImg = {
+  width: '220px',
+  height: '170px'
+};
+
+export const imgStyles = {
+  width: '100%',
+  height: '100%',
+  objectFit: 'contain'
+};
+
 export const ratingStyles = { fontSize: '18px' };
 
 export const wrappForDetailsStyles = isInCart => ({

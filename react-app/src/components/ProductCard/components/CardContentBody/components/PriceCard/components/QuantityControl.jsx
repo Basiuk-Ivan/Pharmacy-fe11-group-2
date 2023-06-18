@@ -39,7 +39,6 @@ export const QuantityControl = ({ productItem, isInCart }) => {
   }
 
   return (
-
     <Box sx={{ position: 'relative', mb: '14px' }}>
       <RemoveCircleIcon
         sx={{
@@ -50,14 +49,12 @@ export const QuantityControl = ({ productItem, isInCart }) => {
           color: '#d34747',
           cursor: 'pointer'
         }}
-        onClick={
-                    () => {
-                      if (quantity === 1) {
-                        return;
-                      }
-                      handleDecrement(productItem);
-                    }
-                }
+        onClick={() => {
+          if (quantity === 1) {
+            return;
+          }
+          handleDecrement(productItem);
+        }}
       />
       <Box
         sx={{
