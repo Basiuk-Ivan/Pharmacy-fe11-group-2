@@ -10,16 +10,11 @@ export const RatingCard = ({ productItem }) => {
   }, [productItem.ratingClick, productItem.ratingTotal]);
 
   return (
-    <Stack direction="row" sx={{ gap: '10px' }} alignItems="center">
+    <Stack direction="row" sx={{ gap: '10px', flexWrap: 'wrap' }} alignItems="center">
       <Typography variant="p" gutterBottom sx={textForquantityStyles}>
         {productItem?.quantity > 0 ? 'Є в наявності' : 'Товар відсутній'}
       </Typography>
-      <Rating
-        sx={ratingStyles}
-        name="read-only"
-        value={value}
-        readOnly
-      />
+      <Rating sx={ratingStyles} name="read-only" value={value} readOnly />
     </Stack>
   );
 };

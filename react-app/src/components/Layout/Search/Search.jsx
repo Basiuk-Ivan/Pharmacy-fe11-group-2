@@ -4,7 +4,11 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import { NavLink } from 'react-router-dom';
-import axios from 'axios';
+
+// import { Search, SearchIconWrapper, StyledInputBase, searchIconStyle, inputStyles } from './style';
+import { request } from '../../../tools/request';
+
+// import axios from 'axios';
 import {
   Search,
   SearchIconWrapper,
@@ -33,11 +37,16 @@ const SearchActions = () => {
 
     const fetchData = async () => {
       try {
-        const url = `http://localhost:3004/api/product?search=${text}`;
-        const response = await axios.get(url);
+        const { result } = await request({
+          url: '',
+          method: 'GET',
+          params: { search: text }
+        });
 
-        const { prods } = response.data;
-        setProducts(prods);
+        const { data } = result;
+
+        setProducts(data);
+
         if (!isFetch) {
           isFetchIdRef.current = setTimeout(() => setIsFetch(true), noItemsDelay);
         }
@@ -83,7 +92,6 @@ const SearchActions = () => {
             divider={<Divider orientation="horizontal" sx={{ color: 'black' }} flexItem />}
             sx={searchBlockInnerStyle}
           >
-            {/* eslint-disable-next-line */}
             {products.length > 0 ? (
               products.map(item => (
                 <NavLink key={item.id} to={`/${item?.categories[0]}/${item?.id}`}>
@@ -95,29 +103,25 @@ const SearchActions = () => {
                     spacing={1}
                   >
                     <ListItemIcon sx={listIconStyle}>
-                      <img
-                        style={productImageStyle}
-                        src={item?.img[0]}
-                        alt="productImage"
-                      />
+                      <img style={productImageStyle} src={item?.img[0]} alt="productImage" />
                     </ListItemIcon>
                     <Box sx={boxNameStyle}>{item.name}</Box>
                   </Stack>
                 </NavLink>
               ))
-            ) : isFetch ? (
-              <Box sx={boxResultStyle}>За даним запитом нічого не знайдено. Уточніть свій запит.</Box>
             ) : (
               <Box sx={boxResultStyle}>
-                <CircularProgress color="success" />
+                {isFetch ? (
+                  'За даним запитом нічого не знайдено. Уточніть свій запит.'
+                ) : (
+                  <CircularProgress color="success" />
+                )}
               </Box>
             )}
           </Stack>
         </Box>
       )}
-      {text !== '' && (
-        <ClearIcon onClick={() => setText('')} sx={clearIconStyle} />
-      )}
+      {text !== '' && <ClearIcon onClick={() => setText('')} sx={clearIconStyle} />}
     </Search>
   );
 };
