@@ -21,9 +21,10 @@ function YouBrowsed() {
         _id: items.join(',')
       };
 
-      axios.get('http://localhost:3004/api/product', { params })
+      axios
+        .get('http://localhost:3004/api/product', { params })
         .then(response => {
-          const viewedProd = response.data.prods;
+          const viewedProd = response.data.data;
           setViewedProducts(viewedProd);
         })
         .catch(error => {
@@ -36,7 +37,10 @@ function YouBrowsed() {
     getViewedProducts(viewedItems);
   }, [viewedItems]);
 
-  const displayedProducts = viewedItems.map(itemId => viewedProducts.find(product => product.id === itemId)).filter(Boolean).slice(0, 5);
+  const displayedProducts = viewedItems
+    .map(itemId => viewedProducts.find(product => product.id === itemId))
+    .filter(Boolean)
+    .slice(0, 5);
 
   return (
     <Box id="youBrowsed" sx={youBrowsedStyle}>
@@ -46,11 +50,7 @@ function YouBrowsed() {
 
       <Box id="cardsWrapper" sx={cardsWrapperStyle}>
         {displayedProducts.map(item => (
-          <Box
-            id="cardWrapper"
-            key={item.id}
-            sx={cardWrapperStyle}
-          >
+          <Box id="cardWrapper" key={item.id} sx={cardWrapperStyle}>
             <ProductCard productItem={item} isInCart={isInCart} />
           </Box>
         ))}

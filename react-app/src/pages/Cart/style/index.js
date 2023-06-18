@@ -8,11 +8,11 @@ export const ContainerBox = styled(Box)`
   gap: 20px;
   flex-direction: row-reverse;
   font-family: Roboto, sans-serif;
-  @media (max-width: 805px) {
+  @media (max-width: 888px) {
     display: flex;
     flex-direction: column-reverse;
     padding: 5%;
-  } ;
+  }
 `;
 export const CardBox = styled(Box)`
   display: flex;
@@ -60,9 +60,9 @@ export const FormBox = styled(Box)`
   flex-direction: column;
   align-items: center;
   border: 1px solid rgba(231, 233, 235, 1);
-  @media (max-width: 940px) {
+  @media (max-width: 1023px) {
     width: 100%;
-  } ;
+  }
 `;
 
 export const FormTitle = styled(Typography)`
@@ -74,6 +74,9 @@ export const FormTitle = styled(Typography)`
   align-items: center;
   padding: 20px;
   justify-content: flex-start;
+  @media (max-width: 1023px) {
+    font-size: 22px;
+  }
 `;
 export const FormTitlePromo = styled(Typography)`
   font-size: 24px;
@@ -83,6 +86,10 @@ export const FormTitlePromo = styled(Typography)`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+
+  @media (max-width: 1023px) {
+    font-size: 22px;
+  }
 `;
 
 export const FormText = styled(Typography)`
@@ -93,6 +100,10 @@ export const FormText = styled(Typography)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 1023px) {
+    font-size: 17px;
+  }
 `;
 
 export const OrderButton = styled(Button)`
@@ -106,9 +117,11 @@ export const OrderButton = styled(Button)`
   padding: 10px;
   color: white;
   background: #2fd3ae;
-  @media (max-width: 940px) {
+
+  @media (max-width: 1023px) {
     width: 100%;
-  } ;
+    font-size: 13px;
+  }
 `;
 export const SaleBox = styled(Box)`
   width: 100%;
@@ -138,6 +151,7 @@ export const HeaderBox = styled(Box)`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   //@media (max-width: 805px) {
   //  width: 100%;
   //} ;

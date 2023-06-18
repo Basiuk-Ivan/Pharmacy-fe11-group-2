@@ -10,7 +10,16 @@ const TotalAmountForm = () => {
       <Table sx={{ mb: '40px' }}>
         <TableBody>
           <TableRow>
-            <TableCell colSpan={2} sx={{ backgroundColor: 'white', fontSize: '24px', fontWeight: 700, fontFamily: 'Raleway, sans-serif', color: '#4F4F4F' }}>
+            <TableCell
+              colSpan={2}
+              sx={{
+                backgroundColor: 'white',
+                fontSize: '24px',
+                fontWeight: 700,
+                fontFamily: 'Raleway, sans-serif',
+                color: '#4F4F4F'
+              }}
+            >
               Загальна сума
             </TableCell>
           </TableRow>
@@ -24,8 +33,7 @@ const TotalAmountForm = () => {
             }}
           >
             <TableCell>Без урахування доставки</TableCell>
-            <TableCell>{sumWithDiscount} грн.
-            </TableCell>
+            <TableCell>{sumWithDiscount} грн.</TableCell>
           </TableRow>
         </TableBody>
       </Table>

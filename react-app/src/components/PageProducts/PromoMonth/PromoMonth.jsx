@@ -1,46 +1,4 @@
-// import { useSelector } from 'react-redux';
-
-// import { Box, Typography } from '@mui/material';
-// import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-// import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-// import ProductCard from '../../ProductCard/ProductCard';
-// import {
-//   cardsWrapperStyle,
-//   cardWrapperStyle,
-//   promoMonthStyle,
-//   promoMonthTitleSliderStyle,
-//   promoMonthTitleWrapperStyle,
-//   titleStyle
-// } from './style';
-
-// function PromoMonth() {
-//   const { products } = useSelector(state => state.products);
-//   const promoMonthCards = products.slice(0, 5);
-//   const isInCart = false;
-//   return (
-//     <Box id="promoMonth" sx={promoMonthStyle}>
-//       <Box id="promoMonthTitleWrapper" sx={promoMonthTitleWrapperStyle}>
-//         <Typography sx={titleStyle}>Акції місяця</Typography>
-//         <Box id="promoMonthTitleSlider" sx={promoMonthTitleSliderStyle}>
-//           <ArrowBackIosIcon fontSize="small" sx={{ cursor: 'pointer' }} />
-//           <ArrowForwardIosIcon fontSize="small" sx={{ cursor: 'pointer' }} />
-//         </Box>
-//       </Box>
-//       <Box id="cardsWrapper" sx={cardsWrapperStyle}>
-//         {promoMonthCards.map(item => (
-//           <Box id="cardWrapper" key={item.id} sx={cardWrapperStyle}>
-//             <ProductCard productItem={item} isInCart={isInCart} />
-//           </Box>
-//         ))}
-//       </Box>
-//     </Box>
-//   );
-// }
-
-// export default PromoMonth;
-
 import { useEffect, useState } from 'react';
-// import { NavLink } from 'react-router-dom';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
@@ -48,6 +6,7 @@ import ProductCard from '../../ProductCard';
 import { wrapperForPromotion, promotionStyles } from './style';
 import 'swiper/swiper-bundle.min.css';
 import './style/CustomSlider.scss';
+import { request } from '../../../tools/request';
 
 const PromoMonth = () => {
   const [products, setProducts] = useState([]);
@@ -61,21 +20,29 @@ const PromoMonth = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const url = 'http://localhost:3004/api/product';
-        const response = await fetch(url);
-
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-
-        const { prods } = await response.json();
-
-        const promotionProducts = prods.filter(item => {
-          const discount = (item.discount / item.price) * 100;
-          return discount >= 5;
+        const { result } = await request({
+          url: '',
+          method: 'GET',
+          params: { promotionOfTheMonth: true }
         });
 
-        setProducts(promotionProducts);
+        const { data } = result;
+
+        // const url = 'http://localhost:3004/api/product?promotionOfTheMonth=true';
+        // const response = await fetch(url);
+
+        // if (!response.ok) {
+        //   throw new Error('Network response was not ok');
+        // }
+
+        // const { data } = await response.json();
+
+        // const promotionProducts = prods.filter(item => {
+        //   const discount = (item.discount / item.price) * 100;
+        //   return discount >= 5;
+        // });
+
+        setProducts(data);
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Error fetching products:', error);
@@ -121,9 +88,7 @@ const PromoMonth = () => {
       >
         {productItems.map((product, index) => (
           <SwiperSlide key={index}>
-            {/* <NavLink to={`/product/${product.id}`}> */}
             <ProductCard productItem={product} />
-            {/* </NavLink> */}
           </SwiperSlide>
         ))}
       </Swiper>
