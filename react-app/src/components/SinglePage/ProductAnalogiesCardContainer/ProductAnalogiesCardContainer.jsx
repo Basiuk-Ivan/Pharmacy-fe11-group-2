@@ -44,7 +44,6 @@ const ProductAnalogiesCardContainer = ({ productItem }) => {
   };
   useEffect(() => {
     getAnalogsProducts(productItem);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productItem]);
 
   return (
