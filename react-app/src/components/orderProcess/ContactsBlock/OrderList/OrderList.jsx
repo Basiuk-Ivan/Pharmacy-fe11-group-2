@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Typography, Container, Grid } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { roundPrice } from '../../../../utils/ActionsWithProduct/roundPrice';
+import { request } from '../../../../tools/request';
 
 const OrderList = () => {
   const [products, setProducts] = useState([]);
@@ -11,15 +12,16 @@ const OrderList = () => {
     const fetchProducts = async () => {
       try {
         if (productItemCart.length > 0) {
-          const cartIds = productItemCart.map(item => item.id);
-          const url = `http://localhost:3004/api/product/?_id=${cartIds}`;
-          const response = await fetch(url);
+          const cartIds = productItemCart.map(item => item.id).join(',');
 
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
+          const { result } = await request({
+            url: '',
+            method: 'GET',
+            params: { _id: cartIds }
+          });
 
-          const { data } = await response.json();
+          const { data } = result;
+
           const combinedArray = productItemCart.map(item1 => {
             const arr2 = data.find(item2 => item2.id === item1.id);
             return { ...item1, ...arr2, quantity: item1.quantity };

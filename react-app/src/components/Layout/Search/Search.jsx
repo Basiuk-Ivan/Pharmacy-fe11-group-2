@@ -8,6 +8,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { Stack } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { Search, SearchIconWrapper, StyledInputBase, searchIconStyle, inputStyles } from './style';
+import { request } from '../../../tools/request';
 
 const SearchActions = () => {
   const [text, setText] = useState('');
@@ -19,14 +20,14 @@ const SearchActions = () => {
 
     const fetchData = async () => {
       try {
-        const url = `http://localhost:3004/api/product?search=${text}`;
-        const response = await fetch(url);
+        const { result } = await request({
+          url: '',
+          method: 'GET',
+          params: { search: text }
+        });
 
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
+        const { data } = result;
 
-        const { data } = await response.json();
         setproducts(data);
       } catch (error) {
         // eslint-disable-next-line no-console
@@ -80,51 +81,62 @@ const SearchActions = () => {
             divider={<Divider orientation="horizontal" sx={{ color: 'black' }} flexItem />}
             sx={{ maxWidth: 360, maxHeight: 310, overflowY: 'auto', minHeight: 100 }}
           >
-            {products.length > 0 ? products.map(item => (
-              <NavLink key={item.id} to={`/${item?.categories[0]}/${item?.id}`}>
-                <Stack
-                  key={item.id}
-                  direction="row"
-                  justifyContent="flex-start"
-                  alignItems="center"
-                  spacing={1}
-                >
-                  <ListItemIcon sx={{ width: { xs: '50px', sm: '70px' }, height: { xs: '70px', sm: '100px' } }}>
-                    <img
-                      style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-                      src={item?.img[0]}
-                      alt="productImage"
-                    />
-                  </ListItemIcon>
-                  <Box sx={{
-                    color: '#011d71',
-                    fontWeight: '500',
-                    fontFamily: 'Roboto, sans-serif',
-                    fontSize: { xs: '12px', sm: '14px' },
-                    pr: '2px'
-                  }}
-                  >{item.name}
-                  </Box>
-                </Stack>
-              </NavLink>
-            ))
-              : (
-                <Box sx={{ margin: 'auto',
+            {products.length > 0 ? (
+              products.map(item => (
+                <NavLink key={item.id} to={`/${item?.categories[0]}/${item?.id}`}>
+                  <Stack
+                    key={item.id}
+                    direction="row"
+                    justifyContent="flex-start"
+                    alignItems="center"
+                    spacing={1}
+                  >
+                    <ListItemIcon
+                      sx={{ width: { xs: '50px', sm: '70px' }, height: { xs: '70px', sm: '100px' } }}
+                    >
+                      <img
+                        style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                        src={item?.img[0]}
+                        alt="productImage"
+                      />
+                    </ListItemIcon>
+                    <Box
+                      sx={{
+                        color: '#011d71',
+                        fontWeight: '500',
+                        fontFamily: 'Roboto, sans-serif',
+                        fontSize: { xs: '12px', sm: '14px' },
+                        pr: '2px'
+                      }}
+                    >
+                      {item.name}
+                    </Box>
+                  </Stack>
+                </NavLink>
+              ))
+            ) : (
+              <Box
+                sx={{
+                  margin: 'auto',
                   fontFamily: 'Roboto, sans-serif',
                   textAlign: 'center',
                   fontSize: '16px',
-                  color: '#011d71' }}
-                >За даним запитом нічого не знайдено. Уточніть свій запит.
-                </Box>
-              )}
+                  color: '#011d71'
+                }}
+              >
+                За даним запитом нічого не знайдено. Уточніть свій запит.
+              </Box>
+            )}
           </Stack>
         </Box>
       )}
       {text !== '' && (
-      <ClearIcon
-        onClick={() => { setText(''); }}
-        sx={{ position: 'absolute', right: '4px', top: '8px', cursor: 'pointer', color: '#2fd3ae' }}
-      />
+        <ClearIcon
+          onClick={() => {
+            setText('');
+          }}
+          sx={{ position: 'absolute', right: '4px', top: '8px', cursor: 'pointer', color: '#2fd3ae' }}
+        />
       )}
     </Search>
   );

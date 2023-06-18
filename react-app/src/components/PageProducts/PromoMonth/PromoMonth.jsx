@@ -6,6 +6,7 @@ import ProductCard from '../../ProductCard';
 import { wrapperForPromotion, promotionStyles } from './style';
 import 'swiper/swiper-bundle.min.css';
 import './style/CustomSlider.scss';
+import { request } from '../../../tools/request';
 
 const PromoMonth = () => {
   const [products, setProducts] = useState([]);
@@ -19,14 +20,22 @@ const PromoMonth = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const url = 'http://localhost:3004/api/product?promotionOfTheMonth=true';
-        const response = await fetch(url);
+        const { result } = await request({
+          url: '',
+          method: 'GET',
+          params: { promotionOfTheMonth: true }
+        });
 
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
+        const { data } = result;
 
-        const { data } = await response.json();
+        // const url = 'http://localhost:3004/api/product?promotionOfTheMonth=true';
+        // const response = await fetch(url);
+
+        // if (!response.ok) {
+        //   throw new Error('Network response was not ok');
+        // }
+
+        // const { data } = await response.json();
 
         // const promotionProducts = prods.filter(item => {
         //   const discount = (item.discount / item.price) * 100;

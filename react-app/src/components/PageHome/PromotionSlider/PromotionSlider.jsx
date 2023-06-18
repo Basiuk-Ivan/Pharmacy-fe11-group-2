@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Typography, useMediaQuery, useTheme, Skeleton } from '@mui/material';
 import ProductCard from '../../ProductCard';
 import { wrapperForPromotion, promotionStyles } from './style';
 import 'swiper/swiper-bundle.min.css';
@@ -11,10 +11,19 @@ import './style/CustomSlider.scss';
 const PromotionSlider = () => {
   const [products, setProducts] = useState([]);
   const [slidesPerView, setslidesPerView] = useState(null);
+  const [showSkeleton, setShowSkeleton] = useState(true);
 
   const theme = useTheme();
   const isXs = useMediaQuery(theme.breakpoints.only('xs'));
   const isSm = useMediaQuery(theme.breakpoints.only('sm'));
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSkeleton(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -55,6 +64,8 @@ const PromotionSlider = () => {
 
   const productItems = randomIndexes.map(index => products[index]);
 
+  const isSlider = true;
+
   return (
     <Box>
       <Box sx={wrapperForPromotion}>
@@ -63,23 +74,35 @@ const PromotionSlider = () => {
         </Typography>
       </Box>
 
-      <Swiper
-        modules={[Navigation, Pagination, Scrollbar, A11y]}
-        spaceBetween={50}
-        slidesPerView={slidesPerView}
-        loop
-        navigation
-        pagination={{ clickable: true }}
-        className="product-analogies-slider-promotion"
-      >
-        {productItems.map((product, index) => (
-          <SwiperSlide key={index}>
-            <NavLink to={`/${product?.categories[0]}/${product?.id}`}>
-              <ProductCard productItem={product} />
-            </NavLink>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      {showSkeleton ? (
+        <>
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+        </>
+      ) : (
+        <Swiper
+          modules={[Navigation, Pagination, Scrollbar, A11y]}
+          spaceBetween={50}
+          slidesPerView={slidesPerView}
+          loop
+          navigation
+          pagination={{ clickable: true }}
+          className="product-analogies-slider-promotion"
+        >
+          {productItems.map((product, index) => (
+            <SwiperSlide key={index}>
+              <NavLink to={`/${product?.categories[0]}/${product?.id}`}>
+                <ProductCard productItem={product} isSlider={isSlider} />
+              </NavLink>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
     </Box>
   );
 };

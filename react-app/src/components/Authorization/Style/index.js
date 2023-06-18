@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Button, TextField } from '@mui/material';
 
-export const style = {
+export const styles = {
   position: 'absolute',
   top: '50%',
   left: '50%',
