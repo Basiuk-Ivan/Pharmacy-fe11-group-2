@@ -27,12 +27,12 @@ const BreadProduct = ({ category, name }) => {
     spasm: 'Від спазму',
     migraine: 'Від болю при мігрені',
     backPain: 'Від болю у спині',
-    sedatives:'Седативні (заспокійливі)',
+    sedatives: 'Седативні (заспокійливі)',
     antidepressants: 'Антидепресанти',
-    hypertension:'Гіпертонія',
-    bloodThinning:'Для розрідження крові',
-    thrombosis:'Тромбоз',
-    varicosity:'Варикоз'
+    hypertension: 'Гіпертонія',
+    bloodThinning: 'Для розрідження крові',
+    thrombosis: 'Тромбоз',
+    varicosity: 'Варикоз'
   };
 
   const finalData = values[category];
