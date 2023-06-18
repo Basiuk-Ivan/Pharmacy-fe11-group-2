@@ -88,35 +88,6 @@ const SearchActions = () => {
 
       {text !== '' && (
         <Box sx={searchBlockStyle}>
-          {/* <Stack
-            divider={<Divider orientation="horizontal" sx={{ color: 'black' }} flexItem />}
-            sx={searchBlockInnerStyle}
-          >
-            {products.length > 0 ? (
-              products.map(item => (
-                <NavLink key={item.id} to={`/${item?.categories[0]}/${item?.id}`}>
-                  <Stack
-                    key={item.id}
-                    direction="row"
-                    justifyContent="flex-start"
-                    alignItems="center"
-                    spacing={1}
-                  >
-                    <ListItemIcon sx={listIconStyle}>
-                      <img style={productImageStyle} src={item?.img[0]} alt="productImage" />
-                    </ListItemIcon>
-                    <Box sx={boxNameStyle}>{item.name}</Box>
-                  </Stack>
-                </NavLink>
-              ))
-            ) : isFetch ? (
-              <Box sx={boxResultStyle}>За даним запитом нічого не знайдено. Уточніть свій запит.</Box>
-            ) : (
-              <Box sx={boxResultStyle}>
-                <CircularProgress color="success" />
-              </Box>
-            )}
-          </Stack> */}
           <Stack
             divider={<Divider orientation="horizontal" sx={{ color: 'black' }} flexItem />}
             sx={searchBlockInnerStyle}
