@@ -13,17 +13,16 @@ export const FeedKyiv = () => (
     <Box sx={feedBackItemStar}>
       <Box>
         <Typography fontFamily="Roboto" component="span" sx={feedBackName}>
-          Ліана, Київ,
+          Олег, Київ,
         </Typography>
         <Typography fontFamily="Roboto" component="span" sx={feedBackDate}>
-          25 Июля
+          2 червня
         </Typography>
       </Box>
       <Rating name="half-rating" defaultValue={5} sx={StarRateItem} readOnly />
     </Box>
     <Typography fontFamily="Roboto" component="p" sx={feedBackItemText}>
-      По недоразумению и своей невнимательности, купила не тот товар, разобрались и обменяли без лишней
-      болтовни и проволочек. Низкий поклон и спасибо! Ваш, теперь. постоянный покупатель.
+      Приємний кваліфікований персонал, готовий завжди допомогти. Нещодавно необхідно було замовити рідкісний препарат, якій майже відсутній в Україні. Все було чудово організовано і на третій день я вже отримав цей препарат. Щиро вдячний.
     </Typography>
   </Box>
 );
