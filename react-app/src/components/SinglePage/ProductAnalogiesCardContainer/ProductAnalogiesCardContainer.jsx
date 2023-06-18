@@ -44,6 +44,7 @@ const ProductAnalogiesCardContainer = ({ productItem }) => {
   };
   useEffect(() => {
     getAnalogsProducts(productItem);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productItem]);
 
   return (
@@ -68,12 +69,12 @@ const ProductAnalogiesCardContainer = ({ productItem }) => {
             .filter(element => element.id !== productItem.id)
             .map(element => (
               <SwiperSlide key={element.id}>
-                <ProductCard productItem={element} isInCart={isInCart} />
+                <ProductCard productItem={element} isInCart={isInCart} parent={productItem.id} />
               </SwiperSlide>
             ))}
         </Swiper>
       ) : (
-        <Typography variant="body1">No analog products found.</Typography>
+        <Typography variant="body1">Наразі аналоги відсутні.</Typography>
       )}
     </Box>
   );
