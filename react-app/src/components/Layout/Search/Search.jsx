@@ -1,49 +1,65 @@
-import React, { useState, useEffect } from 'react';
-import Box from '@mui/material/Box';
+import { useState, useEffect } from 'react';
+import { CircularProgress, Stack, Box, Divider } from '@mui/material';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
-
-import { Stack } from '@mui/material';
 import { NavLink } from 'react-router-dom';
-import { Search, SearchIconWrapper, StyledInputBase, searchIconStyle, inputStyles } from './style';
+import {
+  Search,
+  SearchIconWrapper,
+  StyledInputBase,
+  searchIconStyle,
+  inputStyles,
+  searchBlockStyle,
+  clearIconStyle,
+  boxResultStyle,
+  boxNameStyle,
+  productImageStyle,
+  listIconStyle,
+  searchBlockInnerStyle
+} from './style';
+import axios from 'axios';
 
 const SearchActions = () => {
   const [text, setText] = useState('');
-  const [products, setproducts] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [isFetch, setIsFetch] = useState(false);
+  let timeoutId;
+  let isFetchId;
 
   useEffect(() => {
-    const delay = 300;
-    let timeoutId;
+    const responseDelay = 300;
+    const noItemsDelay = 200;
 
     const fetchData = async () => {
       try {
         const url = `http://localhost:3004/api/product?search=${text}`;
-        const response = await fetch(url);
+        const response = await axios.get(url);
 
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+        const prods = response.data.prods;
+        setProducts(prods);
+        if (!isFetch) {
+          isFetchId = setTimeout(() => setIsFetch(true), noItemsDelay);
         }
-
-        const { prods } = await response.json();
-        setproducts(prods);
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.error('Error fetching data:', error);
       }
     };
 
     if (text !== '') {
-      timeoutId = setTimeout(fetchData, delay);
+      timeoutId = setTimeout(fetchData, responseDelay);
     }
 
     return () => {
       clearTimeout(timeoutId);
+      clearTimeout(isFetchId);
     };
   }, [text]);
 
   const handleInputChange = event => {
+    clearTimeout(timeoutId);
+    clearTimeout(isFetchId);
+    setIsFetch(false);
     setText(event.target.value);
   };
 
@@ -54,7 +70,7 @@ const SearchActions = () => {
       </SearchIconWrapper>
       <StyledInputBase
         sx={inputStyles}
-        placeholder="Search…"
+        placeholder=" Пошук . . ."
         inputProps={{ 'aria-label': 'search' }}
         value={text}
         onChange={handleInputChange}
@@ -62,25 +78,13 @@ const SearchActions = () => {
 
       {text !== '' && (
         <Box
-          sx={{
-            position: 'absolute',
-            top: '60px',
-            left: '50%',
-            p: '5px',
-            borderRadius: '10px',
-            transform: 'translateX(-50%)',
-            zIndex: '2',
-            width: { xs: '250px', sm: '310px' },
-            maxWidth: 360,
-            bgcolor: '#eaeaea',
-            maxHeight: 320
-          }}
+          sx={searchBlockStyle}
         >
           <Stack
             divider={<Divider orientation="horizontal" sx={{ color: 'black' }} flexItem />}
-            sx={{ maxWidth: 360, maxHeight: 310, overflowY: 'auto', minHeight: 100 }}
+            sx={searchBlockInnerStyle}
           >
-            {products.length > 0 ? products.map(item => (
+            {(products.length > 0) ? products.map(item => (
               <NavLink key={item.id} to={`/${item?.categories[0]}/${item?.id}`}>
                 <Stack
                   key={item.id}
@@ -89,41 +93,32 @@ const SearchActions = () => {
                   alignItems="center"
                   spacing={1}
                 >
-                  <ListItemIcon sx={{ width: { xs: '50px', sm: '70px' }, height: { xs: '70px', sm: '100px' } }}>
+                  <ListItemIcon sx={listIconStyle}>
                     <img
-                      style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                      style={productImageStyle}
                       src={item?.img[0]}
                       alt="productImage"
                     />
                   </ListItemIcon>
-                  <Box sx={{
-                    color: '#011d71',
-                    fontWeight: '500',
-                    fontFamily: 'Roboto, sans-serif',
-                    fontSize: { xs: '12px', sm: '14px' },
-                    pr: '2px'
-                  }}
-                  >{item.name}
-                  </Box>
+                  <Box sx={boxNameStyle}>{item.name}</Box>
                 </Stack>
               </NavLink>
             ))
-              : (
-                <Box sx={{ margin: 'auto',
-                  fontFamily: 'Roboto, sans-serif',
-                  textAlign: 'center',
-                  fontSize: '16px',
-                  color: '#011d71' }}
-                >За даним запитом нічого не знайдено. Уточніть свій запит.
+              : (isFetch ? (
+                <Box sx={boxResultStyle}>За даним запитом нічого не знайдено. Уточніть свій запит.
                 </Box>
-              )}
+              ) : (
+                <Box sx={boxResultStyle}>
+                  <CircularProgress color="success" />
+                </Box>
+              ))}
           </Stack>
         </Box>
       )}
       {text !== '' && (
       <ClearIcon
         onClick={() => { setText(''); }}
-        sx={{ position: 'absolute', right: '4px', top: '8px', cursor: 'pointer', color: '#2fd3ae' }}
+        sx={clearIconStyle}
       />
       )}
     </Search>
