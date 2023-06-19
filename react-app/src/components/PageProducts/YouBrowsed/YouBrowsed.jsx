@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 import ProductCard from '../../ProductCard/ProductCard';
 import {
   cardsWrapperStyle,
@@ -14,6 +15,7 @@ function YouBrowsed() {
   const isInCart = false;
   const viewedItems = useMemo(() => JSON.parse(localStorage.getItem('viewedProducts')) || [], []);
   const [viewedProducts, setViewedProducts] = useState([]);
+  const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
 
   const getViewedProducts = items => {
     if (items.length > 0) {
@@ -35,7 +37,7 @@ function YouBrowsed() {
 
   useEffect(() => {
     getViewedProducts(viewedItems);
-  }, [viewedItems]);
+  }, [viewedItems, favoriteItems]);
 
   const displayedProducts = viewedItems
     .map(itemId => viewedProducts.find(product => product.id === itemId))
