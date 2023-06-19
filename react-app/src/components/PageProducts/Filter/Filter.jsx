@@ -31,7 +31,6 @@ function Filter() {
 
   useEffect(() => {
     dispatch(fetchProductsData(RequestString(filterBase, 1)));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [clearFilter]);
 
   function receiveGoods() {
@@ -53,21 +52,20 @@ function Filter() {
 
   const changeManufacturer = event => {
     const { value, checked } = event.target;
-    // eslint-disable-next-line no-unused-expressions
-    checked ? dispatch(addManufacture(value))
-      : dispatch(removeManufacture(value));
+    checked ? dispatch(addManufacture(value)) : dispatch(removeManufacture(value));
 
-    setCheckedCountry(prevChecked => prevChecked.map(item => (item.title === value ? { ...item, checked } : item)));
+    setCheckedCountry(prevChecked =>
+      prevChecked.map(item => (item.title === value ? { ...item, checked } : item))
+    );
   };
 
   const changeDosageForm = event => {
     const { value, checked } = event.target;
-    // eslint-disable-next-line no-unused-expressions
-    checked
-      ? dispatch(addDosageForm(event.target.value))
-      : dispatch(removeDosageForm(event.target.value));
+    checked ? dispatch(addDosageForm(event.target.value)) : dispatch(removeDosageForm(event.target.value));
 
-    setCheckedForm(prevChecked => prevChecked.map(item => (item.title === value ? { ...item, checked } : item)));
+    setCheckedForm(prevChecked =>
+      prevChecked.map(item => (item.title === value ? { ...item, checked } : item))
+    );
   };
 
   const changeRecipe = () => {
@@ -106,10 +104,9 @@ function Filter() {
           >
             <Typography>Ціна</Typography>
           </AccordionSummary>
-
           <AccordionDetails sx={{ padding: '0 5px' }}>
             <Box id="priceInputWrapper" sx={priceInputWrapperStyle}>
-              { }
+              {}
               <TextField
                 type="number"
                 onWheel={event => event.target.blur()}
@@ -121,7 +118,7 @@ function Filter() {
                 value={filterBase.priceMin}
                 inputProps={{ min: '0', step: 'any' }}
               />
-              { }
+              {}
               <TextField
                 type="number"
                 onWheel={event => event.target.blur()}
@@ -150,7 +147,7 @@ function Filter() {
           </AccordionSummary>
           <AccordionDetails>
             <FormGroup sx={formGroupStyle}>
-              { checkedCountry.map(item => (
+              {checkedCountry.map(item => (
                 <FormControlLabel
                   key={item.title}
                   checked={item.checked}
@@ -175,7 +172,7 @@ function Filter() {
           </AccordionSummary>
           <AccordionDetails>
             <FormGroup sx={formGroupStyle}>
-              { checkedForm.map(item => (
+              {checkedForm.map(item => (
                 <FormControlLabel
                   key={item.title}
                   checked={item.checked}
@@ -190,55 +187,55 @@ function Filter() {
         </Accordion>
 
         <FormGroup sx={formGroupCheckStyle}>
-          { }
+          {}
           <FormControlLabel
             sx={formCheckboxStyle}
             onChange={changeRecipe}
             checked={filterBase.prescriptionLeave}
-            control={(
+            control={
               <Checkbox
                 icon={<ReceiptLongIcon fontSize="small" sx={{ marginRight: '5px' }} />}
-                checkedIcon={<ReceiptLongIcon fontSize="small" sx={{ color: '#2FD3AE', marginRight: '5px' }} />}
+                checkedIcon={
+                  <ReceiptLongIcon fontSize="small" sx={{ color: '#2FD3AE', marginRight: '5px' }} />
+                }
               />
-          )}
+            }
             label="Без рецепта"
           />
 
-          { }
+          {}
           <FormControlLabel
             onChange={changePregnant}
             checked={filterBase.whoCanPregnant}
             sx={formCheckboxStyle}
-            control={(
+            control={
               <Checkbox
                 icon={<PregnantWomanIcon />}
                 checkedIcon={<PregnantWomanIcon sx={{ color: '#2FD3AE' }} />}
               />
-          )}
+            }
             label="Дозволено вагітним"
           />
 
-          { }
+          {}
           <FormControlLabel
             onChange={changeChildren}
             checked={filterBase.whoCanChildren}
             sx={formCheckboxStyle}
-            control={(
+            control={
               <Checkbox
                 icon={<BabyChangingStationIcon />}
                 checkedIcon={<BabyChangingStationIcon sx={{ color: '#2FD3AE' }} />}
               />
-          )}
+            }
             label="Дозволено дітям"
           />
         </FormGroup>
 
         <Box id="buttonWrapper" sx={buttonWrapperStyle}>
-          {/* eslint-disable-next-line react/jsx-no-bind */}
           <Button variant="contained" sx={showButtonStyle} onClick={receiveGoods}>
             Показати
           </Button>
-          {/* eslint-disable-next-line react/jsx-no-bind */}
           <Button variant="outlined" sx={resetButtonStyle} onClick={cleaningFilter}>
             Скинути
           </Button>

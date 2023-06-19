@@ -14,7 +14,10 @@ export const avatarXSStyles = {
   mr: 2
 };
 
-export const avatarMDStyles = { display: { xs: 'none', sm: 'none', md: 'flex' }, mr: 2 };
+export const avatarMDStyles = {
+  display: { xs: 'none', sm: 'none', md: 'flex' },
+  mr: 2
+};
 
 export const menuStyles = {
   display: {

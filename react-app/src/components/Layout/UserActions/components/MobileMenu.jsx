@@ -19,6 +19,7 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { openModal } from '../../../../redux/slice/modalSlice';
+import { removeToken } from '../../../../redux/slice/isToken';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -38,11 +39,12 @@ export const MobileMenu = () => {
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  // eslint-disable-next-line no-unused-vars
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+    dispatch(removeToken());
+    window.localStorage.setItem('token', '');
   };
 
   const handleMobileMenuClose = () => {

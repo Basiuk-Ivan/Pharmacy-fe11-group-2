@@ -1,17 +1,14 @@
 import { useState, useEffect } from 'react';
-
 import { Container, Typography, Box, Grid, Tabs, Tab, Skeleton, Stack } from '@mui/material';
-
 import { useParams } from 'react-router-dom';
-
 import { ThemeProvider, createTheme, styled } from '@mui/material/styles';
-
 import ProductCardMainBlock from '../../components/SinglePage/ProductCardMainBlock';
 import ProductCardInstruction from '../../components/SinglePage/ProductCardInstruction';
 import ProductAnalogiesCardContainer from '../../components/SinglePage/ProductAnalogiesCardContainer';
 import ProductCardReviews from '../../components/SinglePage/ProductCardReviews';
 import BreadProduct from '../../components/SinglePage/BreadProduct';
 import recentlyViewedProducts from '../../tools/recentlyViewedProducts';
+import { request } from '../../tools/request';
 
 const AntTabs = styled(Tabs)({
   '& .MuiTabs-indicator': {
@@ -86,18 +83,19 @@ const ProductPage = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        // const response = await fetch(`http://localhost:3004/api/product?categories=${category}`);
-        const response = await fetch(`http://localhost:3004/api/product/${id}`);
+        const { result } = await request({
+          url: '',
+          method: 'GET',
+          params: { _id: id }
+        });
 
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+        const { data } = result;
+
+        if (data && data.length > 0) {
+          const firstProduct = data[0];
+          setProduct(firstProduct);
         }
-        // const { prods } = await response.json();
-        // const selectedProduct = prods.find(item => item.id === id);
-        const singleProduct = await response.json();
-        setProduct(singleProduct);
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.error('Error fetching product:', error);
       }
     };

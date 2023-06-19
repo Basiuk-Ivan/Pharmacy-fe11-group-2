@@ -1,7 +1,6 @@
 export const background = {
   width: '100%',
   padding: '9% 4% 5%',
-  // paddingBottom: '5%',
   background: 'linear-gradient(45deg, #011D71 30%, #2FD3BD 90%)'
 };
 
@@ -12,21 +11,21 @@ export const footer = {
 };
 
 export const footerLogo = {
-  alignSelf: 'start',
+  alignSelf: 'start'
 };
 
 export const logoText = {
   fontSize: '22px',
-  color: 'white',
+  color: 'white'
 };
 
 export const logoWord = {
   fontWeight: '800',
-  fontSize: '22px',
+  fontSize: '22px'
 };
 export const logoTextLt = {
   color: '#CECECE',
-  fontSize: '14px',
+  fontSize: '14px'
 };
 
 export const logoFlex = {
@@ -40,7 +39,7 @@ export const logoFlexText = {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  gap: '20px',
+  gap: '20px'
 };
 
 export const Right = {
@@ -53,8 +52,7 @@ export const listStyle = {
   color: 'white',
   paddingBottom: '0px',
   paddingTop: '0px',
-  fontSize: '14px',
-
+  fontSize: '14px'
 };
 
 export const listItemStyle = {
@@ -62,25 +60,24 @@ export const listItemStyle = {
   paddingBottom: '2px',
   listStyleType: "'-   '",
   display: 'list-item',
-  fontSize: '14px',
+  fontSize: '14px'
 };
 
 export const listItemText = {
-  fontSize: '14px',
+  fontSize: '14px'
 };
 
 export const footerMail = {
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'space-between',
-  // width: '250px',
+  justifyContent: 'space-between'
 };
 
 export const mail = {
   marginTop: '10px',
   color: 'white',
   display: 'flex',
-  gap: '15px',
+  gap: '15px'
 };
 
 export const mailStyle = {
@@ -101,14 +98,13 @@ export const phone = {
 
 export const social = {
   display: 'flex',
-  marginBottom: '10px',
+  marginBottom: '10px'
 };
 
 export const descComp = {
-  // flex: 1,
   width: '150px',
   fontFamily: 'Roboto',
   color: 'white',
   fontSize: '14px',
-  lineHeight: '30px',
+  lineHeight: '30px'
 };

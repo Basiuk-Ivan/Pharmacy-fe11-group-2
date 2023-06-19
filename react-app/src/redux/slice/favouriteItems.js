@@ -13,7 +13,6 @@ const favouriteItems = createSlice({
       state.favouriteItems.push({ id: action.payload });
     },
 
-    // eslint-disable-next-line consistent-return
     deleteFromFavouriteItems: (state, action) => {
       if (action.payload === 'all') {
         return {

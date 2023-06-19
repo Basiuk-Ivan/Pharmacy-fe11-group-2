@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { TextField, MenuItem, Typography } from '@mui/material';
-import { CustomTextField, StyledButton, UnderlineSpan, HighlightSpan } from '../Style';
+import { CustomTextField, StyledButton, UnderlineSpan, HighlightSpan } from '../style';
 
 export const RegistrationForm = ({ activeTab, handleFormSubmit }) => (
   <Formik
@@ -26,7 +26,6 @@ export const RegistrationForm = ({ activeTab, handleFormSubmit }) => (
         .matches(/^[0-9]*$/, 'Можна вводити тільки цифри')
     })}
     onSubmit={handleFormSubmit}
-    // eslint-disable-next-line no-unused-vars
     validate={values => {
       const errors = {};
       return errors;

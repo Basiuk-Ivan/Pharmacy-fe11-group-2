@@ -6,19 +6,19 @@ import { currentCategoryStyle, wrappCurrentCategoryStyle } from './style';
 function TitleCategory() {
   const values = {
     painkillers: 'Знеболюючі',
-    cardiovascularSystem: 'Серцево-судинна система',
-    coughColdFlu: 'Ліки від кашлю, застуди та грипу',
-    nervousSystem: 'Для нервової системи',
+    'cardiovascular-system': 'Серцево-судинна система',
+    'cough-cold-flu': 'Ліки від кашлю, застуди та грипу',
+    'nervous-system': 'Для нервової системи',
     antipyretic: 'Жарознижуючі',
     cough: 'Кашель та біль у горлі',
     nasal: 'Назальна терапія',
     spasm: 'Від спазму',
     migraine: 'Від болю при мігрені',
-    backPain: 'Від болю у спині',
+    'back-pain': 'Від болю у спині',
     sedatives: 'Седативні(заспокійливі)',
     antidepressants: 'Антидепресанти',
     hypertension: 'Гіпертонія',
-    bloodThinning: 'Для розрідження крові',
+    'blood-thinning': 'Для розрідження крові',
     thrombosis: 'Тромбоз',
     varicosity: 'Варікоз'
   };

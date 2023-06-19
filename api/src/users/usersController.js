@@ -1,5 +1,9 @@
 import UserDB from "./usersModel.js";
 import bcrypt from "bcrypt";
+import {createToken} from "../utils/token.js";
+import { sendMailRegistration } from "../utils/mail.js";
+
+
 
 const getAll = async (req, res) => {
   try {
@@ -40,10 +44,22 @@ const update = async (req, res) => {
 const create = async (req, res) => {
   try {
     console.log(req.body);
+    const passwordNotHash = req.body.password;
     req.body.password = await bcrypt.hash(req.body.password, 4);
    const data = await UserDB.create((req.body));
+    const { password, ...userData } = data._doc;
+    const token = createToken({
+      payload: userData,
+    });
+    const { email, firstName, secondName } = userData;
+    // await sendMailRegistration({
+    //   email,
+    //   firstName,
+    //   secondName,
+    //   password: passwordNotHash,
+    // });
 
-    res.json({ data: "Успішна реєстрація" });
+    res.json({ token });
   } catch (err) {
     res.status(500).json(err.message);
   }
@@ -56,7 +72,11 @@ const login = async (req, res) => {
     if (user) {
       const isPasswordEqual = await bcrypt.compare( req.query.password, user.password );
       if (isPasswordEqual) {
-          return res.json(user);
+        const { password, ...userData } = user._doc;
+        const token = createToken({
+          payload: userData,
+        });
+          return res.json({token});
       } else {
         throw new Error("Неправильна електронна пошта користувача або пароль");
       }

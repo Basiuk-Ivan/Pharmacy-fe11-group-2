@@ -7,6 +7,9 @@ import DeleteOutlineTwoToneIcon from '@mui/icons-material/DeleteOutlineTwoTone';
 import IconBreadcrumbs from './Breadcrums';
 import ProductCard from '../../components/ProductCard';
 import { removeItem, setSum } from '../../redux/slice/cartItems';
+import { removeAllFromCart } from '../../utils/LocalStore/removeAllFromCart';
+import { countSum } from '../../utils/ActionsWithProduct/countSum';
+import { request } from '../../tools/request';
 import {
   FormBox,
   FormTitle,
@@ -22,8 +25,6 @@ import {
 } from './style';
 
 import './style/CartStyles.scss';
-import { removeAllFromCart } from '../../utils/LocalStore/removeAllFromCart';
-import { countSum } from '../../utils/ActionsWithProduct/countSum';
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
@@ -35,9 +36,6 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   const isInCart = true;
-  // const generalPrice = products.reduce((acum, product) => acum + product.price, 0);
-  // const discount = products.reduce((acum, product) => acum + product.discount, 0);
-  // const totalValue = generalPrice - discount;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -51,21 +49,21 @@ const Cart = () => {
     const fetchProducts = async () => {
       try {
         if (productItemCart.length > 0) {
-          const cartIds = productItemCart.map(item => item.id);
-          const url = `http://localhost:3004/api/product/?_id=${cartIds}`;
-          const response = await fetch(url);
+          const cartIds = productItemCart.map(item => item.id).join(',');
 
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
+          const { result } = await request({
+            url: '',
+            method: 'GET',
+            params: { _id: cartIds }
+          });
 
-          const { prods } = await response.json();
-          setProducts(prods);
-          const sumObj = countSum(productItemCart, prods);
+          const { data } = result;
+
+          setProducts(data);
+          const sumObj = countSum(productItemCart, data);
           dispatch(setSum(sumObj));
         }
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.error('Error fetching products:', error);
       }
     };
@@ -73,7 +71,6 @@ const Cart = () => {
   }, [dispatch, productItemCart]);
 
   useEffect(() => {
-    // eslint-disable-next-line arrow-body-style
     const updatedProducts = products.filter(item => {
       return productItemCart.find(cartItem => cartItem.id === item.id);
     });
@@ -81,8 +78,6 @@ const Cart = () => {
     setProducts(updatedProducts);
     const sumObj = countSum(productItemCart, updatedProducts);
     dispatch(setSum(sumObj));
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productItemCart]);
 
   const delFromCart = () => {
@@ -95,36 +90,33 @@ const Cart = () => {
       <IconBreadcrumbs />
 
       <ContainerBox>
-        { }
+        {}
         {showSkeleton ? (
           <Stack direction="column" spacing={2}>
             <Skeleton variant="rectangular" width={270} height={400} />
           </Stack>
-        )
-          : (
-            <Box>
-              <FormBox>
-                <FormTitle>Ваше Замовлення</FormTitle>
-                <SaleBox>
-                  <FormText>Знижка </FormText>
-                  <FormText>- {sumDiscount} грн</FormText>
-                </SaleBox>
-                <TotalBox>
-                  <FormText>Без урахуваня знижки</FormText>
-                  <FormText> {cartSumWithoutDiscount} грн</FormText>
-                </TotalBox>
+        ) : (
+          <Box>
+            <FormBox>
+              <FormTitle>Ваше Замовлення</FormTitle>
+              <SaleBox>
+                <FormText>Знижка </FormText>
+                <FormText>- {sumDiscount} грн</FormText>
+              </SaleBox>
+              <TotalBox>
+                <FormText>Без урахуваня знижки</FormText>
+                <FormText> {cartSumWithoutDiscount} грн</FormText>
+              </TotalBox>
 
-                <PromoBox mt={2}>
-                  <FormTitlePromo>Загальна сума: {sumWithDiscount} грн</FormTitlePromo>
-                  <NavLink to="/orderprocess">
-                    <OrderButton>
-                      Оформити замовлення
-                    </OrderButton>
-                  </NavLink>
-                </PromoBox>
-              </FormBox>
-            </Box>
-          )}
+              <PromoBox mt={2}>
+                <FormTitlePromo>Загальна сума: {sumWithDiscount} грн</FormTitlePromo>
+                <NavLink to="/orderprocess">
+                  <OrderButton>Оформити замовлення</OrderButton>
+                </NavLink>
+              </PromoBox>
+            </FormBox>
+          </Box>
+        )}
         <CardBox>
           <HeaderBox>
             <Typography variant="h4" gutterBottom>
@@ -135,7 +127,6 @@ const Cart = () => {
               <Typography>Очистити корзину</Typography>
             </IconButton>
           </HeaderBox>
-          {/* eslint-disable-next-line no-nested-ternary */}
           {showSkeleton ? (
             <>
               <Skeleton />

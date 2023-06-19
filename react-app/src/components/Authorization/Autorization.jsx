@@ -6,8 +6,9 @@ import { theme } from '../../tools/muiTheme';
 import { closeModal } from '../../redux/slice/modalSlice';
 import { LoginForm } from './components/LoginForm';
 import { RegistrationForm } from './components/RegistrationForm';
-import './Style/Auth.scss';
-import { style } from './Style';
+import { styles } from './style';
+import { setToken } from '../../redux/slice/isToken';
+import './style/Auth.scss';
 
 const AuthButton = () => {
   const isOpen = useSelector(state => state.modalSlice.openModal);
@@ -21,11 +22,32 @@ const AuthButton = () => {
     setActiveTab(newValue);
   };
 
+  const handleFormLogin = async values => {
+    try {
+      const url = `http://localhost:3004/api/users/login?email=${values.email}&password=${values.password}`;
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(values)
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const { token } = await response.json();
+
+      window.localStorage.setItem('token', token);
+      dispatch(setToken(token));
+    } catch (err) {
+      console.error('Error fetching products:', err);
+    }
+    handleCloseModal();
+  };
   const handleFormSubmit = async values => {
-    // eslint-disable-next-line no-console
     console.log(values);
     try {
-      const url = 'http://localhost:3004/api/users/create';
+      const url = 'http://localhost:3004/api/users/';
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -37,12 +59,11 @@ const AuthButton = () => {
         throw new Error('Network response was not ok');
       }
       const user = await response.json();
-      // eslint-disable-next-line no-console
       console.log('user:', user);
     } catch (err) {
-      // eslint-disable-next-line no-console
       console.error('Error fetching products:', err);
     }
+    handleCloseModal();
   };
 
   return (
@@ -54,7 +75,7 @@ const AuthButton = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>
+          <Box sx={styles}>
             <div className="auth-modal">
               <div className="auth-modal__container">
                 <Tabs color="success" value={activeTab} onChange={handleTabChange}>
@@ -65,7 +86,7 @@ const AuthButton = () => {
                   Залиште ваші дані, і ми зв'яжемося з вами. Ми не займаємося розсилкою рекламних повідомлень,
                   а також не передаємо контактні дані третім особам
                 </Typography>
-                <LoginForm activeTab={activeTab} handleFormSubmit={handleFormSubmit} />
+                <LoginForm activeTab={activeTab} handleFormSubmit={handleFormLogin} />
                 <RegistrationForm activeTab={activeTab} handleFormSubmit={handleFormSubmit} />
               </div>
             </div>

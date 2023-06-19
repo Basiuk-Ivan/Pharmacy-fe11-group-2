@@ -3,6 +3,7 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import ProductCard from '../../ProductCard';
+import { request } from '../../../tools/request';
 import { wrapperForPromotion, promotionStyles } from './style';
 import 'swiper/swiper-bundle.min.css';
 import './style/CustomSlider.scss';
@@ -18,23 +19,16 @@ const PromoMonth = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const url = 'http://localhost:3004/api/product';
-        const response = await fetch(url);
-
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-
-        const { prods } = await response.json();
-
-        const promotionProducts = prods.filter(item => {
-          const discount = (item.discount / item.price) * 100;
-          return discount >= 5;
+        const { result } = await request({
+          url: '',
+          method: 'GET',
+          params: { promotionOfTheMonth: true }
         });
 
-        setProducts(promotionProducts);
+        const { data } = result;
+
+        setProducts(data);
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.error('Error fetching products:', error);
       }
     };
@@ -78,9 +72,7 @@ const PromoMonth = () => {
       >
         {productItems.map((product, index) => (
           <SwiperSlide key={index}>
-            {/* <NavLink to={`/product/${product.id}`}> */}
             <ProductCard productItem={product} />
-            {/* </NavLink> */}
           </SwiperSlide>
         ))}
       </Swiper>

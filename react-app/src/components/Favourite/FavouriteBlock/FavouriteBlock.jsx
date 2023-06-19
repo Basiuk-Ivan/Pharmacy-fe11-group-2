@@ -6,9 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProductCard from '../../ProductCard/ProductCard';
 import Bread from '../../Bread';
-import { addItem } from '../../../redux/slice/cartItems';
+import { addToCart } from '../../../redux/slice/cartItems';
 import { addToCartLocalStorage } from '../../../utils/LocalStore/addToCartLocalStorage';
 import { openModal } from '../../../redux/slice/favouriteItems';
+import { request } from '../../../tools/request';
 
 const FavouriteBlock = () => {
   const [products, setProducts] = useState([]);
@@ -18,7 +19,6 @@ const FavouriteBlock = () => {
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
 
   const dispatch = useDispatch();
-  // const isInCart = false;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -37,36 +37,32 @@ const FavouriteBlock = () => {
           const favouriteItems = JSON.parse(favoriteString);
 
           if (favouriteItems.length > 0) {
-            const favoriteIds = favouriteItems.map(item => item.id);
-            const url = `http://localhost:3004/api/product/?_id=${favoriteIds}`;
-            const response = await fetch(url);
+            const favoriteIds = favouriteItems.map(item => item.id).join(',');
 
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
+            const { result } = await request({
+              url: '',
+              method: 'GET',
+              params: { _id: favoriteIds }
+            });
 
-            const { prods } = await response.json();
+            const { data } = result;
 
-            setProducts(prods);
+            setProducts(data);
           }
         }
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.error('Error fetching products:', error);
       }
     };
     fetchProducts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   useEffect(() => {
-    // eslint-disable-next-line arrow-body-style
     const updatedProducts = products.filter(item => {
       return favoriteItems.find(favoriteItem => favoriteItem.id === item.id);
     });
 
     setProducts(updatedProducts);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [favoriteItems]);
 
   const delFromFav = () => {
@@ -76,7 +72,7 @@ const FavouriteBlock = () => {
   const handleAddToCart = items => {
     items.forEach(element => {
       if (!cartItems.items.find(item => item.id === element.id)) {
-        dispatch(addItem(element));
+        dispatch(addToCart(element));
         addToCartLocalStorage(element);
       }
     });
@@ -91,7 +87,6 @@ const FavouriteBlock = () => {
       }}
     >
       <Bread />
-      {/* eslint-disable-next-line no-nested-ternary */}
       {showSkeleton ? (
         <Stack direction="row" spacing={2}>
           <Box>
@@ -170,10 +165,7 @@ const FavouriteBlock = () => {
           <Grid container spacing={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
             {products.map(item => (
               <Grid item key={item.id}>
-                <ProductCard
-                  productItem={item}
-                  // isInCart={isInCart}
-                />
+                <ProductCard productItem={item} />
               </Grid>
             ))}
           </Grid>
