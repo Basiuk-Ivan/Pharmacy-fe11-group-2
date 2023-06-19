@@ -1,6 +1,7 @@
-import UserDB from "./UsersModel.js";
+import UserDB from "./usersModel.js";
 import bcrypt from "bcrypt";
 import {createToken} from "../utils/token.js";
+import { sendMailRegistration } from "../utils/mail.js";
 
 
 
@@ -43,13 +44,20 @@ const update = async (req, res) => {
 const create = async (req, res) => {
   try {
     console.log(req.body);
+    const passwordNotHash = req.body.password;
     req.body.password = await bcrypt.hash(req.body.password, 4);
    const data = await UserDB.create((req.body));
     const { password, ...userData } = data._doc;
     const token = createToken({
       payload: userData,
     });
-
+    const { email, firstName, secondName } = userData;
+    // await sendMailRegistration({
+    //   email,
+    //   firstName,
+    //   secondName,
+    //   password: passwordNotHash,
+    // });
 
     res.json({ token });
   } catch (err) {

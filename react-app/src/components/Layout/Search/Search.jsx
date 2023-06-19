@@ -44,8 +44,8 @@ const SearchActions = () => {
         });
 
         const { data } = result;
-
-        setProducts(data);
+console.log(data);
+        // setProducts(data.prods);
 
         if (!isFetch) {
           isFetchIdRef.current = setTimeout(() => setIsFetch(true), noItemsDelay);
