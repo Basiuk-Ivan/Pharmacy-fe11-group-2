@@ -1,14 +1,14 @@
 import { Box, Button, Container } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { menuStyles, buttonStyles, navLinkStyles } from './style';
-
 import { mainCategory } from '../../../redux/slice/filterBaseSlice';
+
+import { menuStyles, buttonStyles, navLinkStyles } from './style';
 
 const pages = [
   {
     title: 'Ліки від кашлю, застуди та грипу',
-    path: '/coughColdFlu'
+    path: '/cough-cold-flu'
   },
   {
     title: 'Знеболюючі',
@@ -16,11 +16,11 @@ const pages = [
   },
   {
     title: 'Для нервової системи',
-    path: '/nervousSystem'
+    path: '/nervous-system'
   },
   {
     title: 'Серцево-судинна система',
-    path: '/cardiovascularSystem'
+    path: '/cardiovascular-system'
   }
 ];
 

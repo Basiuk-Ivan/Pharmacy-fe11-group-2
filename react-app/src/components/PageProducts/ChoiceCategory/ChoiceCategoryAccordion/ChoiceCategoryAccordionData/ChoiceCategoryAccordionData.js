@@ -1,7 +1,7 @@
 export const accordions = [
   {
     title: 'Ліки від кашлю , застуди та грипу',
-    path: '/coughColdFlu',
+    path: '/cough-cold-flu',
     panel: 'panel1',
     sub: [
       { title: 'Жарознижуючі', path: 'antipyretic' },
@@ -16,12 +16,12 @@ export const accordions = [
     sub: [
       { title: 'Від спазму', path: 'spasm' },
       { title: 'Від болю при мігрені', path: 'migraine' },
-      { title: 'Від болю у спині', path: 'backPain' }
+      { title: 'Від болю у спині', path: 'back-pain' }
     ]
   },
   {
     title: 'Для нервової системи',
-    path: '/nervousSystem',
+    path: '/nervous-system',
     panel: 'panel3',
     sub: [
       { title: 'Седативні (заспокійливі)', path: 'sedatives' },
@@ -30,11 +30,11 @@ export const accordions = [
   },
   {
     title: 'Для серцево-судинної системи',
-    path: '/cardiovascularSystem',
+    path: '/cardiovascular-system',
     panel: 'panel4',
     sub: [
       { title: 'Гіпертонія', path: 'hypertension' },
-      { title: 'Для розрідження крові', path: 'bloodThinning' },
+      { title: 'Для розрідження крові', path: 'blood-thinning' },
       { title: 'Тромбоз', path: 'thrombosis' },
       { title: 'Варикоз', path: 'varicosity' }
     ]
@@ -42,19 +42,19 @@ export const accordions = [
 ];
 
 export const values = {
-  coughColdFlu: 'panel1',
+  'cough-cold-flu': 'panel1',
   antipyretic: 'panel1',
   cough: 'panel1',
   nasal: 'panel1',
   painkillers: 'panel2',
   spasm: 'panel2',
   migraine: 'panel2',
-  backPain: 'panel2',
-  nervousSystem: 'panel3',
+  'back-pain': 'panel2',
+  'nervous-system': 'panel3',
   sedatives: 'panel3',
   antidepressants: 'panel3',
-  cardiovascularSystem: 'panel4',
-  bloodThinning: 'panel4',
+  'cardiovascular-system': 'panel4',
+  'blood-thinning': 'panel4',
   hypertension: 'panel4',
   thrombosis: 'panel4',
   varicosity: 'panel4'

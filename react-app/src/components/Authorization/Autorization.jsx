@@ -2,15 +2,13 @@ import React, { useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { Modal, Tab, Tabs, Typography, Box } from '@mui/material';
-// eslint-disable-next-line camelcase
-// import jwt_decode from 'jwt-decode';
 import { theme } from '../../tools/muiTheme';
 import { closeModal } from '../../redux/slice/modalSlice';
 import { LoginForm } from './components/LoginForm';
 import { RegistrationForm } from './components/RegistrationForm';
-import './Style/Auth.scss';
-import { styles } from './Style';
+import { styles } from './style';
 import { setToken } from '../../redux/slice/isToken';
+import './style/Auth.scss';
 
 const AuthButton = () => {
   const isOpen = useSelector(state => state.modalSlice.openModal);
@@ -39,19 +37,14 @@ const AuthButton = () => {
       }
       const { token } = await response.json();
 
-      // const decodedToken = jwt_decode(token);
-
       window.localStorage.setItem('token', token);
       dispatch(setToken(token));
-      // console.log(user);
     } catch (err) {
-      // eslint-disable-next-line no-console
       console.error('Error fetching products:', err);
     }
     handleCloseModal();
   };
   const handleFormSubmit = async values => {
-    // eslint-disable-next-line no-console
     console.log(values);
     try {
       const url = 'http://localhost:3004/api/users/';
@@ -66,10 +59,8 @@ const AuthButton = () => {
         throw new Error('Network response was not ok');
       }
       const user = await response.json();
-      // eslint-disable-next-line no-console
       console.log('user:', user);
     } catch (err) {
-      // eslint-disable-next-line no-console
       console.error('Error fetching products:', err);
     }
     handleCloseModal();

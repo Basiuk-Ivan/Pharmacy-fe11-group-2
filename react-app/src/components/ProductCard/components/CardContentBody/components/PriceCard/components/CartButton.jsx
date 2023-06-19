@@ -12,7 +12,8 @@ export const CartButton = ({ productItem, isInCart }) => {
   const dispatch = useDispatch();
   const [isCart, setIsCart] = useState(false);
 
-  const handleAddtoCart = () => {
+  const handleAddtoCart = event => {
+    event.preventDefault();
     if (!isCart) {
       dispatch(addToCart({ id: productItem.id }));
       addToCartLocalStorage(productItem);

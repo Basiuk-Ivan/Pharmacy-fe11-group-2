@@ -1,9 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  // filterSearch: '',
   categories: '',
-  // filterSubCategory: '',
   priceMin: '',
   priceMax: '',
   sort: 1,
@@ -12,7 +10,7 @@ const initialState = {
   prescriptionLeave: false,
   whoCanPregnant: false,
   whoCanChildren: false,
-  limit: 4
+  limit: 8
 };
 
 const filterBaseSlice = createSlice({
@@ -56,6 +54,19 @@ const filterBaseSlice = createSlice({
   }
 });
 
-export const { addManufacture, removeManufacture, addDosageForm, removeDosageForm, recipe, pregnant, children, minPrice, maxPrice, sortingPrice, mainCategory, reset } = filterBaseSlice.actions;
+export const {
+  addManufacture,
+  removeManufacture,
+  addDosageForm,
+  removeDosageForm,
+  recipe,
+  pregnant,
+  children,
+  minPrice,
+  maxPrice,
+  sortingPrice,
+  mainCategory,
+  reset
+} = filterBaseSlice.actions;
 
 export default filterBaseSlice.reducer;

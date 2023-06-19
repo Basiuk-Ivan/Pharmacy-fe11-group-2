@@ -16,7 +16,6 @@ const ReviewList = () => {
       const result = await response.json();
       return result;
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.log('Error fetching products:', error);
       return null;
     }

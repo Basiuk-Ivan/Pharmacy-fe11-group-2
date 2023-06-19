@@ -8,8 +8,7 @@ import { wrapperForPromotion, promotionStyles } from './style';
 import 'swiper/swiper-bundle.min.css';
 import './style/CustomSlider.scss';
 
-const PromotionSlider = () => {
-  const [products, setProducts] = useState([]);
+const PromotionSlider = ({ products }) => {
   const [slidesPerView, setslidesPerView] = useState(null);
   const [showSkeleton, setShowSkeleton] = useState(true);
 
@@ -23,27 +22,6 @@ const PromotionSlider = () => {
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const url = 'http://localhost:3004/api/product?promotionOfTheMonth=true';
-        const response = await fetch(url);
-
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-
-        const { data } = await response.json();
-
-        setProducts(data);
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('Error fetching products:', error);
-      }
-    };
-    fetchProducts();
   }, []);
 
   useEffect(() => {
@@ -61,19 +39,12 @@ const PromotionSlider = () => {
   }
 
   const randomIndexes = Array.from({ length: 8 }, () => Math.floor(Math.random() * products.length));
-
   const productItems = randomIndexes.map(index => products[index]);
 
   const isSlider = true;
 
   return (
     <Box>
-      <Box sx={wrapperForPromotion}>
-        <Typography fontFamily="Roboto" component="div" sx={promotionStyles}>
-          Акції місяця
-        </Typography>
-      </Box>
-
       {showSkeleton ? (
         <>
           <Skeleton />
@@ -85,23 +56,30 @@ const PromotionSlider = () => {
           <Skeleton />
         </>
       ) : (
-        <Swiper
-          modules={[Navigation, Pagination, Scrollbar, A11y]}
-          spaceBetween={50}
-          slidesPerView={slidesPerView}
-          loop
-          navigation
-          pagination={{ clickable: true }}
-          className="product-analogies-slider-promotion"
-        >
-          {productItems.map((product, index) => (
-            <SwiperSlide key={index}>
-              <NavLink to={`/${product?.categories[0]}/${product?.id}`}>
-                <ProductCard productItem={product} isSlider={isSlider} />
-              </NavLink>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <>
+          <Box sx={wrapperForPromotion}>
+            <Typography fontFamily="Roboto" component="div" sx={promotionStyles}>
+              Акції місяця
+            </Typography>
+          </Box>
+          <Swiper
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            spaceBetween={50}
+            slidesPerView={slidesPerView}
+            loop
+            navigation
+            pagination={{ clickable: true }}
+            className="product-analogies-slider-promotion"
+          >
+            {productItems.map((product, index) => (
+              <SwiperSlide key={index}>
+                <NavLink to={`/${product?.categories[0]}/${product?.id}`}>
+                  <ProductCard productItem={product} isSlider={isSlider} />
+                </NavLink>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </>
       )}
     </Box>
   );

@@ -31,7 +31,6 @@ function Products() {
 
   useEffect(() => {
     dispatch(fetchProductsData(RequestString(filterBase, numPage)));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterBase.categories, filterBase.sort, numPage]);
 
   return (
