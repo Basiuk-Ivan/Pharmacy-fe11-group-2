@@ -55,7 +55,7 @@ const FavouriteBlock = () => {
       }
     };
     fetchProducts();
-  }, [dispatch]);
+  }, [favoriteItems]);
 
   useEffect(() => {
     const updatedProducts = products.filter(item => {

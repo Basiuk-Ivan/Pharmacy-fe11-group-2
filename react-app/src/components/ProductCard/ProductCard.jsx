@@ -13,8 +13,7 @@ const ProductCard = ({ productItem, isInCart, parent = 'parent', isSlider }) => 
   const pathElements = pathname.split('/');
   const lastPathElement = pathElements[pathElements.length - 1];
   const newPathname = pathElements.slice(0, -1).join('/');
-  const productPath =
-    lastPathElement === parent ? `${newPathname}/${productItem.id}` : `${pathname}/${productItem.id}`;
+  const productPath = lastPathElement === parent ? `${newPathname}/${productItem.id}` : `${pathname}/${productItem.id}`;
 
   return (
     <ThemeProvider theme={theme}>
