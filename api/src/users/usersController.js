@@ -1,4 +1,4 @@
-import UserDB from "./usersModel.js";
+import UserDB from "./UsersModel.js";
 import bcrypt from "bcrypt";
 
 const getAll = async (req, res) => {
