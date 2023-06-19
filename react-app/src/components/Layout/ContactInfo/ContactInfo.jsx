@@ -2,6 +2,7 @@ import { Box, Typography } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import Link from '@mui/material/Link';
 
 import {
   mainBoxStyles,
@@ -20,9 +21,11 @@ import {
 const ContactInfo = () => (
   <Box sx={mainBoxStyles}>
     <Box sx={wrapperBoxStyles}>
-      <IconButton>
-        <MailOutlineIcon sx={mailOutlineIconStyles} />
-      </IconButton>
+      <Link href="mailto:info@restoll.ua" target="_blank">
+        <IconButton>
+          <MailOutlineIcon sx={mailOutlineIconStyles} />
+        </IconButton>
+      </Link>
       <Box sx={wrapperForTextStyles}>
         <Typography sx={emailStyles} fontFamily="Roboto" component="span">
           info@restoll.UA
@@ -33,9 +36,11 @@ const ContactInfo = () => (
       </Box>
     </Box>
     <Box sx={wrapperForNumberPhoneStyles}>
-      <IconButton>
-        <LocalPhoneIcon sx={localPhoneIconStyle} />
-      </IconButton>
+      <Link href="tel:88007772233" target="_blank">
+        <IconButton>
+          <LocalPhoneIcon sx={localPhoneIconStyle} />
+        </IconButton>
+      </Link>
       <Box sx={bodyForNumberPhoneStyles}>
         <Typography sx={numberPhoneStyles} fontFamily="Roboto" component="span">
           8-800-777-22-33

@@ -18,7 +18,6 @@ export const Job = () => (
     <br />
     <Typography fontFamily="Roboto" component="p">
       Ми будемо раді бачити в своїй команді кваліфікованих фахівців на наступних позиціях:<br />
-
       контент-менеджер;<br />
       автор текстів;<br />
       співробітник колл-центру;<br />
@@ -27,16 +26,16 @@ export const Job = () => (
     <br />
     <Typography fontFamily="Roboto" component="p">
       А наші аптечні заклади-партнери у зв'язку з постійним розширенням і розвитком шукають:<br />
-
       кваліфікованих провізорів;<br />
       досвідчених фармацевтів.
     </Typography>
     <br />
     <Typography fontFamily="Roboto" component="p">
       З питань працевлаштування звертайтеся:<br />
-
       по телефону: 0-800-999-999 (безкоштовно з усіх мобільних операторів);<br />
-      відправляйте своє резюме на електронну пошту:&nbsp;<MailTo><a href="mailto:fe.11.group.c@gmail.com">fe.11.group.c@gmail.com</a>.
+      відправляйте своє резюме на електронну пошту:&nbsp;
+      <MailTo>
+        <a href="mailto:fe.11.group.c@gmail.com">fe.11.group.c@gmail.com</a>.
       </MailTo>
     </Typography>
     <br />

@@ -19,6 +19,7 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { openModal } from '../../../../redux/slice/modalSlice';
+import { removeToken } from '../../../../redux/slice/isToken';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -43,6 +44,8 @@ export const MobileMenu = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+    dispatch(removeToken());
+    window.localStorage.setItem('token', '');
   };
 
   const handleMobileMenuClose = () => {
@@ -136,6 +139,7 @@ export const MobileMenu = () => {
               <AccordionDetails>
                 <Box>
                   {settings.map(setting => (
+
                     <MenuItem component="div" key={setting} onClick={handleCloseUserMenu}>
                       <Typography textAlign="center">{setting}</Typography>
                     </MenuItem>

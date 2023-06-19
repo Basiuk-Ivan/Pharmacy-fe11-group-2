@@ -61,7 +61,8 @@ export const feedBackItemStar = {
 export const feedBackItemText = {
   marginTop: '1%',
   color: '#4F4F4F',
-  fontSize: '14px'
+  fontSize: '14px',
+  textAlign: 'justify'
 };
 
 export const StarRateItem = {

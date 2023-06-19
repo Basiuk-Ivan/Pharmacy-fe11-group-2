@@ -36,15 +36,16 @@ export const textForquantityStyles = {
 export const boxForImg = {
   width: '220px',
   height: '170px',
+  padding: '5px',
+  display: 'flex',
   '@media (max-width: 640px)': {
     margin: '0 auto'
   }
 };
 
 export const imgStyles = {
-  width: '100%',
-  height: '100%',
-  objectFit: 'contain'
+  width: '180px',
+  objectFit: 'contain',
 };
 
 export const ratingStyles = { fontSize: '18px' };

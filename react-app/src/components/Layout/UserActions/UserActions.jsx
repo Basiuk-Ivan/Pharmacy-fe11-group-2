@@ -8,7 +8,7 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import { MobileMenu } from './components/MobileMenu';
 import { StyledBadge, wrapForActionsStyles, fillForIcon, colorForBadge } from './style';
 import { openModal } from '../../../redux/slice/modalSlice';
-// import { setToken } from '../../../redux/slice/isToken';
+import { setToken } from '../../../redux/slice/isToken';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -25,8 +25,8 @@ const UserActions = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     setHasToken(!!token);
-    // dispatch(setToken())
-  }, []);
+    dispatch(setToken(token));
+  }, [dispatch]);
 
   const handleOpenUserMenu = event => {
     setAnchorElUser(event.currentTarget);

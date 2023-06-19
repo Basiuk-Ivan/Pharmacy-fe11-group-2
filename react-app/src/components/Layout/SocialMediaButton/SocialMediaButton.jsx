@@ -4,19 +4,26 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 
+import Link from '@mui/material/Link';
 import { wrapForSocialMediaStyles, fillForIcaonStyles } from './style';
 
 const SocialMediaButton = () => (
   <Box sx={wrapForSocialMediaStyles}>
-    <IconButton>
-      <FacebookIcon sx={fillForIcaonStyles} />
-    </IconButton>
-    <IconButton>
-      <InstagramIcon sx={fillForIcaonStyles} />
-    </IconButton>
-    <IconButton>
-      <YouTubeIcon sx={fillForIcaonStyles} />
-    </IconButton>
+    <Link href="https://www.facebook.com/" target="_blank">
+      <IconButton>
+        <FacebookIcon sx={fillForIcaonStyles} />
+      </IconButton>
+    </Link>
+    <Link href="https://www.instagram.com/" target="_blank">
+      <IconButton>
+        <InstagramIcon sx={fillForIcaonStyles} />
+      </IconButton>
+    </Link>
+    <Link href="https://www.youtube.com/" target="_blank">
+      <IconButton>
+        <YouTubeIcon sx={fillForIcaonStyles} />
+      </IconButton>
+    </Link>
   </Box>
 );
 
