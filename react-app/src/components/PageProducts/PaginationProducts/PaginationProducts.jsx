@@ -6,13 +6,16 @@ import { theme } from '../../../tools/muiTheme';
 import { changePage } from '../../../redux/slice/numPageSlice';
 
 function PaginationProducts() {
+  let totalPage = 1;
   const dispatch = useDispatch();
 
   const filterBase = useSelector(state => state.filterBase);
+  console.log('filterBase:', filterBase);
   const { totalFound } = useSelector(state => state.products);
   const { numPage } = useSelector(state => state.numPage);
+  console.log('numPage:', numPage);
 
-  const totalPage = Math.ceil(totalFound / filterBase.limit);
+  totalPage = Math.ceil(totalFound / filterBase.limit);
 
   function handleChange(num) {
     sessionStorage.setItem('numPage', num);

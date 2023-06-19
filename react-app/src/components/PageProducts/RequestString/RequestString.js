@@ -1,5 +1,5 @@
 function RequestString(filterBase, numPage) {
-  let requestString = `page=${numPage}&limit=8`;
+  let requestString = `page=${numPage}`;
 
   for (const key in filterBase) {
     if (Array.isArray(filterBase[key]) && filterBase[key].length > 0) {

@@ -14,7 +14,7 @@ const getAllProduct = async (req, res) => {
   try {
     const { page, limit, priceMin, priceMax, sort, ...searchString } =
       req.query;
-    const perPage = parseInt(limit) || 20;
+    const perPage = parseInt(limit) || 8;
     const skip = ((parseInt(page) || 1) - 1) * perPage;
     const minPrice = parseInt(priceMin) || 0;
     const maxPrice = parseInt(priceMax) || 9007199254740992;
@@ -38,11 +38,11 @@ const getAllProduct = async (req, res) => {
       delete searchString.search;
     }
     console.log(searchString);
-    const totalFound = await ProductDB.countDocuments(searchString);
     const data = await ProductDB.find(searchString)
       .limit(perPage)
       .skip(skip)
       .sort({ price: sortStr });
+    const totalFound = await ProductDB.countDocuments(searchString);
 
     return res.json({ totalFound, data });
   } catch (e) {

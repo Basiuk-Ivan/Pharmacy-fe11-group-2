@@ -10,7 +10,7 @@ const initialState = {
   prescriptionLeave: false,
   whoCanPregnant: false,
   whoCanChildren: false,
-  limit: 4
+  limit: 8
 };
 
 const filterBaseSlice = createSlice({
