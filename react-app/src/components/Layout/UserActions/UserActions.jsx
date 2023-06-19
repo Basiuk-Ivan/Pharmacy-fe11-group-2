@@ -25,8 +25,8 @@ const UserActions = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     setHasToken(!!token);
-    dispatch(setToken(token))
-  }, []);
+    dispatch(setToken(token));
+  }, [dispatch]);
 
   const handleOpenUserMenu = event => {
     setAnchorElUser(event.currentTarget);

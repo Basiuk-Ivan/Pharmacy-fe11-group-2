@@ -10,7 +10,7 @@ import { LoginForm } from './components/LoginForm';
 import { RegistrationForm } from './components/RegistrationForm';
 import './Style/Auth.scss';
 import { styles } from './Style';
-import {setToken} from "../../redux/slice/isToken.js";
+import { setToken } from '../../redux/slice/isToken';
 
 const AuthButton = () => {
   const isOpen = useSelector(state => state.modalSlice.openModal);
@@ -40,10 +40,9 @@ const AuthButton = () => {
       const { token } = await response.json();
 
       const decodedToken = jwt_decode(token);
-      // eslint-disable-next-line no-console
-      window.localStorage.setItem("token",token);
+
+      window.localStorage.setItem('token', token);
       dispatch(setToken(token));
-      console.log(decodedToken);
       // console.log(user);
     } catch (err) {
       // eslint-disable-next-line no-console
