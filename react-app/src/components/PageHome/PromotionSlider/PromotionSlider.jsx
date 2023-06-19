@@ -45,12 +45,6 @@ const PromotionSlider = ({ products }) => {
 
   return (
     <Box>
-      <Box sx={wrapperForPromotion}>
-        <Typography fontFamily="Roboto" component="div" sx={promotionStyles}>
-          Акції місяця
-        </Typography>
-      </Box>
-
       {showSkeleton ? (
         <>
           <Skeleton />
@@ -62,23 +56,30 @@ const PromotionSlider = ({ products }) => {
           <Skeleton />
         </>
       ) : (
-        <Swiper
-          modules={[Navigation, Pagination, Scrollbar, A11y]}
-          spaceBetween={50}
-          slidesPerView={slidesPerView}
-          loop
-          navigation
-          pagination={{ clickable: true }}
-          className="product-analogies-slider-promotion"
-        >
-          {productItems.map((product, index) => (
-            <SwiperSlide key={index}>
-              <NavLink to={`/${product?.categories[0]}/${product?.id}`}>
-                <ProductCard productItem={product} isSlider={isSlider} />
-              </NavLink>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <>
+          <Box sx={wrapperForPromotion}>
+            <Typography fontFamily="Roboto" component="div" sx={promotionStyles}>
+              Акції місяця
+            </Typography>
+          </Box>
+          <Swiper
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            spaceBetween={50}
+            slidesPerView={slidesPerView}
+            loop
+            navigation
+            pagination={{ clickable: true }}
+            className="product-analogies-slider-promotion"
+          >
+            {productItems.map((product, index) => (
+              <SwiperSlide key={index}>
+                <NavLink to={`/${product?.categories[0]}/${product?.id}`}>
+                  <ProductCard productItem={product} isSlider={isSlider} />
+                </NavLink>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </>
       )}
     </Box>
   );

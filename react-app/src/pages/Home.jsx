@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Skeleton } from '@mui/material';
 import CreationHistory from '../components/PageHome/CreationHistory';
 import HealthBlog from '../components/PageHome/HealthBlog';
 import HowWeWork from '../components/PageHome/HowWeWork/HowWeWork';
@@ -11,6 +12,16 @@ import { request } from '../tools/request';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+
+  const [showSkeleton, setShowSkeleton] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSkeleton(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -32,8 +43,29 @@ const Home = () => {
   }, []);
   return (
     <>
-      <MainSlider products={products} />
-      <PromotionSlider products={products} />
+      {showSkeleton ? (
+        <>
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+        </>
+      ) : (
+        <>
+          <MainSlider products={products} />
+          <PromotionSlider products={products} />
+        </>
+      )}
       <HowWeWork />
       <Testimonials />
       <OurPartners />
