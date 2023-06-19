@@ -1,23 +1,21 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { request } from '../../tools/request';
 
 export const fetchProductsData = createAsyncThunk(
   'products/fetchProductsData',
+
   async (requestString, { rejectWithValue }) => {
     try {
-      // console.log('productSlice', requestString);
-      const res = await fetch(
-        // `http://localhost:3004/api/product?categories=${category}&page=${numPage}&limit=4`
-        `http://localhost:3004/api/product?${requestString}`
-      );
+      const { result } = await request({
+        url: `?${requestString}`,
+        method: 'GET'
+      });
 
-      if (!res.ok) {
-        throw new Error('Server Error');
-      }
-      const data = await res.json();
+      const response = result;
 
-      const { totalFound } = data;
+      const { totalFound } = response;
 
-      return { products: data.prods, totalFound };
+      return { products: response.data, totalFound };
     } catch (error) {
       return rejectWithValue(error.message);
     }
