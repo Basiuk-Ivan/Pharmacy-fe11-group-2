@@ -4,7 +4,10 @@ export const wrapForCardStyles = isInCart => ({
   width: isInCart ? 'auto' : '220px',
   height: isInCart ? 'auto' : '430px',
   display: isInCart ? 'flex' : 'block',
-  cursor: 'auto'
+  cursor: 'auto',
+  '@media (max-width: 640px)': {
+    flexDirection: 'column'
+  }
 });
 
 export const cardContentStyles = isInCart => ({
@@ -12,10 +15,15 @@ export const cardContentStyles = isInCart => ({
   width: '100%',
   display: 'flex',
   flexDirection: isInCart ? 'row' : 'column',
-  marginLeft: isInCart ? '20px' : undefined,
   '&:last-child': {
-    paddingBottom: isInCart ? 0 : undefined,
-    paddingTop: isInCart ? '13px' : undefined
+    paddingTop: isInCart ? '13px' : undefined,
+    paddingBottom: isInCart ? '13px' : undefined
+  },
+  '@media (max-width: 640px)': {
+    padding: '10px'
+  },
+  '@media (max-width: 455px)': {
+    flexDirection: 'column'
   }
 });
 
@@ -23,6 +31,20 @@ export const textForquantityStyles = {
   fontSize: '12px',
   fontWeight: 700,
   color: '#2FD3AE'
+};
+
+export const boxForImg = {
+  width: '220px',
+  height: '170px',
+  '@media (max-width: 640px)': {
+    margin: '0 auto'
+  }
+};
+
+export const imgStyles = {
+  width: '100%',
+  height: '100%',
+  objectFit: 'contain'
 };
 
 export const ratingStyles = { fontSize: '18px' };
@@ -163,8 +185,11 @@ export const wrappForQuantityStyles = {
 export const stackStyles = isInCart => ({
   flex: isInCart ? '1 1 50%' : undefined,
   paddingTop: isInCart ? '20px' : undefined,
-  gap: isInCart ? '50px' : undefined,
-  justifyContent: isInCart ? undefined : 'space-between'
+  paddingLeft: isInCart ? '20px' : undefined,
+  flexWrap: isInCart ? 'wrap' : undefined,
+  columnGap: isInCart ? '50px' : undefined,
+  justifyContent: isInCart ? undefined : 'space-between',
+  paddingBottom: isInCart ? '10px' : undefined
 });
 
 export const boxForButtonBaseStyles = {

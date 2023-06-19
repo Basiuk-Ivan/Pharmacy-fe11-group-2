@@ -2,10 +2,10 @@ import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import ProductCard from '../../ProductCard';
 import 'swiper/swiper-bundle.min.css';
 import './CustomSwiper.scss';
+import { request } from '../../../tools/request';
 
 const ProductAnalogiesCardContainer = ({ productItem }) => {
   const isInCart = false;
@@ -26,19 +26,17 @@ const ProductAnalogiesCardContainer = ({ productItem }) => {
     }
   }, [isXs, isSm]);
 
-  const getAnalogsProducts = item => {
+  const getAnalogsProducts = async item => {
     if (item.analogs) {
-      const params = {
-        analogs: item.analogs
-      };
-      axios.get('http://localhost:3004/api/product', { params })
-        .then(response => {
-          const analogsProducts = response.data.prods;
-          setAnalogProducts(analogsProducts);
-        })
-        .catch(error => {
-          throw error;
-        });
+      const { result } = await request({
+        url: '',
+        method: 'GET',
+        params: { analogs: item.analogs }
+      });
+
+      const { data } = result;
+
+      setAnalogProducts(data);
     }
   };
   useEffect(() => {
@@ -67,12 +65,12 @@ const ProductAnalogiesCardContainer = ({ productItem }) => {
             .filter(element => element.id !== productItem.id)
             .map(element => (
               <SwiperSlide key={element.id}>
-                <ProductCard productItem={element} isInCart={isInCart} />
+                <ProductCard productItem={element} isInCart={isInCart} parent={productItem.id} />
               </SwiperSlide>
             ))}
         </Swiper>
       ) : (
-        <Typography variant="body1">No analog products found.</Typography>
+        <Typography variant="body1">Наразі аналоги відсутні.</Typography>
       )}
     </Box>
   );

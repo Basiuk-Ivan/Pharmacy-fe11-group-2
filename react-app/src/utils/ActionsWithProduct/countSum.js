@@ -16,5 +16,9 @@ export const countSum = (cartItem, productArr) => {
     sumDiscount += Number(item.price * item.quantity) - (roundPrice(item) * item.quantity);
   });
 
+  localStorage.setItem('cartSumWithoutDiscount', JSON.stringify(cartSumWithoutDiscount));
+  localStorage.setItem('sumWithDiscount', JSON.stringify(sumWithDiscount));
+  localStorage.setItem('sumDiscount', JSON.stringify(sumDiscount));
+
   return { cartSumWithoutDiscount, sumWithDiscount, sumDiscount };
 };

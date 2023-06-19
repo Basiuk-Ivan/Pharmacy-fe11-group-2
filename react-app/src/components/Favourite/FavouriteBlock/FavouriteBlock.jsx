@@ -6,9 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProductCard from '../../ProductCard/ProductCard';
 import Bread from '../../Bread';
-import { addItem } from '../../../redux/slice/cartItems';
+import { addToCart } from '../../../redux/slice/cartItems';
 import { addToCartLocalStorage } from '../../../utils/LocalStore/addToCartLocalStorage';
 import { openModal } from '../../../redux/slice/favouriteItems';
+import { request } from '../../../tools/request';
 
 const FavouriteBlock = () => {
   const [products, setProducts] = useState([]);
@@ -37,17 +38,17 @@ const FavouriteBlock = () => {
           const favouriteItems = JSON.parse(favoriteString);
 
           if (favouriteItems.length > 0) {
-            const favoriteIds = favouriteItems.map(item => item.id);
-            const url = `http://localhost:3004/api/product/?_id=${favoriteIds}`;
-            const response = await fetch(url);
+            const favoriteIds = favouriteItems.map(item => item.id).join(',');
 
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
+            const { result } = await request({
+              url: '',
+              method: 'GET',
+              params: { _id: favoriteIds }
+            });
 
-            const { prods } = await response.json();
+            const { data } = result;
 
-            setProducts(prods);
+            setProducts(data);
           }
         }
       } catch (error) {
@@ -76,7 +77,7 @@ const FavouriteBlock = () => {
   const handleAddToCart = items => {
     items.forEach(element => {
       if (!cartItems.items.find(item => item.id === element.id)) {
-        dispatch(addItem(element));
+        dispatch(addToCart(element));
         addToCartLocalStorage(element);
       }
     });
