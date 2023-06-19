@@ -32,7 +32,7 @@ const ProductCard = ({ productItem, isInCart, parent = 'parent', isSlider }) => 
             <FavoriteCheckbox productItem={productItem} isInCart={isInCart} />
             <Box sx={{ width: '220px', height: '170px' }}>
               <img
-                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                style={{ width: '200px', height: '100%', objectFit: 'contain' }}
                 src={productItem?.img[0]}
                 alt="productImage"
               />
