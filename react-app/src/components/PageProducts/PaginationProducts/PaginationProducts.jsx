@@ -10,10 +10,8 @@ function PaginationProducts() {
   const dispatch = useDispatch();
 
   const filterBase = useSelector(state => state.filterBase);
-  console.log('filterBase:', filterBase);
   const { totalFound } = useSelector(state => state.products);
   const { numPage } = useSelector(state => state.numPage);
-  console.log('numPage:', numPage);
 
   totalPage = Math.ceil(totalFound / filterBase.limit);
 
