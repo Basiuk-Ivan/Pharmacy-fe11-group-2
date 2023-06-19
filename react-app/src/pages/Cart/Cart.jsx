@@ -6,7 +6,12 @@ import { Typography, IconButton, Skeleton, Stack } from '@mui/material';
 import DeleteOutlineTwoToneIcon from '@mui/icons-material/DeleteOutlineTwoTone';
 import IconBreadcrumbs from './Breadcrums';
 import ProductCard from '../../components/ProductCard';
-import { removeItem, setSum } from '../../redux/slice/cartItems';
+import {
+  closeCartModalRemoveAll,
+  openCartModalRemoveAll,
+  removeItem,
+  setSum
+} from '../../redux/slice/cartItems';
 import {
   FormBox,
   FormTitle,
@@ -25,6 +30,8 @@ import './style/CartStyles.scss';
 import { removeAllFromCart } from '../../utils/LocalStore/removeAllFromCart';
 import { countSum } from '../../utils/ActionsWithProduct/countSum';
 import { request } from '../../tools/request';
+import ModalWindow from "../../components/ModalWindow.jsx";
+
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
@@ -34,11 +41,11 @@ const Cart = () => {
   const sumWithDiscount = useSelector(state => state.itemCards.sumWithDiscount);
   const [showSkeleton, setShowSkeleton] = useState(true);
   const dispatch = useDispatch();
+  const isOpenedCartModalRemoveAll= useSelector(state => state.itemCards.isOpenedCartModalRemoveAll);
+
 
   const isInCart = true;
-  // const generalPrice = products.reduce((acum, product) => acum + product.price, 0);
-  // const discount = products.reduce((acum, product) => acum + product.discount, 0);
-  // const totalValue = generalPrice - discount;
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -87,10 +94,17 @@ const Cart = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productItemCart]);
 
-  const delFromCart = () => {
+
+  const handleClickCartModalRemoveAll = () => {
     dispatch(removeItem('all'));
     removeAllFromCart();
+    dispatch(closeCartModalRemoveAll());
+  }
+
+  const handleCloseСartModalRemoveAll = () => {
+    dispatch(closeCartModalRemoveAll());
   };
+
 
   return (
     <Box>
@@ -117,9 +131,11 @@ const Cart = () => {
 
               <PromoBox mt={2}>
                 <FormTitlePromo>Загальна сума: {sumWithDiscount} грн</FormTitlePromo>
+                {sumWithDiscount > 0 &&
                 <NavLink to="/orderprocess">
                   <OrderButton>Оформити замовлення</OrderButton>
                 </NavLink>
+                }
               </PromoBox>
             </FormBox>
           </Box>
@@ -129,10 +145,11 @@ const Cart = () => {
             <Typography variant="h4" gutterBottom>
               Корзина
             </Typography>
-            <IconButton onClick={() => delFromCart()}>
+            {products.length > 0 && <IconButton onClick={() => dispatch(openCartModalRemoveAll())}>
               <DeleteOutlineTwoToneIcon />
               <Typography>Очистити корзину</Typography>
-            </IconButton>
+            </IconButton> }
+
           </HeaderBox>
           {/* eslint-disable-next-line no-nested-ternary */}
           {showSkeleton ? (
@@ -172,6 +189,10 @@ const Cart = () => {
           )}
         </CardBox>
       </ContainerBox>
+      <ModalWindow mainText="Видалити всі товари з корзини?" confirmTextBtn="Підтвердити" cancelTextBtn="Відміна"
+                   handleClick={handleClickCartModalRemoveAll} handleClose={handleCloseСartModalRemoveAll}
+                   isOpened={isOpenedCartModalRemoveAll}/>
+
     </Box>
   );
 };

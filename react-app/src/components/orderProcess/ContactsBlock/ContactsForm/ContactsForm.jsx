@@ -5,6 +5,8 @@ import { TextField, Grid, Typography, Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { ThemeProvider } from '@mui/material/styles';
+import {theme} from "../../../../tools/muiTheme";
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),
@@ -32,7 +34,7 @@ const ContactsForm = () => {
       .min(2, 'Мінімум два символи'),
     phone: Yup.number().required('Введіть номер мобільного телефону').typeError('Введіть номер мобільного телефону'),
     street: Yup.string().required('Введіть назву вулиці'),
-    apartment: Yup.number().required('Введіть номер квартири').typeError('Введіть номер квартири')
+    apartment: Yup.number().typeError('Введіть номер квартири')
   });
 
   const formik = useFormik({
@@ -60,6 +62,7 @@ const ContactsForm = () => {
   }, [orderPaymentMethod]);
 
   return (
+      <ThemeProvider theme={theme}>
     <Container>
       <Typography
         variant="h5"
@@ -154,6 +157,7 @@ const ContactsForm = () => {
         </Grid>
       </form>
     </Container>
+      </ThemeProvider>
   );
 };
 

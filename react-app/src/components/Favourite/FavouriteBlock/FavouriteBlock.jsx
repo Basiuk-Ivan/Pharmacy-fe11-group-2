@@ -8,7 +8,7 @@ import ProductCard from '../../ProductCard/ProductCard';
 import Bread from '../../Bread';
 import { addToCart } from '../../../redux/slice/cartItems';
 import { addToCartLocalStorage } from '../../../utils/LocalStore/addToCartLocalStorage';
-import { openModal } from '../../../redux/slice/favouriteItems';
+import {openModalAddtoCart, openModalRemoveAll} from '../../../redux/slice/favouriteItems';
 import { request } from '../../../tools/request';
 
 const FavouriteBlock = () => {
@@ -71,17 +71,14 @@ const FavouriteBlock = () => {
   }, [favoriteItems]);
 
   const delFromFav = () => {
-    dispatch(openModal());
+    dispatch(openModalRemoveAll());
   };
 
-  const handleAddToCart = items => {
-    items.forEach(element => {
-      if (!cartItems.items.find(item => item.id === element.id)) {
-        dispatch(addToCart(element));
-        addToCartLocalStorage(element);
-      }
-    });
+  const addAlltoCart = () => {
+    dispatch(openModalAddtoCart());
   };
+
+
 
   return (
     <Container
@@ -124,7 +121,7 @@ const FavouriteBlock = () => {
           >
             <Typography
               sx={{
-                fontFamily: 'Raleway, sans-serif',
+                fontFamily: 'Roboto, sans-serif',
                 fontWeight: 700,
                 fontSize: '36px',
                 color: '#2E3A59'
@@ -138,7 +135,7 @@ const FavouriteBlock = () => {
                 variant="text"
                 onClick={() => delFromFav()}
                 sx={{
-                  fontFamily: 'Raleway, sans-serif',
+                  fontFamily: 'Roboto, sans-serif',
                   fontWeight: 700,
                   fontSize: '14px',
                   color: '#828282'
@@ -150,15 +147,12 @@ const FavouriteBlock = () => {
                 variant="contained"
                 type="submit"
                 form="contacts"
-                onClick={() => handleAddToCart(products)}
+                onClick={addAlltoCart}
                 component={Link}
-                to={{
-                  pathname: '/cart'
-                }}
                 sx={{
                   backgroundColor: '#2FD3AE',
                   borderRadius: 50,
-                  fontFamily: 'Raleway, sans-serif',
+                  fontFamily: 'Roboto, sans-serif',
                   fontWeight: 700,
                   fontSize: '14px',
                   color: '#FFFFFF'

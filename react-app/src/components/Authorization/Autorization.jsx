@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { Modal, Tab, Tabs, Typography, Box } from '@mui/material';
-// eslint-disable-next-line camelcase
+
 // import jwt_decode from 'jwt-decode';
 import { theme } from '../../tools/muiTheme';
 import { closeModal } from '../../redux/slice/modalSlice';
