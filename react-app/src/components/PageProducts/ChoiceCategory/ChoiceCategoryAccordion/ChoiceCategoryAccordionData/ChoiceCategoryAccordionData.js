@@ -1,12 +1,12 @@
-export const accordions = [
+export const accordionsData = [
   {
     title: 'Ліки від кашлю , застуди та грипу',
     path: '/coughColdFlu',
     panel: 'panel1',
     sub: [
-      { title: 'Жарознижуючі', path: 'antipyretic' },
-      { title: 'Кашель та біль у горлі', path: 'cough' },
-      { title: 'Назальна терапія', path: 'nasal' }
+      { title: 'Жарознижуючі', path: 'antipyretic', checked: false },
+      { title: 'Кашель та біль у горлі', path: 'cough', checked: false },
+      { title: 'Назальна терапія', path: 'nasal', checked: false }
     ]
   },
   {

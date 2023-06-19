@@ -7,7 +7,11 @@ export const productsContainerStyles = {
 
 export const asideAndCardsStyles = {
   display: 'flex',
-  gap: '8px'
+  gap: '8px',
+  mb: '30px',
+  '@media (max-width: 530px)': {
+    flexDirection: 'column'
+  }
 };
 
 export const asideStyles = {

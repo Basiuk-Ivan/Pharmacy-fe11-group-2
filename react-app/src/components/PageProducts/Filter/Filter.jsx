@@ -15,7 +15,7 @@ import RequestString from '../RequestString';
 import { fetchProductsData } from '../../../redux/slice/productsSlice';
 import { Country, Form } from './FilterData/FilterData';
 // import FilterSlider from './FilterSlider/FilterSlider';
-import { buttonWrapperStyle, formCheckboxStyle, filterWrapperStyle, formGroupCheckStyle, formGroupStyle, mainCategoryStyle, marginStyle, priceInputWrapperStyle, titleCategoryStyle, resetButtonStyle, showButtonStyle } from './style';
+import { buttonWrapperStyle, formCheckboxStyle, filterWrapperStyle, formGroupCheckStyle, formGroupStyle, mainCategoryStyle, marginStyle, priceInputWrapperStyle, titleCategoryStyle, resetButtonStyle, showButtonStyle, errorPriceStyle } from './style';
 
 import { addManufacture, removeManufacture, addDosageForm, removeDosageForm, recipe, pregnant, children, minPrice, maxPrice, reset, mainCategory } from '../../../redux/slice/filterBaseSlice';
 
@@ -27,6 +27,7 @@ function Filter() {
   const [checkedCountry, setCheckedCountry] = useState(Country);
   const [checkedForm, setCheckedForm] = useState(Form);
   const [clearFilter, setClearFilter] = useState(true);
+  const [validationPrice, setValidationPrice] = useState(true);
 
   useEffect(() => {
     dispatch(fetchProductsData(RequestString(filterBase, 1)));
@@ -34,7 +35,10 @@ function Filter() {
   }, [clearFilter]);
 
   function receiveGoods() {
-    dispatch(fetchProductsData(RequestString(filterBase, 1)));
+    if (Number(filterBase.priceMin) <= Number(filterBase.priceMax) && Number(filterBase.priceMin) >= 0 && Number(filterBase.priceMax) >= 0) {
+      setValidationPrice(true);
+      dispatch(fetchProductsData(RequestString(filterBase, 1)));
+    } else setValidationPrice(false);
   }
 
   function cleaningFilter() {
@@ -44,6 +48,7 @@ function Filter() {
     dispatch(reset());
     dispatch(changePage(1));
     dispatch(mainCategory(currentCategory));
+    setValidationPrice(true);
   }
 
   const changeManufacturer = event => {
@@ -101,6 +106,7 @@ function Filter() {
           >
             <Typography>Ціна</Typography>
           </AccordionSummary>
+
           <AccordionDetails sx={{ padding: '0 5px' }}>
             <Box id="priceInputWrapper" sx={priceInputWrapperStyle}>
               { }
@@ -113,6 +119,7 @@ function Filter() {
                 variant="outlined"
                 size="small"
                 value={filterBase.priceMin}
+                inputProps={{ min: '0', step: 'any' }}
               />
               { }
               <TextField
@@ -124,11 +131,13 @@ function Filter() {
                 variant="outlined"
                 size="small"
                 value={filterBase.priceMax}
+                inputProps={{ min: '0', step: 'any' }}
               />
             </Box>
             {/* <FilterSlider /> */}
           </AccordionDetails>
         </Accordion>
+        {!validationPrice ? <Typography sx={errorPriceStyle}>Введіть коректні значення ціни!</Typography> : null}
 
         <Accordion sx={marginStyle}>
           <AccordionSummary
