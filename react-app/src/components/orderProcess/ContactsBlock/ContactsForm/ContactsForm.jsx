@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-/* eslint-disable no-console */
+
 import { TextField, Grid, Typography, Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useFormik } from 'formik';
@@ -56,7 +56,6 @@ const ContactsForm = () => {
 
   useEffect(() => {
     formik.setFieldValue('paymentMethod', orderPaymentMethod);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderPaymentMethod]);
 
   return (

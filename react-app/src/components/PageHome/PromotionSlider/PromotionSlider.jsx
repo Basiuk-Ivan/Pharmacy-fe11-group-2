@@ -4,14 +4,11 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Box, Typography, useMediaQuery, useTheme, Skeleton } from '@mui/material';
 import ProductCard from '../../ProductCard';
-import { request } from '../../../tools/request';
-
-import 'swiper/swiper-bundle.min.css';
 import { wrapperForPromotion, promotionStyles } from './style';
+import 'swiper/swiper-bundle.min.css';
 import './style/CustomSlider.scss';
 
-const PromotionSlider = () => {
-  const [products, setProducts] = useState([]);
+const PromotionSlider = ({ products }) => {
   const [slidesPerView, setslidesPerView] = useState(null);
   const [showSkeleton, setShowSkeleton] = useState(true);
 
@@ -25,25 +22,6 @@ const PromotionSlider = () => {
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const { result } = await request({
-          url: '',
-          method: 'GET',
-          params: { promotionOfTheMonth: true }
-        });
-
-        const { data } = result;
-
-        setProducts(data);
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      }
-    };
-    fetchProducts();
   }, []);
 
   useEffect(() => {
@@ -61,7 +39,6 @@ const PromotionSlider = () => {
   }
 
   const randomIndexes = Array.from({ length: 8 }, () => Math.floor(Math.random() * products.length));
-
   const productItems = randomIndexes.map(index => products[index]);
 
   const isSlider = true;

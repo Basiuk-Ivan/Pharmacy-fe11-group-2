@@ -14,6 +14,7 @@ module.exports = {
   plugins: ['react-refresh', 'prettier', 'jest'],
   rules: {
     'react/prop-types': 'off',
+    'react/jsx-no-useless-fragment': 'off',
     'no-console': 'off',
     'no-unused-vars': 'off',
     'no-plusplus': 'off',

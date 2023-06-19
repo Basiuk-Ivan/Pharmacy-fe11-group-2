@@ -42,10 +42,21 @@ export const boxForImg = {
     margin: '0 auto'
   }
 };
+export const boxForImgPromotion = {
+  width: '220px',
+  height: '170px'
+};
+
+export const imgPromotion = {
+  width: '200px',
+  height: '100%',
+  objectFit: 'contain',
+  cursor: 'pointer'
+};
 
 export const imgStyles = {
   width: '180px',
-  objectFit: 'contain',
+  objectFit: 'contain'
 };
 
 export const ratingStyles = { fontSize: '18px' };

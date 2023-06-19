@@ -45,7 +45,7 @@ const PaymentMethodForm = () => {
                 dispatch(addPaymentMethod('card'));
               }}
               label={
-                // eslint-disable-next-line react/jsx-wrap-multilines
+
                 <Box display="flex" alignItems="center">
                   <span>Карткою онлайн</span>
                   <img

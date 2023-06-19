@@ -24,7 +24,8 @@ const Prod = new mongoose.Schema(
     ratingClick: { type: Number, required: true }, // ++
     ratingTotal: { type: Number, required: true }, // ++
     packageQuantity: { type: String, required: true },
-    promotionOfTheMonth: { type: Boolean, required: true },// ++
+    promotionOfTheMonth: { type: Boolean, required: true }, // ++
+    descriptionForSlider: { type: String, required: true },
   },
   {
     timestamps: false,

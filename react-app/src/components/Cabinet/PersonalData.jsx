@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { TextField, Grid, Typography, Container, MenuItem, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useFormik } from 'formik';
