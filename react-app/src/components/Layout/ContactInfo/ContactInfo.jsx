@@ -22,9 +22,9 @@ const ContactInfo = () => (
   <Box sx={mainBoxStyles}>
     <Box sx={wrapperBoxStyles}>
       <Link href="mailto:info@restoll.ua" target="_blank">
-      <IconButton>
-        <MailOutlineIcon sx={mailOutlineIconStyles} />
-      </IconButton>
+        <IconButton>
+          <MailOutlineIcon sx={mailOutlineIconStyles} />
+        </IconButton>
       </Link>
       <Box sx={wrapperForTextStyles}>
         <Typography sx={emailStyles} fontFamily="Roboto" component="span">
@@ -37,9 +37,9 @@ const ContactInfo = () => (
     </Box>
     <Box sx={wrapperForNumberPhoneStyles}>
       <Link href="tel:88007772233" target="_blank">
-      <IconButton>
-        <LocalPhoneIcon sx={localPhoneIconStyle} />
-      </IconButton>
+        <IconButton>
+          <LocalPhoneIcon sx={localPhoneIconStyle} />
+        </IconButton>
       </Link>
       <Box sx={bodyForNumberPhoneStyles}>
         <Typography sx={numberPhoneStyles} fontFamily="Roboto" component="span">

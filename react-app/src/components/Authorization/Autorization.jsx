@@ -2,15 +2,13 @@ import React, { useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { Modal, Tab, Tabs, Typography, Box } from '@mui/material';
+import jwt_decode from 'jwt-decode';
 import { theme } from '../../tools/muiTheme';
 import { closeModal } from '../../redux/slice/modalSlice';
 import { LoginForm } from './components/LoginForm';
 import { RegistrationForm } from './components/RegistrationForm';
 import './Style/Auth.scss';
 import { styles } from './Style';
-import jwt_decode from "jwt-decode";
-
-
 
 const AuthButton = () => {
   const isOpen = useSelector(state => state.modalSlice.openModal);
@@ -37,9 +35,10 @@ const AuthButton = () => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      const {token} = await response.json();
-      // eslint-disable-next-line no-console
+      const { token } = await response.json();
+
       const decodedToken = jwt_decode(token);
+      // eslint-disable-next-line no-console
       console.log(decodedToken);
       // console.log(user);
     } catch (err) {
@@ -47,7 +46,7 @@ const AuthButton = () => {
       console.error('Error fetching products:', err);
     }
     handleCloseModal();
-  }
+  };
   const handleFormSubmit = async values => {
     // eslint-disable-next-line no-console
     console.log(values);

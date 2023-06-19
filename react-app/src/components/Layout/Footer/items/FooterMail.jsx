@@ -17,9 +17,9 @@ export const FooterMail = () => (
   <Box sx={footerMail}>
     <Box sx={mail}>
       <Link href="mailto:info@restoll.ua" target="_blank">
-      <IconButton>
-        <DraftsOutlinedIcon sx={mailOutlineIconStyles} />
-      </IconButton>
+        <IconButton>
+          <DraftsOutlinedIcon sx={mailOutlineIconStyles} />
+        </IconButton>
       </Link>
       <Box>
         <Typography fontFamily="Roboto" component="p" sx={mailStyle}>
@@ -32,9 +32,9 @@ export const FooterMail = () => (
     </Box>
     <Box sx={phone}>
       <Link href="tel:88007772233" target="_blank">
-      <IconButton>
-        <LocalPhoneOutlinedIcon sx={localPhoneIconStyle} />
-      </IconButton>
+        <IconButton>
+          <LocalPhoneOutlinedIcon sx={localPhoneIconStyle} />
+        </IconButton>
       </Link>
       <Box>
 
@@ -49,29 +49,29 @@ export const FooterMail = () => (
     </Box>
     <Box sx={social}>
       <Link href="https://www.facebook.com/" target="_blank">
-      <IconButton>
-        <FacebookIcon sx={{ fill: '#2FD3AE' }} />
-      </IconButton>
+        <IconButton>
+          <FacebookIcon sx={{ fill: '#2FD3AE' }} />
+        </IconButton>
       </Link>
       <Link href="https://www.instagram.com/" target="_blank">
-      <IconButton>
-        <InstagramIcon sx={{ fill: '#2FD3AE' }} />
-      </IconButton>
+        <IconButton>
+          <InstagramIcon sx={{ fill: '#2FD3AE' }} />
+        </IconButton>
       </Link>
       <Link href="https://www.youtube.com/" target="_blank">
-      <IconButton>
-        <YouTubeIcon sx={{ fill: '#2FD3AE' }} />
-      </IconButton>
+        <IconButton>
+          <YouTubeIcon sx={{ fill: '#2FD3AE' }} />
+        </IconButton>
       </Link>
       <Link href="https://twitter.com/" target="_blank">
-      <IconButton>
-        <TwitterIcon sx={{ fill: '#2FD3AE' }} />
-      </IconButton>
+        <IconButton>
+          <TwitterIcon sx={{ fill: '#2FD3AE' }} />
+        </IconButton>
       </Link>
       <Link href="https://www.linkedin.com/" target="_blank">
-      <IconButton>
-        <LinkedInIcon sx={{ fill: '#2FD3AE' }} />
-      </IconButton>
+        <IconButton>
+          <LinkedInIcon sx={{ fill: '#2FD3AE' }} />
+        </IconButton>
       </Link>
     </Box>
   </Box>

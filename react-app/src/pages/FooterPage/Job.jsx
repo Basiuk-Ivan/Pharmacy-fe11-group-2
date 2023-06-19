@@ -37,7 +37,7 @@ export const Job = () => (
 
       по телефону: 0-800-999-999 (безкоштовно з усіх мобільних операторів);<br />
       відправляйте своє резюме на електронну пошту:&nbsp;<MailTo><a href="mailto:fe.11.group.c@gmail.com">fe.11.group.c@gmail.com</a>.
-      </MailTo>
+                                                         </MailTo>
     </Typography>
     <br />
     <br />

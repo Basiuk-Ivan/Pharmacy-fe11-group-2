@@ -36,8 +36,8 @@ export const textForquantityStyles = {
 export const boxForImg = {
   width: '220px',
   height: '170px',
-  padding: "5px",
-  display:"flex",
+  padding: '5px',
+  display: 'flex',
   '@media (max-width: 640px)': {
     margin: '0 auto'
   }

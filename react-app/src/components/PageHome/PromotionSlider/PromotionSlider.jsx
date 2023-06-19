@@ -34,11 +34,10 @@ const PromotionSlider = () => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-//change data on prods
-        const { data} = await response.json();
-        console.log(data);
-//change data on prods
-//         setProducts(prods);
+
+        const { data } = await response.json();
+
+        setProducts(data);
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Error fetching products:', error);

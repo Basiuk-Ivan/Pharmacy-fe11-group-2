@@ -2,7 +2,6 @@ import { Box, List, ListItemButton, ListItemText } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { listItemStyle, listStyle } from '../style/index';
 
-
 export const FeedBackList = () => (
   <Box>
     <List sx={listStyle}>
