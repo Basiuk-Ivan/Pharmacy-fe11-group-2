@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Typography } from '@mui/material';
-import { CustomTextField, StyledButton, UnderlineSpan, HighlightSpan } from '../style';
+import { CustomTextField, StyledButton, UnderlineSpan, HighlightSpan } from '../Style';
 
 export const LoginForm = ({ activeTab, handleFormSubmit }) => (
   <Formik
