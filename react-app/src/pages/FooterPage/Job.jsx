@@ -35,8 +35,8 @@ export const Job = () => (
         <Typography fontFamily="Roboto" component="p">
             З питань працевлаштування звертайтеся:<br/>
             по телефону: 0-800-999-999 (безкоштовно з усіх мобільних операторів);<br/>
-            відправляйте своє резюме на електронну пошту:&nbsp;<MailTo><a
-            href="mailto:fe.11.group.c@gmail.com">fe.11.group.c@gmail.com</a>.
+            відправляйте своє резюме на електронну пошту:&nbsp;<MailTo>
+            <a href="mailto:fe.11.group.c@gmail.com">fe.11.group.c@gmail.com</a>.
         </MailTo>
         </Typography>
         <br/>
