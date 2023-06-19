@@ -38,12 +38,12 @@ const getAllProduct = async (req, res) => {
         }
 console.log(searchString);
         const totalFound = await ProductDB.countDocuments(searchString);
-        const prods = await ProductDB.find( searchString )
+        const data = await ProductDB.find( searchString )
             .limit(perPage)
             .skip(skip)
             .sort({'price': sortStr });
 
-        return res.json({totalFound, prods});
+        return res.json({totalFound, data});
     } catch (e) {
         res.status(500).json(e.message);
     }
