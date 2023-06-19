@@ -4,8 +4,10 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Box, Typography, useMediaQuery, useTheme, Skeleton } from '@mui/material';
 import ProductCard from '../../ProductCard';
-import { wrapperForPromotion, promotionStyles } from './style';
+import { request } from '../../../tools/request';
+
 import 'swiper/swiper-bundle.min.css';
+import { wrapperForPromotion, promotionStyles } from './style';
 import './style/CustomSlider.scss';
 
 const PromotionSlider = () => {
@@ -28,18 +30,16 @@ const PromotionSlider = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const url = 'http://localhost:3004/api/product?promotionOfTheMonth=true';
-        const response = await fetch(url);
+        const { result } = await request({
+          url: '',
+          method: 'GET',
+          params: { promotionOfTheMonth: true }
+        });
 
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-
-        const { data } = await response.json();
+        const { data } = result;
 
         setProducts(data);
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.error('Error fetching products:', error);
       }
     };

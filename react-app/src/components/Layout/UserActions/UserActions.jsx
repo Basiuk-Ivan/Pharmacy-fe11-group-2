@@ -6,9 +6,10 @@ import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import { MobileMenu } from './components/MobileMenu';
-import { StyledBadge, wrapForActionsStyles, fillForIcon, colorForBadge } from './style';
 import { openModal } from '../../../redux/slice/modalSlice';
 import { setToken } from '../../../redux/slice/isToken';
+
+import { StyledBadge, wrapForActionsStyles, fillForIcon, colorForBadge } from './style';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -16,8 +17,6 @@ const UserActions = () => {
   const dispatch = useDispatch();
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
   const cartItems = useSelector(state => state.itemCards.items);
-  // const isToken = useSelector(state => state.isToken.isToken);
-  // console.log('isToken:', isToken);
 
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [hasToken, setHasToken] = useState(false);

@@ -7,10 +7,9 @@ import { changePage } from '../../../redux/slice/numPageSlice';
 
 function PaginationProducts() {
   const dispatch = useDispatch();
+
   const filterBase = useSelector(state => state.filterBase);
-
   const { totalFound } = useSelector(state => state.products);
-
   const { numPage } = useSelector(state => state.numPage);
 
   const totalPage = Math.ceil(totalFound / filterBase.limit);
@@ -29,8 +28,6 @@ function PaginationProducts() {
         color="primary"
         variant="outlined"
         shape="rounded"
-        // hidePrevButton
-        // hideNextButton
         boundaryCount={1}
         siblingCount={0}
         onChange={(_, num) => handleChange(num)}

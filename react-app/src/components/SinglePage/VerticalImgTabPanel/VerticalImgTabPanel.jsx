@@ -4,7 +4,6 @@ import { tabsClasses } from '@mui/material/Tabs';
 import s from './VerticalImgTabPanel.module.scss';
 
 const TabPanel = props => {
-  // eslint-disable react/jsx-props-no-spreading
   const { children, value, index, ...other } = props;
 
   return (
@@ -16,10 +15,11 @@ const TabPanel = props => {
       {...other}
     >
       {value === index && (
-        <Box sx={{
-          paddingLeft: { xs: 0.4, sm: 3, md: 3, lg: 3 },
-          paddingTop: { xs: 1, sm: 3, md: 3, lg: 3 }
-        }}
+        <Box
+          sx={{
+            paddingLeft: { xs: 0.4, sm: 3, md: 3, lg: 3 },
+            paddingTop: { xs: 1, sm: 3, md: 3, lg: 3 }
+          }}
         >
           <Typography component="div">{children}</Typography>
         </Box>
@@ -39,7 +39,6 @@ const VerticalImgTabPanel = ({ productItem }) => {
   };
 
   return (
-
     <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: '100%' }}>
       <Tabs
         orientation="vertical"

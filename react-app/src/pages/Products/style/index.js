@@ -14,14 +14,13 @@ export const asideStyles = {
   display: 'flex',
   flexDirection: 'column',
   '@media (min-width: 1200px)': {
-    width: '240px',
+    width: '240px'
   }
 };
 
 export const sortingAndCardsStyles = {
   display: 'flex',
-  flexDirection: 'column',
-  // width: '100%',
+  flexDirection: 'column'
 };
 
 export const paginationWrapperStyles = {

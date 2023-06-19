@@ -1,17 +1,16 @@
-import { Typography } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import { blogDesc, blogImg, blogTitle, Item } from './style/index';
 
-const BlogItem = ({ BlogImg, BlogImgName }) => (
+const BlogItem = ({ BlogImg, BlogImgName, blogTitleText, blogDescriptionText }) => (
   <Item>
     <Typography component="div" sx={blogImg}>
       <img src={BlogImg} alt={`post-${BlogImgName}`} />
     </Typography>
-    <Typography component="p" sx={blogTitle}>
-      Активне життя без "припливів" - все у ваших руках
+    <Typography component="div" sx={blogTitle}>
+      <Box>{blogTitleText}</Box>
     </Typography>
-    <Typography component="p" sx={blogDesc}>
-      І все ж природу обдурити неможливо, і майже кожна жінка після сорока років замислюється про наближення
-      клімаксу.
+    <Typography component="div" sx={blogDesc}>
+      {blogDescriptionText}
     </Typography>
   </Item>
 );

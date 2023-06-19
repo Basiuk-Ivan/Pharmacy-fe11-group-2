@@ -17,7 +17,6 @@ import { roundPrice } from '../../../utils/ActionsWithProduct/roundPrice';
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const ProductCardMainBlock = ({ productItem }) => {
   const dispatch = useDispatch();
-  // const { id } = useParams();
 
   const [value, setValue] = useState(null);
   const [activeSubstance, setActiveSubstance] = useState('');
@@ -283,9 +282,7 @@ const ProductCardMainBlock = ({ productItem }) => {
         >
           <Grid item xs={12} lg={9} sx={{ paddingLeft: '0px' }}>
             <Typography variant="h5" gutterBottom sx={{ paddingLeft: '0px' }}>
-              {productItem.discount > 0
-                ? `${mainPrice} ГРН. `
-                : `${productItem.price} ГРН.`}
+              {productItem.discount > 0 ? `${mainPrice} ГРН. ` : `${productItem.price} ГРН.`}
             </Typography>
           </Grid>
           <Grid item xs={12} lg={3}>
@@ -300,101 +297,96 @@ const ProductCardMainBlock = ({ productItem }) => {
           </Grid>
         </Grid>
 
-        {(productItem.price !== mainPrice) && (
-        <>
-          <Typography
-            variant="h4"
-            sx={{
-              paddingLeft: '30px',
-              fontSize: '14px',
-              color: '828282',
-              textDecoration: 'line-through'
-            }}
-          >
-            Актуальна ціна
-          </Typography>
-          <Typography
-            variant="body2"
-            sx={{
-              paddingLeft: '30px',
-              fontSize: '14px',
-              fontWeight: 700,
-              color: '#DD8888',
-              textDecoration: 'line-through'
-            }}
-          >
-            {productItem.price} ГРН.
-          </Typography>
-        </>
+        {productItem.price !== mainPrice && (
+          <>
+            <Typography
+              variant="h4"
+              sx={{
+                paddingLeft: '30px',
+                fontSize: '14px',
+                color: '828282',
+                textDecoration: 'line-through'
+              }}
+            >
+              Актуальна ціна
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                paddingLeft: '30px',
+                fontSize: '14px',
+                fontWeight: 700,
+                color: '#DD8888',
+                textDecoration: 'line-through'
+              }}
+            >
+              {productItem.price} ГРН.
+            </Typography>
+          </>
         )}
 
         <Stack direction="column" justifyContent="center" alignItems="center" spacing={2} sx={{ mb: '12px' }}>
-          {!isInCart
-                        && (
-                        <Button
-                          variant="outlined"
-                          disabled={(productItem.quantity < 1)}
-                          sx={{
-                            margin: '25px 0 17px',
-                            color: '#525A68',
-                            borderRadius: '50px',
-                            width: { xs: '200px', sm: '240px' }
-                          }}
-                        >
-                          Купити в один клік
-                        </Button>
-                        )}
+          {!isInCart && (
+            <Button
+              variant="outlined"
+              disabled={productItem.quantity < 1}
+              sx={{
+                margin: '25px 0 17px',
+                color: '#525A68',
+                borderRadius: '50px',
+                width: { xs: '200px', sm: '240px' }
+              }}
+            >
+              Купити в один клік
+            </Button>
+          )}
           <Stack>
-            {!isInCart
-              ? (
-                <Button
-                  variant="outlined"
-                  onClick={() => handleAddToCart(productItem)}
-                  disabled={(productItem.quantity < 1)}
-                  sx={{
-                    width: '200px',
-                    color: '#ffffff',
-                    borderRadius: '50px',
-                    border: 'none',
-                    backgroundColor: '#2FD3AE',
-                    '&:hover': {
-                      color: '#2FD3AE'
-                    }
-                  }}
+            {!isInCart ? (
+              <Button
+                variant="outlined"
+                onClick={() => handleAddToCart(productItem)}
+                disabled={productItem.quantity < 1}
+                sx={{
+                  width: '200px',
+                  color: '#ffffff',
+                  borderRadius: '50px',
+                  border: 'none',
+                  backgroundColor: '#2FD3AE',
+                  '&:hover': {
+                    color: '#2FD3AE'
+                  }
+                }}
+              >
+                Додати до корзини
+              </Button>
+            ) : (
+              <Stack alignItems="center">
+                <Typography
+                  component="span"
+                  variant="body1"
+                  sx={{ color: '#2FD3AE', fontSize: '16px', m: '10px 0' }}
                 >
-                  Додати до корзини
-                </Button>
-              )
-
-              : (
-                <Stack alignItems="center">
-                  <Typography
-                    component="span"
-                    variant="body1"
-                    sx={{ color: '#2FD3AE', fontSize: '16px', m: '10px 0' }}
+                  Товар додано до корзини
+                </Typography>
+                <NavLink to="/cart">
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      width: '200px',
+                      color: '#ffffff',
+                      borderRadius: '50px',
+                      border: 'none',
+                      backgroundColor: '#12608d',
+                      '&:hover': {
+                        color: '#12608d'
+                      }
+                    }}
                   >
-                    Товар додано до корзини
-                  </Typography>
-                  <NavLink to="/cart">
-                    <Button
-                      variant="outlined"
-                      sx={{
-                        width: '200px',
-                        color: '#ffffff',
-                        borderRadius: '50px',
-                        border: 'none',
-                        backgroundColor: '#12608d',
-                        '&:hover': {
-                          color: '#12608d'
-                        }
-                      }}
-                    >
-                      Перейти до корзини
-                    </Button>
-                  </NavLink>
-
-                </Stack>
-              )}
+                    Перейти до корзини
+                  </Button>
+                </NavLink>
+              </Stack>
+            )}
           </Stack>
         </Stack>
       </Grid>

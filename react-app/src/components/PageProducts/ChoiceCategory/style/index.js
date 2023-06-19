@@ -1,7 +1,6 @@
 export const choiceCategoryStyle = {
   boxShadow: '0px 5px 20px 0px #0B361D1A',
-  marginBottom: '40px',
-  // padding: '0 9px'
+  marginBottom: '40px'
 };
 
 export const titleCategoryStyle = {

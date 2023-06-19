@@ -1,16 +1,13 @@
 /* eslint-disable */
-import { Box, Button, Link, Rating, Typography } from '@mui/material';
+import { Box, Rating, Typography } from '@mui/material';
 import React from 'react';
 import {
   ave,
   aveRate,
   aveText,
-  btnFeed,
   feedBack,
-  linkFeed,
   mainFeedback,
   StarRate,
-  totalCountFeed,
   totalRate,
   wrapperForTestimonials
 } from './style';
@@ -35,19 +32,11 @@ const Testimonials = () => (
       <Typography fontFamily="Roboto" component="div" sx={totalRate}>
         Загальний рейтинг на основі 4349 <br /> відгуків наших покупців
       </Typography>
-      <Box>
-        <Button variant="contained" sx={btnFeed}>
-          Залишити відгук
-        </Button>
-      </Box>
     </Box>
     <Box sx={feedBack}>
       <FeedKyiv />
       <FeedDnepr />
       <FeedLviv />
-      <Typography fontFamily="Roboto" component="div" sx={totalCountFeed}>
-        <Link sx={linkFeed}>Всі 4349 відгуків</Link>
-      </Typography>
     </Box>
   </Box>
 );

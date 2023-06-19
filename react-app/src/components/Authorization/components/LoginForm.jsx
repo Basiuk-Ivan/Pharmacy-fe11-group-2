@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Typography } from '@mui/material';
-import { CustomTextField, StyledButton, UnderlineSpan, HighlightSpan } from '../Style';
+import { CustomTextField, StyledButton, UnderlineSpan, HighlightSpan } from '../style';
 
 export const LoginForm = ({ activeTab, handleFormSubmit }) => (
   <Formik
@@ -15,7 +15,6 @@ export const LoginForm = ({ activeTab, handleFormSubmit }) => (
       password: Yup.string().required('Обовязкове поле').min(6, 'Мінімальна довжина пароля - 6 символів')
     })}
     onSubmit={handleFormSubmit}
-    // eslint-disable-next-line no-unused-vars
     validate={values => {
       const errors = {};
       return errors;

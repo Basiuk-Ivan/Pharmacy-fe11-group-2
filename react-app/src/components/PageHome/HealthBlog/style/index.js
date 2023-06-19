@@ -80,7 +80,6 @@ export const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),
   color: theme.palette.text.secondary,
   width: '275px',
-  // height: '375px',
   display: 'flex',
   flexDirection: 'column',
   gap: '20px',

@@ -16,10 +16,14 @@ const PersonalData = () => {
     surname: Yup.string().required('Обовязкове поле'),
     name: Yup.string().required('Обовязкове поле'),
     email: Yup.string().email('Невірний формат email').required('Обовязкове поле'),
-    phone: Yup.string().required('Обовязкове поле').matches(/^[0-9]*$/, 'Можна вводити тільки цифри'),
+    phone: Yup.string()
+      .required('Обовязкове поле')
+      .matches(/^[0-9]*$/, 'Можна вводити тільки цифри'),
     newpassword: Yup.string().required('Обовязкове поле').min(6, 'Мінімальна довжина пароля - 6 символів'),
 
-    confirmpassword: Yup.string().required('Обовязкове поле').oneOf([Yup.ref('newpassword'), null], 'Паролі повинні співпадати'),
+    confirmpassword: Yup.string()
+      .required('Обовязкове поле')
+      .oneOf([Yup.ref('newpassword'), null], 'Паролі повинні співпадати')
   });
 
   const formik = useFormik({
@@ -33,7 +37,7 @@ const PersonalData = () => {
       email: '',
       phone: '',
       newpassword: '',
-      confirmpassword: '',
+      confirmpassword: ''
     },
     validationSchema,
     onSubmit: (values, { resetForm }) => {
@@ -44,7 +48,6 @@ const PersonalData = () => {
 
   const daysDate = () => {
     const items = [];
-    // eslint-disable-next-line no-plusplus
     for (let x = 1; x < 32; x++) {
       items.push(
         <MenuItem key={x + 9} value={`${x}`}>
@@ -56,7 +59,20 @@ const PersonalData = () => {
   };
 
   const monthsDate = () => {
-    const items = ['січень', 'лютий', 'березень', 'квітень', 'травень', 'червень', 'липень', 'серпень', 'вересень', 'жовтень', 'листопад', 'грудень'];
+    const items = [
+      'січень',
+      'лютий',
+      'березень',
+      'квітень',
+      'травень',
+      'червень',
+      'липень',
+      'серпень',
+      'вересень',
+      'жовтень',
+      'листопад',
+      'грудень'
+    ];
     return items.map(el => (
       <MenuItem key={el} value={`${el}`}>
         {el}
@@ -66,7 +82,6 @@ const PersonalData = () => {
 
   const yearsDate = () => {
     const items = [];
-    // eslint-disable-next-line no-plusplus
     for (let x = 2023; x > 1900; x--) {
       items.push(
         <MenuItem key={x + 9} value={`${x}`}>
@@ -98,9 +113,7 @@ const PersonalData = () => {
           error={Boolean(formik.touched.name && formik.errors.name)}
           helperText={formik.touched.name && formik.errors.name}
         />
-        <Typography>
-          Дата народження
-        </Typography>
+        <Typography>Дата народження</Typography>
         <Grid container>
           <Grid item md={3}>
             <ChangedTextField

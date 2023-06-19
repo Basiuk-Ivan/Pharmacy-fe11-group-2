@@ -4,11 +4,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import { NavLink } from 'react-router-dom';
-
-// import { Search, SearchIconWrapper, StyledInputBase, searchIconStyle, inputStyles } from './style';
 import { request } from '../../../tools/request';
 
-// import axios from 'axios';
 import {
   Search,
   SearchIconWrapper,
@@ -51,7 +48,6 @@ const SearchActions = () => {
           isFetchIdRef.current = setTimeout(() => setIsFetch(true), noItemsDelay);
         }
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.error('Error fetching data:', error);
       }
     };
