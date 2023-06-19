@@ -16,7 +16,7 @@ const UserActions = () => {
   const dispatch = useDispatch();
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
   const cartItems = useSelector(state => state.itemCards.items);
-  const isToken = useSelector(state => state.isToken.isToken);
+  // const isToken = useSelector(state => state.isToken.isToken);
   // console.log('isToken:', isToken);
 
   const [anchorElUser, setAnchorElUser] = useState(null);

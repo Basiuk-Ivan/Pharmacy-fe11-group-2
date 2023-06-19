@@ -3,7 +3,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { Modal, Tab, Tabs, Typography, Box } from '@mui/material';
 // eslint-disable-next-line camelcase
-import jwt_decode from 'jwt-decode';
+// import jwt_decode from 'jwt-decode';
 import { theme } from '../../tools/muiTheme';
 import { closeModal } from '../../redux/slice/modalSlice';
 import { LoginForm } from './components/LoginForm';
@@ -39,7 +39,7 @@ const AuthButton = () => {
       }
       const { token } = await response.json();
 
-      const decodedToken = jwt_decode(token);
+      // const decodedToken = jwt_decode(token);
 
       window.localStorage.setItem('token', token);
       dispatch(setToken(token));

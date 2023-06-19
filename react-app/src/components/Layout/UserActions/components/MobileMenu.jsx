@@ -139,10 +139,10 @@ export const MobileMenu = () => {
               <AccordionDetails>
                 <Box>
                   {settings.map(setting => (
-                      // eslint-disable-next-line react/jsx-indent
+
                     <MenuItem component="div" key={setting} onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">{setting}</Typography>
-                      </MenuItem>
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
                   ))}
                 </Box>
               </AccordionDetails>
