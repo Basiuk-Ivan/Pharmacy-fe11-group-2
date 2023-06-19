@@ -50,52 +50,40 @@ const OrderList = () => {
             >
                 Ваше замовлення
             </Typography>
-            <Grid container sx={{overflowY: 'auto', maxHeight: '300px'}}>
+            <Grid container sx={{overflowY: 'auto', maxHeight: '300px', paddingRight:"10px"}}>
                 {products.map(el => {
                     const currentPrice = roundPrice(el) * el.quantity;
                     return (
                         <Grid container key={el.id} alignItems="center"
                               sx={{mt: "10px", gap: "10px", border: "1px solid #2fd3ae"}}>
-                            <Grid item md={12} sx={{ gap:"5px"}}>
-                                <Grid container>
-                                    <Grid item md={3}>
-                                        <img src={`${el.img[0]}`} width="70px"  alt=""/>
+                            <Grid item md={12} sx={{ gap:"10px"}}>
+                                <Grid container spacing={1}>
+                                    <Grid item md={3} >
+                                        <img src={`${el.img[0]}`} width="80px"  alt=""/>
                                     </Grid>
-                                    <Grid item md={9} sx={{alingSelf:"center"}}>
+                                    <Grid item md={9} sx={{display:"flex", flexDirection:"column", gap:"5px"}}>
                                         <Typography
-                                            sx={{textAlign: 'left', fontSize: "16px"}}>{`${el.name}`}</Typography>
+                                            sx={{textAlign: 'left', fontSize: "14px", fontWeight:500}}>{`${el.name}`}</Typography>
+                                        <Typography sx={{ textAlign: 'left',fontSize: "14px" }}>Ціна за одиницю: {`${currentPrice} грн.`}</Typography>
+                                        <Typography
+                                            sx={{
+                                                fontSize: "14px",
+                                                fontWeight:500
+                                            }}
+                                        >
+                                            Кількість: {`${el.quantity}`}
+                                        </Typography>
                                     </Grid>
                                 </Grid>
                             </Grid>
 
                             <Grid item md={12} sx={{ gap:"5px"}}>
                                 <Grid container>
-                                    <Grid item md={4} sx={{ flexGrow: 0 }}>
-                                        <Typography
-                                            sx={{
-                                                fontSize: "14px",
-                                                textAlign: "center"
-                                            }}
-                                        >
-                                            Кількість
-                                        </Typography>
+                                    <Grid item md={12} sx={{ flexGrow: 0 }}>
 
-                                        <Typography
-                                            sx={{
-                                                textAlign: 'center',
-                                                // borderRadius: '50px',
-                                                padding: '2px',
-                                                backgroundColor: '#dadada',
-                                                fontSize: "12px",
-                                                flexGrow: 0
-                                            }}
-                                        >
-                                            {`${el.quantity}`}
-                                        </Typography>
+
                                     </Grid>
-                                    <Grid item md={8}>
-                                        <Typography sx={{ textAlign: 'center' }}>Ціна за од.: {`${currentPrice} грн.`}</Typography>
-                                    </Grid>
+
                                 </Grid>
                             </Grid>
                         </Grid>
