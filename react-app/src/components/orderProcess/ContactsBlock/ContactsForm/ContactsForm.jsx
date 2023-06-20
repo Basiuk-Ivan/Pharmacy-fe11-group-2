@@ -59,7 +59,6 @@ const ContactsForm = ({ products }) => {
     },
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
-      console.log(values);
       const { status } = await request({
         url: '/order',
         method: 'POST',

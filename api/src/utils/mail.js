@@ -21,7 +21,7 @@ export const sendMailOrder = async ({ products, email, totalPrice }) => {
   const message = `<p>Привіт, шановний клієнт. Це ваше замовлення </p>
         <ul>${productsList}</ul>
         <hr>
-        <div style="text-align: right">РАЗОМ:  ${totalPrice}$</div>
+        <div style="text-align: right">РАЗОМ:  ${totalPrice}грн</div>
         `;
   await transporter.sendMail({
     from: process.env.SMTP_USER,
