@@ -49,9 +49,7 @@ const MainSlider = ({ products }) => {
         >
           {productItems.map(item => (
             <SwiperSlide key={item.id}>
-              {/* <NavLink to={`/${product?.categories[0]}/${product?.id}`}> */}
               <ProductSlider product={item} />
-              {/* </NavLink> */}
             </SwiperSlide>
           ))}
 

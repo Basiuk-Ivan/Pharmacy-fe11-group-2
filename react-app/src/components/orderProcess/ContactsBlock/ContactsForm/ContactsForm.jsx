@@ -17,7 +17,7 @@ const ChangedTextField = styled(TextField)(({ theme }) => ({
 
 const nameRegExp = /[a-zA-zа-яА-яёЁ]$/;
 
-const ContactsForm = () => {
+const ContactsForm = ({ products }) => {
   const orderPaymentMethod = useSelector(state => state.order.PaymentMethodValue);
   const dispatch = useDispatch();
 
@@ -33,7 +33,9 @@ const ContactsForm = () => {
       .required('Введіть своє прізвище кирилицею')
       .matches(nameRegExp, 'Введіть своє прізвище кирилицею')
       .min(2, 'Мінімум два символи'),
-    phone: Yup.number().required('Введіть номер мобільного телефону').typeError('Введіть номер мобільного телефону'),
+    phone: Yup.number()
+      .required('Введіть номер мобільного телефону')
+      .typeError('Введіть номер мобільного телефону'),
     street: Yup.string().required('Введіть назву вулиці'),
     apartment: Yup.number().typeError('Введіть номер квартири')
   });
@@ -48,7 +50,8 @@ const ContactsForm = () => {
       phone: '',
       street: '',
       apartment: '',
-      paymentMethod: `${orderPaymentMethod}`
+      paymentMethod: `${orderPaymentMethod}`,
+      products: []
     },
     validationSchema,
     onSubmit: (values, { resetForm }) => {
@@ -57,6 +60,10 @@ const ContactsForm = () => {
       resetForm();
     }
   });
+
+  useEffect(() => {
+    formik.setFieldValue('products', products);
+  }, [products]);
 
   useEffect(() => {
     formik.setFieldValue('paymentMethod', orderPaymentMethod);

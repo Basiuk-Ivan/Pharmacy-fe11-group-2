@@ -52,12 +52,12 @@ const create = async (req, res) => {
       payload: userData,
     });
     const { email, firstName, secondName } = userData;
-    // await sendMailRegistration({
-    //   email,
-    //   firstName,
-    //   secondName,
-    //   password: passwordNotHash,
-    // });
+    await sendMailRegistration({
+      email,
+      firstName,
+      secondName,
+      password: passwordNotHash,
+    });
 
     res.json({ token });
   } catch (err) {

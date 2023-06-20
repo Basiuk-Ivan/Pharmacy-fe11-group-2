@@ -1,9 +1,18 @@
 import OrderDB from "./OrdersModel.js";
+import ProductDB from '../product/ProductModel.js';
 import mongoose from "mongoose";
+import {fillFields} from "../product/ProductController.js";
+import {sendMailOrder} from "../utils/mail.js";
+
+
 
 export const createOrder = async (req, res) => {
     try {
-        const createdOrder = await OrderDB.create(req.body);
+
+        const productsData = await fillFields(req.body);
+        const createdOrder = await OrderDB.create({ ...req.body, products: productsData });
+        const [{ email, products, totalPrice }] = createdOrder;
+        await sendMailOrder({ products, email, totalPrice });
         res.json(createdOrder);
     } catch (e) {
         res.status(500).json(e.message);
