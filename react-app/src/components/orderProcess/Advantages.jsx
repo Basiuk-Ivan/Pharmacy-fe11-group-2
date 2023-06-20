@@ -30,7 +30,7 @@ const Advantages = () => (
         textAlign: 'center'
       }}
     >
-      <img src="./orderprocessTest/im1.png" alt="" />
+      <img src="./src/assets/orderprocess/im1.png" alt="" />
       <TypographyTitle>Асортимент</TypographyTitle>
       <TypographyData>Широкий вибір товарів</TypographyData>
     </Grid>
@@ -42,7 +42,7 @@ const Advantages = () => (
         textAlign: 'center'
       }}
     >
-      <img src="./orderprocessTest/im2.png" alt="" />
+      <img src="./src/assets/orderprocess/im2.png" alt="" />
       <TypographyTitle>Швидка доставка</TypographyTitle>
       <TypographyData>В будь-яке місто України</TypographyData>
     </Grid>
@@ -54,7 +54,7 @@ const Advantages = () => (
         textAlign: 'center'
       }}
     >
-      <img src="./orderprocessTest/im3.png" alt="" />
+      <img src="./src/assets/orderprocess/im3.png" alt="" />
       <TypographyTitle>Гарантія</TypographyTitle>
       <TypographyData>Вся продукція сертифікована</TypographyData>
     </Grid>
@@ -66,7 +66,7 @@ const Advantages = () => (
         textAlign: 'center'
       }}
     >
-      <img src="./orderprocessTest/im4.png" alt="" />
+      <img src="./src/assets/orderprocess/im4.png" alt="" />
       <TypographyTitle>Низькі ціни</TypographyTitle>
       <TypographyData>Ми намагаємось тримати найнижчі ціни серед конкурентів</TypographyData>
     </Grid>
