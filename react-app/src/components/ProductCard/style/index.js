@@ -71,6 +71,8 @@ export const productNameStyles = isInCart => ({
   fontSize: '16px',
   fontWeight: 500,
   color: '#525A68',
+  overflow: 'hidden',
+  maxHeight:'45px',
   '&:hover': {
     cursor: 'pointer',
     color: '#46baa0'
