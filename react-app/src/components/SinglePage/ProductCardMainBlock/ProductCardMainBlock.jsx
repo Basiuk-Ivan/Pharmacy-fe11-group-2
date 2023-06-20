@@ -129,16 +129,17 @@ const ProductCardMainBlock = ({ productItem }) => {
               </Typography>
               <Box>
                 <Grid container sx={{ rowGap: '5px' }}>
-                  {[{ title: 'Виробник', value: `${productItem?.manufacturer}` },
-                    { title: 'Діюча речовина', value: `${activeSubstance}` },
-                    { title: 'Термін придатності', value: `${productItem?.bestBeforeDate}` }]
-                    .map(({ title, value }) => (<Grid key={title} item xs={12} sx={{ mb: '5px' }}>
+                  {[{ title: 'Виробник', itemValue: `${productItem?.manufacturer}` },
+                    { title: 'Діюча речовина', itemValue: `${activeSubstance}` },
+                    { title: 'Термін придатності', itemValue: `${productItem?.bestBeforeDate}` }]
+                    .map(({ title, itemValue }) => (<Grid key={title} item xs={12} sx={{ mb: '5px' }}>
                       <Grid
                         container
                         justifyContent="flex-start"
                         alignItems="flex-start"
                         gap={0.5}
-                        sx={{ ml: '10px' }}>
+                        sx={{ ml: '10px' }}
+                      >
                         <Grid item>
                           <Stack direction="row" spacing={0.5} alignItems="center">
                             <Typography component="span" variant="body1" sx={bulletStyle} />
@@ -151,7 +152,8 @@ const ProductCardMainBlock = ({ productItem }) => {
                           {value}
                         </Grid>
                       </Grid>
-                    </Grid>))}
+                    </Grid>
+                    ))}
                 </Grid>
               </Box>
             </Box>
@@ -217,6 +219,7 @@ const ProductCardMainBlock = ({ productItem }) => {
           </Stack>
         </Stack>
       </Grid>
-    </Grid>);};
+    </Grid>);
+};
 
 export default ProductCardMainBlock;
