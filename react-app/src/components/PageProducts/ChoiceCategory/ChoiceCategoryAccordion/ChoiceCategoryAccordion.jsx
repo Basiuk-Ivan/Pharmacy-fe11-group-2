@@ -28,7 +28,7 @@ export default function ChoiceCategoryAccordion() {
   const dispatch = useDispatch();
   const [expanded, setExpanded] = React.useState(sessionStorage.getItem('panel') || false);
 
-  const [accordions, setAccordions] = useState(accordionsData);
+  const [accordions, setAccordions] = useState(JSON.parse(sessionStorage.getItem('accordionsData')) || accordionsData);
 
   useEffect(() => {
     dispatch(reset());
@@ -72,9 +72,13 @@ export default function ChoiceCategoryAccordion() {
     setAccordions(JSON.parse(sessionStorage.getItem('accordionsData')) || accordionsData);
   }, []);
 
-  const handleChange = panel => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-    sessionStorage.setItem('panel', expanded);
+  const handleChange = panel => {
+    return (event, isExpanded) => {
+      setExpanded(isExpanded ? panel : false);
+      sessionStorage.setItem('panel', expanded);
+      setAccordions(accordionsData);
+      sessionStorage.removeItem('accordionsData');
+    };
   };
 
   return (
