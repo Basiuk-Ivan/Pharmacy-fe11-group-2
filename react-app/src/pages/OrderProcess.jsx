@@ -37,7 +37,7 @@ const OrderProcess = () => {
       }
     };
     fetchProducts();
-  }, [productItemCart]);
+  }, []);
   return (
     <Container
       sx={{

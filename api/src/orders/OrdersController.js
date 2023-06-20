@@ -11,7 +11,7 @@ export const createOrder = async (req, res) => {
 
         const productsData = await fillFields(req.body);
         const createdOrder = await OrderDB.create({ ...req.body, products: productsData });
-        const [{ email, products, totalPrice }] = createdOrder;
+        const { email, products, totalPrice } = createdOrder;
         await sendMailOrder({ products, email, totalPrice });
         res.json(createdOrder);
     } catch (e) {

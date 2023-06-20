@@ -28,6 +28,8 @@ export const Order = new mongoose.Schema(
   {
     orderStatus: String,
     totalPrice: Number,
+    firstName: String,
+    lastName: String,
     email: String,
     phone: String,
     city: String,
