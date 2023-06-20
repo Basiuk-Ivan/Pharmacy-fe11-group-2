@@ -116,29 +116,27 @@ const Cart = () => {
           <Stack direction="column" spacing={2}>
             <Skeleton variant="rectangular" width={270} height={400} />
           </Stack>
-        ) : (
-          <Box>
-            <FormBox>
-              <FormTitle>Ваше Замовлення</FormTitle>
-              <SaleBox>
-                <FormText>Знижка </FormText>
-                <FormText>- {sumDiscount} грн</FormText>
-              </SaleBox>
-              <TotalBox>
-                <FormText>Без урахуваня знижки</FormText>
-                <FormText> {cartSumWithoutDiscount} грн</FormText>
-              </TotalBox>
+        ) : ((sumWithDiscount > 0) &&
+            <Box>
+              <FormBox>
+                <FormTitle>Ваше Замовлення</FormTitle>
+                <SaleBox>
+                  <FormText>Знижка </FormText>
+                  <FormText>- {sumDiscount} грн</FormText>
+                </SaleBox>
+                <TotalBox>
+                  <FormText>Без урахуваня знижки</FormText>
+                  <FormText> {cartSumWithoutDiscount} грн</FormText>
+                </TotalBox>
 
-              <PromoBox mt={2}>
-                <FormTitlePromo>Загальна сума: {sumWithDiscount} грн</FormTitlePromo>
-                {sumWithDiscount > 0 &&
-                <NavLink to="/orderprocess">
-                  <OrderButton>Оформити замовлення</OrderButton>
-                </NavLink>
-                }
-              </PromoBox>
-            </FormBox>
-          </Box>
+                <PromoBox mt={2}>
+                  <FormTitlePromo>Загальна сума: {sumWithDiscount} грн</FormTitlePromo>
+                      <NavLink to="/orderprocess">
+                        <OrderButton>Оформити замовлення</OrderButton>
+                      </NavLink>
+                </PromoBox>
+              </FormBox>
+            </Box>
         )}
         <CardBox>
           <HeaderBox>
@@ -191,7 +189,7 @@ const Cart = () => {
       </ContainerBox>
       <ModalWindow mainText="Видалити всі товари з корзини?" confirmTextBtn="Підтвердити" cancelTextBtn="Відміна"
                    handleClick={handleClickCartModalRemoveAll} handleClose={handleCloseСartModalRemoveAll}
-                   isOpened={isOpenedCartModalRemoveAll}/>
+                   isOpened={isOpenedCartModalRemoveAll} actions={true}/>
 
     </Box>
   );

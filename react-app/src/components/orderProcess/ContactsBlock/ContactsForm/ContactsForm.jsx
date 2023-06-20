@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 /* eslint-disable no-console */
 import { TextField, Grid, Typography, Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -7,6 +7,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { ThemeProvider } from '@mui/material/styles';
 import {theme} from "../../../../tools/muiTheme";
+import {openOrderModal} from "../../../../redux/slice/cartItems.js";
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),
@@ -19,6 +20,7 @@ const nameRegExp = /[a-zA-zа-яА-яёЁ]$/;
 
 const ContactsForm = () => {
   const orderPaymentMethod = useSelector(state => state.order.PaymentMethodValue);
+  const dispatch = useDispatch();
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -52,6 +54,7 @@ const ContactsForm = () => {
     validationSchema,
     onSubmit: (values, { resetForm }) => {
       console.log(values);
+      dispatch(openOrderModal())
       resetForm();
     }
   });

@@ -58,12 +58,13 @@ export const CartButton = ({ productItem, isInCart }) => {
           <CloseIcon />
         </IconButton>
         <ModalWindow
-          mainText="Видатили даний товар з корзини?"
+          mainText="Видалити даний товар з корзини?"
           confirmTextBtn="Так"
           cancelTextBtn="Ні"
           handleClick={() => handleClickCartModalRemoveOne(productItem)}
           handleClose={handleCloseСartModalRemoveOne}
           isOpened={isOpenedCartModalRemoveOne}
+          actions={true}
         />
       </>
     );

@@ -8,7 +8,8 @@ const cartSlice = createSlice({
     sumDiscount: JSON.parse(localStorage.getItem('sumDiscount')) || 0,
     sumWithDiscount: JSON.parse(localStorage.getItem('sumWithDiscount')) || 0,
     isOpenedCartModalRemoveAll: false,
-    isOpenedCartModalRemoveOne: false
+    isOpenedCartModalRemoveOne: false,
+    isOpenedOrderModal:false
   },
   reducers: {
     addToCart: (state, action) => {
@@ -62,6 +63,12 @@ const cartSlice = createSlice({
     closeCartModalRemoveOne: state => {
       state.isOpenedCartModalRemoveOne = false;
     },
+    openOrderModal: state => {
+      state.isOpenedOrderModal = true;
+    },
+    closeOrderModal: state => {
+      state.isOpenedOrderModal = false;
+    },
   }
 });
 
@@ -73,7 +80,9 @@ export const { addToCart,
   openCartModalRemoveAll,
   closeCartModalRemoveAll,
   openCartModalRemoveOne,
-  closeCartModalRemoveOne
+  closeCartModalRemoveOne,
+  openOrderModal,
+  closeOrderModal
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
