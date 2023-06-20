@@ -50,7 +50,7 @@ export const MenuAppBar = () => {
   };
 
   return (
-    <>git
+    <>
       <Box sx={wrapperStyles}>
         <IconButton
           size="large"
