@@ -74,7 +74,6 @@ const Cart = () => {
           dispatch(setSum(sumObj));
         }
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.error('Error fetching products:', error);
       }
     };
@@ -82,7 +81,6 @@ const Cart = () => {
   }, [dispatch, productItemCart]);
 
   useEffect(() => {
-    // eslint-disable-next-line arrow-body-style
     const updatedProducts = products.filter(item => {
       return productItemCart.find(cartItem => cartItem.id === item.id);
     });
@@ -90,8 +88,6 @@ const Cart = () => {
     setProducts(updatedProducts);
     const sumObj = countSum(productItemCart, updatedProducts);
     dispatch(setSum(sumObj));
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productItemCart]);
 
 
@@ -149,7 +145,6 @@ const Cart = () => {
             </IconButton> }
 
           </HeaderBox>
-          {/* eslint-disable-next-line no-nested-ternary */}
           {showSkeleton ? (
             <>
               <Skeleton />

@@ -3,15 +3,14 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import ProductCard from '../../ProductCard';
+import { request } from '../../../tools/request';
 import { wrapperForPromotion, promotionStyles } from './style';
 import 'swiper/swiper-bundle.min.css';
 import './style/CustomSlider.scss';
-import { request } from '../../../tools/request';
 
 const PromoMonth = () => {
   const [products, setProducts] = useState([]);
   const [slidesPerView, setslidesPerView] = useState(null);
-  // const { id, category } = useParams();
 
   const theme = useTheme();
   const isXs = useMediaQuery(theme.breakpoints.only('xs'));
@@ -28,23 +27,8 @@ const PromoMonth = () => {
 
         const { data } = result;
 
-        // const url = 'http://localhost:3004/api/product?promotionOfTheMonth=true';
-        // const response = await fetch(url);
-
-        // if (!response.ok) {
-        //   throw new Error('Network response was not ok');
-        // }
-
-        // const { data } = await response.json();
-
-        // const promotionProducts = prods.filter(item => {
-        //   const discount = (item.discount / item.price) * 100;
-        //   return discount >= 5;
-        // });
-
         setProducts(data);
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.error('Error fetching products:', error);
       }
     };

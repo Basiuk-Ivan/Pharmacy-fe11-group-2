@@ -35,7 +35,7 @@ const ReviewForm = () => {
         email: values.email,
         review: values.review
       };
-      // eslint-disable-next-line no-console
+
       console.table(finishedReview);
       resetForm();
     }

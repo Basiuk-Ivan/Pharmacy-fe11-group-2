@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-/* eslint-disable no-console */
+
 import { TextField, Grid, Typography, Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useFormik } from 'formik';
@@ -61,11 +61,9 @@ const ContactsForm = () => {
 
   useEffect(() => {
     formik.setFieldValue('paymentMethod', orderPaymentMethod);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderPaymentMethod]);
 
   return (
-      <ThemeProvider theme={theme}>
     <Container>
       <Typography
         variant="h5"

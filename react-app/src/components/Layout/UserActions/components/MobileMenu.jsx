@@ -39,7 +39,6 @@ export const MobileMenu = () => {
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  // eslint-disable-next-line no-unused-vars
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleCloseUserMenu = () => {
@@ -139,7 +138,6 @@ export const MobileMenu = () => {
               <AccordionDetails>
                 <Box>
                   {settings.map(setting => (
-
                     <MenuItem component="div" key={setting} onClick={handleCloseUserMenu}>
                       <Typography textAlign="center">{setting}</Typography>
                     </MenuItem>

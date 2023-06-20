@@ -41,6 +41,54 @@ const OrderList = () => {
                         return {...item1, ...arr2, quantity: item1.quantity};
                     });
 
+          setProducts(combinedArray);
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+    fetchProducts();
+  }, [productItemCart]);
+  return (
+    <Container disableGutters>
+      <Typography
+        sx={{
+          margin: '40px 0 20px 0',
+          fontFamily: 'Raleway, sans-serif',
+          color: '#4F4F4F',
+          fontWeight: '700',
+          fontSize: '24px',
+          width: '100%'
+        }}
+      >
+        Ваше замовлення
+      </Typography>
+      <Grid container sx={{ overflowY: 'auto', maxHeight: '300px' }}>
+        {products.map(el => {
+          const currentPrice = roundPrice(el) * el.quantity;
+          return (
+            <Grid container key={el.id} alignItems="center">
+              <Grid item md={3}>
+                <img src={`${el.img[0]}`} width="70px" height="60px" alt="" />
+              </Grid>
+              <Grid item md={5}>
+                <Typography sx={{ textAlign: 'left' }}>{`${el.name}`}</Typography>
+              </Grid>
+              <Grid item md={1}>
+                <Typography
+                  sx={{
+                    textAlign: 'center',
+                    borderRadius: '50px',
+                    padding: '2px',
+                    backgroundColor: '#2fd3ae'
+                  }}
+                >
+                  {`${el.quantity}`}
+                </Typography>
+              </Grid>
+              <Grid item md={3}>
+                <Typography sx={{ textAlign: 'center' }}>{`${currentPrice} грн.`}</Typography>
+              </Grid>
                     setProducts(combinedArray);
                 }
             } catch (error) {

@@ -1,11 +1,7 @@
 import { useState, useEffect } from 'react';
-
 import { Container, Typography, Box, Grid, Tabs, Tab, Skeleton, Stack } from '@mui/material';
-
 import { useParams } from 'react-router-dom';
-
 import { ThemeProvider, createTheme, styled } from '@mui/material/styles';
-
 import ProductCardMainBlock from '../../components/SinglePage/ProductCardMainBlock';
 import ProductCardInstruction from '../../components/SinglePage/ProductCardInstruction';
 import ProductAnalogiesCardContainer from '../../components/SinglePage/ProductAnalogiesCardContainer';
@@ -100,7 +96,6 @@ const ProductPage = () => {
           setProduct(firstProduct);
         }
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.error('Error fetching product:', error);
       }
     };

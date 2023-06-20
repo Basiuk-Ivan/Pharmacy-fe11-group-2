@@ -19,7 +19,6 @@ const FavouriteBlock = () => {
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
 
   const dispatch = useDispatch();
-  // const isInCart = false;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -52,22 +51,18 @@ const FavouriteBlock = () => {
           }
         }
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.error('Error fetching products:', error);
       }
     };
     fetchProducts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  }, [favoriteItems]);
 
   useEffect(() => {
-    // eslint-disable-next-line arrow-body-style
     const updatedProducts = products.filter(item => {
       return favoriteItems.find(favoriteItem => favoriteItem.id === item.id);
     });
 
     setProducts(updatedProducts);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [favoriteItems]);
 
   const delFromFav = () => {
@@ -89,7 +84,6 @@ const FavouriteBlock = () => {
       }}
     >
       <Bread />
-      {/* eslint-disable-next-line no-nested-ternary */}
       {showSkeleton ? (
         <Stack direction="row" spacing={2}>
           <Box>
@@ -165,10 +159,7 @@ const FavouriteBlock = () => {
           <Grid container spacing={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
             {products.map(item => (
               <Grid item key={item.id}>
-                <ProductCard
-                  productItem={item}
-                  // isInCart={isInCart}
-                />
+                <ProductCard productItem={item} />
               </Grid>
             ))}
           </Grid>
