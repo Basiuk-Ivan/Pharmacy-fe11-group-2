@@ -74,6 +74,7 @@ const Cart = () => {
           dispatch(setSum(sumObj));
         }
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Error fetching products:', error);
       }
     };
@@ -81,6 +82,7 @@ const Cart = () => {
   }, [dispatch, productItemCart]);
 
   useEffect(() => {
+    // eslint-disable-next-line arrow-body-style
     const updatedProducts = products.filter(item => {
       return productItemCart.find(cartItem => cartItem.id === item.id);
     });
@@ -88,6 +90,8 @@ const Cart = () => {
     setProducts(updatedProducts);
     const sumObj = countSum(productItemCart, updatedProducts);
     dispatch(setSum(sumObj));
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productItemCart]);
 
 
@@ -103,90 +107,91 @@ const Cart = () => {
 
 
   return (
-    <Box>
-      <IconBreadcrumbs />
+      <Box>
+        <IconBreadcrumbs />
 
-      <ContainerBox>
-        {}
-        {showSkeleton ? (
-          <Stack direction="column" spacing={2}>
-            <Skeleton variant="rectangular" width={270} height={400} />
-          </Stack>
-        ) : ((sumWithDiscount > 0) &&
-            <Box>
-              <FormBox>
-                <FormTitle>Ваше Замовлення</FormTitle>
-                <SaleBox>
-                  <FormText>Знижка </FormText>
-                  <FormText>- {sumDiscount} грн</FormText>
-                </SaleBox>
-                <TotalBox>
-                  <FormText>Без урахуваня знижки</FormText>
-                  <FormText> {cartSumWithoutDiscount} грн</FormText>
-                </TotalBox>
-
-                <PromoBox mt={2}>
-                  <FormTitlePromo>Загальна сума: {sumWithDiscount} грн</FormTitlePromo>
-                      <NavLink to="/orderprocess">
-                        <OrderButton>Оформити замовлення</OrderButton>
-                      </NavLink>
-                </PromoBox>
-              </FormBox>
-            </Box>
-        )}
-        <CardBox>
-          <HeaderBox>
-            <Typography variant="h4" gutterBottom>
-              Корзина
-            </Typography>
-            {products.length > 0 && <IconButton onClick={() => dispatch(openCartModalRemoveAll())}>
-              <DeleteOutlineTwoToneIcon />
-              <Typography>Очистити корзину</Typography>
-            </IconButton> }
-
-          </HeaderBox>
+        <ContainerBox>
+          {}
           {showSkeleton ? (
-            <>
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-            </>
-          ) : products.length > 0 ? (
-            <>
-              {products.map(item => (
-                <ProductCard key={item.id} productItem={item} isInCart={isInCart} />
-              ))}
-            </>
-          ) : (
-            <Typography
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                fontSize: 24,
-                fontWeight: 400,
-                mt: '100px',
-                mb: '400px'
-              }}
-            >
-              Додайте товар в корзину для відображення на цій сторінці
-            </Typography>
-          )}
-        </CardBox>
-      </ContainerBox>
-      <ModalWindow mainText="Видалити всі товари з корзини?" confirmTextBtn="Підтвердити" cancelTextBtn="Відміна"
-                   handleClick={handleClickCartModalRemoveAll} handleClose={handleCloseСartModalRemoveAll}
-                   isOpened={isOpenedCartModalRemoveAll} actions={true}/>
+              <Stack direction="column" spacing={2}>
+                <Skeleton variant="rectangular" width={270} height={400} />
+              </Stack>
+          ) : ((sumWithDiscount > 0) &&
+              <Box>
+                <FormBox>
+                  <FormTitle>Ваше Замовлення</FormTitle>
+                  <SaleBox>
+                    <FormText>Знижка </FormText>
+                    <FormText>- {sumDiscount} грн</FormText>
+                  </SaleBox>
+                  <TotalBox>
+                    <FormText>Без урахуваня знижки</FormText>
+                    <FormText> {cartSumWithoutDiscount} грн</FormText>
+                  </TotalBox>
 
-    </Box>
+                  <PromoBox mt={2}>
+                    <FormTitlePromo>Загальна сума: {sumWithDiscount} грн</FormTitlePromo>
+                    <NavLink to="/orderprocess">
+                      <OrderButton>Оформити замовлення</OrderButton>
+                    </NavLink>
+                  </PromoBox>
+                </FormBox>
+              </Box>
+          )}
+          <CardBox>
+            <HeaderBox>
+              <Typography variant="h4" gutterBottom>
+                Корзина
+              </Typography>
+              {products.length > 0 && <IconButton onClick={() => dispatch(openCartModalRemoveAll())}>
+                <DeleteOutlineTwoToneIcon />
+                <Typography>Очистити корзину</Typography>
+              </IconButton> }
+
+            </HeaderBox>
+            {/* eslint-disable-next-line no-nested-ternary */}
+            {showSkeleton ? (
+                <>
+                  <Skeleton />
+                  <Skeleton />
+                  <Skeleton />
+                  <Skeleton />
+                  <Skeleton />
+                  <Skeleton />
+                  <Skeleton />
+                  <Skeleton />
+                  <Skeleton />
+                  <Skeleton />
+                  <Skeleton />
+                  <Skeleton />
+                </>
+            ) : products.length > 0 ? (
+                <>
+                  {products.map(item => (
+                      <ProductCard key={item.id} productItem={item} isInCart={isInCart} />
+                  ))}
+                </>
+            ) : (
+                <Typography
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      fontSize: 24,
+                      fontWeight: 400,
+                      mt: '100px',
+                      mb: '400px'
+                    }}
+                >
+                  Додайте товар в корзину для відображення на цій сторінці
+                </Typography>
+            )}
+          </CardBox>
+        </ContainerBox>
+        <ModalWindow mainText="Видалити всі товари з корзини?" confirmTextBtn="Підтвердити" cancelTextBtn="Відміна"
+                     handleClick={handleClickCartModalRemoveAll} handleClose={handleCloseСartModalRemoveAll}
+                     isOpened={isOpenedCartModalRemoveAll} actions={true}/>
+
+      </Box>
   );
 };
 export default Cart;

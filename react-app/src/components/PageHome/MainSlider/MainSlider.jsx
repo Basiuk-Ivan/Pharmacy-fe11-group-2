@@ -47,7 +47,7 @@ const MainSlider = ({ products }) => {
           pagination={{ clickable: true, el: '.swiper-pagination' }}
           scrollbar={false}
         >
-          {productItems.map(item => (
+          {products.map(item => (
             <SwiperSlide key={item.id}>
               {/* <NavLink to={`/${product?.categories[0]}/${product?.id}`}> */}
               <ProductSlider product={item} />

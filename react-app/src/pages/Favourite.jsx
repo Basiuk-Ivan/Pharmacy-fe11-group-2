@@ -54,7 +54,7 @@ const Favourite = () => {
                          handleClick={handleClickModalRemoveAll} handleClose={handleCloseModalRemoveAll}
                          isOpened={isOpenModalRemoveAll} actions={true}/>
             <ModalWindow mainText="Додати всі обрані товари до кошика?" confirmTextBtn="Підтвердити" cancelTextBtn="Відміна"
-                         handleClick={() => handleClickModalAddToCart(products)} handleClose={handleCloseModalAddtoCart}
+                         handleClick={() => handleClickModalAddToCart(favourites)} handleClose={handleCloseModalAddtoCart}
                          isOpened={isOpenedModalAddtoCart} actions={true}/>
         </>
     );
