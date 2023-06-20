@@ -2,10 +2,9 @@ import * as React from 'react';
 import {
   NavLink,
   useLocation
-  // useParams
 } from 'react-router-dom';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useCallback, useEffect, useState } from 'react';
 
 import Accordion from '@mui/material/Accordion';
@@ -27,15 +26,9 @@ export default function ChoiceCategoryAccordion() {
   const currentCategory = location.pathname.slice(1);
 
   const dispatch = useDispatch();
-  const [expanded, setExpanded] = React.useState(false);
-
-  const filterBase = useSelector(state => state.filterBase);
+  const [expanded, setExpanded] = React.useState(sessionStorage.getItem('panel') || false);
 
   const [accordions, setAccordions] = useState(accordionsData);
-
-  useEffect(() => {
-    setExpanded(values[currentCategory]);
-  }, [currentCategory, expanded]);
 
   useEffect(() => {
     dispatch(reset());
@@ -45,31 +38,44 @@ export default function ChoiceCategoryAccordion() {
 
   const checkedSub = useCallback(
     (itemMainTitle, itemSubTitle) => {
-      setAccordions(prevChecked => prevChecked.map(item => (item.title === itemMainTitle
-        ? {
-          ...item,
-          sub: item.sub.map(elem => (elem.title === itemSubTitle ? { ...elem, checked: true } : { ...elem, checked: false }))
-        }
-        : item)));
+      setAccordions(prevAccordions => {
+        const updatedAccordions = prevAccordions.map(item => {
+          if (item.title === itemMainTitle) {
+            const updatedSub = item.sub.map(elem =>
+              (elem.title === itemSubTitle ? { ...elem, checked: true } : { ...elem, checked: false })
+            );
+            return { ...item, sub: updatedSub };
+          }
+          return item;
+        });
+
+        sessionStorage.setItem('accordionsData', JSON.stringify(updatedAccordions));
+        sessionStorage.setItem('currentCategory', currentCategory);
+
+        return updatedAccordions;
+      });
     },
     []
   );
 
-  const resetStyles = useCallback(() => {
-    setAccordions(prevChecked => prevChecked.map(item => ({
-      ...item,
-      sub: item.sub.map(elem => ({ ...elem, checked: false }))
-    })));
+  useEffect(() => {
+    setExpanded(values[currentCategory]);
+    sessionStorage.setItem('currentCategory', currentCategory);
+    sessionStorage.setItem('panel', expanded);
+  }, [currentCategory, expanded]);
+
+  useEffect(() => {
+    setAccordions(accordionsData);
+  }, [expanded]);
+
+  useEffect(() => {
+    setAccordions(JSON.parse(sessionStorage.getItem('accordionsData')) || accordionsData);
   }, []);
 
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
-    resetStyles();
+    sessionStorage.setItem('panel', expanded);
   };
-
-  useEffect(() => {
-    console.log(filterBase);
-  }, [filterBase]);
 
   return (
     <ThemeProvider theme={theme}>

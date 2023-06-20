@@ -7,14 +7,16 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 import Avatar from '@mui/material/Avatar';
+import { useDispatch } from 'react-redux';
 import logo from '../../../../../assets/logo.svg';
 
 import { wrapperStyles, avatarXSStyles, menuStyles, menuItemStyles } from '../../style';
+import { mainCategory } from '../../../../../redux/slice/filterBaseSlice';
 
 const pages = [
   {
     title: 'Ліки від кашлю, застуди та грипу',
-    path: '/coughColdFlu'
+    path: '/cough-cold-flu'
   },
   {
     title: 'Знеболюючі',
@@ -31,6 +33,7 @@ const pages = [
 ];
 
 export const MenuAppBar = () => {
+  const dispatch = useDispatch();
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = event => {
@@ -39,6 +42,11 @@ export const MenuAppBar = () => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const choiceMainCategory = path => {
+    dispatch(mainCategory(path.slice(1)));
+    sessionStorage.setItem('currentCategory', path.slice(1));
   };
 
   return (
@@ -76,7 +84,7 @@ export const MenuAppBar = () => {
         {pages.map(page => (
           <NavLink key={page.title} to={page.path}>
             <MenuItem key={page.title} onClick={handleCloseNavMenu} sx={menuItemStyles}>
-              <Typography textAlign="center">{page.title}</Typography>
+              <Typography onClick={() => choiceMainCategory(page.path)} textAlign="center">{page.title}</Typography>
             </MenuItem>
           </NavLink>
         ))}

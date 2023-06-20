@@ -14,7 +14,7 @@ import { theme } from '../../../tools/muiTheme';
 import RequestString from '../RequestString';
 import { fetchProductsData } from '../../../redux/slice/productsSlice';
 import { Country, Form } from './FilterData/FilterData';
-// import FilterSlider from './FilterSlider/FilterSlider';
+
 import { buttonWrapperStyle, formCheckboxStyle, filterWrapperStyle, formGroupCheckStyle, formGroupStyle, mainCategoryStyle, marginStyle, priceInputWrapperStyle, titleCategoryStyle, resetButtonStyle, showButtonStyle, errorPriceStyle } from './style';
 
 import { addManufacture, removeManufacture, addDosageForm, removeDosageForm, recipe, pregnant, children, minPrice, maxPrice, reset, mainCategory } from '../../../redux/slice/filterBaseSlice';
@@ -26,11 +26,14 @@ function Filter() {
   const currentCategory = location.pathname.slice(1);
   const [checkedCountry, setCheckedCountry] = useState(Country);
   const [checkedForm, setCheckedForm] = useState(Form);
-  const [clearFilter, setClearFilter] = useState(true);
+  const [clearFilter, setClearFilter] = useState(false);
   const [validationPrice, setValidationPrice] = useState(true);
 
   useEffect(() => {
-    dispatch(fetchProductsData(RequestString(filterBase, 1)));
+    if (clearFilter) {
+      dispatch(fetchProductsData(RequestString(filterBase, 1)));
+      setClearFilter(false);
+    }
   }, [clearFilter]);
 
   function receiveGoods() {
@@ -41,7 +44,7 @@ function Filter() {
   }
 
   function cleaningFilter() {
-    setClearFilter(prevState => !prevState);
+    setClearFilter(true);
     setCheckedCountry(Country);
     setCheckedForm(Form);
     dispatch(reset());

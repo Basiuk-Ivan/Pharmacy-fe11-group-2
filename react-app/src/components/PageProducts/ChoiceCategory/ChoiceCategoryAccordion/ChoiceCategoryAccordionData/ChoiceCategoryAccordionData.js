@@ -14,9 +14,9 @@ export const accordionsData = [
     path: '/painkillers',
     panel: 'panel2',
     sub: [
-      { title: 'Від спазму', path: 'spasm' },
-      { title: 'Від болю при мігрені', path: 'migraine' },
-      { title: 'Від болю у спині', path: 'back-pain' }
+      { title: 'Від спазму', path: 'spasm', checked: false },
+      { title: 'Від болю при мігрені', path: 'migraine', checked: false },
+      { title: 'Від болю у спині', path: 'back-pain', checked: false }
     ]
   },
   {
@@ -24,8 +24,8 @@ export const accordionsData = [
     path: '/nervous-system',
     panel: 'panel3',
     sub: [
-      { title: 'Седативні (заспокійливі)', path: 'sedatives' },
-      { title: 'Антидепресанти', path: 'antidepressants' }
+      { title: 'Седативні (заспокійливі)', path: 'sedatives', checked: false },
+      { title: 'Антидепресанти', path: 'antidepressants', checked: false }
     ]
   },
   {
@@ -33,10 +33,10 @@ export const accordionsData = [
     path: '/cardiovascular-system',
     panel: 'panel4',
     sub: [
-      { title: 'Гіпертонія', path: 'hypertension' },
-      { title: 'Для розрідження крові', path: 'blood-thinning' },
-      { title: 'Тромбоз', path: 'thrombosis' },
-      { title: 'Варикоз', path: 'varicosity' }
+      { title: 'Гіпертонія', path: 'hypertension', checked: false },
+      { title: 'Для розрідження крові', path: 'blood-thinning', checked: false },
+      { title: 'Тромбоз', path: 'thrombosis', checked: false },
+      { title: 'Варикоз', path: 'varicosity', checked: false }
     ]
   }
 ];
