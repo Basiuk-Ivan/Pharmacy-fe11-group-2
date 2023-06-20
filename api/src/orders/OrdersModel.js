@@ -4,8 +4,10 @@ import mongoose from "mongoose";
 const product = new mongoose.Schema(
   {
     productID: { type: mongoose.Types.ObjectId, ref: "ProductDB" },
+    name: String,
     price: { type: Number, required: true },
     amount: { type: Number, required: true },
+    priceTotal: { type: Number }
   },{
         timestamps: false,
         versionKey: false,
@@ -20,14 +22,17 @@ const product = new mongoose.Schema(
         },
     },
 );
+// orderID: { type: Number, required: true },
 
 export const Order = new mongoose.Schema(
   {
-    orderID: { type: Number, required: true },
     orderStatus: String,
     totalPrice: Number,
     email: String,
     phone: String,
+    city: String,
+    street: String,
+    house: String,
     orderPaid: Boolean,
     products: [product],
     user: { type: mongoose.Types.ObjectId, ref: "UserDB" },

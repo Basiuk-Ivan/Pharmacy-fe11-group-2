@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import { Box, Button, Typography } from '@mui/material';
 import {
   wrapForItemStyles,
@@ -16,7 +17,9 @@ export const ProductSlider = ({ product }) => {
         <Box sx={oralBTextStyles}>{product?.name}</Box>
         <Typography sx={descStyles}>{product?.descriptionForSlider}</Typography>
         <Box>
-          <Button sx={buttonStyles}>Перейти в каталог</Button>
+          <NavLink to={`/${product?.categories[0]}/${product?.id}`}>
+            <Button sx={buttonStyles}>Перейти в каталог</Button>
+          </NavLink>
         </Box>
       </Box>
       <Box sx={wrapForImgStyles}>

@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
 import { TextField, Grid, Typography, Container } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { styled, ThemeProvider } from '@mui/material/styles';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { theme as muiTheme } from '../../../../tools/muiTheme';
+
+import { openOrderModal } from '../../../../redux/slice/cartItems';
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),
@@ -15,8 +17,9 @@ const ChangedTextField = styled(TextField)(({ theme }) => ({
 
 const nameRegExp = /[a-zA-zа-яА-яёЁ]$/;
 
-const ContactsForm = () => {
+const ContactsForm = ({ products }) => {
   const orderPaymentMethod = useSelector(state => state.order.PaymentMethodValue);
+  const dispatch = useDispatch();
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -30,9 +33,11 @@ const ContactsForm = () => {
       .required('Введіть своє прізвище кирилицею')
       .matches(nameRegExp, 'Введіть своє прізвище кирилицею')
       .min(2, 'Мінімум два символи'),
-    phone: Yup.number().required('Введіть номер мобільного телефону').typeError('Введіть номер мобільного телефону'),
+    phone: Yup.number()
+      .required('Введіть номер мобільного телефону')
+      .typeError('Введіть номер мобільного телефону'),
     street: Yup.string().required('Введіть назву вулиці'),
-    apartment: Yup.number().required('Введіть номер квартири').typeError('Введіть номер квартири')
+    apartment: Yup.number().typeError('Введіть номер квартири')
   });
 
   const formik = useFormik({
@@ -45,114 +50,122 @@ const ContactsForm = () => {
       phone: '',
       street: '',
       apartment: '',
-      paymentMethod: `${orderPaymentMethod}`
+      paymentMethod: `${orderPaymentMethod}`,
+      products: []
     },
     validationSchema,
     onSubmit: (values, { resetForm }) => {
       console.log(values);
+      dispatch(openOrderModal());
       resetForm();
     }
   });
+
+  useEffect(() => {
+    formik.setFieldValue('products', products);
+  }, [products]);
 
   useEffect(() => {
     formik.setFieldValue('paymentMethod', orderPaymentMethod);
   }, [orderPaymentMethod]);
 
   return (
-    <Container>
-      <Typography
-        variant="h5"
-        sx={{
-          margin: '40px 0 30px 0',
-          fontFamily: 'Raleway, sans-serif',
-          color: '#4F4F4F',
-          fontWeight: '700',
-          fontSize: '24px'
-        }}
-      >
-        Контактні дані
-      </Typography>
-      <form id="contacts" onSubmit={formik.handleSubmit}>
-        <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
-          <Grid item md={6} xl={6}>
-            <ChangedTextField
-              label="Ваше ім'я"
-              fullWidth
-              name="name"
-              value={formik.values.name}
-              onChange={formik.handleChange}
-              error={Boolean(formik.touched.name && formik.errors.name)}
-              helperText={formik.touched.name && formik.errors.name}
-            />
-            <ChangedTextField
-              label="Ваш e-mail"
-              fullWidth
-              name="email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              error={Boolean(formik.touched.email && formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
-            />
-            <ChangedTextField
-              label="Місто"
-              fullWidth
-              name="city"
-              value={formik.values.city}
-              onChange={formik.handleChange}
-              error={Boolean(formik.touched.city && formik.errors.city)}
-              helperText={formik.touched.city && formik.errors.city}
-            />
-            <ChangedTextField
-              label="Будинок"
-              fullWidth
-              name="house"
-              value={formik.values.house}
-              onChange={formik.handleChange}
-              error={Boolean(formik.touched.house && formik.errors.house)}
-              helperText={formik.touched.house && formik.errors.house}
-            />
+    <ThemeProvider theme={muiTheme}>
+      <Container>
+        <Typography
+          variant="h5"
+          sx={{
+            margin: '40px 0 30px 0',
+            fontFamily: 'Raleway, sans-serif',
+            color: '#4F4F4F',
+            fontWeight: '700',
+            fontSize: '24px'
+          }}
+        >
+          Контактні дані
+        </Typography>
+        <form id="contacts" onSubmit={formik.handleSubmit}>
+          <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
+            <Grid item md={6} xl={6}>
+              <ChangedTextField
+                label="Ваше ім'я"
+                fullWidth
+                name="name"
+                value={formik.values.name}
+                onChange={formik.handleChange}
+                error={Boolean(formik.touched.name && formik.errors.name)}
+                helperText={formik.touched.name && formik.errors.name}
+              />
+              <ChangedTextField
+                label="Ваш e-mail"
+                fullWidth
+                name="email"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                error={Boolean(formik.touched.email && formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
+              />
+              <ChangedTextField
+                label="Місто"
+                fullWidth
+                name="city"
+                value={formik.values.city}
+                onChange={formik.handleChange}
+                error={Boolean(formik.touched.city && formik.errors.city)}
+                helperText={formik.touched.city && formik.errors.city}
+              />
+              <ChangedTextField
+                label="Будинок"
+                fullWidth
+                name="house"
+                value={formik.values.house}
+                onChange={formik.handleChange}
+                error={Boolean(formik.touched.house && formik.errors.house)}
+                helperText={formik.touched.house && formik.errors.house}
+              />
+            </Grid>
+            <Grid item md={6} xl={6}>
+              <ChangedTextField
+                label="Ваше прізвище"
+                fullWidth
+                name="surname"
+                value={formik.values.surname}
+                onChange={formik.handleChange}
+                error={Boolean(formik.touched.surname && formik.errors.surname)}
+                helperText={formik.touched.surname && formik.errors.surname}
+              />
+              <ChangedTextField
+                label="Ваш телефон"
+                fullWidth
+                name="phone"
+                value={formik.values.phone}
+                onChange={formik.handleChange}
+                error={Boolean(formik.touched.phone && formik.errors.phone)}
+                helperText={formik.touched.phone && formik.errors.phone}
+              />
+              <ChangedTextField
+                label="Вулиця"
+                fullWidth
+                name="street"
+                value={formik.values.street}
+                onChange={formik.handleChange}
+                error={Boolean(formik.touched.street && formik.errors.street)}
+                helperText={formik.touched.street && formik.errors.street}
+              />
+              <ChangedTextField
+                label="Квартира"
+                fullWidth
+                name="apartment"
+                value={formik.values.apartment}
+                onChange={formik.handleChange}
+                error={Boolean(formik.touched.apartment && formik.errors.apartment)}
+                helperText={formik.touched.apartment && formik.errors.apartment}
+              />
+            </Grid>
           </Grid>
-          <Grid item md={6} xl={6}>
-            <ChangedTextField
-              label="Ваше прізвище"
-              fullWidth
-              name="surname"
-              value={formik.values.surname}
-              onChange={formik.handleChange}
-              error={Boolean(formik.touched.surname && formik.errors.surname)}
-              helperText={formik.touched.surname && formik.errors.surname}
-            />
-            <ChangedTextField
-              label="Ваш телефон"
-              fullWidth
-              name="phone"
-              value={formik.values.phone}
-              onChange={formik.handleChange}
-              error={Boolean(formik.touched.phone && formik.errors.phone)}
-              helperText={formik.touched.phone && formik.errors.phone}
-            />
-            <ChangedTextField
-              label="Вулиця"
-              fullWidth
-              name="street"
-              value={formik.values.street}
-              onChange={formik.handleChange}
-              error={Boolean(formik.touched.street && formik.errors.street)}
-              helperText={formik.touched.street && formik.errors.street}
-            />
-            <ChangedTextField
-              label="Квартира"
-              fullWidth
-              name="apartment"
-              value={formik.values.apartment}
-              onChange={formik.handleChange}
-              error={Boolean(formik.touched.apartment && formik.errors.apartment)}
-              helperText={formik.touched.apartment && formik.errors.apartment}
-            />
-          </Grid>
-        </Grid>
-      </form>
-    </Container>
+        </form>
+      </Container>
+    </ThemeProvider>
   );
 };
 

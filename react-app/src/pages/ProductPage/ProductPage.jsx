@@ -114,7 +114,7 @@ const ProductPage = () => {
           <Container>
             <Grid container spacing={2}>
               <Grid item lg={12}>
-                <BreadProduct category={category} name={product.name} />
+                <BreadProduct category={product.categories[0]} name={product.name} />
               </Grid>
               <Grid item lg={12}>
                 <Typography
