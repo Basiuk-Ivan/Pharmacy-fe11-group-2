@@ -11,12 +11,12 @@ import { addToCartLocalStorage } from '../../../utils/LocalStore/addToCartLocalS
 import { openModal } from '../../../redux/slice/favouriteItems';
 import { request } from '../../../tools/request';
 
-const FavouriteBlock = () => {
+const FavouriteBlock = props => {
   const [products, setProducts] = useState([]);
   const [showSkeleton, setShowSkeleton] = useState(true);
 
   const cartItems = useSelector(state => state.itemCards);
-  const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
+  const { favoriteItems } = props;
 
   const dispatch = useDispatch();
 
