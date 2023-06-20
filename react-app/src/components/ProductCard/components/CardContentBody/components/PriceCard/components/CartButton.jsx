@@ -1,19 +1,39 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IconButton } from '@mui/material';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import { addToCartLocalStorage } from '../../../../../../../utils/LocalStore/addToCartLocalStorage';
 import { removeFromCartLocalStorage } from '../../../../../../../utils/LocalStore/removeFromCartLocalStorage';
-import { addToCart, removeItem } from '../../../../../../../redux/slice/cartItems';
+import {
+  addToCart,
+  closeCartModalRemoveOne, openCartModalRemoveOne,
+  removeItem
+} from '../../../../../../../redux/slice/cartItems';
 import { cartStyles, iconButtonStyles } from '../../../../../style';
+import ModalWindow from '../../../../../../ModalWindow';
 
 export const CartButton = ({ productItem, isInCart }) => {
   const dispatch = useDispatch();
   const [isCart, setIsCart] = useState(false);
 
-  const handleAddtoCart = event => {
-    event.preventDefault();
+  const isOpenedCartModalRemoveOne = useSelector(state => state.itemCards.isOpenedCartModalRemoveOne);
+  const handleClickCartModalRemoveOne = () => {
+    const prod = JSON.parse(window.localStorage.getItem('removeItem'));
+    dispatch(removeItem(prod));
+    removeFromCartLocalStorage(prod);
+    dispatch(closeCartModalRemoveOne());
+  };
+  const handleCloseСartModalRemoveOne = product => {
+    dispatch(closeCartModalRemoveOne());
+  };
+
+  const iconClick = productForRemove => {
+    dispatch(openCartModalRemoveOne());
+    window.localStorage.setItem('removeItem', JSON.stringify(productForRemove));
+  };
+
+  const handleAddtoCart = () => {
     if (!isCart) {
       dispatch(addToCart({ id: productItem.id }));
       addToCartLocalStorage(productItem);
@@ -22,11 +42,6 @@ export const CartButton = ({ productItem, isInCart }) => {
       removeFromCartLocalStorage(productItem);
     }
     setIsCart(!isCart);
-  };
-
-  const delItem = prod => {
-    dispatch(removeItem(prod));
-    removeFromCartLocalStorage(prod);
   };
 
   useEffect(() => {
@@ -43,9 +58,20 @@ export const CartButton = ({ productItem, isInCart }) => {
 
   if (isInCart) {
     return (
-      <IconButton sx={iconButtonStyles} onClick={() => delItem(productItem)}>
-        <CloseIcon />
-      </IconButton>
+      <>
+        <IconButton sx={iconButtonStyles} onClick={() => iconClick(productItem)}>
+          <CloseIcon />
+        </IconButton>
+        <ModalWindow
+          mainText="Видалити даний товар з корзини?"
+          confirmTextBtn="Так"
+          cancelTextBtn="Ні"
+          handleClick={handleClickCartModalRemoveOne}
+          handleClose={handleCloseСartModalRemoveOne}
+          isOpened={isOpenedCartModalRemoveOne}
+          actions
+        />
+      </>
     );
   }
   return (

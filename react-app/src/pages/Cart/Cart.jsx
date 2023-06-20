@@ -6,10 +6,12 @@ import { Typography, IconButton, Skeleton, Stack } from '@mui/material';
 import DeleteOutlineTwoToneIcon from '@mui/icons-material/DeleteOutlineTwoTone';
 import IconBreadcrumbs from './Breadcrums';
 import ProductCard from '../../components/ProductCard';
-import { removeItem, setSum } from '../../redux/slice/cartItems';
-import { removeAllFromCart } from '../../utils/LocalStore/removeAllFromCart';
-import { countSum } from '../../utils/ActionsWithProduct/countSum';
-import { request } from '../../tools/request';
+import {
+  closeCartModalRemoveAll,
+  openCartModalRemoveAll,
+  removeItem,
+  setSum
+} from '../../redux/slice/cartItems';
 import {
   FormBox,
   FormTitle,
@@ -25,6 +27,10 @@ import {
 } from './style';
 
 import './style/CartStyles.scss';
+import { removeAllFromCart } from '../../utils/LocalStore/removeAllFromCart';
+import { countSum } from '../../utils/ActionsWithProduct/countSum';
+import { request } from '../../tools/request';
+import ModalWindow from '../../components/ModalWindow';
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
@@ -34,6 +40,7 @@ const Cart = () => {
   const sumWithDiscount = useSelector(state => state.itemCards.sumWithDiscount);
   const [showSkeleton, setShowSkeleton] = useState(true);
   const dispatch = useDispatch();
+  const isOpenedCartModalRemoveAll = useSelector(state => state.itemCards.isOpenedCartModalRemoveAll);
 
   const isInCart = true;
 
@@ -80,9 +87,14 @@ const Cart = () => {
     dispatch(setSum(sumObj));
   }, [productItemCart]);
 
-  const delFromCart = () => {
+  const handleClickCartModalRemoveAll = () => {
     dispatch(removeItem('all'));
     removeAllFromCart();
+    dispatch(closeCartModalRemoveAll());
+  };
+
+  const handleCloseСartModalRemoveAll = () => {
+    dispatch(closeCartModalRemoveAll());
   };
 
   return (
@@ -95,38 +107,41 @@ const Cart = () => {
           <Stack direction="column" spacing={2}>
             <Skeleton variant="rectangular" width={270} height={400} />
           </Stack>
-        ) : (
-          <Box>
-            <FormBox>
-              <FormTitle>Ваше Замовлення</FormTitle>
-              <SaleBox>
-                <FormText>Знижка </FormText>
-                <FormText>- {sumDiscount} грн</FormText>
-              </SaleBox>
-              <TotalBox>
-                <FormText>Без урахуваня знижки</FormText>
-                <FormText> {cartSumWithoutDiscount} грн</FormText>
-              </TotalBox>
+        ) : ((sumWithDiscount > 0) &&
+        <Box>
+          <FormBox>
+            <FormTitle>Ваше Замовлення</FormTitle>
+            <SaleBox>
+              <FormText>Знижка </FormText>
+              <FormText>- {sumDiscount} грн</FormText>
+            </SaleBox>
+            <TotalBox>
+              <FormText>Без урахуваня знижки</FormText>
+              <FormText> {cartSumWithoutDiscount} грн</FormText>
+            </TotalBox>
 
-              <PromoBox mt={2}>
-                <FormTitlePromo>Загальна сума: {sumWithDiscount} грн</FormTitlePromo>
-                <NavLink to="/orderprocess">
-                  <OrderButton>Оформити замовлення</OrderButton>
-                </NavLink>
-              </PromoBox>
-            </FormBox>
-          </Box>
+            <PromoBox mt={2}>
+              <FormTitlePromo>Загальна сума: {sumWithDiscount} грн</FormTitlePromo>
+              <NavLink to="/orderprocess">
+                <OrderButton>Оформити замовлення</OrderButton>
+              </NavLink>
+            </PromoBox>
+          </FormBox>
+        </Box>
         )}
         <CardBox>
           <HeaderBox>
             <Typography variant="h4" gutterBottom>
               Корзина
             </Typography>
-            <IconButton onClick={() => delFromCart()}>
+            {products.length > 0 &&
+            <IconButton onClick={() => dispatch(openCartModalRemoveAll())}>
               <DeleteOutlineTwoToneIcon />
               <Typography>Очистити корзину</Typography>
-            </IconButton>
+            </IconButton>}
+
           </HeaderBox>
+          {}
           {showSkeleton ? (
             <>
               <Skeleton />
@@ -164,6 +179,16 @@ const Cart = () => {
           )}
         </CardBox>
       </ContainerBox>
+      <ModalWindow
+        mainText="Видалити всі товари з корзини?"
+        confirmTextBtn="Підтвердити"
+        cancelTextBtn="Відміна"
+        handleClick={handleClickCartModalRemoveAll}
+        handleClose={handleCloseСartModalRemoveAll}
+        isOpened={isOpenedCartModalRemoveAll}
+        actions
+      />
+
     </Box>
   );
 };

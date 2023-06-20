@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { Modal, Tab, Tabs, Typography, Box } from '@mui/material';
+
+// import jwt_decode from 'jwt-decode';
 import { theme } from '../../tools/muiTheme';
 import { closeModal } from '../../redux/slice/modalSlice';
 import { LoginForm } from './components/LoginForm';
 import { RegistrationForm } from './components/RegistrationForm';
-import { styles } from './style';
+import { styles } from './Style';
 import { setToken } from '../../redux/slice/isToken';
-import './style/Auth.scss';
+import './Style/Auth.scss';
 
 const AuthButton = () => {
   const isOpen = useSelector(state => state.modalSlice.openModal);
