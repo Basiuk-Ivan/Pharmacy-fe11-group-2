@@ -8,8 +8,10 @@ import { theme } from '../../tools/muiTheme';
 import { closeModal } from '../../redux/slice/modalSlice';
 import { LoginForm } from './components/LoginForm';
 import { RegistrationForm } from './components/RegistrationForm';
+// eslint-disable-next-line import/no-unresolved
 import { styles } from './style';
 import { setToken } from '../../redux/slice/isToken';
+// eslint-disable-next-line import/no-unresolved
 import './style/Auth.scss';
 
 const AuthButton = () => {
