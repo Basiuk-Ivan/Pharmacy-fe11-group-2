@@ -22,6 +22,7 @@ import { addManufacture, removeManufacture, addDosageForm, removeDosageForm, rec
 function Filter() {
   const dispatch = useDispatch();
   const filterBase = useSelector(state => state.filterBase);
+  const { numPage } = useSelector(state => state.numPage);
   const location = useLocation();
   const currentCategory = location.pathname.slice(1);
   const [checkedCountry, setCheckedCountry] = useState(Country);
@@ -39,18 +40,21 @@ function Filter() {
   function receiveGoods() {
     if (Number(filterBase.priceMin) <= Number(filterBase.priceMax) && Number(filterBase.priceMin) >= 0 && Number(filterBase.priceMax) >= 0) {
       setValidationPrice(true);
-      dispatch(fetchProductsData(RequestString(filterBase, 1)));
+      if (numPage === 1) {
+        dispatch(fetchProductsData(RequestString(filterBase, 1)));
+      } else dispatch(changePage(1));
     } else setValidationPrice(false);
   }
 
   function cleaningFilter() {
-    setClearFilter(true);
     setCheckedCountry(Country);
     setCheckedForm(Form);
     dispatch(reset());
-    dispatch(changePage(1));
     dispatch(mainCategory(currentCategory));
     setValidationPrice(true);
+    if (numPage === 1) {
+      setClearFilter(true);
+    } else dispatch(changePage(1));
   }
 
   const changeManufacturer = event => {
