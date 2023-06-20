@@ -6,7 +6,7 @@ import { styled, ThemeProvider } from '@mui/material/styles';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-import { theme } from '../../../../tools/muiTheme';
+
 import { openOrderModal } from '../../../../redux/slice/cartItems';
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({

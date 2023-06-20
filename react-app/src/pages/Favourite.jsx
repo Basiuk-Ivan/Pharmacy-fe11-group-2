@@ -4,10 +4,10 @@ import Advantages from '../components/orderProcess/Advantages';
 import FavouriteBlock from '../components/Favourite/FavouriteBlock/FavouriteBlock';
 import AdditionalBlock from '../components/Favourite/AdditionalBlock/AdditionalBlock';
 import ModalWindow from '../components/ModalWindow';
-import { removeFromFavouriteLocalStorage } from '../utils/LocalStore/removeFromFavouriteLocalStorage.js';
-import { closeModalAddtoCart, closeModalRemoveAll, deleteFromFavouriteItems } from '../redux/slice/favouriteItems.js';
-import { addToCart } from '../redux/slice/cartItems.js';
-import { addToCartLocalStorage } from '../utils/LocalStore/addToCartLocalStorage.js';
+import { removeFromFavouriteLocalStorage } from '../utils/LocalStore/removeFromFavouriteLocalStorage';
+import { closeModalAddtoCart, closeModalRemoveAll, deleteFromFavouriteItems } from '../redux/slice/favouriteItems';
+import { addToCart } from '../redux/slice/cartItems';
+import { addToCartLocalStorage } from '../utils/LocalStore/addToCartLocalStorage';
 
 const Favourite = () => {
   const { products } = useSelector(state => state.products);
