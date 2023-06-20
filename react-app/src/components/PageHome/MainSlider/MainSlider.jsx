@@ -5,9 +5,10 @@ import { Skeleton } from '@mui/material';
 import { ProductSlider } from './Item/ProductSlider';
 import 'swiper/swiper-bundle.min.css';
 import './style/CustomSlider.scss';
+import shuffleArray from '../../../tools/shuffleArray';
 
 const MainSlider = ({ products }) => {
-  // const productItems = shuffleArray(products);
+  const productItems = shuffleArray(products);
 
   const [showSkeleton, setShowSkeleton] = useState(true);
 
@@ -46,7 +47,7 @@ const MainSlider = ({ products }) => {
           pagination={{ clickable: true, el: '.swiper-pagination' }}
           scrollbar={false}
         >
-          {products.map(item => (
+          {productItems.map(item => (
             <SwiperSlide key={item.id}>
               {/* <NavLink to={`/${product?.categories[0]}/${product?.id}`}> */}
               <ProductSlider product={item} />

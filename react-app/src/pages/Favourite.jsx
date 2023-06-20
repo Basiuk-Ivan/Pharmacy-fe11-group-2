@@ -10,14 +10,13 @@ import { addToCart } from '../redux/slice/cartItems';
 import { addToCartLocalStorage } from '../utils/LocalStore/addToCartLocalStorage';
 
 const Favourite = () => {
-  const { products } = useSelector(state => state.products);
+  const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
   const dispatch = useDispatch();
-  const favourites = useSelector(state => state.favouriteItems.favouriteItems);
   const isOpenModalRemoveAll = useSelector(state => state.favouriteItems.isOpenedModalRemoveAll);
   const isOpenedModalAddtoCart = useSelector(state => state.favouriteItems.isOpenedModalAddtoCart);
   const navigate = useNavigate();
   const handleClickModalRemoveAll = () => {
-    favourites.forEach(element => {
+      favoriteItems.forEach(element => {
       removeFromFavouriteLocalStorage(element);
     });
     dispatch(deleteFromFavouriteItems('all'));
@@ -37,7 +36,7 @@ const Favourite = () => {
       addToCartLocalStorage(product);
     });
     dispatch(closeModalAddtoCart());
-    favourites.forEach(element => {
+      favoriteItems.forEach(element => {
       removeFromFavouriteLocalStorage(element);
     });
     dispatch(deleteFromFavouriteItems('all'));
@@ -46,8 +45,8 @@ const Favourite = () => {
 
   return (
     <>
-      <FavouriteBlock />
-      <AdditionalBlock products={products} />
+      <FavouriteBlock favoriteItems={favoriteItems} />
+      <AdditionalBlock favoriteItems={favoriteItems} />
       <Advantages />
       <ModalWindow
         mainText="Видалити всі товари з обраних?"
@@ -56,16 +55,16 @@ const Favourite = () => {
         handleClick={handleClickModalRemoveAll}
         handleClose={handleCloseModalRemoveAll}
         isOpened={isOpenModalRemoveAll}
-        actions
+        actions={true}
       />
       <ModalWindow
         mainText="Додати всі обрані товари до кошика?"
         confirmTextBtn="Підтвердити"
         cancelTextBtn="Відміна"
-        handleClick={() => handleClickModalAddToCart(favourites)}
+        handleClick={() => handleClickModalAddToCart(favoriteItems)}
         handleClose={handleCloseModalAddtoCart}
         isOpened={isOpenedModalAddtoCart}
-        actions
+        actions={true}
       />
     </>
   );
