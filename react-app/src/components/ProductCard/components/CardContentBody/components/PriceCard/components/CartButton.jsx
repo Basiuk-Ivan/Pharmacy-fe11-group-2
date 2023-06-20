@@ -20,7 +20,6 @@ export const CartButton = ({ productItem, isInCart }) => {
   const isOpenedCartModalRemoveOne = useSelector(state => state.itemCards.isOpenedCartModalRemoveOne);
   const handleClickCartModalRemoveOne = ()=> {
     const prod = JSON.parse(window.localStorage.getItem("removeItem"));
-    console.log(prod);
     dispatch(removeItem(prod));
     removeFromCartLocalStorage(prod);
     dispatch(closeCartModalRemoveOne());
@@ -33,6 +32,7 @@ export const CartButton = ({ productItem, isInCart }) => {
     dispatch(openCartModalRemoveOne());
     window.localStorage.setItem("removeItem", JSON.stringify(productForRemove));
   }
+
 
   const handleAddtoCart = () => {
     if (!isCart) {
