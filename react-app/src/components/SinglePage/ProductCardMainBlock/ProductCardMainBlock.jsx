@@ -136,32 +136,32 @@ const ProductCardMainBlock = ({ productItem }) => {
                     .map(({ title, itemValue }) => (
                       <Grid key={title} item xs={12} sx={{ mb: '5px' }}>
                         <Grid
-                            container
-                            justifyContent="flex-start"
-                            alignItems="flex-start"
-                            gap={0.5}
-                            sx={{ ml: '10px' }}
-                          >
-                            <Grid item>
-                              <Stack direction="row" spacing={0.5} alignItems="center">
-                                <Typography
-                                  component="span"
-                                  variant="body1"
-                                  sx={bulletStyle}
-                                />
-                                <Typography
-                                  component="span"
-                                  variant="body1"
-                                  sx={{ fontSize: '14px', color: '#7B818C' }}
-                                >
-                                  {title}:
-                                </Typography>
-                              </Stack>
-                            </Grid>
-                            <Grid item fontFamily="Roboto" sx={{ fontSize: '14px' }}>
-                              {itemValue}
-                            </Grid>
+                          container
+                          justifyContent="flex-start"
+                          alignItems="flex-start"
+                          gap={0.5}
+                          sx={{ ml: '10px' }}
+                        >
+                          <Grid item>
+                            <Stack direction="row" spacing={0.5} alignItems="center">
+                              <Typography
+                                component="span"
+                                variant="body1"
+                                sx={bulletStyle}
+                              />
+                              <Typography
+                                component="span"
+                                variant="body1"
+                                sx={{ fontSize: '14px', color: '#7B818C' }}
+                              >
+                                {title}:
+                              </Typography>
+                            </Stack>
                           </Grid>
+                          <Grid item fontFamily="Roboto" sx={{ fontSize: '14px' }}>
+                            {itemValue}
+                          </Grid>
+                        </Grid>
                       </Grid>
                     ))}
                 </Grid>
