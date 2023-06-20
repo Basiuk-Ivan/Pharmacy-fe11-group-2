@@ -64,6 +64,7 @@ const ContactsForm = () => {
   }, [orderPaymentMethod]);
 
   return (
+      <ThemeProvider theme={theme}>
     <Container>
       <Typography
         variant="h5"
