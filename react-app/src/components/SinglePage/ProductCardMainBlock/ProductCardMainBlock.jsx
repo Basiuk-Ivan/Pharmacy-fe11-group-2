@@ -229,7 +229,8 @@ const ProductCardMainBlock = ({ productItem }) => {
             </Stack>
           </Stack>
         </Grid>
-      </Grid>);
+      </Grid>
+  );
 };
 
 export default ProductCardMainBlock;
