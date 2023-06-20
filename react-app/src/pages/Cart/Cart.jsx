@@ -107,39 +107,41 @@ const Cart = () => {
           <Stack direction="column" spacing={2}>
             <Skeleton variant="rectangular" width={270} height={400} />
           </Stack>
-        ) : ((sumWithDiscount > 0) &&
-        <Box>
-          <FormBox>
-            <FormTitle>Ваше Замовлення</FormTitle>
-            <SaleBox>
-              <FormText>Знижка </FormText>
-              <FormText>- {sumDiscount} грн</FormText>
-            </SaleBox>
-            <TotalBox>
-              <FormText>Без урахуваня знижки</FormText>
-              <FormText> {cartSumWithoutDiscount} грн</FormText>
-            </TotalBox>
+        ) : (
+          sumWithDiscount > 0 && (
+            <Box>
+              <FormBox>
+                <FormTitle>Ваше Замовлення</FormTitle>
+                <SaleBox>
+                  <FormText>Знижка </FormText>
+                  <FormText>- {sumDiscount} грн</FormText>
+                </SaleBox>
+                <TotalBox>
+                  <FormText>Без урахуваня знижки</FormText>
+                  <FormText> {cartSumWithoutDiscount} грн</FormText>
+                </TotalBox>
 
-            <PromoBox mt={2}>
-              <FormTitlePromo>Загальна сума: {sumWithDiscount} грн</FormTitlePromo>
-              <NavLink to="/orderprocess">
-                <OrderButton>Оформити замовлення</OrderButton>
-              </NavLink>
-            </PromoBox>
-          </FormBox>
-        </Box>
+                <PromoBox mt={2}>
+                  <FormTitlePromo>Загальна сума: {sumWithDiscount} грн</FormTitlePromo>
+                  <NavLink to="/orderprocess">
+                    <OrderButton>Оформити замовлення</OrderButton>
+                  </NavLink>
+                </PromoBox>
+              </FormBox>
+            </Box>
+          )
         )}
         <CardBox>
           <HeaderBox>
             <Typography variant="h4" gutterBottom>
               Корзина
             </Typography>
-            {products.length > 0 &&
-            <IconButton onClick={() => dispatch(openCartModalRemoveAll())}>
-              <DeleteOutlineTwoToneIcon />
-              <Typography>Очистити корзину</Typography>
-            </IconButton>}
-
+            {products.length > 0 && (
+              <IconButton onClick={() => dispatch(openCartModalRemoveAll())}>
+                <DeleteOutlineTwoToneIcon />
+                <Typography>Очистити корзину</Typography>
+              </IconButton>
+            )}
           </HeaderBox>
           {}
           {showSkeleton ? (
@@ -188,7 +190,6 @@ const Cart = () => {
         isOpened={isOpenedCartModalRemoveAll}
         actions
       />
-
     </Box>
   );
 };
