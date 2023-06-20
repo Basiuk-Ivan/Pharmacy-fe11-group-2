@@ -11,15 +11,15 @@ import {
   removeItem
 } from '../../../../../../../redux/slice/cartItems';
 import { cartStyles, iconButtonStyles } from '../../../../../style';
-import ModalWindow from '../../../../../../ModalWindow.jsx';
+import ModalWindow from '../../../../../../ModalWindow';
 
 export const CartButton = ({ productItem, isInCart }) => {
   const dispatch = useDispatch();
   const [isCart, setIsCart] = useState(false);
 
   const isOpenedCartModalRemoveOne = useSelector(state => state.itemCards.isOpenedCartModalRemoveOne);
-  const handleClickCartModalRemoveOne = ()=> {
-    const prod = JSON.parse(window.localStorage.getItem("removeItem"));
+  const handleClickCartModalRemoveOne = () => {
+    const prod = JSON.parse(window.localStorage.getItem('removeItem'));
     dispatch(removeItem(prod));
     removeFromCartLocalStorage(prod);
     dispatch(closeCartModalRemoveOne());
@@ -28,11 +28,10 @@ export const CartButton = ({ productItem, isInCart }) => {
     dispatch(closeCartModalRemoveOne());
   };
 
-  const iconClick = (productForRemove) => {
+  const iconClick = productForRemove => {
     dispatch(openCartModalRemoveOne());
-    window.localStorage.setItem("removeItem", JSON.stringify(productForRemove));
-  }
-
+    window.localStorage.setItem('removeItem', JSON.stringify(productForRemove));
+  };
 
   const handleAddtoCart = () => {
     if (!isCart) {
@@ -60,7 +59,7 @@ export const CartButton = ({ productItem, isInCart }) => {
   if (isInCart) {
     return (
       <>
-        <IconButton sx={iconButtonStyles} onClick={()=>iconClick(productItem)}>
+        <IconButton sx={iconButtonStyles} onClick={() => iconClick(productItem)}>
           <CloseIcon />
         </IconButton>
         <ModalWindow
@@ -70,7 +69,7 @@ export const CartButton = ({ productItem, isInCart }) => {
           handleClick={handleClickCartModalRemoveOne}
           handleClose={handleCloseСartModalRemoveOne}
           isOpened={isOpenedCartModalRemoveOne}
-          actions={true}
+          actions
         />
       </>
     );

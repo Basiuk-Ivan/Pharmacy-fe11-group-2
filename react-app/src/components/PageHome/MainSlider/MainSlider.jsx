@@ -6,7 +6,6 @@ import { ProductSlider } from './Item/ProductSlider';
 import 'swiper/swiper-bundle.min.css';
 import './style/CustomSlider.scss';
 
-
 const MainSlider = ({ products }) => {
   // const productItems = shuffleArray(products);
 

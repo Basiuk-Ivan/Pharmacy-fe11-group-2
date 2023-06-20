@@ -3,7 +3,6 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
-
 const style = {
     display: 'flex',
     flexDirection: 'column',
@@ -16,7 +15,7 @@ const style = {
     width: 400,
     // bgcolor: 'background.paper',
     // border: '2px solid #000',
-    bgcolor:"#c7f5ee",
+    bgcolor: '#c7f5ee',
     boxShadow: 24,
     p: 4,
     borderRadius: '10px'
@@ -26,8 +25,6 @@ const ModalWindow = ({
                          mainText, isOpened, handleClick,
                          handleClose, confirmTextBtn, cancelTextBtn, actions
                      }) => {
-
-
     return (
         <Modal open={isOpened} onClose={handleClose}>
             <Box sx={style}>
@@ -36,49 +33,48 @@ const ModalWindow = ({
                     fontFamily: 'Roboto, sans-serif',
                     fontWeight: 700,
                     fontSize: '21px',
-                    textAlign: "center"
+                    textAlign: 'center'
 
                 }}
                 >{mainText}
                 </Typography>
-                {actions &&
-                    (<Box sx={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        mt: 2,
-                        gap: '30px',
+                {actions && (<Box sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    mt: 2,
+                    gap: '30px',
 
-                    }}
+                }}
+                >
+                    <Button
+                        variant="contained"
+                        onClick={handleClick}
+                        sx={{
+                            backgroundColor: '#2FD3AE',
+                            borderRadius: 50,
+                            fontFamily: 'Roboto, sans-serif',
+                            fontWeight: 700,
+                            fontSize: '14px',
+                            color: '#FFFFFF'
+                        }}
                     >
-                        <Button
-                            variant="contained"
-                            onClick={handleClick}
-                            sx={{
-                                backgroundColor: '#2FD3AE',
-                                borderRadius: 50,
-                                fontFamily: 'Roboto, sans-serif',
-                                fontWeight: 700,
-                                fontSize: '14px',
-                                color: '#FFFFFF'
-                            }}
-                        >
-                            {confirmTextBtn}
-                        </Button>
-                        <Button
-                            variant="contained"
-                            onClick={handleClose}
-                            sx={{
-                                backgroundColor: '#2FD3AE',
-                                borderRadius: 50,
-                                fontFamily: 'Roboto, sans-serif',
-                                fontWeight: 700,
-                                fontSize: '14px',
-                                color: '#FFFFFF'
-                            }}
-                        >
-                            {cancelTextBtn}
-                        </Button>
-                    </Box>)}
+                        {confirmTextBtn}
+                    </Button>
+                    <Button
+                        variant="contained"
+                        onClick={handleClose}
+                        sx={{
+                            backgroundColor: '#2FD3AE',
+                            borderRadius: 50,
+                            fontFamily: 'Roboto, sans-serif',
+                            fontWeight: 700,
+                            fontSize: '14px',
+                            color: '#FFFFFF'
+                        }}
+                    >
+                        {cancelTextBtn}
+                    </Button>
+                </Box>)}
 
             </Box>
         </Modal>

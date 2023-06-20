@@ -8,7 +8,7 @@ import ProductCard from '../../ProductCard/ProductCard';
 import Bread from '../../Bread';
 import { addToCart } from '../../../redux/slice/cartItems';
 import { addToCartLocalStorage } from '../../../utils/LocalStore/addToCartLocalStorage';
-import {openModalAddtoCart, openModalRemoveAll} from '../../../redux/slice/favouriteItems';
+import { openModalAddtoCart, openModalRemoveAll } from '../../../redux/slice/favouriteItems';
 import { request } from '../../../tools/request';
 
 const FavouriteBlock = () => {
@@ -72,8 +72,6 @@ const FavouriteBlock = () => {
   const addAlltoCart = () => {
     dispatch(openModalAddtoCart());
   };
-
-
 
   return (
     <Container

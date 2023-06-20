@@ -9,7 +9,7 @@ const cartSlice = createSlice({
     sumWithDiscount: JSON.parse(localStorage.getItem('sumWithDiscount')) || 0,
     isOpenedCartModalRemoveAll: false,
     isOpenedCartModalRemoveOne: false,
-    isOpenedOrderModal:false
+    isOpenedOrderModal: false
   },
   reducers: {
     addToCart: (state, action) => {

@@ -8,9 +8,9 @@ import { theme } from '../../tools/muiTheme';
 import { closeModal } from '../../redux/slice/modalSlice';
 import { LoginForm } from './components/LoginForm';
 import { RegistrationForm } from './components/RegistrationForm';
-import { styles } from './style';
+import { styles } from './Style';
 import { setToken } from '../../redux/slice/isToken';
-import './style/Auth.scss';
+import './Style/Auth.scss';
 
 const AuthButton = () => {
   const isOpen = useSelector(state => state.modalSlice.openModal);
