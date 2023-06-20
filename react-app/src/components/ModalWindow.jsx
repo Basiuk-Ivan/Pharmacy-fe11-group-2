@@ -20,60 +20,62 @@ const style = {
 };
 
 const ModalWindow = ({
-                       mainText, isOpened, handleClick,
-                       handleClose, confirmTextBtn, cancelTextBtn, actions
-                     }) => {
+  mainText, isOpened, handleClick,
+  handleClose, confirmTextBtn, cancelTextBtn, actions
+}) => {
   return (
-      <Modal open={isOpened} onClose={handleClose}>
-        <Box sx={style}>
-          <Typography sx={{
-            mb: '30px',
-            fontFamily: 'Roboto, sans-serif',
-            fontWeight: 700,
-            fontSize: '21px',
-            textAlign: 'center'
-          }}>
-            {mainText}
-          </Typography>
-          {actions && (
-              <Box sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                mt: 2,
-                gap: '30px',
-              }}>
-                <Button
-                    variant="contained"
-                    onClick={handleClick}
-                    sx={{
-                      backgroundColor: '#2FD3AE',
-                      borderRadius: 50,
-                      fontFamily: 'Roboto, sans-serif',
-                      fontWeight: 700,
-                      fontSize: '14px',
-                      color: '#FFFFFF'
-                    }}
-                >
-                  {confirmTextBtn}
-                </Button>
-                <Button
-                    variant="contained"
-                    onClick={handleClose}
-                    sx={{
-                      backgroundColor: '#2FD3AE',
-                      borderRadius: 50,
-                      fontFamily: 'Roboto, sans-serif',
-                      fontWeight: 700,
-                      fontSize: '14px',
-                      color: '#FFFFFF'
-                    }}
-                >
-                  {cancelTextBtn}
-                </Button>
-              </Box>
-          )}
-        </Box>
-      </Modal>
+    <Modal open={isOpened} onClose={handleClose}>
+      <Box sx={style}>
+        <Typography sx={{
+          mb: '30px',
+          fontFamily: 'Roboto, sans-serif',
+          fontWeight: 700,
+          fontSize: '21px',
+          textAlign: 'center'
+        }}
+        >
+          {mainText}
+        </Typography>
+        {actions && (
+          <Box sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            mt: 2,
+            gap: '30px',
+          }}
+          >
+            <Button
+              variant="contained"
+              onClick={handleClick}
+              sx={{
+                backgroundColor: '#2FD3AE',
+                borderRadius: 50,
+                fontFamily: 'Roboto, sans-serif',
+                fontWeight: 700,
+                fontSize: '14px',
+                color: '#FFFFFF'
+              }}
+            >
+              {confirmTextBtn}
+            </Button>
+            <Button
+              variant="contained"
+              onClick={handleClose}
+              sx={{
+                backgroundColor: '#2FD3AE',
+                borderRadius: 50,
+                fontFamily: 'Roboto, sans-serif',
+                fontWeight: 700,
+                fontSize: '14px',
+                color: '#FFFFFF'
+              }}
+            >
+              {cancelTextBtn}
+            </Button>
+          </Box>
+        )}
+      </Box>
+    </Modal>
   );
 };
 

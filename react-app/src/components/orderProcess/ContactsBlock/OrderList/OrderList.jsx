@@ -67,24 +67,33 @@ const OrderList = () => {
           {products.map(el => {
             const currentPrice = roundPrice(el) * el.quantity;
             return (
-              <Grid container key={el.id} alignItems="center"
+              <Grid
+                container
+                key={el.id}
+                alignItems="center"
                 sx={{ mt: '10px', gap: '10px', border: '1px solid #2fd3ae', p: '5px' }}
               >
                 <Grid item sx={{ mr: '5px' }}>
                   <img src={`${el.img[0]}`} width="70px" alt="" />
                 </Grid>
 
-                <Grid item xs={12} sm={8} md={9} lg={9} xl={8}
+                <Grid
+                  item
+                  xs={12}
+                  sm={8}
+                  md={9}
+                  lg={9}
+                  xl={8}
                   sx={{ display: 'flex', flexDirection: 'column', gap: '5px' }}
                 >
                   <Typography
-                    sx={{textAlign: 'left', fontSize: '14px', fontWeight: 500}}
+                    sx={{ textAlign: 'left', fontSize: '14px', fontWeight: 500 }}
                   >{`${el.name}`}
                   </Typography>
                   <Typography sx={{ textAlign: 'left', fontSize: '14px' }}>
                     Ціна за од. : {`${currentPrice} грн.`}
                   </Typography>
-                  <Typography sx={{fontSize: '14px', fontWeight: 500}}>Кількість: {`${el.quantity}`}
+                  <Typography sx={{ fontSize: '14px', fontWeight: 500 }}>Кількість: {`${el.quantity}`}
                   </Typography>
                 </Grid>
 

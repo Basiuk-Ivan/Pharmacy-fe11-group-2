@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { theme as muiTheme } from '../../../../tools/muiTheme';
 import { TextField, Grid, Typography, Container } from '@mui/material';
 import { styled, ThemeProvider } from '@mui/material/styles';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
 
 import { openOrderModal } from '../../../../redux/slice/cartItems';
 
@@ -64,7 +63,7 @@ const ContactsForm = () => {
   }, [orderPaymentMethod]);
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={muiTheme}>
       <Container>
         <Typography
           variant="h5"
