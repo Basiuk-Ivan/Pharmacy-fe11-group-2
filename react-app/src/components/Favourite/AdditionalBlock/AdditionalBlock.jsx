@@ -5,9 +5,9 @@ import { useSelector } from 'react-redux';
 import { request } from '../../../tools/request';
 import ProductCard from '../../ProductCard/ProductCard';
 
-const AdditionalBlock = () => {
+const AdditionalBlock = props => {
   const [products, setProducts] = useState([]);
-  const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
+  const { favoriteItems } = props;
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -24,6 +24,14 @@ const AdditionalBlock = () => {
       }
     };
     fetchProducts();
+  }, [favoriteItems]);
+
+  useEffect(() => {
+    const updatedProducts = products.filter(item => {
+      return favoriteItems.find(favoriteItem => favoriteItem.id === item.id);
+    });
+
+    setProducts(updatedProducts);
   }, [favoriteItems]);
 
   return (
