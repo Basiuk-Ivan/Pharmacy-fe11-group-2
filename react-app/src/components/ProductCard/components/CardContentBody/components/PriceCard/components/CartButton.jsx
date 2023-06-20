@@ -18,7 +18,8 @@ export const CartButton = ({ productItem, isInCart }) => {
   const [isCart, setIsCart] = useState(false);
 
   const isOpenedCartModalRemoveOne = useSelector(state => state.itemCards.isOpenedCartModalRemoveOne);
-  const handleClickCartModalRemoveOne = prod => {
+  const handleClickCartModalRemoveOne = ()=> {
+    const prod = JSON.parse(window.localStorage.getItem("removeItem"));
     console.log(prod);
     dispatch(removeItem(prod));
     removeFromCartLocalStorage(prod);
@@ -27,6 +28,11 @@ export const CartButton = ({ productItem, isInCart }) => {
   const handleCloseСartModalRemoveOne = product => {
     dispatch(closeCartModalRemoveOne());
   };
+
+  const iconClick = (productForRemove) => {
+    dispatch(openCartModalRemoveOne());
+    window.localStorage.setItem("removeItem", JSON.stringify(productForRemove));
+  }
 
   const handleAddtoCart = () => {
     if (!isCart) {
@@ -54,14 +60,14 @@ export const CartButton = ({ productItem, isInCart }) => {
   if (isInCart) {
     return (
       <>
-        <IconButton sx={iconButtonStyles} onClick={() => dispatch(openCartModalRemoveOne())}>
+        <IconButton sx={iconButtonStyles} onClick={()=>iconClick(productItem)}>
           <CloseIcon />
         </IconButton>
         <ModalWindow
           mainText="Видалити даний товар з корзини?"
           confirmTextBtn="Так"
           cancelTextBtn="Ні"
-          handleClick={() => handleClickCartModalRemoveOne(productItem)}
+          handleClick={handleClickCartModalRemoveOne}
           handleClose={handleCloseСartModalRemoveOne}
           isOpened={isOpenedCartModalRemoveOne}
           actions={true}

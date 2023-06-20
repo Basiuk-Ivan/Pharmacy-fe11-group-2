@@ -41,7 +41,8 @@ const cartSlice = createSlice({
       if (action.payload === 'all') {
         state.items = [];
       } else {
-        state.items = state.items.filter(item => item.id !== action.payload.id);
+        const newArr = state.items.filter(item => item.id !== action.payload.id);
+        state.items = [...newArr];
       }
     },
     setSum: (state, action) => {
