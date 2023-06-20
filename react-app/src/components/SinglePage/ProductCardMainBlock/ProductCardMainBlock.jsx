@@ -152,6 +152,7 @@ const ProductCardMainBlock = ({ productItem }) => {
                           {value}
                         </Grid>
                       </Grid>
+
                     </Grid>
                     ))}
                 </Grid>
