@@ -1,4 +1,3 @@
-/* eslint-disable no-shadow */
 import { Container, Typography, Grid } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';

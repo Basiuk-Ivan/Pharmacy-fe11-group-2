@@ -2,7 +2,7 @@ import { Grid } from '@mui/material';
 import ContactsForm from './ContactsForm/ContactsForm';
 import OrderList from './OrderList/OrderList';
 
-const ContactsBlock = () => (
+const ContactsBlock = ({ products }) => (
   <Grid
     container
     sx={{
@@ -19,7 +19,7 @@ const ContactsBlock = () => (
         padding: '10px'
       }}
     >
-      <ContactsForm />
+      <ContactsForm products={products} />
     </Grid>
     <Grid
       item
@@ -31,7 +31,7 @@ const ContactsBlock = () => (
         padding: '10px'
       }}
     >
-      <OrderList />
+      <OrderList products={products} />
     </Grid>
   </Grid>
 );

@@ -7,7 +7,8 @@ import { addToCartLocalStorage } from '../../../../../../../utils/LocalStore/add
 import { removeFromCartLocalStorage } from '../../../../../../../utils/LocalStore/removeFromCartLocalStorage';
 import {
   addToCart,
-  closeCartModalRemoveOne, openCartModalRemoveOne,
+  closeCartModalRemoveOne,
+  openCartModalRemoveOne,
   removeItem
 } from '../../../../../../../redux/slice/cartItems';
 import { cartStyles, iconButtonStyles } from '../../../../../style';
@@ -18,6 +19,7 @@ export const CartButton = ({ productItem, isInCart }) => {
   const [isCart, setIsCart] = useState(false);
 
   const isOpenedCartModalRemoveOne = useSelector(state => state.itemCards.isOpenedCartModalRemoveOne);
+
   const handleClickCartModalRemoveOne = () => {
     const prod = JSON.parse(window.localStorage.getItem('removeItem'));
     dispatch(removeItem(prod));
@@ -33,7 +35,8 @@ export const CartButton = ({ productItem, isInCart }) => {
     window.localStorage.setItem('removeItem', JSON.stringify(productForRemove));
   };
 
-  const handleAddtoCart = () => {
+  const handleAddtoCart = event => {
+    event.preventDefault();
     if (!isCart) {
       dispatch(addToCart({ id: productItem.id }));
       addToCartLocalStorage(productItem);

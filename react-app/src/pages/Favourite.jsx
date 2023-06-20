@@ -16,7 +16,7 @@ const Favourite = () => {
   const isOpenedModalAddtoCart = useSelector(state => state.favouriteItems.isOpenedModalAddtoCart);
   const navigate = useNavigate();
   const handleClickModalRemoveAll = () => {
-      favoriteItems.forEach(element => {
+    favoriteItems.forEach(element => {
       removeFromFavouriteLocalStorage(element);
     });
     dispatch(deleteFromFavouriteItems('all'));
@@ -36,7 +36,7 @@ const Favourite = () => {
       addToCartLocalStorage(product);
     });
     dispatch(closeModalAddtoCart());
-      favoriteItems.forEach(element => {
+    favoriteItems.forEach(element => {
       removeFromFavouriteLocalStorage(element);
     });
     dispatch(deleteFromFavouriteItems('all'));
@@ -55,7 +55,7 @@ const Favourite = () => {
         handleClick={handleClickModalRemoveAll}
         handleClose={handleCloseModalRemoveAll}
         isOpened={isOpenModalRemoveAll}
-        actions={true}
+        actions
       />
       <ModalWindow
         mainText="Додати всі обрані товари до кошика?"
@@ -64,7 +64,7 @@ const Favourite = () => {
         handleClick={() => handleClickModalAddToCart(favoriteItems)}
         handleClose={handleCloseModalAddtoCart}
         isOpened={isOpenedModalAddtoCart}
-        actions={true}
+        actions
       />
     </>
   );

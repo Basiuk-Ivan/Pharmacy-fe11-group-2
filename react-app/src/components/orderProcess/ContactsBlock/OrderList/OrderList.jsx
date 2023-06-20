@@ -1,9 +1,6 @@
-import { useEffect, useState } from 'react';
 import { Typography, Container, Grid } from '@mui/material';
-import { useSelector } from 'react-redux';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { roundPrice } from '../../../../utils/ActionsWithProduct/roundPrice';
-import { request } from '../../../../tools/request';
 
 const theme1 = createTheme({
   breakpoints: {
@@ -12,42 +9,12 @@ const theme1 = createTheme({
       sm: 400,
       md: 600,
       lg: 900,
-      xl: 1200,
-    },
-  },
+      xl: 1200
+    }
+  }
 });
 
-const OrderList = () => {
-  const [products, setProducts] = useState([]);
-  const productItemCart = useSelector(state => state.itemCards.items);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        if (productItemCart.length > 0) {
-          const cartIds = productItemCart.map(item => item.id).join(',');
-
-          const { result } = await request({
-            url: '',
-            method: 'GET',
-            params: { _id: cartIds }
-          });
-
-          const { data } = result;
-
-          const combinedArray = productItemCart.map(item1 => {
-            const arr2 = data.find(item2 => item2.id === item1.id);
-            return { ...item1, ...arr2, quantity: item1.quantity };
-          });
-
-          setProducts(combinedArray);
-        }
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      }
-    };
-    fetchProducts();
-  }, [productItemCart]);
+const OrderList = ({ products }) => {
   return (
     <ThemeProvider theme={theme1}>
       <Container disableGutters>
@@ -86,17 +53,16 @@ const OrderList = () => {
                   xl={8}
                   sx={{ display: 'flex', flexDirection: 'column', gap: '5px' }}
                 >
-                  <Typography
-                    sx={{ textAlign: 'left', fontSize: '14px', fontWeight: 500 }}
-                  >{`${el.name}`}
+                  <Typography sx={{ textAlign: 'left', fontSize: '14px', fontWeight: 500 }}>
+                    {`${el.name}`}
                   </Typography>
                   <Typography sx={{ textAlign: 'left', fontSize: '14px' }}>
                     Ціна за од. : {`${currentPrice} грн.`}
                   </Typography>
-                  <Typography sx={{ fontSize: '14px', fontWeight: 500 }}>Кількість: {`${el.quantity}`}
+                  <Typography sx={{ fontSize: '14px', fontWeight: 500 }}>
+                    Кількість: {`${el.quantity}`}
                   </Typography>
                 </Grid>
-
               </Grid>
             );
           })}

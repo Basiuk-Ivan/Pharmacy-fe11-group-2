@@ -10,6 +10,32 @@ const createProduct = async (req, res) => {
   }
 };
 
+const getOneProd = async (id, res) => {
+  try {
+    const oneProd = await ProductDB.findById(id);
+    return oneProd;
+  } catch (e) {
+    res.status(500).json(e.message);
+  }
+};
+
+export const fillFields = async (orderData, res) => {
+  try {
+    const { products } = orderData;
+    const productsData = await Promise.all(
+      products.map(async item => {
+        const { price, name } = await getOneProd(item.productID);
+        const priceTotal = item.amount * price;
+        return { ...item, priceTotal, price, name };
+      })
+    );
+
+    return productsData;
+  } catch (e) {
+    res.status(500).json(e.message);
+  }
+};
+
 const getAllProduct = async (req, res) => {
   try {
     const { page, limit, priceMin, priceMax, sort, ...searchString } =
@@ -28,16 +54,13 @@ const getAllProduct = async (req, res) => {
     }
     if (!!searchString._id) {
       let searchTxt = searchString._id?.toString();
-      console.log(searchTxt.split(','));
       searchString._id = { $in: searchTxt.split(',') };
     }
     if (searchString.search) {
       const regexp = new RegExp(searchString.search, 'i');
-      console.log(regexp);
       searchString.name = regexp;
       delete searchString.search;
     }
-    console.log(searchString);
     const data = await ProductDB.find(searchString)
       .limit(perPage)
       .skip(skip)
