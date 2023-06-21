@@ -1,5 +1,5 @@
 const HTML_TEMPLATE = (text) => {
-    return `
+  return `
     <!DOCTYPE html>
     <html>
       <head>
@@ -19,7 +19,7 @@ const HTML_TEMPLATE = (text) => {
             padding: 20px;
           }
           .email-header {
-            background-color: #333;
+            background-color: #2FD3AE;
             color: #fff;
             padding: 20px;
             text-align: center;
@@ -28,7 +28,7 @@ const HTML_TEMPLATE = (text) => {
             padding: 20px;
           }
           .email-footer {
-            background-color: #333;
+            background-color: #2FD3AE;
             color: #fff;
             padding: 20px;
             text-align: center;
@@ -39,19 +39,19 @@ const HTML_TEMPLATE = (text) => {
         <div class="container">
           <div class="email">
             <div class="email-header">
-              <h1>Інтернет магазин Pharmace shop</h1>
+              <h1>Інтернет магазин Аптека Онлайн</h1>
             </div>
             <div class="email-body">
               <p>${text}</p>
             </div>
             <div class="email-footer">
-              <p>Дякуемо що Ви з нами</p>
+              <p>Дякуємо, що Ви з нами</p>
             </div>
           </div>
         </div>
       </body>
     </html>
   `;
-}
+};
 
 export default HTML_TEMPLATE;
