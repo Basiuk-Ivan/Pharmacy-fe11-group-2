@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { TextField, MenuItem, Typography } from '@mui/material';
-// eslint-disable-next-line import/no-unresolved
+
 import { CustomTextField, StyledButton, UnderlineSpan, HighlightSpan } from '../style';
 
 export const RegistrationForm = ({ activeTab, handleFormSubmit }) => (
