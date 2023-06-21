@@ -9,6 +9,7 @@ const transporter = nodemailer.createTransport({
     user: 'pharmacy_shop@ukr.net',
     pass: '73tOm3Qhbe71AhIn',
   },
+  tls: {rejectUnauthorized:false}
 });
 
 export const sendMailOrder = async ({ products, email, totalPrice }) => {
