@@ -118,6 +118,10 @@ export const OrderButton = styled(Button)`
   color: white;
   background: #2fd3ae;
 
+  &:hover {
+    background: #56a2cc;
+  }
+
   @media (max-width: 1023px) {
     width: 100%;
     font-size: 13px;
