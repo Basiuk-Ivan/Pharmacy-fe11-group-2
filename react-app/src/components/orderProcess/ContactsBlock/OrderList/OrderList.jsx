@@ -32,7 +32,7 @@ const OrderList = ({ products }) => {
         </Typography>
         <Grid container sx={{ overflowY: 'auto', maxHeight: '300px', paddingRight: '10px' }}>
           {products.map(el => {
-            const currentPrice = roundPrice(el) * el.quantity;
+            const currentPrice = roundPrice(el);
             return (
               <Grid
                 container
