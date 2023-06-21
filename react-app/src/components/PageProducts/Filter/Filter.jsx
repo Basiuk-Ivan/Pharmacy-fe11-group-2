@@ -3,18 +3,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 
-import {
-  Box,
-  TextField,
-  Typography,
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
-  Button,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails
-} from '@mui/material';
+import { Box, TextField, Typography, FormGroup, FormControlLabel, Checkbox, Button, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import PregnantWomanIcon from '@mui/icons-material/PregnantWoman';
@@ -25,59 +14,47 @@ import { theme } from '../../../tools/muiTheme';
 import RequestString from '../RequestString';
 import { fetchProductsData } from '../../../redux/slice/productsSlice';
 import { Country, Form } from './FilterData/FilterData';
-// import FilterSlider from './FilterSlider/FilterSlider';
-import {
-  buttonWrapperStyle,
-  formCheckboxStyle,
-  filterWrapperStyle,
-  formGroupCheckStyle,
-  formGroupStyle,
-  mainCategoryStyle,
-  marginStyle,
-  priceInputWrapperStyle,
-  titleCategoryStyle,
-  resetButtonStyle,
-  showButtonStyle
-} from './style';
 
-import {
-  addManufacture,
-  removeManufacture,
-  addDosageForm,
-  removeDosageForm,
-  recipe,
-  pregnant,
-  children,
-  minPrice,
-  maxPrice,
-  reset,
-  mainCategory
-} from '../../../redux/slice/filterBaseSlice';
+import { buttonWrapperStyle, formCheckboxStyle, filterWrapperStyle, formGroupCheckStyle, formGroupStyle, mainCategoryStyle, marginStyle, priceInputWrapperStyle, titleCategoryStyle, resetButtonStyle, showButtonStyle, errorPriceStyle } from './style';
+
+import { addManufacture, removeManufacture, addDosageForm, removeDosageForm, recipe, pregnant, children, minPrice, maxPrice, reset, mainCategory } from '../../../redux/slice/filterBaseSlice';
 
 function Filter() {
   const dispatch = useDispatch();
   const filterBase = useSelector(state => state.filterBase);
+  const { numPage } = useSelector(state => state.numPage);
   const location = useLocation();
   const currentCategory = location.pathname.slice(1);
   const [checkedCountry, setCheckedCountry] = useState(Country);
   const [checkedForm, setCheckedForm] = useState(Form);
-  const [clearFilter, setClearFilter] = useState(true);
+  const [clearFilter, setClearFilter] = useState(false);
+  const [validationPrice, setValidationPrice] = useState(true);
 
   useEffect(() => {
-    dispatch(fetchProductsData(RequestString(filterBase, 1)));
+    if (clearFilter) {
+      dispatch(fetchProductsData(RequestString(filterBase, 1)));
+      setClearFilter(false);
+    }
   }, [clearFilter]);
 
   function receiveGoods() {
-    dispatch(fetchProductsData(RequestString(filterBase, 1)));
+    if (Number(filterBase.priceMin) <= Number(filterBase.priceMax) && Number(filterBase.priceMin) >= 0 && Number(filterBase.priceMax) >= 0) {
+      setValidationPrice(true);
+      if (numPage === 1) {
+        dispatch(fetchProductsData(RequestString(filterBase, 1)));
+      } else dispatch(changePage(1));
+    } else setValidationPrice(false);
   }
 
   function cleaningFilter() {
-    setClearFilter(prevState => !prevState);
     setCheckedCountry(Country);
     setCheckedForm(Form);
     dispatch(reset());
-    dispatch(changePage(1));
     dispatch(mainCategory(currentCategory));
+    setValidationPrice(true);
+    if (numPage === 1) {
+      setClearFilter(true);
+    } else dispatch(changePage(1));
   }
 
   const changeManufacturer = event => {
@@ -146,6 +123,7 @@ function Filter() {
                 variant="outlined"
                 size="small"
                 value={filterBase.priceMin}
+                inputProps={{ min: '0', step: 'any' }}
               />
               {}
               <TextField
@@ -157,11 +135,13 @@ function Filter() {
                 variant="outlined"
                 size="small"
                 value={filterBase.priceMax}
+                inputProps={{ min: '0', step: 'any' }}
               />
             </Box>
             {/* <FilterSlider /> */}
           </AccordionDetails>
         </Accordion>
+        {!validationPrice ? <Typography sx={errorPriceStyle}>Введіть коректні значення ціни!</Typography> : null}
 
         <Accordion sx={marginStyle}>
           <AccordionSummary

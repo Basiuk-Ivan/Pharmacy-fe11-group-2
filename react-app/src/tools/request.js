@@ -1,17 +1,25 @@
 import axios from 'axios';
 
-const instance = axios.create({
+const productInstance = axios.create({
   baseURL: 'http://localhost:3004/api/product'
 });
 
+const orderInstance = axios.create({
+  baseURL: 'http://localhost:3004/api'
+});
+
 export const request = async ({ url, method = 'GET', params, body, headers } = {}) => {
+  const instance = method === 'POST' ? orderInstance : productInstance;
+
   instance.defaults.headers.post['Content-Type'] = 'application/json';
 
   const fetchData = () => {
     if (method === 'GET') {
       return instance.get(url, { params });
     }
-    return instance({ url, method, data: body, headers });
+    if (method === 'POST') {
+      return instance.post(url, body, { headers });
+    }
   };
 
   try {

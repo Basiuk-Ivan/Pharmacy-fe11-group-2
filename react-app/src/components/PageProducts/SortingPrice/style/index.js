@@ -14,7 +14,7 @@ export const sortingStyles = {
   alignItems: 'center',
   gap: '40px',
   paddingLeft: '20px',
-  '@media (max-width: 899px)': {
+  '@media (max-width: 1062px)': {
     flexDirection: 'column',
     gap: '10px',
     alignItems: 'flex-start',

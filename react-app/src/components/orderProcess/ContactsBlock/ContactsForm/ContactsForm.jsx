@@ -4,6 +4,7 @@ import { TextField, Grid, Typography, Container } from '@mui/material';
 import { styled, ThemeProvider } from '@mui/material/styles';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { request } from '../../../../tools/request';
 import { theme as muiTheme } from '../../../../tools/muiTheme';
 
 import { openOrderModal } from '../../../../redux/slice/cartItems';
@@ -19,17 +20,19 @@ const nameRegExp = /[a-zA-zа-яА-яёЁ]$/;
 
 const ContactsForm = ({ products }) => {
   const orderPaymentMethod = useSelector(state => state.order.PaymentMethodValue);
+  const sumWithDiscount = useSelector(state => state.itemCards.sumWithDiscount);
+
   const dispatch = useDispatch();
 
   const validationSchema = Yup.object().shape({
-    name: Yup.string()
+    firstName: Yup.string()
       .required("Введіть своє ім'я кирилицею")
       .matches(nameRegExp, "Введіть своє ім'я кирилицею")
       .min(2, 'Мінімум два символи'),
     email: Yup.string().email('Введіть свою ел. пошту').required('Введіть свою ел. пошту'),
     city: Yup.string().required('Введіть своє місто').matches(nameRegExp, 'Введіть своє місто'),
     house: Yup.string().required('Введіть номер будинку'),
-    surname: Yup.string()
+    lastName: Yup.string()
       .required('Введіть своє прізвище кирилицею')
       .matches(nameRegExp, 'Введіть своє прізвище кирилицею')
       .min(2, 'Мінімум два символи'),
@@ -42,27 +45,38 @@ const ContactsForm = ({ products }) => {
 
   const formik = useFormik({
     initialValues: {
-      name: '',
+      firstName: '',
       email: '',
       city: '',
       house: '',
-      surname: '',
+      lastName: '',
       phone: '',
       street: '',
       apartment: '',
       paymentMethod: `${orderPaymentMethod}`,
-      products: []
+      products: [],
+      totalPrice: Number
     },
     validationSchema,
-    onSubmit: (values, { resetForm }) => {
-      console.log(values);
-      dispatch(openOrderModal());
-      resetForm();
+    onSubmit: async (values, { resetForm }) => {
+      const { status } = await request({
+        url: '/order',
+        method: 'POST',
+        body: values
+      });
+
+      if (status === 200) {
+        dispatch(openOrderModal());
+        resetForm();
+      }
     }
   });
 
   useEffect(() => {
     formik.setFieldValue('products', products);
+  }, [products]);
+  useEffect(() => {
+    formik.setFieldValue('totalPrice', sumWithDiscount);
   }, [products]);
 
   useEffect(() => {
@@ -90,11 +104,11 @@ const ContactsForm = ({ products }) => {
               <ChangedTextField
                 label="Ваше ім'я"
                 fullWidth
-                name="name"
-                value={formik.values.name}
+                name="firstName"
+                value={formik.values.firstName}
                 onChange={formik.handleChange}
-                error={Boolean(formik.touched.name && formik.errors.name)}
-                helperText={formik.touched.name && formik.errors.name}
+                error={Boolean(formik.touched.firstName && formik.errors.firstName)}
+                helperText={formik.touched.firstName && formik.errors.firstName}
               />
               <ChangedTextField
                 label="Ваш e-mail"
@@ -128,11 +142,11 @@ const ContactsForm = ({ products }) => {
               <ChangedTextField
                 label="Ваше прізвище"
                 fullWidth
-                name="surname"
-                value={formik.values.surname}
+                name="lastName"
+                value={formik.values.lastName}
                 onChange={formik.handleChange}
-                error={Boolean(formik.touched.surname && formik.errors.surname)}
-                helperText={formik.touched.surname && formik.errors.surname}
+                error={Boolean(formik.touched.lastName && formik.errors.lastName)}
+                helperText={formik.touched.lastName && formik.errors.lastName}
               />
               <ChangedTextField
                 label="Ваш телефон"

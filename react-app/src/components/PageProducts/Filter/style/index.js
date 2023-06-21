@@ -68,3 +68,7 @@ export const resetButtonStyle = {
   borderColor: '#2fd3ae',
   ':hover': { color: '#1b7360', borderColor: '#1b7360' }
 };
+
+export const errorPriceStyle = {
+  color: 'red', mt: '-10px', mb: '10px', pl: '7px', fontSize: '15px',
+};
