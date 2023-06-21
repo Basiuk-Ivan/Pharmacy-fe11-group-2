@@ -31,8 +31,8 @@ import { removeAllFromCart } from '../../utils/LocalStore/removeAllFromCart';
 import { countSum } from '../../utils/ActionsWithProduct/countSum';
 import { request } from '../../tools/request';
 import ModalWindow from '../../components/ModalWindow';
-import AdditionalBlock from '../../components/Favourite/AdditionalBlock/AdditionalBlock.jsx';
-import Advantages from '../../components/orderProcess/Advantages.jsx';
+import AdditionalBlock from '../../components/Favourite/AdditionalBlock/AdditionalBlock';
+import Advantages from '../../components/orderProcess/Advantages';
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
