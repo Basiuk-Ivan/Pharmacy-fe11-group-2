@@ -3,7 +3,7 @@ import { Container, Typography, Grid } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { request } from '../../../tools/request';
-import { shuffleArray } from '../../../tools/shuffleArray';
+// import { shuffleArray } from '../../../tools/shuffleArray';
 import ProductCard from '../../ProductCard/ProductCard';
 
 const AdditionalBlock = () => {
