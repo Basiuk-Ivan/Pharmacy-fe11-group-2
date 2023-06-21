@@ -49,7 +49,7 @@ const PaymentMethodForm = () => {
                 <Box display="flex" alignItems="center">
                   <span>Карткою онлайн</span>
                   <img
-                    src="./orderprocessTest/cards.png"
+                    src="./src/assets/orderprocess/cards.png"
                     alt="Payment Method"
                     style={{ marginLeft: '10px' }}
                   />

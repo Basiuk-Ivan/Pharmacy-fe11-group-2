@@ -16,7 +16,6 @@ function PaginationProducts() {
   totalPage = Math.ceil(totalFound / filterBase.limit);
 
   function handleChange(num) {
-    sessionStorage.setItem('numPage', num);
     dispatch(changePage(num));
   }
 

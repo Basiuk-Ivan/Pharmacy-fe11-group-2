@@ -7,6 +7,9 @@ const cartSlice = createSlice({
     cartSumWithoutDiscount: JSON.parse(localStorage.getItem('cartSumWithoutDiscount')) || 0,
     sumDiscount: JSON.parse(localStorage.getItem('sumDiscount')) || 0,
     sumWithDiscount: JSON.parse(localStorage.getItem('sumWithDiscount')) || 0,
+    isOpenedCartModalRemoveAll: false,
+    isOpenedCartModalRemoveOne: false,
+    isOpenedOrderModal: false
   },
   reducers: {
     addToCart: (state, action) => {
@@ -38,7 +41,8 @@ const cartSlice = createSlice({
       if (action.payload === 'all') {
         state.items = [];
       } else {
-        state.items = state.items.filter(item => item.id !== action.payload.id);
+        const newArr = state.items.filter(item => item.id !== action.payload.id);
+        state.items = [...newArr];
       }
     },
     setSum: (state, action) => {
@@ -46,9 +50,40 @@ const cartSlice = createSlice({
       state.sumDiscount = action.payload.sumDiscount;
       state.sumWithDiscount = action.payload.sumWithDiscount;
     },
+    openCartModalRemoveAll: state => {
+      state.isOpenedCartModalRemoveOne = false;
+      state.isOpenedCartModalRemoveAll = true;
+    },
+    closeCartModalRemoveAll: state => {
+      state.isOpenedCartModalRemoveAll = false;
+    },
+    openCartModalRemoveOne: state => {
+      state.isOpenedCartModalRemoveAll = false;
+      state.isOpenedCartModalRemoveOne = true;
+    },
+    closeCartModalRemoveOne: state => {
+      state.isOpenedCartModalRemoveOne = false;
+    },
+    openOrderModal: state => {
+      state.isOpenedOrderModal = true;
+    },
+    closeOrderModal: state => {
+      state.isOpenedOrderModal = false;
+    },
   }
 });
 
-export const { addToCart, addItem, removeItem, removeFromCart, setSum } = cartSlice.actions;
+export const { addToCart,
+  addItem,
+  removeItem,
+  removeFromCart,
+  setSum,
+  openCartModalRemoveAll,
+  closeCartModalRemoveAll,
+  openCartModalRemoveOne,
+  closeCartModalRemoveOne,
+  openOrderModal,
+  closeOrderModal
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

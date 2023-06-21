@@ -17,7 +17,10 @@ export const secondCategoryStyle = {
 };
 
 export const secondCategoryStyleCheck = {
-  color: '#cb0a0a'
+  color: '#2FD3AE',
+  fontWeight: '600',
+  fontSize: '14px',
+  cursor: 'pointer'
 };
 
 export const secondCategoryStyle4px = {

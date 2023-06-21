@@ -1,12 +1,12 @@
-export const accordions = [
+export const accordionsData = [
   {
     title: 'Ліки від кашлю , застуди та грипу',
     path: '/cough-cold-flu',
     panel: 'panel1',
     sub: [
-      { title: 'Жарознижуючі', path: 'antipyretic' },
-      { title: 'Кашель та біль у горлі', path: 'cough' },
-      { title: 'Назальна терапія', path: 'nasal' }
+      { title: 'Жарознижуючі', path: 'antipyretic', checked: false },
+      { title: 'Кашель та біль у горлі', path: 'cough', checked: false },
+      { title: 'Назальна терапія', path: 'nasal', checked: false }
     ]
   },
   {
@@ -14,9 +14,9 @@ export const accordions = [
     path: '/painkillers',
     panel: 'panel2',
     sub: [
-      { title: 'Від спазму', path: 'spasm' },
-      { title: 'Від болю при мігрені', path: 'migraine' },
-      { title: 'Від болю у спині', path: 'back-pain' }
+      { title: 'Від спазму', path: 'spasm', checked: false },
+      { title: 'Від болю при мігрені', path: 'migraine', checked: false },
+      { title: 'Від болю у спині', path: 'back-pain', checked: false }
     ]
   },
   {
@@ -24,8 +24,8 @@ export const accordions = [
     path: '/nervous-system',
     panel: 'panel3',
     sub: [
-      { title: 'Седативні (заспокійливі)', path: 'sedatives' },
-      { title: 'Антидепресанти', path: 'antidepressants' }
+      { title: 'Седативні (заспокійливі)', path: 'sedatives', checked: false },
+      { title: 'Антидепресанти', path: 'antidepressants', checked: false }
     ]
   },
   {
@@ -33,10 +33,10 @@ export const accordions = [
     path: '/cardiovascular-system',
     panel: 'panel4',
     sub: [
-      { title: 'Гіпертонія', path: 'hypertension' },
-      { title: 'Для розрідження крові', path: 'blood-thinning' },
-      { title: 'Тромбоз', path: 'thrombosis' },
-      { title: 'Варикоз', path: 'varicosity' }
+      { title: 'Гіпертонія', path: 'hypertension', checked: false },
+      { title: 'Для розрідження крові', path: 'blood-thinning', checked: false },
+      { title: 'Тромбоз', path: 'thrombosis', checked: false },
+      { title: 'Варикоз', path: 'varicosity', checked: false }
     ]
   }
 ];

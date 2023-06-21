@@ -14,7 +14,15 @@ export const titleStyle = {
   color: '#333333',
   fontSize: '36px',
   fontWeight: '700',
-  mb: '20px'
+  mb: '20px',
+  '@media (max-width: 770px)': {
+    fontSize: '28px',
+    fontWeight: '600',
+  },
+  '@media (max-width: 530px)': {
+    fontSize: '20px',
+    fontWeight: '500',
+  }
 };
 
 export const youBrowsedTitleSliderStyle = {
@@ -28,17 +36,16 @@ export const cardsWrapperStyle = {
   display: 'flex',
   flexWrap: 'wrap',
   gap: '13px',
-  marginBottom: '30px'
+  marginBottom: '30px',
+  rowGap: '20px',
+  justifyContent: 'space-around'
 };
 
 export const cardWrapperStyle = {
-  width: '220px',
-  minHeight: '300px',
-  backgroundColor: '#c4c2cc',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   fontSize: 24,
   fontWeight: 600,
-  cursor: 'pointer'
+  cursor: 'pointer',
 };
