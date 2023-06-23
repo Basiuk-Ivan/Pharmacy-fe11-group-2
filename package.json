@@ -4,7 +4,7 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "start": "concurrently \"cd api && npm i && npm run start \" \"cd react-app && npm i && npm run dev\""
+    "start": "concurrently \"cd react-app && npm i && npm run dev\" \"cd api && npm i && npm run start \""
   },
   "dependencies": {
     "concurrently": "^8.2.0"
