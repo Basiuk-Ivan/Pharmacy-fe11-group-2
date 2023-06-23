@@ -16,6 +16,7 @@ function YouBrowsed() {
   const viewedItems = useMemo(() => JSON.parse(localStorage.getItem('viewedProducts')) || [], []);
   const [viewedProducts, setViewedProducts] = useState([]);
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
+  // console.log('favoriteItems:', favoriteItems);
 
   const getViewedProducts = items => {
     if (items.length > 0) {
@@ -37,7 +38,7 @@ function YouBrowsed() {
 
   useEffect(() => {
     getViewedProducts(viewedItems);
-  }, [viewedItems, favoriteItems]);
+  }, [viewedItems]);
 
   const displayedProducts = viewedItems
     .map(itemId => viewedProducts.find(product => product.id === itemId))

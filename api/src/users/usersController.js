@@ -77,8 +77,8 @@ const login = async (req, res) => {
         const token = createToken({
           payload: userData,
         });
-        // return res.json({ token });
-        return res.json({ token, user });
+        return res.json({ token });
+        // return res.json({ token, user });
       } else {
         throw new Error('Неправильна електронна пошта користувача або пароль');
       }
