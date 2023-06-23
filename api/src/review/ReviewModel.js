@@ -1,9 +1,10 @@
 import mongoose from 'mongoose';
 
-export const Favorite = new mongoose.Schema(
+export const Review = new mongoose.Schema(
   {
-    products: [{ type: mongoose.Types.ObjectId, ref: 'ProductDB' }],
+    product: { type: mongoose.Types.ObjectId, ref: 'ProductDB' },
     user: { type: mongoose.Types.ObjectId, ref: 'UserDB' },
+    reviewTxt: String,
   },
   {
     timestamps: false,
@@ -14,10 +15,9 @@ export const Favorite = new mongoose.Schema(
         ret.id = ret._id;
         delete ret._id;
         delete ret.__v;
-        delete ret.password;
       },
     },
   }
 );
 
-export default mongoose.model('FavoriteDB', Favorite, 'favorites');
+export default mongoose.model('ReviewDB', Review, 'reviews');

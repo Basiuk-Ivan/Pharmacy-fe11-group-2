@@ -2,12 +2,11 @@ import { Container, Typography, Grid, Button, Skeleton, Box } from '@mui/materia
 import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProductCard from '../../ProductCard/ProductCard';
 import Bread from '../../Bread';
-import { addToCart } from '../../../redux/slice/cartItems';
-import { addToCartLocalStorage } from '../../../utils/LocalStore/addToCartLocalStorage';
+
 import { openModalAddtoCart, openModalRemoveAll } from '../../../redux/slice/favouriteItems';
 import { request } from '../../../tools/request';
 
@@ -15,7 +14,6 @@ const FavouriteBlock = props => {
   const [products, setProducts] = useState([]);
   const [showSkeleton, setShowSkeleton] = useState(true);
 
-  const cartItems = useSelector(state => state.itemCards);
   const { favoriteItems } = props;
 
   const dispatch = useDispatch();
@@ -55,7 +53,7 @@ const FavouriteBlock = props => {
       }
     };
     fetchProducts();
-  }, [favoriteItems]);
+  }, []);
 
   useEffect(() => {
     const updatedProducts = products.filter(item => {

@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { Box, Container } from '@mui/material';
+import { Box, Container, Skeleton, Stack } from '@mui/material';
+import { SkeletonSection } from '../../tools/productsSkeleton';
 import Filter from '../../components/PageProducts/Filter';
 import ChoiceCategory from '../../components/PageProducts/ChoiceCategory';
 import PromoMonth from '../../components/PageProducts/PromoMonth';
@@ -24,10 +25,20 @@ import {
 import { fetchProductsData } from '../../redux/slice/productsSlice';
 
 function Products() {
+  const [showSkeleton, setShowSkeleton] = useState(true);
+
   const dispatch = useDispatch();
   const { numPage } = useSelector(state => state.numPage);
   const filterBase = useSelector(state => state.filterBase);
   const { category } = useParams();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSkeleton(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     dispatch(fetchProductsData(RequestString(filterBase, numPage)));
@@ -47,7 +58,7 @@ function Products() {
 
         <Box id="sortingAndCards" sx={sortingAndCardsStyles}>
           <SortingPrice />
-          <Cards />
+          {showSkeleton ? <SkeletonSection /> : <Cards />}
           <Box id="paginationDownWrapper" sx={paginationWrapperStyles}>
             <PaginationProducts category={category} />
           </Box>

@@ -5,7 +5,7 @@ export const wrapForSocialMediaStyles = {
     md: 'flex',
     flexWrap: 'wrap'
   },
-  '@media (max-width: 826px)': {
+  '@media (max-width: 834px)': {
     display: 'none'
   }
 };

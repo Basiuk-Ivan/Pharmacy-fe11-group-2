@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import Home from './pages/Home';
 import Products from './pages/Products';
@@ -40,7 +40,8 @@ const App = () => (
         <Route path="/:category/:id" element={<ProductPage />} />
         <Route path="/orderprocess" element={<OrderProcess />} />
         <Route path="/cabinet" element={<Cabinet />} />
-        <Route path="*" element={<NotFound />} />
+        {/* <Route path="*" element={<NotFound />} /> */}
+        {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
       </Route>
     </Routes>
   </ThemeProvider>

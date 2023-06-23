@@ -36,8 +36,7 @@ const favouriteItems = createSlice({
     },
     closeModalAddtoCart: state => {
       state.isOpenedModalAddtoCart = false;
-    },
-
+    }
   }
 });
 

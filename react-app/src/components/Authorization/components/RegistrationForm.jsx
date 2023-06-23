@@ -17,6 +17,12 @@ export const RegistrationForm = ({ activeTab, handleFormSubmit }) => (
       gender: ''
     }}
     validationSchema={Yup.object().shape({
+      firstName: Yup.string()
+        .matches(/^[A-Za-zА-Яа-яЁёІіЇїЄєҐґ']+$/, 'Введіть тільки букви')
+        .required("Обов'язкове поле"),
+      secondName: Yup.string()
+        .matches(/^[A-Za-zА-Яа-яЁёІіЇїЄєҐґ']+$/, 'Введіть тільки букви')
+        .required("Обов'язкове поле"),
       email: Yup.string().email('Невірний формат email').required('Обовязкове поле'),
       password: Yup.string().required('Обовязкове поле').min(6, 'Мінімальна довжина пароля - 6 символів'),
       confirmPassword: Yup.string()
@@ -41,7 +47,7 @@ export const RegistrationForm = ({ activeTab, handleFormSubmit }) => (
                 type="text"
                 id="firstName"
                 name="firstName"
-                label="Введіть Імя"
+                label="Введіть Ім'я"
                 variant="outlined"
                 value={values.firstName}
                 onChange={handleChange}
@@ -57,11 +63,11 @@ export const RegistrationForm = ({ activeTab, handleFormSubmit }) => (
                 name="secondName"
                 label="Введіть Прізвище"
                 variant="outlined"
-                value={values.lastName}
+                value={values.secondName}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              <ErrorMessage name="lastName" component="div" className="error-message" />
+              <ErrorMessage name="secondName" component="div" className="error-message" />
             </div>
             <div className="form-group">
               <CustomTextField
