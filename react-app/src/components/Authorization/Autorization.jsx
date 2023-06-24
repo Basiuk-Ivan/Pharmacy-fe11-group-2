@@ -1,20 +1,32 @@
 import React, { useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { Modal, Tab, Tabs, Typography, Box } from '@mui/material';
-
-// import jwt_decode from 'jwt-decode';
+import { Modal, Tab, Tabs, Typography, Box, Button } from '@mui/material';
 import { theme } from '../../tools/muiTheme';
 import { closeModal } from '../../redux/slice/modalSlice';
 import { LoginForm } from './components/LoginForm';
 import { RegistrationForm } from './components/RegistrationForm';
-
 import { styles } from './style';
 import { setToken } from '../../redux/slice/isToken';
 
 import './style/Auth.scss';
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4
+};
+
 const AuthButton = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => setOpen(false);
+
   const isOpen = useSelector(state => state.modalSlice.openModal);
   const dispatch = useDispatch();
 
@@ -39,15 +51,17 @@ const AuthButton = () => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      const { token } = await response.json();
+      const { token, user } = await response.json();
 
       window.localStorage.setItem('token', token);
       dispatch(setToken(token));
+      window.location.reload();
     } catch (err) {
       console.error('Error fetching products:', err);
     }
     handleCloseModal();
   };
+
   const handleFormSubmit = async values => {
     console.log(values);
     try {
@@ -60,10 +74,11 @@ const AuthButton = () => {
         body: JSON.stringify(values)
       });
       if (!response.ok) {
+        setOpen(true);
         throw new Error('Network response was not ok');
       }
-      const user = await response.json();
-      console.log('user:', user);
+      const { token } = await response.json();
+      window.localStorage.setItem('token', token);
     } catch (err) {
       console.error('Error fetching products:', err);
     }
@@ -73,6 +88,23 @@ const AuthButton = () => {
   return (
     <ThemeProvider theme={theme}>
       <div>
+        {!!open && (
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Упс...
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                Щось пішло не так
+              </Typography>
+            </Box>
+          </Modal>
+        )}
         <Modal
           open={isOpen}
           onClose={handleCloseModal}

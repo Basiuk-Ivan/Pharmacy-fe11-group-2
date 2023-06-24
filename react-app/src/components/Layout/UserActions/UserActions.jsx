@@ -1,22 +1,30 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Box, Typography, Menu, IconButton, Tooltip, MenuItem } from '@mui/material';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import PersonIcon from '@mui/icons-material/Person';
+
 import { MobileMenu } from './components/MobileMenu';
 import { openModal } from '../../../redux/slice/modalSlice';
 import { setToken } from '../../../redux/slice/isToken';
 
 import { StyledBadge, wrapForActionsStyles, fillForIcon, colorForBadge } from './style';
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = [
+  { name: 'Profile', path: '/cabinet' },
+  { name: 'Account' },
+  { name: 'Dashboard' },
+  { name: 'Logout' }
+];
 
 const UserActions = () => {
   const dispatch = useDispatch();
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
   const cartItems = useSelector(state => state.itemCards.items);
+  const navigate = useNavigate();
 
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [hasToken, setHasToken] = useState(false);
@@ -39,14 +47,21 @@ const UserActions = () => {
     dispatch(openModal());
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    dispatch(setToken(null));
+    navigate('/');
+    window.location.reload();
+  };
+
   return (
     <>
       <Box sx={wrapForActionsStyles}>
         {hasToken ? (
           <>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <PermIdentityOutlinedIcon sx={fillForIcon} />
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, width: 40, height: 40 }}>
+                <PersonIcon sx={fillForIcon} />
               </IconButton>
             </Tooltip>
             <NavLink to="/favourite">
@@ -82,8 +97,13 @@ const UserActions = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map(setting => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem
+                  key={setting.name}
+                  onClick={setting.name === 'Logout' ? handleLogout : handleCloseUserMenu}
+                >
+                  <NavLink to={setting.path} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting.name}</Typography>
+                  </NavLink>
                 </MenuItem>
               ))}
             </Menu>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import {
   Box,
   Typography,
@@ -18,24 +18,37 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreIcon from '@mui/icons-material/MoreVert';
+
 import { openModal } from '../../../../redux/slice/modalSlice';
-import { removeToken } from '../../../../redux/slice/isToken';
+import { setToken, removeToken } from '../../../../redux/slice/isToken';
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-
+const settings = [
+  { name: 'Profile', path: '/cabinet' },
+  { name: 'Account' },
+  { name: 'Dashboard' },
+  { name: 'Logout' }
+];
 export const MobileMenu = () => {
   const dispatch = useDispatch();
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
   const cartItems = useSelector(state => state.itemCards.items);
+  const navigate = useNavigate();
 
   const [hasToken, setHasToken] = useState(false);
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+  //   setHasToken(!!token);
+  // }, []);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     setHasToken(!!token);
-  }, []);
+    dispatch(setToken(token));
+  }, [dispatch]);
 
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  // const [hasToken, setHasToken] = useState(false);
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -57,6 +70,14 @@ export const MobileMenu = () => {
 
   const handleOpenModal = () => {
     dispatch(openModal());
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+
+    dispatch(setToken(null));
+    navigate('/');
+    window.location.reload();
   };
 
   const StyledBadge = styled(Badge)(() => ({
@@ -138,8 +159,14 @@ export const MobileMenu = () => {
               <AccordionDetails>
                 <Box>
                   {settings.map(setting => (
-                    <MenuItem component="div" key={setting} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{setting}</Typography>
+                    <MenuItem
+                      component="div"
+                      key={setting.name}
+                      onClick={setting.name === 'Logout' ? handleLogout : handleCloseUserMenu}
+                    >
+                      <NavLink to={setting.path} onClick={handleCloseUserMenu}>
+                        <Typography textAlign="center">{setting.name}</Typography>
+                      </NavLink>
                     </MenuItem>
                   ))}
                 </Box>

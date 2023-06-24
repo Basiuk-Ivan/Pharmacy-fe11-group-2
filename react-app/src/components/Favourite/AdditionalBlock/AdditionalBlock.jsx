@@ -23,7 +23,7 @@ const AdditionalBlock = props => {
       }
     };
     fetchProducts();
-  }, [favoriteItems]);
+  }, []);
 
   useEffect(() => {
     const updatedProducts = products.filter(item => {
@@ -31,7 +31,7 @@ const AdditionalBlock = props => {
     });
 
     setProducts(updatedProducts);
-  }, [favoriteItems]);
+  }, []);
 
   return (
     <Container
