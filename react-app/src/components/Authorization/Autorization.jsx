@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { Modal, Tab, Tabs, Typography, Box, Button } from '@mui/material';
+import Cookies from 'js-cookie';
+import jwtDecode from 'jwt-decode';
 import { theme } from '../../tools/muiTheme';
 import { closeModal } from '../../redux/slice/modalSlice';
 import { LoginForm } from './components/LoginForm';
@@ -10,6 +12,7 @@ import { styles } from './style';
 import { setToken } from '../../redux/slice/isToken';
 
 import './style/Auth.scss';
+import { setUser } from '../../redux/slice/userSlice.js';
 
 const style = {
   position: 'absolute',
@@ -51,11 +54,15 @@ const AuthButton = () => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      const { token, user } = await response.json();
+      const { token } = await response.json();
+      const decodedToken = jwtDecode(token);
+
+      // const expirationTime = new Date(decodedToken.exp * 1000);
+      // Cookies.set('token', token, { expires: expirationTime });
 
       window.localStorage.setItem('token', token);
-      dispatch(setToken(token));
-      window.location.reload();
+      dispatch(setUser(decodedToken ));
+
     } catch (err) {
       console.error('Error fetching products:', err);
     }
