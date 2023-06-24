@@ -1,2 +1,0 @@
-buildCommand: cd react-app && npm install && npm run build && cd ../api && npm install
-startCommand: cd api && npm run dev
