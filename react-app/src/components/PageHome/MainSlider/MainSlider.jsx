@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Skeleton } from '@mui/material';
+import { Skeleton, Stack, Box } from '@mui/material';
 import { ProductSlider } from './Item/ProductSlider';
 import 'swiper/swiper-bundle.min.css';
 import './style/CustomSlider.scss';
@@ -26,36 +26,24 @@ const MainSlider = ({ products }) => {
 
   return (
     <>
-      {showSkeleton ? (
-        <>
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-        </>
-      ) : (
-        <Swiper
-          className="product-analogies-slider-main"
-          modules={[Navigation, Pagination, Scrollbar, A11y]}
-          spaceBetween={50}
-          slidesPerView={1}
-          loop
-          navigation
-          pagination={{ clickable: true, el: '.swiper-pagination' }}
-          scrollbar={false}
-        >
-          {productItems.map(item => (
-            <SwiperSlide key={item.id}>
-              <ProductSlider product={item} />
-            </SwiperSlide>
-          ))}
+      <Swiper
+        className="product-analogies-slider-main"
+        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        spaceBetween={50}
+        slidesPerView={1}
+        loop
+        navigation
+        pagination={{ clickable: true, el: '.swiper-pagination' }}
+        scrollbar={false}
+      >
+        {productItems.map(item => (
+          <SwiperSlide key={item.id}>
+            <ProductSlider product={item} />
+          </SwiperSlide>
+        ))}
 
-          <div className="swiper-pagination custom-pagination" />
-        </Swiper>
-      )}
+        <div className="swiper-pagination custom-pagination" />
+      </Swiper>
     </>
   );
 };

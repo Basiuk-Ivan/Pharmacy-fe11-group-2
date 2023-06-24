@@ -2,7 +2,7 @@ import { Stack, Typography } from '@mui/material';
 import { priceStyles, discountStyles } from '../../../../../style';
 
 export const ProductPrice = ({ productItem }) => {
-  const discountedPrice = Math.ceil(productItem.price * ((100 - productItem.discount) / 100));
+  const discountedPrice = Math.round(productItem.price * ((100 - productItem.discount) / 100));
 
   return (
     <Stack direction="column">

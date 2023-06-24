@@ -1,18 +1,17 @@
 import { useEffect, useState } from 'react';
-import { Skeleton } from '@mui/material';
 import CreationHistory from '../components/PageHome/CreationHistory';
 import HealthBlog from '../components/PageHome/HealthBlog';
 import HowWeWork from '../components/PageHome/HowWeWork/HowWeWork';
 import MainSlider from '../components/PageHome/MainSlider';
 import OurPartners from '../components/PageHome/OurPartners';
 import PromotionSlider from '../components/PageHome/PromotionSlider';
+import { SkeletonMainSlider } from '../utils/Skeleton/SkeletonMainSlider';
 import Testimonials from '../components/PageHome/Testimonials';
 import TodayPharmacy from '../components/PageHome/TodayPharmacy';
 import { request } from '../tools/request';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
-
   const [showSkeleton, setShowSkeleton] = useState(true);
 
   useEffect(() => {
@@ -41,31 +40,11 @@ const Home = () => {
     };
     fetchProducts();
   }, []);
+
   return (
     <>
-      {showSkeleton ? (
-        <>
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-        </>
-      ) : (
-        <>
-          <MainSlider products={products} />
-          <PromotionSlider products={products} />
-        </>
-      )}
+      {showSkeleton ? <SkeletonMainSlider /> : <MainSlider products={products} />}
+      <PromotionSlider products={products} />
       <HowWeWork />
       <Testimonials />
       <OurPartners />
