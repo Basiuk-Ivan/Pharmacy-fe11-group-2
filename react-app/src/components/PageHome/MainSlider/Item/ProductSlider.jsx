@@ -18,7 +18,7 @@ export const ProductSlider = ({ product }) => {
         <Typography sx={descStyles}>{product?.descriptionForSlider}</Typography>
         <Box>
           <NavLink to={`/${product?.categories[0]}/${product?.id}`}>
-            <Button sx={buttonStyles}>Перейти в каталог</Button>
+            <Button sx={buttonStyles}>Переглянути</Button>
           </NavLink>
         </Box>
       </Box>

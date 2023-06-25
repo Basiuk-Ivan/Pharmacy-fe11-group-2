@@ -73,6 +73,7 @@ export const wrapForImgStyles = {
   },
   '@media (max-width: 520px)': {
     width: '170px',
+    height: '140px',
     marginBottom: '40px'
   }
 };

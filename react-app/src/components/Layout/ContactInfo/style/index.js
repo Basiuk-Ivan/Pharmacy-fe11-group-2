@@ -6,7 +6,7 @@ export const mainBoxStyles = {
     flexWrap: 'wrap',
     gap: '10px'
   },
-  '@media (max-width: 705px)': {
+  '@media (max-width: 714px)': {
     display: 'none'
   }
 };
@@ -22,7 +22,7 @@ export const wrapperForTextStyles = {
     xs: 'flex',
     flexDirection: 'column'
   },
-  '@media (max-width: 1136px)': {
+  '@media (max-width: 1145px)': {
     display: 'none'
   }
 };
@@ -47,7 +47,7 @@ export const bodyForNumberPhoneStyles = {
   display: {
     xs: 'flex',
     flexDirection: 'column',
-    '@media (max-width: 1012px)': {
+    '@media (max-width: 1021px)': {
       display: 'none'
     }
   }

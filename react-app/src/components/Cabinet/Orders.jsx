@@ -25,28 +25,25 @@ const Orders = () => (
         {[1, 2, 3].map(id => (
           <Grid container key={id}>
             <Grid item md={3}>
-              <img src={`./orderprocessTest/${id}.png`} alt="" />
+              {/* <img src={`./orderprocessTest/${id}.png`} alt="" /> */}
             </Grid>
             <Grid item md={6}>
-              <Typography sx={{ textAlign: 'left' }}>
-                Велсон таблетки 30 шт.
-              </Typography>
+              <Typography sx={{ textAlign: 'left' }}>Велсон таблетки 30 шт.</Typography>
             </Grid>
             <Grid item md={3}>
-              <Typography sx={{ textAlign: 'left' }}>
-                108 грн.
-              </Typography>
+              <Typography sx={{ textAlign: 'left' }}>108 грн.</Typography>
             </Grid>
           </Grid>
         ))}
       </Grid>
-      <Container sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        gap: '10px',
-        mb: '60px'
-      }}
+      <Container
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '10px',
+          mb: '60px'
+        }}
       >
         <Button
           variant="contained"

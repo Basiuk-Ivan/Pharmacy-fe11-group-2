@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Box } from '@mui/system';
@@ -31,6 +31,8 @@ import { removeAllFromCart } from '../../utils/LocalStore/removeAllFromCart';
 import { countSum } from '../../utils/ActionsWithProduct/countSum';
 import { request } from '../../tools/request';
 import ModalWindow from '../../components/ModalWindow';
+import AdditionalBlock from '../../components/Favourite/AdditionalBlock/AdditionalBlock';
+import Advantages from '../../components/orderProcess/Advantages';
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
@@ -96,7 +98,7 @@ const Cart = () => {
   const handleCloseСartModalRemoveAll = () => {
     dispatch(closeCartModalRemoveAll());
   };
-
+  const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
   return (
     <Box>
       <IconBreadcrumbs />
@@ -190,6 +192,8 @@ const Cart = () => {
         isOpened={isOpenedCartModalRemoveAll}
         actions
       />
+      <AdditionalBlock favoriteItems={favoriteItems} />
+      <Advantages />
     </Box>
   );
 };

@@ -9,6 +9,7 @@ const transporter = nodemailer.createTransport({
     user: 'pharmacy_shop@ukr.net',
     pass: '73tOm3Qhbe71AhIn',
   },
+  tls: { rejectUnauthorized: false },
 });
 
 export const sendMailOrder = async ({ products, email, totalPrice }) => {
@@ -21,7 +22,7 @@ export const sendMailOrder = async ({ products, email, totalPrice }) => {
   const message = `<p>Привіт, шановний клієнт. Це ваше замовлення </p>
         <ul>${productsList}</ul>
         <hr>
-        <div style="text-align: right">РАЗОМ:  ${totalPrice}грн</div>
+        <div style="text-align: right">РАЗОМ:  ${totalPrice} грн</div>
         `;
   await transporter.sendMail({
     from: process.env.SMTP_USER,
@@ -44,7 +45,9 @@ export const sendMailRegistration = async ({
     firstName +
     ' ' +
     secondName +
-    '. Ваша реєстрація успішна, ваш пароль: ' +
+    '.Ваша реєстрація успішна. Ваша пошта: ' +
+    email +
+    ', Ваш пароль: ' +
     password;
   await transporter.sendMail({
     from: 'pharmacy_shop@ukr.net',

@@ -14,9 +14,14 @@ import { addToCartLocalStorage } from '../../../utils/LocalStore/addToCartLocalS
 import { roundRating } from '../../../utils/ActionsWithProduct/roundRating';
 import { roundPrice } from '../../../utils/ActionsWithProduct/roundPrice';
 import {
-  actualPriceValueStyle, actualPriceStyle,
-  bulletStyle, charactersStyle, mainBlockStyle,
-  btnAddToCartStyle, linkToCartStyle, priceBlockStyle
+  actualPriceValueStyle,
+  actualPriceStyle,
+  bulletStyle,
+  charactersStyle,
+  mainBlockStyle,
+  btnAddToCartStyle,
+  linkToCartStyle,
+  priceBlockStyle
 } from './style';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -29,8 +34,20 @@ const ProductCardMainBlock = ({ productItem }) => {
   const [ratingClick, setRatingClick] = useState(true);
   const [isInCart, setIsInCart] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-
+  const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
+  console.log('favoriteItems:', favoriteItems);
   const cartItems = useSelector(state => state.itemCards.items);
+
+  useEffect(() => {
+    const favoriteString = localStorage.getItem('favouriteItems');
+
+    if (favoriteString) {
+      const favouriteItems = JSON.parse(favoriteString);
+
+      const isItemFavorite = favouriteItems.some(elem => elem.id === productItem.id);
+      setIsFavorite(isItemFavorite);
+    }
+  }, [productItem.id]);
 
   useEffect(() => {
     const productItemIndex = cartItems.findIndex(item => item.id === productItem.id);
@@ -58,7 +75,7 @@ const ProductCardMainBlock = ({ productItem }) => {
 
     if (!isFavorite) {
       addToFavouriteLocalStorage(productItem);
-      dispatch(addToFavouriteItems(productItem));
+      dispatch(addToFavouriteItems(productItem.id));
     } else {
       removeFromFavouriteLocalStorage(productItem);
       dispatch(deleteFromFavouriteItems(productItem.id));
@@ -130,40 +147,37 @@ const ProductCardMainBlock = ({ productItem }) => {
               </Typography>
               <Box>
                 <Grid container sx={{ rowGap: '5px' }}>
-                  {[{ title: 'Виробник', itemValue: `${productItem?.manufacturer}` },
+                  {[
+                    { title: 'Виробник', itemValue: `${productItem?.manufacturer}` },
                     { title: 'Діюча речовина', itemValue: `${activeSubstance}` },
-                    { title: 'Термін придатності', itemValue: `${productItem?.bestBeforeDate}` }]
-                    .map(({ title, itemValue }) => (
-                      <Grid key={title} item xs={12} sx={{ mb: '5px' }}>
-                        <Grid
-                          container
-                          justifyContent="flex-start"
-                          alignItems="flex-start"
-                          gap={0.5}
-                          sx={{ ml: '10px' }}
-                        >
-                          <Grid item>
-                            <Stack direction="row" spacing={0.5} alignItems="center">
-                              <Typography
-                                component="span"
-                                variant="body1"
-                                sx={bulletStyle}
-                              />
-                              <Typography
-                                component="span"
-                                variant="body1"
-                                sx={{ fontSize: '14px', color: '#7B818C' }}
-                              >
-                                {title}:
-                              </Typography>
-                            </Stack>
-                          </Grid>
-                          <Grid item fontFamily="Roboto" sx={{ fontSize: '14px' }}>
-                            {itemValue}
-                          </Grid>
+                    { title: 'Термін придатності', itemValue: `${productItem?.bestBeforeDate}` }
+                  ].map(({ title, itemValue }) => (
+                    <Grid key={title} item xs={12} sx={{ mb: '5px' }}>
+                      <Grid
+                        container
+                        justifyContent="flex-start"
+                        alignItems="flex-start"
+                        gap={0.5}
+                        sx={{ ml: '10px' }}
+                      >
+                        <Grid item>
+                          <Stack direction="row" spacing={0.5} alignItems="center">
+                            <Typography component="span" variant="body1" sx={bulletStyle} />
+                            <Typography
+                              component="span"
+                              variant="body1"
+                              sx={{ fontSize: '14px', color: '#7B818C' }}
+                            >
+                              {title}:
+                            </Typography>
+                          </Stack>
+                        </Grid>
+                        <Grid item fontFamily="Roboto" sx={{ fontSize: '14px' }}>
+                          {itemValue}
                         </Grid>
                       </Grid>
-                    ))}
+                    </Grid>
+                  ))}
                 </Grid>
               </Box>
             </Box>
