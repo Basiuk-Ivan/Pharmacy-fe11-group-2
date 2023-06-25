@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 export const createBacket = async (req, res) => {
     try {
         const createdBacket = await BacketDB.create(req.body);
+        console.log(createdBacket);
         res.json(createdBacket);
     } catch (e) {
         res.status(500).json(e.message);
@@ -14,13 +15,14 @@ export const getAllBacket = async (req, res) => {
        try {
         let backets = [];
         const {user} = req.query;
-console.log(user);
+
         if (!!user) {
             const objectId = new mongoose.Types.ObjectId(user);
             backets = await BacketDB.find({ user : objectId });
         } else {
             backets = await BacketDB.find();
         }
+        console.log(backets);
         return res.json(backets);
     } catch (e) {
         res.status(500).json(e.message);

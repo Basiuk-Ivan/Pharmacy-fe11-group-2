@@ -25,6 +25,21 @@ const cartSlice = createSlice({
         state.items = [...updatedCart];
       }
     },
+    addToCartMoreOne: (state, action) => {
+      const { id, quantity } = action.payload;
+      const cartItem = { id, quantity};
+      const existingCartItemIndex = state.items.findIndex(item => item.id === id);
+      if (existingCartItemIndex !== -1) {
+        const updatedCart = [...state.items];
+        updatedCart[existingCartItemIndex].quantity += quantity;
+        state.items = [...updatedCart];
+      } else {
+        const updatedCart = [...state.items, cartItem];
+        state.items = [...updatedCart];
+      }
+    },
+
+
     removeFromCart: (state, action) => {
       const { id } = action.payload;
       const existingCartItemIndex = state.items.findIndex(item => item.id === id);
@@ -83,6 +98,7 @@ export const { addToCart,
   openCartModalRemoveOne,
   closeCartModalRemoveOne,
   openOrderModal,
+  addToCartMoreOne,
   closeOrderModal
 } = cartSlice.actions;
 

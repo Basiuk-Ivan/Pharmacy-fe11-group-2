@@ -10,9 +10,12 @@ import { LoginForm } from './components/LoginForm';
 import { RegistrationForm } from './components/RegistrationForm';
 import { styles } from './style';
 import { setToken } from '../../redux/slice/isToken';
-
 import './style/Auth.scss';
 import { setUser } from '../../redux/slice/userSlice.js';
+import { sendRequest } from '../../tools/sendRequest.js';
+import {removeItem, addToCartMoreOne} from "../../redux/slice/cartItems.js";
+import {addToFavouriteItems, deleteFromFavouriteItems} from "../../redux/slice/favouriteItems.js";
+import {addToCartLocalStorage} from "../../utils/LocalStore/addToCartLocalStorage.js";
 
 const style = {
   position: 'absolute',
@@ -37,32 +40,73 @@ const AuthButton = () => {
 
   const [activeTab, setActiveTab] = useState('login');
 
+  const favItm = useSelector(state => state.favouriteItems.favouriteItems);
+
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
   };
 
   const handleFormLogin = async values => {
     try {
-      const url = `http://localhost:3004/api/users/login?email=${values.email}&password=${values.password}`;
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(values)
+      const authURL = 'http://localhost:3004/api/users/login';
+      const userResponse = await sendRequest(authURL, 'POST', values);
+      const { token } = userResponse.data;
+      const decodedToken = jwtDecode(token);
+      const { _id } = decodedToken;
+      window.localStorage.setItem('token', token);
+      dispatch(setUser(decodedToken));
+
+      const cartURL = `http://localhost:3004/api/backet?user=${_id}`;
+      const cartResponse = await sendRequest(cartURL);
+      const cartProducts = cartResponse.data[0].products;
+      const cartItemsFromLS = JSON.parse(localStorage.getItem('cartItems')) || [];
+      const productsLS = cartItemsFromLS.map(({ id, quantity }) => {
+        const newCartObj = { productID: id, quantity };
+        return newCartObj;
       });
-      if (!response.ok) {
+      const mergedProducts = [...cartProducts];
+      productsLS.forEach(itemLS => {
+        const foundIndex = mergedProducts.findIndex(item => item.productID === itemLS.productID);
+        if (foundIndex !== -1) {
+          mergedProducts[foundIndex].quantity += itemLS.quantity;
+        } else {
+          mergedProducts.push({ ...itemLS });
+        }
+      });
+      const newCartData = { id: cartResponse.data[0].id, products: [...mergedProducts] };
+      const cartULRForPUT = 'http://localhost:3004/api/backet';
+      const cartPUTResponse = await sendRequest(cartULRForPUT, 'PUT', newCartData);
+      window.localStorage.removeItem('cartItems');
+      dispatch(removeItem("all"));
+      mergedProducts.forEach(product => {
+        dispatch(addToCartMoreOne({ id: product.productID, quantity: product.quantity }));
+      });
+
+
+      const favoriteURL = `http://localhost:3004/api/favorite?user=${_id}`;
+      const favoriteResponse = await sendRequest(favoriteURL);
+      const favoriteProduct = favoriteResponse.data[0].products;
+      const favouriteItemsFromLS = JSON.parse(localStorage.getItem('favouriteItems')) || [];
+      const favorites = favouriteItemsFromLS.map(item => item.id);
+      const newFavorites = [...new Set([...favoriteProduct, ...favorites])];
+      const newFavoriteData = { id: favoriteResponse.data[0].id, products: [...newFavorites] };
+      const favoriteULRForPUT = 'http://localhost:3004/api/favorite';
+      const favoritePUTResponse = await sendRequest(favoriteULRForPUT, 'PUT', newFavoriteData);
+      window.localStorage.removeItem('favouriteItems');
+      dispatch(deleteFromFavouriteItems("all"));
+      console.log(newFavorites);
+      newFavorites.forEach(product => {
+        dispatch(addToFavouriteItems( product ));
+        console.log(favItm);
+      });
+
+
+
+
+      if (!userResponse.statusText) {
+        setOpen(true);
         throw new Error('Network response was not ok');
       }
-      const { token } = await response.json();
-      const decodedToken = jwtDecode(token);
-
-      // const expirationTime = new Date(decodedToken.exp * 1000);
-      // Cookies.set('token', token, { expires: expirationTime });
-
-      window.localStorage.setItem('token', token);
-      dispatch(setUser(decodedToken ));
-
     } catch (err) {
       console.error('Error fetching products:', err);
     }
@@ -70,25 +114,28 @@ const AuthButton = () => {
   };
 
   const handleFormSubmit = async values => {
-    console.log(values);
     try {
-      const url = 'http://localhost:3004/api/users/';
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(values)
-      });
-      if (!response.ok) {
+      const authURL = 'http://localhost:3004/api/users/';
+      const userResponse = await sendRequest(authURL, 'POST', values);
+      const { token } = userResponse.data;
+      const { _id } = jwtDecode(token);
+
+      const products = [];
+      const createData = { user: _id, products };
+      const cartURL = 'http://localhost:3004/api/backet';
+      const cartResponse = await sendRequest(cartURL, 'POST', createData);
+
+      const favoriteURL = 'http://localhost:3004/api/favorite';
+      const favoriteResponse = await sendRequest(favoriteURL, 'POST', createData);
+
+      if (!userResponse.statusText && !cartResponse.statusText && !favoriteResponse.statusText) {
         setOpen(true);
         throw new Error('Network response was not ok');
       }
-      const { token } = await response.json();
-      window.localStorage.setItem('token', token);
     } catch (err) {
-      console.error('Error fetching products:', err);
+      console.error('Error fetching', err);
     }
+
     handleCloseModal();
   };
 

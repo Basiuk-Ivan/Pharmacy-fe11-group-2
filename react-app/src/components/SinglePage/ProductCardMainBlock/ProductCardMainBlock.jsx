@@ -35,8 +35,10 @@ const ProductCardMainBlock = ({ productItem }) => {
   const [isInCart, setIsInCart] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
-  console.log('favoriteItems:', favoriteItems);
+
   const cartItems = useSelector(state => state.itemCards.items);
+
+  const userId = useSelector(state => state.user.id);
 
   useEffect(() => {
     const favoriteString = localStorage.getItem('favouriteItems');
@@ -82,9 +84,63 @@ const ProductCardMainBlock = ({ productItem }) => {
     }
   };
 
-  const handleAddToCart = product => {
-    dispatch(addToCart({ id: productItem.id }));
+  const handleAddToCart = async product => {
+
+    dispatch(addToCart({ id: product.id }));
+
     addToCartLocalStorage(product);
+
+    try {
+      console.log(userId);
+      const url = `http://localhost:3004/api/backet?user=${userId}`;
+      const response = await fetch(url);
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      console.log(data);
+
+      const prodArr = data[0].products;
+      const productID = productItem.id;
+      const cartItem = { productID, quantity: 1 };
+
+      const existingCartItemIndex = prodArr.findIndex(item => item.productID === productID);
+
+      let updatedCart;
+
+      if (existingCartItemIndex !== -1) {
+        updatedCart = [...prodArr];
+        updatedCart[existingCartItemIndex].quantity += 1;
+      } else {
+        updatedCart = [...prodArr, cartItem];
+      }
+
+      const newCart = {
+        id: data[0].id,
+        products: updatedCart
+      }
+
+      console.log("Single page");
+      console.log(newCart)
+
+
+      const url2 = 'http://localhost:3004/api/backet';
+      const res = await fetch(url2, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newCart)
+      });
+
+
+
+    } catch (err) {
+      console.error('Error fetching products:', err);
+    }
   };
 
   return (

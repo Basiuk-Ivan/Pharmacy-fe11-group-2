@@ -2,8 +2,10 @@ import mongoose from "mongoose";
 
 const product = new mongoose.Schema(
   {
+
     productID: { type: mongoose.Types.ObjectId, ref: "ProductDB" },
-    amount: { type: Number, required: true },
+      // productID: { type: String, required: true },
+    quantity: { type: Number, required: true },
   },{
         timestamps: false,
         versionKey: false,
