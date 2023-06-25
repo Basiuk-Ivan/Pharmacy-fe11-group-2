@@ -37,6 +37,11 @@ function Filter() {
     }
   }, [clearFilter]);
 
+  useEffect(() => {
+    setCheckedCountry(Country);
+    setCheckedForm(Form);
+  }, [currentCategory]);
+
   function receiveGoods() {
     if (Number(filterBase.priceMin) <= Number(filterBase.priceMax) && Number(filterBase.priceMin) >= 0 && Number(filterBase.priceMax) >= 0) {
       setValidationPrice(true);
