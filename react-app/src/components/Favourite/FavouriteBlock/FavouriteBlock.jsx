@@ -16,7 +16,6 @@ const FavouriteBlock = props => {
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
   const dispatch = useDispatch();
 
-  console.log(favoriteItems);
 
   useEffect(() => {
     const timer = setTimeout(() => {

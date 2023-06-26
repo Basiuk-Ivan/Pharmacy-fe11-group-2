@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { Box } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -8,11 +8,15 @@ import { addToFavouriteLocalStorage } from '../../../utils/LocalStore/addToFavou
 import { removeFromFavouriteLocalStorage } from '../../../utils/LocalStore/removeFromFavouriteLocalStorage';
 import { addToFavouriteItems, deleteFromFavouriteItems } from '../../../redux/slice/favouriteItems';
 import { favoriteIconStyles, checkBoxStyles, favoriteIcon } from '../style';
+import {addToFavoriteUserDBProduct} from "../../../utils/ActionsWithProduct/addToFavoriteUserDBProduct.js";
+import {removeFromFavoriteUserDBProduct} from "../../../utils/ActionsWithProduct/removeFromFavoriteUserDBProduct.js";
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export const FavoriteCheckbox = ({ isInCart, productItem }) => {
   const dispatch = useDispatch();
+  const isAuth = useSelector(state => state.user.isAuth);
+  const userId = useSelector(state => state.user.id);
 
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -27,16 +31,24 @@ export const FavoriteCheckbox = ({ isInCart, productItem }) => {
     }
   }, [productItem.id]);
 
-  const handleFavoriteClick = event => {
+  const handleFavoriteClick = async event => {
     event.preventDefault();
     setIsFavorite(!isFavorite);
 
     if (!isFavorite) {
-      addToFavouriteLocalStorage(productItem);
       dispatch(addToFavouriteItems(productItem.id));
+      if (isAuth) {
+        await addToFavoriteUserDBProduct(userId, productItem.id);
+      } else {
+        addToFavouriteLocalStorage(productItem);
+      }
     } else {
-      removeFromFavouriteLocalStorage(productItem);
       dispatch(deleteFromFavouriteItems(productItem.id));
+      if (isAuth) {
+        await removeFromFavoriteUserDBProduct(userId, productItem.id);
+      } else {
+        removeFromFavouriteLocalStorage(productItem);
+      }
     }
   };
 

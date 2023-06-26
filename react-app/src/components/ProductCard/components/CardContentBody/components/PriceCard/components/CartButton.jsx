@@ -13,17 +13,32 @@ import {
 } from '../../../../../../../redux/slice/cartItems';
 import { cartStyles, iconButtonStyles } from '../../../../../style';
 import ModalWindow from '../../../../../../ModalWindow';
+import {
+  removeAllFromCartUserDBProduct
+} from "../../../../../../../utils/ActionsWithProduct/removeAllFromCartUserDBProduct.js";
+import {removeAllFromCartLocalStorage} from "../../../../../../../utils/LocalStore/removeAllFromCartLocalStorage.js";
+import {
+  removeFromCartUserDBProduct
+} from "../../../../../../../utils/ActionsWithProduct/removeFromCartUserDBProduct.js";
 
 export const CartButton = ({ productItem, isInCart }) => {
   const dispatch = useDispatch();
   const [isCart, setIsCart] = useState(false);
+  const isAuth = useSelector(state => state.user.isAuth);
+  const userId = useSelector(state => state.user.id);
 
   const isOpenedCartModalRemoveOne = useSelector(state => state.itemCards.isOpenedCartModalRemoveOne);
 
-  const handleClickCartModalRemoveOne = () => {
-    const prod = JSON.parse(window.localStorage.getItem('removeItem'));
+  const handleClickCartModalRemoveOne = async (isAuth, userId) => {
+    const prod = JSON.parse(window.localStorage.getItem("removeItem"));
     dispatch(removeItem(prod));
-    removeFromCartLocalStorage(prod);
+
+    if (isAuth) {
+      await removeFromCartUserDBProduct(userId, prod.id, 1,true );
+    } else {
+      removeFromCartLocalStorage(prod);
+    }
+
     dispatch(closeCartModalRemoveOne());
   };
   const handleCloseСartModalRemoveOne = product => {
@@ -69,7 +84,7 @@ export const CartButton = ({ productItem, isInCart }) => {
           mainText="Видалити даний товар з корзини?"
           confirmTextBtn="Так"
           cancelTextBtn="Ні"
-          handleClick={handleClickCartModalRemoveOne}
+          handleClick={() => handleClickCartModalRemoveOne (isAuth, userId)}
           handleClose={handleCloseСartModalRemoveOne}
           isOpened={isOpenedCartModalRemoveOne}
           actions

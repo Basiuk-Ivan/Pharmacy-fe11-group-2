@@ -13,9 +13,9 @@ import { setToken } from '../../redux/slice/isToken';
 import './style/Auth.scss';
 import { setUser } from '../../redux/slice/userSlice.js';
 import { sendRequest } from '../../tools/sendRequest.js';
-import {removeItem, addToCartMoreOne} from "../../redux/slice/cartItems.js";
-import {addToFavouriteItems, deleteFromFavouriteItems} from "../../redux/slice/favouriteItems.js";
-import {addToCartLocalStorage} from "../../utils/LocalStore/addToCartLocalStorage.js";
+import { removeItem, addToCartMoreOne } from '../../redux/slice/cartItems.js';
+import { addToFavouriteItems, deleteFromFavouriteItems } from '../../redux/slice/favouriteItems.js';
+import { addToCartLocalStorage } from '../../utils/LocalStore/addToCartLocalStorage.js';
 
 const style = {
   position: 'absolute',
@@ -77,31 +77,25 @@ const AuthButton = () => {
       const cartULRForPUT = 'http://localhost:3004/api/backet';
       const cartPUTResponse = await sendRequest(cartULRForPUT, 'PUT', newCartData);
       window.localStorage.removeItem('cartItems');
-      dispatch(removeItem("all"));
+      dispatch(removeItem('all'));
       mergedProducts.forEach(product => {
         dispatch(addToCartMoreOne({ id: product.productID, quantity: product.quantity }));
       });
 
-
       const favoriteURL = `http://localhost:3004/api/favorite?user=${_id}`;
       const favoriteResponse = await sendRequest(favoriteURL);
-      const favoriteProduct = favoriteResponse.data[0].products;
+      const favoriteProducts = favoriteResponse.data[0].products;
       const favouriteItemsFromLS = JSON.parse(localStorage.getItem('favouriteItems')) || [];
       const favorites = favouriteItemsFromLS.map(item => item.id);
-      const newFavorites = [...new Set([...favoriteProduct, ...favorites])];
+      const newFavorites = [...new Set([...favoriteProducts, ...favorites])];
       const newFavoriteData = { id: favoriteResponse.data[0].id, products: [...newFavorites] };
       const favoriteULRForPUT = 'http://localhost:3004/api/favorite';
       const favoritePUTResponse = await sendRequest(favoriteULRForPUT, 'PUT', newFavoriteData);
       window.localStorage.removeItem('favouriteItems');
-      dispatch(deleteFromFavouriteItems("all"));
-      console.log(newFavorites);
+      dispatch(deleteFromFavouriteItems('all'));
       newFavorites.forEach(product => {
-        dispatch(addToFavouriteItems( product ));
-        console.log(favItm);
+        dispatch(addToFavouriteItems(product));
       });
-
-
-
 
       if (!userResponse.statusText) {
         setOpen(true);

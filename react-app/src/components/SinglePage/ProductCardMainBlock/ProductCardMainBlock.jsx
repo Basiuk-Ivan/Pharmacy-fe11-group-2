@@ -23,6 +23,10 @@ import {
   linkToCartStyle,
   priceBlockStyle
 } from './style';
+import { sendRequest } from '../../../tools/sendRequest.js';
+import { addToCartUserDBProduct } from '../../../utils/ActionsWithProduct/addToCartUserDBProduct.js';
+import { addToFavoriteUserDBProduct } from '../../../utils/ActionsWithProduct/addToFavoriteUserDBProduct.js';
+import { removeFromFavoriteUserDBProduct } from '../../../utils/ActionsWithProduct/removeFromFavoriteUserDBProduct.js';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const ProductCardMainBlock = ({ productItem }) => {
@@ -35,10 +39,12 @@ const ProductCardMainBlock = ({ productItem }) => {
   const [isInCart, setIsInCart] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
+  const isAuth = useSelector(state => state.user.isAuth);
+  const userId = useSelector(state => state.user.id);
 
   const cartItems = useSelector(state => state.itemCards.items);
 
-  const userId = useSelector(state => state.user.id);
+
 
   useEffect(() => {
     const favoriteString = localStorage.getItem('favouriteItems');
@@ -71,75 +77,33 @@ const ProductCardMainBlock = ({ productItem }) => {
     setMainPrice(roundedPrice);
   }, [productItem]);
 
-  const handleFavoriteClick = event => {
+  const handleFavoriteClick = async event => {
     event.preventDefault();
     setIsFavorite(!isFavorite);
 
     if (!isFavorite) {
-      addToFavouriteLocalStorage(productItem);
       dispatch(addToFavouriteItems(productItem.id));
+      if (isAuth) {
+        await addToFavoriteUserDBProduct(userId, productItem.id);
+      } else {
+        addToFavouriteLocalStorage(productItem);
+      }
     } else {
-      removeFromFavouriteLocalStorage(productItem);
       dispatch(deleteFromFavouriteItems(productItem.id));
+      if (isAuth) {
+        await removeFromFavoriteUserDBProduct(userId, productItem.id);
+      } else {
+        removeFromFavouriteLocalStorage(productItem);
+      }
     }
   };
 
   const handleAddToCart = async product => {
-
     dispatch(addToCart({ id: product.id }));
-
-    addToCartLocalStorage(product);
-
-    try {
-      console.log(userId);
-      const url = `http://localhost:3004/api/backet?user=${userId}`;
-      const response = await fetch(url);
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      console.log(data);
-
-      const prodArr = data[0].products;
-      const productID = productItem.id;
-      const cartItem = { productID, quantity: 1 };
-
-      const existingCartItemIndex = prodArr.findIndex(item => item.productID === productID);
-
-      let updatedCart;
-
-      if (existingCartItemIndex !== -1) {
-        updatedCart = [...prodArr];
-        updatedCart[existingCartItemIndex].quantity += 1;
-      } else {
-        updatedCart = [...prodArr, cartItem];
-      }
-
-      const newCart = {
-        id: data[0].id,
-        products: updatedCart
-      }
-
-      console.log("Single page");
-      console.log(newCart)
-
-
-      const url2 = 'http://localhost:3004/api/backet';
-      const res = await fetch(url2, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newCart)
-      });
-
-
-
-    } catch (err) {
-      console.error('Error fetching products:', err);
+    if (isAuth) {
+      await addToCartUserDBProduct(userId, productItem.id);
+    } else {
+      addToCartLocalStorage(product);
     }
   };
 

@@ -27,12 +27,15 @@ import {
 } from './style';
 
 import './style/CartStyles.scss';
-import { removeAllFromCart } from '../../utils/LocalStore/removeAllFromCart';
 import { countSum } from '../../utils/ActionsWithProduct/countSum';
 import { request } from '../../tools/request';
 import ModalWindow from '../../components/ModalWindow';
 import AdditionalBlock from '../../components/Favourite/AdditionalBlock/AdditionalBlock';
 import Advantages from '../../components/orderProcess/Advantages';
+import {addToFavoriteUserDBProduct} from "../../utils/ActionsWithProduct/addToFavoriteUserDBProduct.js";
+import {addToFavouriteLocalStorage} from "../../utils/LocalStore/addToFavouriteLocalStorage.js";
+import {removeAllFromCartUserDBProduct} from "../../utils/ActionsWithProduct/removeAllFromCartUserDBProduct.js";
+import {removeAllFromCartLocalStorage} from "../../utils/LocalStore/removeAllFromCartLocalStorage.js";
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
@@ -43,6 +46,8 @@ const Cart = () => {
   const [showSkeleton, setShowSkeleton] = useState(true);
   const dispatch = useDispatch();
   const isOpenedCartModalRemoveAll = useSelector(state => state.itemCards.isOpenedCartModalRemoveAll);
+  const isAuth = useSelector(state => state.user.isAuth);
+  const userId = useSelector(state => state.user.id);
 
   const isInCart = true;
 
@@ -89,9 +94,14 @@ const Cart = () => {
     dispatch(setSum(sumObj));
   }, [productItemCart]);
 
-  const handleClickCartModalRemoveAll = () => {
+  //TODO This
+  const handleClickCartModalRemoveAll = async (isAuth, userId) => {
     dispatch(removeItem('all'));
-    removeAllFromCart();
+    if (isAuth) {
+      await removeAllFromCartUserDBProduct(userId);
+    } else {
+      removeAllFromCartLocalStorage();
+    }
     dispatch(closeCartModalRemoveAll());
   };
 
@@ -187,7 +197,7 @@ const Cart = () => {
         mainText="Видалити всі товари з корзини?"
         confirmTextBtn="Підтвердити"
         cancelTextBtn="Відміна"
-        handleClick={handleClickCartModalRemoveAll}
+        handleClick={() => handleClickCartModalRemoveAll(isAuth,userId)}
         handleClose={handleCloseСartModalRemoveAll}
         isOpened={isOpenedCartModalRemoveAll}
         actions
