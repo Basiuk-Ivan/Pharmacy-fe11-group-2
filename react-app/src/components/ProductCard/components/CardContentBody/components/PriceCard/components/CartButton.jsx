@@ -26,7 +26,7 @@ export const CartButton = ({ productItem, isInCart }) => {
 
   const isOpenedCartModalRemoveOne = useSelector(state => state.itemCards.isOpenedCartModalRemoveOne);
 
-  const handleClickCartModalRemoveOne = async (isAuth, userId) => {
+  const handleClickCartModalRemoveOne = async () => {
     const prod = JSON.parse(window.localStorage.getItem('removeItem'));
     dispatch(removeItem(prod));
 
@@ -90,7 +90,7 @@ export const CartButton = ({ productItem, isInCart }) => {
           mainText="Видалити даний товар з корзини?"
           confirmTextBtn="Так"
           cancelTextBtn="Ні"
-          handleClick={() => handleClickCartModalRemoveOne(isAuth, userId)}
+          handleClick={() => handleClickCartModalRemoveOne()}
           handleClose={handleCloseСartModalRemoveOne}
           isOpened={isOpenedCartModalRemoveOne}
           actions

@@ -6,10 +6,10 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { addToCart, removeFromCart } from '../../../../../../../redux/slice/cartItems';
 import { addToCartLocalStorage } from '../../../../../../../utils/LocalStore/addToCartLocalStorage';
 import { removeCartItemFromLocalStorage } from '../../../../../../../utils/LocalStore/removeCartItemFromLocalStorage';
-import { addToCartUserDBProduct } from '../../../../../../../utils/ActionsWithProduct/addToCartUserDBProduct.js';
+import { addToCartUserDBProduct } from '../../../../../../../utils/ActionsWithProduct/addToCartUserDBProduct';
 import {
   removeFromCartUserDBProduct
-} from '../../../../../../../utils/ActionsWithProduct/removeFromCartUserDBProduct.js';
+} from '../../../../../../../utils/ActionsWithProduct/removeFromCartUserDBProduct';
 
 export const QuantityControl = ({ productItem, isInCart }) => {
   const [quantity, setQuantity] = useState(1);

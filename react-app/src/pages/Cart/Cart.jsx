@@ -93,7 +93,7 @@ const Cart = () => {
   }, [productItemCart]);
 
   // TODO This
-  const handleClickCartModalRemoveAll = async (isAuth, userId) => {
+  const handleClickCartModalRemoveAll = async () => {
     dispatch(removeItem('all'));
     if (isAuth) {
       await removeAllFromCartUserDBProduct(userId);
@@ -195,7 +195,7 @@ const Cart = () => {
         mainText="Видалити всі товари з корзини?"
         confirmTextBtn="Підтвердити"
         cancelTextBtn="Відміна"
-        handleClick={() => handleClickCartModalRemoveAll(isAuth, userId)}
+        handleClick={() => handleClickCartModalRemoveAll()}
         handleClose={handleCloseСartModalRemoveAll}
         isOpened={isOpenedCartModalRemoveAll}
         actions
