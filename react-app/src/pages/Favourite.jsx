@@ -41,7 +41,7 @@ const Favourite = () => {
     dispatch(closeModalAddtoCart());
   };
 
-  const handleClickModalAddToCart = async (isAuth, userId, items) => {
+  const handleClickModalAddToCart = async (items) => {
     items.forEach(product => {
       dispatch(addToCart({ id: product.id }));
     });
@@ -76,7 +76,7 @@ const Favourite = () => {
         mainText="Додати всі обрані товари до кошика?"
         confirmTextBtn="Підтвердити"
         cancelTextBtn="Відміна"
-        handleClick={() => handleClickModalAddToCart(isAuth, userId, favoriteItems)}
+        handleClick={() => handleClickModalAddToCart(favoriteItems)}
         handleClose={handleCloseModalAddtoCart}
         isOpened={isOpenedModalAddtoCart}
         actions

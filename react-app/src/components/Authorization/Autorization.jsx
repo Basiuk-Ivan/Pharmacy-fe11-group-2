@@ -49,9 +49,10 @@ const AuthButton = () => {
       const userResponse = await sendRequest(authURL, 'POST', values);
       const { token } = userResponse.data;
       const decodedToken = jwtDecode(token);
-      const { _id } = decodedToken;
+      const { _id, ...rest } = decodedToken;
+      const updatedObj = { id: _id, ...rest };
       window.localStorage.setItem('token', token);
-      dispatch(setUser(decodedToken));
+      dispatch(setUser(updatedObj));
 
       const cartURL = `http://localhost:3004/api/backet?user=${_id}`;
       const cartResponse = await sendRequest(cartURL);
