@@ -20,30 +20,31 @@ import { Marketing } from './pages/FooterPage/Marketing';
 import { Job } from './pages/FooterPage/Job';
 import { Varranty } from './pages/FooterPage/Varranty';
 
-const App = () => (
-  <ThemeProvider theme={theme}>
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="/:category/*" element={<Products />} />
-        <Route path="/favourite" element={<Favourite />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/company" element={<Company />} />
-        <Route path="/delivery" element={<Delivery />} />
-        <Route path="/pay" element={<Pay />} />
-        <Route path="/agreement" element={<Agreement />} />
-        <Route path="/editorial-policy" element={<EditorialPolicy />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/marketing" element={<Marketing />} />
-        <Route path="/job" element={<Job />} />
-        <Route path="/varranty" element={<Varranty />} />
-        <Route path="/:category/:id" element={<ProductPage />} />
-        <Route path="/orderprocess" element={<OrderProcess />} />
-        <Route path="/cabinet" element={<Cabinet />} />
-        {/* <Route path="*" element={<NotFound />} /> */}
+const App = () => {
+  return (
+    <ThemeProvider theme={theme}>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/:category/*" element={<Products />} />
+          <Route path="/favourite" element={<Favourite />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/company" element={<Company />} />
+          <Route path="/delivery" element={<Delivery />} />
+          <Route path="/pay" element={<Pay />} />
+          <Route path="/agreement" element={<Agreement />} />
+          <Route path="/editorial-policy" element={<EditorialPolicy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/marketing" element={<Marketing />} />
+          <Route path="/job" element={<Job />} />
+          <Route path="/varranty" element={<Varranty />} />
+          <Route path="/:category/:id" element={<ProductPage />} />
+          <Route path="/orderprocess" element={<OrderProcess />} />
+          <Route path="/cabinet" element={<Cabinet />} />
+        </Route>
         {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
-      </Route>
-    </Routes>
-  </ThemeProvider>
-);
+      </Routes>
+    </ThemeProvider>
+  );
+};
 export default App;

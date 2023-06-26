@@ -40,7 +40,8 @@ const AuthButton = () => {
 
   const handleFormLogin = async values => {
     try {
-      const url = `http://localhost:3004/api/users/login?email=${values.email}&password=${values.password}`;
+      // const url = `http://localhost:3004/api/users/login?email=${values.email}&password=${values.password}`;
+      const url = `${process.env.VITE_API_URL}/api/users/login?email=${values.email}&password=${values.password}`;
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -65,7 +66,8 @@ const AuthButton = () => {
   const handleFormSubmit = async values => {
     console.log(values);
     try {
-      const url = 'http://localhost:3004/api/users/';
+      // const url = 'http://localhost:3004/api/users/';
+      const url = `${process.env.VITE_API_URL}/api/users/`;
       const response = await fetch(url, {
         method: 'POST',
         headers: {
