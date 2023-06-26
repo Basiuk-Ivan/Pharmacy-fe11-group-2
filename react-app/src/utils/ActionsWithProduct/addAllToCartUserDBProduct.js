@@ -1,4 +1,4 @@
-import { sendRequest } from '../../tools/sendRequest.js';
+import { sendRequest } from '../../tools/sendRequest';
 
 export const addAllToCartUserDBProduct = async (userId, products) => {
   try {

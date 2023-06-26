@@ -14,7 +14,6 @@ import { sendRequest } from '../../tools/sendRequest';
 import { removeItem, addToCartMoreOne } from '../../redux/slice/cartItems';
 import { addToFavouriteItems, deleteFromFavouriteItems } from '../../redux/slice/favouriteItems';
 
-
 const style = {
   position: 'absolute',
   top: '50%',

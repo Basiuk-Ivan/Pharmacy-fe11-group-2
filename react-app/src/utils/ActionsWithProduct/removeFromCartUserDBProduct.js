@@ -1,4 +1,4 @@
-import { sendRequest } from '../../tools/sendRequest.js';
+import { sendRequest } from '../../tools/sendRequest';
 
 export const removeFromCartUserDBProduct = async (userId, productID, productQuantity = 1, isRemove = false) => {
   try {
