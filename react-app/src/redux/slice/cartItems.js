@@ -27,7 +27,7 @@ const cartSlice = createSlice({
     },
     addToCartMoreOne: (state, action) => {
       const { id, quantity } = action.payload;
-      const cartItem = { id, quantity};
+      const cartItem = { id, quantity };
       const existingCartItemIndex = state.items.findIndex(item => item.id === id);
       if (existingCartItemIndex !== -1) {
         const updatedCart = [...state.items];
@@ -38,7 +38,6 @@ const cartSlice = createSlice({
         state.items = [...updatedCart];
       }
     },
-
 
     removeFromCart: (state, action) => {
       const { id } = action.payload;

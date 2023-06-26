@@ -2,7 +2,7 @@ import { Container, Typography, Grid, Button, Skeleton, Box } from '@mui/materia
 import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
 import { useEffect, useState } from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProductCard from '../../ProductCard/ProductCard';
 import Bread from '../../Bread';
@@ -16,7 +16,6 @@ const FavouriteBlock = props => {
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowSkeleton(false);
@@ -28,21 +27,18 @@ const FavouriteBlock = props => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-
-
         if (favoriteItems.length > 0) {
-        const favoriteIds = favoriteItems.map(item => item.id);
+          const favoriteIds = favoriteItems.map(item => item.id);
 
+          const { result } = await request({
+            url: '',
+            method: 'GET',
+            params: { _id: favoriteIds }
+          });
 
-        const { result } = await request({
-              url: '',
-              method: 'GET',
-              params: { _id: favoriteIds }
-            });
+          const { data } = result;
 
-        const { data } = result;
-
-        setProducts(data);
+          setProducts(data);
         }
       } catch (error) {
         console.error('Error fetching products:', error);

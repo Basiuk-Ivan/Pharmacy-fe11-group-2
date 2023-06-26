@@ -23,10 +23,10 @@ import {
   linkToCartStyle,
   priceBlockStyle
 } from './style';
-import { sendRequest } from '../../../tools/sendRequest.js';
-import { addToCartUserDBProduct } from '../../../utils/ActionsWithProduct/addToCartUserDBProduct.js';
-import { addToFavoriteUserDBProduct } from '../../../utils/ActionsWithProduct/addToFavoriteUserDBProduct.js';
-import { removeFromFavoriteUserDBProduct } from '../../../utils/ActionsWithProduct/removeFromFavoriteUserDBProduct.js';
+
+import { addToCartUserDBProduct } from '../../../utils/ActionsWithProduct/addToCartUserDBProduct';
+import { addToFavoriteUserDBProduct } from '../../../utils/ActionsWithProduct/addToFavoriteUserDBProduct';
+import { removeFromFavoriteUserDBProduct } from '../../../utils/ActionsWithProduct/removeFromFavoriteUserDBProduct';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const ProductCardMainBlock = ({ productItem }) => {
@@ -43,8 +43,6 @@ const ProductCardMainBlock = ({ productItem }) => {
   const userId = useSelector(state => state.user.id);
 
   const cartItems = useSelector(state => state.itemCards.items);
-
-
 
   useEffect(() => {
     const favoriteString = localStorage.getItem('favouriteItems');

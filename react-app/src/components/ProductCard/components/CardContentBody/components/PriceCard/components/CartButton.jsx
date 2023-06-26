@@ -14,13 +14,9 @@ import {
 import { cartStyles, iconButtonStyles } from '../../../../../style';
 import ModalWindow from '../../../../../../ModalWindow';
 import {
-  removeAllFromCartUserDBProduct
-} from "../../../../../../../utils/ActionsWithProduct/removeAllFromCartUserDBProduct.js";
-import {removeAllFromCartLocalStorage} from "../../../../../../../utils/LocalStore/removeAllFromCartLocalStorage.js";
-import {
   removeFromCartUserDBProduct
-} from "../../../../../../../utils/ActionsWithProduct/removeFromCartUserDBProduct.js";
-import {addToCartUserDBProduct} from "../../../../../../../utils/ActionsWithProduct/addToCartUserDBProduct.js";
+} from '../../../../../../../utils/ActionsWithProduct/removeFromCartUserDBProduct';
+import { addToCartUserDBProduct } from '../../../../../../../utils/ActionsWithProduct/addToCartUserDBProduct';
 
 export const CartButton = ({ productItem, isInCart }) => {
   const dispatch = useDispatch();
@@ -31,11 +27,11 @@ export const CartButton = ({ productItem, isInCart }) => {
   const isOpenedCartModalRemoveOne = useSelector(state => state.itemCards.isOpenedCartModalRemoveOne);
 
   const handleClickCartModalRemoveOne = async (isAuth, userId) => {
-    const prod = JSON.parse(window.localStorage.getItem("removeItem"));
+    const prod = JSON.parse(window.localStorage.getItem('removeItem'));
     dispatch(removeItem(prod));
 
     if (isAuth) {
-      await removeFromCartUserDBProduct(userId, prod.id, 1,true );
+      await removeFromCartUserDBProduct(userId, prod.id, 1, true);
     } else {
       removeFromCartLocalStorage(prod);
     }
@@ -50,9 +46,8 @@ export const CartButton = ({ productItem, isInCart }) => {
     dispatch(openCartModalRemoveOne());
     window.localStorage.setItem('removeItem', JSON.stringify(productForRemove));
   };
-//TODO Async with state
-  const handleAddtoCart =  () => {
-
+  // TODO Async with state
+  const handleAddtoCart = () => {
     if (!isCart) {
       dispatch(addToCart({ id: productItem.id }));
 
@@ -64,7 +59,7 @@ export const CartButton = ({ productItem, isInCart }) => {
     } else {
       dispatch(removeItem(productItem));
       if (isAuth) {
-       removeFromCartUserDBProduct(userId, productItem.id);
+        removeFromCartUserDBProduct(userId, productItem.id);
       } else {
         removeFromCartLocalStorage(productItem);
       }
@@ -95,7 +90,7 @@ export const CartButton = ({ productItem, isInCart }) => {
           mainText="Видалити даний товар з корзини?"
           confirmTextBtn="Так"
           cancelTextBtn="Ні"
-          handleClick={() => handleClickCartModalRemoveOne (isAuth, userId)}
+          handleClick={() => handleClickCartModalRemoveOne(isAuth, userId)}
           handleClose={handleCloseСartModalRemoveOne}
           isOpened={isOpenedCartModalRemoveOne}
           actions

@@ -8,10 +8,8 @@ import { removeFromFavouriteLocalStorage } from '../utils/LocalStore/removeFromF
 import { closeModalAddtoCart, closeModalRemoveAll, deleteFromFavouriteItems } from '../redux/slice/favouriteItems';
 import { addToCart } from '../redux/slice/cartItems';
 import { addToCartLocalStorage } from '../utils/LocalStore/addToCartLocalStorage';
-import { addToCartUserDBProduct } from '../utils/ActionsWithProduct/addToCartUserDBProduct.js';
-import { removeFromFavoriteUserDBProduct } from '../utils/ActionsWithProduct/removeFromFavoriteUserDBProduct.js';
-import { removeAllFromFavoriteUserDB } from '../utils/ActionsWithProduct/removeAllFromFavoriteUserDB.js';
-import { addAllToCartUserDBProduct } from '../utils/ActionsWithProduct/addAllToCartUserDBProduct.js';
+import { removeAllFromFavoriteUserDB } from '../utils/ActionsWithProduct/removeAllFromFavoriteUserDB';
+import { addAllToCartUserDBProduct } from '../utils/ActionsWithProduct/addAllToCartUserDBProduct';
 
 const Favourite = () => {
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
@@ -44,7 +42,6 @@ const Favourite = () => {
   };
 
   const handleClickModalAddToCart = async (isAuth, userId, items) => {
-
     items.forEach(product => {
       dispatch(addToCart({ id: product.id }));
     });

@@ -7,7 +7,7 @@ import itemCardsSlice from '../slice/cartItems';
 import favouriteItemsSlice from '../slice/favouriteItems';
 import filterBaseSlice from '../slice/filterBaseSlice';
 import tokenSlise from '../slice/isToken';
-import userSlice from "../slice/userSlice.js";
+import userSlice from '../slice/userSlice';
 
 const store = configureStore({
   reducer: {

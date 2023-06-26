@@ -58,7 +58,7 @@ const UserActions = () => {
   return (
     <>
       <Box sx={wrapForActionsStyles}>
-        {isAuth  ? (
+        {isAuth ? (
           <>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, width: 40, height: 40 }}>

@@ -2,20 +2,18 @@ import React, { useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { Modal, Tab, Tabs, Typography, Box, Button } from '@mui/material';
-import Cookies from 'js-cookie';
 import jwtDecode from 'jwt-decode';
 import { theme } from '../../tools/muiTheme';
 import { closeModal } from '../../redux/slice/modalSlice';
 import { LoginForm } from './components/LoginForm';
 import { RegistrationForm } from './components/RegistrationForm';
 import { styles } from './style';
-import { setToken } from '../../redux/slice/isToken';
 import './style/Auth.scss';
-import { setUser } from '../../redux/slice/userSlice.js';
-import { sendRequest } from '../../tools/sendRequest.js';
-import { removeItem, addToCartMoreOne } from '../../redux/slice/cartItems.js';
-import { addToFavouriteItems, deleteFromFavouriteItems } from '../../redux/slice/favouriteItems.js';
-import { addToCartLocalStorage } from '../../utils/LocalStore/addToCartLocalStorage.js';
+import { setUser } from '../../redux/slice/userSlice';
+import { sendRequest } from '../../tools/sendRequest';
+import { removeItem, addToCartMoreOne } from '../../redux/slice/cartItems';
+import { addToFavouriteItems, deleteFromFavouriteItems } from '../../redux/slice/favouriteItems';
+
 
 const style = {
   position: 'absolute',

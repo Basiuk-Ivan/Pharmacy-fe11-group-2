@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import { useFormik } from 'formik';
 import { useEffect } from 'react';
 import * as Yup from 'yup';
-import {useSelector} from "react-redux";
+import { useSelector } from 'react-redux';
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),
@@ -13,13 +13,11 @@ const ChangedTextField = styled(TextField)(({ theme }) => ({
 }));
 
 const PersonalData = () => {
-
-  const secondName =  useSelector(state => state.user.secondName);
-  const firstName =  useSelector(state => state.user.firstName);
-  const gender =  useSelector(state => state.user.gender);
-  const email =  useSelector(state => state.user.email);
-  const phoneNumber =  useSelector(state => state.user.phoneNumber);
-
+  const secondName = useSelector(state => state.user.secondName);
+  const firstName = useSelector(state => state.user.firstName);
+  const gender = useSelector(state => state.user.gender);
+  const email = useSelector(state => state.user.email);
+  const phoneNumber = useSelector(state => state.user.phoneNumber);
 
   const validationSchema = Yup.object().shape({
     surname: Yup.string().required('Обовязкове поле'),
@@ -42,8 +40,8 @@ const PersonalData = () => {
       day: '',
       month: '',
       year: '',
-      gender: gender,
-      email: email,
+      gender,
+      email,
       phone: phoneNumber,
       newpassword: '',
       confirmpassword: ''

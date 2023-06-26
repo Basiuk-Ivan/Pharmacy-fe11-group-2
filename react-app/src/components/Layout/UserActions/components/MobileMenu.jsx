@@ -18,11 +18,9 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreIcon from '@mui/icons-material/MoreVert';
-
 import { openModal } from '../../../../redux/slice/modalSlice';
 import { setToken, removeToken } from '../../../../redux/slice/isToken';
-import {removeUser} from "../../../../redux/slice/userSlice.js";
-import Cookies from 'js-cookie';
+import { removeUser } from '../../../../redux/slice/userSlice';
 
 const settings = [
   { name: 'Profile', path: '/cabinet' },

@@ -32,10 +32,8 @@ import { request } from '../../tools/request';
 import ModalWindow from '../../components/ModalWindow';
 import AdditionalBlock from '../../components/Favourite/AdditionalBlock/AdditionalBlock';
 import Advantages from '../../components/orderProcess/Advantages';
-import {addToFavoriteUserDBProduct} from "../../utils/ActionsWithProduct/addToFavoriteUserDBProduct.js";
-import {addToFavouriteLocalStorage} from "../../utils/LocalStore/addToFavouriteLocalStorage.js";
-import {removeAllFromCartUserDBProduct} from "../../utils/ActionsWithProduct/removeAllFromCartUserDBProduct.js";
-import {removeAllFromCartLocalStorage} from "../../utils/LocalStore/removeAllFromCartLocalStorage.js";
+import { removeAllFromCartUserDBProduct } from '../../utils/ActionsWithProduct/removeAllFromCartUserDBProduct';
+import { removeAllFromCartLocalStorage } from '../../utils/LocalStore/removeAllFromCartLocalStorage';
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
@@ -94,7 +92,7 @@ const Cart = () => {
     dispatch(setSum(sumObj));
   }, [productItemCart]);
 
-  //TODO This
+  // TODO This
   const handleClickCartModalRemoveAll = async (isAuth, userId) => {
     dispatch(removeItem('all'));
     if (isAuth) {
@@ -197,7 +195,7 @@ const Cart = () => {
         mainText="Видалити всі товари з корзини?"
         confirmTextBtn="Підтвердити"
         cancelTextBtn="Відміна"
-        handleClick={() => handleClickCartModalRemoveAll(isAuth,userId)}
+        handleClick={() => handleClickCartModalRemoveAll(isAuth, userId)}
         handleClose={handleCloseСartModalRemoveAll}
         isOpened={isOpenedCartModalRemoveAll}
         actions
