@@ -30,6 +30,7 @@ const Menu = () => {
   const choiceMainCategory = path => {
     dispatch(mainCategory(path.slice(1)));
     sessionStorage.setItem('currentCategory', path.slice(1));
+    sessionStorage.removeItem('accordionsData');
   };
 
   return (

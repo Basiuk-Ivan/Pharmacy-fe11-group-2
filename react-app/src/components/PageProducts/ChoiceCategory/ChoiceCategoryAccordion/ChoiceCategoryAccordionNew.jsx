@@ -4,7 +4,7 @@ import {
   useLocation, useParams
 } from 'react-router-dom';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useEffect, useState } from 'react';
 
 import Accordion from '@mui/material/Accordion';
@@ -20,10 +20,20 @@ import { accordionsData, values } from './ChoiceCategoryAccordionData/ChoiceCate
 
 import { mainCategoryStyle, secondCategoryStyle, secondCategoryWrappStyle, marginStyle, secondCategoryStyleCheck } from './style';
 import { theme } from '../../../../tools/muiTheme';
+import RequestString from '../../RequestString';
 
 export default function ChoiceCategoryAccordion() {
   const location = useLocation();
-  const currentCategory = location.pathname.slice(1);
+  // const currentCategory = location.pathname.slice(1);
+
+  const { numPage } = useSelector(state => state.numPage);
+  const filterBase = useSelector(state => state.filterBase);
+
+  const queryString = location.search;
+  const searchParams = new URLSearchParams(queryString);
+  const currentCategory = searchParams.get('categories');
+  // const currentSearch = location.search;
+  // const param = useParams();
 
   const dispatch = useDispatch();
   const [expanded, setExpanded] = React.useState(sessionStorage.getItem('panel') || false);
@@ -34,21 +44,7 @@ export default function ChoiceCategoryAccordion() {
     dispatch(reset());
     dispatch(mainCategory(currentCategory));
     dispatch(changePage(1));
-  }, [currentCategory, dispatch]);
-
-  useEffect(() => {
-    setExpanded(values[currentCategory]);
-    sessionStorage.setItem('currentCategory', currentCategory);
-    sessionStorage.setItem('panel', expanded);
-  }, [currentCategory, expanded]);
-
-  useEffect(() => {
-    setAccordions(accordionsData);
-  }, [expanded]);
-
-  useEffect(() => {
-    setAccordions(JSON.parse(sessionStorage.getItem('accordionsData')) || accordionsData);
-  }, []);
+  }, [filterBase.categories, dispatch]);
 
   const checkedSub = useCallback(
     (itemMainTitle, itemSubTitle) => {
@@ -72,6 +68,20 @@ export default function ChoiceCategoryAccordion() {
     []
   );
 
+  useEffect(() => {
+    setExpanded(values[currentCategory]);
+    sessionStorage.setItem('currentCategory', currentCategory);
+    sessionStorage.setItem('panel', expanded);
+  }, [currentCategory, expanded]);
+
+  useEffect(() => {
+    setAccordions(accordionsData);
+  }, [expanded]);
+
+  useEffect(() => {
+    setAccordions(JSON.parse(sessionStorage.getItem('accordionsData')) || accordionsData);
+  }, []);
+
   const handleChange = panel => {
     return (event, isExpanded) => {
       setExpanded(isExpanded ? panel : false);
@@ -91,7 +101,7 @@ export default function ChoiceCategoryAccordion() {
             onChange={handleChange(item.panel)}
             sx={marginStyle}
           >
-            <NavLink to={item.path}>
+            <NavLink onClick={() => dispatch(mainCategory(item.path))} to={RequestString(filterBase, numPage)}>
               <AccordionSummary sx={mainCategoryStyle} expandIcon={<ExpandMoreIcon />}>
                 <Typography>{item.title}</Typography>
               </AccordionSummary>

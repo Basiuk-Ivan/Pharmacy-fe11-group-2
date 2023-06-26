@@ -57,7 +57,7 @@ function Filter() {
     dispatch(reset());
     dispatch(mainCategory(currentCategory));
     setValidationPrice(true);
-    if (numPage === 1) {
+    if (numPage === 1 && filterBase.sort === 1) {
       setClearFilter(true);
     } else dispatch(changePage(1));
   }
