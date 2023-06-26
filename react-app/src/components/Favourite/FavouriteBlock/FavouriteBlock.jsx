@@ -53,7 +53,7 @@ const FavouriteBlock = props => {
       }
     };
     fetchProducts();
-  }, []);
+  }, [favoriteItems]);
 
   useEffect(() => {
     const updatedProducts = products.filter(item => {

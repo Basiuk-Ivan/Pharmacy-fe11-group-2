@@ -8,8 +8,10 @@ import { request } from '../../../../tools/request';
 import { theme as muiTheme } from '../../../../tools/muiTheme';
 
 import { openOrderModal } from '../../../../redux/slice/cartItems';
+import createUser from '../../../../tools/NovaPost/createUser';
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
+
   marginBottom: theme.spacing(2),
   '& .MuiInputBase-root': {
     borderRadius: 30
@@ -64,7 +66,6 @@ const ContactsForm = ({ products }) => {
         method: 'POST',
         body: values
       });
-
       if (status === 200) {
         dispatch(openOrderModal());
         resetForm();
