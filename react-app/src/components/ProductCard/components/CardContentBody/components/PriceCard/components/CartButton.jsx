@@ -20,6 +20,7 @@ import {removeAllFromCartLocalStorage} from "../../../../../../../utils/LocalSto
 import {
   removeFromCartUserDBProduct
 } from "../../../../../../../utils/ActionsWithProduct/removeFromCartUserDBProduct.js";
+import {addToCartUserDBProduct} from "../../../../../../../utils/ActionsWithProduct/addToCartUserDBProduct.js";
 
 export const CartButton = ({ productItem, isInCart }) => {
   const dispatch = useDispatch();
@@ -49,17 +50,27 @@ export const CartButton = ({ productItem, isInCart }) => {
     dispatch(openCartModalRemoveOne());
     window.localStorage.setItem('removeItem', JSON.stringify(productForRemove));
   };
+//TODO Async with state
+  const handleAddtoCart =  () => {
 
-  const handleAddtoCart = event => {
-    event.preventDefault();
     if (!isCart) {
       dispatch(addToCart({ id: productItem.id }));
-      addToCartLocalStorage(productItem);
+
+      if (isAuth) {
+        addToCartUserDBProduct(userId, productItem.id);
+      } else {
+        addToCartLocalStorage(productItem);
+      }
     } else {
       dispatch(removeItem(productItem));
-      removeFromCartLocalStorage(productItem);
+      if (isAuth) {
+       removeFromCartUserDBProduct(userId, productItem.id);
+      } else {
+        removeFromCartLocalStorage(productItem);
+      }
     }
-    setIsCart(!isCart);
+
+    setIsCart(prevIsCart => !prevIsCart);
   };
 
   useEffect(() => {

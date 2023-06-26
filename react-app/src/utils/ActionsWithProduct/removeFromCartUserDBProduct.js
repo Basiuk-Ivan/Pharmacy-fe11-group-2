@@ -1,6 +1,6 @@
 import { sendRequest } from '../../tools/sendRequest.js';
 
-export const removeFromCartUserDBProduct = async (userId, productID, productQuantity = 1, isRemove) => {
+export const removeFromCartUserDBProduct = async (userId, productID, productQuantity = 1, isRemove = false) => {
   try {
     const cartURL = `http://localhost:3004/api/backet?user=${userId}`;
     const cartResponse = await sendRequest(cartURL);

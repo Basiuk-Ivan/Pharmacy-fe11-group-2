@@ -14,11 +14,11 @@ const ChangedTextField = styled(TextField)(({ theme }) => ({
 
 const PersonalData = () => {
 
-  const surname =  useSelector(state => state.user.secondName);
-  const name =  useSelector(state => state.user.firstName);
+  const secondName =  useSelector(state => state.user.secondName);
+  const firstName =  useSelector(state => state.user.firstName);
   const gender =  useSelector(state => state.user.gender);
   const email =  useSelector(state => state.user.email);
-  const phone =  useSelector(state => state.user.phone);
+  const phoneNumber =  useSelector(state => state.user.phoneNumber);
 
 
   const validationSchema = Yup.object().shape({
@@ -37,14 +37,14 @@ const PersonalData = () => {
 
   const formik = useFormik({
     initialValues: {
-      surname,
-      name,
+      surname: secondName,
+      name: firstName,
       day: '',
       month: '',
       year: '',
-      gender,
-      email,
-      phone,
+      gender: gender,
+      email: email,
+      phone: phoneNumber,
       newpassword: '',
       confirmpassword: ''
     },

@@ -8,6 +8,7 @@ import { request } from '../../../../tools/request';
 import { theme as muiTheme } from '../../../../tools/muiTheme';
 
 import { openOrderModal } from '../../../../redux/slice/cartItems';
+import {removeAllFromCartUserDBProduct} from "../../../../utils/ActionsWithProduct/removeAllFromCartUserDBProduct.js";
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),
@@ -21,6 +22,13 @@ const nameRegExp = /[a-zA-zа-яА-яёЁ]$/;
 const ContactsForm = ({ products }) => {
   const orderPaymentMethod = useSelector(state => state.order.PaymentMethodValue);
   const sumWithDiscount = useSelector(state => state.itemCards.sumWithDiscount);
+  const userId = useSelector(state => state.user.id);
+
+  const surname =  useSelector(state => state.user.secondName);
+  const name =  useSelector(state => state.user.firstName);
+  const gender =  useSelector(state => state.user.gender);
+  const email =  useSelector(state => state.user.email);
+  const phoneNumber =  useSelector(state => state.user.phoneNumber);
 
   const dispatch = useDispatch();
 
@@ -45,12 +53,12 @@ const ContactsForm = ({ products }) => {
 
   const formik = useFormik({
     initialValues: {
-      firstName: '',
-      email: '',
+      firstName: name,
+      email: email,
       city: '',
       house: '',
-      lastName: '',
-      phone: '',
+      lastName: surname,
+      phone: phoneNumber,
       street: '',
       apartment: '',
       paymentMethod: `${orderPaymentMethod}`,
@@ -66,6 +74,7 @@ const ContactsForm = ({ products }) => {
       });
 
       if (status === 200) {
+        await removeAllFromCartUserDBProduct(userId);
         dispatch(openOrderModal());
         resetForm();
       }

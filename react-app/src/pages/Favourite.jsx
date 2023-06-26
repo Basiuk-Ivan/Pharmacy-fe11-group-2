@@ -8,6 +8,10 @@ import { removeFromFavouriteLocalStorage } from '../utils/LocalStore/removeFromF
 import { closeModalAddtoCart, closeModalRemoveAll, deleteFromFavouriteItems } from '../redux/slice/favouriteItems';
 import { addToCart } from '../redux/slice/cartItems';
 import { addToCartLocalStorage } from '../utils/LocalStore/addToCartLocalStorage';
+import { addToCartUserDBProduct } from '../utils/ActionsWithProduct/addToCartUserDBProduct.js';
+import { removeFromFavoriteUserDBProduct } from '../utils/ActionsWithProduct/removeFromFavoriteUserDBProduct.js';
+import { removeAllFromFavoriteUserDB } from '../utils/ActionsWithProduct/removeAllFromFavoriteUserDB.js';
+import { addAllToCartUserDBProduct } from '../utils/ActionsWithProduct/addAllToCartUserDBProduct.js';
 
 const Favourite = () => {
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
@@ -15,11 +19,20 @@ const Favourite = () => {
   const isOpenModalRemoveAll = useSelector(state => state.favouriteItems.isOpenedModalRemoveAll);
   const isOpenedModalAddtoCart = useSelector(state => state.favouriteItems.isOpenedModalAddtoCart);
   const navigate = useNavigate();
-  const handleClickModalRemoveAll = () => {
-    favoriteItems.forEach(element => {
-      removeFromFavouriteLocalStorage(element);
-    });
+  const isAuth = useSelector(state => state.user.isAuth);
+  const userId = useSelector(state => state.user.id);
+
+  const handleClickModalRemoveAll = async () => {
     dispatch(deleteFromFavouriteItems('all'));
+
+    if (isAuth) {
+      await removeAllFromFavoriteUserDB(userId);
+    } else {
+      favoriteItems.forEach(element => {
+        removeFromFavouriteLocalStorage(element);
+      });
+    }
+
     dispatch(closeModalRemoveAll());
   };
 
@@ -30,16 +43,21 @@ const Favourite = () => {
     dispatch(closeModalAddtoCart());
   };
 
-  const handleClickModalAddToCart = items => {
+  const handleClickModalAddToCart = async (isAuth, userId, items) => {
+
     items.forEach(product => {
       dispatch(addToCart({ id: product.id }));
-      addToCartLocalStorage(product);
     });
+
+    if (isAuth) {
+      await addAllToCartUserDBProduct(userId, items);
+    } else {
+      items.forEach(product => {
+        addToCartLocalStorage(product);
+      });
+    }
     dispatch(closeModalAddtoCart());
-    favoriteItems.forEach(element => {
-      removeFromFavouriteLocalStorage(element);
-    });
-    dispatch(deleteFromFavouriteItems('all'));
+
     navigate('/cart');
   };
 
@@ -61,7 +79,7 @@ const Favourite = () => {
         mainText="Додати всі обрані товари до кошика?"
         confirmTextBtn="Підтвердити"
         cancelTextBtn="Відміна"
-        handleClick={() => handleClickModalAddToCart(favoriteItems)}
+        handleClick={() => handleClickModalAddToCart(isAuth, userId, favoriteItems)}
         handleClose={handleCloseModalAddtoCart}
         isOpened={isOpenedModalAddtoCart}
         actions
