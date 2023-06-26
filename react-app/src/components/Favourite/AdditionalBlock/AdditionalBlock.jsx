@@ -25,13 +25,13 @@ const AdditionalBlock = props => {
     fetchProducts();
   }, []);
 
-  useEffect(() => {
-    const updatedProducts = products.filter(item => {
-      return favoriteItems.find(favoriteItem => favoriteItem.id === item.id);
-    });
-
-    setProducts(updatedProducts);
-  }, []);
+  const renderProductCards = () => {
+    return products.slice(0, 5).map(item => (
+      <Grid item key={item.id}>
+        <ProductCard productItem={item} />
+      </Grid>
+    ));
+  };
 
   return (
     <Container
@@ -53,11 +53,7 @@ const AdditionalBlock = props => {
         Завжди в пригоді
       </Typography>
       <Grid container spacing={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
-        {products.slice(0, 5).map(item => (
-          <Grid item key={item.id}>
-            <ProductCard productItem={item} />
-          </Grid>
-        ))}
+        {renderProductCards()}
       </Grid>
     </Container>
   );

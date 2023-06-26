@@ -20,7 +20,7 @@ const PaymentBlock = () => {
   };
 
   return (
-    <Container>
+    <Container disableGutters>
       <Grid
         container
         sx={{
