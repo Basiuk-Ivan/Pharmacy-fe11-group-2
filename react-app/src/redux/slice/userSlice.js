@@ -15,7 +15,7 @@ const userSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.isAuth = true;
-      state.id = action.payload._id;
+      state.id = action.payload.id;
       state.firstName = action.payload.firstName;
       state.secondName = action.payload.secondName;
       state.gender = action.payload.gender;

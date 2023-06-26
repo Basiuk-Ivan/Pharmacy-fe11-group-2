@@ -41,7 +41,7 @@ const Favourite = () => {
     dispatch(closeModalAddtoCart());
   };
 
-  const handleClickModalAddToCart = async (items) => {
+  const handleClickModalAddToCart = async items => {
     items.forEach(product => {
       dispatch(addToCart({ id: product.id }));
     });
