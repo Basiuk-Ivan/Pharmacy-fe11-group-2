@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Box } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -13,6 +13,7 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export const FavoriteCheckbox = ({ isInCart, productItem }) => {
   const dispatch = useDispatch();
+  const fav = useSelector(state => state.favouriteItems.favouriteItems);
 
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -25,7 +26,7 @@ export const FavoriteCheckbox = ({ isInCart, productItem }) => {
       const isItemFavorite = favouriteItems.some(elem => elem.id === productItem.id);
       setIsFavorite(isItemFavorite);
     }
-  }, [productItem.id]);
+  }, [fav]);
 
   const handleFavoriteClick = event => {
     event.preventDefault();

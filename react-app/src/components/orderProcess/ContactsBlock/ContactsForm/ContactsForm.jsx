@@ -6,9 +6,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { request } from '../../../../tools/request';
 import { theme as muiTheme } from '../../../../tools/muiTheme';
-
 import { openOrderModal } from '../../../../redux/slice/cartItems';
-import createUser from '../../../../tools/NovaPost/createUser';
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
 
