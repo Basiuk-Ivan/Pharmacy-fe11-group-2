@@ -1,10 +1,10 @@
 import BacketDB from "./BacketModel.js";
 import mongoose from "mongoose";
 
+
 export const createBacket = async (req, res) => {
     try {
         const createdBacket = await BacketDB.create(req.body);
-        console.log(createdBacket);
         res.json(createdBacket);
     } catch (e) {
         res.status(500).json(e.message);
@@ -13,16 +13,20 @@ export const createBacket = async (req, res) => {
 
 export const getAllBacket = async (req, res) => {
        try {
-        let backets = [];
-        const {user} = req.query;
-
-        if (!!user) {
-            const objectId = new mongoose.Types.ObjectId(user);
-            backets = await BacketDB.find({ user : objectId });
-        } else {
-            backets = await BacketDB.find();
-        }
-        console.log(backets);
+        let backets = { };
+           const {backet,user} = req.query;
+console.log(user);
+           if (!!backet) {
+               const objectIdbacket = new mongoose.Types.ObjectId(backet);
+               backets = await BacketDB.findOne({ _id : objectIdbacket });
+           } else {
+               if (!!user) {
+                   const objectIdUser = new mongoose.Types.ObjectId(user);
+                   backets = await BacketDB.findOne({ user : objectIdUser });
+               }
+               else {
+                   backets = await BacketDB.find();
+               }}
         return res.json(backets);
     } catch (e) {
         res.status(500).json(e.message);
