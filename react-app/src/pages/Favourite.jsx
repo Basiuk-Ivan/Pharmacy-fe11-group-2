@@ -8,6 +8,10 @@ import { removeFromFavouriteLocalStorage } from '../utils/LocalStore/removeFromF
 import { closeModalAddtoCart, closeModalRemoveAll, deleteFromFavouriteItems } from '../redux/slice/favouriteItems';
 import { addToCart } from '../redux/slice/cartItems';
 import { addToCartLocalStorage } from '../utils/LocalStore/addToCartLocalStorage';
+import { putFavoritesToFavoritesDB } from '../utils/ActionsWithProduct/putFavoritesToFavoritesDB';
+import { addCartProduct } from '../utils/ActionsWithProduct/addCartProduct';
+import { addAllCartProduct } from '../utils/ActionsWithProduct/addAllCartProduct';
+import { putProductsToCartDB } from '../utils/ActionsWithProduct/putProductsToCartDB';
 
 const Favourite = () => {
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
@@ -15,11 +19,24 @@ const Favourite = () => {
   const isOpenModalRemoveAll = useSelector(state => state.favouriteItems.isOpenedModalRemoveAll);
   const isOpenedModalAddtoCart = useSelector(state => state.favouriteItems.isOpenedModalAddtoCart);
   const navigate = useNavigate();
-  const handleClickModalRemoveAll = () => {
-    favoriteItems.forEach(element => {
-      removeFromFavouriteLocalStorage(element);
-    });
+  const isAuth = useSelector(state => state.user.isAuth);
+  const userId = useSelector(state => state.user.id);
+  const favoriteStoreId = useSelector(state => state.user.favoriteStoreId);
+  const cartItems = useSelector(state => state.itemCards.items);
+  const cartStoreId = useSelector(state => state.user.cartStoreId);
+
+  const handleClickModalRemoveAll = async () => {
     dispatch(deleteFromFavouriteItems('all'));
+
+    if (isAuth) {
+      const favorites = [];
+      await putFavoritesToFavoritesDB(favoriteStoreId, favorites);
+    } else {
+      favoriteItems.forEach(element => {
+        removeFromFavouriteLocalStorage(element);
+      });
+    }
+
     dispatch(closeModalRemoveAll());
   };
 
@@ -30,16 +47,22 @@ const Favourite = () => {
     dispatch(closeModalAddtoCart());
   };
 
-  const handleClickModalAddToCart = items => {
+  const handleClickModalAddToCart = async items => {
     items.forEach(product => {
       dispatch(addToCart({ id: product.id }));
-      addToCartLocalStorage(product);
     });
+
+    if (isAuth) {
+      const chagedItems = items.map(item => ({ id: item.id, quantity: 1 }));
+      const newProducts = addAllCartProduct(cartItems, chagedItems);
+      await putProductsToCartDB(cartStoreId, newProducts);
+    } else {
+      items.forEach(product => {
+        addToCartLocalStorage(product);
+      });
+    }
     dispatch(closeModalAddtoCart());
-    favoriteItems.forEach(element => {
-      removeFromFavouriteLocalStorage(element);
-    });
-    dispatch(deleteFromFavouriteItems('all'));
+
     navigate('/cart');
   };
 

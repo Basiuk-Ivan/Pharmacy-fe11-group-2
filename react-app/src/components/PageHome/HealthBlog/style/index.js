@@ -60,7 +60,7 @@ export const blogDesc = {
 
 export const blogImg = {
   overflow: 'hidden',
-  width: '280px',
+  width: '277px',
   marginLeft: '-9px',
   '@media (max-width: 1205px)': {
     width: '250px'

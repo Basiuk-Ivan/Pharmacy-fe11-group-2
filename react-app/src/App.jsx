@@ -1,5 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
+import { useEffect } from 'react';
+import jwtDecode from 'jwt-decode';
+import { useDispatch } from 'react-redux';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import Cart from './pages/Cart/Cart';
@@ -19,8 +22,47 @@ import { Terms } from './pages/FooterPage/Terms';
 import { Marketing } from './pages/FooterPage/Marketing';
 import { Job } from './pages/FooterPage/Job';
 import { Varranty } from './pages/FooterPage/Varranty';
+import { setCartStoreId, setFavoriteStoreId, setUser } from './redux/slice/userSlice';
+import { Step } from './pages/BlogPages/5steps';
+import { sendRequest } from './tools/sendRequest';
+import { addToCartMoreOne } from './redux/slice/cartItems';
+import { addToFavouriteItems } from './redux/slice/favouriteItems';
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const token = window.localStorage.getItem('token');
+    if (token) {
+      const startLoading = async () => {
+        const decodedToken = jwtDecode(token);
+        const { _id, ...rest } = decodedToken;
+        const updatedObj = { id: _id, ...rest };
+        dispatch(setUser(updatedObj));
+
+        const cartURL = `http://localhost:3004/api/backet?user=${_id}`;
+        const cartResponse = await sendRequest(cartURL);
+        const cartProducts = cartResponse.data.products;
+        cartProducts.forEach(product => {
+          dispatch(addToCartMoreOne({ id: product.productID, quantity: product.quantity }));
+        });
+
+        dispatch(setCartStoreId(cartResponse.data.id));
+
+        const favoriteURL = `http://localhost:3004/api/favorite?user=${_id}`;
+        const favoriteResponse = await sendRequest(favoriteURL);
+        const favoriteProducts = favoriteResponse.data.products;
+        const newFavorites = favoriteProducts.map(item => ({ id: item }));
+        newFavorites.forEach(product => {
+          dispatch(addToFavouriteItems(product));
+        });
+
+        dispatch(setFavoriteStoreId(favoriteResponse.data.id));
+      };
+      startLoading();
+    }
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <Routes>
@@ -29,6 +71,7 @@ const App = () => {
           <Route path="/:category/*" element={<Products />} />
           <Route path="/favourite" element={<Favourite />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/step" element={<Step />} />
           <Route path="/company" element={<Company />} />
           <Route path="/delivery" element={<Delivery />} />
           <Route path="/pay" element={<Pay />} />
@@ -42,6 +85,8 @@ const App = () => {
           <Route path="/orderprocess" element={<OrderProcess />} />
           <Route path="/cabinet" element={<Cabinet />} />
         </Route>
+
+        {/* <Route path="*" element={<NotFound />} /> */}
         {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
       </Routes>
     </ThemeProvider>

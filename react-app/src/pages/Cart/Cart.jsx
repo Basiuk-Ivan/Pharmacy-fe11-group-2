@@ -27,12 +27,15 @@ import {
 } from './style';
 
 import './style/CartStyles.scss';
-import { removeAllFromCart } from '../../utils/LocalStore/removeAllFromCart';
 import { countSum } from '../../utils/ActionsWithProduct/countSum';
 import { request } from '../../tools/request';
 import ModalWindow from '../../components/ModalWindow';
 import AdditionalBlock from '../../components/Favourite/AdditionalBlock/AdditionalBlock';
 import Advantages from '../../components/orderProcess/Advantages';
+import { removeAllFromCartUserDBProduct } from '../../utils/ActionsWithProduct/removeAllFromCartUserDBProduct';
+import { removeAllFromCartLocalStorage } from '../../utils/LocalStore/removeAllFromCartLocalStorage';
+import { addCartProduct } from '../../utils/ActionsWithProduct/addCartProduct';
+import { putProductsToCartDB } from '../../utils/ActionsWithProduct/putProductsToCartDB';
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
@@ -43,6 +46,9 @@ const Cart = () => {
   const [showSkeleton, setShowSkeleton] = useState(true);
   const dispatch = useDispatch();
   const isOpenedCartModalRemoveAll = useSelector(state => state.itemCards.isOpenedCartModalRemoveAll);
+  const isAuth = useSelector(state => state.user.isAuth);
+  const userId = useSelector(state => state.user.id);
+  const cartStoreId = useSelector(state => state.user.cartStoreId);
 
   const isInCart = true;
 
@@ -89,9 +95,14 @@ const Cart = () => {
     dispatch(setSum(sumObj));
   }, [productItemCart]);
 
-  const handleClickCartModalRemoveAll = () => {
+  const handleClickCartModalRemoveAll = async () => {
     dispatch(removeItem('all'));
-    removeAllFromCart();
+    if (isAuth) {
+      const newProducts = [];
+      await putProductsToCartDB(cartStoreId, newProducts);
+    } else {
+      removeAllFromCartLocalStorage();
+    }
     dispatch(closeCartModalRemoveAll());
   };
 
@@ -187,7 +198,7 @@ const Cart = () => {
         mainText="Видалити всі товари з корзини?"
         confirmTextBtn="Підтвердити"
         cancelTextBtn="Відміна"
-        handleClick={handleClickCartModalRemoveAll}
+        handleClick={() => handleClickCartModalRemoveAll()}
         handleClose={handleCloseСartModalRemoveAll}
         isOpened={isOpenedCartModalRemoveAll}
         actions
