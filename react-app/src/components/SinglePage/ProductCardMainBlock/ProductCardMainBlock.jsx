@@ -28,7 +28,7 @@ import { addCartProduct } from '../../../utils/ActionsWithProduct/addCartProduct
 import { putFavoritesToFavoritesDB } from '../../../utils/ActionsWithProduct/putFavoritesToFavoritesDB';
 import { addFavorite } from '../../../utils/ActionsWithProduct/addFavorite';
 import { removeFavorite } from '../../../utils/ActionsWithProduct/removeFavorite';
-import {putProductsToCartDB} from "../../../utils/ActionsWithProduct/putProductsToCartDB";
+import { putProductsToCartDB } from '../../../utils/ActionsWithProduct/putProductsToCartDB';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const ProductCardMainBlock = ({ productItem }) => {

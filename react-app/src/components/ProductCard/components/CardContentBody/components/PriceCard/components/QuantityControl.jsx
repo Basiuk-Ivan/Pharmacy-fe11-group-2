@@ -8,8 +8,7 @@ import { addToCartLocalStorage } from '../../../../../../../utils/LocalStore/add
 import { removeCartItemFromLocalStorage } from '../../../../../../../utils/LocalStore/removeCartItemFromLocalStorage';
 import { addCartProduct } from '../../../../../../../utils/ActionsWithProduct/addCartProduct';
 import { removeCartProduct } from '../../../../../../../utils/ActionsWithProduct/removeCartProduct';
-import {putProductsToCartDB} from "../../../../../../../utils/ActionsWithProduct/putProductsToCartDB";
-
+import { putProductsToCartDB } from '../../../../../../../utils/ActionsWithProduct/putProductsToCartDB';
 
 export const QuantityControl = ({ productItem, isInCart }) => {
   const [quantity, setQuantity] = useState(1);

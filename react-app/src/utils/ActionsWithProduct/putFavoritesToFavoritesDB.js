@@ -8,7 +8,6 @@ export const putFavoritesToFavoritesDB = async (favoriteId, favoriteItems) => {
       id: favoriteId,
       products: [...favorites]
     };
-    console.log(newFavoriteData);
 
     const favoriteULRForPUT = 'http://localhost:3004/api/favorite';
     const favoritePUTResponse = await sendRequest(favoriteULRForPUT, 'PUT', newFavoriteData);

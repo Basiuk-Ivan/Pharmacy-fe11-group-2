@@ -90,7 +90,7 @@ const AuthButton = () => {
 
       dispatch(setFavoriteStoreId(favoriteResponse.data.id));
       const newFavoriteData = { id: favoriteResponse.data.id, products: [...newFavorites] };
-      console.log(newFavoriteData);
+
       const favoriteULRForPUT = 'http://localhost:3004/api/favorite';
       const favoritePUTResponse = await sendRequest(favoriteULRForPUT, 'PUT', newFavoriteData);
       window.localStorage.removeItem('favouriteItems');
