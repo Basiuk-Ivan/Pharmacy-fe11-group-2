@@ -22,32 +22,45 @@ import { Terms } from './pages/FooterPage/Terms';
 import { Marketing } from './pages/FooterPage/Marketing';
 import { Job } from './pages/FooterPage/Job';
 import { Varranty } from './pages/FooterPage/Varranty';
-import {setCartStoreId, setFavoriteStoreId, setUser} from './redux/slice/userSlice';
+import { setCartStoreId, setFavoriteStoreId, setUser } from './redux/slice/userSlice';
 import { Step } from './pages/BlogPages/5steps';
-import {sendRequest} from "./tools/sendRequest.js";
-import {addToCartMoreOne, removeItem} from "./redux/slice/cartItems.js";
+import { sendRequest } from './tools/sendRequest';
+import {addToCartMoreOne} from "./redux/slice/cartItems.js";
+import {addToFavouriteItems} from "./redux/slice/favouriteItems.js";
+
 
 const App = () => {
   const dispatch = useDispatch();
 
-
-
-  useEffect( () => {
+  useEffect(() => {
     const token = window.localStorage.getItem('token');
     if (token) {
-        const startLoading = async (token) => {
+      const startLoading = async () => {
         const decodedToken = jwtDecode(token);
-        const {_id, ...rest} = decodedToken;
-        const updatedObj = {id: _id, ...rest};
+        const { _id, ...rest } = decodedToken;
+        const updatedObj = { id: _id, ...rest };
         dispatch(setUser(updatedObj));
+
         const cartURL = `http://localhost:3004/api/backet?user=${_id}`;
         const cartResponse = await sendRequest(cartURL);
+        const cartProducts = cartResponse.data.products;
+        cartProducts.forEach(product => {
+          dispatch(addToCartMoreOne({ id: product.productID, quantity: product.quantity }));
+        });
+
         dispatch(setCartStoreId(cartResponse.data.id));
+
         const favoriteURL = `http://localhost:3004/api/favorite?user=${_id}`;
         const favoriteResponse = await sendRequest(favoriteURL);
+        const favoriteProducts = favoriteResponse.data.products;
+        const newFavorites = favoriteProducts.map(item => ({id:item}))
+        newFavorites.forEach(product => {
+          dispatch(addToFavouriteItems(product));
+        });
+
         dispatch(setFavoriteStoreId(favoriteResponse.data.id));
-      }
-        startLoading(token);
+      };
+      startLoading();
     }
   }, []);
 

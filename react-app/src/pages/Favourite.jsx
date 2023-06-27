@@ -53,8 +53,8 @@ const Favourite = () => {
     });
 
     if (isAuth) {
-      const chagedItems = items.map((item) => ({ id: item.id, quantity: 1 }));
-      const newProducts = addAllCartProduct(cartItems, chagedItems );
+      const chagedItems = items.map(item => ({ id: item.id, quantity: 1 }));
+      const newProducts = addAllCartProduct(cartItems, chagedItems);
       await putProductsToCartDB(cartStoreId, newProducts);
     } else {
       items.forEach(product => {
