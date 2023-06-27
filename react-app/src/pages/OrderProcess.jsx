@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Container, Typography } from '@mui/material';
+import { Container, Fab, Typography } from '@mui/material';
 import Bread from '../components/Bread';
 import Advantages from '../components/orderProcess/Advantages';
 import ContactsBlock from '../components/orderProcess/ContactsBlock/ContactsBlock';
 import PaymentBlock from '../components/orderProcess/PaymentBlock/PaymentBlock';
 import { request } from '../tools/request';
+import DeliveryBlock from '../components/orderProcess/DeliveryBlock/DeliveryBlock';
 
 const OrderProcess = () => {
   const [products, setProducts] = useState([]);
@@ -38,6 +39,7 @@ const OrderProcess = () => {
     };
     fetchProducts();
   }, [productItemCart]);
+
   return (
     <Container
       sx={{
@@ -57,6 +59,7 @@ const OrderProcess = () => {
         Оформити замовлення
       </Typography>
       <ContactsBlock products={products} />
+      <DeliveryBlock />
       <PaymentBlock />
       <Advantages />
     </Container>

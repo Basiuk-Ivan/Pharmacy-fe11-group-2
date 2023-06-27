@@ -23,6 +23,7 @@ import { Marketing } from './pages/FooterPage/Marketing';
 import { Job } from './pages/FooterPage/Job';
 import { Varranty } from './pages/FooterPage/Varranty';
 import { setUser } from './redux/slice/userSlice';
+import { Step } from './pages/BlogPages/5steps';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ const App = () => {
           <Route path="/:category/*" element={<Products />} />
           <Route path="/favourite" element={<Favourite />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/step" element={<Step />} />
           <Route path="/company" element={<Company />} />
           <Route path="/delivery" element={<Delivery />} />
           <Route path="/pay" element={<Pay />} />
