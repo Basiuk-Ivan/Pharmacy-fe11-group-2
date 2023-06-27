@@ -18,8 +18,7 @@ import { removeCartProduct } from '../../../../../../../utils/ActionsWithProduct
 import {
   removeCartProductAllquantity
 } from '../../../../../../../utils/ActionsWithProduct/removeCartProductAllquantity';
-import {putProductsToCartDB} from "../../../../../../../utils/ActionsWithProduct/putProductsToCartDB.js";
-
+import { putProductsToCartDB } from '../../../../../../../utils/ActionsWithProduct/putProductsToCartDB';
 
 export const CartButton = ({ productItem, isInCart }) => {
   const dispatch = useDispatch();

@@ -11,7 +11,7 @@ import { addToCartLocalStorage } from '../utils/LocalStore/addToCartLocalStorage
 import { putFavoritesToFavoritesDB } from '../utils/ActionsWithProduct/putFavoritesToFavoritesDB';
 import { addCartProduct } from '../utils/ActionsWithProduct/addCartProduct';
 import { addAllCartProduct } from '../utils/ActionsWithProduct/addAllCartProduct';
-import {putProductsToCartDB} from "../utils/ActionsWithProduct/putProductsToCartDB.js";
+import { putProductsToCartDB } from '../utils/ActionsWithProduct/putProductsToCartDB';
 
 const Favourite = () => {
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
