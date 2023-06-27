@@ -24,7 +24,7 @@ import {
   priceBlockStyle
 } from './style';
 
-import { putProductsToCartDB } from '../../../utils/ActionsWithProduct/putProductsToCartDB';
+
 import { addCartProduct } from '../../../utils/ActionsWithProduct/addCartProduct';
 import { putFavoritesToFavoritesDB } from '../../../utils/ActionsWithProduct/putFavoritesToFavoritesDB';
 import { addFavorite } from '../../../utils/ActionsWithProduct/addFavorite';

@@ -7,8 +7,8 @@ import { addToCart, removeFromCart } from '../../../../../../../redux/slice/cart
 import { addToCartLocalStorage } from '../../../../../../../utils/LocalStore/addToCartLocalStorage';
 import { removeCartItemFromLocalStorage } from '../../../../../../../utils/LocalStore/removeCartItemFromLocalStorage';
 import { addCartProduct } from '../../../../../../../utils/ActionsWithProduct/addCartProduct';
-import { putProductsToCartDB } from '../../../../../../../utils/ActionsWithProduct/putProductsToCartDB';
 import { removeCartProduct } from '../../../../../../../utils/ActionsWithProduct/removeCartProduct';
+import {putProductsToCartDB} from "../../../../../../../utils/ActionsWithProduct/putProductsToCartDB.js";
 
 export const QuantityControl = ({ productItem, isInCart }) => {
   const [quantity, setQuantity] = useState(1);

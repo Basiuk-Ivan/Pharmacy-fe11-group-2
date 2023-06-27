@@ -8,8 +8,7 @@ import { request } from '../../../../tools/request';
 import { theme as muiTheme } from '../../../../tools/muiTheme';
 import { openOrderModal } from '../../../../redux/slice/cartItems';
 import { removeCartProductAllquantity } from '../../../../utils/ActionsWithProduct/removeCartProductAllquantity';
-import {putProductsToCartDB} from "../../../../utils/ActionsWithProduct/putProductsToCartDB";
-
+import { putProductsToCartDB } from '../../../../utils/ActionsWithProduct/putProductsToCartDB';
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),

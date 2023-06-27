@@ -18,7 +18,8 @@ import { removeCartProduct } from '../../../../../../../utils/ActionsWithProduct
 import {
   removeCartProductAllquantity
 } from '../../../../../../../utils/ActionsWithProduct/removeCartProductAllquantity';
-import {putProductsToCartDB} from '../../../../../../../utils/ActionsWithProduct/putProductsToCartDB';
+import {putProductsToCartDB} from "../../../../../../../utils/ActionsWithProduct/putProductsToCartDB.js";
+
 
 export const CartButton = ({ productItem, isInCart }) => {
   const dispatch = useDispatch();
@@ -81,7 +82,6 @@ export const CartButton = ({ productItem, isInCart }) => {
       }
     }
   };
-
 
   const cartStyle = cartStyles(isCart);
 

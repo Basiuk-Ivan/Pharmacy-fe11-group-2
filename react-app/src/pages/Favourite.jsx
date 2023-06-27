@@ -8,10 +8,10 @@ import { removeFromFavouriteLocalStorage } from '../utils/LocalStore/removeFromF
 import { closeModalAddtoCart, closeModalRemoveAll, deleteFromFavouriteItems } from '../redux/slice/favouriteItems';
 import { addToCart } from '../redux/slice/cartItems';
 import { addToCartLocalStorage } from '../utils/LocalStore/addToCartLocalStorage';
-import { putFavoritesToFavoritesDB } from '../utils/ActionsWithProduct/putFavoritesToFavoritesDB.js';
+import { putFavoritesToFavoritesDB } from '../utils/ActionsWithProduct/putFavoritesToFavoritesDB';
 import { addCartProduct } from '../utils/ActionsWithProduct/addCartProduct';
-import { putProductsToCartDB } from '../utils/ActionsWithProduct/putProductsToCartDB ';
 import { addAllCartProduct } from '../utils/ActionsWithProduct/addAllCartProduct';
+import {putProductsToCartDB} from "../utils/ActionsWithProduct/putProductsToCartDB.js";
 
 const Favourite = () => {
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);

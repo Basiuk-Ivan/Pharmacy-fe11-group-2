@@ -35,7 +35,8 @@ import Advantages from '../../components/orderProcess/Advantages';
 import { removeAllFromCartUserDBProduct } from '../../utils/ActionsWithProduct/removeAllFromCartUserDBProduct';
 import { removeAllFromCartLocalStorage } from '../../utils/LocalStore/removeAllFromCartLocalStorage';
 import { addCartProduct } from '../../utils/ActionsWithProduct/addCartProduct';
-import { putProductsToCartDB } from '../../utils/ActionsWithProduct/putProductsToCartDB';
+import {putProductsToCartDB} from "../../utils/ActionsWithProduct/putProductsToCartDB";
+
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
@@ -94,7 +95,6 @@ const Cart = () => {
     const sumObj = countSum(productItemCart, updatedProducts);
     dispatch(setSum(sumObj));
   }, [productItemCart]);
-
 
   const handleClickCartModalRemoveAll = async () => {
     dispatch(removeItem('all'));
