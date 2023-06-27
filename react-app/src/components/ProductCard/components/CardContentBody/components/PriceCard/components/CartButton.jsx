@@ -13,25 +13,39 @@ import {
 } from '../../../../../../../redux/slice/cartItems';
 import { cartStyles, iconButtonStyles } from '../../../../../style';
 import ModalWindow from '../../../../../../ModalWindow';
+import { addCartProduct } from '../../../../../../../utils/ActionsWithProduct/addCartProduct';
+import { removeCartProduct } from '../../../../../../../utils/ActionsWithProduct/removeCartProduct';
 import {
-  removeFromCartUserDBProduct
-} from '../../../../../../../utils/ActionsWithProduct/removeFromCartUserDBProduct';
-import { addToCartUserDBProduct } from '../../../../../../../utils/ActionsWithProduct/addToCartUserDBProduct';
+  removeCartProductAllquantity
+} from '../../../../../../../utils/ActionsWithProduct/removeCartProductAllquantity';
+import {putProductsToCartDB} from '../../../../../../../utils/ActionsWithProduct/putProductsToCartDB';
 
 export const CartButton = ({ productItem, isInCart }) => {
   const dispatch = useDispatch();
   const [isCart, setIsCart] = useState(false);
   const isAuth = useSelector(state => state.user.isAuth);
   const userId = useSelector(state => state.user.id);
+  const cartItems = useSelector(state => state.itemCards.items);
+  const cartStoreId = useSelector(state => state.user.cartStoreId);
 
   const isOpenedCartModalRemoveOne = useSelector(state => state.itemCards.isOpenedCartModalRemoveOne);
+
+  useEffect(() => {
+    const productItemIndex = cartItems.findIndex(item => item.id === productItem.id);
+    if (productItemIndex !== -1) {
+      setIsCart(true);
+    } else {
+      setIsCart(false);
+    }
+  }, [cartItems, productItem.id]);
 
   const handleClickCartModalRemoveOne = async () => {
     const prod = JSON.parse(window.localStorage.getItem('removeItem'));
     dispatch(removeItem(prod));
 
     if (isAuth) {
-      await removeFromCartUserDBProduct(userId, prod.id, 1, true);
+      const newProducts = removeCartProductAllquantity(cartItems, prod);
+      await putProductsToCartDB(cartStoreId, newProducts);
     } else {
       removeFromCartLocalStorage(prod);
     }
@@ -46,37 +60,28 @@ export const CartButton = ({ productItem, isInCart }) => {
     dispatch(openCartModalRemoveOne());
     window.localStorage.setItem('removeItem', JSON.stringify(productForRemove));
   };
-  // TODO Async with state
-  const handleAddtoCart = () => {
+
+  const handleAddToCart = async product => {
     if (!isCart) {
-      dispatch(addToCart({ id: productItem.id }));
+      dispatch(addToCart({ id: product.id }));
 
       if (isAuth) {
-        addToCartUserDBProduct(userId, productItem.id);
+        const newProducts = addCartProduct(cartItems, product);
+        await putProductsToCartDB(cartStoreId, newProducts);
       } else {
         addToCartLocalStorage(productItem);
       }
     } else {
       dispatch(removeItem(productItem));
       if (isAuth) {
-        removeFromCartUserDBProduct(userId, productItem.id);
+        const newProducts = removeCartProduct(cartItems, product);
+        await putProductsToCartDB(cartStoreId, newProducts);
       } else {
         removeFromCartLocalStorage(productItem);
       }
     }
-
-    setIsCart(prevIsCart => !prevIsCart);
   };
 
-  useEffect(() => {
-    const cartString = localStorage.getItem('cartItems');
-
-    if (cartString) {
-      const cartItems = JSON.parse(cartString);
-      const isItemCart = cartItems.some(elem => elem.id === productItem.id);
-      setIsCart(isItemCart);
-    }
-  }, [isCart, productItem.id]);
 
   const cartStyle = cartStyles(isCart);
 
@@ -99,7 +104,7 @@ export const CartButton = ({ productItem, isInCart }) => {
     );
   }
   return (
-    <IconButton onClick={handleAddtoCart} sx={cartStyle}>
+    <IconButton onClick={() => handleAddToCart(productItem)} sx={cartStyle}>
       <ShoppingCartOutlinedIcon />
     </IconButton>
   );

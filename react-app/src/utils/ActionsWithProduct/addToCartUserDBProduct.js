@@ -4,7 +4,7 @@ export const addToCartUserDBProduct = async (userId, productID, productQuantity 
   try {
     const cartURL = `http://localhost:3004/api/backet?user=${userId}`;
     const cartResponse = await sendRequest(cartURL);
-    const cartDBProducts = cartResponse.data[0].products;
+    const cartDBProducts = cartResponse.data.products;
     const cartItemToAdd = { productID, quantity: productQuantity };
     const mergedProducts = [...cartDBProducts];
     const foundIndex = mergedProducts.findIndex(item => item.productID === cartItemToAdd.productID);
@@ -15,9 +15,11 @@ export const addToCartUserDBProduct = async (userId, productID, productQuantity 
     }
 
     const newCartData = {
-      id: cartResponse.data[0].id,
+      id: cartResponse.data.id,
       products: mergedProducts
     };
+    console.log('merged', mergedProducts);
+    console.log('newCartData', newCartData);
 
     const cartULRForPUT = 'http://localhost:3004/api/backet';
     const cartPUTResponse = await sendRequest(cartULRForPUT, 'PUT', newCartData);

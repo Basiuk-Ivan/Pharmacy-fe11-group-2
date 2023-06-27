@@ -6,9 +6,10 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { request } from '../../../../tools/request';
 import { theme as muiTheme } from '../../../../tools/muiTheme';
-
 import { openOrderModal } from '../../../../redux/slice/cartItems';
-import { removeAllFromCartUserDBProduct } from '../../../../utils/ActionsWithProduct/removeAllFromCartUserDBProduct';
+import { removeCartProductAllquantity } from '../../../../utils/ActionsWithProduct/removeCartProductAllquantity';
+import {putProductsToCartDB} from "../../../../utils/ActionsWithProduct/putProductsToCartDB";
+
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),
@@ -23,6 +24,7 @@ const ContactsForm = ({ products }) => {
   const orderPaymentMethod = useSelector(state => state.order.PaymentMethodValue);
   const sumWithDiscount = useSelector(state => state.itemCards.sumWithDiscount);
   const userId = useSelector(state => state.user.id);
+  const cartStoreId = useSelector(state => state.user.cartStoreId);
 
   const surname = useSelector(state => state.user.secondName);
   const name = useSelector(state => state.user.firstName);
@@ -74,7 +76,9 @@ const ContactsForm = ({ products }) => {
       });
 
       if (status === 200) {
-        await removeAllFromCartUserDBProduct(userId);
+        const newProducts = [];
+        await putProductsToCartDB(cartStoreId, newProducts);
+
         dispatch(openOrderModal());
         resetForm();
       }

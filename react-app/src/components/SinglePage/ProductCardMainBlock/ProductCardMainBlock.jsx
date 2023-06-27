@@ -24,9 +24,11 @@ import {
   priceBlockStyle
 } from './style';
 
-import { addToCartUserDBProduct } from '../../../utils/ActionsWithProduct/addToCartUserDBProduct';
-import { addToFavoriteUserDBProduct } from '../../../utils/ActionsWithProduct/addToFavoriteUserDBProduct';
-import { removeFromFavoriteUserDBProduct } from '../../../utils/ActionsWithProduct/removeFromFavoriteUserDBProduct';
+import { putProductsToCartDB } from '../../../utils/ActionsWithProduct/putProductsToCartDB';
+import { addCartProduct } from '../../../utils/ActionsWithProduct/addCartProduct';
+import { putFavoritesToFavoritesDB } from '../../../utils/ActionsWithProduct/putFavoritesToFavoritesDB';
+import { addFavorite } from '../../../utils/ActionsWithProduct/addFavorite';
+import { removeFavorite } from '../../../utils/ActionsWithProduct/removeFavorite';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const ProductCardMainBlock = ({ productItem }) => {
@@ -36,24 +38,25 @@ const ProductCardMainBlock = ({ productItem }) => {
   const [activeSubstance, setActiveSubstance] = useState('');
   const [mainPrice, setMainPrice] = useState('');
   const [ratingClick, setRatingClick] = useState(true);
+
   const [isInCart, setIsInCart] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
   const isAuth = useSelector(state => state.user.isAuth);
   const userId = useSelector(state => state.user.id);
-
   const cartItems = useSelector(state => state.itemCards.items);
+  const cartStoreId = useSelector(state => state.user.cartStoreId);
+  const favoriteStoreId = useSelector(state => state.user.favoriteStoreId);
 
   useEffect(() => {
-    const favoriteString = localStorage.getItem('favouriteItems');
-
-    if (favoriteString) {
-      const favouriteItems = JSON.parse(favoriteString);
-
-      const isItemFavorite = favouriteItems.some(elem => elem.id === productItem.id);
-      setIsFavorite(isItemFavorite);
+    const productItemIndex = favoriteItems.findIndex(item => item.id === productItem.id);
+    if (productItemIndex !== -1) {
+      setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
     }
-  }, [productItem.id]);
+  }, [favoriteItems, productItem.id]);
 
   useEffect(() => {
     const productItemIndex = cartItems.findIndex(item => item.id === productItem.id);
@@ -82,14 +85,16 @@ const ProductCardMainBlock = ({ productItem }) => {
     if (!isFavorite) {
       dispatch(addToFavouriteItems(productItem.id));
       if (isAuth) {
-        await addToFavoriteUserDBProduct(userId, productItem.id);
+        const favorites = addFavorite(favoriteItems, productItem);
+        await putFavoritesToFavoritesDB(favoriteStoreId, favorites);
       } else {
         addToFavouriteLocalStorage(productItem);
       }
     } else {
       dispatch(deleteFromFavouriteItems(productItem.id));
       if (isAuth) {
-        await removeFromFavoriteUserDBProduct(userId, productItem.id);
+        const favorites = removeFavorite(favoriteItems, productItem);
+        await putFavoritesToFavoritesDB(favoriteStoreId, favorites);
       } else {
         removeFromFavouriteLocalStorage(productItem);
       }
@@ -99,7 +104,8 @@ const ProductCardMainBlock = ({ productItem }) => {
   const handleAddToCart = async product => {
     dispatch(addToCart({ id: product.id }));
     if (isAuth) {
-      await addToCartUserDBProduct(userId, productItem.id);
+      const newProducts = addCartProduct(cartItems, product);
+      await putProductsToCartDB(cartStoreId, newProducts);
     } else {
       addToCartLocalStorage(product);
     }

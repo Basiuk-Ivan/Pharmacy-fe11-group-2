@@ -8,8 +8,10 @@ import { removeFromFavouriteLocalStorage } from '../utils/LocalStore/removeFromF
 import { closeModalAddtoCart, closeModalRemoveAll, deleteFromFavouriteItems } from '../redux/slice/favouriteItems';
 import { addToCart } from '../redux/slice/cartItems';
 import { addToCartLocalStorage } from '../utils/LocalStore/addToCartLocalStorage';
-import { removeAllFromFavoriteUserDB } from '../utils/ActionsWithProduct/removeAllFromFavoriteUserDB';
-import { addAllToCartUserDBProduct } from '../utils/ActionsWithProduct/addAllToCartUserDBProduct';
+import { putFavoritesToFavoritesDB } from '../utils/ActionsWithProduct/putFavoritesToFavoritesDB.js';
+import { addCartProduct } from '../utils/ActionsWithProduct/addCartProduct';
+import { putProductsToCartDB } from '../utils/ActionsWithProduct/putProductsToCartDB ';
+import { addAllCartProduct } from '../utils/ActionsWithProduct/addAllCartProduct';
 
 const Favourite = () => {
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
@@ -19,12 +21,16 @@ const Favourite = () => {
   const navigate = useNavigate();
   const isAuth = useSelector(state => state.user.isAuth);
   const userId = useSelector(state => state.user.id);
+  const favoriteStoreId = useSelector(state => state.user.favoriteStoreId);
+  const cartItems = useSelector(state => state.itemCards.items);
+  const cartStoreId = useSelector(state => state.user.cartStoreId);
 
   const handleClickModalRemoveAll = async () => {
     dispatch(deleteFromFavouriteItems('all'));
 
     if (isAuth) {
-      await removeAllFromFavoriteUserDB(userId);
+      const favorites = [];
+      await putFavoritesToFavoritesDB(favoriteStoreId, favorites);
     } else {
       favoriteItems.forEach(element => {
         removeFromFavouriteLocalStorage(element);
@@ -47,7 +53,8 @@ const Favourite = () => {
     });
 
     if (isAuth) {
-      await addAllToCartUserDBProduct(userId, items);
+      const newProducts = addAllCartProduct(cartItems, items);
+      await putProductsToCartDB(cartStoreId, newProducts);
     } else {
       items.forEach(product => {
         addToCartLocalStorage(product);

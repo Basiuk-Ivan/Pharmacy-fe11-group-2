@@ -9,7 +9,7 @@ import { LoginForm } from './components/LoginForm';
 import { RegistrationForm } from './components/RegistrationForm';
 import { styles } from './style';
 import './style/Auth.scss';
-import { setUser } from '../../redux/slice/userSlice';
+import { setCartStoreId, setFavoriteStoreId, setUser } from '../../redux/slice/userSlice';
 import { sendRequest } from '../../tools/sendRequest';
 import { removeItem, addToCartMoreOne } from '../../redux/slice/cartItems';
 import { addToFavouriteItems, deleteFromFavouriteItems } from '../../redux/slice/favouriteItems';
@@ -56,7 +56,7 @@ const AuthButton = () => {
 
       const cartURL = `http://localhost:3004/api/backet?user=${_id}`;
       const cartResponse = await sendRequest(cartURL);
-      const cartProducts = cartResponse.data[0].products;
+      const cartProducts = cartResponse.data.products;
       const cartItemsFromLS = JSON.parse(localStorage.getItem('cartItems')) || [];
       const productsLS = cartItemsFromLS.map(({ id, quantity }) => {
         const newCartObj = { productID: id, quantity };
@@ -71,7 +71,8 @@ const AuthButton = () => {
           mergedProducts.push({ ...itemLS });
         }
       });
-      const newCartData = { id: cartResponse.data[0].id, products: [...mergedProducts] };
+      dispatch(setCartStoreId(cartResponse.data.id));
+      const newCartData = { id: cartResponse.data.id, products: [...mergedProducts] };
       const cartULRForPUT = 'http://localhost:3004/api/backet';
       const cartPUTResponse = await sendRequest(cartULRForPUT, 'PUT', newCartData);
       window.localStorage.removeItem('cartItems');
@@ -82,11 +83,14 @@ const AuthButton = () => {
 
       const favoriteURL = `http://localhost:3004/api/favorite?user=${_id}`;
       const favoriteResponse = await sendRequest(favoriteURL);
-      const favoriteProducts = favoriteResponse.data[0].products;
+      const favoriteProducts = favoriteResponse.data.products;
       const favouriteItemsFromLS = JSON.parse(localStorage.getItem('favouriteItems')) || [];
       const favorites = favouriteItemsFromLS.map(item => item.id);
       const newFavorites = [...new Set([...favoriteProducts, ...favorites])];
-      const newFavoriteData = { id: favoriteResponse.data[0].id, products: [...newFavorites] };
+
+      dispatch(setFavoriteStoreId(favoriteResponse.data.id));
+      const newFavoriteData = { id: favoriteResponse.data.id, products: [...newFavorites] };
+      console.log(newFavoriteData);
       const favoriteULRForPUT = 'http://localhost:3004/api/favorite';
       const favoritePUTResponse = await sendRequest(favoriteULRForPUT, 'PUT', newFavoriteData);
       window.localStorage.removeItem('favouriteItems');

@@ -1,6 +1,6 @@
 import { sendRequest } from '../../tools/sendRequest';
 
-export const putProductToDB = async (cardId, cartProducts) => {
+export const putProductsToCartDB = async (cardId, cartProducts) => {
   try {
     const mergedProducts = cartProducts.map(({ id, quantity }) => {
       const newCartObj = { productID: id, quantity };

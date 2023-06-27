@@ -10,7 +10,9 @@ const userSlice = createSlice({
     gender: '',
     email: '',
     phoneNumber: '',
-    admin: false
+    admin: false,
+    cartStoreId: '',
+    favoriteStoreId: ''
   },
   reducers: {
     setUser: (state, action) => {
@@ -32,13 +34,23 @@ const userSlice = createSlice({
       state.email = '';
       state.phoneNumber = '';
       state.admin = false;
+      state.cartStoreId = '';
+      state.favoriteStoreId = '';
+    },
+    setCartStoreId: (state, action) => {
+      state.cartStoreId = action.payload;
+    },
+    setFavoriteStoreId: (state, action) => {
+      state.favoriteStoreId = action.payload;
     }
   }
 });
 
 export const {
   setUser,
-  removeUser
+  removeUser,
+  setCartStoreId,
+  setFavoriteStoreId
 } = userSlice.actions;
 
 export default userSlice.reducer;
