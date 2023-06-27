@@ -1,6 +1,6 @@
 import { Container } from '@mui/system';
 import { Typography } from '@mui/material';
-// eslint-disable-next-line import/no-unresolved
+
 import steps from '../../assets/healthBlog/postsImg/5steps.webp';
 import { BlogImg, title } from './style/index';
 

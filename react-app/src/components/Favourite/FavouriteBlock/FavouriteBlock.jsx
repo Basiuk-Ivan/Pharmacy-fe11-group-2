@@ -2,7 +2,7 @@ import { Container, Typography, Grid, Button, Skeleton, Box } from '@mui/materia
 import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProductCard from '../../ProductCard/ProductCard';
 import Bread from '../../Bread';
@@ -13,9 +13,7 @@ import { request } from '../../../tools/request';
 const FavouriteBlock = props => {
   const [products, setProducts] = useState([]);
   const [showSkeleton, setShowSkeleton] = useState(true);
-
-  const { favoriteItems } = props;
-
+  const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,24 +27,18 @@ const FavouriteBlock = props => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const favoriteString = localStorage.getItem('favouriteItems');
+        if (favoriteItems.length > 0) {
+          const favoriteIds = favoriteItems.map(item => item.id);
 
-        if (favoriteItems && favoriteItems.length > 0) {
-          const favouriteItems = JSON.parse(favoriteString);
+          const { result } = await request({
+            url: '',
+            method: 'GET',
+            params: { _id: favoriteIds }
+          });
 
-          if (favouriteItems.length > 0) {
-            const favoriteIds = favouriteItems.map(item => item.id).join(',');
+          const { data } = result;
 
-            const { result } = await request({
-              url: '',
-              method: 'GET',
-              params: { _id: favoriteIds }
-            });
-
-            const { data } = result;
-
-            setProducts(data);
-          }
+          setProducts(data);
         }
       } catch (error) {
         console.error('Error fetching products:', error);

@@ -18,9 +18,9 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreIcon from '@mui/icons-material/MoreVert';
-
 import { openModal } from '../../../../redux/slice/modalSlice';
 import { setToken, removeToken } from '../../../../redux/slice/isToken';
+import { removeUser } from '../../../../redux/slice/userSlice';
 
 const settings = [
   { name: 'Profile', path: '/cabinet' },
@@ -32,6 +32,7 @@ export const MobileMenu = () => {
   const dispatch = useDispatch();
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
   const cartItems = useSelector(state => state.itemCards.items);
+  const isAuth = useSelector(state => state.user.isAuth);
   const navigate = useNavigate();
 
   const [hasToken, setHasToken] = useState(false);
@@ -74,10 +75,11 @@ export const MobileMenu = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-
-    dispatch(setToken(null));
-    navigate('/');
-    window.location.reload();
+    //
+    // dispatch(setToken(null));
+    // navigate('/');
+    // window.location.reload();
+    dispatch(removeUser());
   };
 
   const StyledBadge = styled(Badge)(() => ({
@@ -142,7 +144,7 @@ export const MobileMenu = () => {
           </MenuItem>
         </NavLink>
 
-        {hasToken ? (
+        {isAuth ? (
           <MenuItem>
             <Accordion>
               <AccordionSummary

@@ -5,7 +5,7 @@ import PaymentMethodForm from './PaymentMethodForm/PaymentMethodForm';
 import TotalAmountForm from './TotalAmountForm/TotalAmountForm';
 import ModalWindow from '../../ModalWindow';
 import { closeOrderModal, removeItem } from '../../../redux/slice/cartItems';
-import { removeAllFromCart } from '../../../utils/LocalStore/removeAllFromCart';
+import { removeAllFromCartLocalStorage } from '../../../utils/LocalStore/removeAllFromCartLocalStorage';
 
 const PaymentBlock = () => {
   const dispatch = useDispatch();
@@ -14,7 +14,8 @@ const PaymentBlock = () => {
 
   const handleCloseOrderModal = () => {
     dispatch(removeItem('all'));
-    removeAllFromCart();
+
+    removeAllFromCartLocalStorage();
     dispatch(closeOrderModal());
     navigate('/');
   };

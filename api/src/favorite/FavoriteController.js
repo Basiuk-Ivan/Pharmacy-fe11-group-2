@@ -14,11 +14,11 @@ export const createFavorite = async (req, res) => {
 
 export const getAllFavorite = async (req, res) => {
   try {
-    let favorites = [];
+    let favorites = { };
     const { user } = req.query;
     if (!!user) {
       const objectId = new mongoose.Types.ObjectId(user);
-      favorites = await FavoriteDB.find({ user: objectId });
+      favorites = await FavoriteDB.findOne({ user: objectId });
     } else {
       favorites = await FavoriteDB.find();
     }
@@ -27,6 +27,7 @@ export const getAllFavorite = async (req, res) => {
     res.status(500).json(e.message);
   }
 };
+
 
 export const updateFavorite = async (req, res) => {
   try {
