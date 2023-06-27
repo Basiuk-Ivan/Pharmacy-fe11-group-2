@@ -25,9 +25,8 @@ import { Varranty } from './pages/FooterPage/Varranty';
 import { setCartStoreId, setFavoriteStoreId, setUser } from './redux/slice/userSlice';
 import { Step } from './pages/BlogPages/5steps';
 import { sendRequest } from './tools/sendRequest';
-import {addToCartMoreOne} from "./redux/slice/cartItems.js";
-import {addToFavouriteItems} from "./redux/slice/favouriteItems.js";
-
+import { addToCartMoreOne } from './redux/slice/cartItems';
+import { addToFavouriteItems } from './redux/slice/favouriteItems';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -53,7 +52,7 @@ const App = () => {
         const favoriteURL = `http://localhost:3004/api/favorite?user=${_id}`;
         const favoriteResponse = await sendRequest(favoriteURL);
         const favoriteProducts = favoriteResponse.data.products;
-        const newFavorites = favoriteProducts.map(item => ({id:item}))
+        const newFavorites = favoriteProducts.map(item => ({ id: item }));
         newFavorites.forEach(product => {
           dispatch(addToFavouriteItems(product));
         });
