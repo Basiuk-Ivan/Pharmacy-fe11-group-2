@@ -23,15 +23,25 @@ const getByID = async (req, res) => {
 };
 
 const update = async (req, res) => {
+  const passwordNotHash = req.body.password;
   try {
-    if (req.body?.password) {
-      req.body.password = await bcrypt.hash(req.body.password, 4);
+       if (req.body?.password) {
+         req.body.password = await bcrypt.hash(req.body.password, 4);
     }
-    await UserDB.findByIdAndUpdate({
+    const user = await UserDB.findOneAndUpdate({
       id: req.params.userId,
       updateData: req.body,
+      }, {new: true} );
+    if (passwordNotHash) {
+    const { password, ...userData } = user._doc;
+        const { email, firstName, secondName } = userData;
+    await sendMailRegistration({
+      email,
+      firstName,
+      secondName,
+      password: passwordNotHash,
     });
-    const user = await UserDB.findById({ id: req.params.userId });
+    }
     res.json(user);
   } catch (err) {
     res.status(500).json(err.message);
