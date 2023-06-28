@@ -119,8 +119,6 @@ function Filter() {
   const changeDosageForm = event => {
     const { value, checked } = event.target;
     checked ? dispatch(addDosageForm(event.target.value)) : dispatch(removeDosageForm(event.target.value));
-    console.log(filterBase.productForm);
-    console.log('dispatch', event.target.value, 'check', checked);
 
     setCheckedForm(prevChecked =>
       prevChecked.map(item => (item.title === value ? { ...item, checked } : item))
