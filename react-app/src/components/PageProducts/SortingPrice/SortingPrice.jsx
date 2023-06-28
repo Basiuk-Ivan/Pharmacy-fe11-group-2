@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import SortIcon from '@mui/icons-material/Sort';
 import { ThemeProvider } from '@mui/material/styles';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { sortingPrice } from '../../../redux/slice/filterBaseSlice';
 import { theme } from '../../../tools/muiTheme';
 import { changePage } from '../../../redux/slice/numPageSlice';
@@ -17,12 +18,19 @@ import {
 
 function SortingPrice() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const queryString = location.search;
+  const searchParams = new URLSearchParams(queryString);
 
   const filterBase = useSelector(state => state.filterBase);
 
   const handleChange = event => {
     dispatch(sortingPrice(event.target.value));
     dispatch(changePage(1));
+    searchParams.set('sort', event.target.value.toString());
+    navigate({ search: searchParams.toString(), replace: true });
+    // window.location.search = searchParams.toString();
   };
 
   return (
@@ -42,7 +50,7 @@ function SortingPrice() {
               <Select
                 labelId="selectPrice"
                 id="selectPriceId"
-                value={filterBase.sort}
+                value={searchParams.get('sort')}
                 label="Ціна"
                 onChange={handleChange}
               >

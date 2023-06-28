@@ -1,5 +1,5 @@
 function RequestString(filterBase, numPage) {
-  let requestString = `page=${numPage}`;
+  let requestString = `?page=${numPage}`; // добавил знак ?
 
   for (const key in filterBase) {
     if (Array.isArray(filterBase[key]) && filterBase[key].length > 0) {

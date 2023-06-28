@@ -7,7 +7,7 @@ export const fetchProductsData = createAsyncThunk(
   async (requestString, { rejectWithValue }) => {
     try {
       const { result } = await request({
-        url: `?${requestString}`,
+        url: `${requestString}`,
         method: 'GET'
       });
 
