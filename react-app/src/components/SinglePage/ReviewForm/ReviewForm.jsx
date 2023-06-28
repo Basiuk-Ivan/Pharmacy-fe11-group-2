@@ -80,13 +80,12 @@ const ReviewForm = () => {
           }}
           sx={{ fontSize: '25px' }}
         />
-        {ratingError && <Typography
-          variant="p"
-          component="p"
-          sx={{ fontSize: '12px', color: 'red' }}
-        >
-          Встановіть оцінку
-        </Typography>}
+        {ratingError &&
+            <Typography variant="p"
+                        component="p"
+                        sx={{ fontSize: '12px', color: 'red' }}>
+              Встановіть оцінку
+            </Typography>}
         <Stack direction="row" useFlexGap flexWrap="wrap" justifyContent="space-between" spacing={3}>
 
           <Stack
