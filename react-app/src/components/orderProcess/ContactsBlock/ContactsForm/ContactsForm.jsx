@@ -11,7 +11,6 @@ import { removeCartProductAllquantity } from '../../../../utils/ActionsWithProdu
 import { putProductsToCartDB } from '../../../../utils/ActionsWithProduct/putProductsToCartDB';
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
-
   marginBottom: theme.spacing(2),
   '& .MuiInputBase-root': {
     borderRadius: 30
