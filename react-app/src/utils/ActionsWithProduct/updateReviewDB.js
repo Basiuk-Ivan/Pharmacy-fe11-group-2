@@ -1,0 +1,26 @@
+import { sendRequest } from '../../tools/sendRequest';
+
+export const updateReviewDB = async (reviewData, userId, emotion) => {
+  try {
+    let newReviewData = {};
+
+    if (emotion === 'like') {
+      const updatedWhoLike = [...reviewData.whoLike];
+      updatedWhoLike.push(userId);
+      newReviewData = { id: reviewData.id, countLike: reviewData.countLike + 1, whoLike: [...updatedWhoLike] };
+    } else {
+      const updatedWhoDislike = [...reviewData.whoDislike];
+      updatedWhoDislike.push(userId);
+      newReviewData = { id: reviewData.id, countDislike: reviewData.countDislike + 1, whoDislike: [...updatedWhoDislike] };
+    }
+
+    const url = 'http://localhost:3004/api/review';
+    const updateReviewResponse = await sendRequest(url, 'PUT', newReviewData);
+
+    if (!updateReviewResponse.statusText) {
+      throw new Error('Network response was not ok');
+    }
+  } catch (err) {
+    console.error('Error fetching products:', err);
+  }
+};
