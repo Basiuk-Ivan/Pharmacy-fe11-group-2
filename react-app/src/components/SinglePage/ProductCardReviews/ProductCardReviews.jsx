@@ -27,29 +27,25 @@ const ProductCardReviews = () => {
           noValidate
           autoComplete="off"
         >
-          {isAuth && <Box>
-            <Typography
-              variant="h5"
-              component="h5"
-              gutterBottom
-              sx={{ mb: '30px', fontSize: '18px', lineHeight: '18px', fontWeight: '500' }}
-            >
-              Залишити відгук
-            </Typography>
-            <ReviewForm />
-                     </Box>}
+          {isAuth &&
+          <Box>
+              <Typography variant="h5"
+                          component="h5"
+                          gutterBottom
+                          sx={{ mb: '30px', fontSize: '18px', lineHeight: '18px', fontWeight: '500' }}>
+                  Залишити відгук
+              </Typography>
+              <ReviewForm />
+          </Box>}
 
-          {!isAuth && <Typography
-            variant="h4"
-            component="h4"
-            gutterBottom
-            sx={{ mb: '30px', fontSize: '20px', lineHeight: '22px', fontWeight: '500' }}
-          >
-            Додати відгук може лише авторизований користувач
-          </Typography>}
-
-          <ReviewList />
-
+          {!isAuth &&
+              <Typography variant="h4"
+                          component="h4"
+                          gutterBottom
+                          sx={{ mb: '30px', fontSize: '20px', lineHeight: '22px', fontWeight: '500' }}>
+                  Додати відгук може лише авторизований користувач
+              </Typography>}
+            <ReviewList />
         </Box>
       </Box>
     </Box>);

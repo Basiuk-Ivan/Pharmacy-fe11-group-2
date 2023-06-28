@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
+import { useSelector } from 'react-redux';
 import Review from '../Review';
-import {getProductReviewsFromDB} from "../../../utils/ActionsWithProduct/getProductReviewsFromDB";
-import {useSelector} from "react-redux";
+import { getProductReviewsFromDB } from '../../../utils/ActionsWithProduct/getProductReviewsFromDB';
 
 const ReviewList = () => {
   const { id } = useParams();
@@ -11,13 +11,13 @@ const ReviewList = () => {
   const changeStateReview = useSelector(state => state.user.changeStateReview);
 
   useEffect(() => {
-    const fetchData = async (productId) => {
+    const fetchData = async productId => {
       try {
         const response = await getProductReviewsFromDB(productId);
         if (!response.statusText) {
           throw new Error('Network response was not ok');
         }
-        const {data} = await response;
+        const { data } = await response;
         setProductReviews(data);
         console.log(changeStateReview);
       } catch (error) {
@@ -25,7 +25,7 @@ const ReviewList = () => {
         return null;
       }
     };
-fetchData(id);
+    fetchData(id);
   }, [id, changeStateReview]);
 
   return (

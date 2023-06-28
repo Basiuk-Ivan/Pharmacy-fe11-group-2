@@ -86,7 +86,7 @@ const ReviewForm = () => {
           sx={{ fontSize: '12px', color: 'red' }}
         >
           Встановіть оцінку
-                        </Typography>}
+        </Typography>}
         <Stack direction="row" useFlexGap flexWrap="wrap" justifyContent="space-between" spacing={3}>
 
           <Stack
