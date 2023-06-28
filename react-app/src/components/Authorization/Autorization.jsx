@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { Modal, Tab, Tabs, Typography, Box, Button } from '@mui/material';
+import jwtDecode from 'jwt-decode';
 import { theme } from '../../tools/muiTheme';
 import { closeModal } from '../../redux/slice/modalSlice';
 import { LoginForm } from './components/LoginForm';
 import { RegistrationForm } from './components/RegistrationForm';
 import { styles } from './style';
-import { setToken } from '../../redux/slice/isToken';
-
 import './style/Auth.scss';
+import { setCartStoreId, setFavoriteStoreId, setUser } from '../../redux/slice/userSlice';
+import { sendRequest } from '../../tools/sendRequest';
+import { removeItem, addToCartMoreOne } from '../../redux/slice/cartItems';
+import { addToFavouriteItems, deleteFromFavouriteItems } from '../../redux/slice/favouriteItems';
 
 const style = {
   position: 'absolute',
@@ -34,28 +37,72 @@ const AuthButton = () => {
 
   const [activeTab, setActiveTab] = useState('login');
 
+  const favItm = useSelector(state => state.favouriteItems.favouriteItems);
+
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
   };
 
   const handleFormLogin = async values => {
     try {
-      const url = `http://localhost:3004/api/users/login?email=${values.email}&password=${values.password}`;
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(values)
+      const authURL = 'http://localhost:3004/api/users/login';
+      const userResponse = await sendRequest(authURL, 'POST', values);
+      const { token } = userResponse.data;
+      const decodedToken = jwtDecode(token);
+      const { _id, ...rest } = decodedToken;
+      const updatedObj = { id: _id, ...rest };
+      window.localStorage.setItem('token', token);
+      dispatch(setUser(updatedObj));
+
+      const cartURL = `http://localhost:3004/api/backet?user=${_id}`;
+      const cartResponse = await sendRequest(cartURL);
+      const cartProducts = cartResponse.data.products;
+      const cartItemsFromLS = JSON.parse(localStorage.getItem('cartItems')) || [];
+      const productsLS = cartItemsFromLS.map(({ id, quantity }) => {
+        const newCartObj = { productID: id, quantity };
+        return newCartObj;
       });
-      if (!response.ok) {
+      const mergedProducts = [...cartProducts];
+      productsLS.forEach(itemLS => {
+        const foundIndex = mergedProducts.findIndex(item => item.productID === itemLS.productID);
+        if (foundIndex !== -1) {
+          mergedProducts[foundIndex].quantity += itemLS.quantity;
+        } else {
+          mergedProducts.push({ ...itemLS });
+        }
+      });
+      dispatch(setCartStoreId(cartResponse.data.id));
+      const newCartData = { id: cartResponse.data.id, products: [...mergedProducts] };
+      const cartULRForPUT = 'http://localhost:3004/api/backet';
+      const cartPUTResponse = await sendRequest(cartULRForPUT, 'PUT', newCartData);
+      window.localStorage.removeItem('cartItems');
+      dispatch(removeItem('all'));
+      mergedProducts.forEach(product => {
+        dispatch(addToCartMoreOne({ id: product.productID, quantity: product.quantity }));
+      });
+
+      const favoriteURL = `http://localhost:3004/api/favorite?user=${_id}`;
+      const favoriteResponse = await sendRequest(favoriteURL);
+      const favoriteProducts = favoriteResponse.data.products;
+      const favouriteItemsFromLS = JSON.parse(localStorage.getItem('favouriteItems')) || [];
+      const favorites = favouriteItemsFromLS.map(item => item.id);
+      const newFavorites = [...new Set([...favoriteProducts, ...favorites])];
+
+      dispatch(setFavoriteStoreId(favoriteResponse.data.id));
+      const newFavoriteData = { id: favoriteResponse.data.id, products: [...newFavorites] };
+
+      const favoriteULRForPUT = 'http://localhost:3004/api/favorite';
+      const favoritePUTResponse = await sendRequest(favoriteULRForPUT, 'PUT', newFavoriteData);
+      window.localStorage.removeItem('favouriteItems');
+      dispatch(deleteFromFavouriteItems('all'));
+      newFavorites.forEach(product => {
+        dispatch(addToFavouriteItems(product));
+      });
+
+      if (!userResponse.statusText) {
+        setOpen(true);
         throw new Error('Network response was not ok');
       }
-      const { token, user } = await response.json();
-
-      window.localStorage.setItem('token', token);
-      dispatch(setToken(token));
-      window.location.reload();
     } catch (err) {
       console.error('Error fetching products:', err);
     }
@@ -63,25 +110,28 @@ const AuthButton = () => {
   };
 
   const handleFormSubmit = async values => {
-    console.log(values);
     try {
-      const url = 'http://localhost:3004/api/users/';
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(values)
-      });
-      if (!response.ok) {
+      const authURL = 'http://localhost:3004/api/users/';
+      const userResponse = await sendRequest(authURL, 'POST', values);
+      const { token } = userResponse.data;
+      const { _id } = jwtDecode(token);
+
+      const products = [];
+      const createData = { user: _id, products };
+      const cartURL = 'http://localhost:3004/api/backet';
+      const cartResponse = await sendRequest(cartURL, 'POST', createData);
+
+      const favoriteURL = 'http://localhost:3004/api/favorite';
+      const favoriteResponse = await sendRequest(favoriteURL, 'POST', createData);
+
+      if (!userResponse.statusText && !cartResponse.statusText && !favoriteResponse.statusText) {
         setOpen(true);
         throw new Error('Network response was not ok');
       }
-      const { token } = await response.json();
-      window.localStorage.setItem('token', token);
     } catch (err) {
-      console.error('Error fetching products:', err);
+      console.error('Error fetching', err);
     }
+
     handleCloseModal();
   };
 

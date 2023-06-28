@@ -29,7 +29,7 @@ console.log(product);
                Reviews = await ReviewDB.find();
            }}
 
-        return res.json(Reviews);
+        return res.json(Reviews.reverse());
     } catch (e) {
         res.status(500).json(e.message);
     }

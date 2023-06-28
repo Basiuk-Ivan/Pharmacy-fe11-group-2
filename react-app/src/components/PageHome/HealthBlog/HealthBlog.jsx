@@ -23,6 +23,8 @@ const blogDescriptionText = [
   'Дізнайтеся, як зберегти баланс та енергію, дотримуючись порад і рекомендацій, що пропонує наш блог про здоровʼя.'
 ];
 
+const blogLinks = '/step';
+
 const HealthBlog = () => (
   <Box>
     <Box sx={Title}>
@@ -39,6 +41,7 @@ const HealthBlog = () => (
             BlogImgName={key}
             blogTitleText={blogTitleText[index]}
             blogDescriptionText={blogDescriptionText[index]}
+            link={blogLinks}
           />
         ))}
       </Box>

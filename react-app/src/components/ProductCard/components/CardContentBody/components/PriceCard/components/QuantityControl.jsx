@@ -6,11 +6,17 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { addToCart, removeFromCart } from '../../../../../../../redux/slice/cartItems';
 import { addToCartLocalStorage } from '../../../../../../../utils/LocalStore/addToCartLocalStorage';
 import { removeCartItemFromLocalStorage } from '../../../../../../../utils/LocalStore/removeCartItemFromLocalStorage';
+import { addCartProduct } from '../../../../../../../utils/ActionsWithProduct/addCartProduct';
+import { removeCartProduct } from '../../../../../../../utils/ActionsWithProduct/removeCartProduct';
+import { putProductsToCartDB } from '../../../../../../../utils/ActionsWithProduct/putProductsToCartDB';
 
 export const QuantityControl = ({ productItem, isInCart }) => {
   const [quantity, setQuantity] = useState(1);
-  const cartItems = useSelector(state => state.itemCards.items);
   const dispatch = useDispatch();
+  const isAuth = useSelector(state => state.user.isAuth);
+  const userId = useSelector(state => state.user.id);
+  const cartItems = useSelector(state => state.itemCards.items);
+  const cartStoreId = useSelector(state => state.user.cartStoreId);
 
   useEffect(() => {
     if (isInCart && cartItems && cartItems.length > 0) {
@@ -22,16 +28,26 @@ export const QuantityControl = ({ productItem, isInCart }) => {
       }
     }
   }, [cartItems, isInCart, productItem.id]);
-  const handleIncrement = product => {
+  const handleIncrement = async product => {
     setQuantity(prev => prev + 1);
     dispatch(addToCart({ id: product.id }));
-    addToCartLocalStorage(product);
+    if (isAuth) {
+      const newProducts = addCartProduct(cartItems, product);
+      await putProductsToCartDB(cartStoreId, newProducts);
+    } else {
+      addToCartLocalStorage(product);
+    }
   };
 
-  const handleDecrement = prod => {
+  const handleDecrement = async product => {
     setQuantity(prev => prev - 1);
-    dispatch(removeFromCart({ id: prod.id }));
-    removeCartItemFromLocalStorage(prod);
+    dispatch(removeFromCart({ id: product.id }));
+    if (isAuth) {
+      const newProducts = removeCartProduct(cartItems, product);
+      await putProductsToCartDB(cartStoreId, newProducts);
+    } else {
+      removeCartItemFromLocalStorage(product);
+    }
   };
 
   if (!isInCart) {

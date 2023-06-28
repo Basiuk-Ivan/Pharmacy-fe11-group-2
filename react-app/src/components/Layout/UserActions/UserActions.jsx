@@ -24,6 +24,7 @@ const UserActions = () => {
   const dispatch = useDispatch();
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
   const cartItems = useSelector(state => state.itemCards.items);
+  const isAuth = useSelector(state => state.user.isAuth);
   const navigate = useNavigate();
 
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -57,7 +58,7 @@ const UserActions = () => {
   return (
     <>
       <Box sx={wrapForActionsStyles}>
-        {hasToken ? (
+        {isAuth ? (
           <>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, width: 40, height: 40 }}>
