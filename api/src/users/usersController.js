@@ -2,8 +2,9 @@ import UserDB from './UsersModel.js';
 import bcrypt from 'bcrypt';
 import { createToken } from '../utils/token.js';
 import { sendMailRegistration } from '../utils/mail.js';
+import {generateRandomString} from "../utils/stringRandom.js";
 
-const getAll = async (req, res) => {
+const getUser = async (req, res) => {
   try {
     console.log(req.query);
     const users = await UserDB.find(req.query);
@@ -13,7 +14,7 @@ const getAll = async (req, res) => {
   }
 };
 
-const getByID = async (req, res) => {
+const getUserByID = async (req, res) => {
   try {
     const user = await UserDB.findById(req.params.userId);
     res.json(user);
@@ -22,23 +23,65 @@ const getByID = async (req, res) => {
   }
 };
 
-const update = async (req, res) => {
+// Create a function for reusable perpose
+
+
+const passwordUser = async (req, res) => {
+console.log(req.query);
   try {
-    if (req.body?.password) {
-      req.body.password = await bcrypt.hash(req.body.password, 4);
+    const data = await UserDB.findOne(req.query);
+console.log(data);
+    if (!data) {
+      res.status(404).json('Email не знайдено ');
+    } else {
+        const passwordNotHash = generateRandomString(8);
+        const passwordHash = await bcrypt.hash(passwordNotHash, 4);
+        const filter = {email: data.email};
+        const update = {password: passwordHash};
+        const user = await UserDB.findOneAndUpdate(filter, update,{new: true});
+        console.log(user);
+        const {password, ...userData} = user._doc;
+        const {email, firstName, secondName} = userData;
+        await sendMailRegistration({
+          email,
+          firstName,
+          secondName,
+          password: passwordNotHash,
+        });
+      res.json(user);
     }
-    await UserDB.findByIdAndUpdate({
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+};
+
+const updateUser = async (req, res) => {
+  const passwordNotHash = req.body.password;
+  try {
+       if (req.body?.password) {
+         req.body.password = await bcrypt.hash(req.body.password, 4);
+    }
+    const user = await UserDB.findOneAndUpdate({
       id: req.params.userId,
       updateData: req.body,
+      }, {new: true} );
+    if (passwordNotHash) {
+    const { password, ...userData } = user._doc;
+        const { email, firstName, secondName } = userData;
+    await sendMailRegistration({
+      email,
+      firstName,
+      secondName,
+      password: passwordNotHash,
     });
-    const user = await UserDB.findById({ id: req.params.userId });
+    }
     res.json(user);
   } catch (err) {
     res.status(500).json(err.message);
   }
 };
 
-const create = async (req, res) => {
+const createUser = async (req, res) => {
   try {
     console.log(req.body);
     const passwordNotHash = req.body.password;
@@ -62,7 +105,7 @@ const create = async (req, res) => {
   }
 };
 
-const login = async (req, res) => {
+const loginUser = async (req, res) => {
   try {
     console.log(req.body.email);
     const user = await UserDB.findOne({ email: req.body.email });
@@ -90,9 +133,10 @@ const login = async (req, res) => {
 };
 
 export const UserController = {
-  getAll,
-  getByID,
-  update,
-  create,
-  login,
+  getUser,
+  getUserByID,
+  passwordUser,
+  updateUser,
+  createUser,
+  loginUser,
 };

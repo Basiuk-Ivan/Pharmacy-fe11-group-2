@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useLocation, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Box, Container, Skeleton, Stack } from '@mui/material';
 import { SkeletonSection } from '../../tools/productsSkeleton';
 import Filter from '../../components/PageProducts/Filter';
@@ -11,8 +11,7 @@ import SortingPrice from '../../components/PageProducts/SortingPrice';
 import PaginationProducts from '../../components/PageProducts/PaginationProducts';
 import Cards from '../../components/PageProducts/Cards';
 import TitleCategory from '../../components/PageProducts/TitleCategory';
-import Bread from '../../components/Bread';
-import RequestString from '../../components/PageProducts/RequestString';
+import BreadPageProducts from '../../components/PageProducts/BreadPageProducts';
 
 import {
   asideAndCardsStyles,
@@ -27,9 +26,9 @@ import { fetchProductsData } from '../../redux/slice/productsSlice';
 function Products() {
   const [showSkeleton, setShowSkeleton] = useState(true);
 
+  const location = useLocation();
+  const queryString = location.search;
   const dispatch = useDispatch();
-  const { numPage } = useSelector(state => state.numPage);
-  const filterBase = useSelector(state => state.filterBase);
   const { category } = useParams();
 
   useEffect(() => {
@@ -41,13 +40,13 @@ function Products() {
   }, []);
 
   useEffect(() => {
-    dispatch(fetchProductsData(RequestString(filterBase, numPage)));
-  }, [filterBase.categories, filterBase.sort, numPage]);
+    dispatch(fetchProductsData(queryString));
+  }, [queryString]);
 
   return (
     <Container disableGutters id="productsContainer" sx={productsContainerStyles}>
       <Box sx={{ mt: '-20px' }}>
-        <Bread />
+        <BreadPageProducts />
       </Box>
       <TitleCategory />
       <Box id="asideAndCards" sx={asideAndCardsStyles}>

@@ -1,40 +1,36 @@
 import { useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
+import { useSelector } from 'react-redux';
 import Review from '../Review';
+import { getProductReviewsFromDB } from '../../../utils/ActionsWithProduct/getProductReviewsFromDB';
 
 const ReviewList = () => {
   const { id } = useParams();
-  const [productReviews, setProductReviews] = useState(null);
-
-  const getReviews = async url => {
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const result = await response.json();
-      return result;
-    } catch (error) {
-      console.log('Error fetching products:', error);
-      return null;
-    }
-  };
+  const [productReviews, setProductReviews] = useState([]);
+  const changeStateReview = useSelector(state => state.user.changeStateReview);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const allDataReviews = await getReviews('../reviews.json');
-
-      const reviewsThisProduct = allDataReviews.find(item => item.id === id);
-
-      setProductReviews(reviewsThisProduct);
+    const fetchData = async productId => {
+      try {
+        const response = await getProductReviewsFromDB(productId);
+        if (!response.statusText) {
+          throw new Error('Network response was not ok');
+        }
+        const { data } = await response;
+        setProductReviews(data);
+        console.log(changeStateReview);
+      } catch (error) {
+        console.log('Error fetching products:', error);
+        return null;
+      }
     };
-    fetchData();
-  }, [id]);
+    fetchData(id);
+  }, [id, changeStateReview]);
 
   return (
     <Box sx={{ mt: '40px' }}>
-      {!!productReviews && productReviews.reviews.map((item, index) => <Review key={index} item={item} />)}
+      {!!productReviews && productReviews.map((item, index) => <Review key={index} item={item} />)}
     </Box>
   );
 };
