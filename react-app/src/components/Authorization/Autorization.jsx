@@ -6,6 +6,7 @@ import jwtDecode from 'jwt-decode';
 import { theme } from '../../tools/muiTheme';
 import { closeModal } from '../../redux/slice/modalSlice';
 import { LoginForm } from './components/LoginForm';
+import { ForgotForm } from './components/ForgotForm';
 import { RegistrationForm } from './components/RegistrationForm';
 import { styles } from './style';
 import './style/Auth.scss';
@@ -31,6 +32,7 @@ const AuthButton = () => {
   const handleClose = () => setOpen(false);
 
   const isOpen = useSelector(state => state.modalSlice.openModal);
+  const isModalForgotPass = useSelector(state => state.modalSlice.modalForgotPass);
   const dispatch = useDispatch();
 
   const handleCloseModal = () => dispatch(closeModal());
@@ -178,6 +180,16 @@ const AuthButton = () => {
             </div>
           </Box>
         </Modal>
+        <Modal open={isModalForgotPass} onClose={handleCloseModal} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+          <Box sx={styles}>
+            <div className="auth-modal">
+              <div className="auth-modal__container">
+                <ForgotForm />
+              </div>
+            </div>
+          </Box>
+        </Modal>
+
       </div>
     </ThemeProvider>
   );
