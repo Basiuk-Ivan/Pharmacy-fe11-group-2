@@ -1,4 +1,4 @@
-import { FormControl, FormControlLabel, RadioGroup, Typography, Radio, Grid, TextField } from '@mui/material';
+import { FormControl, FormControlLabel, RadioGroup, Typography, Radio, Grid, TextField, Autocomplete } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
 import { theme } from '../../../tools/muiTheme';
@@ -6,6 +6,7 @@ import searchAddress from '../../../tools/NovaPost/searchAddress';
 import CitySelect from './CitySelect/CitySelect';
 import searchWarehouse from '../../../tools/NovaPost/searchWarehouse';
 import WarehouseSelect from './WarehouseSelect/WarehouseSelect';
+import SelfPickup from './SelfPickup/SelfPickup';
 
 const DeliveryBlock = () => {
   const [selectedCity, setSelectedCity] = useState(null);
@@ -87,24 +88,15 @@ const DeliveryBlock = () => {
               </FormControl>
             </Grid>
             {showAdditionalField && (
-            <Grid item md={8}>
-              <CitySelect cityDelivery={cityDelivery} setSelectedCity={setSelectedCity} />
-              <WarehouseSelect warehouseDelivery={warehouseDelivery} setSelectedWarehouse={setSelectedWarehouse} />
-            </Grid>
+              <Grid item md={8}>
+                <CitySelect cityDelivery={cityDelivery} setSelectedCity={setSelectedCity} />
+                <WarehouseSelect warehouseDelivery={warehouseDelivery} setSelectedWarehouse={setSelectedWarehouse} />
+              </Grid>
             )}
             {!showAdditionalField && (
-            <Grid item md={8}>
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2540.4452429944536!2d30.524919676975006!3d50.45143308729259!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4ce51c3bdb9a1%3A0xff877737cf946b28!2sKhreschatyk%20St%2C%201%2C%20Kyiv%2C%2002000!5e0!3m2!1sen!2sua!4v1687819324960!5m2!1sen!2sua"
-                width="100%"
-                height="100%"
-                title="Google Map"
-                loading="lazy"
-                allowFullScreen
-                referrerPolicy="no-referrer-when-downgrade"
-                style={{ border: 0 }}
-              />
-            </Grid>
+              <Grid item md={8}>
+                <SelfPickup />
+              </Grid>
             )}
           </Grid>
         </Grid>

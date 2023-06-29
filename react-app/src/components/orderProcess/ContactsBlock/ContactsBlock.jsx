@@ -16,7 +16,8 @@ const ContactsBlock = ({ products }) => (
         border: '1px solid white',
         borderRadius: '20px',
         boxShadow: '0px 10px 40px rgba(11, 54, 29, 0.05)',
-        padding: '10px'
+        padding: '10px',
+        minHeight: '500px'
       }}
     >
       <ContactsForm products={products} />
