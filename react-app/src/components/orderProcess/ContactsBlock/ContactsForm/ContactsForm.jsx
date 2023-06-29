@@ -11,7 +11,6 @@ import { removeCartProductAllquantity } from '../../../../utils/ActionsWithProdu
 import { putProductsToCartDB } from '../../../../utils/ActionsWithProduct/putProductsToCartDB';
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
-
   marginBottom: theme.spacing(2),
   '& .MuiInputBase-root': {
     borderRadius: 30
@@ -37,14 +36,14 @@ const ContactsForm = ({ products }) => {
   const validationSchema = Yup.object().shape({
     firstName: Yup.string()
       .required("Введіть своє ім'я кирилицею")
-      .matches(nameRegExp, "Введіть своє ім'я кирилицею")
+      .matches(/^[A-Za-zА-Яа-яЁёІіЇїЄєҐґ']+$/, 'Введіть тільки букви')
       .min(2, 'Мінімум два символи'),
     email: Yup.string().email('Введіть свою ел. пошту').required('Введіть свою ел. пошту'),
     city: Yup.string().required('Введіть своє місто').matches(nameRegExp, 'Введіть своє місто'),
     house: Yup.string().required('Введіть номер будинку'),
     lastName: Yup.string()
       .required('Введіть своє прізвище кирилицею')
-      .matches(nameRegExp, 'Введіть своє прізвище кирилицею')
+      .matches(/^[A-Za-zА-Яа-яЁёІіЇїЄєҐґ']+$/, 'Введіть тільки букви')
       .min(2, 'Мінімум два символи'),
     phone: Yup.number()
       .required('Введіть номер мобільного телефону')
