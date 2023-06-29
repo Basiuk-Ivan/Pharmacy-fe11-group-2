@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Button, TextField } from '@mui/material';
-
 export const styles = {
   position: 'absolute',
   top: '50%',
@@ -11,7 +10,6 @@ export const styles = {
   boxShadow: 24,
   borderRadius: 5
 };
-
 export const StyledButton = styled(Button)`
   width: 160px;
   height: 50px;
@@ -29,6 +27,7 @@ export const UnderlineSpan = styled.span`
 
 export const HighlightSpan = styled.span`
   color: #2fd3ae;
+  cursor: pointer;
 `;
 
 export const CustomTextField = styled(TextField)`

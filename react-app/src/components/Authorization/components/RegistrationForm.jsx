@@ -86,22 +86,22 @@ export const RegistrationForm = ({ activeTab, handleFormSubmit }) => (
               />
               <ErrorMessage name="phoneNumber" component="div" className="error-message" />
             </div>
-            {/*<div className="form-group">*/}
-            {/*  <CustomTextField*/}
-            {/*    select*/}
-            {/*    id="gender"*/}
-            {/*    name="gender"*/}
-            {/*    label="Стать"*/}
-            {/*    variant="outlined"*/}
-            {/*    value={values.gender}*/}
-            {/*    onChange={handleChange}*/}
-            {/*    onBlur={handleBlur}*/}
-            {/*  >*/}
-            {/*    <MenuItem value="male">Чоловіча</MenuItem>*/}
-            {/*    <MenuItem value="female">Жіноча</MenuItem>*/}
-            {/*  </CustomTextField>*/}
-            {/*  <ErrorMessage name="gender" component="div" className="error-message" />*/}
-            {/*</div>*/}
+            <div className="form-group">
+              <CustomTextField
+                select
+                id="gender"
+                name="gender"
+                label="Стать"
+                variant="outlined"
+                value={values.gender}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              >
+                <MenuItem value="male">Чоловіча</MenuItem>
+                <MenuItem value="female">Жіноча</MenuItem>
+              </CustomTextField>
+              <ErrorMessage name="gender" component="div" className="error-message" />
+            </div>
 
             <div className="form-group">
               <CustomTextField
