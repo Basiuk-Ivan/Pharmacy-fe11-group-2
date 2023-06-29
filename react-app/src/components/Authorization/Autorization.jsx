@@ -33,7 +33,7 @@ const AuthButton = () => {
   const [open, setOpen] = React.useState(false);
 
   const [welcomeModalOpen, setWelcomeModalOpen] = useState(false);
-
+  const handleWelcomeModalClose = () => setWelcomeModalOpen(false);
   useEffect(() => {
     if (welcomeModalOpen) {
       const timer = setTimeout(() => {
@@ -43,7 +43,7 @@ const AuthButton = () => {
       return () => clearTimeout(timer);
     }
   }, [welcomeModalOpen]);
-  const handleWelcomeModalClose = () => setWelcomeModalOpen(false);
+
   const handleClose = () => setOpen(false);
 
   const isOpen = useSelector(state => state.modalSlice.openModal);
@@ -62,8 +62,8 @@ const AuthButton = () => {
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
   };
-  const [firstName, setFirstName] = useState('');
-  const [secondName, setSecondName] = useState('');
+  const [name, setFirstName] = useState('');
+  const [lastName, setSecondName] = useState('');
   const handleFormLogin = async values => {
     try {
       const authURL = 'http://localhost:3004/api/users/login';
@@ -126,7 +126,6 @@ const AuthButton = () => {
         setOpen(true);
         throw new Error('Network response was not ok');
       } else {
-        // Открываем модальное окно приветствия при успешной авторизации
         setWelcomeModalOpen(true);
       }
     } catch (err) {
@@ -190,7 +189,7 @@ const AuthButton = () => {
           >
             <Box sx={style}>
               <Typography id="modal-modal-title" variant="h6" component="h2">
-                Привіт, {firstName} {secondName} !
+                Привіт, {name} {lastName} !
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 Ласкаво просимо на наш сайт. Сподіваємось, вам сподобаються наші пропозиції.
