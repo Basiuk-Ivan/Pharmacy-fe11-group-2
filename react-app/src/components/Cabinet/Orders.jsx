@@ -9,8 +9,8 @@ const Orders = () => {
   const userId = useSelector(state => state.user.id);
 
   useEffect(() => {
-    const fetchData = async userId => {
-      const { data } = await getUserOrdersFromDB(userId);
+    const fetchData = async (userID) => {
+      const { data } = await getUserOrdersFromDB(userID);
       setOrders(data);
     };
 

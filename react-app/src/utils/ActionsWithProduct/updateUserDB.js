@@ -27,11 +27,12 @@ export const updateUserDB = async (userID, userData, changePassword = false) => 
     const userURL = `http://localhost:3004/api/users/${userID}`;
     const userURLResponse = await sendRequest(userURL, 'POST', newCartData);
 
-    return userURLResponse;
-
     if (!userURLResponse.statusText) {
       throw new Error('Network response was not ok');
     }
+
+    return userURLResponse;
+
   } catch (err) {
     console.error('Error fetching products:', err);
   }
