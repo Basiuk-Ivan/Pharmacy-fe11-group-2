@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { ThemeProvider } from '@mui/material/styles';
+import { Checkbox } from '@mui/material';
 import { changePage } from '../../../../redux/slice/numPageSlice';
 import { mainCategory, reset } from '../../../../redux/slice/filterBaseSlice';
 // import { accordionsData, values } from './ChoiceCategoryAccordionData/ChoiceCategoryAccordionData';
@@ -26,6 +27,10 @@ export default function ChoiceCategoryAccordion() {
   const location = useLocation();
   const queryString = location.search;
   const searchParams = new URLSearchParams(queryString);
+  // const filterParams = {};
+  // searchParams.forEach((value, key) => {
+  //   filterParams[key] = value;
+  // });
   const currentCategory = searchParams.get('categories');
 
   const dispatch = useDispatch();
@@ -53,9 +58,9 @@ export default function ChoiceCategoryAccordion() {
     setAccordions(accordionsData);
   }, [expanded]);
 
-  useEffect(() => {
-    setAccordions(JSON.parse(sessionStorage.getItem('accordionsData')) || accordionsData);
-  }, []);
+  // useEffect(() => {
+  //   setAccordions(JSON.parse(sessionStorage.getItem('accordionsData')) || accordionsData);
+  // }, []);
 
   function updateSub(subCategory) {
     setAccordions(prevAccordions => {
@@ -95,8 +100,28 @@ export default function ChoiceCategoryAccordion() {
     []
   );
 
+  // useEffect(() => {
+  //   setAccordions(prevAccordions => {
+  //     prevAccordions.map(item => {
+  //       item.sub.map(elem => {
+  //         elem.path === currentCategory ? { ...elem, checked: true } : { ...elem, checked: false };
+  //       });
+  //     });
+  //   });
+  // }, []);
+
   useEffect(() => {
-    updateSub(currentCategory);
+    setAccordions(prevAccordions =>
+      prevAccordions.map(item => ({
+        ...item,
+        sub: item.sub.map(elem => {
+          if (elem.path === currentCategory) {
+            return { ...elem, checked: true };
+          }
+          return { ...elem, checked: false };
+        })
+      }))
+    );
   }, []);
 
   const handleChange = panel => {
@@ -126,7 +151,10 @@ export default function ChoiceCategoryAccordion() {
             <AccordionDetails sx={secondCategoryWrappStyle}>
               {item.sub.map(itemSub => (
                 <NavLink key={itemSub.title} to={`/${itemSub.req}`}>
+                  {/* <Checkbox checked={itemSub.checked} onClick={() => checkedSub(item.title, itemSub.title)} key={itemSub.title}>{itemSub.title}</Checkbox> */}
                   <Typography onClick={() => checkedSub(item.title, itemSub.title)} key={itemSub.title} sx={itemSub.checked ? secondCategoryStyleCheck : secondCategoryStyle}>{itemSub.title}</Typography>
+                  {/* <Typography onClick={() => checkedSub(item.title, itemSub.title)} key={itemSub.title} sx={itemSub.checked ? secondCategoryStyleCheck : secondCategoryStyle}>{itemSub.path}</Typography> */}
+                  {/* <Typography onClick={() => checkedSub(item.title, itemSub.title)} key={itemSub.title} sx={itemSub.checked ? secondCategoryStyleCheck : secondCategoryStyle}>{`${itemSub.checked}`}</Typography> */}
                 </NavLink>
               ))}
             </AccordionDetails>
