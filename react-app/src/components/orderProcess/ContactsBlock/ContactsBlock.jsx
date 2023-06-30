@@ -5,8 +5,9 @@ import OrderList from './OrderList/OrderList';
 const ContactsBlock = ({ products }) => (
   <Grid
     container
+    justifyContent={{ xs: 'center', md: 'space-between' }}
     sx={{
-      justifyContent: 'space-between'
+      gap: '30px'
     }}
   >
     <Grid

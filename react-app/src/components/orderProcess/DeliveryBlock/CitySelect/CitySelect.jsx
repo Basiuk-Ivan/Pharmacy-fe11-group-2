@@ -18,6 +18,7 @@ const CitySelect = ({ cityDelivery, setSelectedCity }) => {
       onChange={handleCityChange}
       renderInput={params => <TextField {...params} label="Місто" />}
       isOptionEqualToValue={isOptionEqualToValue}
+      style={{ width: '100%' }}
     />
   );
 };

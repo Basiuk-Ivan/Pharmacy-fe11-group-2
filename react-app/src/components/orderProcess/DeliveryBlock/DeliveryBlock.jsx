@@ -1,4 +1,4 @@
-import { FormControl, FormControlLabel, RadioGroup, Typography, Radio, Grid, TextField, Autocomplete } from '@mui/material';
+import { FormControl, FormControlLabel, RadioGroup, Typography, Radio, Grid, TextField, Autocomplete, useMediaQuery } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
 import { theme } from '../../../tools/muiTheme';
@@ -41,7 +41,10 @@ const DeliveryBlock = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container>
+      <Grid
+        container
+        justifyContent={{ xs: 'center' }}
+      >
         <Grid
           item
           md={12}
@@ -55,7 +58,7 @@ const DeliveryBlock = () => {
           }}
         >
           <Grid container>
-            <Grid item md={4}>
+            <Grid item md={4} xs={12}>
               <Typography
                 sx={{
                   margin: '41px 10px 19px 0px',
@@ -88,13 +91,17 @@ const DeliveryBlock = () => {
               </FormControl>
             </Grid>
             {showAdditionalField && (
-              <Grid item md={8}>
+              <Grid
+                item
+                md={8}
+                xs={12}
+              >
                 <CitySelect cityDelivery={cityDelivery} setSelectedCity={setSelectedCity} />
                 <WarehouseSelect warehouseDelivery={warehouseDelivery} setSelectedWarehouse={setSelectedWarehouse} />
               </Grid>
             )}
             {!showAdditionalField && (
-              <Grid item md={8}>
+              <Grid item md={8} xs={12}>
                 <SelfPickup />
               </Grid>
             )}
