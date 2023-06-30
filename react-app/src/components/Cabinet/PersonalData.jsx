@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { updateUserDB } from '../../utils/ActionsWithProduct/updateUserDB';
 import { updateUser } from '../../redux/slice/userSlice';
-import { theme as muiTheme} from '../../tools/muiTheme';
+import { theme as muiTheme } from '../../tools/muiTheme';
 import ModalWindow from '../ModalWindow';
 import { closeOrderModal, openOrderModal, removeItem } from '../../redux/slice/cartItems';
 import { removeAllFromCartLocalStorage } from '../../utils/LocalStore/removeAllFromCartLocalStorage';
