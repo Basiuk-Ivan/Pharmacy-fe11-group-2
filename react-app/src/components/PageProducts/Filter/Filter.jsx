@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 
 import { Box, TextField, Typography, FormGroup, FormControlLabel, Checkbox, Button, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
@@ -9,22 +9,40 @@ import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import PregnantWomanIcon from '@mui/icons-material/PregnantWoman';
 import BabyChangingStationIcon from '@mui/icons-material/BabyChangingStation';
 
-import { changePage } from '../../../redux/slice/numPageSlice';
 import { theme } from '../../../tools/muiTheme';
 import RequestString from '../RequestString';
-import { fetchProductsData } from '../../../redux/slice/productsSlice';
 import { Country, Form } from './FilterData/FilterData';
 
 import { buttonWrapperStyle, formCheckboxStyle, filterWrapperStyle, formGroupCheckStyle, formGroupStyle, mainCategoryStyle, marginStyle, priceInputWrapperStyle, titleCategoryStyle, resetButtonStyle, showButtonStyle, errorPriceStyle } from './style';
 
-import { addManufacture, removeManufacture, addDosageForm, removeDosageForm, recipe, pregnant, children, minPrice, maxPrice, reset, mainCategory } from '../../../redux/slice/filterBaseSlice';
+import {
+  addManufacture,
+  removeManufacture,
+  addDosageForm,
+  removeDosageForm,
+  recipe,
+  pregnant,
+  children,
+  minPrice,
+  maxPrice,
+  reset,
+  mainCategory,
+  sortingPrice
+} from '../../../redux/slice/filterBaseSlice';
 
 function Filter() {
   const dispatch = useDispatch();
   const filterBase = useSelector(state => state.filterBase);
-  const { numPage } = useSelector(state => state.numPage);
   const location = useLocation();
-  const currentCategory = location.pathname.slice(1);
+  const navigate = useNavigate();
+  const queryString = location.search;
+  const searchParams = new URLSearchParams(queryString);
+  const currentCategory = searchParams.get('categories');
+  const filterParams = {};
+  searchParams.forEach((value, key) => {
+    filterParams[key] = value;
+  });
+
   const [checkedCountry, setCheckedCountry] = useState(Country);
   const [checkedForm, setCheckedForm] = useState(Form);
   const [clearFilter, setClearFilter] = useState(false);
@@ -32,17 +50,51 @@ function Filter() {
 
   useEffect(() => {
     if (clearFilter) {
-      dispatch(fetchProductsData(RequestString(filterBase, 1)));
+      navigate({ search: RequestString(filterBase, 1).toString(), replace: true });
       setClearFilter(false);
     }
   }, [clearFilter]);
 
+  useEffect(() => {
+    setCheckedCountry(Country);
+    setCheckedForm(Form);
+  }, [currentCategory]);
+
+  useEffect(() => {
+    for (const key in filterParams) {
+      key === 'categories' && dispatch(mainCategory(filterParams[key]));
+      key === 'priceMin' && dispatch(minPrice(filterParams[key]));
+      key === 'priceMax' && dispatch(maxPrice(filterParams[key]));
+      key === 'sort' && dispatch(sortingPrice(filterParams[key]));
+      key === 'prescriptionLeave' && dispatch(recipe());
+      key === 'whoCanPregnant' && dispatch(pregnant());
+      key === 'whoCanChildren' && dispatch(children());
+      if (key === 'productForm') {
+        const dose = filterParams[key].split(',');
+        dose.map(item => dispatch(addDosageForm(item)));
+      }
+      if (key === 'country') {
+        const country = filterParams[key].split(',');
+        country.map(item => dispatch(addManufacture(item)));
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const country = filterParams.country ? filterParams.country.split(',') : [];
+    country.map(elem => setCheckedCountry(prevChecked =>
+      prevChecked.map(item => (item.title === elem ? { ...item, checked: true } : item))
+    ));
+    const productForm = filterParams.productForm ? filterParams.productForm.split(',') : [];
+    productForm.map(elem => setCheckedForm(prevChecked =>
+      prevChecked.map(item => (item.title === elem ? { ...item, checked: true } : item))
+    ));
+  }, []);
+
   function receiveGoods() {
     if (Number(filterBase.priceMin) <= Number(filterBase.priceMax) && Number(filterBase.priceMin) >= 0 && Number(filterBase.priceMax) >= 0) {
       setValidationPrice(true);
-      if (numPage === 1) {
-        dispatch(fetchProductsData(RequestString(filterBase, 1)));
-      } else dispatch(changePage(1));
+      navigate({ search: RequestString(filterBase, 1).toString(), replace: true });
     } else setValidationPrice(false);
   }
 
@@ -52,9 +104,7 @@ function Filter() {
     dispatch(reset());
     dispatch(mainCategory(currentCategory));
     setValidationPrice(true);
-    if (numPage === 1) {
-      setClearFilter(true);
-    } else dispatch(changePage(1));
+    setClearFilter(true);
   }
 
   const changeManufacturer = event => {
@@ -138,7 +188,6 @@ function Filter() {
                 inputProps={{ min: '0', step: 'any' }}
               />
             </Box>
-            {/* <FilterSlider /> */}
           </AccordionDetails>
         </Accordion>
         {!validationPrice ? <Typography sx={errorPriceStyle}>Введіть коректні значення ціни!</Typography> : null}

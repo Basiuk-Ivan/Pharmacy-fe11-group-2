@@ -12,7 +12,8 @@ const userSlice = createSlice({
     phoneNumber: '',
     admin: false,
     cartStoreId: '',
-    favoriteStoreId: ''
+    favoriteStoreId: '',
+    changeStateReview: ''
   },
   reducers: {
     setUser: (state, action) => {
@@ -42,7 +43,10 @@ const userSlice = createSlice({
     },
     setFavoriteStoreId: (state, action) => {
       state.favoriteStoreId = action.payload;
-    }
+    },
+    changeStateReview: (state, action) => {
+      state.changeStateReview = action.payload;
+    },
   }
 });
 
@@ -50,7 +54,8 @@ export const {
   setUser,
   removeUser,
   setCartStoreId,
-  setFavoriteStoreId
+  setFavoriteStoreId,
+  changeStateReview
 } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -7,7 +7,6 @@
     "start": "concurrently \"npm start --prefix api\" \"npm run dev --prefix react-app\""
   },
   "dependencies": {
-    "concurrently": "^8.2.0",
-    "js-cookie": "^3.0.5"
+    "concurrently": "^8.2.0"
   }
 }

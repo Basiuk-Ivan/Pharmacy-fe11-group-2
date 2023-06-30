@@ -3,9 +3,10 @@ import { UserController } from "./usersController.js";
 
 export const userRouter = new Router();
 export const userDefaultPath = "/api/users";
-//змінив get на post в роуті login
-userRouter.post("/login", UserController.login);
-userRouter.get("/", UserController.getAll);
-userRouter.get("/:id", UserController.getByID);
-userRouter.post( "/:id", UserController.update);
-userRouter.post("/", UserController.create);
+
+userRouter.post("/login", UserController.loginUser);
+userRouter.post("/password", UserController.passwordUser);
+userRouter.get("/", UserController.getUser);
+userRouter.get("/:id", UserController.getUserByID);
+userRouter.post( "/:id", UserController.updateUser);
+userRouter.post("/", UserController.createUser);

@@ -29,7 +29,7 @@ console.log(product);
                Reviews = await ReviewDB.find();
            }}
 
-        return res.json(Reviews);
+        return res.json(Reviews.reverse());
     } catch (e) {
         res.status(500).json(e.message);
     }
@@ -38,7 +38,7 @@ console.log(product);
 export const updateReview = async (req, res) => {
     try {
         if (!req.body.id) {
-            throw new Error('ID was not set');
+            throw new Error('ID не знайдено');
         }
         const updatedReview = await ReviewDB.findByIdAndUpdate(req.body.id, req.body, { new: true });
         return res.json(updatedReview);
@@ -49,11 +49,11 @@ export const updateReview = async (req, res) => {
 export const deleteReview = async (req, res) => {
     try {
         if (!req.params.id) {
-            throw new Error('ID was not set');
+            throw new Error('ID не знайдено');
         }
         const Review = await ReviewDB.findByIdAndDelete(req.params.id);
         if (!Review) {
-            res.status(404).json('ID was not founded or already deleted');
+            res.status(404).json('ID не знайдено чи вже видалено');
         } else {
             return res.json(Review);
         }

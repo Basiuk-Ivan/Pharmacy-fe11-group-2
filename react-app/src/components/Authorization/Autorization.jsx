@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { Modal, Tab, Tabs, Typography, Box, Button } from '@mui/material';
 import jwtDecode from 'jwt-decode';
 import { theme } from '../../tools/muiTheme';
-import { closeModal } from '../../redux/slice/modalSlice';
+import { closeModal, closeModalForgotPass } from '../../redux/slice/modalSlice';
 import { LoginForm } from './components/LoginForm';
+import { ForgotForm } from './components/ForgotForm';
 import { RegistrationForm } from './components/RegistrationForm';
 import { styles } from './style';
 import './style/Auth.scss';
@@ -19,21 +20,40 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 500,
+  height: 300,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
+  borderRadius: 20,
   p: 4
 };
 
 const AuthButton = () => {
   const [open, setOpen] = React.useState(false);
+
+  const [welcomeModalOpen, setWelcomeModalOpen] = useState(false);
+  const handleWelcomeModalClose = () => setWelcomeModalOpen(false);
+  useEffect(() => {
+    if (welcomeModalOpen) {
+      const timer = setTimeout(() => {
+        handleWelcomeModalClose();
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [welcomeModalOpen]);
+
   const handleClose = () => setOpen(false);
 
   const isOpen = useSelector(state => state.modalSlice.openModal);
+  const isModalForgotPass = useSelector(state => state.modalSlice.modalForgotPass);
   const dispatch = useDispatch();
 
   const handleCloseModal = () => dispatch(closeModal());
+  const handleCloseForgotModal = () => {
+    dispatch(closeModalForgotPass());
+  };
 
   const [activeTab, setActiveTab] = useState('login');
 
@@ -42,14 +62,17 @@ const AuthButton = () => {
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
   };
-
+  const [name, setFirstName] = useState('');
+  const [lastName, setSecondName] = useState('');
   const handleFormLogin = async values => {
     try {
       const authURL = 'http://localhost:3004/api/users/login';
       const userResponse = await sendRequest(authURL, 'POST', values);
       const { token } = userResponse.data;
       const decodedToken = jwtDecode(token);
-      const { _id, ...rest } = decodedToken;
+      const { _id, firstName, secondName, ...rest } = decodedToken;
+      setFirstName(firstName);
+      setSecondName(secondName);
       const updatedObj = { id: _id, ...rest };
       window.localStorage.setItem('token', token);
       dispatch(setUser(updatedObj));
@@ -102,6 +125,8 @@ const AuthButton = () => {
       if (!userResponse.statusText) {
         setOpen(true);
         throw new Error('Network response was not ok');
+      } else {
+        setWelcomeModalOpen(true);
       }
     } catch (err) {
       console.error('Error fetching products:', err);
@@ -160,6 +185,23 @@ const AuthButton = () => {
             </Box>
           </Modal>
         )}
+        {!!welcomeModalOpen && (
+          <Modal
+            open={welcomeModalOpen}
+            onClose={() => setWelcomeModalOpen(false)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Привіт, {name} {lastName} !
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                Ласкаво просимо на наш сайт. Сподіваємось, вам сподобаються наші пропозиції.
+              </Typography>
+            </Box>
+          </Modal>
+        )}
         <Modal
           open={isOpen}
           onClose={handleCloseModal}
@@ -179,6 +221,20 @@ const AuthButton = () => {
                 </Typography>
                 <LoginForm activeTab={activeTab} handleFormSubmit={handleFormLogin} />
                 <RegistrationForm activeTab={activeTab} handleFormSubmit={handleFormSubmit} />
+              </div>
+            </div>
+          </Box>
+        </Modal>
+        <Modal
+          open={isModalForgotPass}
+          onClose={handleCloseForgotModal}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={styles}>
+            <div className="auth-modal">
+              <div className="auth-modal__container">
+                <ForgotForm />
               </div>
             </div>
           </Box>

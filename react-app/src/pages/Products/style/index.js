@@ -24,7 +24,8 @@ export const asideStyles = {
 
 export const sortingAndCardsStyles = {
   display: 'flex',
-  flexDirection: 'column'
+  flexDirection: 'column',
+  width: '100%'
 };
 
 export const paginationWrapperStyles = {
