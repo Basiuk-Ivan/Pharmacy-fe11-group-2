@@ -21,8 +21,8 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import { openModal } from '../../../../redux/slice/modalSlice';
 import { setToken, removeToken } from '../../../../redux/slice/isToken';
 import { removeUser } from '../../../../redux/slice/userSlice';
-import {deleteFromFavouriteItems} from "../../../../redux/slice/favouriteItems.js";
-import {removeItem} from "../../../../redux/slice/cartItems.js";
+import { deleteFromFavouriteItems } from '../../../../redux/slice/favouriteItems';
+import { removeItem } from '../../../../redux/slice/cartItems';
 
 const settings = [
   { name: 'Профіль', path: '/cabinet' },
@@ -81,7 +81,7 @@ export const MobileMenu = () => {
     navigate('/');
     // window.location.reload();
     dispatch(removeUser());
-    dispatch(deleteFromFavouriteItems("all"));
+    dispatch(deleteFromFavouriteItems('all'));
     dispatch(removeItem('all'));
   };
 

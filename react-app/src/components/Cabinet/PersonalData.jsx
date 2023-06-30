@@ -7,9 +7,9 @@ import { useState } from 'react';
 import { updateUserDB } from '../../utils/ActionsWithProduct/updateUserDB';
 import { updateUser } from '../../redux/slice/userSlice';
 import { theme } from '../../tools/muiTheme';
-import ModalWindow from "../ModalWindow.jsx";
-import {closeOrderModal, openOrderModal, removeItem} from "../../redux/slice/cartItems.js";
-import {removeAllFromCartLocalStorage} from "../../utils/LocalStore/removeAllFromCartLocalStorage.js";
+import ModalWindow from '../ModalWindow';
+import { closeOrderModal, openOrderModal, removeItem } from '../../redux/slice/cartItems';
+import { removeAllFromCartLocalStorage } from '../../utils/LocalStore/removeAllFromCartLocalStorage';
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),
@@ -29,7 +29,6 @@ const PersonalData = () => {
   const isOpenedOrderModal = useSelector(state => state.itemCards.isOpenedOrderModal);
 
   const dispatch = useDispatch();
-
 
   const [changePassword, setChangePassword] = useState(false);
 
@@ -218,11 +217,11 @@ const PersonalData = () => {
           </Button>
         </form>
         <ModalWindow
-            mainText="Оновлено реєстраціні дані"
-            handleClick={() => {}}
-            handleClose={handleCloseOrderModal}
-            isOpened={isOpenedOrderModal}
-            actions={false}
+          mainText="Оновлено реєстраціні дані"
+          handleClick={() => {}}
+          handleClose={handleCloseOrderModal}
+          isOpened={isOpenedOrderModal}
+          actions={false}
         />
       </Container>
     </ThemeProvider>

@@ -54,9 +54,9 @@ const App = () => {
         const favoriteProducts = favoriteResponse.data.products;
         const newFavorites = favoriteProducts.map(item => {
           console.log(item);
-          return  { id: item }
+          return { id: item };
         });
-        console.log("new", newFavorites);
+        console.log('new', newFavorites);
         newFavorites.forEach(product => {
           dispatch(addToFavouriteItems(product));
         });

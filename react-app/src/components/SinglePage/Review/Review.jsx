@@ -6,7 +6,7 @@ import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { updateReviewDB } from '../../../utils/ActionsWithProduct/updateReviewDB';
-import {formatDate} from "../../../utils/ActionsWithProduct/formatDate.js";
+import { formatDate } from '../../../utils/ActionsWithProduct/formatDate';
 
 const Review = ({ item }) => {
   const isAuth = useSelector(state => state.user.isAuth);

@@ -12,7 +12,6 @@ export const putProductsToCartDB = async (cardId, cartProducts) => {
       products: [...mergedProducts]
     };
 
-
     const cartULRForPUT = 'http://localhost:3004/api/backet';
     const cartPUTResponse = await sendRequest(cartULRForPUT, 'PUT', newCartData);
 

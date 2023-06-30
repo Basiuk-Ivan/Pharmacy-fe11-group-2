@@ -18,7 +18,7 @@ const Orders = () => {
   }, []);
 
   return (
-    <Box sx={{  minHeight:"1000px"}}>
+    <Box sx={{ minHeight: '1000px' }}>
       {!!orders && orders.reverse().map(order => {
         const formatedDate = formatDate(order.createdAt);
         return (
@@ -38,7 +38,7 @@ const Orders = () => {
               alignItems="center"
               flexWrap="wrap"
             >
-              <Typography gutterBottom variant="h6" sx={{flexGrow:3}}>
+              <Typography gutterBottom variant="h6" sx={{ flexGrow: 3 }}>
                 Ваше замовлення
               </Typography>
               <Typography gutterBottom variant="body1">
@@ -46,7 +46,7 @@ const Orders = () => {
               </Typography>
             </Stack>
             <Stack key={order.id} direction="row" justifyContent="space-between" spacing={2}>
-              <Typography gutterBottom variant="body1" sx={{fontWeight:500, p:"5px", borderRadius:"10px", backgroundColor:"#2fd3ae", color:"#ffffff"}}>
+              <Typography gutterBottom variant="body1" sx={{ fontWeight: 500, p: '5px', borderRadius: '10px', backgroundColor: '#2fd3ae', color: '#ffffff' }}>
                 Вартість замовлення {order.totalPrice} грн.
               </Typography>
             </Stack>
@@ -58,19 +58,20 @@ const Orders = () => {
                   </Grid>
                   <Grid item xs={12} md={10}>
                     <Stack
-                        direction="column"
-                        spacing={1} sx={{ mb: 1, p: 1 }}
-                      >
-                        <Typography gutterBottom variant="body1" sx={{fontWeight:500}}>
-                            {productItem.name}
-                          </Typography>
-                        <Typography gutterBottom variant="body1" sx={{fontWeight:500}}>
-                            Кількість:  {productItem.quantity} од.
-                          </Typography>
-                        <Typography gutterBottom variant="body1" sx={{fontWeight:500}}>
-                            Ціна за од.: {productItem.price} грн.
-                          </Typography>
-                      </Stack>
+                      direction="column"
+                      spacing={1}
+                      sx={{ mb: 1, p: 1 }}
+                    >
+                      <Typography gutterBottom variant="body1" sx={{ fontWeight: 500 }}>
+                        {productItem.name}
+                      </Typography>
+                      <Typography gutterBottom variant="body1" sx={{ fontWeight: 500 }}>
+                        Кількість:  {productItem.quantity} од.
+                      </Typography>
+                      <Typography gutterBottom variant="body1" sx={{ fontWeight: 500 }}>
+                        Ціна за од.: {productItem.price} грн.
+                      </Typography>
+                    </Stack>
                   </Grid>
                 </Grid>);
             })}
@@ -83,4 +84,3 @@ const Orders = () => {
 };
 
 export default Orders;
-

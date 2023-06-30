@@ -12,9 +12,9 @@ import { openModal } from '../../../redux/slice/modalSlice';
 import { setToken } from '../../../redux/slice/isToken';
 
 import { StyledBadge, wrapForActionsStyles, fillForIcon, colorForBadge } from './style';
-import {removeUser} from "../../../redux/slice/userSlice.js";
-import {deleteFromFavouriteItems} from "../../../redux/slice/favouriteItems.js";
-import {removeItem} from "../../../redux/slice/cartItems.js";
+import { removeUser } from '../../../redux/slice/userSlice';
+import { deleteFromFavouriteItems } from '../../../redux/slice/favouriteItems';
+import { removeItem } from '../../../redux/slice/cartItems';
 
 const settings = [
   { name: 'Профіль', path: '/cabinet' },
@@ -56,7 +56,7 @@ const UserActions = () => {
     navigate('/');
 
     dispatch(removeUser());
-    dispatch(deleteFromFavouriteItems("all"));
+    dispatch(deleteFromFavouriteItems('all'));
     dispatch(removeItem('all'));
   };
 

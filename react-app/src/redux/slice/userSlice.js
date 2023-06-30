@@ -26,7 +26,7 @@ const userSlice = createSlice({
       state.email = action.payload.email;
       state.phoneNumber = action.payload.phoneNumber;
       state.admin = action.payload.role === 'admin';
-      if (!!action.payload.userBirthday) {
+      if (action.payload.userBirthday) {
         state.birthday = action.payload.userBirthday;
       }
     },
@@ -36,7 +36,7 @@ const userSlice = createSlice({
       state.gender = action.payload.gender;
       state.email = action.payload.email;
       state.phoneNumber = action.payload.phoneNumber;
-      if (!!action.payload.birthday) {
+      if (action.payload.birthday) {
         state.birthday = action.payload.birthday;
       }
     },
