@@ -1,13 +1,17 @@
 import { TextField, Autocomplete, Button } from '@mui/material';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addOrderAddress, addOrderCity } from '../../../../redux/slice/orderProcessSlice';
 
 const SelfPickup = () => {
   const [selectedCityStreets, setSelectedCityStreets] = useState([]);
+  const dispatch = useDispatch();
 
   const cityPickup = ['Київ', 'Дніпро', 'Львів'];
   const addressPickup = [['бул. Лесі Українки, 26', 'вул. Євгена Коновальця, 16/20'], ['просп. Дмитра Яворницького, 22', 'вул. Сергія Єфремова, 6'], ['вул. Академіка Богомольця, 6', 'вул. Петра Дорошенка, 21']];
 
   const handleCityChange = value => {
+    dispatch(addOrderCity(value));
     switch (value) {
       case 'Київ':
         setSelectedCityStreets(addressPickup[0]);
@@ -25,7 +29,7 @@ const SelfPickup = () => {
   };
 
   const handleAddressChange = (event, value) => {
-    console.log(value);
+    dispatch(addOrderAddress(value));
   };
 
   return (

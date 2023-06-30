@@ -1,12 +1,14 @@
 import { FormControl, FormControlLabel, RadioGroup, Typography, Radio, Grid, TextField, Autocomplete, useMediaQuery } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { theme } from '../../../tools/muiTheme';
 import searchAddress from '../../../tools/NovaPost/searchAddress';
 import CitySelect from './CitySelect/CitySelect';
 import searchWarehouse from '../../../tools/NovaPost/searchWarehouse';
 import WarehouseSelect from './WarehouseSelect/WarehouseSelect';
 import SelfPickup from './SelfPickup/SelfPickup';
+import { addOrderDeliveryMethod } from '../../../redux/slice/orderProcessSlice';
 
 const DeliveryBlock = () => {
   const [selectedCity, setSelectedCity] = useState(null);
@@ -14,6 +16,7 @@ const DeliveryBlock = () => {
   const [cityDelivery, setCityDelivery] = useState([]);
   const [warehouseDelivery, setWarehouseDelivery] = useState([]);
   const [selectedWarehouse, setSelectedWarehouse] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchCityDelivery = async () => {
@@ -37,6 +40,7 @@ const DeliveryBlock = () => {
 
   const handleRadioChange = event => {
     setShowAdditionalField(event.target.value === 'novaPost');
+    dispatch(addOrderDeliveryMethod(event.target.value));
   };
 
   return (

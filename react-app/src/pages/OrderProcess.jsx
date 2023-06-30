@@ -11,7 +11,8 @@ import DeliveryBlock from '../components/orderProcess/DeliveryBlock/DeliveryBloc
 const OrderProcess = () => {
   const [products, setProducts] = useState([]);
   const productItemCart = useSelector(state => state.itemCards.items);
-
+  const testtt = useSelector(state => state.order.orderInfo);
+  console.log(testtt);
   useEffect(() => {
     const fetchProducts = async () => {
       try {

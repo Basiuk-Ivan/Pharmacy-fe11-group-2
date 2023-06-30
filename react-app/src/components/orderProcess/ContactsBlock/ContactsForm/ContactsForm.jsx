@@ -8,6 +8,7 @@ import { request } from '../../../../tools/request';
 import { theme as muiTheme } from '../../../../tools/muiTheme';
 import { openOrderModal } from '../../../../redux/slice/cartItems';
 import { putProductsToCartDB } from '../../../../utils/ActionsWithProduct/putProductsToCartDB';
+import { addContactsInfo } from '../../../../redux/slice/orderProcessSlice';
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),
@@ -56,6 +57,7 @@ const ContactsForm = ({ products }) => {
     },
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
+      dispatch(addContactsInfo(values));
       const data = { ...values,
         ...(userId && { user: userId }) };
       const { status } = await request({
