@@ -29,6 +29,7 @@ const FavouriteBlock = props => {
       try {
         if (favoriteItems.length > 0) {
           const favoriteIds = favoriteItems.map(item => item.id);
+          console.log('favoriteIds:', favoriteIds);
 
           const { result } = await request({
             url: '',
