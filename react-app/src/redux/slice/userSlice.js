@@ -9,6 +9,7 @@ const userSlice = createSlice({
     secondName: '',
     gender: '',
     email: '',
+    birthday: '',
     phoneNumber: '',
     admin: false,
     cartStoreId: '',
@@ -25,6 +26,19 @@ const userSlice = createSlice({
       state.email = action.payload.email;
       state.phoneNumber = action.payload.phoneNumber;
       state.admin = action.payload.role === 'admin';
+      if (action.payload.userBirthday) {
+        state.birthday = action.payload.userBirthday;
+      }
+    },
+    updateUser: (state, action) => {
+      state.secondName = action.payload.secondName;
+      state.firstName = action.payload.firstName;
+      state.gender = action.payload.gender;
+      state.email = action.payload.email;
+      state.phoneNumber = action.payload.phoneNumber;
+      if (action.payload.birthday) {
+        state.birthday = action.payload.birthday;
+      }
     },
     removeUser: state => {
       state.isAuth = false;
@@ -55,7 +69,8 @@ export const {
   removeUser,
   setCartStoreId,
   setFavoriteStoreId,
-  changeStateReview
+  changeStateReview,
+  updateUser
 } = userSlice.actions;
 
 export default userSlice.reducer;
