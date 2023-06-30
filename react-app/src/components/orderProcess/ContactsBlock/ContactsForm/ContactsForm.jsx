@@ -57,12 +57,12 @@ const ContactsForm = ({ products }) => {
     },
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
-      const data = { ...values,
-        ...(userId && { user: userId }) };
+      // const data = { ...values,
+      //   ...(userId && { user: userId }) };
       const { status } = await request({
         url: '/order',
         method: 'POST',
-        body: data
+        body: values
       });
       if (status === 200) {
         const newProducts = [];
