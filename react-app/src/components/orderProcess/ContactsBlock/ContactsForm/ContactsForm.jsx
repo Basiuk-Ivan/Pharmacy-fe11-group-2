@@ -57,7 +57,6 @@ const ContactsForm = ({ products }) => {
     },
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
-      dispatch(addContactsInfo(values));
       const data = { ...values,
         ...(userId && { user: userId }) };
       const { status } = await request({
@@ -68,7 +67,7 @@ const ContactsForm = ({ products }) => {
       if (status === 200) {
         const newProducts = [];
         await putProductsToCartDB(cartStoreId, newProducts);
-
+        dispatch(addContactsInfo(values));
         dispatch(openOrderModal());
         resetForm();
       }
