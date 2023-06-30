@@ -138,6 +138,7 @@ const AuthButton = () => {
     try {
       const authURL = 'http://localhost:3004/api/users/';
       const userResponse = await sendRequest(authURL, 'POST', values);
+
       const { token } = userResponse.data;
       const { _id } = jwtDecode(token);
 
@@ -149,11 +150,15 @@ const AuthButton = () => {
       const favoriteURL = 'http://localhost:3004/api/favorite';
       const favoriteResponse = await sendRequest(favoriteURL, 'POST', createData);
 
-      if (!userResponse.statusText && !cartResponse.statusText && !favoriteResponse.statusText) {
-        setOpen(true);
+      // if (!userResponse.statusText && !cartResponse.statusText && !favoriteResponse.statusText) {
+      //   setOpen(true);
+      //   throw new Error('Network response was not ok');
+      // }
+      if (!userResponse.statusText) {
         throw new Error('Network response was not ok');
       }
     } catch (err) {
+      setOpen(true);
       console.error('Error fetching', err);
     }
 
