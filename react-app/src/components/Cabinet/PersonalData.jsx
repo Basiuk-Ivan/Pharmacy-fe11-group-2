@@ -1,9 +1,15 @@
-import { TextField, Grid, Typography, Container, MenuItem, Button } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { TextField, Grid, Box, Container, MenuItem, Button, Checkbox, FormControlLabel } from '@mui/material';
+import { styled, ThemeProvider } from '@mui/material/styles';
 import { useFormik } from 'formik';
-import { useEffect } from 'react';
 import * as Yup from 'yup';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { updateUserDB } from '../../utils/ActionsWithProduct/updateUserDB';
+import { updateUser } from '../../redux/slice/userSlice';
+import { theme as muiTheme } from '../../tools/muiTheme';
+import ModalWindow from '../ModalWindow';
+import { closeOrderModal, openOrderModal, removeItem } from '../../redux/slice/cartItems';
+import { removeAllFromCartLocalStorage } from '../../utils/LocalStore/removeAllFromCartLocalStorage';
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),
@@ -13,226 +19,212 @@ const ChangedTextField = styled(TextField)(({ theme }) => ({
 }));
 
 const PersonalData = () => {
-  const secondName = useSelector(state => state.user.secondName);
   const firstName = useSelector(state => state.user.firstName);
+  const secondName = useSelector(state => state.user.secondName);
   const gender = useSelector(state => state.user.gender);
   const email = useSelector(state => state.user.email);
   const phoneNumber = useSelector(state => state.user.phoneNumber);
+  const userId = useSelector(state => state.user.id);
+  const birthday = useSelector(state => state.user.birthday);
+  const isOpenedOrderModal = useSelector(state => state.itemCards.isOpenedOrderModal);
+
+  const dispatch = useDispatch();
+
+  const [changePassword, setChangePassword] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setChangePassword(!changePassword);
+  };
+
+  const handleCloseOrderModal = () => {
+    dispatch(closeOrderModal());
+  };
+  const handleFormSubmit = async values => {
+    const digitsOnly = values.phoneNumber.replace(/\D/g, '');
+    const changedData = { ...values, phoneNumber: digitsOnly };
+    try {
+      const userData = await updateUserDB(userId, changedData, changePassword);
+    } catch (err) {
+      console.error('Error fetching', err);
+    }
+  };
+
+  const changeUserStateData = values => {
+    const digitsOnly = values.phoneNumber.replace(/\D/g, '');
+    const changedData = { ...values, phoneNumber: digitsOnly };
+    console.log(changedData);
+    dispatch(updateUser(changedData));
+  };
 
   const validationSchema = Yup.object().shape({
-    surname: Yup.string().required('Обовязкове поле'),
-    name: Yup.string().required('Обовязкове поле'),
-    email: Yup.string().email('Невірний формат email').required('Обовязкове поле'),
-    phone: Yup.string()
-      .required('Обовязкове поле')
-      .matches(/^[0-9]*$/, 'Можна вводити тільки цифри'),
-    newpassword: Yup.string().required('Обовязкове поле').min(6, 'Мінімальна довжина пароля - 6 символів'),
-
-    confirmpassword: Yup.string()
-      .required('Обовязкове поле')
+    firstName: Yup.string()
+      .matches(/^[A-Za-zА-Яа-яЁёІіЇїЄєҐґ']+$/, 'Введіть тільки літери')
+      .min(2, 'Прізвище має містити не менше 2 символів')
+      .max(20, 'Має бути не більше 20 символів')
+      .required("Обов'язкове поле"),
+    secondName: Yup.string()
+      .matches(/^[A-Za-zА-Яа-яЁёІіЇїЄєҐґ']+$/, 'Введіть тільки літери')
+      .min(2, 'Прізвище має містити не менше 2 символів')
+      .max(20, 'Має бути не більше 20 символів')
+      .required("Обов'язкове поле"),
+    email: Yup.string().email('Невірний формат email').required("Обов'язкове поле"),
+    phoneNumber: Yup.string()
+      // .matches(/^[0-9]*$/, 'Можна вводити тільки цифри')
+      .required("Обов'язкове поле"),
+    ...(changePassword && { newpassword: Yup.string()
+      .min(6, 'Мінімальна довжина пароля - 6 символів')
+      .required("Обов'язкове поле") }),
+    ...(changePassword && { confirmpassword: Yup.string()
       .oneOf([Yup.ref('newpassword'), null], 'Паролі повинні співпадати')
+      .required("Обов'язкове поле") }),
   });
 
   const formik = useFormik({
     initialValues: {
-      surname: secondName,
-      name: firstName,
-      day: '',
-      month: '',
-      year: '',
+      firstName,
+      secondName,
+      birthday: birthday || '2000.01.01',
       gender,
       email,
-      phone: phoneNumber,
-      newpassword: '',
-      confirmpassword: ''
+      phoneNumber,
+      ...(changePassword && { newpassword: '' }),
+      ...(changePassword && { confirmpassword: '' }),
     },
     validationSchema,
-    onSubmit: (values, { resetForm }) => {
-      console.log(values);
-      resetForm();
+    onSubmit: async values => {
+      await handleFormSubmit(values);
+      changeUserStateData(values);
+      dispatch(openOrderModal());
     }
   });
 
-  const daysDate = () => {
-    const items = [];
-    for (let x = 1; x < 32; x++) {
-      items.push(
-        <MenuItem key={x + 9} value={`${x}`}>
-          {x}
-        </MenuItem>
-      );
-    }
-    return items;
-  };
-
-  const monthsDate = () => {
-    const items = [
-      'січень',
-      'лютий',
-      'березень',
-      'квітень',
-      'травень',
-      'червень',
-      'липень',
-      'серпень',
-      'вересень',
-      'жовтень',
-      'листопад',
-      'грудень'
-    ];
-    return items.map(el => (
-      <MenuItem key={el} value={`${el}`}>
-        {el}
-      </MenuItem>
-    ));
-  };
-
-  const yearsDate = () => {
-    const items = [];
-    for (let x = 2023; x > 1900; x--) {
-      items.push(
-        <MenuItem key={x + 9} value={`${x}`}>
-          {x}
-        </MenuItem>
-      );
-    }
-    return items;
-  };
-
   return (
-    <Container sx={{ mb: '60px' }}>
-      <form onSubmit={formik.handleSubmit}>
-        <ChangedTextField
-          label="Прізвище"
-          fullWidth
-          name="surname"
-          value={formik.values.surname}
-          onChange={formik.handleChange}
-          error={Boolean(formik.touched.surname && formik.errors.surname)}
-          helperText={formik.touched.surname && formik.errors.surname}
-        />
-        <ChangedTextField
-          label="Ім'я"
-          fullWidth
-          name="name"
-          value={formik.values.name}
-          onChange={formik.handleChange}
-          error={Boolean(formik.touched.name && formik.errors.name)}
-          helperText={formik.touched.name && formik.errors.name}
-        />
-        <Typography>Дата народження</Typography>
-        <Grid container>
-          <Grid item md={3}>
-            <ChangedTextField
-              select
-              label="День"
-              fullWidth
-              name="day"
-              value={formik.values.day}
-              onChange={formik.handleChange}
-              error={Boolean(formik.touched.day && formik.errors.day)}
-              helperText={formik.touched.day && formik.errors.day}
-            >
-              {daysDate()}
-            </ChangedTextField>
+    <ThemeProvider theme={muiTheme}>
+      <Container sx={{ mb: '60px' }}>
+        <form onSubmit={formik.handleSubmit}>
+          <ChangedTextField
+            label="Ім'я"
+            fullWidth
+            name="firstName"
+            value={formik.values.firstName}
+            onChange={formik.handleChange}
+            error={Boolean(formik.touched.firstName && formik.errors.firstName)}
+            helperText={formik.touched.firstName && formik.errors.firstName}
+          />
+          <ChangedTextField
+            label="Прізвище"
+            fullWidth
+            name="secondName"
+            value={formik.values.secondName}
+            onChange={formik.handleChange}
+            error={Boolean(formik.touched.secondName && formik.errors.secondName)}
+            helperText={formik.touched.secondName && formik.errors.secondName}
+          />
+          <Grid container spacing={2}>
+            <Grid item md={6}>
+              <ChangedTextField
+                type="date"
+                label="Дата народження"
+                fullWidth
+                name="birthday"
+                value={formik.values.birthday}
+                onChange={formik.handleChange}
+              />
+            </Grid>
+            <Grid item md={6}>
+              <ChangedTextField
+                select
+                label="Стать"
+                fullWidth
+                name="gender"
+                value={formik.values.gender}
+                onChange={formik.handleChange}
+                error={Boolean(formik.touched.gender && formik.errors.gender)}
+                helperText={formik.touched.gender && formik.errors.gender}
+              >
+                <MenuItem value="male">Чоловіча</MenuItem>
+                <MenuItem value="female">Жіноча</MenuItem>
+              </ChangedTextField>
+            </Grid>
           </Grid>
-          <Grid item md={3}>
-            <ChangedTextField
-              select
-              label="Місяць"
-              fullWidth
-              name="month"
-              value={formik.values.month}
-              onChange={formik.handleChange}
-              error={Boolean(formik.touched.month && formik.errors.month)}
-              helperText={formik.touched.month && formik.errors.month}
-            >
-              {monthsDate()}
-            </ChangedTextField>
-          </Grid>
-          <Grid item md={3}>
-            <ChangedTextField
-              select
-              label="Рік"
-              fullWidth
-              name="year"
-              value={formik.values.year}
-              onChange={formik.handleChange}
-              error={Boolean(formik.touched.year && formik.errors.year)}
-              helperText={formik.touched.year && formik.errors.year}
-            >
-              {yearsDate()}
-            </ChangedTextField>
-          </Grid>
-          <Grid item md={3}>
-            <ChangedTextField
-              select
-              label="Стать"
-              fullWidth
-              name="gender"
-              value={formik.values.gender}
-              onChange={formik.handleChange}
-              error={Boolean(formik.touched.gender && formik.errors.gender)}
-              helperText={formik.touched.gender && formik.errors.gender}
-            >
-              <MenuItem value="male">Чоловіча</MenuItem>
-              <MenuItem value="female">Жіноча</MenuItem>
-            </ChangedTextField>
-          </Grid>
-        </Grid>
-        <ChangedTextField
-          label="e-mail адреса"
-          fullWidth
-          name="email"
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          error={Boolean(formik.touched.email && formik.errors.email)}
-          helperText={formik.touched.email && formik.errors.email}
+          <ChangedTextField
+            label="e-mail адреса"
+            fullWidth
+            name="email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={Boolean(formik.touched.email && formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
+          />
+          <ChangedTextField
+            label="Телефон"
+            fullWidth
+            name="phoneNumber"
+            value={formik.values.phoneNumber}
+            onChange={formik.handleChange}
+            error={Boolean(formik.touched.phoneNumber && formik.errors.phoneNumber)}
+            helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
+          />
+
+          <Box>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={changePassword}
+                  onChange={handleCheckboxChange}
+                />
+            }
+              label="Встановити новий пароль"
+            />
+          </Box>
+          {changePassword && (
+            <>
+
+              <ChangedTextField
+                type="password"
+                label="Новий пароль"
+                fullWidth
+                name="newpassword"
+                value={formik.values.newpassword}
+                onChange={formik.handleChange}
+                error={Boolean(formik.touched.newpassword && formik.errors.newpassword)}
+                helperText={formik.touched.newpassword && formik.errors.newpassword}
+              />
+              <ChangedTextField
+                type="password"
+                label="Підтвердження пароля"
+                fullWidth
+                name="confirmpassword"
+                value={formik.values.confirmpassword}
+                onChange={formik.handleChange}
+                error={Boolean(formik.touched.confirmpassword && formik.errors.confirmpassword)}
+                helperText={formik.touched.confirmpassword && formik.errors.confirmpassword}
+              />
+            </>
+          )}
+          <Button
+            variant="contained"
+            type="submit"
+            sx={{
+              backgroundColor: '#2FD3AE',
+              borderRadius: 50,
+              mt: '20px',
+              color: '#FFFFFF',
+              padding: '13px 68px 10px 68px'
+            }}
+          >
+            Зберегти зміни
+          </Button>
+        </form>
+        <ModalWindow
+          mainText="Оновлено реєстраціні дані"
+          handleClick={() => {}}
+          handleClose={handleCloseOrderModal}
+          isOpened={isOpenedOrderModal}
+          actions={false}
         />
-        <ChangedTextField
-          label="Телефон"
-          fullWidth
-          name="phone"
-          value={formik.values.phone}
-          onChange={formik.handleChange}
-          error={Boolean(formik.touched.phone && formik.errors.phone)}
-          helperText={formik.touched.phone && formik.errors.phone}
-        />
-        <ChangedTextField
-          type="password"
-          label="Новий пароль"
-          fullWidth
-          name="newpassword"
-          value={formik.values.newpassword}
-          onChange={formik.handleChange}
-          error={Boolean(formik.touched.newpassword && formik.errors.newpassword)}
-          helperText={formik.touched.newpassword && formik.errors.newpassword}
-        />
-        <ChangedTextField
-          type="password"
-          label="Підтвердження пароля"
-          fullWidth
-          name="confirmpassword"
-          value={formik.values.confirmpassword}
-          onChange={formik.handleChange}
-          error={Boolean(formik.touched.confirmpassword && formik.errors.confirmpassword)}
-          helperText={formik.touched.confirmpassword && formik.errors.confirmpassword}
-        />
-        <Button
-          variant="contained"
-          type="submit"
-          sx={{
-            backgroundColor: '#2FD3AE',
-            borderRadius: 50,
-            mt: '20px',
-            color: '#FFFFFF',
-            padding: '13px 68px 10px 68px'
-          }}
-        >
-          Зберегти зміни
-        </Button>
-      </form>
-    </Container>
+      </Container>
+    </ThemeProvider>
   );
 };
 

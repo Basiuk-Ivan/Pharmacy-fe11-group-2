@@ -52,7 +52,7 @@ const App = () => {
         const favoriteURL = `http://localhost:3004/api/favorite?user=${_id}`;
         const favoriteResponse = await sendRequest(favoriteURL);
         const favoriteProducts = favoriteResponse.data.products;
-        const newFavorites = favoriteProducts.map(item => ({ id: item }));
+        const newFavorites = favoriteProducts.map(item => item);
         newFavorites.forEach(product => {
           dispatch(addToFavouriteItems(product));
         });
@@ -84,9 +84,10 @@ const App = () => {
           <Route path="/:category/:id" element={<ProductPage />} />
           <Route path="/orderprocess" element={<OrderProcess />} />
           <Route path="/cabinet" element={<Cabinet />} />
-          {/* <Route path="*" element={<NotFound />} /> */}
-          {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
         </Route>
+
+        {/* <Route path="*" element={<NotFound />} /> */}
+        {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
       </Routes>
     </ThemeProvider>
   );
