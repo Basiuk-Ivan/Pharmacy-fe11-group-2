@@ -32,7 +32,6 @@ export const updateUserDB = async (userID, userData, changePassword = false) => 
     }
 
     return userURLResponse;
-
   } catch (err) {
     console.error('Error fetching products:', err);
   }

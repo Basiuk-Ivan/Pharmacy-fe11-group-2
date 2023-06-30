@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { updateUserDB } from '../../utils/ActionsWithProduct/updateUserDB';
 import { updateUser } from '../../redux/slice/userSlice';
-import { theme } from '../../tools/muiTheme';
+import { theme as muiTheme} from '../../tools/muiTheme';
 import ModalWindow from '../ModalWindow';
 import { closeOrderModal, openOrderModal, removeItem } from '../../redux/slice/cartItems';
 import { removeAllFromCartLocalStorage } from '../../utils/LocalStore/removeAllFromCartLocalStorage';
@@ -99,7 +99,7 @@ const PersonalData = () => {
   });
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={muiTheme}>
       <Container sx={{ mb: '60px' }}>
         <form onSubmit={formik.handleSubmit}>
           <ChangedTextField

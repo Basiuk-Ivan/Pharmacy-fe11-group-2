@@ -9,7 +9,7 @@ const Orders = () => {
   const userId = useSelector(state => state.user.id);
 
   useEffect(() => {
-    const fetchData = async (userID) => {
+    const fetchData = async userID => {
       const { data } = await getUserOrdersFromDB(userID);
       setOrders(data);
     };
@@ -54,7 +54,7 @@ const Orders = () => {
               return (
                 <Grid container key={productItem.id} sx={{ mb: 1, border: '1px solid green', p: 1 }}>
                   <Grid item xs={12} md={2}>
-                    <img src={productItem.img[0]} alt="picture" width="120px" />
+                    <img src={productItem.img[0]} alt="goods" width="120px" />
                   </Grid>
                   <Grid item xs={12} md={10}>
                     <Stack
