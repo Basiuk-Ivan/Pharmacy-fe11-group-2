@@ -4,10 +4,12 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
-import { PatternFormat } from 'react-number-format';
 import { updateUserDB } from '../../utils/ActionsWithProduct/updateUserDB';
 import { updateUser } from '../../redux/slice/userSlice';
 import { theme } from '../../tools/muiTheme';
+import ModalWindow from "../ModalWindow.jsx";
+import {closeOrderModal, openOrderModal, removeItem} from "../../redux/slice/cartItems.js";
+import {removeAllFromCartLocalStorage} from "../../utils/LocalStore/removeAllFromCartLocalStorage.js";
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),
@@ -24,8 +26,10 @@ const PersonalData = () => {
   const phoneNumber = useSelector(state => state.user.phoneNumber);
   const userId = useSelector(state => state.user.id);
   const birthday = useSelector(state => state.user.birthday);
+  const isOpenedOrderModal = useSelector(state => state.itemCards.isOpenedOrderModal);
 
   const dispatch = useDispatch();
+
 
   const [changePassword, setChangePassword] = useState(false);
 
@@ -33,6 +37,9 @@ const PersonalData = () => {
     setChangePassword(!changePassword);
   };
 
+  const handleCloseOrderModal = () => {
+    dispatch(closeOrderModal());
+  };
   const handleFormSubmit = async values => {
     const digitsOnly = values.phoneNumber.replace(/\D/g, '');
     const changedData = { ...values, phoneNumber: digitsOnly };
@@ -88,6 +95,7 @@ const PersonalData = () => {
     onSubmit: async values => {
       await handleFormSubmit(values);
       changeUserStateData(values);
+      dispatch(openOrderModal());
     }
   });
 
@@ -209,6 +217,13 @@ const PersonalData = () => {
             Зберегти зміни
           </Button>
         </form>
+        <ModalWindow
+            mainText="Оновлено реєстраціні дані"
+            handleClick={() => {}}
+            handleClose={handleCloseOrderModal}
+            isOpened={isOpenedOrderModal}
+            actions={false}
+        />
       </Container>
     </ThemeProvider>
   );

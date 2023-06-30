@@ -52,7 +52,11 @@ const App = () => {
         const favoriteURL = `http://localhost:3004/api/favorite?user=${_id}`;
         const favoriteResponse = await sendRequest(favoriteURL);
         const favoriteProducts = favoriteResponse.data.products;
-        const newFavorites = favoriteProducts.map(item => ({ id: item }));
+        const newFavorites = favoriteProducts.map(item => {
+          console.log(item);
+          return  { id: item }
+        });
+        console.log("new", newFavorites);
         newFavorites.forEach(product => {
           dispatch(addToFavouriteItems(product));
         });

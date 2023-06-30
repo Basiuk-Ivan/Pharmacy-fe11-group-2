@@ -28,7 +28,9 @@ const FavouriteBlock = props => {
     const fetchProducts = async () => {
       try {
         if (favoriteItems.length > 0) {
+
           const favoriteIds = favoriteItems.map(item => item.id);
+
 
           const { result } = await request({
             url: '',

@@ -57,7 +57,7 @@ export const LoginForm = ({ activeTab, handleFormSubmit }) => {
             </div>
             <div className="footer_container">
               <StyledButton type="submit" variant="contained" color="success">
-                Вход
+                Вхід
               </StyledButton>
               <Typography id="modal-modal-footer" variant="h6" component="p">
                 Забыли пароль?{' '}

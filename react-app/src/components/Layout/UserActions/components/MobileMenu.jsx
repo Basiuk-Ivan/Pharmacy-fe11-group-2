@@ -21,12 +21,14 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import { openModal } from '../../../../redux/slice/modalSlice';
 import { setToken, removeToken } from '../../../../redux/slice/isToken';
 import { removeUser } from '../../../../redux/slice/userSlice';
+import {deleteFromFavouriteItems} from "../../../../redux/slice/favouriteItems.js";
+import {removeItem} from "../../../../redux/slice/cartItems.js";
 
 const settings = [
-  { name: 'Profile', path: '/cabinet' },
+  { name: 'Профіль', path: '/cabinet' },
   { name: 'Account' },
   { name: 'Dashboard' },
-  { name: 'Logout' }
+  { name: 'Вихід' }
 ];
 export const MobileMenu = () => {
   const dispatch = useDispatch();
@@ -75,11 +77,12 @@ export const MobileMenu = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    //
-    // dispatch(setToken(null));
-    // navigate('/');
+    dispatch(setToken(null));
+    navigate('/');
     // window.location.reload();
     dispatch(removeUser());
+    dispatch(deleteFromFavouriteItems("all"));
+    dispatch(removeItem('all'));
   };
 
   const StyledBadge = styled(Badge)(() => ({
@@ -164,7 +167,7 @@ export const MobileMenu = () => {
                     <MenuItem
                       component="div"
                       key={setting.name}
-                      onClick={setting.name === 'Logout' ? handleLogout : handleCloseUserMenu}
+                      onClick={setting.name === 'Вихід' ? handleLogout : handleCloseUserMenu}
                     >
                       <NavLink to={setting.path} onClick={handleCloseUserMenu}>
                         <Typography textAlign="center">{setting.name}</Typography>

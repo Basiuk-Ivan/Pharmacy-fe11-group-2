@@ -6,6 +6,7 @@ import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { updateReviewDB } from '../../../utils/ActionsWithProduct/updateReviewDB';
+import {formatDate} from "../../../utils/ActionsWithProduct/formatDate.js";
 
 const Review = ({ item }) => {
   const isAuth = useSelector(state => state.user.isAuth);
@@ -28,11 +29,11 @@ const Review = ({ item }) => {
     }
   }, []);
 
-  const formatDate = dateString => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    const date = new Date(dateString);
-    return date.toLocaleDateString('uk-UA', options);
-  };
+  // const formatDate = dateString => {
+  //   const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  //   const date = new Date(dateString);
+  //   return date.toLocaleDateString('uk-UA', options);
+  // };
 
   useEffect(() => {
     const formattedDate = formatDate(item.createdAt);
