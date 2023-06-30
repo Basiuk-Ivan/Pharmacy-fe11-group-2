@@ -1,20 +1,15 @@
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Box, Typography, useMediaQuery, useTheme, Skeleton } from '@mui/material';
-import ProductCard from '../../ProductCard';
+import { Box, Typography } from '@mui/material';
+import { SkeletonPromotionSlider } from '../../../utils/Skeleton/SkeletonPromotionSlider';
+import { SwiperPromotion } from './components/SwiperPromotion';
+import shuffleArray from '../../../tools/shuffleArray';
 import { wrapperForPromotion, promotionStyles } from './style';
 import 'swiper/swiper-bundle.min.css';
 import './style/CustomSlider.scss';
 
 const PromotionSlider = ({ products }) => {
-  const [slidesPerView, setslidesPerView] = useState(null);
   const [showSkeleton, setShowSkeleton] = useState(true);
-
-  const theme = useTheme();
-  const isXs = useMediaQuery(theme.breakpoints.only('xs'));
-  const isSm = useMediaQuery(theme.breakpoints.only('sm'));
+  const [randomProducts, setRandomProducts] = useState([]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -25,62 +20,20 @@ const PromotionSlider = ({ products }) => {
   }, []);
 
   useEffect(() => {
-    if (isXs) {
-      setslidesPerView(1);
-    } else if (isSm) {
-      setslidesPerView(2);
-    } else {
-      setslidesPerView(3);
-    }
-  }, [isXs, isSm]);
+    const shuffledProducts = shuffleArray(products);
+    const slicedProducts = shuffledProducts;
 
-  if (products.length === 0) {
-    return null;
-  }
-
-  const randomIndexes = Array.from({ length: 8 }, () => Math.floor(Math.random() * products.length));
-  const productItems = randomIndexes.map(index => products[index]);
-
-  const isSlider = true;
+    setRandomProducts(slicedProducts);
+  }, [products]);
 
   return (
     <Box>
-      {showSkeleton ? (
-        <>
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-          <Skeleton />
-        </>
-      ) : (
-        <>
-          <Box sx={wrapperForPromotion}>
-            <Typography fontFamily="Roboto" component="div" sx={promotionStyles}>
-              Акції місяця
-            </Typography>
-          </Box>
-          <Swiper
-            modules={[Navigation, Pagination, Scrollbar, A11y]}
-            spaceBetween={50}
-            slidesPerView={slidesPerView}
-            loop
-            navigation
-            pagination={{ clickable: true }}
-            className="product-analogies-slider-promotion"
-          >
-            {productItems.map((product, index) => (
-              <SwiperSlide key={index}>
-                <NavLink to={`/${product?.categories[0]}/${product?.id}`}>
-                  <ProductCard productItem={product} isSlider={isSlider} />
-                </NavLink>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </>
-      )}
+      <Box sx={wrapperForPromotion}>
+        <Typography fontFamily="Roboto" component="div" sx={promotionStyles}>
+          Акції місяця
+        </Typography>
+      </Box>
+      {showSkeleton ? <SkeletonPromotionSlider /> : <SwiperPromotion randomProducts={randomProducts} />}
     </Box>
   );
 };

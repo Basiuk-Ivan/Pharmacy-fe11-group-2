@@ -25,7 +25,8 @@ function YouBrowsed() {
       };
 
       axios
-        .get('http://localhost:3004/api/product', { params })
+        // .get('http://localhost:3004/api/product', { params })
+        .get(`${process.env.VITE_API_URL}/api/product`, { params })
         .then(response => {
           const viewedProd = response.data.data;
           setViewedProducts(viewedProd);

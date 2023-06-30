@@ -24,10 +24,10 @@ export const ForgotForm = () => {
   return (
     <Formik
       initialValues={{
-        email: '',
+        email: ''
       }}
       validationSchema={Yup.object().shape({
-        email: Yup.string().email('Невірний формат email').required('Обовязкове поле'),
+        email: Yup.string().email('Невірний формат email').required('Обовязкове поле')
       })}
       onSubmit={handleFormSubmit}
       validate={values => {
@@ -37,6 +37,12 @@ export const ForgotForm = () => {
     >
       {({ values, handleChange, handleBlur }) => (
         <Form>
+          <Typography id="forgot-password-modal-title" variant="h6" component="h2">
+            Забули пароль
+          </Typography>
+          <Typography id="forgot-password-modal-description" sx={{ mt: 2, mb: 2 }}>
+            Введіть ваш email и ми відправимо вам інструкціЇ з відновлення паролю.
+          </Typography>
           <div className="form-group">
             <CustomTextField
               type="email"
@@ -52,14 +58,8 @@ export const ForgotForm = () => {
           </div>
           <div className="footer_container">
             <StyledButton type="submit" variant="contained" color="success">
-              Отримати новий пароль
+              Відновити пароль
             </StyledButton>
-            <Typography id="modal-modal-footer" variant="h6" component="p">
-              Натискаючи на кнопку, ви погоджуєтесь на обробку{' '}
-              <UnderlineSpan>
-                <HighlightSpan>персональних даних</HighlightSpan>
-              </UnderlineSpan>
-            </Typography>
           </div>
         </Form>
       )}

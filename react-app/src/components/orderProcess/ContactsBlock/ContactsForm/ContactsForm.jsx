@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TextField, Grid, Typography, Container } from '@mui/material';
 import { styled, ThemeProvider } from '@mui/material/styles';
-import { useFormik } from 'formik';
+import { ErrorMessage, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { request } from '../../../../tools/request';
 import { theme as muiTheme } from '../../../../tools/muiTheme';
@@ -11,7 +11,6 @@ import { removeCartProductAllquantity } from '../../../../utils/ActionsWithProdu
 import { putProductsToCartDB } from '../../../../utils/ActionsWithProduct/putProductsToCartDB';
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
-
   marginBottom: theme.spacing(2),
   '& .MuiInputBase-root': {
     borderRadius: 30
@@ -37,14 +36,14 @@ const ContactsForm = ({ products }) => {
   const validationSchema = Yup.object().shape({
     firstName: Yup.string()
       .required("Введіть своє ім'я кирилицею")
-      .matches(nameRegExp, "Введіть своє ім'я кирилицею")
+      .matches(/^[A-Za-zА-Яа-яЁёІіЇїЄєҐґ']+$/, 'Введіть тільки букви')
       .min(2, 'Мінімум два символи'),
     email: Yup.string().email('Введіть свою ел. пошту').required('Введіть свою ел. пошту'),
     city: Yup.string().required('Введіть своє місто').matches(nameRegExp, 'Введіть своє місто'),
     house: Yup.string().required('Введіть номер будинку'),
     lastName: Yup.string()
       .required('Введіть своє прізвище кирилицею')
-      .matches(nameRegExp, 'Введіть своє прізвище кирилицею')
+      .matches(/^[A-Za-zА-Яа-яЁёІіЇїЄєҐґ']+$/, 'Введіть тільки букви')
       .min(2, 'Мінімум два символи'),
     phone: Yup.number()
       .required('Введіть номер мобільного телефону')
@@ -121,6 +120,7 @@ const ContactsForm = ({ products }) => {
                 name="firstName"
                 value={formik.values.firstName}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 error={Boolean(formik.touched.firstName && formik.errors.firstName)}
                 helperText={formik.touched.firstName && formik.errors.firstName}
               />
@@ -130,6 +130,7 @@ const ContactsForm = ({ products }) => {
                 name="email"
                 value={formik.values.email}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 error={Boolean(formik.touched.email && formik.errors.email)}
                 helperText={formik.touched.email && formik.errors.email}
               />
@@ -139,6 +140,7 @@ const ContactsForm = ({ products }) => {
                 name="city"
                 value={formik.values.city}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 error={Boolean(formik.touched.city && formik.errors.city)}
                 helperText={formik.touched.city && formik.errors.city}
               />
@@ -148,6 +150,7 @@ const ContactsForm = ({ products }) => {
                 name="house"
                 value={formik.values.house}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 error={Boolean(formik.touched.house && formik.errors.house)}
                 helperText={formik.touched.house && formik.errors.house}
               />
@@ -159,6 +162,7 @@ const ContactsForm = ({ products }) => {
                 name="lastName"
                 value={formik.values.lastName}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 error={Boolean(formik.touched.lastName && formik.errors.lastName)}
                 helperText={formik.touched.lastName && formik.errors.lastName}
               />
@@ -168,6 +172,7 @@ const ContactsForm = ({ products }) => {
                 name="phone"
                 value={formik.values.phone}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 error={Boolean(formik.touched.phone && formik.errors.phone)}
                 helperText={formik.touched.phone && formik.errors.phone}
               />
