@@ -17,7 +17,7 @@ const Cabinet = () => {
     <Container
       disableGutters
       sx={{
-        height: 'calc(100vh)',
+        minHeight: '80vh'
       }}
     >
       <Bread />
