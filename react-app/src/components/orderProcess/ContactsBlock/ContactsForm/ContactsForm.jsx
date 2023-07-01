@@ -9,6 +9,7 @@ import { theme as muiTheme } from '../../../../tools/muiTheme';
 import { openOrderModal } from '../../../../redux/slice/cartItems';
 import { removeCartProductAllquantity } from '../../../../utils/ActionsWithProduct/removeCartProductAllquantity';
 import { putProductsToCartDB } from '../../../../utils/ActionsWithProduct/putProductsToCartDB';
+import { updateQuantity } from '../../../../utils/ActionsWithProduct/updateQuantity.js';
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),
@@ -75,6 +76,19 @@ const ContactsForm = ({ products }) => {
         method: 'POST',
         body: data
       });
+
+      const updateProductQuantities = async productArr => {
+        productArr.forEach(productItem => {
+          updateQuantity(productItem);
+        });
+      };
+
+      await updateProductQuantities(values.products);
+
+      // // values.products.forEach(productItem => {
+      //   updateQuantity(productItem);
+      // });
+
       if (status === 200) {
         const newProducts = [];
         await putProductsToCartDB(cartStoreId, newProducts);

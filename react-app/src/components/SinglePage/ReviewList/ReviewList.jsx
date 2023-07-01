@@ -19,7 +19,6 @@ const ReviewList = () => {
         }
         const { data } = await response;
         setProductReviews(data);
-        console.log(changeStateReview);
       } catch (error) {
         console.log('Error fetching products:', error);
         return null;

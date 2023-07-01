@@ -73,7 +73,7 @@ const AuthButton = () => {
       const { _id, firstName, secondName, ...rest } = decodedToken;
       setFirstName(firstName);
       setSecondName(secondName);
-      const updatedObj = { id: _id, ...rest };
+      const updatedObj = {...decodedToken, id: _id};
       window.localStorage.setItem('token', token);
       dispatch(setUser(updatedObj));
 

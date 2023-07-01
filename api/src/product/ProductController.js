@@ -24,9 +24,10 @@ export const fillFields = async (orderData, res) => {
     const { products } = orderData;
     const productsData = await Promise.all(
       products.map(async item => {
-        const { price, name } = await getOneProd(item.id);
+        const { price, name, img } = await getOneProd(item.id);
+
         const priceTotal = item.quantity * price;
-        return { ...item, priceTotal, price, name };
+        return { ...item, priceTotal, price, name, img: [...img] };
       })
     );
 

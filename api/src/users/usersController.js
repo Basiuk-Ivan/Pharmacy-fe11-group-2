@@ -39,7 +39,6 @@ console.log(data);
         const filter = {email: data.email};
         const update = {password: passwordHash};
         const user = await UserDB.findOneAndUpdate(filter, update,{new: true});
-        console.log(user);
         const {password, ...userData} = user._doc;
         const {email, firstName, secondName} = userData;
         await sendMailRegistration({
@@ -56,15 +55,23 @@ console.log(data);
 };
 
 const updateUser = async (req, res) => {
+
   const passwordNotHash = req.body.password;
   try {
        if (req.body?.password) {
          req.body.password = await bcrypt.hash(req.body.password, 4);
     }
+
     const user = await UserDB.findOneAndUpdate({
-      id: req.params.userId,
-      updateData: req.body,
-      }, {new: true} );
+      _id: req.params.id}, req.body, {new: true} );
+
+    // const user = await UserDB.findOneAndUpdate({
+    //   id: req.params.id,
+    //   updateData: req.body,
+    //   }, {new: true} );
+    //    console.log(user);
+
+
     if (passwordNotHash) {
     const { password, ...userData } = user._doc;
         const { email, firstName, secondName } = userData;

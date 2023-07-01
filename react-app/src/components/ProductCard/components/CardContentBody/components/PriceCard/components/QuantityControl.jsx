@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, Snackbar, IconButton } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import CloseIcon from '@mui/icons-material/Close';
 import { addToCart, removeFromCart } from '../../../../../../../redux/slice/cartItems';
 import { addToCartLocalStorage } from '../../../../../../../utils/LocalStore/addToCartLocalStorage';
 import { removeCartItemFromLocalStorage } from '../../../../../../../utils/LocalStore/removeCartItemFromLocalStorage';
@@ -11,23 +12,23 @@ import { removeCartProduct } from '../../../../../../../utils/ActionsWithProduct
 import { putProductsToCartDB } from '../../../../../../../utils/ActionsWithProduct/putProductsToCartDB';
 
 export const QuantityControl = ({ productItem, isInCart }) => {
+  const [open, setOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const isAuth = useSelector(state => state.user.isAuth);
   const userId = useSelector(state => state.user.id);
   const cartItems = useSelector(state => state.itemCards.items);
   const cartStoreId = useSelector(state => state.user.cartStoreId);
-
-  useEffect(() => {
-    if (isInCart && cartItems && cartItems.length > 0) {
-      const order = cartItems?.find(item => item.id === productItem.id);
-      if (order) {
-        setQuantity(order.quantity);
-      } else {
-        setQuantity(null);
-      }
+  const handleClick = () => {
+    setOpen(true);
+  };
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
     }
-  }, [cartItems, isInCart, productItem.id]);
+    setOpen(false);
+  };
+
   const handleIncrement = async product => {
     setQuantity(prev => prev + 1);
     dispatch(addToCart({ id: product.id }));
@@ -54,6 +55,36 @@ export const QuantityControl = ({ productItem, isInCart }) => {
     return null;
   }
 
+  const action = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  );
+
+  useEffect(() => {
+    if (quantity >= productItem?.quantity) {
+      handleClick();
+    }
+  }, [quantity, productItem?.quantity]);
+
+  useEffect(() => {
+    if (isInCart && cartItems && cartItems.length > 0) {
+      const order = cartItems?.find(item => item.id === productItem.id);
+      if (order) {
+        setQuantity(order.quantity);
+      } else {
+        setQuantity(null);
+      }
+    }
+  }, [cartItems, isInCart, productItem.id]);
+
   return (
     <Box sx={{ position: 'relative', mb: '14px' }}>
       <RemoveCircleIcon
@@ -62,9 +93,10 @@ export const QuantityControl = ({ productItem, isInCart }) => {
           top: '5px',
           left: '-6px',
           fontSize: '18px',
-          color: '#d34747',
+          color: quantity === 1 ? '#b7c1c1' : '#d34747',
           cursor: 'pointer'
         }}
+
         onClick={() => {
           if (quantity === 1) {
             return;
@@ -97,9 +129,16 @@ export const QuantityControl = ({ productItem, isInCart }) => {
           top: '5px',
           right: '-6px',
           fontSize: '18px',
-          color: '#2db496',
+          color: quantity >= productItem?.quantity ? '#b7c1c1' : '#2db496',
           cursor: 'pointer'
         }}
+      />
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message="Ви обрали максимальну кількість"
+        action={action}
       />
     </Box>
   );

@@ -19,17 +19,17 @@ export const RegistrationForm = ({ activeTab, handleFormSubmit }) => (
     validationSchema={Yup.object().shape({
       firstName: Yup.string()
         .matches(/^[A-Za-zА-Яа-яЁёІіЇїЄєҐґ']+$/, 'Введіть тільки букви')
-        .required("Обов'язкове поле"),
+        .required('Обов\'язкове поле'),
       secondName: Yup.string()
         .matches(/^[A-Za-zА-Яа-яЁёІіЇїЄєҐґ']+$/, 'Введіть тільки букви')
-        .required("Обов'язкове поле"),
-      email: Yup.string().email('Невірний формат email').required('Обовязкове поле'),
-      password: Yup.string().required('Обовязкове поле').min(6, 'Мінімальна довжина пароля - 6 символів'),
+        .required('Обов\'язкове поле'),
+      email: Yup.string().email('Невірний формат email').required('Обов\'язкове поле'),
+      password: Yup.string().required('Обов\'язкове поле').min(6, 'Мінімальна довжина пароля - 6 символів'),
       confirmPassword: Yup.string()
-        .required('Обовязкове поле')
+        .required('Обов\'язкове поле')
         .oneOf([Yup.ref('password'), null], 'Паролі повинні співпадати'),
       phoneNumber: Yup.string()
-        .required('Обовязкове поле')
+        .required('Обов\'язкове поле')
         .matches(/^[0-9]*$/, 'Можна вводити тільки цифри')
     })}
     onSubmit={handleFormSubmit}

@@ -12,11 +12,11 @@ const ChangedTextField = styled(TextField)(({ theme }) => ({
 
 const Contacts = () => {
   const validationSchema = Yup.object().shape({
-    subject: Yup.string().required('Обязательное поле'),
-    nameSurname: Yup.string().required('Обязательное поле'),
-    phone: Yup.string().required('Обязательное поле').matches(/^[0-9]*$/, 'Можно вводить только цифры'),
-    email: Yup.string().email('Неверный формат email').required('Обязательное поле'),
-    text: Yup.string().required('Обязательное поле'),
+    subject: Yup.string().required('Обов\'язкове поле'),
+    nameSurname: Yup.string().required('Обов\'язкове поле'),
+    phone: Yup.string().required('Обов\'язкове поле').matches(/^[0-9]*$/, 'Можно вводить тільки цифри'),
+    email: Yup.string().email('Невірний формат email').required('"Обов\'язкове поле"'),
+    text: Yup.string().required('Обов\'язкове поле'),
   });
 
   const formik = useFormik({
