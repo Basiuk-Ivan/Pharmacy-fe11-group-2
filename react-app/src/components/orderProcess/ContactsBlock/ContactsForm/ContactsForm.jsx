@@ -23,6 +23,7 @@ const ContactsForm = ({ products }) => {
   const orderPaymentMethod = useSelector(state => state.order.PaymentMethodValue);
   const sumWithDiscount = useSelector(state => state.itemCards.sumWithDiscount);
   const cartStoreId = useSelector(state => state.user.cartStoreId);
+  const userId = useSelector(state => state.user.id);
   const surname = useSelector(state => state.user.secondName);
   const name = useSelector(state => state.user.firstName);
   const email = useSelector(state => state.user.email);
