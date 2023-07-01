@@ -7,8 +7,8 @@ import * as Yup from 'yup';
 import { request } from '../../../../tools/request';
 import { theme as muiTheme } from '../../../../tools/muiTheme';
 import { openOrderModal } from '../../../../redux/slice/cartItems';
-import { removeCartProductAllquantity } from '../../../../utils/ActionsWithProduct/removeCartProductAllquantity';
 import { putProductsToCartDB } from '../../../../utils/ActionsWithProduct/putProductsToCartDB';
+import { addContactsInfo } from '../../../../redux/slice/orderProcessSlice';
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),
@@ -22,12 +22,10 @@ const nameRegExp = /[a-zA-zа-яА-яёЁ]$/;
 const ContactsForm = ({ products }) => {
   const orderPaymentMethod = useSelector(state => state.order.PaymentMethodValue);
   const sumWithDiscount = useSelector(state => state.itemCards.sumWithDiscount);
-  const userId = useSelector(state => state.user.id);
   const cartStoreId = useSelector(state => state.user.cartStoreId);
-
+  const userId = useSelector(state => state.user.id);
   const surname = useSelector(state => state.user.secondName);
   const name = useSelector(state => state.user.firstName);
-  const gender = useSelector(state => state.user.gender);
   const email = useSelector(state => state.user.email);
   const phoneNumber = useSelector(state => state.user.phoneNumber);
 
@@ -39,8 +37,6 @@ const ContactsForm = ({ products }) => {
       .matches(/^[A-Za-zА-Яа-яЁёІіЇїЄєҐґ']+$/, 'Введіть тільки букви')
       .min(2, 'Мінімум два символи'),
     email: Yup.string().email('Введіть свою ел. пошту').required('Введіть свою ел. пошту'),
-    city: Yup.string().required('Введіть своє місто').matches(nameRegExp, 'Введіть своє місто'),
-    house: Yup.string().required('Введіть номер будинку'),
     lastName: Yup.string()
       .required('Введіть своє прізвище кирилицею')
       .matches(/^[A-Za-zА-Яа-яЁёІіЇїЄєҐґ']+$/, 'Введіть тільки букви')
@@ -48,20 +44,14 @@ const ContactsForm = ({ products }) => {
     phone: Yup.number()
       .required('Введіть номер мобільного телефону')
       .typeError('Введіть номер мобільного телефону'),
-    street: Yup.string().required('Введіть назву вулиці'),
-    apartment: Yup.number().typeError('Введіть номер квартири')
   });
 
   const formik = useFormik({
     initialValues: {
       firstName: name,
       email,
-      city: '',
-      house: '',
       lastName: surname,
       phone: phoneNumber,
-      street: '',
-      apartment: '',
       paymentMethod: `${orderPaymentMethod}`,
       products: [],
       totalPrice: Number
@@ -78,7 +68,7 @@ const ContactsForm = ({ products }) => {
       if (status === 200) {
         const newProducts = [];
         await putProductsToCartDB(cartStoreId, newProducts);
-
+        dispatch(addContactsInfo(values));
         dispatch(openOrderModal());
         resetForm();
       }
@@ -134,26 +124,6 @@ const ContactsForm = ({ products }) => {
                 error={Boolean(formik.touched.email && formik.errors.email)}
                 helperText={formik.touched.email && formik.errors.email}
               />
-              <ChangedTextField
-                label="Місто"
-                fullWidth
-                name="city"
-                value={formik.values.city}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={Boolean(formik.touched.city && formik.errors.city)}
-                helperText={formik.touched.city && formik.errors.city}
-              />
-              <ChangedTextField
-                label="Будинок"
-                fullWidth
-                name="house"
-                value={formik.values.house}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={Boolean(formik.touched.house && formik.errors.house)}
-                helperText={formik.touched.house && formik.errors.house}
-              />
             </Grid>
             <Grid item md={6} xl={6}>
               <ChangedTextField
@@ -175,24 +145,6 @@ const ContactsForm = ({ products }) => {
                 onBlur={formik.handleBlur}
                 error={Boolean(formik.touched.phone && formik.errors.phone)}
                 helperText={formik.touched.phone && formik.errors.phone}
-              />
-              <ChangedTextField
-                label="Вулиця"
-                fullWidth
-                name="street"
-                value={formik.values.street}
-                onChange={formik.handleChange}
-                error={Boolean(formik.touched.street && formik.errors.street)}
-                helperText={formik.touched.street && formik.errors.street}
-              />
-              <ChangedTextField
-                label="Квартира"
-                fullWidth
-                name="apartment"
-                value={formik.values.apartment}
-                onChange={formik.handleChange}
-                error={Boolean(formik.touched.apartment && formik.errors.apartment)}
-                helperText={formik.touched.apartment && formik.errors.apartment}
               />
             </Grid>
           </Grid>
