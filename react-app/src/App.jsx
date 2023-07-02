@@ -40,7 +40,7 @@ const App = () => {
         const updatedObj = { id: _id, ...rest };
         dispatch(setUser(updatedObj));
 
-        const cartURL = `http://localhost:3004/api/backet?user=${_id}`;
+        const cartURL = `${process.env.VITE_API_URL}/api/backet?user=${_id}`;
         const cartResponse = await sendRequest(cartURL);
         const cartProducts = cartResponse.data.products;
         cartProducts.forEach(product => {
@@ -49,7 +49,7 @@ const App = () => {
 
         dispatch(setCartStoreId(cartResponse.data.id));
 
-        const favoriteURL = `http://localhost:3004/api/favorite?user=${_id}`;
+        const favoriteURL = `${process.env.VITE_API_URL}/api/favorite?user=${_id}`;
         const favoriteResponse = await sendRequest(favoriteURL);
         const favoriteProducts = favoriteResponse.data.products;
         const newFavorites = favoriteProducts.map(item => item);

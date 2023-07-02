@@ -1,12 +1,10 @@
 import axios from 'axios';
 
 const productInstance = axios.create({
-  // baseURL: 'http://localhost:3004/api/product'
   baseURL: `${process.env.VITE_API_URL}/api/product`
 });
 
 const orderInstance = axios.create({
-  // baseURL: 'http://localhost:3004/api'
   baseURL: `${process.env.VITE_API_URL}/api`
 });
 

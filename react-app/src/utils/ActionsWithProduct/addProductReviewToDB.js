@@ -16,7 +16,7 @@ export const addProductReviewToDB = async (review, productId, userID, userGender
       whoDislike: []
     };
 
-    const url = 'http://localhost:3004/api/review';
+    const url = `${process.env.VITE_API_URL}/api/review`;
     const createReviewResponse = await sendRequest(url, 'POST', reviewData);
 
     if (!createReviewResponse.statusText) {

@@ -66,7 +66,7 @@ const AuthButton = () => {
   const [lastName, setSecondName] = useState('');
   const handleFormLogin = async values => {
     try {
-      const authURL = 'http://localhost:3004/api/users/login';
+      const authURL = `${process.env.VITE_API_URL}/api/users/login`;
       const userResponse = await sendRequest(authURL, 'POST', values);
       const { token } = userResponse.data;
       const decodedToken = jwtDecode(token);
@@ -77,7 +77,7 @@ const AuthButton = () => {
       window.localStorage.setItem('token', token);
       dispatch(setUser(updatedObj));
 
-      const cartURL = `http://localhost:3004/api/backet?user=${_id}`;
+      const cartURL = `${process.env.VITE_API_URL}/api/backet?user=${_id}`;
       const cartResponse = await sendRequest(cartURL);
       const cartProducts = cartResponse.data.products;
       const cartItemsFromLS = JSON.parse(localStorage.getItem('cartItems')) || [];
@@ -96,7 +96,7 @@ const AuthButton = () => {
       });
       dispatch(setCartStoreId(cartResponse.data.id));
       const newCartData = { id: cartResponse.data.id, products: [...mergedProducts] };
-      const cartULRForPUT = 'http://localhost:3004/api/backet';
+      const cartULRForPUT = `${process.env.VITE_API_URL}/api/backet`;
       const cartPUTResponse = await sendRequest(cartULRForPUT, 'PUT', newCartData);
       window.localStorage.removeItem('cartItems');
       dispatch(removeItem('all'));
@@ -104,7 +104,7 @@ const AuthButton = () => {
         dispatch(addToCartMoreOne({ id: product.productID, quantity: product.quantity }));
       });
 
-      const favoriteURL = `http://localhost:3004/api/favorite?user=${_id}`;
+      const favoriteURL = `${process.env.VITE_API_URL}/api/favorite?user=${_id}`;
       const favoriteResponse = await sendRequest(favoriteURL);
       const favoriteProducts = favoriteResponse.data.products;
       const favouriteItemsFromLS = JSON.parse(localStorage.getItem('favouriteItems')) || [];
@@ -114,7 +114,7 @@ const AuthButton = () => {
       dispatch(setFavoriteStoreId(favoriteResponse.data.id));
       const newFavoriteData = { id: favoriteResponse.data.id, products: [...newFavorites] };
 
-      const favoriteULRForPUT = 'http://localhost:3004/api/favorite';
+      const favoriteULRForPUT = `${process.env.VITE_API_URL}/api/favorite`;
       const favoritePUTResponse = await sendRequest(favoriteULRForPUT, 'PUT', newFavoriteData);
       window.localStorage.removeItem('favouriteItems');
       dispatch(deleteFromFavouriteItems('all'));
@@ -136,7 +136,7 @@ const AuthButton = () => {
 
   const handleFormSubmit = async values => {
     try {
-      const authURL = 'http://localhost:3004/api/users/';
+      const authURL = `${process.env.VITE_API_URL}/api/users/`;
       const userResponse = await sendRequest(authURL, 'POST', values);
 
       const { token } = userResponse.data;
@@ -144,10 +144,10 @@ const AuthButton = () => {
 
       const products = [];
       const createData = { user: _id, products };
-      const cartURL = 'http://localhost:3004/api/backet';
+      const cartURL = `${process.env.VITE_API_URL}/api/backet`;
       const cartResponse = await sendRequest(cartURL, 'POST', createData);
 
-      const favoriteURL = 'http://localhost:3004/api/favorite';
+      const favoriteURL = `${process.env.VITE_API_URL}/api/favorite`;
       const favoriteResponse = await sendRequest(favoriteURL, 'POST', createData);
 
       // if (!userResponse.statusText && !cartResponse.statusText && !favoriteResponse.statusText) {

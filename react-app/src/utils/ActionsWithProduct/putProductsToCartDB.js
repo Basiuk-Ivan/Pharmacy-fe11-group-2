@@ -12,7 +12,7 @@ export const putProductsToCartDB = async (cardId, cartProducts) => {
       products: [...mergedProducts]
     };
 
-    const cartULRForPUT = 'http://localhost:3004/api/backet';
+    const cartULRForPUT = `${process.env.VITE_API_URL}/api/backet`;
     const cartPUTResponse = await sendRequest(cartULRForPUT, 'PUT', newCartData);
 
     if (!cartPUTResponse.statusText) {
