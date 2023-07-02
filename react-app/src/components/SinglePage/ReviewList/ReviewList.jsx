@@ -14,9 +14,9 @@ const ReviewList = () => {
     const fetchData = async productId => {
       try {
         const response = await getProductReviewsFromDB(productId);
-        if (!response.statusText) {
-          throw new Error('Network response was not ok');
-        }
+        // if (!response.statusText) {
+        //   throw new Error('Network response was not ok');
+        // }
         const { data } = await response;
         setProductReviews(data);
       } catch (error) {

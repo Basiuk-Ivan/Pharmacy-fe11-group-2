@@ -41,10 +41,12 @@ const App = () => {
         const { _id } = decodedToken;
         const userData = await getUserDataFromDB(_id);
 
-        const updatedObj = { ...userData[0], id: _id };
+        const [currentUser, ...otherUsers] = userData;
+
+        const updatedObj = { ...currentUser, id: _id };
         dispatch(setUser(updatedObj));
 
-        const cartURL = `http://localhost:3004/api/backet?user=${_id}`;
+        const cartURL = `${process.env.VITE_API_URL}/api/backet?user=${_id}`;
         const cartResponse = await sendRequest(cartURL);
         const cartProducts = cartResponse.data.products;
         cartProducts.forEach(product => {
@@ -53,7 +55,7 @@ const App = () => {
 
         dispatch(setCartStoreId(cartResponse.data.id));
 
-        const favoriteURL = `http://localhost:3004/api/favorite?user=${_id}`;
+        const favoriteURL = `${process.env.VITE_API_URL}/api/favorite?user=${_id}`;
         const favoriteResponse = await sendRequest(favoriteURL);
         const favoriteProducts = favoriteResponse.data.products;
         const newFavorites = favoriteProducts.map(item => item);

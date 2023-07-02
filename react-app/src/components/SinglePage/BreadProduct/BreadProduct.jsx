@@ -51,7 +51,7 @@ const BreadProduct = ({ category, name }) => {
             </Box>
           </NavLink>
           {/* <NavLink to={`/${category}`}> */}
-          <NavLink to={`/product/?page=1&categories=${category}&sort=1&limit=8`}>
+          <NavLink to={`/product?page=1&categories=${category}&sort=1&limit=8`}>
             <Stack direction="row" sx={{ minHeight: '30px', mr: '5px' }}>
               <Box>
                 <KeyboardDoubleArrowRightTwoToneIcon sx={{ fill: '#BDBDBD', mr: '12px' }} />
