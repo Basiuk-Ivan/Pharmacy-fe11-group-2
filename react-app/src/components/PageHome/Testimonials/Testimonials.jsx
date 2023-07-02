@@ -40,7 +40,7 @@ const Testimonials = () => (
       <FeedDnepr />
       <FeedLviv />
       <Typography fontFamily="Roboto" component="div" sx={totalCountFeed}>
-        <NavLink to="/response" sx={linkFeed}>Всі 4349 відгуків</NavLink>
+        <NavLink to="/respond" sx={linkFeed}>Всі 4349 відгуків</NavLink>
       </Typography>
     </Box>
   </Box>

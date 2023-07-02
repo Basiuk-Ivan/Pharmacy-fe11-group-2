@@ -1,18 +1,19 @@
 import { Stack, Typography,Box } from '@mui/material';
 import React from 'react';
 import IconBreadcrumbs from './Breadcrums';
-import ResponseBlock from "../../components/Response/ResponseBlock";
+import RespondBlock from "../../components/Response/RespondBlock";
 
-const Response = () => {
+
+const RespondPage = () => {
   return (
     <Box>
         <IconBreadcrumbs />
         <Typography variant="h4" gutterBottom>
-            Відгуки кліентів
+            Відгуки клієнтів
         </Typography>
-        <ResponseBlock/>
+        <RespondBlock/>
     </Box>
   );
 };
 
-export default Response;
+export default RespondPage;

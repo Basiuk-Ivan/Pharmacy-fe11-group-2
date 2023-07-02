@@ -28,7 +28,7 @@ import { sendRequest } from './tools/sendRequest';
 import { addToCartMoreOne } from './redux/slice/cartItems';
 import { addToFavouriteItems } from './redux/slice/favouriteItems';
 import { getUserDataFromDB } from './utils/ActionWithUser/getUserDataFromDB';
-import Response from "./pages/Response/Response";
+import RespondPage from "./pages/Response/RespondPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -78,7 +78,7 @@ const App = () => {
           <Route path="/:category/*" element={<Products />} />
           <Route path="/favourite" element={<Favourite />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/response" element={<Response />} />
+          <Route path="/respond" element={<RespondPage />} />
           <Route path="/step" element={<Step />} />
           <Route path="/company" element={<Company />} />
           <Route path="/delivery" element={<Delivery />} />

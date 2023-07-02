@@ -1,10 +1,9 @@
 import { Box, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
-import ResponseForm from "./ResponseForm";
-// import ReviewList from '../ReviewList';
-// import ReviewForm from '../ReviewForm';
+import RespondForm from "./RespondForm";
+import RespondList from "./RespondList";
 
-const ResponseBlock = () => {
+const RespondBlock = () => {
   const isAuth = useSelector(state => state.user.isAuth);
 
   return (
@@ -29,7 +28,7 @@ const ResponseBlock = () => {
           >
             Залишити відгук
           </Typography>
-          <ResponseForm />
+          <RespondForm />
         </Box>}
 
         {!isAuth &&
@@ -41,8 +40,8 @@ const ResponseBlock = () => {
         >
           Додати відгук може лише авторизований користувач
         </Typography>}
-        {/* <ReviewList product={productItem} /> */}
+         <RespondList/>
       </Box>
     </Box>);
 };
-export default ResponseBlock;
+export default RespondBlock;
