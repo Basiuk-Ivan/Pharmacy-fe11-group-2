@@ -71,8 +71,9 @@ export const QuantityControl = ({ productItem, isInCart }) => {
   useEffect(() => {
     if (quantity >= productItem?.quantity) {
       handleClick();
-    } else {
-        return null;
+    }
+    if  (quantity < productItem?.quantity) {
+        setOpen(false);
     }
   }, [quantity, productItem?.quantity]);
 
