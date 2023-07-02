@@ -51,8 +51,6 @@ export const QuantityControl = ({ productItem, isInCart }) => {
     }
   };
 
-
-
   const action = (
     <>
       <IconButton
@@ -83,9 +81,9 @@ export const QuantityControl = ({ productItem, isInCart }) => {
     }
   }, [cartItems, isInCart, productItem.id]);
 
-    if (!isInCart) {
-        return null;
-    }
+  if (!isInCart) {
+    return null;
+  }
 
   return (
     <Box sx={{ position: 'relative', mb: '14px' }}>
