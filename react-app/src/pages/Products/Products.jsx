@@ -43,7 +43,6 @@ function Products() {
     dispatch(fetchProductsData(queryString));
   }, [queryString]);
 
-
   return (
     <Container disableGutters id="productsContainer" sx={productsContainerStyles}>
       <Box sx={{ mt: '-20px' }}>

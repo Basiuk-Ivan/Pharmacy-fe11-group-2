@@ -29,9 +29,9 @@ export default function ChoiceCategoryAccordion() {
 
   const dispatch = useDispatch();
 
-  const [expanded, setExpanded] = React.useState(sessionStorage.getItem('panel') || false);
+  const [expanded, setExpanded] = useState(false);
   const [accordionsData, values] = AccordData();
-  const [accordions, setAccordions] = useState(JSON.parse(sessionStorage.getItem('accordionsData')) || accordionsData);
+  const [accordions, setAccordions] = useState(accordionsData);
   const [updateSubCategory, setUpdateSubCategory] = useState(false);
 
   useEffect(() => {
@@ -45,8 +45,6 @@ export default function ChoiceCategoryAccordion() {
     if (currentCategory === 'cough-cold-flu' || currentCategory === 'painkillers' || currentCategory === 'nervous-system' || currentCategory === 'cardiovascular-system') {
       setAccordions(accordionsData);
     }
-    sessionStorage.setItem('currentCategory', currentCategory);
-    sessionStorage.setItem('panel', expanded);
   }, [currentCategory, expanded]);
 
   useEffect(() => {
@@ -61,9 +59,6 @@ export default function ChoiceCategoryAccordion() {
         );
         return { ...item, sub: updatedSub };
       });
-
-      sessionStorage.setItem('accordionsData', JSON.stringify(updatedAccordions));
-      sessionStorage.setItem('currentCategory', currentCategory);
 
       return updatedAccordions;
     });
@@ -81,9 +76,6 @@ export default function ChoiceCategoryAccordion() {
           }
           return item;
         });
-
-        sessionStorage.setItem('accordionsData', JSON.stringify(updatedAccordions));
-        sessionStorage.setItem('currentCategory', currentCategory);
 
         return updatedAccordions;
       });
@@ -105,9 +97,7 @@ export default function ChoiceCategoryAccordion() {
   const handleChange = panel => {
     return (event, isExpanded) => {
       setExpanded(isExpanded ? panel : false);
-      sessionStorage.setItem('panel', expanded);
       setAccordions(accordionsData);
-      sessionStorage.removeItem('accordionsData');
     };
   };
 

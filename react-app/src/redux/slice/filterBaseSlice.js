@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  categories: (sessionStorage.getItem('currentCategory') || ''),
+  categories: '',
   priceMin: '',
   priceMax: '',
   sort: 1,

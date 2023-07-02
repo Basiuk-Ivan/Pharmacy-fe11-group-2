@@ -23,14 +23,11 @@ function SortingPrice() {
   const queryString = location.search;
   const searchParams = new URLSearchParams(queryString);
 
-  const filterBase = useSelector(state => state.filterBase);
-
   const handleChange = event => {
     dispatch(sortingPrice(event.target.value));
     dispatch(changePage(1));
     searchParams.set('sort', event.target.value.toString());
     navigate({ search: searchParams.toString(), replace: true });
-    // window.location.search = searchParams.toString();
   };
 
   return (
