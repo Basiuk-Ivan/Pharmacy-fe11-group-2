@@ -4,17 +4,17 @@ Welcome to our online application [**PharmacyOnline**](https://api-p4qh.onrender
 
 The main features of the application:
 
-1. Search and selection of medicines: Find the medicines you need quickly and easily using filters. Filters allow you to limit search results by category, brand, price, and other parameters.
+- Search and selection of medicines: Find the medicines you need quickly and easily using filters. Filters allow you to limit search results by category, brand, price, and other parameters.
 
-2. Registration and personal account: Register to access all the features. In your personal account, store your order history and customize your contact information.
+- Registration and personal account: Register to access all the features. In your personal account, store your order history and customize your contact information.
 
-3. Order and delivery: Add your favorite medicines to the cart and checkout quickly and easily. Choose from different delivery methods that suit you best.
+- Order and delivery: Add your favorite medicines to the cart and checkout quickly and easily. Choose from different delivery methods that suit you best.
 
-4. Product reviews: Authorized users have the opportunity to leave reviews and ratings for various products in the Pharmacy app. This allows other users to get useful information about the quality and effectiveness of products before purchasing them.
+- Product reviews: Authorized users have the opportunity to leave reviews and ratings for various products in the Pharmacy app. This allows other users to get useful information about the quality and effectiveness of products before purchasing them.
 
-5. Self-written backend: We use Node.js, Express, and MongoDB technologies to build a reliable and efficient infrastructure for our Pharmacy app.
+- Self-written backend: We use Node.js, Express, and MongoDB technologies to build a reliable and efficient infrastructure for our Pharmacy app.
 
-6. Certified application: Our development team has successfully certified the Pharmacy Online application and ensured its availability to users. This means that you can access all the features of the application directly from your device.
+- Certified application: Our development team has successfully certified the Pharmacy Online application and ensured its availability to users. This means that you can access all the features of the application directly from your device.
 
 ### Languages and Tools:
 
