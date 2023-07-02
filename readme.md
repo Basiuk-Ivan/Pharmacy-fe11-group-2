@@ -26,7 +26,6 @@ The main features of the application:
 <a href="https://sass-lang.com" title="Sass"  target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/sass/sass-original.svg" alt="sass" width="50" height="50"/> </a>
 <a href="https://vitejs.dev/" title="Vite" target="_blank" rel="noreferrer"> <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Vitejs-logo.svg" alt="Vite" width="50" height="50"/> </a>
 <a href="https://git-scm.com/" title="Git" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="50" height="50"/> </a> 
-<a href="https://www.gnu.org/software/bash/" title="Bash" target="_blank" rel="noreferrer"><img src="https://www.vectorlogo.zone/logos/gnu_bash/gnu_bash-icon.svg" alt="bash" width="50" height="50"/> </a>
 <a href="https://cloudinary.com/" title="cloudinary" target="_blank" rel="noreferrer"> <img src="https://www.svgrepo.com/show/353566/cloudinary.svg" alt="cloudinary" width="50" height="50"/> </a>
 <a href="https://postman.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="postman" width="50" height="50"/> </a>
 <a href="https://axios-http.com/ru/docs/intro" title="axios" target="_blank" rel="noreferrer"><img src="https://upload.vectorlogo.zone/logos/axios/images/e2aae3c1-f98d-450b-8406-513bb5e6d5da.svg" alt="axios" width="50" height="50"/> </a>
