@@ -64,6 +64,7 @@ const AuthButton = () => {
   };
   const [name, setFirstName] = useState('');
   const [lastName, setSecondName] = useState('');
+
   const handleFormLogin = async values => {
     try {
       const authURL = `${process.env.VITE_API_URL}/api/users/login`;
@@ -122,12 +123,12 @@ const AuthButton = () => {
         dispatch(addToFavouriteItems(product));
       });
 
-      if (!userResponse.statusText) {
-        setOpen(true);
-        throw new Error('Network response was not ok');
-      } else {
-        setWelcomeModalOpen(true);
-      }
+      // if (!userResponse.statusText) {
+      //   setOpen(true);
+      //   throw new Error('Network response was not ok');
+      // } else {
+      //   setWelcomeModalOpen(true);
+      // }
     } catch (err) {
       console.error('Error fetching products:', err);
     }
@@ -154,9 +155,9 @@ const AuthButton = () => {
       //   setOpen(true);
       //   throw new Error('Network response was not ok');
       // }
-      if (!userResponse.statusText) {
-        throw new Error('Network response was not ok');
-      }
+      // if (!userResponse.statusText) {
+      //   throw new Error('Network response was not ok');
+      // }
     } catch (err) {
       setOpen(true);
       console.error('Error fetching', err);

@@ -16,8 +16,6 @@ export const sendRequest = async (url, method = 'GET', data = null, headers = {}
 
     return response;
   } catch (error) {
-    throw new Error(
-      error.response?.data?.message || 'Network response was not ok'
-    );
+    throw new Error(error.response?.data?.message || 'Network response was not ok');
   }
 };

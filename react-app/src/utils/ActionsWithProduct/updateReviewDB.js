@@ -25,9 +25,9 @@ export const updateReviewDB = async (reviewData, userId, emotion) => {
     const url = `${process.env.VITE_API_URL}/api/review`;
     const updateReviewResponse = await sendRequest(url, 'PUT', newReviewData);
 
-    if (!updateReviewResponse.statusText) {
-      throw new Error('Network response was not ok');
-    }
+    // if (!updateReviewResponse.statusText) {
+    //   throw new Error('Network response was not ok');
+    // }
   } catch (err) {
     console.error('Error fetching products:', err);
   }

@@ -12,9 +12,9 @@ export const putFavoritesToFavoritesDB = async (favoriteId, favoriteItems) => {
     const favoriteULRForPUT = `${process.env.VITE_API_URL}/api/favorite`;
     const favoritePUTResponse = await sendRequest(favoriteULRForPUT, 'PUT', newFavoriteData);
 
-    if (!favoritePUTResponse.statusText) {
-      throw new Error('Network response was not ok');
-    }
+    // if (!favoritePUTResponse.statusText) {
+    //   throw new Error('Network response was not ok');
+    // }
   } catch (err) {
     console.error('Error fetching products:', err);
   }

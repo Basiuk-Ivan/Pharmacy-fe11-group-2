@@ -10,6 +10,7 @@ import { openOrderModal } from '../../../../redux/slice/cartItems';
 import { putProductsToCartDB } from '../../../../utils/ActionsWithProduct/putProductsToCartDB';
 import { addContactsInfo } from '../../../../redux/slice/orderProcessSlice';
 import { updateQuantity } from '../../../../utils/ActionsWithProduct/updateQuantity';
+import { sendRequest } from '../../../../tools/sendRequest';
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),
@@ -44,7 +45,7 @@ const ContactsForm = ({ products }) => {
       .min(2, 'Мінімум два символи'),
     phone: Yup.number()
       .required('Введіть номер мобільного телефону')
-      .typeError('Введіть номер мобільного телефону'),
+      .typeError('Введіть номер мобільного телефону')
   });
 
   const formik = useFormik({
@@ -58,9 +59,44 @@ const ContactsForm = ({ products }) => {
       totalPrice: Number
     },
     validationSchema,
+
+    // onSubmit: async (values, { resetForm }) => {
+    //   const data = { ...values, ...(userId && { user: userId }) };
+
+    //   // const orderUrl = `${process.env.VITE_API_URL}/api/order`;
+
+    //   // const cartResponse = await sendRequest(orderUrl, 'POST', data);
+
+    //   const { status } = await request({
+    //     url: '/order',
+    //     method: 'POST',
+    //     body: data
+    //   });
+
+    //   const updateProductQuantities = async productArr => {
+    //     productArr.forEach(productItem => {
+    //       updateQuantity(productItem);
+    //     });
+    //   };
+
+    //   await updateProductQuantities(values.products);
+
+    //   // // values.products.forEach(productItem => {
+    //   //   updateQuantity(productItem);
+    //   // });
+
+    //   if (status === 200) {
+    //     const newProducts = [];
+    //     await putProductsToCartDB(cartStoreId, newProducts);
+    //     dispatch(addContactsInfo(values));
+    //     dispatch(openOrderModal());
+    //     resetForm();
+    //   }
+    // }
+
     onSubmit: async (values, { resetForm }) => {
-      const data = { ...values,
-        ...(userId && { user: userId }) };
+      const data = { ...values, ...(userId && { user: userId }) };
+
       const { status } = await request({
         url: '/order',
         method: 'POST',
@@ -80,8 +116,10 @@ const ContactsForm = ({ products }) => {
       // });
 
       if (status === 200) {
-        const newProducts = [];
-        await putProductsToCartDB(cartStoreId, newProducts);
+        if (!!cartStoreId) {
+          const newProducts = [];
+          await putProductsToCartDB(cartStoreId, newProducts);
+        }
         dispatch(addContactsInfo(values));
         dispatch(openOrderModal());
         resetForm();

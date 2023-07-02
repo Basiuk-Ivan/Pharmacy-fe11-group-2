@@ -19,9 +19,9 @@ export const addProductReviewToDB = async (review, productId, userID, userGender
     const url = `${process.env.VITE_API_URL}/api/review`;
     const createReviewResponse = await sendRequest(url, 'POST', reviewData);
 
-    if (!createReviewResponse.statusText) {
-      throw new Error('Network response was not ok');
-    }
+    // if (!createReviewResponse.statusText) {
+    //   throw new Error('Network response was not ok');
+    // }
   } catch (err) {
     console.error('Error fetching products:', err);
   }

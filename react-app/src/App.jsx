@@ -41,7 +41,9 @@ const App = () => {
         const { _id } = decodedToken;
         const userData = await getUserDataFromDB(_id);
 
-        const updatedObj = { ...userData[0], id: _id };
+        const [currentUser, ...otherUsers] = userData;
+
+        const updatedObj = { ...currentUser, id: _id };
         dispatch(setUser(updatedObj));
 
         const cartURL = `${process.env.VITE_API_URL}/api/backet?user=${_id}`;

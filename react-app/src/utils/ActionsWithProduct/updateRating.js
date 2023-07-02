@@ -1,5 +1,4 @@
 export const updateRating = async (productItem, newValue) => {
-  console.log(productItem);
   const res = await fetch(
     `${process.env.VITE_API_URL}/api/product/${productItem.id}`,
 
