@@ -84,7 +84,7 @@ const DeliveryBlock = () => {
                   <FormControlLabel
                     value="self"
                     control={<Radio />}
-                    label="Самовивіз"
+                    label="Забрати з аптеки"
                   />
                   <FormControlLabel
                     value="novaPost"
