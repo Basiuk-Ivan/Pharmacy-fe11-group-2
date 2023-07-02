@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import ReviewList from '../ReviewList';
 import ReviewForm from '../ReviewForm';
 
-const ProductCardReviews = () => {
+const ProductCardReviews = ({ productItem }) => {
   const isAuth = useSelector(state => state.user.isAuth);
 
   return (
@@ -37,7 +37,7 @@ const ProductCardReviews = () => {
             >
               Залишити відгук
             </Typography>
-            <ReviewForm />
+            <ReviewForm product={productItem} />
           </Box>}
 
           {!isAuth &&
@@ -49,7 +49,7 @@ const ProductCardReviews = () => {
           >
             Додати відгук може лише авторизований користувач
           </Typography>}
-          <ReviewList />
+          <ReviewList product={productItem} />
         </Box>
       </Box>
     </Box>);

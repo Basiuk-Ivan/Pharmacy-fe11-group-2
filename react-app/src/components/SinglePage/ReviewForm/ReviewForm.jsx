@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { addProductReviewToDB } from '../../../utils/ActionsWithProduct/addProductReviewToDB';
 import { changeStateReview } from '../../../redux/slice/userSlice';
+import { updateRating } from '../../../utils/ActionsWithProduct/updateRating';
 
-const ReviewForm = () => {
+const ReviewForm = ({ product }) => {
   const { id } = useParams();
   const userId = useSelector(state => state.user.id);
   const dispatch = useDispatch();
@@ -51,6 +52,7 @@ const ReviewForm = () => {
           reviewTxt: values.review
         };
         await addProductReviewToDB(finishedReview, id, userId, gender);
+        await updateRating(product, valueRating);
         setValueRating(0);
         dispatch(changeStateReview(values.review));
         resetForm();

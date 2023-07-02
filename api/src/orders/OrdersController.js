@@ -26,9 +26,9 @@ export const getAllOrder = async (req, res) => {
     console.log(user);
     if (!!user) {
       const objectId = new mongoose.Types.ObjectId(user);
-      favorites = await OrderDB.find({ user: objectId });
+      Orders = await OrderDB.find({ user: objectId });
     } else {
-      favorites = await OrderDB.find();
+      Orders = await OrderDB.find();
     }
     return res.json(Orders);
   } catch (e) {
