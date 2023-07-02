@@ -71,6 +71,8 @@ export const QuantityControl = ({ productItem, isInCart }) => {
   useEffect(() => {
     if (quantity >= productItem?.quantity) {
       handleClick();
+    } else {
+        return null;
     }
   }, [quantity, productItem?.quantity]);
 
@@ -96,7 +98,6 @@ export const QuantityControl = ({ productItem, isInCart }) => {
           color: quantity === 1 ? '#b7c1c1' : '#d34747',
           cursor: 'pointer'
         }}
-
         onClick={() => {
           if (quantity === 1) {
             return;

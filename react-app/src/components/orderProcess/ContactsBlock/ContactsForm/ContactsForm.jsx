@@ -9,7 +9,7 @@ import { theme as muiTheme } from '../../../../tools/muiTheme';
 import { openOrderModal } from '../../../../redux/slice/cartItems';
 import { removeCartProductAllquantity } from '../../../../utils/ActionsWithProduct/removeCartProductAllquantity';
 import { putProductsToCartDB } from '../../../../utils/ActionsWithProduct/putProductsToCartDB';
-import { updateQuantity } from '../../../../utils/ActionsWithProduct/updateQuantity.js';
+import { updateQuantity } from '../../../../utils/ActionsWithProduct/updateQuantity';
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),

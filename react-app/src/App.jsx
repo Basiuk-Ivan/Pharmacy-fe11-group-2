@@ -27,7 +27,7 @@ import { Step } from './pages/BlogPages/5steps';
 import { sendRequest } from './tools/sendRequest';
 import { addToCartMoreOne } from './redux/slice/cartItems';
 import { addToFavouriteItems } from './redux/slice/favouriteItems';
-import {getUserDataFromDB} from "./utils/ActionWithUser/getUserDataFromDB.js";
+import { getUserDataFromDB } from './utils/ActionWithUser/getUserDataFromDB';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -38,10 +38,10 @@ const App = () => {
       const startLoading = async () => {
         const decodedToken = jwtDecode(token);
 
-        const { _id} = decodedToken;
+        const { _id } = decodedToken;
         const userData = await getUserDataFromDB(_id);
 
-        const updatedObj = {...userData[0], id: _id};
+        const updatedObj = { ...userData[0], id: _id };
         dispatch(setUser(updatedObj));
 
         const cartURL = `http://localhost:3004/api/backet?user=${_id}`;

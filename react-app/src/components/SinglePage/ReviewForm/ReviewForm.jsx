@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { addProductReviewToDB } from '../../../utils/ActionsWithProduct/addProductReviewToDB';
 import { changeStateReview } from '../../../redux/slice/userSlice';
-import {updateRating} from "../../../utils/ActionsWithProduct/updateRating.js";
+import { updateRating } from '../../../utils/ActionsWithProduct/updateRating';
 
-const ReviewForm = ({product}) => {
+const ReviewForm = ({ product }) => {
   const { id } = useParams();
   const userId = useSelector(state => state.user.id);
   const dispatch = useDispatch();
