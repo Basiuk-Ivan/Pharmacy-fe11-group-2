@@ -28,7 +28,7 @@ import { sendRequest } from './tools/sendRequest';
 import { addToCartMoreOne } from './redux/slice/cartItems';
 import { addToFavouriteItems } from './redux/slice/favouriteItems';
 import { getUserDataFromDB } from './utils/ActionWithUser/getUserDataFromDB';
-import RespondPage from "./pages/Response/RespondPage";
+import RespondPage from './pages/Response/RespondPage';
 
 const App = () => {
   const dispatch = useDispatch();

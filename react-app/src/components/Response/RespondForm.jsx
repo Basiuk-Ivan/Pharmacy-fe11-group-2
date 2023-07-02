@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from '@mui/material/styles';
 import { changeStateReview } from '../../redux/slice/userSlice';
 import { theme } from '../../tools/muiTheme';
-import { addResponseToDB } from '../../utils/Responses/addResponseToDB.js';
+import { addResponseToDB } from '../../utils/Responses/addResponseToDB';
 
 const RespondForm = ({ product }) => {
   const userId = useSelector(state => state.user.id);

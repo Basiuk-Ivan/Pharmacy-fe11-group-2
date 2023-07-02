@@ -13,13 +13,12 @@ import './style/reset.scss';
 // eslint-disable-next-line import/extensions
 import ScrollToTop from './tools/scrolToTop.js';
 
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <BrowserRouter>
       <StyledEngineProvider injectFirst>
         <ScrollToTop />
-            <App />
+        <App />
       </StyledEngineProvider>
     </BrowserRouter>
   </Provider>
