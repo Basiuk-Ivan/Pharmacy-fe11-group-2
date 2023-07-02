@@ -22,22 +22,22 @@ export const MenuAppBar = () => {
     {
       title: 'Ліки від кашлю, застуди та грипу',
       path: '/cough-cold-flu',
-      req: `product/?page=1&categories=cough-cold-flu&sort=1&limit=${filterBase.limit}`
+      req: `product?page=1&categories=cough-cold-flu&sort=1&limit=${filterBase.limit}`
     },
     {
       title: 'Знеболюючі',
       path: '/painkillers',
-      req: `product/?page=1&categories=painkillers&sort=1&limit=${filterBase.limit}`
+      req: `product?page=1&categories=painkillers&sort=1&limit=${filterBase.limit}`
     },
     {
       title: 'Для нервової системи',
       path: '/nervous-system',
-      req: `product/?page=1&categories=nervous-system&sort=1&limit=${filterBase.limit}`
+      req: `product?page=1&categories=nervous-system&sort=1&limit=${filterBase.limit}`
     },
     {
       title: 'Серцево-судинна система',
       path: '/cardiovascular-system',
-      req: `product/?page=1&categories=cardiovascular-system&sort=1&limit=${filterBase.limit}`
+      req: `product?page=1&categories=cardiovascular-system&sort=1&limit=${filterBase.limit}`
     }
   ];
 
@@ -90,7 +90,9 @@ export const MenuAppBar = () => {
         {pages.map(page => (
           <NavLink key={page.title} to={page.req}>
             <MenuItem key={page.title} onClick={handleCloseNavMenu} sx={menuItemStyles}>
-              <Typography onClick={() => choiceMainCategory(page.path)} textAlign="center">{page.title}</Typography>
+              <Typography onClick={() => choiceMainCategory(page.path)} textAlign="center">
+                {page.title}
+              </Typography>
             </MenuItem>
           </NavLink>
         ))}

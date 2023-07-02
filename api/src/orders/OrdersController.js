@@ -13,6 +13,7 @@ export const createOrder = async (req, res) => {
     });
     const { email, products, totalPrice } = createdOrder;
     await sendMailOrder({ products, email, totalPrice });
+
     res.json(createdOrder);
   } catch (e) {
     res.status(500).json(e.message);
@@ -23,7 +24,6 @@ export const getAllOrder = async (req, res) => {
   try {
     let Orders = [];
     const { user } = req.query;
-    console.log(user);
     if (!!user) {
       const objectId = new mongoose.Types.ObjectId(user);
       Orders = await OrderDB.find({ user: objectId });

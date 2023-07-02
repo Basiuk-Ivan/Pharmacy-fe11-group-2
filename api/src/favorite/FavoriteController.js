@@ -3,9 +3,7 @@ import mongoose from 'mongoose';
 
 export const createFavorite = async (req, res) => {
   try {
-    console.log(req.body);
     const createdFavorite = await FavoriteDB.create(req.body);
-    console.log(createdFavorite);
     res.json(createdFavorite);
   } catch (e) {
     res.status(500).json(e.message);
@@ -14,7 +12,7 @@ export const createFavorite = async (req, res) => {
 
 export const getAllFavorite = async (req, res) => {
   try {
-    let favorites = { };
+    let favorites = {};
     const { user } = req.query;
     if (!!user) {
       const objectId = new mongoose.Types.ObjectId(user);
@@ -27,7 +25,6 @@ export const getAllFavorite = async (req, res) => {
     res.status(500).json(e.message);
   }
 };
-
 
 export const updateFavorite = async (req, res) => {
   try {
