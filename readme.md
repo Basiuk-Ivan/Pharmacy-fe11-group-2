@@ -34,6 +34,8 @@ The main features of the application:
 <a href="https://nodejs.org/uk" title="NodeJS"  target="_blank" rel="noreferrer"> <img src="https://www.svgrepo.com/show/439238/nodejs.svg" alt="nodejs" width="50" height="50"/> </a>
 <a href="https://expressjs.com/" title="Express"  target="_blank" rel="noreferrer"> <img src="https://www.svgrepo.com/show/353724/express.svg" alt="Express" width="50" height="50"/> </a>
 <a href="https://trello.com/u/user80215570/boards" title="Trello"  target="_blank" rel="noreferrer"> <img src="https://www.svgrepo.com/show/475688/trello-color.svg" alt="Trello" width="50" height="50"/> </a>
+<a href="https://mui.com/" title="Mui"  target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/material-ui-1.svg" alt="Mui" width="50" height="50"/> </a>
+<a href="https://mui.com/" title="Redux"  target="_blank" rel="noreferrer"> <img src="https://www.svgrepo.com/show/452093/redux.svg" alt="Redux" width="50" height="50"/> </a>
 </p>
 
 ### Developers:
