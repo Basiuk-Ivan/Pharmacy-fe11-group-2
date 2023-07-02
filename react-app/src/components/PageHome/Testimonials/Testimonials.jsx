@@ -5,15 +5,17 @@ import {
   ave,
   aveRate,
   aveText,
-  feedBack,
+  feedBack, linkFeed,
   mainFeedback,
-  StarRate,
+  StarRate, totalCountFeed,
   totalRate,
-  wrapperForTestimonials
+  wrapperForTestimonials,
+
 } from './style';
 import { FeedKyiv } from './item/FeedKyiv.jsx';
 import { FeedDnepr } from './item/FeedDnepr.jsx';
 import { FeedLviv } from './item/FeedLviv.jsx';
+import {NavLink} from "react-router-dom";
 
 const Testimonials = () => (
   <Box sx={wrapperForTestimonials}>
@@ -37,6 +39,9 @@ const Testimonials = () => (
       <FeedKyiv />
       <FeedDnepr />
       <FeedLviv />
+      <Typography fontFamily="Roboto" component="div" sx={totalCountFeed}>
+        <NavLink to="/response" sx={linkFeed}>Всі 4349 відгуків</NavLink>
+      </Typography>
     </Box>
   </Box>
 );
