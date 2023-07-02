@@ -116,7 +116,7 @@ const ContactsForm = ({ products }) => {
       // });
 
       if (status === 200) {
-        if (!!cartStoreId) {
+        if (cartStoreId) {
           const newProducts = [];
           await putProductsToCartDB(cartStoreId, newProducts);
         }
