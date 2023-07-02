@@ -51,9 +51,7 @@ export const QuantityControl = ({ productItem, isInCart }) => {
     }
   };
 
-  if (!isInCart) {
-    return null;
-  }
+
 
   const action = (
     <>
@@ -72,9 +70,6 @@ export const QuantityControl = ({ productItem, isInCart }) => {
     if (quantity >= productItem?.quantity) {
       handleClick();
     }
-    else {
-      setOpen(false);
-    }
   }, [quantity, productItem?.quantity]);
 
   useEffect(() => {
@@ -87,6 +82,10 @@ export const QuantityControl = ({ productItem, isInCart }) => {
       }
     }
   }, [cartItems, isInCart, productItem.id]);
+
+    if (!isInCart) {
+        return null;
+    }
 
   return (
     <Box sx={{ position: 'relative', mb: '14px' }}>
