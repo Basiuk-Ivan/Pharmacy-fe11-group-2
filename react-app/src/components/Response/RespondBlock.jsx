@@ -1,14 +1,68 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Rating } from '@mui/material';
 import { useSelector } from 'react-redux';
 import RespondForm from './RespondForm';
 import RespondList from './RespondList';
+import React, {useEffect, useState} from 'react';
+import {
+    ave,
+    aveRate,
+    aveText,
+    feedBack, linkFeed,
+    mainFeedback,
+    StarRate, totalCountFeed,
+    totalRate,
+    wrapperForTestimonials,
+} from './style';
+import {getResponsesFromDB} from "../../utils/Responses/getResponsesFromDB";
 
 const RespondBlock = () => {
   const isAuth = useSelector(state => state.user.isAuth);
+  const [averageRating, setAverageRating] = useState(4.5);
+  const [totalFound, setTotalFound] = useState(0);
+    const changeStateReview = useSelector(state => state.user.changeStateReview);
+
+    const fetchData = async () => {
+        try {
+            const res = await getResponsesFromDB(1);
+
+            const { data } = await res;
+
+            setAverageRating(data.roundedValueRating);
+            setTotalFound(data.totalFound);
+        } catch (error) {
+            console.log('Error fetching products:', error);
+            return null;
+        }
+    };
+
+
+    useEffect(() => {
+        fetchData()
+    }, [changeStateReview]);
+
+
+
 
   return (
     <Box>
-
+        <Box sx={wrapperForTestimonials}>
+            <Box sx={mainFeedback}>
+                <Box sx={ave}>
+                    <Typography fontFamily="Roboto" component="div" sx={aveText}>
+                        Середня <br /> оцінка <br /> аптеки
+                    </Typography>
+                    <Box>
+                        <Typography fontFamily="Roboto" component="div" sx={aveRate}>
+                            {averageRating}
+                        </Typography>
+                        <Rating name="half-rating" value={averageRating} sx={StarRate} readOnly precision={0.5} />
+                    </Box>
+                </Box>
+                <Typography fontFamily="Roboto" component="div" sx={totalRate}>
+                    Загальний рейтинг на основі {totalFound} <br /> відгуків наших покупців
+                </Typography>
+            </Box>
+        </Box>
       <Box
         sx={{
           borderRadius: '20px',
@@ -18,6 +72,8 @@ const RespondBlock = () => {
         noValidate
         autoComplete="off"
       >
+
+
         {isAuth &&
         <Box>
           <Typography
