@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addPaymentMethod } from '../../../../redux/slice/orderProcessSlice';
 import CardPaymentData from '../../CardPaymentData';
 import { theme } from '../../../../tools/muiTheme';
+import card from '../../../../assets/orderprocess/cards.png';
 
 const PaymentMethodForm = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const PaymentMethodForm = () => {
         >
           Спосіб Оплати
         </Typography>
-        <FormControl>
+        <FormControl id="payment-form">
           <RadioGroup
             aria-labelledby="radio-buttons-group-label"
             defaultValue="cash"
@@ -45,14 +46,9 @@ const PaymentMethodForm = () => {
                 dispatch(addPaymentMethod('card'));
               }}
               label={
-
                 <Box display="flex" alignItems="center">
                   <span>Карткою онлайн</span>
-                  <img
-                    src="./src/assets/orderprocess/cards.png"
-                    alt="Payment Method"
-                    style={{ marginLeft: '10px' }}
-                  />
+                  <img src={card} alt="Payment Method" style={{ marginLeft: '10px' }} />
                 </Box>
               }
             />

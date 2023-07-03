@@ -16,7 +16,6 @@ function YouBrowsed() {
   const viewedItems = useMemo(() => JSON.parse(localStorage.getItem('viewedProducts')) || [], []);
   const [viewedProducts, setViewedProducts] = useState([]);
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
-  // console.log('favoriteItems:', favoriteItems);
 
   const getViewedProducts = items => {
     if (items.length > 0) {
@@ -25,7 +24,7 @@ function YouBrowsed() {
       };
 
       axios
-        .get('http://localhost:3004/api/product', { params })
+        .get(`${process.env.VITE_API_URL}/api/product`, { params })
         .then(response => {
           const viewedProd = response.data.data;
           setViewedProducts(viewedProd);

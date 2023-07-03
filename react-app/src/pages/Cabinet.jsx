@@ -14,7 +14,12 @@ const Cabinet = () => {
   };
 
   return (
-    <Container disableGutters>
+    <Container
+      disableGutters
+      sx={{
+        minHeight: '80vh'
+      }}
+    >
       <Bread />
       <Typography
         sx={{

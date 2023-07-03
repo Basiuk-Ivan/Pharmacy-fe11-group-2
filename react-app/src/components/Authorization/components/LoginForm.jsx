@@ -16,8 +16,8 @@ export const LoginForm = ({ activeTab, handleFormSubmit }) => {
         password: ''
       }}
       validationSchema={Yup.object().shape({
-        email: Yup.string().email('Неверный формат email').required('Обязательное поле'),
-        password: Yup.string().required('Обязательное поле').min(6, 'Минимальная длина пароля - 6 символов')
+        email: Yup.string().email('Невірний формат email').required('Обов\'язкове поле'),
+        password: Yup.string().required('Обов\'язкове поле')
       })}
       onSubmit={handleFormSubmit}
       validate={values => {
@@ -39,6 +39,7 @@ export const LoginForm = ({ activeTab, handleFormSubmit }) => {
                   value={values.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
+                  autoComplete="username"
                 />
                 <ErrorMessage name="email" component="div" className="error-message" />
               </div>
@@ -52,12 +53,13 @@ export const LoginForm = ({ activeTab, handleFormSubmit }) => {
                   value={values.password}
                   onChange={handleChange}
                   onBlur={handleBlur}
+                  autoComplete="current-password"
                 />
                 <ErrorMessage name="password" component="div" className="error-message" />
               </div>
               <div className="footer_container">
                 <StyledButton type="submit" variant="contained" color="success">
-                  Вход
+                  Вхід
                 </StyledButton>
                 <Typography id="modal-modal-footer" variant="h6" component="p">
                   Забули пароль?{' '}

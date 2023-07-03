@@ -1,5 +1,9 @@
 import { styled } from '@mui/material/styles';
 import { Grid, Typography } from '@mui/material';
+import assortment from '../../assets/orderprocess/im1.png';
+import delivery from '../../assets/orderprocess/im2.png';
+import guarantee from '../../assets/orderprocess/im3.png';
+import lowPrice from '../../assets/orderprocess/im4.png';
 
 const TypographyTitle = styled(Typography)({
   fontSize: '18px',
@@ -30,7 +34,7 @@ const Advantages = () => (
         textAlign: 'center'
       }}
     >
-      <img src="./src/assets/orderprocess/im1.png" alt="" />
+      <img src={assortment} alt="assortment" />
       <TypographyTitle>Асортимент</TypographyTitle>
       <TypographyData>Широкий вибір товарів</TypographyData>
     </Grid>
@@ -42,7 +46,7 @@ const Advantages = () => (
         textAlign: 'center'
       }}
     >
-      <img src="./src/assets/orderprocess/im2.png" alt="" />
+      <img src={delivery} alt="delivery" />
       <TypographyTitle>Швидка доставка</TypographyTitle>
       <TypographyData>В будь-яке місто України</TypographyData>
     </Grid>
@@ -54,7 +58,7 @@ const Advantages = () => (
         textAlign: 'center'
       }}
     >
-      <img src="./src/assets/orderprocess/im3.png" alt="" />
+      <img src={guarantee} alt="guarantee" />
       <TypographyTitle>Гарантія</TypographyTitle>
       <TypographyData>Вся продукція сертифікована</TypographyData>
     </Grid>
@@ -66,7 +70,7 @@ const Advantages = () => (
         textAlign: 'center'
       }}
     >
-      <img src="./src/assets/orderprocess/im4.png" alt="" />
+      <img src={lowPrice} alt="lowPrice" />
       <TypographyTitle>Низькі ціни</TypographyTitle>
       <TypographyData>Ми намагаємось тримати найнижчі ціни серед конкурентів</TypographyData>
     </Grid>

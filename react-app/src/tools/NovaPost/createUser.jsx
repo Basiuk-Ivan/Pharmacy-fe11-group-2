@@ -28,7 +28,6 @@ const createUser = order => {
       });
 
       const { data } = result;
-      console.log(data);
     } catch (error) {
       console.error('Error fetching products:', error);
     }

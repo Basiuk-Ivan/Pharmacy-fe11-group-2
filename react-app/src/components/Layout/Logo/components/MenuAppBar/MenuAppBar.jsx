@@ -90,7 +90,9 @@ export const MenuAppBar = () => {
         {pages.map(page => (
           <NavLink key={page.title} to={page.req}>
             <MenuItem key={page.title} onClick={handleCloseNavMenu} sx={menuItemStyles}>
-              <Typography onClick={() => choiceMainCategory(page.path)} textAlign="center">{page.title}</Typography>
+              <Typography onClick={() => choiceMainCategory(page.path)} textAlign="center">
+                {page.title}
+              </Typography>
             </MenuItem>
           </NavLink>
         ))}

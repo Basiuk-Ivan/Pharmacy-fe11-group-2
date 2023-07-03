@@ -29,19 +29,8 @@ const SectionsMenu = props => {
         <TableRow>
           <ChangedTableCell
             onClick={() => handleSectionClick('orders')}
-            sx={{
-              backgroundColor: '#F7FAFB'
-            }}
           >Ваші замовлення
           </ChangedTableCell>
-        </TableRow>
-        <TableRow
-          onClick={() => handleSectionClick('feedback')}
-          sx={{
-            backgroundColor: 'white'
-          }}
-        >
-          <ChangedTableCell>Зворотній Зв'язок</ChangedTableCell>
         </TableRow>
       </TableBody>
     </Table>
