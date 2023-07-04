@@ -8,12 +8,20 @@ import { closeModal, closeModalForgotPass } from '../../redux/slice/modalSlice';
 import { LoginForm } from './components/LoginForm';
 import { ForgotForm } from './components/ForgotForm';
 import { RegistrationForm } from './components/RegistrationForm';
-import { styles } from './style';
-import './style/Auth.scss';
 import { setCartStoreId, setFavoriteStoreId, setUser } from '../../redux/slice/userSlice';
 import { sendRequest } from '../../tools/sendRequest';
 import { removeItem, addToCartMoreOne } from '../../redux/slice/cartItems';
 import { addToFavouriteItems, deleteFromFavouriteItems } from '../../redux/slice/favouriteItems';
+import ModalWindow from '../ModalWindow';
+import {
+  closeLoginModal,
+  openLoginModal,
+  openRegistrationModal,
+  setLogin,
+  setRegistration
+} from '../../redux/slice/isToken';
+import { styles } from './style';
+import './style/Auth.scss';
 
 const style = {
   position: 'absolute',
@@ -31,6 +39,8 @@ const style = {
 
 const AuthButton = () => {
   const [open, setOpen] = React.useState(false);
+  const isOpenedLoginModal = useSelector(state => state.isToken.isOpenedLoginModal);
+  const isOpenedRegistrationModal = useSelector(state => state.isToken.isOpenedRegistrationModal);
 
   const [welcomeModalOpen, setWelcomeModalOpen] = useState(false);
   const handleWelcomeModalClose = () => setWelcomeModalOpen(false);
@@ -69,6 +79,7 @@ const AuthButton = () => {
     try {
       const authURL = `${process.env.VITE_API_URL}/api/users/login`;
       const userResponse = await sendRequest(authURL, 'POST', values);
+      const { status } = userResponse;
       const { token } = userResponse.data;
       const decodedToken = jwtDecode(token);
       const { _id, firstName, secondName, ...rest } = decodedToken;
@@ -123,22 +134,21 @@ const AuthButton = () => {
         dispatch(addToFavouriteItems(product));
       });
 
-      // if (!userResponse.statusText) {
-      //   setOpen(true);
-      //   throw new Error('Network response was not ok');
-      // } else {
-      //   setWelcomeModalOpen(true);
-      // }
+      if (status === 200) {
+        dispatch(openLoginModal(true));
+        handleCloseModal();
+      }
     } catch (err) {
       console.error('Error fetching products:', err);
+      dispatch(setLogin(true));
     }
-    handleCloseModal();
   };
 
   const handleFormSubmit = async values => {
     try {
       const authURL = `${process.env.VITE_API_URL}/api/users/`;
       const userResponse = await sendRequest(authURL, 'POST', values);
+      const { status } = userResponse;
 
       const { token } = userResponse.data;
       const { _id } = jwtDecode(token);
@@ -151,57 +161,45 @@ const AuthButton = () => {
       const favoriteURL = `${process.env.VITE_API_URL}/api/favorite`;
       const favoriteResponse = await sendRequest(favoriteURL, 'POST', createData);
 
-      // if (!userResponse.statusText && !cartResponse.statusText && !favoriteResponse.statusText) {
-      //   setOpen(true);
-      //   throw new Error('Network response was not ok');
-      // }
-      // if (!userResponse.statusText) {
-      //   throw new Error('Network response was not ok');
-      // }
+      if (status === 200) {
+        dispatch(openRegistrationModal(true));
+        handleCloseModal();
+        dispatch(setRegistration(false));
+      }
     } catch (err) {
-      setOpen(true);
+      dispatch(setRegistration(true));
       console.error('Error fetching', err);
     }
+  };
 
-    handleCloseModal();
+  const handleCloseLoginModal = () => {
+    dispatch(closeLoginModal(false));
+  };
+
+  const handleCloseRegistrationModal = () => {
+    dispatch(openRegistrationModal(false));
   };
 
   return (
     <ThemeProvider theme={theme}>
       <div>
-        {!!open && (
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Упс...
-              </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                Щось пішло не так
-              </Typography>
-            </Box>
-          </Modal>
+        {!!isOpenedLoginModal && (
+          <ModalWindow
+            mainText="Ви успішно увійшли"
+            handleClick={() => {}}
+            handleClose={handleCloseLoginModal}
+            isOpened={isOpenedLoginModal}
+            actions={false}
+          />
         )}
-        {!!welcomeModalOpen && (
-          <Modal
-            open={welcomeModalOpen}
-            onClose={() => setWelcomeModalOpen(false)}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Привіт, {name} {lastName} !
-              </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                Ласкаво просимо на наш сайт. Сподіваємось, вам сподобаються наші пропозиції.
-              </Typography>
-            </Box>
-          </Modal>
+        {!!isOpenedRegistrationModal && (
+          <ModalWindow
+            mainText="Ви успішно зареєструвались"
+            handleClick={() => {}}
+            handleClose={handleCloseRegistrationModal}
+            isOpened={isOpenedRegistrationModal}
+            actions={false}
+          />
         )}
         <Modal
           open={isOpen}

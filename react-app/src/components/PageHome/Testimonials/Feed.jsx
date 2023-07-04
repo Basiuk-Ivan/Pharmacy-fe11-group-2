@@ -29,7 +29,7 @@ export const Feed = ({ item }) => {
             {dateValue}
           </Typography>
         </Box>
-        <Rating name="half-rating" value={item.rating} sx={StarRateItem} readOnly />
+        <Rating name="half-rating" value={Number(item.rating)} sx={StarRateItem} readOnly />
       </Box>
       <Typography fontFamily="Roboto" component="p" sx={feedBackItemText}>
         {item.responseTxt}

@@ -19,39 +19,27 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { openModal } from '../../../../redux/slice/modalSlice';
-import { setToken, removeToken } from '../../../../redux/slice/isToken';
+import { setToken, removeToken, openLogoutModal, setLogin } from '../../../../redux/slice/isToken';
 import { removeUser } from '../../../../redux/slice/userSlice';
 import { deleteFromFavouriteItems } from '../../../../redux/slice/favouriteItems';
 import { removeItem } from '../../../../redux/slice/cartItems';
+import ModalWindow from '../../../ModalWindow';
 
-const settings = [
-  { name: 'Профіль', path: '/cabinet' },
-  { name: 'Account' },
-  { name: 'Dashboard' },
-  { name: 'Вихід' }
-];
+const settings = [{ name: 'Профіль', path: '/cabinet' }, { name: 'Вихід' }];
 export const MobileMenu = () => {
   const dispatch = useDispatch();
+  const isOpenedLogoutModal = useSelector(state => state.isToken.isOpenedLogoutModal);
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
   const cartItems = useSelector(state => state.itemCards.items);
   const isAuth = useSelector(state => state.user.isAuth);
   const navigate = useNavigate();
 
-  const [hasToken, setHasToken] = useState(false);
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   setHasToken(!!token);
-  // }, []);
-
   useEffect(() => {
     const token = localStorage.getItem('token');
-    setHasToken(!!token);
     dispatch(setToken(token));
   }, [dispatch]);
 
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-  // const [hasToken, setHasToken] = useState(false);
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -79,10 +67,15 @@ export const MobileMenu = () => {
     localStorage.removeItem('token');
     dispatch(setToken(null));
     navigate('/');
-    // window.location.reload();
     dispatch(removeUser());
     dispatch(deleteFromFavouriteItems('all'));
     dispatch(removeItem('all'));
+    dispatch(openLogoutModal(true));
+  };
+
+  const handleCloseLogoutModal = () => {
+    dispatch(openLogoutModal(false));
+    dispatch(setLogin(false));
   };
 
   const StyledBadge = styled(Badge)(() => ({
@@ -97,6 +90,15 @@ export const MobileMenu = () => {
 
   return (
     <>
+      {!!isOpenedLogoutModal && (
+        <ModalWindow
+          mainText="Ви вийшли з кабінета"
+          handleClick={() => {}}
+          handleClose={handleCloseLogoutModal}
+          isOpened={isOpenedLogoutModal}
+          actions={false}
+        />
+      )}
       <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
         <IconButton
           size="large"
@@ -158,7 +160,7 @@ export const MobileMenu = () => {
                 <IconButton sx={{ p: 0 }}>
                   <PermIdentityOutlinedIcon sx={{ fill: '#2FD3AE' }} />
                 </IconButton>
-                <Typography>Profile</Typography>
+                <Typography>Профіль</Typography>
               </AccordionSummary>
 
               <AccordionDetails>
@@ -183,7 +185,7 @@ export const MobileMenu = () => {
             <IconButton>
               <PermIdentityOutlinedIcon sx={{ fill: '#2FD3AE' }} />
             </IconButton>
-            <Typography>Profile</Typography>
+            <Typography>Профіль</Typography>
           </MenuItem>
         )}
       </Menu>
