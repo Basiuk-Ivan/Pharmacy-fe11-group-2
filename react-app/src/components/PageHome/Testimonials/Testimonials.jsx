@@ -30,7 +30,7 @@ const Testimonials = () => {
     try {
       const res = await getResponsesFromDB(1);
 
-      const { data } = await res;
+      const { data } = res;
 
       setAverageRating(data.roundedValueRating);
       setTotalFound(data.totalFound);
