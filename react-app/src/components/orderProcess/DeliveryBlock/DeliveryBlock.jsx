@@ -20,7 +20,7 @@ import WarehouseSelect from './WarehouseSelect/WarehouseSelect';
 import SelfPickup from './SelfPickup/SelfPickup';
 import { addOrderDeliveryMethod } from '../../../redux/slice/orderProcessSlice';
 
-const DeliveryBlock = ({ setContactsData }) => {
+const DeliveryBlock = () => {
   const [selectedCity, setSelectedCity] = useState(null);
   const [showAdditionalField, setShowAdditionalField] = useState(false);
   const [cityDelivery, setCityDelivery] = useState([]);
@@ -104,7 +104,7 @@ const DeliveryBlock = ({ setContactsData }) => {
             )}
             {!showAdditionalField && (
               <Grid item md={8} xs={12}>
-                <SelfPickup setContactsData={setContactsData} />
+                <SelfPickup />
               </Grid>
             )}
           </Grid>

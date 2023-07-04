@@ -18,6 +18,7 @@ const transporter = nodemailer.createTransport({
     user: 'fe.11.group.c@gmail.com',
     pass: 'hynlysmxahzjyllh',
   },
+  tls: { rejectUnauthorized: false },
 });
 
 export const sendMailOrder = async ({ products, email, totalPrice }) => {

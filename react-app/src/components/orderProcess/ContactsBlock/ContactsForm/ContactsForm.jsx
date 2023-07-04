@@ -1,16 +1,24 @@
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { TextField, Grid, Typography, Container } from '@mui/material';
+import { TextField, Grid, Typography, Container, Stack, Skeleton } from '@mui/material';
 import { styled, ThemeProvider } from '@mui/material/styles';
 import { ErrorMessage, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { request } from '../../../../tools/request';
 import { theme as muiTheme } from '../../../../tools/muiTheme';
-import { openOrderModal } from '../../../../redux/slice/cartItems';
+import {
+  closeModalNotAvailable,
+  openModalNotAvailable,
+  openOrderModal,
+  setSum
+} from '../../../../redux/slice/cartItems';
 import { putProductsToCartDB } from '../../../../utils/ActionsWithProduct/putProductsToCartDB';
 import { addContactsInfo } from '../../../../redux/slice/orderProcessSlice';
 import { updateQuantity } from '../../../../utils/ActionsWithProduct/updateQuantity';
 import { sendRequest } from '../../../../tools/sendRequest';
+import { countSum } from '../../../../utils/ActionsWithProduct/countSum';
+import { openModalAddtoCart } from '../../../../redux/slice/favouriteItems';
+import ModalWindow from '../../../ModalWindow';
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),
@@ -21,7 +29,8 @@ const ChangedTextField = styled(TextField)(({ theme }) => ({
 
 const nameRegExp = /[a-zA-zа-яА-яёЁ]$/;
 
-const ContactsForm = ({ products, setContactsData }) => {
+const ContactsForm = () => {
+  const isOpenedCartModalNotAvailable = useSelector(state => state.itemCards.isOpenedCartModalNotAvailable);
   const orderPaymentMethod = useSelector(state => state.order.PaymentMethodValue);
   const sumWithDiscount = useSelector(state => state.itemCards.sumWithDiscount);
   const cartStoreId = useSelector(state => state.user.cartStoreId);
@@ -33,7 +42,14 @@ const ContactsForm = ({ products, setContactsData }) => {
   const city = useSelector(state => state.validationOrder.city);
   console.log('cityState:', city);
 
+  const [products, setProducts] = useState([]);
+  const productItemCart = useSelector(state => state.itemCards.items);
   const dispatch = useDispatch();
+  const [showSkeleton, setShowSkeleton] = useState(true);
+
+  const handleCloseModalNotAvailable = () => {
+    dispatch(closeModalNotAvailable());
+  };
 
   const validationSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -102,13 +118,50 @@ const ContactsForm = ({ products, setContactsData }) => {
     // }
 
     onSubmit: async (values, { resetForm }) => {
-      const data = { ...values, ...(userId && { user: userId }) };
+      console.log(values.products);
+      let cartItemsCheckQuantity;
+      let dataProductsDB;
+      const fetchProducts = async () => {
+        try {
+          if (values.products.length > 0) {
+            const cartIds = values.products.map(item => item.id).join(',');
+
+            const { result } = await request({
+              url: '',
+              method: 'GET',
+              params: { _id: cartIds }
+            });
+
+            const { data } = result;
+            dataProductsDB = data;
+
+            cartItemsCheckQuantity = values.products.find(cartItem => {
+              const someResult = data.find(cartItemDB => cartItemDB.quantity < cartItem.quantity);
+              if (someResult) {
+                return true;
+              }
+              return false;
+            });
+          }
+        } catch (error) {
+          console.error('Error fetching products:', error);
+        }
+      };
+
+      await fetchProducts();
+
+      if (cartItemsCheckQuantity) {
+        dispatch(openModalNotAvailable());
+        return;
+      }
+
+      const productData = { ...values, ...(userId && { user: userId }) };
 
       console.log('values:', values);
       const { status } = await request({
         url: '/order',
         method: 'POST',
-        body: data
+        body: productData
       });
 
       const updateProductQuantities = async productArr => {
@@ -118,10 +171,6 @@ const ContactsForm = ({ products, setContactsData }) => {
       };
 
       await updateProductQuantities(values.products);
-
-      // // values.products.forEach(productItem => {
-      //   updateQuantity(productItem);
-      // });
 
       if (status === 200) {
         if (cartStoreId) {
@@ -144,8 +193,32 @@ const ContactsForm = ({ products, setContactsData }) => {
   }, [city, formik.setValues]);
 
   useEffect(() => {
-    setContactsData(formik.values);
-  }, [formik.values, setContactsData]);
+    const fetchProducts = async () => {
+      try {
+        if (productItemCart.length > 0) {
+          const cartIds = productItemCart.map(item => item.id).join(',');
+
+          const { result } = await request({
+            url: '',
+            method: 'GET',
+            params: { _id: cartIds }
+          });
+
+          const { data } = result;
+
+          const combinedArray = productItemCart.map(item1 => {
+            const arr2 = data.find(item2 => item2.id === item1.id);
+            return { ...item1, ...arr2, quantity: item1.quantity, quantityStore: arr2.quantity };
+          });
+
+          setProducts(combinedArray);
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+    fetchProducts();
+  }, [productItemCart]);
 
   useEffect(() => {
     formik.setFieldValue('products', products);
@@ -157,6 +230,14 @@ const ContactsForm = ({ products, setContactsData }) => {
   useEffect(() => {
     formik.setFieldValue('paymentMethod', orderPaymentMethod);
   }, [orderPaymentMethod]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSkeleton(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <ThemeProvider theme={muiTheme}>
@@ -173,54 +254,70 @@ const ContactsForm = ({ products, setContactsData }) => {
         >
           Контактні дані
         </Typography>
-        <form id="contacts" onSubmit={formik.handleSubmit}>
-          <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
-            <Grid item md={6} xl={6}>
-              <ChangedTextField
-                label="Ваше ім'я"
-                fullWidth
-                name="firstName"
-                value={formik.values.firstName}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={Boolean(formik.touched.firstName && formik.errors.firstName)}
-                helperText={formik.touched.firstName && formik.errors.firstName}
-              />
-              <ChangedTextField
-                label="Ваш e-mail"
-                fullWidth
-                name="email"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={Boolean(formik.touched.email && formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
-              />
+        {showSkeleton ? (
+          <Stack direction="column" spacing={2}>
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+          </Stack>
+        ) : (
+          <form id="contacts" onSubmit={formik.handleSubmit}>
+            <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
+              <Grid item md={6} xl={6}>
+                <ChangedTextField
+                  label="Ваше ім'я"
+                  fullWidth
+                  name="firstName"
+                  value={formik.values.firstName}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={Boolean(formik.touched.firstName && formik.errors.firstName)}
+                  helperText={formik.touched.firstName && formik.errors.firstName}
+                />
+                <ChangedTextField
+                  label="Ваш e-mail"
+                  fullWidth
+                  name="email"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={Boolean(formik.touched.email && formik.errors.email)}
+                  helperText={formik.touched.email && formik.errors.email}
+                />
+              </Grid>
+              <Grid item md={6} xl={6}>
+                <ChangedTextField
+                  label="Ваше прізвище"
+                  fullWidth
+                  name="lastName"
+                  value={formik.values.lastName}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={Boolean(formik.touched.lastName && formik.errors.lastName)}
+                  helperText={formik.touched.lastName && formik.errors.lastName}
+                />
+                <ChangedTextField
+                  label="Ваш телефон"
+                  fullWidth
+                  name="phone"
+                  value={formik.values.phone}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={Boolean(formik.touched.phone && formik.errors.phone)}
+                  helperText={formik.touched.phone && formik.errors.phone}
+                />
+              </Grid>
             </Grid>
-            <Grid item md={6} xl={6}>
-              <ChangedTextField
-                label="Ваше прізвище"
-                fullWidth
-                name="lastName"
-                value={formik.values.lastName}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={Boolean(formik.touched.lastName && formik.errors.lastName)}
-                helperText={formik.touched.lastName && formik.errors.lastName}
-              />
-              <ChangedTextField
-                label="Ваш телефон"
-                fullWidth
-                name="phone"
-                value={formik.values.phone}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={Boolean(formik.touched.phone && formik.errors.phone)}
-                helperText={formik.touched.phone && formik.errors.phone}
-              />
-            </Grid>
-          </Grid>
-        </form>
+          </form>
+        )}
+        <ModalWindow
+          mainText="В корзині є товари, наявність яких відсутня. Для подальшого оформлення видаліть відсутні товари з корзини."
+          handleClick={() => {}}
+          handleClose={handleCloseModalNotAvailable}
+          isOpened={isOpenedCartModalNotAvailable}
+          actions={false}
+        />
       </Container>
     </ThemeProvider>
   );

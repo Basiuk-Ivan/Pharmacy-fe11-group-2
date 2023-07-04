@@ -9,13 +9,6 @@ import { request } from '../tools/request';
 import DeliveryBlock from '../components/orderProcess/DeliveryBlock/DeliveryBlock';
 
 const OrderProcess = () => {
-  const [contactsData, setContactsData] = useState(null);
-
-  const handleSubmit = values => {
-    // Обробка подання форми
-    setContactsData(values);
-  };
-
   const [products, setProducts] = useState([]);
   const productItemCart = useSelector(state => state.itemCards.items);
 
@@ -35,7 +28,7 @@ const OrderProcess = () => {
 
           const combinedArray = productItemCart.map(item1 => {
             const arr2 = data.find(item2 => item2.id === item1.id);
-            return { ...item1, ...arr2, quantity: item1.quantity, quantityStore: arr2.quantity };
+            return { ...item1, ...arr2, quantity: item1.quantity };
           });
 
           setProducts(combinedArray);
@@ -65,8 +58,8 @@ const OrderProcess = () => {
       >
         Оформити замовлення
       </Typography>
-      <ContactsBlock products={products} setContactsData={setContactsData} />
-      <DeliveryBlock setContactsData={setContactsData} />
+      <ContactsBlock products={products} />
+      <DeliveryBlock />
       <PaymentBlock />
       <Advantages />
     </Container>

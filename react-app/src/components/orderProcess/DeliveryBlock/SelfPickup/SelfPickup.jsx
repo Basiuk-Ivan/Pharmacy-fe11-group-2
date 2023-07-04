@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addOrderAddress, addOrderCity } from '../../../../redux/slice/orderProcessSlice';
 import { addCity } from '../../../../redux/slice/validationOrder';
 
-const SelfPickup = ({ setContactsData }) => {
+const SelfPickup = () => {
   const [selectedCityStreets, setSelectedCityStreets] = useState([]);
 
   const dispatch = useDispatch();
@@ -67,9 +67,6 @@ const SelfPickup = ({ setContactsData }) => {
     formik.validateField(field);
   };
 
-  useEffect(() => {
-    setContactsData(formik.values);
-  }, [formik.values, setContactsData]);
   return (
     <>
       <form id="self-pickup">

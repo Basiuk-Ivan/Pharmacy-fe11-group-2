@@ -23,11 +23,15 @@ import { Marketing } from './pages/FooterPage/Marketing';
 import { Job } from './pages/FooterPage/Job';
 import { Varranty } from './pages/FooterPage/Varranty';
 import { setCartStoreId, setFavoriteStoreId, setUser } from './redux/slice/userSlice';
-import { Step } from './pages/BlogPages/5steps';
+import { Step } from './pages/BlogPages/steps';
 import { sendRequest } from './tools/sendRequest';
 import { addToCartMoreOne } from './redux/slice/cartItems';
 import { addToFavouriteItems } from './redux/slice/favouriteItems';
 import { getUserDataFromDB } from './utils/ActionWithUser/getUserDataFromDB';
+import RespondPage from './pages/Response/RespondPage';
+import { Rede } from './pages/BlogPages/rede';
+import { Nature } from './pages/BlogPages/nature';
+import { Energy } from './pages/BlogPages/energy';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -77,7 +81,11 @@ const App = () => {
           <Route path="/:category/*" element={<Products />} />
           <Route path="/favourite" element={<Favourite />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/respond" element={<RespondPage />} />
           <Route path="/step" element={<Step />} />
+          <Route path="/rede" element={<Rede />} />
+          <Route path="/nature" element={<Nature />} />
+          <Route path="/energy" element={<Energy />} />
           <Route path="/company" element={<Company />} />
           <Route path="/delivery" element={<Delivery />} />
           <Route path="/pay" element={<Pay />} />

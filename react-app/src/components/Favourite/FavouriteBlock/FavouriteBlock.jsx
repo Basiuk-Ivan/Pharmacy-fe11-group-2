@@ -9,12 +9,15 @@ import Bread from '../../Bread';
 
 import { openModalAddtoCart, openModalRemoveAll } from '../../../redux/slice/favouriteItems';
 import { request } from '../../../tools/request';
+import ModalWindow from '../../ModalWindow';
+import { closeModalNotAvailable, openModalNotAvailable } from '../../../redux/slice/cartItems';
 
 const FavouriteBlock = props => {
   const [products, setProducts] = useState([]);
   const [showSkeleton, setShowSkeleton] = useState(true);
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
   const dispatch = useDispatch();
+  const isOpenedCartModalNotAvailable = useSelector(state => state.itemCards.isOpenedCartModalNotAvailable);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -60,7 +63,16 @@ const FavouriteBlock = props => {
   };
 
   const addAlltoCart = () => {
-    dispatch(openModalAddtoCart());
+    const product = products.find(productItem => productItem.quantity < 1);
+    if (product) {
+      dispatch(openModalNotAvailable());
+    } else {
+      dispatch(openModalAddtoCart());
+    }
+  };
+
+  const handleCloseModalNotAvailable = () => {
+    dispatch(closeModalNotAvailable());
   };
 
   return (
@@ -166,6 +178,13 @@ const FavouriteBlock = props => {
           Додайте товар в обране для відображення на цій сторінці
         </Typography>
       )}
+      <ModalWindow
+        mainText="В улюблених є товари, кількість яких відсутня. Для додавання товарів в корзину, будь-ласка видаліть відсутній товар"
+        handleClick={() => {}}
+        handleClose={handleCloseModalNotAvailable}
+        isOpened={isOpenedCartModalNotAvailable}
+        actions={false}
+      />
     </Container>
   );
 };
