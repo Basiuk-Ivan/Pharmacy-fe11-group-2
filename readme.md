@@ -1,6 +1,6 @@
-# [**PharmacyOnline**](https://api-p4qh.onrender.com/)
+# [**PharmacyOnline**](https://pharmacy-online-8jx0.onrender.com/)
 
-Welcome to our online application [**PharmacyOnline**](https://api-p4qh.onrender.com/) - a service for convenient purchase of medicines and medical products.
+Welcome to our online application [**PharmacyOnline**](https://pharmacy-online-8jx0.onrender.com/) - a service for convenient purchase of medicines and medical products.
 
 The main features of the application:
 

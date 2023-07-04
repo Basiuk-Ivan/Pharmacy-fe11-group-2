@@ -9,6 +9,13 @@ import { request } from '../tools/request';
 import DeliveryBlock from '../components/orderProcess/DeliveryBlock/DeliveryBlock';
 
 const OrderProcess = () => {
+  const [contactsData, setContactsData] = useState(null);
+
+  const handleSubmit = values => {
+    // Обробка подання форми
+    setContactsData(values);
+  };
+
   const [products, setProducts] = useState([]);
   const productItemCart = useSelector(state => state.itemCards.items);
 
@@ -58,8 +65,8 @@ const OrderProcess = () => {
       >
         Оформити замовлення
       </Typography>
-      <ContactsBlock products={products} />
-      <DeliveryBlock />
+      <ContactsBlock products={products} setContactsData={setContactsData} />
+      <DeliveryBlock setContactsData={setContactsData} />
       <PaymentBlock />
       <Advantages />
     </Container>

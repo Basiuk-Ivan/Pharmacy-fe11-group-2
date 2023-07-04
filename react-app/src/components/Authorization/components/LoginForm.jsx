@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Typography } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { CustomTextField, StyledButton, UnderlineSpan, HighlightSpan } from '../style';
 import { openModalForgotPass } from '../../../redux/slice/modalSlice';
 
 export const LoginForm = ({ activeTab, handleFormSubmit }) => {
+  const isLogin = useSelector(state => state.isToken.isLogin);
+
   const dispatch = useDispatch();
 
   return (
@@ -16,8 +18,8 @@ export const LoginForm = ({ activeTab, handleFormSubmit }) => {
         password: ''
       }}
       validationSchema={Yup.object().shape({
-        email: Yup.string().email('Невірний формат email').required('Обов\'язкове поле'),
-        password: Yup.string().required('Обов\'язкове поле')
+        email: Yup.string().email('Невірний формат email').required("Обов'язкове поле"),
+        password: Yup.string().required("Обов'язкове поле")
       })}
       onSubmit={handleFormSubmit}
       validate={values => {
@@ -56,6 +58,7 @@ export const LoginForm = ({ activeTab, handleFormSubmit }) => {
                   autoComplete="current-password"
                 />
                 <ErrorMessage name="password" component="div" className="error-message" />
+                {isLogin && <div className="error-message">Невірний логін або пароль</div>}
               </div>
               <div className="footer_container">
                 <StyledButton type="submit" variant="contained" color="success">

@@ -1,4 +1,14 @@
-import { FormControl, FormControlLabel, RadioGroup, Typography, Radio, Grid, TextField, Autocomplete, useMediaQuery } from '@mui/material';
+import {
+  FormControl,
+  FormControlLabel,
+  RadioGroup,
+  Typography,
+  Radio,
+  Grid,
+  TextField,
+  Autocomplete,
+  useMediaQuery
+} from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,7 +20,7 @@ import WarehouseSelect from './WarehouseSelect/WarehouseSelect';
 import SelfPickup from './SelfPickup/SelfPickup';
 import { addOrderDeliveryMethod } from '../../../redux/slice/orderProcessSlice';
 
-const DeliveryBlock = () => {
+const DeliveryBlock = ({ setContactsData }) => {
   const [selectedCity, setSelectedCity] = useState(null);
   const [showAdditionalField, setShowAdditionalField] = useState(false);
   const [cityDelivery, setCityDelivery] = useState([]);
@@ -45,10 +55,7 @@ const DeliveryBlock = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid
-        container
-        justifyContent={{ xs: 'center' }}
-      >
+      <Grid container justifyContent={{ xs: 'center' }}>
         <Grid
           item
           md={12}
@@ -58,7 +65,7 @@ const DeliveryBlock = () => {
             boxShadow: '0px 10px 40px rgba(11, 54, 29, 0.05)',
             padding: '10px',
             backgroundColor: 'white',
-            mt: '30px',
+            mt: '30px'
           }}
         >
           <Grid container>
@@ -81,32 +88,23 @@ const DeliveryBlock = () => {
                   name="radio-buttons-group"
                   onChange={handleRadioChange}
                 >
-                  <FormControlLabel
-                    value="self"
-                    control={<Radio />}
-                    label="Забрати з аптеки"
-                  />
-                  <FormControlLabel
-                    value="novaPost"
-                    control={<Radio />}
-                    label="Самовивіз з Нової Пошти"
-                  />
+                  <FormControlLabel value="self" control={<Radio />} label="Забрати з аптеки" />
+                  <FormControlLabel value="novaPost" control={<Radio />} label="Самовивіз з Нової Пошти" />
                 </RadioGroup>
               </FormControl>
             </Grid>
             {showAdditionalField && (
-              <Grid
-                item
-                md={8}
-                xs={12}
-              >
+              <Grid item md={8} xs={12}>
                 <CitySelect cityDelivery={cityDelivery} setSelectedCity={setSelectedCity} />
-                <WarehouseSelect warehouseDelivery={warehouseDelivery} setSelectedWarehouse={setSelectedWarehouse} />
+                <WarehouseSelect
+                  warehouseDelivery={warehouseDelivery}
+                  setSelectedWarehouse={setSelectedWarehouse}
+                />
               </Grid>
             )}
             {!showAdditionalField && (
               <Grid item md={8} xs={12}>
-                <SelfPickup />
+                <SelfPickup setContactsData={setContactsData} />
               </Grid>
             )}
           </Grid>

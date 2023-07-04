@@ -21,7 +21,7 @@ const ChangedTextField = styled(TextField)(({ theme }) => ({
 
 const nameRegExp = /[a-zA-zа-яА-яёЁ]$/;
 
-const ContactsForm = ({ products }) => {
+const ContactsForm = ({ products, setContactsData }) => {
   const orderPaymentMethod = useSelector(state => state.order.PaymentMethodValue);
   const sumWithDiscount = useSelector(state => state.itemCards.sumWithDiscount);
   const cartStoreId = useSelector(state => state.user.cartStoreId);
@@ -126,6 +126,10 @@ const ContactsForm = ({ products }) => {
       }
     }
   });
+
+  useEffect(() => {
+    setContactsData(formik.values);
+  }, [formik.values, setContactsData]);
 
   useEffect(() => {
     formik.setFieldValue('products', products);

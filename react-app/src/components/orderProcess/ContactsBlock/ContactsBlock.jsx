@@ -2,7 +2,7 @@ import { Grid } from '@mui/material';
 import ContactsForm from './ContactsForm/ContactsForm';
 import OrderList from './OrderList/OrderList';
 
-const ContactsBlock = ({ products }) => (
+const ContactsBlock = ({ products, setContactsData }) => (
   <Grid
     container
     justifyContent={{ xs: 'center', md: 'space-between' }}
@@ -21,7 +21,7 @@ const ContactsBlock = ({ products }) => (
         minHeight: '500px'
       }}
     >
-      <ContactsForm products={products} />
+      <ContactsForm setContactsData={setContactsData} products={products} />
     </Grid>
     <Grid
       item
