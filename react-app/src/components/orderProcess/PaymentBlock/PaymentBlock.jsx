@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import PaymentMethodForm from './PaymentMethodForm/PaymentMethodForm';
 import TotalAmountForm from './TotalAmountForm/TotalAmountForm';
 import ModalWindow from '../../ModalWindow';
-import { closeOrderModal, removeItem } from '../../../redux/slice/cartItems';
+import { closeModalNotAvailable, closeOrderModal, removeItem } from '../../../redux/slice/cartItems';
 import { removeAllFromCartLocalStorage } from '../../../utils/LocalStore/removeAllFromCartLocalStorage';
 
 const PaymentBlock = () => {
@@ -18,6 +18,10 @@ const PaymentBlock = () => {
     removeAllFromCartLocalStorage();
     dispatch(closeOrderModal());
     navigate('/');
+  };
+
+  const handleCloseModalNotAvailable = () => {
+    dispatch(closeModalNotAvailable());
   };
 
   return (
@@ -82,6 +86,7 @@ const PaymentBlock = () => {
         isOpened={isOpenedOrderModal}
         actions={false}
       />
+
     </Container>
   );
 };

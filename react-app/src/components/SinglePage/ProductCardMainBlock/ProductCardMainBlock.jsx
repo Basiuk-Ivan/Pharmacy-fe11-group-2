@@ -140,7 +140,7 @@ const ProductCardMainBlock = ({ productItem }) => {
                 color={productItem?.quantity > 0 ? '#2FD3AE' : '#910808'}
                 sx={{ fontSize: { xs: '14px', sm: '14px', md: '14px', lg: '14px' }, fontWeight: '500' }}
               >
-                {productItem?.quantity > 0 ? 'Є в наявності' : 'Товар відсутній'}
+                {productItem?.quantity > 0 ? 'Є в наявності' : 'Відсутній'}
               </Typography>
               <Box sx={{ display: 'flex', gap: '3px' }}>
                 <Typography

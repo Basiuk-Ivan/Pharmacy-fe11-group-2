@@ -217,7 +217,7 @@ const AuthButton = () => {
                   <Tab color="success" label="Реєстрація" value="registration" />
                 </Tabs>
                 <Typography id="modal-modal-title" variant="h6" component="p">
-                  Залиште ваші дані, і ми зв'яжемося з вами. Ми не займаємося розсилкою рекламних повідомлень,
+                  Залиште Ваші дані, і ми зв'яжемося з вами. Ми не займаємося розсилкою рекламних повідомлень,
                   а також не передаємо контактні дані третім особам
                 </Typography>
                 <LoginForm activeTab={activeTab} handleFormSubmit={handleFormLogin} />
