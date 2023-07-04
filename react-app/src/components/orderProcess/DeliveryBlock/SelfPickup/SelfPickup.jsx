@@ -2,11 +2,13 @@ import { TextField, Autocomplete, Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addOrderAddress, addOrderCity } from '../../../../redux/slice/orderProcessSlice';
+import { addCity } from '../../../../redux/slice/validationOrder';
 
 const SelfPickup = ({ setContactsData }) => {
   const [selectedCityStreets, setSelectedCityStreets] = useState([]);
+
   const dispatch = useDispatch();
 
   const validationSchema = Yup.object().shape({
@@ -21,6 +23,8 @@ const SelfPickup = ({ setContactsData }) => {
     },
     validationSchema
   });
+  // console.log('values:', formik.values);
+  // console.log('errors:', formik.errors);
 
   const cityPickup = ['Київ', 'Дніпро', 'Львів'];
   const addressPickup = [
@@ -46,6 +50,7 @@ const SelfPickup = ({ setContactsData }) => {
         break;
     }
     formik.setFieldValue('city', value || '');
+    dispatch(addCity(value || ''));
     formik.setFieldTouched('city', true);
     formik.validateField('city');
   };

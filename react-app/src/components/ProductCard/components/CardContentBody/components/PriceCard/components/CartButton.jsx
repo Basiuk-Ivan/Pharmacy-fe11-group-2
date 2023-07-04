@@ -15,9 +15,7 @@ import { cartStyles, iconButtonStyles } from '../../../../../style';
 import ModalWindow from '../../../../../../ModalWindow';
 import { addCartProduct } from '../../../../../../../utils/ActionsWithProduct/addCartProduct';
 import { removeCartProduct } from '../../../../../../../utils/ActionsWithProduct/removeCartProduct';
-import {
-  removeCartProductAllquantity
-} from '../../../../../../../utils/ActionsWithProduct/removeCartProductAllquantity';
+import { removeCartProductAllquantity } from '../../../../../../../utils/ActionsWithProduct/removeCartProductAllquantity';
 import { putProductsToCartDB } from '../../../../../../../utils/ActionsWithProduct/putProductsToCartDB';
 
 export const CartButton = ({ productItem, isInCart }) => {
@@ -61,7 +59,9 @@ export const CartButton = ({ productItem, isInCart }) => {
     window.localStorage.setItem('removeItem', JSON.stringify(productForRemove));
   };
 
-  const handleAddToCart = async product => {
+  const handleAddToCart = async (product, event) => {
+    event.preventDefault();
+
     if (!isCart) {
       dispatch(addToCart({ id: product.id }));
 
@@ -103,7 +103,7 @@ export const CartButton = ({ productItem, isInCart }) => {
     );
   }
   return (
-    <IconButton onClick={() => handleAddToCart(productItem)} sx={cartStyle}>
+    <IconButton onClick={event => handleAddToCart(productItem, event)} sx={cartStyle}>
       <ShoppingCartOutlinedIcon />
     </IconButton>
   );

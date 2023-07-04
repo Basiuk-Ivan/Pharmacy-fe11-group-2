@@ -8,6 +8,7 @@ import favouriteItemsSlice from '../slice/favouriteItems';
 import filterBaseSlice from '../slice/filterBaseSlice';
 import tokenSlise from '../slice/isToken';
 import userSlice from '../slice/userSlice';
+import validationOrderSlice from '../slice/validationOrder';
 
 const store = configureStore({
   reducer: {
@@ -19,7 +20,8 @@ const store = configureStore({
     filterBase: filterBaseSlice,
     itemCards: itemCardsSlice,
     user: userSlice,
-    isToken: tokenSlise
+    isToken: tokenSlise,
+    validationOrder: validationOrderSlice
   }
 });
 

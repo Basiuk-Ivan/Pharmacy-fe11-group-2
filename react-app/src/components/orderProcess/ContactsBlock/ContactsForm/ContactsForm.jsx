@@ -30,6 +30,8 @@ const ContactsForm = ({ products, setContactsData }) => {
   const name = useSelector(state => state.user.firstName);
   const email = useSelector(state => state.user.email);
   const phoneNumber = useSelector(state => state.user.phoneNumber);
+  const city = useSelector(state => state.validationOrder.city);
+  console.log('cityState:', city);
 
   const dispatch = useDispatch();
 
@@ -45,7 +47,9 @@ const ContactsForm = ({ products, setContactsData }) => {
       .min(2, 'Мінімум два символи'),
     phone: Yup.number()
       .required('Введіть номер мобільного телефону')
-      .typeError('Введіть номер мобільного телефону')
+      .typeError('Введіть номер мобільного телефону'),
+    city: Yup.string().required('Оберіть місто').nullable(),
+    address: Yup.string().required('Оберіть адресу').nullable()
   });
 
   const formik = useFormik({
@@ -56,7 +60,10 @@ const ContactsForm = ({ products, setContactsData }) => {
       phone: phoneNumber,
       paymentMethod: `${orderPaymentMethod}`,
       products: [],
-      totalPrice: Number
+      totalPrice: Number,
+      // city: '',
+      city,
+      address: ''
     },
     validationSchema,
 
@@ -97,6 +104,7 @@ const ContactsForm = ({ products, setContactsData }) => {
     onSubmit: async (values, { resetForm }) => {
       const data = { ...values, ...(userId && { user: userId }) };
 
+      console.log('values:', values);
       const { status } = await request({
         url: '/order',
         method: 'POST',
@@ -126,6 +134,14 @@ const ContactsForm = ({ products, setContactsData }) => {
       }
     }
   });
+  console.log('formik:', formik);
+
+  useEffect(() => {
+    formik.setValues({
+      ...formik.values,
+      city: city || ''
+    });
+  }, [city, formik.setValues]);
 
   useEffect(() => {
     setContactsData(formik.values);
