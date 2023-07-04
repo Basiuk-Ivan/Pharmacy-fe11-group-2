@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { TextField, Grid, Typography, Container } from '@mui/material';
+import {TextField, Grid, Typography, Container, Stack, Skeleton} from '@mui/material';
 import { styled, ThemeProvider } from '@mui/material/styles';
 import { ErrorMessage, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -37,6 +37,7 @@ const ContactsForm = () => {
   const [products, setProducts] = useState([]);
   const productItemCart = useSelector(state => state.itemCards.items);
   const dispatch = useDispatch();
+  const [showSkeleton, setShowSkeleton] = useState(true);
 
   const handleCloseModalNotAvailable = () => {
     dispatch(closeModalNotAvailable());
@@ -210,21 +211,37 @@ const ContactsForm = () => {
     formik.setFieldValue('paymentMethod', orderPaymentMethod);
   }, [orderPaymentMethod]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSkeleton(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <ThemeProvider theme={muiTheme}>
       <Container>
         <Typography
-          variant="h5"
-          sx={{
-            margin: '40px 0 30px 0',
-            fontFamily: 'Raleway, sans-serif',
-            color: '#4F4F4F',
-            fontWeight: '700',
-            fontSize: '24px'
-          }}
+            variant="h5"
+            sx={{
+              margin: '40px 0 30px 0',
+              fontFamily: 'Raleway, sans-serif',
+              color: '#4F4F4F',
+              fontWeight: '700',
+              fontSize: '24px'
+            }}
         >
           Контактні дані
         </Typography>
+        {showSkeleton ? (
+                <Stack direction="column" spacing={2}>
+                  <Skeleton />
+                  <Skeleton />
+                  <Skeleton />
+                  <Skeleton />
+                </Stack>
+            ) :
         <form id="contacts" onSubmit={formik.handleSubmit}>
           <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
             <Grid item md={6} xl={6}>
@@ -272,7 +289,7 @@ const ContactsForm = () => {
               />
             </Grid>
           </Grid>
-        </form>
+        </form> }
         <ModalWindow
           mainText="В корзині є товари, наявність яких відсутня. Для подальшого оформлення видаліть відсутні товари з корзини."
           handleClick={() => {}}
