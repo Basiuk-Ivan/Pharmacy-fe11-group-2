@@ -1,19 +1,39 @@
-import { Box, Skeleton, Stack } from '@mui/material';
+import { Box, Skeleton } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export const SkeletonPromotionSlider = () => {
-  return (
+  const isMediumScreen = useMediaQuery('(max-width: 900px)');
+  const isSmallScreen = useMediaQuery('(max-width: 600px)');
+
+  const skeletonItemSmallScreen = <Skeleton variant="rectangular" width={220} height={430} />;
+
+  const skeletonItemMediumScreen = (
     <>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-        <Stack direction="column" spacing={2}>
-          <Skeleton variant="rectangular" width={220} height={430} />
-        </Stack>
-        <Stack direction="column" spacing={2}>
-          <Skeleton variant="rectangular" width={220} height={430} />
-        </Stack>
-        <Stack direction="column" spacing={2}>
-          <Skeleton variant="rectangular" width={220} height={430} />
-        </Stack>
-      </Box>
+      <Skeleton variant="rectangular" width={220} height={430} />
+      <Skeleton variant="rectangular" width={220} height={430} />
     </>
+  );
+
+  const skeletonItemLargeScreen = (
+    <>
+      <Skeleton variant="rectangular" width={220} height={430} />
+      <Skeleton variant="rectangular" width={220} height={430} />
+      <Skeleton variant="rectangular" width={220} height={430} />
+    </>
+  );
+
+  const skeletonItemsSmallScreen = isSmallScreen ? skeletonItemSmallScreen : skeletonItemMediumScreen;
+  const skeletonItems = isMediumScreen ? skeletonItemsSmallScreen : skeletonItemLargeScreen;
+
+  return (
+    <Box
+      display="flex"
+      justifyContent={isSmallScreen ? 'center' : 'space-between'}
+      flexWrap="wrap"
+      gap={2}
+      padding={isMediumScreen ? '0 50px' : '0'}
+    >
+      {skeletonItems}
+    </Box>
   );
 };

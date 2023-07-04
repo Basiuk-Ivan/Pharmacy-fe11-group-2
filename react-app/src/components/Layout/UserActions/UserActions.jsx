@@ -9,20 +9,25 @@ import PersonIcon from '@mui/icons-material/Person';
 
 import { MobileMenu } from './components/MobileMenu';
 import { openModal } from '../../../redux/slice/modalSlice';
-import { setToken } from '../../../redux/slice/isToken';
+import {
+  closeLoginModal,
+  openLoginModal,
+  openLogoutModal,
+  setLogin,
+  setToken
+} from '../../../redux/slice/isToken';
 
 import { StyledBadge, wrapForActionsStyles, fillForIcon, colorForBadge } from './style';
 import { removeUser } from '../../../redux/slice/userSlice';
 import { deleteFromFavouriteItems } from '../../../redux/slice/favouriteItems';
 import { removeItem } from '../../../redux/slice/cartItems';
+import ModalWindow from '../../ModalWindow';
 
-const settings = [
-  { name: 'Профіль', path: '/cabinet' },
-  { name: 'Вихід' }
-];
+const settings = [{ name: 'Профіль', path: '/cabinet' }, { name: 'Вихід' }];
 
 const UserActions = () => {
   const dispatch = useDispatch();
+  const isOpenedLogoutModal = useSelector(state => state.isToken.isOpenedLogoutModal);
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
   const cartItems = useSelector(state => state.itemCards.items);
   const isAuth = useSelector(state => state.user.isAuth);
@@ -58,10 +63,26 @@ const UserActions = () => {
     dispatch(removeUser());
     dispatch(deleteFromFavouriteItems('all'));
     dispatch(removeItem('all'));
+    dispatch(setLogin(false));
+
+    dispatch(openLogoutModal(true));
+  };
+
+  const handleCloseLogoutModal = () => {
+    dispatch(openLogoutModal(false));
   };
 
   return (
     <>
+      {!!isOpenedLogoutModal && (
+        <ModalWindow
+          mainText="Ви вийшли з кабінета"
+          handleClick={() => {}}
+          handleClose={handleCloseLogoutModal}
+          isOpened={isOpenedLogoutModal}
+          actions={false}
+        />
+      )}
       <Box sx={wrapForActionsStyles}>
         {isAuth ? (
           <>
