@@ -24,8 +24,8 @@ const blogDescriptionText = [
 ];
 
 const blogLinks = ['/step',
-  '/rede', '/step',
-  '/rede'];
+  '/rede', '/nature',
+  '/energy'];
 
 const HealthBlog = () => (
   <Box>

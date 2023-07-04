@@ -29,6 +29,8 @@ import { addToCartMoreOne } from './redux/slice/cartItems';
 import { addToFavouriteItems } from './redux/slice/favouriteItems';
 import { getUserDataFromDB } from './utils/ActionWithUser/getUserDataFromDB';
 import { Rede } from './pages/BlogPages/rede';
+import { Nature } from './pages/BlogPages/nature.jsx';
+import { Energy } from './pages/BlogPages/energy.jsx';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -80,6 +82,8 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/step" element={<Step />} />
           <Route path="/rede" element={<Rede />} />
+          <Route path="/nature" element={<Nature />} />
+          <Route path="/energy" element={<Energy />} />
           <Route path="/company" element={<Company />} />
           <Route path="/delivery" element={<Delivery />} />
           <Route path="/pay" element={<Pay />} />
