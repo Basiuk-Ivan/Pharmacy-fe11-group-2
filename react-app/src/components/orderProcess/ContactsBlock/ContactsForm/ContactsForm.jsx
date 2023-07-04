@@ -6,7 +6,12 @@ import { ErrorMessage, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { request } from '../../../../tools/request';
 import { theme as muiTheme } from '../../../../tools/muiTheme';
-import { closeModalNotAvailable, openModalNotAvailable, openOrderModal, setSum } from '../../../../redux/slice/cartItems';
+import {
+  closeModalNotAvailable,
+  openModalNotAvailable,
+  openOrderModal,
+  setSum
+} from '../../../../redux/slice/cartItems';
 import { putProductsToCartDB } from '../../../../utils/ActionsWithProduct/putProductsToCartDB';
 import { addContactsInfo } from '../../../../redux/slice/orderProcessSlice';
 import { updateQuantity } from '../../../../utils/ActionsWithProduct/updateQuantity';
@@ -70,42 +75,7 @@ const ContactsForm = () => {
     },
     validationSchema,
 
-    // onSubmit: async (values, { resetForm }) => {
-    //   const data = { ...values, ...(userId && { user: userId }) };
-
-    //   // const orderUrl = `${process.env.VITE_API_URL}/api/order`;
-
-    //   // const cartResponse = await sendRequest(orderUrl, 'POST', data);
-
-    //   const { status } = await request({
-    //     url: '/order',
-    //     method: 'POST',
-    //     body: data
-    //   });
-
-    //   const updateProductQuantities = async productArr => {
-    //     productArr.forEach(productItem => {
-    //       updateQuantity(productItem);
-    //     });
-    //   };
-
-    //   await updateProductQuantities(values.products);
-
-    //   // // values.products.forEach(productItem => {
-    //   //   updateQuantity(productItem);
-    //   // });
-
-    //   if (status === 200) {
-    //     const newProducts = [];
-    //     await putProductsToCartDB(cartStoreId, newProducts);
-    //     dispatch(addContactsInfo(values));
-    //     dispatch(openOrderModal());
-    //     resetForm();
-    //   }
-    // }
-
     onSubmit: async (values, { resetForm }) => {
-      console.log(values.products);
       let cartItemsCheckQuantity;
       let dataProductsDB;
       const fetchProducts = async () => {
@@ -239,7 +209,7 @@ const ContactsForm = () => {
             <Skeleton />
             <Skeleton />
           </Stack>
-        ) :
+        ) : (
           <form id="contacts" onSubmit={formik.handleSubmit}>
             <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
               <Grid item md={6} xl={6}>
@@ -287,7 +257,8 @@ const ContactsForm = () => {
                 />
               </Grid>
             </Grid>
-          </form> }
+          </form>
+        )}
         <ModalWindow
           mainText="В корзині є товари, наявність яких відсутня. Для подальшого оформлення видаліть відсутні товари з корзини."
           handleClick={() => {}}
