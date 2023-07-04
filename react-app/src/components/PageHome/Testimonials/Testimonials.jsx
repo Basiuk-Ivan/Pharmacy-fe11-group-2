@@ -12,13 +12,11 @@ import {
   wrapperForTestimonials,
 
 } from './style';
-import { FeedKyiv } from './item/FeedKyiv.jsx';
-import { FeedDnepr } from './item/FeedDnepr.jsx';
-import { FeedLviv } from './item/FeedLviv.jsx';
+
 import {NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {getResponsesFromDB} from "../../../utils/Responses/getResponsesFromDB.js";
-import Respond from "../../Response/Respond.jsx";
+import Feed from "./Feed";
 
 const Testimonials = () => {
   const isAuth = useSelector(state => state.user.isAuth);
@@ -65,11 +63,11 @@ const Testimonials = () => {
             </Box>
           </Box>
           <Typography fontFamily="Roboto" component="div" sx={totalRate}>
-            Загальний рейтинг на основі {totalFound} <br /> відгуків наших покупців
+            Загальний рейтинг на основі  <br /> {totalFound} відгуків наших покупців
           </Typography>
         </Box>
         <Box sx={feedBack}>
-          {!!respondsForHome && respondsForHome.map((item, index) => <Respond key={index} item={item} />)}
+          {!!respondsForHome && respondsForHome.map((item, index) => <Feed key={index} item={item} />)}
           <Typography fontFamily="Roboto" component="div" sx={totalCountFeed}>
             <NavLink to="/respond" sx={linkFeed}>Всі {totalFound} відгуків</NavLink>
           </Typography>

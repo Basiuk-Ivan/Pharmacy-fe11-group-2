@@ -28,7 +28,7 @@ const OrderProcess = () => {
 
           const combinedArray = productItemCart.map(item1 => {
             const arr2 = data.find(item2 => item2.id === item1.id);
-            return { ...item1, ...arr2, quantity: item1.quantity, quantityStore: arr2.quantity };
+            return { ...item1, ...arr2, quantity: item1.quantity };
           });
 
           setProducts(combinedArray);

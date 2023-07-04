@@ -8,7 +8,7 @@ import IconBreadcrumbs from './Breadcrums';
 import ProductCard from '../../components/ProductCard';
 import {
   closeCartModalRemoveAll,
-  openCartModalRemoveAll,
+  openCartModalRemoveAll, openModalNotAvailable,
   removeItem,
   setSum
 } from '../../redux/slice/cartItems';
@@ -36,6 +36,7 @@ import { removeAllFromCartUserDBProduct } from '../../utils/ActionsWithProduct/r
 import { removeAllFromCartLocalStorage } from '../../utils/LocalStore/removeAllFromCartLocalStorage';
 import { addCartProduct } from '../../utils/ActionsWithProduct/addCartProduct';
 import { putProductsToCartDB } from '../../utils/ActionsWithProduct/putProductsToCartDB';
+import {openModalAddtoCart} from "../../redux/slice/favouriteItems.js";
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
@@ -49,6 +50,7 @@ const Cart = () => {
   const isAuth = useSelector(state => state.user.isAuth);
   const userId = useSelector(state => state.user.id);
   const cartStoreId = useSelector(state => state.user.cartStoreId);
+  const [isDisabled, setDisabled] =  useState(false);
 
   const isInCart = true;
 
@@ -77,6 +79,18 @@ const Cart = () => {
           setProducts(data);
           const sumObj = countSum(productItemCart, data);
           dispatch(setSum(sumObj));
+
+          // const product = products.find(productItem => productItem.quantity < 1);
+          // if (product) {
+          //   dispatch(openModalNotAvailable());
+          // } else {
+          //   dispatch(openModalAddtoCart());
+          // }
+
+
+
+          const resultQuantity = data.find(item =>  item.quantity < 1);
+          setDisabled(resultQuantity)
         }
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -94,6 +108,7 @@ const Cart = () => {
     const sumObj = countSum(productItemCart, updatedProducts);
     dispatch(setSum(sumObj));
   }, [productItemCart]);
+
 
   const handleClickCartModalRemoveAll = async () => {
     dispatch(removeItem('all'));
@@ -136,9 +151,12 @@ const Cart = () => {
 
                 <PromoBox mt={2}>
                   <FormTitlePromo>Загальна сума: {sumWithDiscount} грн</FormTitlePromo>
-                  <NavLink to="/orderprocess">
+                  {isDisabled ?  <FormText sx={{color:"red"}}>В корзині є товари, наявність яких відсутня. Для подальшого оформлення видаліть відсутні товари з корзини. </FormText>
+                      :
+                  <NavLink to="/orderprocess" disabled>
                     <OrderButton>Оформити замовлення</OrderButton>
                   </NavLink>
+                  }
                 </PromoBox>
               </FormBox>
             </Box>

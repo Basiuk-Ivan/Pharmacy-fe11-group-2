@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TextField, Grid, Typography, Container } from '@mui/material';
 import { styled, ThemeProvider } from '@mui/material/styles';
@@ -6,11 +6,14 @@ import { ErrorMessage, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { request } from '../../../../tools/request';
 import { theme as muiTheme } from '../../../../tools/muiTheme';
-import { openOrderModal } from '../../../../redux/slice/cartItems';
+import { closeModalNotAvailable, openModalNotAvailable, openOrderModal, setSum } from '../../../../redux/slice/cartItems';
 import { putProductsToCartDB } from '../../../../utils/ActionsWithProduct/putProductsToCartDB';
 import { addContactsInfo } from '../../../../redux/slice/orderProcessSlice';
 import { updateQuantity } from '../../../../utils/ActionsWithProduct/updateQuantity';
 import { sendRequest } from '../../../../tools/sendRequest';
+import { countSum } from '../../../../utils/ActionsWithProduct/countSum.js';
+import { openModalAddtoCart } from '../../../../redux/slice/favouriteItems.js';
+import ModalWindow from '../../../ModalWindow.jsx';
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),
@@ -21,7 +24,8 @@ const ChangedTextField = styled(TextField)(({ theme }) => ({
 
 const nameRegExp = /[a-zA-zа-яА-яёЁ]$/;
 
-const ContactsForm = ({ products }) => {
+const ContactsForm = () => {
+  const isOpenedCartModalNotAvailable = useSelector(state => state.itemCards.isOpenedCartModalNotAvailable);
   const orderPaymentMethod = useSelector(state => state.order.PaymentMethodValue);
   const sumWithDiscount = useSelector(state => state.itemCards.sumWithDiscount);
   const cartStoreId = useSelector(state => state.user.cartStoreId);
@@ -30,8 +34,13 @@ const ContactsForm = ({ products }) => {
   const name = useSelector(state => state.user.firstName);
   const email = useSelector(state => state.user.email);
   const phoneNumber = useSelector(state => state.user.phoneNumber);
-
+  const [products, setProducts] = useState([]);
+  const productItemCart = useSelector(state => state.itemCards.items);
   const dispatch = useDispatch();
+
+  const handleCloseModalNotAvailable = () => {
+    dispatch(closeModalNotAvailable());
+  };
 
   const validationSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -95,12 +104,49 @@ const ContactsForm = ({ products }) => {
     // }
 
     onSubmit: async (values, { resetForm }) => {
-      const data = { ...values, ...(userId && { user: userId }) };
+      console.log(values.products);
+      let cartItemsCheckQuantity;
+      let dataProductsDB;
+      const fetchProducts = async () => {
+        try {
+          if (values.products.length > 0) {
+            const cartIds = values.products.map(item => item.id).join(',');
+
+            const { result } = await request({
+              url: '',
+              method: 'GET',
+              params: { _id: cartIds }
+            });
+
+            const { data } = result;
+            dataProductsDB = data;
+
+            cartItemsCheckQuantity = values.products.find(cartItem => {
+              const someResult = data.find(cartItemDB => cartItemDB.quantity < cartItem.quantity);
+              if (someResult) {
+                return true;
+              }
+              return false;
+            });
+          }
+        } catch (error) {
+          console.error('Error fetching products:', error);
+        }
+      };
+
+      await fetchProducts();
+
+      if (cartItemsCheckQuantity) {
+        dispatch(openModalNotAvailable());
+        return;
+      }
+
+      const productData = { ...values, ...(userId && { user: userId }) };
 
       const { status } = await request({
         url: '/order',
         method: 'POST',
-        body: data
+        body: productData
       });
 
       const updateProductQuantities = async productArr => {
@@ -111,9 +157,6 @@ const ContactsForm = ({ products }) => {
 
       await updateProductQuantities(values.products);
 
-      // // values.products.forEach(productItem => {
-      //   updateQuantity(productItem);
-      // });
 
       if (status === 200) {
         if (cartStoreId) {
@@ -126,6 +169,35 @@ const ContactsForm = ({ products }) => {
       }
     }
   });
+
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        if (productItemCart.length > 0) {
+          const cartIds = productItemCart.map(item => item.id).join(',');
+
+          const { result } = await request({
+            url: '',
+            method: 'GET',
+            params: { _id: cartIds }
+          });
+
+          const { data } = result;
+
+          const combinedArray = productItemCart.map(item1 => {
+            const arr2 = data.find(item2 => item2.id === item1.id);
+            return { ...item1, ...arr2, quantity: item1.quantity, quantityStore: arr2.quantity };
+          });
+
+          setProducts(combinedArray);
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+    fetchProducts();
+  }, [productItemCart]);
 
   useEffect(() => {
     formik.setFieldValue('products', products);
@@ -201,6 +273,13 @@ const ContactsForm = ({ products }) => {
             </Grid>
           </Grid>
         </form>
+        <ModalWindow
+          mainText="В корзині є товари, наявність яких відсутня. Для подальшого оформлення видаліть відсутні товари з корзини."
+          handleClick={() => {}}
+          handleClose={handleCloseModalNotAvailable}
+          isOpened={isOpenedCartModalNotAvailable}
+          actions={false}
+        />
       </Container>
     </ThemeProvider>
   );

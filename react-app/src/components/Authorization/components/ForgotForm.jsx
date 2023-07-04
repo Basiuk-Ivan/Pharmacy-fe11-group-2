@@ -38,10 +38,10 @@ export const ForgotForm = () => {
       {({ values, handleChange, handleBlur }) => (
         <Form>
           <Typography id="forgot-password-modal-title" variant="h6" component="h2">
-            Забули пароль
+            Забули пароль?
           </Typography>
           <Typography id="forgot-password-modal-description" sx={{ mt: 2, mb: 2 }}>
-            Введіть ваш email и ми відправимо вам інструкціЇ з відновлення паролю.
+            Введіть ваш email і ми відправимо Вам інструкції з відновлення паролю.
           </Typography>
           <div className="form-group">
             <CustomTextField

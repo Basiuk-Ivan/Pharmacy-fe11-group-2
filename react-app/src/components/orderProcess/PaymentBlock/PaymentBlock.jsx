@@ -4,13 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import PaymentMethodForm from './PaymentMethodForm/PaymentMethodForm';
 import TotalAmountForm from './TotalAmountForm/TotalAmountForm';
 import ModalWindow from '../../ModalWindow';
-import { closeOrderModal, removeItem } from '../../../redux/slice/cartItems';
+import {closeModalNotAvailable, closeOrderModal, removeItem} from '../../../redux/slice/cartItems';
 import { removeAllFromCartLocalStorage } from '../../../utils/LocalStore/removeAllFromCartLocalStorage';
 
 const PaymentBlock = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isOpenedOrderModal = useSelector(state => state.itemCards.isOpenedOrderModal);
+
 
   const handleCloseOrderModal = () => {
     dispatch(removeItem('all'));
@@ -19,6 +20,10 @@ const PaymentBlock = () => {
     dispatch(closeOrderModal());
     navigate('/');
   };
+
+    const handleCloseModalNotAvailable = () => {
+        dispatch(closeModalNotAvailable())
+    }
 
   return (
     <Container disableGutters>
@@ -75,13 +80,14 @@ const PaymentBlock = () => {
           </Button>
         </Grid>
       </Grid>
-      <ModalWindow
-        mainText="Дякуємо за замовлення!"
-        handleClick={() => {}}
-        handleClose={handleCloseOrderModal}
-        isOpened={isOpenedOrderModal}
-        actions={false}
-      />
+        <ModalWindow
+            mainText="Дякуємо за замовлення!"
+            handleClick={() => {}}
+            handleClose={handleCloseOrderModal}
+            isOpened={isOpenedOrderModal}
+            actions={false}
+        />
+
     </Container>
   );
 };

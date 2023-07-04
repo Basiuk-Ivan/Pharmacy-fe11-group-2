@@ -21,7 +21,7 @@ const ContactsBlock = ({ products }) => (
         minHeight: '500px'
       }}
     >
-      <ContactsForm products={products} />
+      <ContactsForm />
     </Grid>
     <Grid
       item

@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { ThemeProvider } from '@mui/material/styles';
 import { formatDate } from '../../utils/ActionsWithProduct/formatDate';
 import { theme } from '../../tools/muiTheme';
+import {updateRespondDB} from "../../utils/Responses/updateRespondDB";
 
 const Respond = ({ item }) => {
   const isAuth = useSelector(state => state.user.isAuth);
@@ -30,11 +31,7 @@ const Respond = ({ item }) => {
     }
   }, []);
 
-  // const formatDate = dateString => {
-  //   const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  //   const date = new Date(dateString);
-  //   return date.toLocaleDateString('uk-UA', options);
-  // };
+
 
   useEffect(() => {
     const formattedDate = formatDate(item.createdAt);
@@ -43,7 +40,7 @@ const Respond = ({ item }) => {
 
   const numericValue = parseInt(item.rating, 10);
   const handleClickLike = async () => {
-    // await updateReviewDB(item, userId, 'like');
+    await updateRespondDB(item, userId, 'like');
     if (!clickLike && !clickDisLike) {
       setItemLike(prev => prev + 1);
       setClickLike(prev => !prev);
@@ -59,7 +56,7 @@ const Respond = ({ item }) => {
   };
 
   const handleClickDisLike = async () => {
-    // await updateReviewDB(item, userId, 'dislike');
+    await updateRespondDB(item, userId, 'disLike');
     if (!clickDisLike && !clickLike) {
       setItemDisLike(prev => prev + 1);
       setClickDisLike(prev => !prev);
@@ -96,7 +93,7 @@ const Respond = ({ item }) => {
               variant="p"
               component="p"
               gutterBottom
-              sx={{ mb: '30px', fontSize: '18px', lineHeight: '18px', fontWeight: '500' }}
+              sx={{ mb: '30px', fontSize: '18px', lineHeight: '18px', fontWeight: '500',fontFamily: 'Roboto, sans-serif' }}
             >
               {item.userName} {item.userSurname}
             </Typography>
@@ -113,7 +110,7 @@ const Respond = ({ item }) => {
               variant="p"
               component="p"
               gutterBottom
-              sx={{ mb: '30px', fontSize: '18px', lineHeight: '18px', fontWeight: '500', mr: '10px' }}
+              sx={{ mb: '30px', fontSize: '18px', lineHeight: '18px', fontWeight: '500', mr: '10px', fontFamily: 'Roboto, sans-serif' }}
             >
               {dateValue}
             </Typography>
@@ -141,7 +138,7 @@ const Respond = ({ item }) => {
                 variant="p"
                 component="p"
                 gutterBottom
-                sx={{ fontSize: '16px', lineHeight: '16px', fontWeight: '400' }}
+                sx={{ fontSize: '16px', lineHeight: '16px', fontWeight: '400', fontFamily: 'Roboto, sans-serif'}}
               >
                 {itemLike}
               </Typography>
@@ -167,7 +164,7 @@ const Respond = ({ item }) => {
             </Stack>
           </Stack>
         </Stack>
-        <Box sx={{ textAlign: 'justify', fontSize: '16px' }} fontFamily="Roboto">{item.responseTxt}</Box>
+        <Box sx={{ textAlign: 'justify', fontSize: '16px', fontFamily: 'Roboto, sans-serif' }}>{item.responseTxt}</Box>
       </Stack>
     </ThemeProvider>
   );

@@ -60,7 +60,10 @@ export const updateResponse = async (req, res) => {
         if (!req.body.id) {
             throw new Error('ID не знайдено');
         }
-        const updatedResponse = await ResponseDB.findByIdAndUpdate(req.body.id, req.body, {new: true});
+        const updatedResponse = await ResponseDB.findByIdAndUpdate(
+            req.body.id,
+            req.body,
+            {new: true});
         return res.json(updatedResponse);
     } catch (e) {
         res.status(500).json(e.message);

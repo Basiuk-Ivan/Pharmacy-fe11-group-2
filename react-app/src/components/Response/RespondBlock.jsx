@@ -18,7 +18,7 @@ import {getResponsesFromDB} from "../../utils/Responses/getResponsesFromDB";
 const RespondBlock = () => {
   const isAuth = useSelector(state => state.user.isAuth);
   const [averageRating, setAverageRating] = useState(4.5);
-  const [totalFound, setTotalFound] = useState(0);
+  const [totalFound, setTotalFound] = useState();
     const changeStateReview = useSelector(state => state.user.changeStateReview);
 
     const fetchData = async () => {
@@ -59,7 +59,7 @@ const RespondBlock = () => {
                     </Box>
                 </Box>
                 <Typography fontFamily="Roboto" component="div" sx={totalRate}>
-                    Загальний рейтинг на основі {totalFound} <br /> відгуків наших покупців
+                    Загальний рейтинг на основі  <br /> {totalFound} відгуків наших покупців
                 </Typography>
             </Box>
         </Box>
