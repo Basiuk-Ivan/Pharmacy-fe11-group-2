@@ -2,22 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TextField, Grid, Typography, Container, Stack, Skeleton } from '@mui/material';
 import { styled, ThemeProvider } from '@mui/material/styles';
-import { ErrorMessage, FormikProvider, useFormik } from 'formik';
-import * as Yup from 'yup';
-import { request } from '../../../../tools/request';
 import { theme as muiTheme } from '../../../../tools/muiTheme';
-import {
-  closeModalNotAvailable,
-  openModalNotAvailable,
-  openOrderModal,
-  setSum
-} from '../../../../redux/slice/cartItems';
-import { putProductsToCartDB } from '../../../../utils/ActionsWithProduct/putProductsToCartDB';
-import { addContactsInfo } from '../../../../redux/slice/orderProcessSlice';
-import { updateQuantity } from '../../../../utils/ActionsWithProduct/updateQuantity';
-import { sendRequest } from '../../../../tools/sendRequest';
-import { countSum } from '../../../../utils/ActionsWithProduct/countSum';
-import { openModalAddtoCart } from '../../../../redux/slice/favouriteItems';
+import { closeModalNotAvailable } from '../../../../redux/slice/cartItems';
+
 import ModalWindow from '../../../ModalWindow';
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
@@ -27,23 +14,11 @@ const ChangedTextField = styled(TextField)(({ theme }) => ({
   }
 }));
 
-const nameRegExp = /[a-zA-zа-яА-яёЁ]$/;
-
-const ContactsForm = () => {
+const ContactsForm = ({ products, formik }) => {
   const isOpenedCartModalNotAvailable = useSelector(state => state.itemCards.isOpenedCartModalNotAvailable);
   const orderPaymentMethod = useSelector(state => state.order.PaymentMethodValue);
   const sumWithDiscount = useSelector(state => state.itemCards.sumWithDiscount);
-  const cartStoreId = useSelector(state => state.user.cartStoreId);
-  const userId = useSelector(state => state.user.id);
-  const surname = useSelector(state => state.user.secondName);
-  const name = useSelector(state => state.user.firstName);
-  const email = useSelector(state => state.user.email);
-  const phoneNumber = useSelector(state => state.user.phoneNumber);
-  const city = useSelector(state => state.validationOrder.city);
-  console.log('cityState:', city);
 
-  const [products, setProducts] = useState([]);
-  const productItemCart = useSelector(state => state.itemCards.items);
   const dispatch = useDispatch();
   const [showSkeleton, setShowSkeleton] = useState(true);
 
@@ -51,178 +26,10 @@ const ContactsForm = () => {
     dispatch(closeModalNotAvailable());
   };
 
-  const validationSchema = Yup.object().shape({
-    firstName: Yup.string()
-      .required("Введіть своє ім'я кирилицею")
-      .matches(/^[A-Za-zА-Яа-яЁёІіЇїЄєҐґ']+$/, 'Введіть тільки букви')
-      .min(2, 'Мінімум два символи'),
-    email: Yup.string().email('Введіть свою ел. пошту').required('Введіть свою ел. пошту'),
-    lastName: Yup.string()
-      .required('Введіть своє прізвище кирилицею')
-      .matches(/^[A-Za-zА-Яа-яЁёІіЇїЄєҐґ']+$/, 'Введіть тільки букви')
-      .min(2, 'Мінімум два символи'),
-    phone: Yup.number()
-      .required('Введіть номер мобільного телефону')
-      .typeError('Введіть номер мобільного телефону'),
-    city: Yup.string().required('Оберіть місто').nullable(),
-    address: Yup.string().required('Оберіть адресу').nullable()
-  });
-
-  const formik = useFormik({
-    initialValues: {
-      firstName: name,
-      email,
-      lastName: surname,
-      phone: phoneNumber,
-      paymentMethod: `${orderPaymentMethod}`,
-      products: [],
-      totalPrice: Number,
-      // city: '',
-      city,
-      address: ''
-    },
-    validationSchema,
-
-    // onSubmit: async (values, { resetForm }) => {
-    //   const data = { ...values, ...(userId && { user: userId }) };
-
-    //   // const orderUrl = `${process.env.VITE_API_URL}/api/order`;
-
-    //   // const cartResponse = await sendRequest(orderUrl, 'POST', data);
-
-    //   const { status } = await request({
-    //     url: '/order',
-    //     method: 'POST',
-    //     body: data
-    //   });
-
-    //   const updateProductQuantities = async productArr => {
-    //     productArr.forEach(productItem => {
-    //       updateQuantity(productItem);
-    //     });
-    //   };
-
-    //   await updateProductQuantities(values.products);
-
-    //   // // values.products.forEach(productItem => {
-    //   //   updateQuantity(productItem);
-    //   // });
-
-    //   if (status === 200) {
-    //     const newProducts = [];
-    //     await putProductsToCartDB(cartStoreId, newProducts);
-    //     dispatch(addContactsInfo(values));
-    //     dispatch(openOrderModal());
-    //     resetForm();
-    //   }
-    // }
-
-    onSubmit: async (values, { resetForm }) => {
-      console.log(values.products);
-      let cartItemsCheckQuantity;
-      let dataProductsDB;
-      const fetchProducts = async () => {
-        try {
-          if (values.products.length > 0) {
-            const cartIds = values.products.map(item => item.id).join(',');
-
-            const { result } = await request({
-              url: '',
-              method: 'GET',
-              params: { _id: cartIds }
-            });
-
-            const { data } = result;
-            dataProductsDB = data;
-
-            cartItemsCheckQuantity = values.products.find(cartItem => {
-              const someResult = data.find(cartItemDB => cartItemDB.quantity < cartItem.quantity);
-              if (someResult) {
-                return true;
-              }
-              return false;
-            });
-          }
-        } catch (error) {
-          console.error('Error fetching products:', error);
-        }
-      };
-
-      await fetchProducts();
-
-      if (cartItemsCheckQuantity) {
-        dispatch(openModalNotAvailable());
-        return;
-      }
-
-      const productData = { ...values, ...(userId && { user: userId }) };
-
-      console.log('values:', values);
-      const { status } = await request({
-        url: '/order',
-        method: 'POST',
-        body: productData
-      });
-
-      const updateProductQuantities = async productArr => {
-        productArr.forEach(productItem => {
-          updateQuantity(productItem);
-        });
-      };
-
-      await updateProductQuantities(values.products);
-
-      if (status === 200) {
-        if (cartStoreId) {
-          const newProducts = [];
-          await putProductsToCartDB(cartStoreId, newProducts);
-        }
-        dispatch(addContactsInfo(values));
-        dispatch(openOrderModal());
-        resetForm();
-      }
-    }
-  });
-  console.log('formik:', formik);
-
-  useEffect(() => {
-    formik.setValues({
-      ...formik.values,
-      city: city || ''
-    });
-  }, [city, formik.setValues]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        if (productItemCart.length > 0) {
-          const cartIds = productItemCart.map(item => item.id).join(',');
-
-          const { result } = await request({
-            url: '',
-            method: 'GET',
-            params: { _id: cartIds }
-          });
-
-          const { data } = result;
-
-          const combinedArray = productItemCart.map(item1 => {
-            const arr2 = data.find(item2 => item2.id === item1.id);
-            return { ...item1, ...arr2, quantity: item1.quantity, quantityStore: arr2.quantity };
-          });
-
-          setProducts(combinedArray);
-        }
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      }
-    };
-    fetchProducts();
-  }, [productItemCart]);
-
   useEffect(() => {
     formik.setFieldValue('products', products);
   }, [products]);
+
   useEffect(() => {
     formik.setFieldValue('totalPrice', sumWithDiscount);
   }, [products]);

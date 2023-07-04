@@ -1,30 +1,12 @@
 import { TextField, Autocomplete, Button } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { addOrderAddress, addOrderCity } from '../../../../redux/slice/orderProcessSlice';
-import { addCity } from '../../../../redux/slice/validationOrder';
 
-const SelfPickup = () => {
+const SelfPickup = ({ formik }) => {
   const [selectedCityStreets, setSelectedCityStreets] = useState([]);
 
   const dispatch = useDispatch();
-
-  const validationSchema = Yup.object().shape({
-    city: Yup.string().required('Оберіть місто').nullable(),
-    address: Yup.string().required('Оберіть адресу').nullable()
-  });
-
-  const formik = useFormik({
-    initialValues: {
-      city: '',
-      address: ''
-    },
-    validationSchema
-  });
-  // console.log('values:', formik.values);
-  // console.log('errors:', formik.errors);
 
   const cityPickup = ['Київ', 'Дніпро', 'Львів'];
   const addressPickup = [
@@ -50,13 +32,13 @@ const SelfPickup = () => {
         break;
     }
     formik.setFieldValue('city', value || '');
-    dispatch(addCity(value || ''));
     formik.setFieldTouched('city', true);
     formik.validateField('city');
   };
 
-  const handleAddressChange = (event, value) => {
+  const handleAddressChange = value => {
     dispatch(addOrderAddress(value));
+
     formik.setFieldValue('address', value || '');
     formik.setFieldTouched('address', true);
     formik.validateField('address');
@@ -91,12 +73,12 @@ const SelfPickup = () => {
               {...params}
               label="Адреса"
               required
-              onBlur={() => handleBlur('address')}
               error={formik.touched.address && Boolean(formik.errors.address)}
               helperText={formik.touched.address && formik.errors.address}
+              onBlur={() => handleBlur('address')}
             />
           )}
-          onChange={handleAddressChange}
+          onChange={(event, value) => handleAddressChange(value)}
           isOptionEqualToValue={(option, value) => option.value === value.value}
           sx={{
             mt: '20px'

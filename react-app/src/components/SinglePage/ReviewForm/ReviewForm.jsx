@@ -31,17 +31,17 @@ const ReviewForm = ({ product }) => {
     },
     validationSchema: Yup.object({
       name: Yup.string()
-        .min(2, 'Ім\'я має містити не менше 2 символів')
+        .min(2, "Ім'я має містити не менше 2 символів")
         .max(20, 'Має бути 20 символів або менше')
-        .required('Обов\'язкове поле'),
+        .required("Обов'язкове поле"),
       surname: Yup.string()
         .min(2, 'Прізвище має містити не менше 2 символів')
         .max(20, 'Має бути 20 символів або менше')
-        .required('Обов\'язкове поле'),
+        .required("Обов'язкове поле"),
       review: Yup.string()
         .min(10, 'Відгук повинен мати мінімум 10 символів')
         .max(500, 'Відгук не повинен перевищувати 500 символів')
-        .required('Обов\'язкове поле')
+        .required("Обов'язкове поле")
     }),
     onSubmit: async (values, { resetForm }) => {
       if (valueRating > 0) {
@@ -64,7 +64,6 @@ const ReviewForm = ({ product }) => {
 
   return (
     <Stack>
-
       <form onSubmit={formik.handleSubmit}>
         <Typography
           variant="p"
@@ -82,16 +81,12 @@ const ReviewForm = ({ product }) => {
           }}
           sx={{ fontSize: '25px' }}
         />
-        {ratingError &&
-        <Typography
-          variant="p"
-          component="p"
-          sx={{ fontSize: '12px', color: 'red' }}
-        >
-          Встановіть оцінку
-        </Typography>}
+        {ratingError && (
+          <Typography variant="p" component="p" sx={{ fontSize: '12px', color: 'red' }}>
+            Встановіть оцінку
+          </Typography>
+        )}
         <Stack direction="row" useFlexGap flexWrap="wrap" justifyContent="space-between" spacing={3}>
-
           <Stack
             direction="column"
             justifyContent="flex-start"
@@ -112,20 +107,15 @@ const ReviewForm = ({ product }) => {
               sx={{
                 flex: '1',
                 '& .MuiOutlinedInput-root': {
-                  borderRadius: '20px',
-                },
+                  borderRadius: '20px'
+                }
               }}
             />
-            {formik.touched.name && formik.errors.name
-              ? (
-                <Typography
-                  variant="p"
-                  component="p"
-                  sx={{ fontSize: '12px', color: 'red' }}
-                >
-                  {formik.errors.name}
-                </Typography>
-              ) : null}
+            {formik.touched.name && formik.errors.name ? (
+              <Typography variant="p" component="p" sx={{ fontSize: '12px', color: 'red' }}>
+                {formik.errors.name}
+              </Typography>
+            ) : null}
           </Stack>
 
           <Stack
@@ -147,20 +137,15 @@ const ReviewForm = ({ product }) => {
               disabled
               sx={{
                 '& .MuiOutlinedInput-root': {
-                  borderRadius: '20px',
-                },
+                  borderRadius: '20px'
+                }
               }}
             />
-            {formik.touched.surname && formik.errors.surname
-              ? (
-                <Typography
-                  variant="p"
-                  component="p"
-                  sx={{ fontSize: '12px', color: 'red' }}
-                >
-                  {formik.errors.surname}
-                </Typography>
-              ) : null}
+            {formik.touched.surname && formik.errors.surname ? (
+              <Typography variant="p" component="p" sx={{ fontSize: '12px', color: 'red' }}>
+                {formik.errors.surname}
+              </Typography>
+            ) : null}
           </Stack>
 
           <Stack
@@ -183,20 +168,15 @@ const ReviewForm = ({ product }) => {
               rows={4}
               sx={{
                 '& .MuiOutlinedInput-root': {
-                  borderRadius: '20px',
-                },
+                  borderRadius: '20px'
+                }
               }}
             />
-            {formik.touched.review && formik.errors.review
-              ? (
-                <Typography
-                  variant="p"
-                  component="p"
-                  sx={{ fontSize: '12px', color: 'red' }}
-                >
-                  {formik.errors.review}
-                </Typography>
-              ) : null}
+            {formik.touched.review && formik.errors.review ? (
+              <Typography variant="p" component="p" sx={{ fontSize: '12px', color: 'red' }}>
+                {formik.errors.review}
+              </Typography>
+            ) : null}
           </Stack>
           <Button
             type="submit"
@@ -213,7 +193,6 @@ const ReviewForm = ({ product }) => {
             Відправити
           </Button>
         </Stack>
-
       </form>
     </Stack>
   );

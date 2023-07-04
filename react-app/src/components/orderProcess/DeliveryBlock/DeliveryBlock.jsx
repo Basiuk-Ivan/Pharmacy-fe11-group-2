@@ -1,17 +1,7 @@
-import {
-  FormControl,
-  FormControlLabel,
-  RadioGroup,
-  Typography,
-  Radio,
-  Grid,
-  TextField,
-  Autocomplete,
-  useMediaQuery
-} from '@mui/material';
+import { FormControl, FormControlLabel, RadioGroup, Typography, Radio, Grid } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { theme } from '../../../tools/muiTheme';
 import searchAddress from '../../../tools/NovaPost/searchAddress';
 import CitySelect from './CitySelect/CitySelect';
@@ -20,7 +10,7 @@ import WarehouseSelect from './WarehouseSelect/WarehouseSelect';
 import SelfPickup from './SelfPickup/SelfPickup';
 import { addOrderDeliveryMethod } from '../../../redux/slice/orderProcessSlice';
 
-const DeliveryBlock = () => {
+const DeliveryBlock = ({ formik }) => {
   const [selectedCity, setSelectedCity] = useState(null);
   const [showAdditionalField, setShowAdditionalField] = useState(false);
   const [cityDelivery, setCityDelivery] = useState([]);
@@ -95,16 +85,18 @@ const DeliveryBlock = () => {
             </Grid>
             {showAdditionalField && (
               <Grid item md={8} xs={12}>
-                <CitySelect cityDelivery={cityDelivery} setSelectedCity={setSelectedCity} />
+                <CitySelect cityDelivery={cityDelivery} setSelectedCity={setSelectedCity} formik={formik} />
+
                 <WarehouseSelect
                   warehouseDelivery={warehouseDelivery}
                   setSelectedWarehouse={setSelectedWarehouse}
+                  formik={formik}
                 />
               </Grid>
             )}
             {!showAdditionalField && (
               <Grid item md={8} xs={12}>
-                <SelfPickup />
+                <SelfPickup formik={formik} />
               </Grid>
             )}
           </Grid>

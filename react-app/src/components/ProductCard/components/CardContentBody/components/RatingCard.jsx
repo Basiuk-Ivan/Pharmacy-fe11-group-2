@@ -14,9 +14,7 @@ export const RatingCard = ({ productItem }) => {
       <Typography
         variant="p"
         gutterBottom
-        sx={{ fontSize: '12px',
-          fontWeight: 700,
-          color: productItem?.quantity > 0 ? '#2FD3AE' : '#910808' }}
+        sx={{ fontSize: '12px', fontWeight: 700, color: productItem?.quantity > 0 ? '#2FD3AE' : '#910808' }}
       >
         {productItem?.quantity > 0 ? 'Є в наявності' : 'Відсутній'}
       </Typography>

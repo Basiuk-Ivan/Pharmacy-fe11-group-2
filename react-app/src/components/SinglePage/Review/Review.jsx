@@ -77,7 +77,9 @@ const Review = ({ item }) => {
   const womanImg = 'https://res.cloudinary.com/dnagwfnl4/image/upload/v1687946330/woman_pe6lhd.jpg';
 
   return (
-    <Stack sx={{ mb: '40px', minWidth: '280px', border: '1px solid #A4CAD6FF', p: '10px', borderRadius: '20px' }}>
+    <Stack
+      sx={{ mb: '40px', minWidth: '280px', border: '1px solid #A4CAD6FF', p: '10px', borderRadius: '20px' }}
+    >
       <Stack flexWrap="wrap" direction="row" justifyContent="center" sx={{ mb: '20px', rowGap: '10px' }}>
         <Stack
           direction="row"
@@ -141,7 +143,6 @@ const Review = ({ item }) => {
               <Button onClick={handleClickLike} disabled={!isAuth || isEmotionClick}>
                 <ThumbUpOutlinedIcon />
               </Button>
-
             )}
             <Typography
               variant="p"

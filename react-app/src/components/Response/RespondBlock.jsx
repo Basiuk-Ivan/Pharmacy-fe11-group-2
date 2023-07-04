@@ -7,11 +7,13 @@ import {
   ave,
   aveRate,
   aveText,
-  feedBack, linkFeed,
+  feedBack,
+  linkFeed,
   mainFeedback,
-  StarRate, totalCountFeed,
+  StarRate,
+  totalCountFeed,
   totalRate,
-  wrapperForTestimonials,
+  wrapperForTestimonials
 } from './style';
 import { getResponsesFromDB } from '../../utils/Responses/getResponsesFromDB';
 
@@ -55,7 +57,7 @@ const RespondBlock = () => {
             </Box>
           </Box>
           <Typography fontFamily="Roboto" component="div" sx={totalRate}>
-            Загальний рейтинг на основі  <br /> {totalFound} відгуків наших покупців
+            Загальний рейтинг на основі <br /> {totalFound} відгуків наших покупців
           </Typography>
         </Box>
       </Box>
@@ -68,31 +70,33 @@ const RespondBlock = () => {
         noValidate
         autoComplete="off"
       >
+        {isAuth && (
+          <Box>
+            <Typography
+              variant="h5"
+              component="h5"
+              gutterBottom
+              sx={{ mb: '30px', fontSize: '18px', lineHeight: '18px', fontWeight: '500' }}
+            >
+              Залишити відгук
+            </Typography>
+            <RespondForm />
+          </Box>
+        )}
 
-        {isAuth &&
-        <Box>
+        {!isAuth && (
           <Typography
-            variant="h5"
-            component="h5"
+            variant="h4"
+            component="h4"
             gutterBottom
-            sx={{ mb: '30px', fontSize: '18px', lineHeight: '18px', fontWeight: '500' }}
+            sx={{ mb: '30px', fontSize: '20px', lineHeight: '22px', fontWeight: '500' }}
           >
-            Залишити відгук
+            Додати відгук може лише авторизований користувач
           </Typography>
-          <RespondForm />
-        </Box>}
-
-        {!isAuth &&
-        <Typography
-          variant="h4"
-          component="h4"
-          gutterBottom
-          sx={{ mb: '30px', fontSize: '20px', lineHeight: '22px', fontWeight: '500' }}
-        >
-          Додати відгук може лише авторизований користувач
-        </Typography>}
+        )}
         <RespondList />
       </Box>
-    </Box>);
+    </Box>
+  );
 };
 export default RespondBlock;

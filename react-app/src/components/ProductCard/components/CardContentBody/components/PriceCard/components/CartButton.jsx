@@ -105,7 +105,7 @@ export const CartButton = ({ productItem, isInCart }) => {
   return (
     <>
       {productItem.quantity > 0 && (
-        <IconButton onClick={() => handleAddToCart(productItem)} sx={cartStyle}>
+        <IconButton onClick={event => handleAddToCart(productItem, event)} sx={cartStyle}>
           <ShoppingCartOutlinedIcon />
         </IconButton>
       )}

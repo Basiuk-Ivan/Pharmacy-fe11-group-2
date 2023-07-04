@@ -74,7 +74,9 @@ const Respond = ({ item }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Stack sx={{ mb: '40px', minWidth: '280px', border: '1px solid #A4CAD6FF', p: '10px', borderRadius: '20px' }}>
+      <Stack
+        sx={{ mb: '40px', minWidth: '280px', border: '1px solid #A4CAD6FF', p: '10px', borderRadius: '20px' }}
+      >
         <Stack flexWrap="wrap" direction="row" justifyContent="center" sx={{ mb: '20px', rowGap: '10px' }}>
           <Stack
             direction="row"
@@ -91,7 +93,13 @@ const Respond = ({ item }) => {
               variant="p"
               component="p"
               gutterBottom
-              sx={{ mb: '30px', fontSize: '18px', lineHeight: '18px', fontWeight: '500', fontFamily: 'Roboto, sans-serif' }}
+              sx={{
+                mb: '30px',
+                fontSize: '18px',
+                lineHeight: '18px',
+                fontWeight: '500',
+                fontFamily: 'Roboto, sans-serif'
+              }}
             >
               {item.userName} {item.userSurname}
             </Typography>
@@ -108,7 +116,14 @@ const Respond = ({ item }) => {
               variant="p"
               component="p"
               gutterBottom
-              sx={{ mb: '30px', fontSize: '18px', lineHeight: '18px', fontWeight: '500', mr: '10px', fontFamily: 'Roboto, sans-serif' }}
+              sx={{
+                mb: '30px',
+                fontSize: '18px',
+                lineHeight: '18px',
+                fontWeight: '500',
+                mr: '10px',
+                fontFamily: 'Roboto, sans-serif'
+              }}
             >
               {dateValue}
             </Typography>
@@ -130,13 +145,17 @@ const Respond = ({ item }) => {
                 <Button onClick={handleClickLike} disabled={!isAuth || isEmotionClick}>
                   <ThumbUpOutlinedIcon />
                 </Button>
-
               )}
               <Typography
                 variant="p"
                 component="p"
                 gutterBottom
-                sx={{ fontSize: '16px', lineHeight: '16px', fontWeight: '400', fontFamily: 'Roboto, sans-serif' }}
+                sx={{
+                  fontSize: '16px',
+                  lineHeight: '16px',
+                  fontWeight: '400',
+                  fontFamily: 'Roboto, sans-serif'
+                }}
               >
                 {itemLike}
               </Typography>
@@ -162,7 +181,9 @@ const Respond = ({ item }) => {
             </Stack>
           </Stack>
         </Stack>
-        <Box sx={{ textAlign: 'justify', fontSize: '16px', fontFamily: 'Roboto, sans-serif' }}>{item.responseTxt}</Box>
+        <Box sx={{ textAlign: 'justify', fontSize: '16px', fontFamily: 'Roboto, sans-serif' }}>
+          {item.responseTxt}
+        </Box>
       </Stack>
     </ThemeProvider>
   );
