@@ -9,8 +9,8 @@ import Bread from '../../Bread';
 
 import { openModalAddtoCart, openModalRemoveAll } from '../../../redux/slice/favouriteItems';
 import { request } from '../../../tools/request';
-import ModalWindow from "../../ModalWindow.jsx";
-import {closeModalNotAvailable, openModalNotAvailable} from "../../../redux/slice/cartItems";
+import ModalWindow from '../../ModalWindow';
+import { closeModalNotAvailable, openModalNotAvailable } from '../../../redux/slice/cartItems';
 
 const FavouriteBlock = props => {
   const [products, setProducts] = useState([]);
@@ -62,7 +62,6 @@ const FavouriteBlock = props => {
     dispatch(openModalRemoveAll());
   };
 
-
   const addAlltoCart = () => {
     const product = products.find(productItem => productItem.quantity < 1);
     if (product) {
@@ -73,8 +72,8 @@ const FavouriteBlock = props => {
   };
 
   const handleCloseModalNotAvailable = () => {
-    dispatch(closeModalNotAvailable())
-  }
+    dispatch(closeModalNotAvailable());
+  };
 
   return (
     <Container
@@ -180,11 +179,11 @@ const FavouriteBlock = props => {
         </Typography>
       )}
       <ModalWindow
-          mainText="В улюблених є товари, кількість яких відсутня. Для додавання товарів в корзину, будь-ласка видаліть відсутній товар"
-          handleClick={() => {}}
-          handleClose={handleCloseModalNotAvailable}
-          isOpened={isOpenedCartModalNotAvailable}
-          actions={false}
+        mainText="В улюблених є товари, кількість яких відсутня. Для додавання товарів в корзину, будь-ласка видаліть відсутній товар"
+        handleClick={() => {}}
+        handleClose={handleCloseModalNotAvailable}
+        isOpened={isOpenedCartModalNotAvailable}
+        actions={false}
       />
     </Container>
   );

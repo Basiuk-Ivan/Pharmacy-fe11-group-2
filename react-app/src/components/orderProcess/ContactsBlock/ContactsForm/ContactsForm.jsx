@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {TextField, Grid, Typography, Container, Stack, Skeleton} from '@mui/material';
+import { TextField, Grid, Typography, Container, Stack, Skeleton } from '@mui/material';
 import { styled, ThemeProvider } from '@mui/material/styles';
 import { ErrorMessage, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -11,9 +11,9 @@ import { putProductsToCartDB } from '../../../../utils/ActionsWithProduct/putPro
 import { addContactsInfo } from '../../../../redux/slice/orderProcessSlice';
 import { updateQuantity } from '../../../../utils/ActionsWithProduct/updateQuantity';
 import { sendRequest } from '../../../../tools/sendRequest';
-import { countSum } from '../../../../utils/ActionsWithProduct/countSum.js';
-import { openModalAddtoCart } from '../../../../redux/slice/favouriteItems.js';
-import ModalWindow from '../../../ModalWindow.jsx';
+import { countSum } from '../../../../utils/ActionsWithProduct/countSum';
+import { openModalAddtoCart } from '../../../../redux/slice/favouriteItems';
+import ModalWindow from '../../../ModalWindow';
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),
@@ -158,7 +158,6 @@ const ContactsForm = () => {
 
       await updateProductQuantities(values.products);
 
-
       if (status === 200) {
         if (cartStoreId) {
           const newProducts = [];
@@ -170,7 +169,6 @@ const ContactsForm = () => {
       }
     }
   });
-
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -223,73 +221,73 @@ const ContactsForm = () => {
     <ThemeProvider theme={muiTheme}>
       <Container>
         <Typography
-            variant="h5"
-            sx={{
-              margin: '40px 0 30px 0',
-              fontFamily: 'Raleway, sans-serif',
-              color: '#4F4F4F',
-              fontWeight: '700',
-              fontSize: '24px'
-            }}
+          variant="h5"
+          sx={{
+            margin: '40px 0 30px 0',
+            fontFamily: 'Raleway, sans-serif',
+            color: '#4F4F4F',
+            fontWeight: '700',
+            fontSize: '24px'
+          }}
         >
           Контактні дані
         </Typography>
         {showSkeleton ? (
-                <Stack direction="column" spacing={2}>
-                  <Skeleton />
-                  <Skeleton />
-                  <Skeleton />
-                  <Skeleton />
-                </Stack>
-            ) :
-        <form id="contacts" onSubmit={formik.handleSubmit}>
-          <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
-            <Grid item md={6} xl={6}>
-              <ChangedTextField
-                label="Ваше ім'я"
-                fullWidth
-                name="firstName"
-                value={formik.values.firstName}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={Boolean(formik.touched.firstName && formik.errors.firstName)}
-                helperText={formik.touched.firstName && formik.errors.firstName}
-              />
-              <ChangedTextField
-                label="Ваш e-mail"
-                fullWidth
-                name="email"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={Boolean(formik.touched.email && formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
-              />
+          <Stack direction="column" spacing={2}>
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+          </Stack>
+        ) :
+          <form id="contacts" onSubmit={formik.handleSubmit}>
+            <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
+              <Grid item md={6} xl={6}>
+                <ChangedTextField
+                  label="Ваше ім'я"
+                  fullWidth
+                  name="firstName"
+                  value={formik.values.firstName}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={Boolean(formik.touched.firstName && formik.errors.firstName)}
+                  helperText={formik.touched.firstName && formik.errors.firstName}
+                />
+                <ChangedTextField
+                  label="Ваш e-mail"
+                  fullWidth
+                  name="email"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={Boolean(formik.touched.email && formik.errors.email)}
+                  helperText={formik.touched.email && formik.errors.email}
+                />
+              </Grid>
+              <Grid item md={6} xl={6}>
+                <ChangedTextField
+                  label="Ваше прізвище"
+                  fullWidth
+                  name="lastName"
+                  value={formik.values.lastName}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={Boolean(formik.touched.lastName && formik.errors.lastName)}
+                  helperText={formik.touched.lastName && formik.errors.lastName}
+                />
+                <ChangedTextField
+                  label="Ваш телефон"
+                  fullWidth
+                  name="phone"
+                  value={formik.values.phone}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={Boolean(formik.touched.phone && formik.errors.phone)}
+                  helperText={formik.touched.phone && formik.errors.phone}
+                />
+              </Grid>
             </Grid>
-            <Grid item md={6} xl={6}>
-              <ChangedTextField
-                label="Ваше прізвище"
-                fullWidth
-                name="lastName"
-                value={formik.values.lastName}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={Boolean(formik.touched.lastName && formik.errors.lastName)}
-                helperText={formik.touched.lastName && formik.errors.lastName}
-              />
-              <ChangedTextField
-                label="Ваш телефон"
-                fullWidth
-                name="phone"
-                value={formik.values.phone}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={Boolean(formik.touched.phone && formik.errors.phone)}
-                helperText={formik.touched.phone && formik.errors.phone}
-              />
-            </Grid>
-          </Grid>
-        </form> }
+          </form> }
         <ModalWindow
           mainText="В корзині є товари, наявність яких відсутня. Для подальшого оформлення видаліть відсутні товари з корзини."
           handleClick={() => {}}

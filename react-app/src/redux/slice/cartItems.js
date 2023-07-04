@@ -89,8 +89,8 @@ const cartSlice = createSlice({
       state.isOpenedCartModalNotAvailable = true;
     },
     closeModalNotAvailable: state => {
-     state.isOpenedCartModalNotAvailable = false;
-     },
+      state.isOpenedCartModalNotAvailable = false;
+    },
   }
 });
 

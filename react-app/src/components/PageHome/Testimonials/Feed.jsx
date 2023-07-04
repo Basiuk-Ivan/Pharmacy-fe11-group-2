@@ -1,4 +1,5 @@
 import { Rating, Typography, Box } from '@mui/material';
+import { useEffect, useState } from 'react';
 import {
   feedBackDate,
   feedBackItem,
@@ -7,17 +8,15 @@ import {
   feedBackName,
   StarRateItem
 } from './style';
-import {useEffect, useState} from "react";
-import {formatDate} from "../../../utils/ActionsWithProduct/formatDate";
+import { formatDate } from '../../../utils/ActionsWithProduct/formatDate';
 
 export const Feed = ({ item }) => {
-    const [dateValue, setDateValue] = useState(null);
+  const [dateValue, setDateValue] = useState(null);
 
-    useEffect(() => {
-        const formattedDate = formatDate(item.createdAt);
-        setDateValue(formattedDate);
-    }, [item.createdAt]);
-
+  useEffect(() => {
+    const formattedDate = formatDate(item.createdAt);
+    setDateValue(formattedDate);
+  }, [item.createdAt]);
 
   return (
     <Box sx={feedBackItem}>
@@ -27,7 +26,7 @@ export const Feed = ({ item }) => {
             {item.userName} {item.userSurname}
           </Typography>
           <Typography fontFamily="Roboto" component="span" sx={feedBackDate}>
-              {dateValue}
+            {dateValue}
           </Typography>
         </Box>
         <Rating name="half-rating" value={item.rating} sx={StarRateItem} readOnly />

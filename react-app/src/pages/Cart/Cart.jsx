@@ -36,7 +36,7 @@ import { removeAllFromCartUserDBProduct } from '../../utils/ActionsWithProduct/r
 import { removeAllFromCartLocalStorage } from '../../utils/LocalStore/removeAllFromCartLocalStorage';
 import { addCartProduct } from '../../utils/ActionsWithProduct/addCartProduct';
 import { putProductsToCartDB } from '../../utils/ActionsWithProduct/putProductsToCartDB';
-import {openModalAddtoCart} from "../../redux/slice/favouriteItems.js";
+import { openModalAddtoCart } from '../../redux/slice/favouriteItems';
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
@@ -50,7 +50,7 @@ const Cart = () => {
   const isAuth = useSelector(state => state.user.isAuth);
   const userId = useSelector(state => state.user.id);
   const cartStoreId = useSelector(state => state.user.cartStoreId);
-  const [isDisabled, setDisabled] =  useState(false);
+  const [isDisabled, setDisabled] = useState(false);
 
   const isInCart = true;
 
@@ -87,10 +87,8 @@ const Cart = () => {
           //   dispatch(openModalAddtoCart());
           // }
 
-
-
-          const resultQuantity = data.find(item =>  item.quantity < 1);
-          setDisabled(resultQuantity)
+          const resultQuantity = data.find(item => item.quantity < 1);
+          setDisabled(resultQuantity);
         }
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -108,7 +106,6 @@ const Cart = () => {
     const sumObj = countSum(productItemCart, updatedProducts);
     dispatch(setSum(sumObj));
   }, [productItemCart]);
-
 
   const handleClickCartModalRemoveAll = async () => {
     dispatch(removeItem('all'));
@@ -151,12 +148,11 @@ const Cart = () => {
 
                 <PromoBox mt={2}>
                   <FormTitlePromo>Загальна сума: {sumWithDiscount} грн</FormTitlePromo>
-                  {isDisabled ?  <FormText sx={{color:"red"}}>В корзині є товари, наявність яких відсутня. Для подальшого оформлення видаліть відсутні товари з корзини. </FormText>
-                      :
+                  {isDisabled ? <FormText sx={{ color: 'red' }}>В корзині є товари, наявність яких відсутня. Для подальшого оформлення видаліть відсутні товари з корзини. </FormText>
+                    :
                   <NavLink to="/orderprocess" disabled>
                     <OrderButton>Оформити замовлення</OrderButton>
-                  </NavLink>
-                  }
+                  </NavLink>}
                 </PromoBox>
               </FormBox>
             </Box>

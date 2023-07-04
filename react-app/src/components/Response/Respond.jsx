@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { ThemeProvider } from '@mui/material/styles';
 import { formatDate } from '../../utils/ActionsWithProduct/formatDate';
 import { theme } from '../../tools/muiTheme';
-import {updateRespondDB} from "../../utils/Responses/updateRespondDB";
+import { updateRespondDB } from '../../utils/Responses/updateRespondDB';
 
 const Respond = ({ item }) => {
   const isAuth = useSelector(state => state.user.isAuth);
@@ -30,8 +30,6 @@ const Respond = ({ item }) => {
       }
     }
   }, []);
-
-
 
   useEffect(() => {
     const formattedDate = formatDate(item.createdAt);
@@ -93,7 +91,7 @@ const Respond = ({ item }) => {
               variant="p"
               component="p"
               gutterBottom
-              sx={{ mb: '30px', fontSize: '18px', lineHeight: '18px', fontWeight: '500',fontFamily: 'Roboto, sans-serif' }}
+              sx={{ mb: '30px', fontSize: '18px', lineHeight: '18px', fontWeight: '500', fontFamily: 'Roboto, sans-serif' }}
             >
               {item.userName} {item.userSurname}
             </Typography>
@@ -138,7 +136,7 @@ const Respond = ({ item }) => {
                 variant="p"
                 component="p"
                 gutterBottom
-                sx={{ fontSize: '16px', lineHeight: '16px', fontWeight: '400', fontFamily: 'Roboto, sans-serif'}}
+                sx={{ fontSize: '16px', lineHeight: '16px', fontWeight: '400', fontFamily: 'Roboto, sans-serif' }}
               >
                 {itemLike}
               </Typography>

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import {Box, Button, Stack} from '@mui/material';
+import { Box, Button, Stack } from '@mui/material';
 import { useSelector } from 'react-redux';
+import { ThemeProvider } from '@mui/material/styles';
 import { getResponsesFromDB } from '../../utils/Responses/getResponsesFromDB';
 import Respond from './Respond';
-import {ThemeProvider} from "@mui/material/styles";
 import { theme } from '../../tools/muiTheme';
 
 const RespondList = () => {
@@ -13,13 +13,13 @@ const RespondList = () => {
   const [totalFound, setTotalFound] = useState(0);
   const changeStateReview = useSelector(state => state.user.changeStateReview);
 
-  const fetchData = async (page, limit) => {
+  const fetchData = async (pageData, limitData) => {
     try {
-      const res = await getResponsesFromDB(page, limit);
+      const res = await getResponsesFromDB(pageData, limitData);
 
       const { data } = await res;
 
-      setReviews((prevReviews) => [...prevReviews, ...data.responds]);
+      setReviews(prevReviews => [...prevReviews, ...data.responds]);
       setTotalFound(data.totalFound);
     } catch (error) {
       console.log('Error fetching products:', error);
@@ -27,10 +27,9 @@ const RespondList = () => {
     }
   };
 
-
-  const fetchDataReset = async (page, limit) => {
+  const fetchDataReset = async (pageDB, limitDB) => {
     try {
-      const res = await getResponsesFromDB(page, limit);
+      const res = await getResponsesFromDB(pageDB, limitDB);
 
       const { data } = await res;
 
@@ -42,7 +41,7 @@ const RespondList = () => {
     }
   };
   const loadMoreReviews = () => {
-    setPage((prevPage) => prevPage + 1);
+    setPage(prevPage => prevPage + 1);
   };
 
   useEffect(() => {
@@ -55,30 +54,33 @@ const RespondList = () => {
   }, [changeStateReview]);
 
   return (
-      <ThemeProvider theme={theme}>
-    <Stack sx={{ mt: '40px' }} direction="column"
-           justifyContent="center">
-      {!!reviews && reviews.map((item, index) => <Respond key={index} item={item} />)}
-      {reviews.length < totalFound && (
+    <ThemeProvider theme={theme}>
+      <Stack
+        sx={{ mt: '40px' }}
+        direction="column"
+        justifyContent="center"
+      >
+        {!!reviews && reviews.map((item, index) => <Respond key={index} item={item} />)}
+        {reviews.length < totalFound && (
           <Button
-              variant="contained"
-              color="primary"
-              onClick={loadMoreReviews}
-              sx={{
-                padding: '18px 61px',
-                fontSize: '12px',
-                color: '#ffffff',
-                fontWeight: '700',
-                borderRadius: '50px',
-                maxWidth:'250px',
-                alignSelf:'center'
-              }}
+            variant="contained"
+            color="primary"
+            onClick={loadMoreReviews}
+            sx={{
+              padding: '18px 61px',
+              fontSize: '12px',
+              color: '#ffffff',
+              fontWeight: '700',
+              borderRadius: '50px',
+              maxWidth: '250px',
+              alignSelf: 'center'
+            }}
           >
             Завантажити ще
           </Button>
-      )}
-    </Stack>
-      </ThemeProvider>
+        )}
+      </Stack>
+    </ThemeProvider>
   );
 };
 
