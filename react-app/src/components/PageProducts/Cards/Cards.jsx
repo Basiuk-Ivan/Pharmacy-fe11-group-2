@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { Box } from '@mui/material';
+import {Box, Typography} from '@mui/material';
 import ProductCard from '../../ProductCard';
 import { cardsWrapperStyled, cardWrapperStyled } from './style';
 
@@ -15,6 +15,10 @@ function Cards() {
           <ProductCard productItem={item} isInCart={isInCart} />
         </Box>
       ))}
+      {products.length < 1 &&
+          <Typography sx={{ fontSize: '16px' }}>Нажаль, за обраними Вами параметрами
+            нічого не знайдено. Спробуйте змінити умови пошуку.
+          </Typography>}
     </Box>
   );
 }
