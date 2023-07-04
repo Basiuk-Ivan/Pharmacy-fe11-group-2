@@ -104,9 +104,11 @@ export const CartButton = ({ productItem, isInCart }) => {
   }
   return (
     <>
-      {productItem.quantity > 0 && <IconButton onClick={() => handleAddToCart(productItem)} sx={cartStyle}>
-        <ShoppingCartOutlinedIcon />
-      </IconButton>}
+      {productItem.quantity > 0 &&
+          <IconButton onClick={() => handleAddToCart(productItem)} sx={cartStyle}>
+            <ShoppingCartOutlinedIcon />
+          </IconButton>
+      }
     </>
   );
 };
