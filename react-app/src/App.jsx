@@ -30,8 +30,8 @@ import { addToFavouriteItems } from './redux/slice/favouriteItems';
 import { getUserDataFromDB } from './utils/ActionWithUser/getUserDataFromDB';
 import RespondPage from './pages/Response/RespondPage';
 import { Rede } from './pages/BlogPages/rede';
-import { Nature } from './pages/BlogPages/nature.jsx';
-import { Energy } from './pages/BlogPages/energy.jsx';
+import { Nature } from './pages/BlogPages/nature';
+import { Energy } from './pages/BlogPages/energy';
 
 const App = () => {
   const dispatch = useDispatch();
