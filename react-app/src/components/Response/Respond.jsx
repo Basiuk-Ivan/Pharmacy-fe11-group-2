@@ -1,18 +1,29 @@
-import { Avatar, Box, Rating, Stack, Typography, Button } from '@mui/material';
+import {Avatar, Box, Rating, Stack, Typography, Button } from '@mui/material';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { ThemeProvider } from '@mui/material/styles';
 import { formatDate } from '../../utils/ActionsWithProduct/formatDate';
-import { theme } from '../../tools/muiTheme';
 import { updateRespondDB } from '../../utils/Responses/updateRespondDB';
+import {
+  responseWrapperStyles,
+  responseHeaderStyles,
+  personalInfoStyles,
+  avatarStyles,
+  nameStyles,
+  ratingBlockStyles,
+  dateStyles,
+  emotionBlockStyles,
+  itemEmotionStyles,
+  responseTextStyles
+} from './style';
 
 const Respond = ({ item }) => {
   const isAuth = useSelector(state => state.user.isAuth);
   const userId = useSelector(state => state.user.id);
+
 
   const [isEmotionClick, setIsEmotionClick] = useState(false);
   const [dateValue, setDateValue] = useState(null);
@@ -73,98 +84,69 @@ const Respond = ({ item }) => {
   const womanImg = 'https://res.cloudinary.com/dnagwfnl4/image/upload/v1687946330/woman_pe6lhd.jpg';
 
   return (
-    <ThemeProvider theme={theme}>
-      <Stack sx={{ mb: '40px', minWidth: '280px', border: '1px solid #A4CAD6FF', p: '10px', borderRadius: '20px' }}>
-        <Stack flexWrap="wrap" direction="row" justifyContent="center" sx={{ mb: '20px', rowGap: '10px' }}>
-          <Stack
-            direction="row"
-            spacing={2}
-            alignItems="center"
-            sx={{ minWidth: '200px', flexGrow: 1, rowGap: '10px' }}
-          >
-            <Avatar
-              alt="Remy Sharp"
-              src={item.gender === 'male' ? manImg : womanImg}
-              sx={{ width: 56, height: 56 }}
-            />
-            <Typography
-              variant="p"
-              component="p"
-              gutterBottom
-              sx={{ mb: '30px', fontSize: '18px', lineHeight: '18px', fontWeight: '500', fontFamily: 'Roboto, sans-serif' }}
-            >
-              {item.userName} {item.userSurname}
+    <Stack sx={responseWrapperStyles}>
+      <Stack sx={responseHeaderStyles}>
+        <Stack direction="row" spacing={2} alignItems="center" sx={personalInfoStyles}>
+          <Avatar
+            alt="Remy Sharp"
+            src={item.gender === 'male' ? manImg : womanImg}
+            sx={avatarStyles}
+          />
+          <Typography variant="p" component="p" gutterBottom sx={nameStyles}>
+            {item.userName} {item.userSurname}
+          </Typography>
+        </Stack>
+        <Stack
+          flexWrap="wrap"
+          direction="row"
+          spacing={1}
+          alignItems="center"
+          sx={ratingBlockStyles}
+        >
+          <Rating name="read-only" value={numericValue} readOnly />
+          <Typography variant="p" gutterBottom sx={dateStyles}>
+            {dateValue}
+          </Typography>
+        </Stack>
+        <Stack
+          flexWrap="wrap"
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          sx={emotionBlockStyles}
+        >
+          <Stack direction="row" spacing={2} alignItems="center" sx={{ cursor: 'pointer' }}>
+            {clickLike ? (
+            <Button onClick={handleClickLike} disabled={!isAuth || isEmotionClick}>
+              <ThumbUpIcon />
+            </Button>
+            ) : (
+            <Button onClick={handleClickLike} disabled={!isAuth || isEmotionClick}>
+              <ThumbUpOutlinedIcon />
+            </Button>
+            )}
+            <Typography variant="p" component="p" gutterBottom sx={itemEmotionStyles}>
+              {itemLike}
             </Typography>
           </Stack>
-          <Stack
-            flexWrap="wrap"
-            direction="row"
-            spacing={2}
-            alignItems="center"
-            sx={{ minWidth: '200px', paddingRight: '10px', flexGrow: 1, rowGap: '10px' }}
-          >
-            <Rating name="read-only" value={numericValue} readOnly />
-            <Typography
-              variant="p"
-              component="p"
-              gutterBottom
-              sx={{ mb: '30px', fontSize: '18px', lineHeight: '18px', fontWeight: '500', mr: '10px', fontFamily: 'Roboto, sans-serif' }}
-            >
-              {dateValue}
+          <Stack direction="row" spacing={2} alignItems="center" sx={{ cursor: 'pointer' }}>
+            {clickDisLike ? (
+            <Button onClick={handleClickDisLike} disabled={!isAuth || isEmotionClick}>
+              <ThumbDownAltIcon />
+            </Button>
+            ) : (
+            <Button onClick={handleClickDisLike} disabled={!isAuth || isEmotionClick}>
+              <ThumbDownOutlinedIcon />
+            </Button>
+            )}
+            <Typography variant="p" component="p" gutterBottom sx={itemEmotionStyles}>
+              {itemDislike}
             </Typography>
-          </Stack>
-
-          <Stack
-            flexWrap="wrap"
-            direction="row"
-            spacing={2}
-            alignItems="center"
-            sx={{ minWidth: '200px', paddingRight: '10px', flexGrow: 1, rowGap: '10px' }}
-          >
-            <Stack direction="row" spacing={2} alignItems="center" sx={{ cursor: 'pointer' }}>
-              {clickLike ? (
-                <Button onClick={handleClickLike} disabled={!isAuth || isEmotionClick}>
-                  <ThumbUpIcon />
-                </Button>
-              ) : (
-                <Button onClick={handleClickLike} disabled={!isAuth || isEmotionClick}>
-                  <ThumbUpOutlinedIcon />
-                </Button>
-
-              )}
-              <Typography
-                variant="p"
-                component="p"
-                gutterBottom
-                sx={{ fontSize: '16px', lineHeight: '16px', fontWeight: '400', fontFamily: 'Roboto, sans-serif' }}
-              >
-                {itemLike}
-              </Typography>
-            </Stack>
-            <Stack direction="row" spacing={2} alignItems="center" sx={{ cursor: 'pointer' }}>
-              {clickDisLike ? (
-                <Button onClick={handleClickDisLike} disabled={!isAuth || isEmotionClick}>
-                  <ThumbDownAltIcon />
-                </Button>
-              ) : (
-                <Button onClick={handleClickDisLike} disabled={!isAuth || isEmotionClick}>
-                  <ThumbDownOutlinedIcon />
-                </Button>
-              )}
-              <Typography
-                variant="p"
-                component="p"
-                gutterBottom
-                sx={{ fontSize: '16px', lineHeight: '16px', fontWeight: '400' }}
-              >
-                {itemDislike}
-              </Typography>
-            </Stack>
           </Stack>
         </Stack>
-        <Box sx={{ textAlign: 'justify', fontSize: '16px', fontFamily: 'Roboto, sans-serif' }}>{item.responseTxt}</Box>
       </Stack>
-    </ThemeProvider>
+      <Box sx={responseTextStyles}>{item.responseTxt}</Box>
+    </Stack>
   );
 };
 

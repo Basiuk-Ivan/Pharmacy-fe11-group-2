@@ -73,6 +73,7 @@ export const productNameStyles = isInCart => ({
   color: '#525A68',
   overflow: 'hidden',
   maxHeight: '45px',
+  height: "45px",
   '&:hover': {
     cursor: 'pointer',
     color: '#46baa0'
