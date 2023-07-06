@@ -7,8 +7,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { changeStateReview } from '../../redux/slice/userSlice';
 import { theme } from '../../tools/muiTheme';
 import { addResponseToDB } from '../../utils/Responses/addResponseToDB';
-import {formBtnStyles, formErrorStyles, formValueStyles} from './style';
-
+import { formBtnStyles, formErrorStyles, formValueStyles } from './style';
 
 const RespondForm = ({ product }) => {
   const userId = useSelector(state => state.user.id);
@@ -82,7 +81,6 @@ const RespondForm = ({ product }) => {
             Встановіть оцінку
           </Typography>}
           <Stack direction="row" useFlexGap flexWrap="wrap" justifyContent="space-between" spacing={3}>
-
             <Stack
               direction="column"
               justifyContent="flex-start"
@@ -114,7 +112,6 @@ const RespondForm = ({ product }) => {
                   </Typography>
                 ) : null}
             </Stack>
-
             <Stack
               direction="column"
               justifyContent="flex-start"
@@ -181,16 +178,17 @@ const RespondForm = ({ product }) => {
                   </Typography>
                 ) : null}
             </Stack>
-            <Stack direction="column" justifyContent="center"
-                alignItems="center"
-                sx={{ flexGrow: '1' }}
+            <Stack
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+              sx={{ flexGrow: '1' }}
             >
-            <Button type="submit" variant="contained" color="primary" sx={formBtnStyles}>
-              Відправити
-            </Button>
+              <Button type="submit" variant="contained" color="primary" sx={formBtnStyles}>
+                Відправити
+              </Button>
             </Stack>
           </Stack>
-
         </form>
       </Stack>
     </ThemeProvider>

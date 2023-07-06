@@ -1,7 +1,11 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import { Box, Tab, Tabs, Typography } from '@mui/material';
-import { tabsClasses } from '@mui/material/Tabs';
-import s from './VerticalImgTabPanel.module.scss';
+import {
+    wrapperStyles,
+    tabPanelStyles,
+    wrapperImgStyles,
+    activeImgStyles, tabImgStyles, tabsStyles
+} from "./style";
 
 const TabPanel = props => {
   const { children, value, index, ...other } = props;
@@ -16,10 +20,7 @@ const TabPanel = props => {
     >
       {value === index && (
         <Box
-          sx={{
-            paddingLeft: { xs: 0.4, sm: 3, md: 3, lg: 3 },
-            paddingTop: { xs: 1, sm: 3, md: 3, lg: 3 }
-          }}
+          sx={tabPanelStyles}
         >
           <Typography component="div">{children}</Typography>
         </Box>
@@ -39,34 +40,28 @@ const VerticalImgTabPanel = ({ productItem }) => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: '100%' }}>
+    <Box sx={wrapperStyles}>
       <Tabs
         orientation="vertical"
         variant="scrollable"
         value={value}
         onChange={handleChange}
         aria-label="Vertical tabs example"
-        sx={{
-          [`& .${tabsClasses.scrollButtons}`]: {
-            backgroundColor: '#F2C94C',
-            color: '#ffffff'
-          },
-          height: { xs: '250px', sm: '350px' }
-        }}
+        sx={tabsStyles}
         scrollButtons
       >
         {productItem.img.map((imgSrc, index) => (
           <Tab
             key={index}
-            label={<img src={imgSrc} className={s.tabImg} alt={`itm${index + 1}`} />}
+            label={<img src={imgSrc} style={tabImgStyles} alt={`itm${index + 1}`} />}
             {...a11yProps(index)}
           />
         ))}
       </Tabs>
       {productItem.img.map((imgSrc, index) => (
         <TabPanel key={index} value={value} index={index}>
-          <Box sx={{ border: '1px solid #E7E9EB', padding: '10px' }}>
-            <img src={imgSrc} className={s.activeImg} alt={`itm${index + 6}`} />
+          <Box sx={wrapperImgStyles}>
+            <img src={imgSrc} style={activeImgStyles} alt={`itm${index + 6}`} />
           </Box>
         </TabPanel>
       ))}
