@@ -1,11 +1,15 @@
 import { sendRequest } from '../../tools/sendRequest';
 
 export const updateRespondDB = async (reviewData, userId, emotion) => {
+  console.log(reviewData)
   try {
     let newReviewData = {};
 
     if (emotion === 'like') {
-      const updatedWhoLike = [...reviewData.whoLike];
+      let updatedWhoLike = [];
+      if (reviewData.whoLike.length > 0) {
+        updatedWhoLike = [...reviewData.whoLike];
+      }
       updatedWhoLike.push(userId);
       newReviewData = {
         id: reviewData.id,
@@ -13,7 +17,10 @@ export const updateRespondDB = async (reviewData, userId, emotion) => {
         whoLike: [...updatedWhoLike]
       };
     } else {
-      const updatedWhoDislike = [...reviewData.whoDislike];
+      let updatedWhoDislike = [];
+      if (reviewData.whoDislike.length > 0) {
+        updatedWhoDislike = [...reviewData.whoDislike];
+      }
       updatedWhoDislike.push(userId);
       newReviewData = {
         id: reviewData.id,

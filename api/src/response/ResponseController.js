@@ -64,6 +64,7 @@ export const updateResponse = async (req, res) => {
             req.body.id,
             req.body,
             {new: true});
+        console.log(updatedResponse);
         return res.json(updatedResponse);
     } catch (e) {
         res.status(500).json(e.message);

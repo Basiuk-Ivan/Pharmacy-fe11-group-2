@@ -60,7 +60,9 @@ const RespondList = () => {
         direction="column"
         justifyContent="center"
       >
-        {!!reviews && reviews.map((item, index) => <Respond key={index} item={item} />)}
+        {!!reviews && reviews.map((item) => {
+          console.log(item);
+          return (<Respond key={`${item.createdAt}-${item.id}-${item.responseTxt}`} item={item} />)})};
         {reviews.length < totalFound && (
           <Button
             variant="contained"
