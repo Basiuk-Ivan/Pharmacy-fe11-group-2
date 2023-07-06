@@ -1,3 +1,13 @@
+export const submitBtnStyles = {
+  padding: '18px 61px',
+  fontSize: '12px',
+  color: '#ffffff',
+  fontWeight: '700',
+  borderRadius: '50px',
+  maxWidth: '250px',
+  alignSelf: 'center'
+}
+
 export const responseWrapperStyles = {
   p: '10px',
   mb: '40px',
@@ -58,10 +68,6 @@ export const responseTextStyles = {
 };
 
 
-
-
-//CHECK!
-
 export const wrapperForTestimonials = {
   display: 'flex',
   justifyContent: 'center',
@@ -81,11 +87,6 @@ export const mainFeedback = {
   gap: '45px',
   background: 'white',
   padding: '4%',
-};
-export const feedBack = {
-  marginTop: '5px',
-  flex: 2,
-  marginLeft: '2%'
 };
 export const ave = {
   display: 'flex',
@@ -108,77 +109,47 @@ export const totalRate = {
   color: '#4F4F4F',
   textAlign: 'center'
 };
-export const feedBackItem = {
-  marginRight: '3%',
-  marginBottom: '4%'
-};
-
-export const feedBackItemStar = {
-  width: '370px',
-  display: 'flex',
-  flexWrap: 'wrap',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  '@media (max-width: 400px)': {
-    width: '100%'
-  }
-};
-export const feedBackItemText = {
-  marginTop: '1%',
-  color: '#4F4F4F',
-  fontSize: '14px',
-  textAlign: 'justify'
-};
-
-export const StarRateItem = {
-  color: '#F2C94C',
-  fontSize: '19px'
-};
-
-export const feedBackDate = {
-  fontSize: '18px',
-  color: '#828282',
-  marginLeft: '7px',
-};
-
-export const feedBackName = {
-  fontSize: '18px',
-  fontWeight: '700',
-  color: '#333333'
-};
-export const totalCountFeed = {
-  marginLeft: '25px',
-  position: 'relative',
-  color: '#2FD3AE',
-  fontSize: '14px',
-  fontWeight: '700',
-  textTransform: 'uppercase',
-  '::before': {
-    position: 'absolute',
-    top: '-2px',
-    left: '-25px',
-    content: 'url("../../../../src/assets/right.png")',
-    width: '10px',
-    height: '10px'
-  }
-};
-
-export const btnFeed = {
-  background: '#2FD3AE',
-  fontSize: '14px',
-  padding: '11px 31px',
-  borderRadius: '31px',
-  color: 'white',
-  ':hover': { backgroundColor: '#26bea2' }
-};
 
 export const StarRate = {
   color: '#F2C94C',
   fontSize: '19px'
 };
 
-export const linkFeed = {
-  cursor: 'pointer',
-  textDecoration: 'none',
-  color: '#2FD3AE'
-};
+export const warningUserStyles = {
+  mb: '30px',
+  fontSize: '20px',
+  lineHeight: '22px',
+  fontWeight: '500'
+}
+
+export const respondSectionStyles = {
+  borderRadius: '20px',
+  backgroundColor: '#F7FAFB',
+  padding: '30px'
+}
+
+export const respondTitleStyles = {
+  mb: '30px',
+  fontSize: '18px',
+  lineHeight: '18px',
+  fontWeight: '500'
+}
+
+export const formBtnStyles = {
+  padding: '18px 61px',
+  fontSize: '12px',
+  color: '#ffffff',
+  fontWeight: '700',
+  borderRadius: '50px',
+  alignSelf: 'center'
+}
+
+export const formValueStyles = {
+  fontSize: '14px',
+  lineHeight: '16px',
+  fontWeight: '500'
+}
+export const formErrorStyles = {
+  fontSize: '12px',
+  color: 'red'
+}
