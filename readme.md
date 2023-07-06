@@ -52,28 +52,53 @@ The main features of the application:
 
 [**Artem Shchelinskyi**](https://github.com/shchelinskyi)
 
-- Text
+- Implemented layout of the product page (Single page) and product card in compliance with the design.
+- The "scrollTo" technology is used to smoothly scroll to the sections of the product page.
+- Implemented the ability to change the product rating directly in the database by clicking on the rating value.
+- Redux Toolkit and localStorage were used to add products to the cart, change the number of products in the cart, and delete them.
+- A mechanism has been created that generates general information about the order.
+- Implemented modal windows using Redux state that allow you to conveniently interact with the content.
+- A search mechanism has been implemented that allows the user to search by product name in the database.
 
 [**Anatoliy Lehchylin**](https://github.com/AnatoliyLehchylin)
 
-- Text
+- Products page, components - Filter, ChoiceCategory, Cards, Pagination, Sorting.
+- Formation of the search string, component RequestString.
 
 [**Ivan Basiuk**](https://github.com/IvanBasss)
 
-- Text
+- Organization of team work
+- Checking the work done
+- Development of the application structure
+- Home page development
+- Validation of goods
+- Working with the Swipper, Mui library
 
 [**Yaroslav**](https://github.com/keannko)
 
-- Text
+- Page Favorite
+- Components Modal
+- Components Analogs
+- Components YouBrowsed
+- Components CabinetUser
 
 [**Sergiy**](https://github.com/NHunter007)
 
-- Text
+- Development of the database structure, creation of database collections.
+- Creation of api server elements.
+- Setting up access to the database.
+- Creation of queries for working with the database and search queries in the database.
+- Creation and configuration of the mail service.
 
 [**Dmytro**](https://github.com/D9D9kiev)
 
-- Text
+- Page Cart
+- Components Modal
+- Working with Yup, Formik
 
-[**Vadim**](https://github.com/vadba)
+- [**Vadim**](https://github.com/vadba)
 
-- Text
+- Page Home
+- Component Footer
+- Component HealthBlogs
+- Separate tasks and adding entities to db
