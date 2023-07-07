@@ -9,6 +9,7 @@ import ProductCardReviews from '../../components/SinglePage/ProductCardReviews';
 import BreadProduct from '../../components/SinglePage/BreadProduct';
 import recentlyViewedProducts from '../../tools/recentlyViewedProducts';
 import { request } from '../../tools/request';
+import {antTabsStyles, mainBlockStyles, productTitleStyle} from "./style";
 
 const AntTabs = styled(Tabs)({
   '& .MuiTabs-indicator': {
@@ -88,9 +89,7 @@ const ProductPage = () => {
           method: 'GET',
           params: { _id: id }
         });
-
         const { data } = result;
-
         if (data && data.length > 0) {
           const firstProduct = data[0];
           setProduct(firstProduct);
@@ -110,38 +109,20 @@ const ProductPage = () => {
   return (
     <ThemeProvider theme={theme}>
       <div>
-        {product ? (
+        {product && (
           <Container>
             <Grid container spacing={2}>
               <Grid item lg={12}>
                 <BreadProduct category={product.categories[0]} name={product.name} />
               </Grid>
               <Grid item lg={12}>
-                <Typography
-                  variant="h4"
-                  sx={{
-                    fontSize: { xs: '26px', sm: '30px', md: '32px', lg: '36px' },
-                    mt: { xs: '10px', sm: '5px', mx: 0 },
-                    fontWeight: 700,
-                    color: '#394045'
-                  }}
-                  gutterBottom
-                >
+                <Typography variant="h4" sx={productTitleStyle} gutterBottom>
                   {product?.name}
                 </Typography>
               </Grid>
               <Grid item lg={12}>
                 <Box sx={{ width: '100%' }}>
-                  <Box
-                    sx={{
-                      width: { xs: '90%', sm: '100%', md: '100%', lg: '100%' },
-                      borderBottom: 1,
-                      borderColor: 'divider',
-                      backgroundColor: '#F7FAFB',
-                      margin:'0 auto',
-                      border:'1px solid #eaeced'
-                    }}
-                  >
+                  <Box sx={mainBlockStyles}>
                     <AntTabs
                       value={value}
                       onChange={handleChange}
@@ -149,7 +130,7 @@ const ProductPage = () => {
                       scrollButtons
                       allowScrollButtonsMobile
                       aria-label="scrollable auto tabs example"
-                      sx={{ width: { xs: '250px', sm: '100%', md: '100%', lg: '100%' } }}
+                      sx={antTabsStyles}
                     >
                       <Tab sx={{ width: { xs: '150px' } }} label="Все про товар" {...a11yProps(0)} />
                       <Tab sx={{ width: { xs: '150px' } }} label="Інструкція" {...a11yProps(1)} />
@@ -179,7 +160,8 @@ const ProductPage = () => {
               </Grid>
             </Grid>
           </Container>
-        ) : (
+        )}
+        {!product && (
           <Box>
             <Skeleton variant="text" sx={{ fontSize: '16px', mt: '160px', mb: '20px' }} />
             <Skeleton variant="text" sx={{ fontSize: '32px', mb: '20px' }} />
