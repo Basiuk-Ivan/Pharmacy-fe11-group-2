@@ -14,5 +14,14 @@ export const theme = createTheme({
     success: {
       main: '#ed6c02'
     }
-  }
+  },
+  overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        a: {
+          textDecoration: 'none',
+        },
+      },
+    },
+  },
 });

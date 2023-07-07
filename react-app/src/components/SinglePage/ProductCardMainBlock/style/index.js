@@ -1,3 +1,20 @@
+import { tabsClasses } from '@mui/material/Tabs';
+
+export const wrapperStyles = {
+  flexGrow: 1,
+  bgcolor: 'background.paper',
+  display: 'flex',
+  height: '100%'
+};
+
+export const tabsStyles = {
+  [`& .${tabsClasses.scrollButtons}`]: {
+    backgroundColor: '#F2C94C',
+    color: '#ffffff'
+  },
+  height: { xs: '250px', sm: '360px' },
+};
+
 export const mainBlockStyle = {
   display: 'flex',
   justifyContent: 'space-between',
@@ -68,4 +85,11 @@ export const priceBlockStyle = {
   backgroundColor: '#F7FAFB',
   paddingTop: '65px',
   mb: '10px'
+};
+
+export const raitingStyles = {
+  fontSize: {
+    xs: '16px',
+    md: '18px'
+  }
 };

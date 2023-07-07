@@ -4,9 +4,11 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { addProductReviewToDB } from '../../../utils/ActionsWithProduct/addProductReviewToDB';
-import { changeStateReview } from '../../../redux/slice/userSlice';
-import { updateRating } from '../../../utils/ActionsWithProduct/updateRating';
+import { addProductReviewToDB } from '../../../../utils/ActionsWithProduct/addProductReviewToDB';
+import { updateRating } from '../../../../utils/ActionsWithProduct/updateRating';
+import { changeStateReview } from '../../../../redux/slice/userSlice';
+import { formValidateStyles, formValueStyles } from '../style';
+import { formBtnStyles } from '../../../Response/style';
 
 const ReviewForm = ({ product }) => {
   const { id } = useParams();
@@ -66,12 +68,7 @@ const ReviewForm = ({ product }) => {
     <Stack>
 
       <form onSubmit={formik.handleSubmit}>
-        <Typography
-          variant="p"
-          component="p"
-          gutterBottom
-          sx={{ fontSize: '14px', lineHeight: '16px', fontWeight: '500' }}
-        >
+        <Typography variant="p" component="p" gutterBottom sx={formValueStyles}>
           Оцінка
         </Typography>
         <Rating
@@ -83,11 +80,7 @@ const ReviewForm = ({ product }) => {
           sx={{ fontSize: '25px' }}
         />
         {ratingError &&
-        <Typography
-          variant="p"
-          component="p"
-          sx={{ fontSize: '12px', color: 'red' }}
-        >
+        <Typography variant="p" component="p" sx={{ fontSize: '12px', color: 'red' }}>
           Встановіть оцінку
         </Typography>}
         <Stack direction="row" useFlexGap flexWrap="wrap" justifyContent="space-between" spacing={3}>
@@ -118,11 +111,7 @@ const ReviewForm = ({ product }) => {
             />
             {formik.touched.name && formik.errors.name
               ? (
-                <Typography
-                  variant="p"
-                  component="p"
-                  sx={{ fontSize: '12px', color: 'red' }}
-                >
+                <Typography variant="p" component="p" sx={formValidateStyles}>
                   {formik.errors.name}
                 </Typography>
               ) : null}
@@ -153,11 +142,7 @@ const ReviewForm = ({ product }) => {
             />
             {formik.touched.surname && formik.errors.surname
               ? (
-                <Typography
-                  variant="p"
-                  component="p"
-                  sx={{ fontSize: '12px', color: 'red' }}
-                >
+                <Typography variant="p" component="p" sx={formValidateStyles}>
                   {formik.errors.surname}
                 </Typography>
               ) : null}
@@ -189,29 +174,16 @@ const ReviewForm = ({ product }) => {
             />
             {formik.touched.review && formik.errors.review
               ? (
-                <Typography
-                  variant="p"
-                  component="p"
-                  sx={{ fontSize: '12px', color: 'red' }}
-                >
+                <Typography variant="p" component="p" sx={formValidateStyles}>
                   {formik.errors.review}
                 </Typography>
               ) : null}
           </Stack>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            sx={{
-              padding: '18px 61px',
-              fontSize: '12px',
-              color: '#ffffff',
-              fontWeight: '700',
-              borderRadius: '50px'
-            }}
-          >
-            Відправити
-          </Button>
+          <Stack direction="column" justifyContent="center" alignItems="center" sx={{ flexGrow: '1' }}>
+            <Button type="submit" variant="contained" color="primary" sx={formBtnStyles}>
+              Відправити
+            </Button>
+          </Stack>
         </Stack>
 
       </form>

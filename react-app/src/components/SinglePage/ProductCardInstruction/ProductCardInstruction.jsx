@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { Box, Stack, Typography, Button } from '@mui/material';
-import TextComponent from '../TextComponent';
 import { scrollClick } from '../../../tools/scrollClick';
 import { instructionTextComponentData } from '../../../tools/instructionTextComponentData';
 import { instructionButtons } from '../../../tools/instructionButtons';
+import TextComponent from './components/TextComponent';
 
 const ProductCardInstruction = ({ productItem }) => {
   const [activeButton, setActiveButton] = useState(null);

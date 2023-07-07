@@ -1,5 +1,6 @@
 import ReviewDB from './ReviewModel.js';
 import mongoose from 'mongoose';
+import ResponseDB from "../response/ResponseModel.js";
 
 export const createReview = async (req, res) => {
   try {
@@ -13,22 +14,22 @@ export const createReview = async (req, res) => {
 export const getReview = async (req, res) => {
   try {
     let Reviews = [];
-    const { product, user } = req.query;
-    if (!!product) {
+    const { product, user, respondId } = req.query;
+    if (!!respondId) {
+      const respond = await ReviewDB.findById(respondId);
+      return res.json(respond);
+    } else if (!!product) {
       const objectIdProd = new mongoose.Types.ObjectId(product);
       Reviews = await ReviewDB.find({ product: objectIdProd });
+    } else if (!!user) {
+      const objectIdUser = new mongoose.Types.ObjectId(user);
+      Reviews = await ReviewDB.find({ user: objectIdUser });
     } else {
-      if (!!user) {
-        const objectIdUser = new mongoose.Types.ObjectId(user);
-        Reviews = await ReviewDB.find({ user: objectIdUser });
-      } else {
-        Reviews = await ReviewDB.find();
-      }
+      Reviews = await ReviewDB.find();
     }
-
     return res.json(Reviews.reverse());
   } catch (e) {
-    res.status(500).json(e.message);
+    return res.status(500).json(e.message);
   }
 };
 

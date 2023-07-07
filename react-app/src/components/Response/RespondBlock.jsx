@@ -1,16 +1,18 @@
-import { Box, Typography, Rating } from '@mui/material';
+import { Box, Typography, Rating, Stack, Skeleton } from '@mui/material';
 import { useSelector } from 'react-redux';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import RespondForm from './RespondForm';
 import RespondList from './RespondList';
 import {
   ave,
   aveRate,
   aveText,
-  feedBack, linkFeed,
   mainFeedback,
-  StarRate, totalCountFeed,
+  respondSectionStyles,
+  respondTitleStyles,
+  StarRate,
   totalRate,
+  warningUserStyles,
   wrapperForTestimonials,
 } from './style';
 import { getResponsesFromDB } from '../../utils/Responses/getResponsesFromDB';
@@ -20,13 +22,12 @@ const RespondBlock = () => {
   const [averageRating, setAverageRating] = useState(4.5);
   const [totalFound, setTotalFound] = useState();
   const changeStateReview = useSelector(state => state.user.changeStateReview);
+  const [showSkeleton, setShowSkeleton] = useState(true);
 
   const fetchData = async () => {
     try {
       const res = await getResponsesFromDB(1);
-
       const { data } = await res;
-
       setAverageRating(data.roundedValueRating);
       setTotalFound(data.totalFound);
     } catch (error) {
@@ -36,12 +37,25 @@ const RespondBlock = () => {
   };
 
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSkeleton(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
     fetchData();
   }, [changeStateReview]);
 
   return (
     <Box>
       <Box sx={wrapperForTestimonials}>
+        {showSkeleton && (
+          <Stack direction="column" spacing={2}>
+            <Skeleton variant="rectangular" width={270} height={300} />
+          </Stack>
+        )}
+        {!showSkeleton && (
         <Box sx={mainFeedback}>
           <Box sx={ave}>
             <Typography fontFamily="Roboto" component="div" sx={aveText}>
@@ -58,41 +72,25 @@ const RespondBlock = () => {
             Загальний рейтинг на основі  <br /> {totalFound} відгуків наших покупців
           </Typography>
         </Box>
+        )}
       </Box>
-      <Box
-        sx={{
-          borderRadius: '20px',
-          backgroundColor: '#F7FAFB',
-          padding: '30px'
-        }}
-        noValidate
-        autoComplete="off"
-      >
+      <Box sx={respondSectionStyles} noValidate autoComplete="off">
 
         {isAuth &&
         <Box>
-          <Typography
-            variant="h5"
-            component="h5"
-            gutterBottom
-            sx={{ mb: '30px', fontSize: '18px', lineHeight: '18px', fontWeight: '500' }}
-          >
+          <Typography variant="h5" component="h5" gutterBottom sx={respondTitleStyles}>
             Залишити відгук
           </Typography>
           <RespondForm />
         </Box>}
 
         {!isAuth &&
-        <Typography
-          variant="h4"
-          component="h4"
-          gutterBottom
-          sx={{ mb: '30px', fontSize: '20px', lineHeight: '22px', fontWeight: '500' }}
-        >
+        <Typography variant="h4" component="h4" gutterBottom sx={warningUserStyles}>
           Додати відгук може лише авторизований користувач
         </Typography>}
         <RespondList />
       </Box>
-    </Box>);
+    </Box>
+  );
 };
 export default RespondBlock;

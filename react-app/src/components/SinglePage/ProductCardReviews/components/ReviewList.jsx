@@ -2,8 +2,8 @@ import { useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import { useSelector } from 'react-redux';
-import Review from '../Review';
-import { getProductReviewsFromDB } from '../../../utils/ActionsWithProduct/getProductReviewsFromDB';
+import Review from './Review';
+import { getProductReviewsFromDB } from '../../../../utils/ActionsWithProduct/getProductReviewsFromDB';
 
 const ReviewList = () => {
   const { id } = useParams();
@@ -29,7 +29,7 @@ const ReviewList = () => {
 
   return (
     <Box sx={{ mt: '40px' }}>
-      {!!productReviews && productReviews.map((item, index) => <Review key={index} item={item} />)}
+      {!!productReviews && productReviews.map((item, index) => <Review key={`${item.id}-${index}`} item={item} />)}
     </Box>
   );
 };

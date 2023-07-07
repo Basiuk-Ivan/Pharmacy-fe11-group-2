@@ -1,11 +1,18 @@
 import { sendRequest } from '../../tools/sendRequest';
 
-export const updateRespondDB = async (reviewData, userId, emotion) => {
+export const updateRespondDB = async (id, userId, emotion) => {
   try {
     let newReviewData = {};
 
+    const urlData = `${process.env.VITE_API_URL}/api/response?respondId=${id}`;
+    const findActualRespondData = await sendRequest(urlData);
+    const reviewData = findActualRespondData.data;
+
     if (emotion === 'like') {
-      const updatedWhoLike = [...reviewData.whoLike];
+      let updatedWhoLike = [];
+      if (reviewData.whoLike.length > 0) {
+        updatedWhoLike = [...reviewData.whoLike];
+      }
       updatedWhoLike.push(userId);
       newReviewData = {
         id: reviewData.id,
@@ -13,7 +20,10 @@ export const updateRespondDB = async (reviewData, userId, emotion) => {
         whoLike: [...updatedWhoLike]
       };
     } else {
-      const updatedWhoDislike = [...reviewData.whoDislike];
+      let updatedWhoDislike = [];
+      if (reviewData.whoDislike.length > 0) {
+        updatedWhoDislike = [...reviewData.whoDislike];
+      }
       updatedWhoDislike.push(userId);
       newReviewData = {
         id: reviewData.id,

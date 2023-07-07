@@ -1,7 +1,8 @@
 import { Box, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
-import ReviewList from '../ReviewList';
-import ReviewForm from '../ReviewForm';
+import { formBlockStyles, formBlockTitleStyles, formErrorStyles, reviewTitleStyles } from './style';
+import ReviewList from './components/ReviewList';
+import ReviewForm from './components/ReviewForm';
 
 const ProductCardReviews = ({ productItem }) => {
   const isAuth = useSelector(state => state.user.isAuth);
@@ -9,44 +10,21 @@ const ProductCardReviews = ({ productItem }) => {
   return (
     <Box>
       <Box>
-        <Typography
-          variant="h4"
-          component="h4"
-          gutterBottom
-          sx={{ mt: '68px', mb: '30px', fontSize: '36px', lineHeight: '42px', fontWeight: '700' }}
-        >
+        <Typography variant="h4" component="h4" gutterBottom sx={reviewTitleStyles}>
           Відгуки
         </Typography>
 
-        <Box
-          sx={{
-            borderRadius: '20px',
-            backgroundColor: '#F7FAFB',
-            padding: '30px'
-          }}
-          noValidate
-          autoComplete="off"
-        >
+        <Box sx={formBlockStyles} noValidate autoComplete="off">
           {isAuth &&
           <Box>
-            <Typography
-              variant="h5"
-              component="h5"
-              gutterBottom
-              sx={{ mb: '30px', fontSize: '18px', lineHeight: '18px', fontWeight: '500' }}
-            >
+            <Typography variant="h5" component="h5" gutterBottom sx={formBlockTitleStyles}>
               Залишити відгук
             </Typography>
             <ReviewForm product={productItem} />
           </Box>}
 
           {!isAuth &&
-          <Typography
-            variant="h4"
-            component="h4"
-            gutterBottom
-            sx={{ mb: '30px', fontSize: '20px', lineHeight: '22px', fontWeight: '500' }}
-          >
+          <Typography variant="h4" component="h4" gutterBottom sx={formErrorStyles}>
             Додати відгук може лише авторизований користувач
           </Typography>}
           <ReviewList product={productItem} />

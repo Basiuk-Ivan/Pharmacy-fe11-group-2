@@ -7,6 +7,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { changeStateReview } from '../../redux/slice/userSlice';
 import { theme } from '../../tools/muiTheme';
 import { addResponseToDB } from '../../utils/Responses/addResponseToDB';
+import { formBtnStyles, formErrorStyles, formValueStyles } from './style';
 
 const RespondForm = ({ product }) => {
   const userId = useSelector(state => state.user.id);
@@ -64,12 +65,7 @@ const RespondForm = ({ product }) => {
     <ThemeProvider theme={theme}>
       <Stack>
         <form onSubmit={formik.handleSubmit}>
-          <Typography
-            variant="p"
-            component="p"
-            gutterBottom
-            sx={{ fontSize: '14px', lineHeight: '16px', fontWeight: '500' }}
-          >
+          <Typography variant="p" component="p" gutterBottom sx={formValueStyles}>
             Оцінка
           </Typography>
           <Rating
@@ -81,15 +77,10 @@ const RespondForm = ({ product }) => {
             sx={{ fontSize: '25px' }}
           />
           {ratingError &&
-          <Typography
-            variant="p"
-            component="p"
-            sx={{ fontSize: '12px', color: 'red' }}
-          >
+          <Typography variant="p" component="p" sx={formErrorStyles}>
             Встановіть оцінку
           </Typography>}
           <Stack direction="row" useFlexGap flexWrap="wrap" justifyContent="space-between" spacing={3}>
-
             <Stack
               direction="column"
               justifyContent="flex-start"
@@ -116,16 +107,11 @@ const RespondForm = ({ product }) => {
               />
               {formik.touched.name && formik.errors.name
                 ? (
-                  <Typography
-                    variant="p"
-                    component="p"
-                    sx={{ fontSize: '12px', color: 'red' }}
-                  >
+                  <Typography variant="p" component="p" sx={formErrorStyles}>
                     {formik.errors.name}
                   </Typography>
                 ) : null}
             </Stack>
-
             <Stack
               direction="column"
               justifyContent="flex-start"
@@ -151,11 +137,7 @@ const RespondForm = ({ product }) => {
               />
               {formik.touched.surname && formik.errors.surname
                 ? (
-                  <Typography
-                    variant="p"
-                    component="p"
-                    sx={{ fontSize: '12px', color: 'red' }}
-                  >
+                  <Typography variant="p" component="p" sx={formErrorStyles}>
                     {formik.errors.surname}
                   </Typography>
                 ) : null}
@@ -190,28 +172,23 @@ const RespondForm = ({ product }) => {
                   <Typography
                     variant="p"
                     component="p"
-                    sx={{ fontSize: '12px', color: 'red' }}
+                    sx={formErrorStyles}
                   >
                     {formik.errors.review}
                   </Typography>
                 ) : null}
             </Stack>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              sx={{
-                padding: '18px 61px',
-                fontSize: '12px',
-                color: '#ffffff',
-                fontWeight: '700',
-                borderRadius: '50px'
-              }}
+            <Stack
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+              sx={{ flexGrow: '1' }}
             >
-              Відправити
-            </Button>
+              <Button type="submit" variant="contained" color="primary" sx={formBtnStyles}>
+                Відправити
+              </Button>
+            </Stack>
           </Stack>
-
         </form>
       </Stack>
     </ThemeProvider>

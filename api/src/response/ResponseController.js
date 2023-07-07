@@ -15,7 +15,11 @@ export const createResponse = async (req, res) => {
 
 export const getResponse = async (req, res) => {
     try {
-        const {page, limit} = req.query;
+        const {page, limit, respondId} = req.query;
+        if (!!respondId) {
+            const respond = await ResponseDB.findById(respondId);
+            res.json(respond);
+        } else {
         const perPage = parseInt(limit) || 5;
         const skip = ((parseInt(page) || 1) - 1) * perPage;
         let allResponds = [];
@@ -36,7 +40,7 @@ export const getResponse = async (req, res) => {
 
         const totalFound = await ResponseDB.countDocuments();
         return res.json({totalFound, responds, roundedValueRating, respondsForHome})
-
+        }
     } catch (e) {
         res.status(500).json(e.message);
     }
@@ -64,6 +68,7 @@ export const updateResponse = async (req, res) => {
             req.body.id,
             req.body,
             {new: true});
+        console.log(updatedResponse);
         return res.json(updatedResponse);
     } catch (e) {
         res.status(500).json(e.message);
