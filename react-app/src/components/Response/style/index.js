@@ -6,7 +6,7 @@ export const submitBtnStyles = {
   borderRadius: '50px',
   maxWidth: '250px',
   alignSelf: 'center'
-}
+};
 
 export const responseWrapperStyles = {
   p: '10px',
@@ -41,19 +41,19 @@ export const ratingBlockStyles = {
   marginRight: '10px',
   flexGrow: 1,
   rowGap: '10px'
-}
+};
 export const dateStyles = {
   mr: '10px',
   mb: '30px',
   fontSize: '18px',
   lineHeight: '18px',
   fontWeight: '500',
-}
+};
 export const emotionBlockStyles = {
   width: '220px',
   paddingRight: '10px',
   rowGap: '10px',
-}
+};
 
 export const itemEmotionStyles = {
   fontSize: '16px',
@@ -66,7 +66,6 @@ export const responseTextStyles = {
   fontSize: '16px',
   fontFamily: 'Roboto, sans-serif'
 };
-
 
 export const wrapperForTestimonials = {
   display: 'flex',
@@ -120,20 +119,20 @@ export const warningUserStyles = {
   fontSize: '20px',
   lineHeight: '22px',
   fontWeight: '500'
-}
+};
 
 export const respondSectionStyles = {
   borderRadius: '20px',
   backgroundColor: '#F7FAFB',
   padding: '30px'
-}
+};
 
 export const respondTitleStyles = {
   mb: '30px',
   fontSize: '18px',
   lineHeight: '18px',
   fontWeight: '500'
-}
+};
 
 export const formBtnStyles = {
   padding: '18px 61px',
@@ -142,14 +141,14 @@ export const formBtnStyles = {
   fontWeight: '700',
   borderRadius: '50px',
   alignSelf: 'center'
-}
+};
 
 export const formValueStyles = {
   fontSize: '14px',
   lineHeight: '16px',
   fontWeight: '500'
-}
+};
 export const formErrorStyles = {
   fontSize: '12px',
   color: 'red'
-}
+};

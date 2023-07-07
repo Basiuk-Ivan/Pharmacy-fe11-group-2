@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
 import PriceBlock from './components/PriceBlock';
 import InformBlock from './components/InformBlock';
-import VerticalImgTabPanel from "./components/VerticalImgTabPanel";
+import VerticalImgTabPanel from './components/VerticalImgTabPanel';
 
 const ProductCardMainBlock = ({ productItem }) => {
   return (
@@ -10,7 +10,7 @@ const ProductCardMainBlock = ({ productItem }) => {
         <VerticalImgTabPanel productItem={productItem} />
       </Grid>
       <InformBlock productItem={productItem} />
-      <PriceBlock productItem={productItem}/>
+      <PriceBlock productItem={productItem} />
     </Grid>
   );
 };

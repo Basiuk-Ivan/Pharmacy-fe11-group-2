@@ -1,4 +1,4 @@
-import {CssBaseline} from "@mui/material";
+import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { useEffect } from 'react';
 import jwtDecode from 'jwt-decode';
@@ -10,7 +10,6 @@ import { addToCartMoreOne } from './redux/slice/cartItems';
 import { addToFavouriteItems } from './redux/slice/favouriteItems';
 import { getUserDataFromDB } from './utils/ActionWithUser/getUserDataFromDB';
 import AppRouter from './router/AppRouter';
-
 
 const App = () => {
   const dispatch = useDispatch();

@@ -19,7 +19,7 @@ import {
   itemEmotionStyles,
   responseTextStyles
 } from './style';
-import {avatarImg} from "../../utils/commonConstans/avatarImg.js";
+import { avatarImg } from '../../utils/commonConstans/avatarImg.js';
 
 const Respond = ({ item }) => {
   const isAuth = useSelector(state => state.user.isAuth);
@@ -64,7 +64,7 @@ const Respond = ({ item }) => {
         <Stack direction="row" spacing={2} alignItems="center" sx={personalInfoStyles}>
           <Avatar
             alt="Remy Sharp"
-            src={item.gender === 'male' ?  avatarImg.manImg : avatarImg.womanImg}
+            src={item.gender === 'male' ? avatarImg.manImg : avatarImg.womanImg}
             sx={avatarStyles}
           />
           <Typography variant="p" component="p" gutterBottom sx={nameStyles}>

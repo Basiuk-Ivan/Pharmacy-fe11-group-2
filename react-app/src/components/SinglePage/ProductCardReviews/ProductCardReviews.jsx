@@ -1,8 +1,8 @@
 import { Box, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
-import {formBlockStyles, formBlockTitleStyles, formErrorStyles, reviewTitleStyles} from './style';
-import ReviewList from "./components/ReviewList";
-import ReviewForm from "./components/ReviewForm";
+import { formBlockStyles, formBlockTitleStyles, formErrorStyles, reviewTitleStyles } from './style';
+import ReviewList from './components/ReviewList';
+import ReviewForm from './components/ReviewForm';
 
 const ProductCardReviews = ({ productItem }) => {
   const isAuth = useSelector(state => state.user.isAuth);

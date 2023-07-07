@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Box, Tab, Tabs, Typography } from '@mui/material';
-import {wrapperStyles, tabsStyles} from '../style';
+import { wrapperStyles, tabsStyles } from '../style';
 
 const TabPanel = props => {
   const { children, value, index, ...other } = props;

@@ -4,12 +4,11 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import {addProductReviewToDB} from "../../../../utils/ActionsWithProduct/addProductReviewToDB";
-import {updateRating} from "../../../../utils/ActionsWithProduct/updateRating";
-import {changeStateReview} from "../../../../redux/slice/userSlice";
-import {formValidateStyles, formValueStyles} from "../style/index.js";
-import {formBtnStyles} from "../../../Response/style/index.js";
-
+import { addProductReviewToDB } from '../../../../utils/ActionsWithProduct/addProductReviewToDB';
+import { updateRating } from '../../../../utils/ActionsWithProduct/updateRating';
+import { changeStateReview } from '../../../../redux/slice/userSlice';
+import { formValidateStyles, formValueStyles } from '../style';
+import { formBtnStyles } from '../../../Response/style';
 
 const ReviewForm = ({ product }) => {
   const { id } = useParams();
@@ -86,7 +85,8 @@ const ReviewForm = ({ product }) => {
         </Typography>}
         <Stack direction="row" useFlexGap flexWrap="wrap" justifyContent="space-between" spacing={3}>
 
-          <Stack direction="column"
+          <Stack
+            direction="column"
             justifyContent="flex-start"
             alignItems="flex-start"
             spacing={0.5}
@@ -180,9 +180,9 @@ const ReviewForm = ({ product }) => {
               ) : null}
           </Stack>
           <Stack direction="column" justifyContent="center" alignItems="center" sx={{ flexGrow: '1' }}>
-          <Button type="submit" variant="contained" color="primary" sx={formBtnStyles}>
-            Відправити
-          </Button>
+            <Button type="submit" variant="contained" color="primary" sx={formBtnStyles}>
+              Відправити
+            </Button>
           </Stack>
         </Stack>
 

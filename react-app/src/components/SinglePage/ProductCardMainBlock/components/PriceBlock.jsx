@@ -7,7 +7,7 @@ import { actualPriceStyle, actualPriceValueStyle, priceBlockStyle } from '../sty
 import ButtonBlock from './ButtonBlock';
 import { roundPrice } from '../../../../utils/ActionsWithProduct/roundPrice';
 import { addToFavouriteItems, deleteFromFavouriteItems } from '../../../../redux/slice/favouriteItems';
-import { addFavorite } from '../../../../utils/ActionsWithProduct/addFavorite.js';
+import { addFavorite } from '../../../../utils/ActionsWithProduct/addFavorite';
 import { putFavoritesToFavoritesDB } from '../../../../utils/ActionsWithProduct/putFavoritesToFavoritesDB';
 import { addToFavouriteLocalStorage } from '../../../../utils/LocalStore/addToFavouriteLocalStorage';
 import { removeFavorite } from '../../../../utils/ActionsWithProduct/removeFavorite';

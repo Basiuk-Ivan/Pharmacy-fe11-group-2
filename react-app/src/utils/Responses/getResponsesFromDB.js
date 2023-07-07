@@ -1,6 +1,6 @@
 import { sendRequest } from '../../tools/sendRequest';
 
-export const getResponsesFromDB = async (reqPage) => {
+export const getResponsesFromDB = async reqPage => {
   try {
     const url = `${process.env.VITE_API_URL}/api/response?page=${reqPage}&limit=5`;
     const getResponses = await sendRequest(url);

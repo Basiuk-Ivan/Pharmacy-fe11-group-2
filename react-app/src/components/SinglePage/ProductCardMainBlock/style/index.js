@@ -5,7 +5,7 @@ export const wrapperStyles = {
   bgcolor: 'background.paper',
   display: 'flex',
   height: '100%'
-}
+};
 
 export const tabsStyles = {
   [`& .${tabsClasses.scrollButtons}`]: {
@@ -92,6 +92,4 @@ export const raitingStyles = {
     xs: '16px',
     md: '18px'
   }
-}
-
-
+};

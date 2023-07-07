@@ -1,14 +1,12 @@
 import { sendRequest } from '../../tools/sendRequest';
 
 export const updateRespondDB = async (id, userId, emotion) => {
-
   try {
     let newReviewData = {};
 
     const urlData = `${process.env.VITE_API_URL}/api/response?respondId=${id}`;
     const findActualRespondData = await sendRequest(urlData);
     const reviewData = findActualRespondData.data;
-
 
     if (emotion === 'like') {
       let updatedWhoLike = [];
