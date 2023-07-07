@@ -60,7 +60,7 @@ const RespondList = () => {
         direction="column"
         justifyContent="center"
       >
-        {!!reviews && reviews.map((item, index) => (<Respond key={`${item.id}-${index}`} item={item} />))};
+        {!!reviews && reviews.map((item, index) => (<Respond key={`${item.id}-${index}`} item={item} />))}
         {reviews.length < totalFound && (
           <Button variant="contained" color="primary" onClick={loadMoreReviews} sx={submitBtnStyles}>
             Завантажити ще
