@@ -134,10 +134,12 @@ const ProductPage = () => {
                 <Box sx={{ width: '100%' }}>
                   <Box
                     sx={{
-                      width: { xs: '288px', sm: '100%', md: '100%', lg: '100%' },
+                      width: { xs: '90%', sm: '100%', md: '100%', lg: '100%' },
                       borderBottom: 1,
                       borderColor: 'divider',
-                      backgroundColor: '#F7FAFB'
+                      backgroundColor: '#F7FAFB',
+                      margin:'0 auto',
+                      border:'1px solid #eaeced'
                     }}
                   >
                     <AntTabs
