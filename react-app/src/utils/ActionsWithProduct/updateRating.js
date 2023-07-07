@@ -1,17 +1,22 @@
-export const updateRating = async (productItem, newValue) => {
-  const res = await fetch(
-    `${process.env.VITE_API_URL}/api/product/${productItem.id}`,
+import { sendRequest } from '../../tools/sendRequest';
 
-    {
-      method: 'PUT',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({
-        ratingTotal: productItem.ratingTotal + newValue,
-        ratingClick: productItem.ratingClick + 1
-      })
+export const updateRating = async (productItem, newValue) => {
+
+  try {
+    const urlProductData = `${process.env.VITE_API_URL}/api/product/${productItem.id}`;
+    const findProductData = await sendRequest(urlProductData);
+    const reviewData = findProductData.data;
+
+    const newProductData = {
+      ratingTotal: reviewData.ratingTotal + newValue,
+      ratingClick: reviewData.ratingClick + 1
     }
-  );
-  return res.json();
+    const urlPutProductData = `${process.env.VITE_API_URL}/api/product/${productItem.id}`;
+    const updateProductData = await sendRequest(urlPutProductData, 'PUT', newProductData);
+
+    return updateProductData.data;
+    
+  } catch (err) {
+    console.error('Error fetching products:', err);
+  }
 };

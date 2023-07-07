@@ -5,7 +5,7 @@ import { updateRating } from '../../../../utils/ActionsWithProduct/updateRating'
 import { roundRating } from '../../../../utils/ActionsWithProduct/roundRating';
 
 const InformBlock = ({ productItem }) => {
-  const [value, setValue] = useState(null);
+  const [ratingValue, setRatingValue] = useState(null);
   const [ratingClick, setRatingClick] = useState(true);
   const [activeSubstance, setActiveSubstance] = useState('');
 
@@ -13,20 +13,20 @@ const InformBlock = ({ productItem }) => {
     const arr = productItem.activeSubstance;
     setActiveSubstance(arr.join(', '));
     const roundedRating = roundRating(productItem);
-    setValue(roundedRating);
+    setRatingValue(roundedRating);
   }, [productItem]);
 
   return (
-    <Grid item xs={12} sm={7} lg={4} sx={{ bgcolor: '#ffffff', border: '1px solid red' }}>
+    <Grid item xs={12} sm={7} lg={4} sx={{ bgcolor: '#ffffff' }}>
       <Grid container sx={{ justifyContent: 'space-around' }}>
         <Grid item lg={7} sx={{ padding: '0 10px' }}>
           <Box sx={mainBlockStyle}>
             <Box sx={{ '& > legend': { mt: 2 } }}>
               <Rating
                 name="simple-controlled"
-                value={value}
+                value={Number(ratingValue)}
                 onChange={(event, newValue) => {
-                  setValue(newValue);
+                  setRatingValue(newValue);
                   if (ratingClick && newValue > 0) {
                     updateRating(productItem, newValue);
                     setRatingClick(false);

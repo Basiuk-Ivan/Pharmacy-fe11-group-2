@@ -5,8 +5,8 @@ import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { formatDate } from '../../utils/ActionsWithProduct/formatDate';
-import { updateRespondDB } from '../../utils/Responses/updateRespondDB';
+import { updateReviewDB } from '../../../../utils/ActionsWithProduct/updateReviewDB';
+import { formatDate } from '../../../../utils/ActionsWithProduct/formatDate';
 import {
   responseWrapperStyles,
   responseHeaderStyles,
@@ -18,10 +18,10 @@ import {
   emotionBlockStyles,
   itemEmotionStyles,
   responseTextStyles
-} from './style';
-import {avatarImg} from "../../utils/commonConstans/avatarImg.js";
+} from '../style';
+import { avatarImg } from '../../../../utils/commonConstans/avatarImg';
 
-const Respond = ({ item }) => {
+const Review = ({ item }) => {
   const isAuth = useSelector(state => state.user.isAuth);
   const userId = useSelector(state => state.user.id);
 
@@ -47,13 +47,13 @@ const Respond = ({ item }) => {
 
   const numericValue = parseInt(item.rating, 10);
   const handleClickLike = async () => {
-    await updateRespondDB(item.id, userId, 'like');
+    await updateReviewDB(item.id, userId, 'like');
     setItemLike(prev => prev + 1);
     setIsEmotionClick(true);
   };
 
   const handleClickDisLike = async () => {
-    await updateRespondDB(item.id, userId, 'disLike');
+    await updateReviewDB(item.id, userId, 'dislike');
     setItemDisLike(prev => prev + 1);
     setIsEmotionClick(true);
   };
@@ -64,7 +64,7 @@ const Respond = ({ item }) => {
         <Stack direction="row" spacing={2} alignItems="center" sx={personalInfoStyles}>
           <Avatar
             alt="Remy Sharp"
-            src={item.gender === 'male' ?  avatarImg.manImg : avatarImg.womanImg}
+            src={item.gender === 'male' ? avatarImg.manImg : avatarImg.womanImg}
             sx={avatarStyles}
           />
           <Typography variant="p" component="p" gutterBottom sx={nameStyles}>
@@ -122,9 +122,9 @@ const Respond = ({ item }) => {
           </Stack>
         </Stack>
       </Stack>
-      <Box sx={responseTextStyles}>{item.responseTxt}</Box>
+      <Box sx={responseTextStyles}>{item.reviewTxt}</Box>
     </Stack>
   );
 };
 
-export default Respond;
+export default Review;

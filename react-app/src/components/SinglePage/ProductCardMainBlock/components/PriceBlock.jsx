@@ -18,6 +18,7 @@ const PriceBlock = ({ productItem }) => {
   const dispatch = useDispatch();
   const [mainPrice, setMainPrice] = useState('');
   const [isFavorite, setIsFavorite] = useState(false);
+
   const isAuth = useSelector(state => state.user.isAuth);
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
   const favoriteStoreId = useSelector(state => state.user.favoriteStoreId);
