@@ -19,7 +19,7 @@ import {
   itemEmotionStyles,
   responseTextStyles
 } from './style';
-import { avatarImg } from '../../utils/commonConstans/avatarImg.js';
+import { avatarImg } from '../../utils/commonConstans/avatarImg';
 
 const Respond = ({ item }) => {
   const isAuth = useSelector(state => state.user.isAuth);

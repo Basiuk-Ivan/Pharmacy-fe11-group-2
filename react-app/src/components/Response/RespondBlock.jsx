@@ -50,27 +50,29 @@ const RespondBlock = () => {
   return (
     <Box>
       <Box sx={wrapperForTestimonials}>
-        {showSkeleton ? (
+        {showSkeleton && (
           <Stack direction="column" spacing={2}>
             <Skeleton variant="rectangular" width={270} height={300} />
           </Stack>
-        ) :
-          (<Box sx={mainFeedback}>
-            <Box sx={ave}>
-              <Typography fontFamily="Roboto" component="div" sx={aveText}>
-                Середня <br /> оцінка <br /> аптеки
-              </Typography>
-              <Box>
-                <Typography fontFamily="Roboto" component="div" sx={aveRate}>
-                  {averageRating}
-                </Typography>
-                <Rating name="half-rating" value={averageRating} sx={StarRate} readOnly precision={0.5} />
-              </Box>
-            </Box>
-            <Typography fontFamily="Roboto" component="div" sx={totalRate}>
-              Загальний рейтинг на основі  <br /> {totalFound} відгуків наших покупців
+        )}
+        {!showSkeleton && (
+        <Box sx={mainFeedback}>
+          <Box sx={ave}>
+            <Typography fontFamily="Roboto" component="div" sx={aveText}>
+              Середня <br /> оцінка <br /> аптеки
             </Typography>
-          </Box>)}
+            <Box>
+              <Typography fontFamily="Roboto" component="div" sx={aveRate}>
+                {averageRating}
+              </Typography>
+              <Rating name="half-rating" value={averageRating} sx={StarRate} readOnly precision={0.5} />
+            </Box>
+          </Box>
+          <Typography fontFamily="Roboto" component="div" sx={totalRate}>
+            Загальний рейтинг на основі  <br /> {totalFound} відгуків наших покупців
+          </Typography>
+        </Box>
+        )}
       </Box>
       <Box sx={respondSectionStyles} noValidate autoComplete="off">
 
@@ -88,6 +90,7 @@ const RespondBlock = () => {
         </Typography>}
         <RespondList />
       </Box>
-    </Box>);
+    </Box>
+  );
 };
 export default RespondBlock;
