@@ -1,11 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Advantages from '../components/orderProcess/Advantages';
+import Advantages from '../components/OrderProcess/Advantages';
 import FavouriteBlock from '../components/Favourite/FavouriteBlock/FavouriteBlock';
 import AdditionalBlock from '../components/Favourite/AdditionalBlock/AdditionalBlock';
 import ModalWindow from '../components/ModalWindow';
 import { removeFromFavouriteLocalStorage } from '../utils/LocalStore/removeFromFavouriteLocalStorage';
-import { closeModalAddtoCart, closeModalRemoveAll, deleteFromFavouriteItems } from '../redux/slice/favouriteItems';
+import {
+  closeModalAddtoCart,
+  closeModalRemoveAll,
+  deleteFromFavouriteItems
+} from '../redux/slice/favouriteItems';
 import { addToCart } from '../redux/slice/cartItems';
 import { addToCartLocalStorage } from '../utils/LocalStore/addToCartLocalStorage';
 import { putFavoritesToFavoritesDB } from '../utils/ActionsWithProduct/putFavoritesToFavoritesDB';
