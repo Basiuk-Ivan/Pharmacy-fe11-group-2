@@ -68,14 +68,16 @@ const DataBlock = () => {
       .required("Обов'язкове поле"),
     email: Yup.string().email('Невірний формат email').required("Обов'язкове поле"),
     phoneNumber: Yup.string()
-    // .matches(/^[0-9]*$/, 'Можна вводити тільки цифри')
+      // .matches(/^[0-9]*$/, 'Можна вводити тільки цифри')
       .required("Обов'язкове поле"),
-    ...(changePassword && { newpassword: Yup.string()
-      .min(6, 'Мінімальна довжина пароля - 6 символів')
-      .required("Обов'язкове поле") }),
-    ...(changePassword && { confirmpassword: Yup.string()
-      .oneOf([Yup.ref('newpassword'), null], 'Паролі повинні співпадати')
-      .required("Обов'язкове поле") }),
+    ...(changePassword && {
+      newpassword: Yup.string().min(6, 'Мінімальна довжина пароля - 6 символів').required("Обов'язкове поле")
+    }),
+    ...(changePassword && {
+      confirmpassword: Yup.string()
+        .oneOf([Yup.ref('newpassword'), null], 'Паролі повинні співпадати')
+        .required("Обов'язкове поле")
+    })
   });
 
   const formik = useFormik({
@@ -87,7 +89,7 @@ const DataBlock = () => {
       email,
       phoneNumber,
       ...(changePassword && { newpassword: '' }),
-      ...(changePassword && { confirmpassword: '' }),
+      ...(changePassword && { confirmpassword: '' })
     },
     validationSchema,
     onSubmit: async values => {
@@ -167,39 +169,33 @@ const DataBlock = () => {
 
           <Box>
             <FormControlLabel
-              control={
-                <Checkbox
-                  checked={changePassword}
-                  onChange={handleCheckboxChange}
-                />
-                            }
+              control={<Checkbox checked={changePassword} onChange={handleCheckboxChange} />}
               label="Встановити новий пароль"
             />
           </Box>
           {changePassword && (
-          <>
-
-            <ChangedTextField
-              type="password"
-              label="Новий пароль"
-              fullWidth
-              name="newpassword"
-              value={formik.values.newpassword}
-              onChange={formik.handleChange}
-              error={Boolean(formik.touched.newpassword && formik.errors.newpassword)}
-              helperText={formik.touched.newpassword && formik.errors.newpassword}
-            />
-            <ChangedTextField
-              type="password"
-              label="Підтвердження пароля"
-              fullWidth
-              name="confirmpassword"
-              value={formik.values.confirmpassword}
-              onChange={formik.handleChange}
-              error={Boolean(formik.touched.confirmpassword && formik.errors.confirmpassword)}
-              helperText={formik.touched.confirmpassword && formik.errors.confirmpassword}
-            />
-          </>
+            <>
+              <ChangedTextField
+                type="password"
+                label="Новий пароль"
+                fullWidth
+                name="newpassword"
+                value={formik.values.newpassword}
+                onChange={formik.handleChange}
+                error={Boolean(formik.touched.newpassword && formik.errors.newpassword)}
+                helperText={formik.touched.newpassword && formik.errors.newpassword}
+              />
+              <ChangedTextField
+                type="password"
+                label="Підтвердження пароля"
+                fullWidth
+                name="confirmpassword"
+                value={formik.values.confirmpassword}
+                onChange={formik.handleChange}
+                error={Boolean(formik.touched.confirmpassword && formik.errors.confirmpassword)}
+                helperText={formik.touched.confirmpassword && formik.errors.confirmpassword}
+              />
+            </>
           )}
           <Button
             variant="contained"

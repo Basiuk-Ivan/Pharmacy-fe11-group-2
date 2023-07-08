@@ -5,7 +5,7 @@ import Bread from '../components/Bread';
 import Advantages from '../components/orderProcess/Advantages';
 import ContactsBlock from '../components/orderProcess/ContactsBlock/ContactsBlock';
 import PaymentBlock from '../components/orderProcess/PaymentBlock/PaymentBlock';
-import { request } from '../tools/request';
+import { request } from '../tools/Axios/request';
 import DeliveryBlock from '../components/orderProcess/DeliveryBlock/DeliveryBlock';
 
 const OrderProcess = () => {

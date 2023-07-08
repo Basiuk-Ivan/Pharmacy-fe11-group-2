@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { request } from '../request';
+import { request } from '../Axios/request';
 
 const createUser = order => {
   const createUrl = 'https://api.novaposhta.ua/v2.0/json/';

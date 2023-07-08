@@ -1,6 +1,6 @@
 import { Box, Skeleton, Stack } from '@mui/material';
 
-export const SkeletonSection = () => {
+export const SkeletonCategory = () => {
   return (
     <Box sx={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
       <Stack direction="column" spacing={2}>

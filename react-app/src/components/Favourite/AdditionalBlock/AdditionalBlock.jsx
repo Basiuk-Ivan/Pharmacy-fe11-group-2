@@ -1,7 +1,7 @@
 import { Container, Typography, Grid } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { request } from '../../../tools/request';
+import { request } from '../../../tools/Axios/request';
 import ProductCard from '../../ProductCard/ProductCard';
 
 const AdditionalBlock = props => {

@@ -8,7 +8,8 @@ import IconBreadcrumbs from './Breadcrums';
 import ProductCard from '../../components/ProductCard';
 import {
   closeCartModalRemoveAll,
-  openCartModalRemoveAll, openModalNotAvailable,
+  openCartModalRemoveAll,
+  openModalNotAvailable,
   removeItem,
   setSum
 } from '../../redux/slice/cartItems';
@@ -28,10 +29,10 @@ import {
 
 import './style/CartStyles.scss';
 import { countSum } from '../../utils/ActionsWithProduct/countSum';
-import { request } from '../../tools/request';
+import { request } from '../../tools/Axios/request';
+import Advantages from '../../components/orderProcess/Advantages';
 import ModalWindow from '../../components/ModalWindow';
 import AdditionalBlock from '../../components/Favourite/AdditionalBlock/AdditionalBlock';
-import Advantages from '../../components/orderProcess/Advantages';
 import { removeAllFromCartUserDBProduct } from '../../utils/ActionsWithProduct/removeAllFromCartUserDBProduct';
 import { removeAllFromCartLocalStorage } from '../../utils/LocalStore/removeAllFromCartLocalStorage';
 import { addCartProduct } from '../../utils/ActionsWithProduct/addCartProduct';
@@ -148,11 +149,16 @@ const Cart = () => {
 
                 <PromoBox mt={2}>
                   <FormTitlePromo>Загальна сума: {sumWithDiscount} грн</FormTitlePromo>
-                  {isDisabled ? <FormText sx={{ color: 'red' }}>В корзині є товари, наявність яких відсутня. Для подальшого оформлення видаліть відсутні товари з корзини. </FormText>
-                    :
-                  <NavLink to="/orderprocess" disabled>
-                    <OrderButton>Оформити замовлення</OrderButton>
-                  </NavLink>}
+                  {isDisabled ? (
+                    <FormText sx={{ color: 'red' }}>
+                      В корзині є товари, наявність яких відсутня. Для подальшого оформлення видаліть відсутні
+                      товари з корзини.{' '}
+                    </FormText>
+                  ) : (
+                    <NavLink to="/orderprocess" disabled>
+                      <OrderButton>Оформити замовлення</OrderButton>
+                    </NavLink>
+                  )}
                 </PromoBox>
               </FormBox>
             </Box>

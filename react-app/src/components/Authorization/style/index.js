@@ -16,6 +16,11 @@ export const StyledButton = styled(Button)`
   height: 50px;
   border-radius: 26px;
   background: #2fd3ae;
+
+  @media (max-width: 630px) {
+    font-size: 11px;
+  }
+
   @media (max-width: 360px) {
     font-size: 10px;
   }

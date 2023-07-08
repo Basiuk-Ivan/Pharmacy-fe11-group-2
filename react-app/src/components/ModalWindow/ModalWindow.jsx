@@ -20,29 +20,36 @@ const style = {
 };
 
 const ModalWindow = ({
-  mainText, isOpened, handleClick,
-  handleClose, confirmTextBtn, cancelTextBtn, actions
+  mainText,
+  isOpened,
+  handleClick,
+  handleClose,
+  confirmTextBtn,
+  cancelTextBtn,
+  actions
 }) => {
   return (
     <Modal open={isOpened} onClose={handleClose}>
       <Box sx={style}>
-        <Typography sx={{
-          mb: '30px',
-          fontFamily: 'Roboto, sans-serif',
-          fontWeight: 700,
-          fontSize: '21px',
-          textAlign: 'center'
-        }}
+        <Typography
+          sx={{
+            mb: '30px',
+            fontFamily: 'Roboto, sans-serif',
+            fontWeight: 700,
+            fontSize: '21px',
+            textAlign: 'center'
+          }}
         >
           {mainText}
         </Typography>
         {actions && (
-          <Box sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            mt: 2,
-            gap: '30px',
-          }}
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              mt: 2,
+              gap: '30px'
+            }}
           >
             <Button
               variant="contained"

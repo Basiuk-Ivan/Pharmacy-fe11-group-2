@@ -1,4 +1,4 @@
-import { sendRequest } from '../../tools/sendRequest';
+import { sendRequest } from '../../tools/Axios/sendRequest';
 
 export const putProductsToCartDB = async (cardId, cartProducts) => {
   try {

@@ -10,8 +10,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import './style/reset.scss';
-// eslint-disable-next-line import/extensions
-import ScrollToTop from './tools/scrolToTop.js';
+import ScrollToTop from './tools/Scroll/scrolToTop';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>

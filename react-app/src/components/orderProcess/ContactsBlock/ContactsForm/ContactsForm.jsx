@@ -4,7 +4,7 @@ import { TextField, Grid, Typography, Container, Stack, Skeleton } from '@mui/ma
 import { styled, ThemeProvider } from '@mui/material/styles';
 import { ErrorMessage, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
-import { request } from '../../../../tools/request';
+import { request } from '../../../../tools/Axios/request';
 import { theme as muiTheme } from '../../../../tools/muiTheme';
 import {
   closeModalNotAvailable,
@@ -15,7 +15,7 @@ import {
 import { putProductsToCartDB } from '../../../../utils/ActionsWithProduct/putProductsToCartDB';
 import { addContactsInfo } from '../../../../redux/slice/orderProcessSlice';
 import { updateQuantity } from '../../../../utils/ActionsWithProduct/updateQuantity';
-import { sendRequest } from '../../../../tools/sendRequest';
+import { sendRequest } from '../../../../tools/Axios/sendRequest';
 import { countSum } from '../../../../utils/ActionsWithProduct/countSum';
 import { openModalAddtoCart } from '../../../../redux/slice/favouriteItems';
 import ModalWindow from '../../../ModalWindow';
