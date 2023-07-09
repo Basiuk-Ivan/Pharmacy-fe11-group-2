@@ -63,8 +63,8 @@ const ProductReviews = ({ item, setLoading }) => {
 
   const numericValue = parseInt(item.rating, 10);
 
-  const openRemoveModal = item => {
-    window.localStorage.setItem('deleteReview', JSON.stringify(item));
+  const openRemoveModal = reviewItem => {
+    window.localStorage.setItem('deleteReview', JSON.stringify(reviewItem));
     dispatch(openModalRemoveReview());
   };
   const handleClickModalRemove = async () => {
