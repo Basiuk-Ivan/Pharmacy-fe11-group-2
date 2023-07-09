@@ -22,7 +22,7 @@ const ContactsBlock = ({ products }) => {
           borderRadius: '20px',
           boxShadow: '0px 10px 40px rgba(11, 54, 29, 0.05)',
           padding: '10px',
-          minHeight:  cartItems.length === 2 ? '300px' : cartItems.length > 2 ? '500px' : undefined
+          minHeight: cartItems.length === 2 ? '300px' : cartItems.length > 2 ? '500px' : undefined
         }}
       >
         <ContactsForm />
