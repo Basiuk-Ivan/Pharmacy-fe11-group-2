@@ -28,7 +28,7 @@ import {deleteUserReviewsFromDB} from "../../utils/Responses/deleteUserReviewsFr
 import ModalWindow from "../ModalWindow/index.js";
 import {changeStateReview, closeModalRemoveReview, openModalRemoveReview} from "../../redux/slice/userSlice.js";
 
-const ProductReviews = ({ item }) => {
+const ProductReviews = ({ item, setLoading }) => {
 
   const id = item.product;
   const [dateValue, setDateValue] = useState(null);
@@ -72,6 +72,7 @@ const ProductReviews = ({ item }) => {
     const reviewItem = JSON.parse(window.localStorage.getItem("deleteReview"));
     await deleteUserReviewsFromDB(reviewItem);
     dispatch(changeStateReview(reviewItem.reviewTxt));
+    setLoading(true);
     dispatch(closeModalRemoveReview());
   }
   const handleCloseModalRemove = () => {

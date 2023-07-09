@@ -7,13 +7,13 @@ import { getUserReviewsFromDB } from '../../utils/Responses/getUserReviewsFromDB
 import ProductReviews from './ProductReviews';
 import { theme as muiTheme } from '../../tools/muiTheme.js';
 import DataBlock from './DataBlock.jsx';
+import LinearProgress from '@mui/material/LinearProgress';
 
 const ReviewsBlock = () => {
   const [isLoading, setLoading] = useState(true);
   const changeStateReview = useSelector(state => state.user.changeStateReview);
 
   useEffect(() => {
-    setLoading(true);
     setTimeout(() => {
       setLoading(false);
     }, 500);
@@ -34,16 +34,30 @@ const ReviewsBlock = () => {
 
   return (
     <ThemeProvider theme={muiTheme}>
-      {isLoading ? <Stack spacing={2} direction="row" justifyContent="center">
-        <CircularProgress color="primary" />
-        <CircularProgress color="primary" />
-        <CircularProgress color="primary" />
-        <CircularProgress color="primary" />
-        <CircularProgress color="primary" />
+      <Box sx={{ minHeight:'500px', mt: '40px' }}>
+      {isLoading ? <Stack spacing={2} direction="column" justifyContent="center">
+            <LinearProgress color="primary" />
+            <LinearProgress color="primary" />
+            <LinearProgress color="primary" />
+            <LinearProgress color="primary" />
+            <LinearProgress color="primary" />
+            <LinearProgress color="primary" />
+            <LinearProgress color="primary" />
+            <LinearProgress color="primary" />
+            <LinearProgress color="primary" />
+            <LinearProgress color="primary" />
+            <LinearProgress color="primary" />
+            <LinearProgress color="primary" />
+            <LinearProgress color="primary" />
+            <LinearProgress color="primary" />
+            <LinearProgress color="primary" />
+            <LinearProgress color="primary" />
+            <LinearProgress color="primary" />
+            <LinearProgress color="primary" />
       </Stack>
-        : <Box sx={{ mt: '40px' }}>
-          {!!productReviews && productReviews.map((item, index) => <ProductReviews key={`${item.id}-${index}`} item={item} />)}
-            {!productReviews &&
+        : <Box >
+          {!!productReviews && productReviews.map((item, index) => <ProductReviews key={`${item.id}-${index}`} item={item}  setLoading={setLoading}/>)}
+            {productReviews.length < 1 &&
                 <Typography
                     sx={{
                       display: 'flex',
@@ -52,13 +66,13 @@ const ReviewsBlock = () => {
                       fontWeight: 400,
                       mt: '100px',
                       mb: '100px',
-                      color:"red"
                     }}
                 >
                  Відгуки товарів відсутні
                 </Typography>
             }
         </Box>}
+      </Box>
     </ThemeProvider>
   );
 };
