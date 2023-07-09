@@ -1,4 +1,4 @@
-import { sendRequest } from '../../tools/Axios/sendRequest.js';
+import { sendRequest } from '../../tools/Axios/sendRequest';
 
 export const deleteUserReviewsFromDB = async review => {
   try {
