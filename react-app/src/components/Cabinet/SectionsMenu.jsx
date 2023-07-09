@@ -34,7 +34,7 @@ const SectionsMenu = props => {
         </TableRow>
         <TableRow>
           <ChangedTableCell
-              onClick={() => handleSectionClick('reviews')}
+            onClick={() => handleSectionClick('reviews')}
           >Ваші відгуки
           </ChangedTableCell>
         </TableRow>

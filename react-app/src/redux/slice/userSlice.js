@@ -65,7 +65,7 @@ const userSlice = createSlice({
     openModalRemoveReview: state => {
       state.isOpenModalRemoveReview = true;
     },
-    closeModalRemoveReview:  state => {
+    closeModalRemoveReview: state => {
       state.isOpenModalRemoveReview = false;
     },
   }
