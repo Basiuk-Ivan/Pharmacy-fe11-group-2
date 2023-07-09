@@ -32,6 +32,12 @@ const SectionsMenu = props => {
           >Ваші замовлення
           </ChangedTableCell>
         </TableRow>
+        <TableRow>
+          <ChangedTableCell
+              onClick={() => handleSectionClick('reviews')}
+          >Ваші відгуки
+          </ChangedTableCell>
+        </TableRow>
       </TableBody>
     </Table>
   );

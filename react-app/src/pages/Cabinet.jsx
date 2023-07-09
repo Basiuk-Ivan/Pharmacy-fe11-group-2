@@ -5,6 +5,7 @@ import Orders from '../components/Cabinet/Orders';
 import PersonalData from '../components/Cabinet/PersonalData';
 import SectionsMenu from '../components/Cabinet/SectionsMenu';
 import Bread from '../components/Bread';
+import ReviewsBlock from "../components/Cabinet/ReviewsBlock.jsx";
 
 const Cabinet = () => {
   const [activeSection, setActiveSection] = useState('personalData');
@@ -39,6 +40,7 @@ const Cabinet = () => {
         <Grid item md={8}>
           {activeSection === 'personalData' && <PersonalData />}
           {activeSection === 'orders' && <Orders />}
+            {activeSection === 'reviews' && <ReviewsBlock />}
           {activeSection === 'feedback' && <Contacts />}
         </Grid>
       </Grid>
