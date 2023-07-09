@@ -10,7 +10,8 @@ const cartSlice = createSlice({
     isOpenedCartModalNotAvailable: false,
     isOpenedCartModalRemoveAll: false,
     isOpenedCartModalRemoveOne: false,
-    isOpenedOrderModal: false
+    isOpenedOrderModal: false,
+    isOpenedErrorDeliveryModal: false,
   },
   reducers: {
     addToCart: (state, action) => {
@@ -39,7 +40,6 @@ const cartSlice = createSlice({
         state.items = [...updatedCart];
       }
     },
-
     removeFromCart: (state, action) => {
       const { id } = action.payload;
       const existingCartItemIndex = state.items.findIndex(item => item.id === id);
@@ -91,6 +91,12 @@ const cartSlice = createSlice({
     closeModalNotAvailable: state => {
       state.isOpenedCartModalNotAvailable = false;
     },
+    openModalErrorDelivery: state => {
+      state.isOpenedErrorDeliveryModal = true;
+    },
+    closeModalErrorDelivery: state => {
+      state.isOpenedErrorDeliveryModal = false;
+    },
   }
 });
 
@@ -107,7 +113,9 @@ export const { addToCart,
   addToCartMoreOne,
   closeOrderModal,
   openModalNotAvailable,
-  closeModalNotAvailable
+  closeModalNotAvailable,
+  openModalErrorDelivery,
+  closeModalErrorDelivery
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

@@ -9,7 +9,7 @@ import { request } from '../../tools/Axios/request';
 import ModalWindow from '../../components/ModalWindow';
 import AdditionalBlock from '../../components/Favourite/AdditionalBlock/AdditionalBlock';
 import { removeAllFromCartLocalStorage } from '../../utils/LocalStore/removeAllFromCartLocalStorage';
-import Advantages from '../../components/OrderProcess/Advantages';
+import Advantages from '../../components/orderProcess/Advantages';
 import { putProductsToCartDB } from '../../utils/ActionsWithProduct/putProductsToCartDB';
 import { SkeletonCartBlock } from '../../utils/Skeleton/SkeletonCartBlock';
 import { SkeletonCartLine } from '../../utils/Skeleton/SkeletonCartLine';

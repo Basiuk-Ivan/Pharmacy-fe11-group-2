@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Advantages from '../components/OrderProcess/Advantages';
+import Advantages from '../components/orderProcess/Advantages';
 import FavouriteBlock from '../components/Favourite/FavouriteBlock/FavouriteBlock';
 import AdditionalBlock from '../components/Favourite/AdditionalBlock/AdditionalBlock';
 import ModalWindow from '../components/ModalWindow';

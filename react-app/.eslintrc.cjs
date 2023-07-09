@@ -49,6 +49,6 @@ module.exports = {
     ],
     'no-param-reassign': 'off',
     'react/jsx-one-expression-per-line': 'off',
-    'object-curly-newline': 'off'
+    'object-curly-newline': 'off',
   }
 };

@@ -8,7 +8,7 @@ import CitySelect from './CitySelect/CitySelect';
 import searchWarehouse from '../../../tools/NovaPost/searchWarehouse';
 import WarehouseSelect from './WarehouseSelect/WarehouseSelect';
 import SelfPickup from './SelfPickup/SelfPickup';
-import { addOrderDeliveryMethod } from '../../../redux/slice/orderProcessSlice';
+import { addOrderDeliveryMethod, resetDelivery } from '../../../redux/slice/orderProcessSlice';
 
 const DeliveryBlock = () => {
   const [selectedCity, setSelectedCity] = useState(null);
@@ -40,6 +40,7 @@ const DeliveryBlock = () => {
 
   const handleRadioChange = event => {
     setShowAdditionalField(event.target.value === 'novaPost');
+    dispatch(resetDelivery());
     dispatch(addOrderDeliveryMethod(event.target.value));
   };
 

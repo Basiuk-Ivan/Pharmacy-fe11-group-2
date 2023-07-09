@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   PaymentMethodValue: 'cash',
+  isDelivery: false,
   orderInfo: { deliveryType: 'self' }
 };
 
@@ -9,6 +10,13 @@ const orderProcessSlice = createSlice({
   name: 'order',
   initialState,
   reducers: {
+    activeDelivery: state => {
+      state.isDelivery = true;
+    },
+    resetDelivery: state => {
+      state.isDelivery = false;
+    },
+    // addOrderDelivery: (state, action)
     addPaymentMethod: (state, action) => ({
       ...state, PaymentMethodValue: action.payload,
     }),
@@ -43,6 +51,13 @@ const orderProcessSlice = createSlice({
   },
 });
 
-export const { addPaymentMethod, addOrderDeliveryMethod, addOrderCity, addOrderAddress, addContactsInfo } = orderProcessSlice.actions;
+export const {
+  activeDelivery,
+  resetDelivery,
+  addPaymentMethod,
+  addOrderDeliveryMethod,
+  addOrderCity,
+  addOrderAddress,
+  addContactsInfo } = orderProcessSlice.actions;
 
 export default orderProcessSlice.reducer;
