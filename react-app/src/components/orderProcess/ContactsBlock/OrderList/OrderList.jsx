@@ -30,7 +30,7 @@ const OrderList = ({ products }) => {
         >
           Ваше замовлення
         </Typography>
-        <Grid container sx={{ overflowY: 'auto', maxHeight: '300px', paddingRight: '10px' }}>
+        <Grid container sx={{ overflowY: 'auto', maxHeight: '350px', paddingRight: '10px' }}>
           {products.map(el => {
             const currentPrice = roundPrice(el);
             return (

@@ -7,7 +7,8 @@ import * as Yup from 'yup';
 import { request } from '../../../../tools/Axios/request';
 import { theme as muiTheme } from '../../../../tools/muiTheme';
 import {
-  closeModalNotAvailable,
+  closeModalErrorDelivery,
+  closeModalNotAvailable, openModalErrorDelivery,
   openModalNotAvailable,
   openOrderModal,
   setSum
@@ -30,7 +31,9 @@ const ChangedTextField = styled(TextField)(({ theme }) => ({
 const nameRegExp = /[a-zA-zа-яА-яёЁ]$/;
 
 const ContactsForm = () => {
+  const isDelivery = useSelector(state => state.order.isDelivery);
   const isOpenedCartModalNotAvailable = useSelector(state => state.itemCards.isOpenedCartModalNotAvailable);
+  const isOpenedErrorDeliveryModal = useSelector(state => state.itemCards.isOpenedErrorDeliveryModal);
   const orderPaymentMethod = useSelector(state => state.order.PaymentMethodValue);
   const sumWithDiscount = useSelector(state => state.itemCards.sumWithDiscount);
   const cartStoreId = useSelector(state => state.user.cartStoreId);
@@ -46,6 +49,9 @@ const ContactsForm = () => {
 
   const handleCloseModalNotAvailable = () => {
     dispatch(closeModalNotAvailable());
+  };
+  const handleCloseErrorDeliveryModal = () => {
+    dispatch(closeModalErrorDelivery());
   };
 
   const validationSchema = Yup.object().shape({
@@ -78,6 +84,11 @@ const ContactsForm = () => {
     onSubmit: async (values, { resetForm }) => {
       let cartItemsCheckQuantity;
       let dataProductsDB;
+
+      if (!isDelivery) {
+        dispatch(openModalErrorDelivery());
+        return;
+      }
       const fetchProducts = async () => {
         try {
           if (values.products.length > 0) {
@@ -264,6 +275,13 @@ const ContactsForm = () => {
           handleClick={() => {}}
           handleClose={handleCloseModalNotAvailable}
           isOpened={isOpenedCartModalNotAvailable}
+          actions={false}
+        />
+        <ModalWindow
+          mainText="Оберіть спосіб доставки та введіть необхідні дані"
+          handleClick={() => {}}
+          handleClose={handleCloseErrorDeliveryModal}
+          isOpened={isOpenedErrorDeliveryModal}
           actions={false}
         />
       </Container>

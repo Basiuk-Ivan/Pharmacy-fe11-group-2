@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { Box } from '@mui/system';
 import {
   FormBox,
@@ -11,8 +11,10 @@ import {
   SaleBox,
   TotalBox
 } from '../style';
+import {resetDelivery} from "../../../redux/slice/orderProcessSlice";
 
 export const SumWithDiscount = ({ sumDiscount, cartSumWithoutDiscount, isDisabled }) => {
+  const dispatch =  useDispatch();
   const sumWithDiscount = useSelector(state => state.itemCards.sumWithDiscount);
 
   return (
@@ -37,7 +39,7 @@ export const SumWithDiscount = ({ sumDiscount, cartSumWithoutDiscount, isDisable
                 товари з корзини.{' '}
               </FormText>
             ) : (
-              <NavLink to="/orderprocess" disabled>
+              <NavLink to="/orderprocess" onClick={()=> dispatch(resetDelivery())} disabled>
                 <OrderButton>Оформити замовлення</OrderButton>
               </NavLink>
             )}
