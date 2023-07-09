@@ -8,7 +8,7 @@ import CitySelect from './CitySelect/CitySelect';
 import searchWarehouse from '../../../tools/NovaPost/searchWarehouse';
 import WarehouseSelect from './WarehouseSelect/WarehouseSelect';
 import SelfPickup from './SelfPickup/SelfPickup';
-import {addOrderDeliveryMethod, resetDelivery} from '../../../redux/slice/orderProcessSlice';
+import { addOrderDeliveryMethod, resetDelivery } from '../../../redux/slice/orderProcessSlice';
 
 const DeliveryBlock = () => {
   const [selectedCity, setSelectedCity] = useState(null);

@@ -1,7 +1,7 @@
 import { TextField } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useDispatch } from 'react-redux';
-import {activeDelivery, addOrderAddress} from '../../../../redux/slice/orderProcessSlice';
+import { activeDelivery, addOrderAddress } from '../../../../redux/slice/orderProcessSlice';
 
 const WarehouseSelect = ({ warehouseDelivery, setSelectedWarehouse }) => {
   const dispatch = useDispatch();

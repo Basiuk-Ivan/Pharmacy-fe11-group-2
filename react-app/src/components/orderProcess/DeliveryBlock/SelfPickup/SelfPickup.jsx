@@ -1,7 +1,7 @@
 import { TextField, Autocomplete, Button } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {activeDelivery, addOrderAddress, addOrderCity} from '../../../../redux/slice/orderProcessSlice';
+import { activeDelivery, addOrderAddress, addOrderCity } from '../../../../redux/slice/orderProcessSlice';
 
 const SelfPickup = () => {
   const [selectedCityStreets, setSelectedCityStreets] = useState([]);
