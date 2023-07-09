@@ -8,7 +8,7 @@ import ProductAnalogiesCardContainer from '../../components/SinglePage/ProductAn
 import ProductCardReviews from '../../components/SinglePage/ProductCardReviews';
 import BreadProduct from '../../components/SinglePage/BreadProduct';
 import recentlyViewedProducts from '../../tools/recentlyViewedProducts';
-import { request } from '../../tools/request';
+import { request } from '../../tools/Axios/request';
 import { antTabsStyles, mainBlockStyles, productTitleStyle } from './style';
 
 const AntTabs = styled(Tabs)({

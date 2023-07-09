@@ -1,4 +1,4 @@
-import { sendRequest } from '../../tools/sendRequest';
+import { sendRequest } from '../../tools/Axios/sendRequest';
 
 export const addResponseToDB = async (review, userID, userGender) => {
   try {

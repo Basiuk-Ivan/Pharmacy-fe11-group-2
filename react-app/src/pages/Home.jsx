@@ -8,7 +8,7 @@ import PromotionSlider from '../components/PageHome/PromotionSlider';
 import { SkeletonMainSlider } from '../utils/Skeleton/SkeletonMainSlider';
 import Testimonials from '../components/PageHome/Testimonials';
 import TodayPharmacy from '../components/PageHome/TodayPharmacy';
-import { request } from '../tools/request';
+import { request } from '../tools/Axios/request';
 
 const Home = () => {
   const [products, setProducts] = useState([]);

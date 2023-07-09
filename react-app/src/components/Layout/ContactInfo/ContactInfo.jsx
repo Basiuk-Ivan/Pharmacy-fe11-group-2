@@ -29,7 +29,7 @@ const ContactInfo = () => (
       <Box sx={wrapperForTextStyles}>
         <Typography sx={emailStyles} fontFamily="Roboto" component="span">
           info@restoll.UA
-          {/* pharmacy_shop@ukr.net */}
+          {/* fe.11.group.c@gmail.com */}
         </Typography>
         <Typography sx={descriptionStyles} fontFamily="Roboto" component="span">
           Напишіть нам

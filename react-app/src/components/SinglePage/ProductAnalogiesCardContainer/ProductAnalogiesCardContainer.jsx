@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import ProductCard from '../../ProductCard';
 import 'swiper/swiper-bundle.min.css';
 import './CustomSwiper.scss';
-import { request } from '../../../tools/request';
+import { request } from '../../../tools/Axios/request';
 
 const ProductAnalogiesCardContainer = ({ productItem }) => {
   const isInCart = false;

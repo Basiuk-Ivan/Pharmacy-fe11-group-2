@@ -1,38 +1,22 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
-import {
-  Box,
-  Typography,
-  Menu,
-  Badge,
-  IconButton,
-  MenuItem,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails
-} from '@mui/material';
+import { NavLink } from 'react-router-dom';
+import { Box, Menu, Badge, IconButton, MenuItem } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import { openModal } from '../../../../redux/slice/modalSlice';
-import { setToken, removeToken, openLogoutModal, setLogin } from '../../../../redux/slice/isToken';
-import { removeUser } from '../../../../redux/slice/userSlice';
-import { deleteFromFavouriteItems } from '../../../../redux/slice/favouriteItems';
-import { removeItem } from '../../../../redux/slice/cartItems';
+import { setToken, openLogoutModal, setLogin } from '../../../../redux/slice/isToken';
 import ModalWindow from '../../../ModalWindow';
+import { IsAuthRender } from './components/IsAuthRender';
+import { NotAuthRender } from './components/NotAuthRender';
 
-const settings = [{ name: 'Профіль', path: '/cabinet' }, { name: 'Вихід' }];
 export const MobileMenu = () => {
   const dispatch = useDispatch();
   const isOpenedLogoutModal = useSelector(state => state.isToken.isOpenedLogoutModal);
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
   const cartItems = useSelector(state => state.itemCards.items);
   const isAuth = useSelector(state => state.user.isAuth);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -43,34 +27,12 @@ export const MobileMenu = () => {
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const [anchorElUser, setAnchorElUser] = useState(null);
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-    dispatch(removeToken());
-    window.localStorage.setItem('token', '');
-  };
-
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
 
   const handleMobileMenuOpen = event => {
     setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const handleOpenModal = () => {
-    dispatch(openModal());
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    dispatch(setToken(null));
-    navigate('/');
-    dispatch(removeUser());
-    dispatch(deleteFromFavouriteItems('all'));
-    dispatch(removeItem('all'));
-    dispatch(openLogoutModal(true));
   };
 
   const handleCloseLogoutModal = () => {
@@ -87,6 +49,16 @@ export const MobileMenu = () => {
   }));
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
+
+  useEffect(() => {
+    if (isOpenedLogoutModal) {
+      const timer = setTimeout(() => {
+        handleCloseLogoutModal();
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isOpenedLogoutModal]);
 
   return (
     <>
@@ -149,45 +121,7 @@ export const MobileMenu = () => {
           </MenuItem>
         </NavLink>
 
-        {isAuth ? (
-          <MenuItem>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <IconButton sx={{ p: 0 }}>
-                  <PermIdentityOutlinedIcon sx={{ fill: '#2FD3AE' }} />
-                </IconButton>
-                <Typography>Профіль</Typography>
-              </AccordionSummary>
-
-              <AccordionDetails>
-                <Box>
-                  {settings.map(setting => (
-                    <MenuItem
-                      component="div"
-                      key={setting.name}
-                      onClick={setting.name === 'Вихід' ? handleLogout : handleCloseUserMenu}
-                    >
-                      <NavLink to={setting.path} onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">{setting.name}</Typography>
-                      </NavLink>
-                    </MenuItem>
-                  ))}
-                </Box>
-              </AccordionDetails>
-            </Accordion>
-          </MenuItem>
-        ) : (
-          <MenuItem sx={{ display: 'flex', gap: '5px' }} onClick={handleOpenModal}>
-            <IconButton>
-              <PermIdentityOutlinedIcon sx={{ fill: '#2FD3AE' }} />
-            </IconButton>
-            <Typography>Профіль</Typography>
-          </MenuItem>
-        )}
+        {isAuth ? <IsAuthRender /> : <NotAuthRender />}
       </Menu>
     </>
   );

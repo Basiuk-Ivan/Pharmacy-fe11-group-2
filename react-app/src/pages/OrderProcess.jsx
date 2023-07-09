@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Container, Fab, Typography } from '@mui/material';
 import Bread from '../components/Bread';
-import Advantages from '../components/orderProcess/Advantages';
-import ContactsBlock from '../components/orderProcess/ContactsBlock/ContactsBlock';
-import PaymentBlock from '../components/orderProcess/PaymentBlock/PaymentBlock';
-import { request } from '../tools/request';
-import DeliveryBlock from '../components/orderProcess/DeliveryBlock/DeliveryBlock';
+import Advantages from '../components/OrderProcess/Advantages';
+import ContactsBlock from '../components/OrderProcess/ContactsBlock/ContactsBlock';
+import PaymentBlock from '../components/OrderProcess/PaymentBlock/PaymentBlock';
+import { request } from '../tools/Axios/request';
+import DeliveryBlock from '../components/OrderProcess/DeliveryBlock/DeliveryBlock';
 
 const OrderProcess = () => {
   const [products, setProducts] = useState([]);

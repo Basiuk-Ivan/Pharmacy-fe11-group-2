@@ -8,7 +8,7 @@ import ProductCard from '../../ProductCard/ProductCard';
 import Bread from '../../Bread';
 
 import { openModalAddtoCart, openModalRemoveAll } from '../../../redux/slice/favouriteItems';
-import { request } from '../../../tools/request';
+import { request } from '../../../tools/Axios/request';
 import ModalWindow from '../../ModalWindow';
 import { closeModalNotAvailable, openModalNotAvailable } from '../../../redux/slice/cartItems';
 

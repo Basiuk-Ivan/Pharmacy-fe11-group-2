@@ -1,4 +1,4 @@
-import { request } from '../request';
+import { request } from '../Axios/request';
 
 const searchAddress = async () => {
   const createUrl = 'https://api.novaposhta.ua/v2.0/json/';
@@ -6,14 +6,14 @@ const searchAddress = async () => {
   const addressParams = {
     apiKey,
     modelName: 'Address',
-    calledMethod: 'getCities',
+    calledMethod: 'getCities'
   };
 
   try {
     const { result } = await request({
       url: createUrl,
       method: 'POST',
-      body: addressParams,
+      body: addressParams
     });
 
     const { data } = result;

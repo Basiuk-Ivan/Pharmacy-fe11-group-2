@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Box, Container, Skeleton, Stack } from '@mui/material';
-import { SkeletonSection } from '../../tools/productsSkeleton';
+import { SkeletonCategory } from '../../utils/Skeleton/SkeletonCategory';
 import Filter from '../../components/PageProducts/Filter';
 import ChoiceCategory from '../../components/PageProducts/ChoiceCategory';
 import PromoMonth from '../../components/PageProducts/PromoMonth';
@@ -57,7 +57,7 @@ function Products() {
 
         <Box id="sortingAndCards" sx={sortingAndCardsStyles}>
           <SortingPrice />
-          {showSkeleton ? <SkeletonSection /> : <Cards />}
+          {showSkeleton ? <SkeletonCategory /> : <Cards />}
           <Box id="paginationDownWrapper" sx={paginationWrapperStyles}>
             <PaginationProducts category={category} />
           </Box>

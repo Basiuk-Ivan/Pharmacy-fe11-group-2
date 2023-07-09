@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Box, Stack, Typography, Button } from '@mui/material';
-import { scrollClick } from '../../../tools/scrollClick';
-import { instructionTextComponentData } from '../../../tools/instructionTextComponentData';
-import { instructionButtons } from '../../../tools/instructionButtons';
+import { scrollClick } from '../../../tools/Scroll/scrollClick';
+import { instructionTextComponentData } from '../../../tools/Instruction/instructionTextComponentData';
+import { instructionButtons } from '../../../tools/Instruction/instructionButtons';
 import TextComponent from './components/TextComponent';
 
 const ProductCardInstruction = ({ productItem }) => {
@@ -19,9 +19,18 @@ const ProductCardInstruction = ({ productItem }) => {
   const storageConditionsRef = useRef(null);
   const manufacturerRef = useRef(null);
 
-  const arrRef = [compoundRef, dosageFormRef, pharmGroupRef, indicationsRef,
-    contraindicationsRef, howToTakeRef, adverseReactionsRef,
-    bestBeforeDateRef, storageConditionsRef, manufacturerRef];
+  const arrRef = [
+    compoundRef,
+    dosageFormRef,
+    pharmGroupRef,
+    indicationsRef,
+    contraindicationsRef,
+    howToTakeRef,
+    adverseReactionsRef,
+    bestBeforeDateRef,
+    storageConditionsRef,
+    manufacturerRef
+  ];
 
   useEffect(() => {
     window.addEventListener('scroll', () => setActiveButton(false));
@@ -74,7 +83,6 @@ const ProductCardInstruction = ({ productItem }) => {
           />
         ))}
       </Box>
-
     </Box>
   );
 };

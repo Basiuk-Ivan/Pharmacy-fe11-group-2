@@ -1,4 +1,4 @@
-import { request } from '../request';
+import { request } from '../Axios/request';
 
 const searchWarehouse = async city => {
   const createUrl = 'https://api.novaposhta.ua/v2.0/json/';
@@ -9,7 +9,7 @@ const searchWarehouse = async city => {
     calledMethod: 'getWarehouses',
     methodProperties: {
       CityName: city,
-      TypeOfWarehouseRef: '841339c7-591a-42e2-8233-7a0a00f0ed6f',
+      TypeOfWarehouseRef: '841339c7-591a-42e2-8233-7a0a00f0ed6f'
     }
   };
 
@@ -17,7 +17,7 @@ const searchWarehouse = async city => {
     const { result } = await request({
       url: createUrl,
       method: 'POST',
-      body: warehouseParams,
+      body: warehouseParams
     });
 
     const { data } = result;

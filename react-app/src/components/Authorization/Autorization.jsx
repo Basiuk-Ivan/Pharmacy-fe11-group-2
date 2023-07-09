@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { Modal, Tab, Tabs, Typography, Box, Button } from '@mui/material';
@@ -8,10 +8,8 @@ import { closeModal, closeModalForgotPass } from '../../redux/slice/modalSlice';
 import { LoginForm } from './components/LoginForm';
 import { ForgotForm } from './components/ForgotForm';
 import { RegistrationForm } from './components/RegistrationForm';
-import { setCartStoreId, setFavoriteStoreId, setUser } from '../../redux/slice/userSlice';
-import { sendRequest } from '../../tools/sendRequest';
-import { removeItem, addToCartMoreOne } from '../../redux/slice/cartItems';
-import { addToFavouriteItems, deleteFromFavouriteItems } from '../../redux/slice/favouriteItems';
+import { setUser } from '../../redux/slice/userSlice';
+import { sendRequest } from '../../tools/Axios/sendRequest';
 import ModalWindow from '../ModalWindow';
 import {
   closeLoginModal,
@@ -22,58 +20,28 @@ import {
 } from '../../redux/slice/isToken';
 import { styles } from './style';
 import './style/Auth.scss';
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 500,
-  height: 300,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  borderRadius: 20,
-  p: 4
-};
+import { getFavoriteFromLogin } from '../../utils/Autorization/getFavoriteFormLogin';
+import { getBasketFromLogin } from '../../utils/Autorization/getBasketFromLogin';
 
 const AuthButton = () => {
-  const [open, setOpen] = React.useState(false);
-  const isOpenedLoginModal = useSelector(state => state.isToken.isOpenedLoginModal);
-  const isOpenedRegistrationModal = useSelector(state => state.isToken.isOpenedRegistrationModal);
+  const [activeTab, setActiveTab] = useState('login');
 
-  const [welcomeModalOpen, setWelcomeModalOpen] = useState(false);
-  const handleWelcomeModalClose = () => setWelcomeModalOpen(false);
-  useEffect(() => {
-    if (welcomeModalOpen) {
-      const timer = setTimeout(() => {
-        handleWelcomeModalClose();
-      }, 3000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [welcomeModalOpen]);
-
-  const handleClose = () => setOpen(false);
-
-  const isOpen = useSelector(state => state.modalSlice.openModal);
-  const isModalForgotPass = useSelector(state => state.modalSlice.modalForgotPass);
   const dispatch = useDispatch();
 
+  const isOpenedLoginModal = useSelector(state => state.isToken.isOpenedLoginModal);
+  const isOpenedRegistrationModal = useSelector(state => state.isToken.isOpenedRegistrationModal);
+  const isOpen = useSelector(state => state.modalSlice.openModal);
+  const isModalForgotPass = useSelector(state => state.modalSlice.modalForgotPass);
+
   const handleCloseModal = () => dispatch(closeModal());
+
   const handleCloseForgotModal = () => {
     dispatch(closeModalForgotPass());
   };
 
-  const [activeTab, setActiveTab] = useState('login');
-
-  const favItm = useSelector(state => state.favouriteItems.favouriteItems);
-
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
   };
-  const [name, setFirstName] = useState('');
-  const [lastName, setSecondName] = useState('');
 
   const handleFormLogin = async values => {
     try {
@@ -83,56 +51,13 @@ const AuthButton = () => {
       const { token } = userResponse.data;
       const decodedToken = jwtDecode(token);
       const { _id, firstName, secondName, ...rest } = decodedToken;
-      setFirstName(firstName);
-      setSecondName(secondName);
       const updatedObj = { ...decodedToken, id: _id };
       window.localStorage.setItem('token', token);
+
       dispatch(setUser(updatedObj));
 
-      const cartURL = `${process.env.VITE_API_URL}/api/backet?user=${_id}`;
-      const cartResponse = await sendRequest(cartURL);
-      const cartProducts = cartResponse.data.products;
-      const cartItemsFromLS = JSON.parse(localStorage.getItem('cartItems')) || [];
-      const productsLS = cartItemsFromLS.map(({ id, quantity }) => {
-        const newCartObj = { productID: id, quantity };
-        return newCartObj;
-      });
-      const mergedProducts = [...cartProducts];
-      productsLS.forEach(itemLS => {
-        const foundIndex = mergedProducts.findIndex(item => item.productID === itemLS.productID);
-        if (foundIndex !== -1) {
-          mergedProducts[foundIndex].quantity += itemLS.quantity;
-        } else {
-          mergedProducts.push({ ...itemLS });
-        }
-      });
-      dispatch(setCartStoreId(cartResponse.data.id));
-      const newCartData = { id: cartResponse.data.id, products: [...mergedProducts] };
-      const cartULRForPUT = `${process.env.VITE_API_URL}/api/backet`;
-      const cartPUTResponse = await sendRequest(cartULRForPUT, 'PUT', newCartData);
-      window.localStorage.removeItem('cartItems');
-      dispatch(removeItem('all'));
-      mergedProducts.forEach(product => {
-        dispatch(addToCartMoreOne({ id: product.productID, quantity: product.quantity }));
-      });
-
-      const favoriteURL = `${process.env.VITE_API_URL}/api/favorite?user=${_id}`;
-      const favoriteResponse = await sendRequest(favoriteURL);
-      const favoriteProducts = favoriteResponse.data.products;
-      const favouriteItemsFromLS = JSON.parse(localStorage.getItem('favouriteItems')) || [];
-      const favorites = favouriteItemsFromLS.map(item => item.id);
-      const newFavorites = [...new Set([...favoriteProducts, ...favorites])];
-
-      dispatch(setFavoriteStoreId(favoriteResponse.data.id));
-      const newFavoriteData = { id: favoriteResponse.data.id, products: [...newFavorites] };
-
-      const favoriteULRForPUT = `${process.env.VITE_API_URL}/api/favorite`;
-      const favoritePUTResponse = await sendRequest(favoriteULRForPUT, 'PUT', newFavoriteData);
-      window.localStorage.removeItem('favouriteItems');
-      dispatch(deleteFromFavouriteItems('all'));
-      newFavorites.forEach(product => {
-        dispatch(addToFavouriteItems(product));
-      });
+      getBasketFromLogin(_id, dispatch);
+      getFavoriteFromLogin(_id, dispatch);
 
       if (status === 200) {
         dispatch(openLoginModal(true));
@@ -180,9 +105,19 @@ const AuthButton = () => {
     dispatch(openRegistrationModal(false));
   };
 
+  useEffect(() => {
+    if (isOpenedLoginModal) {
+      const timer = setTimeout(() => {
+        handleCloseLoginModal();
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isOpenedLoginModal]);
+
   return (
     <ThemeProvider theme={theme}>
-      <div>
+      <Box>
         {!!isOpenedLoginModal && (
           <ModalWindow
             mainText="Ви успішно увійшли"
@@ -238,7 +173,7 @@ const AuthButton = () => {
             </div>
           </Box>
         </Modal>
-      </div>
+      </Box>
     </ThemeProvider>
   );
 };
