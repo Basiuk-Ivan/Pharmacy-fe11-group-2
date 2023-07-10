@@ -39,6 +39,7 @@ export const createUser = async userData => {
 };
 
 export const updateUserPassword = async (email, newPassword) => {
+  console.log('newPassword:', newPassword);
   try {
     const filter = { email };
     const update = { password: newPassword };
