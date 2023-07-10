@@ -54,11 +54,13 @@ export const passwordUserService = async query => {
 };
 
 export const updateUserService = async (userId, updatedFields) => {
+  console.log('updatedFields:', updatedFields);
   try {
     if (updatedFields?.password) {
       updatedFields.password = await bcrypt.hash(updatedFields.password, 4);
     }
     const updatedUser = await updateUserById(userId, updatedFields);
+    console.log('updatedUser:', updatedUser);
 
     if (updatedFields.password) {
       const { password, ...userData } = updatedUser._doc;
