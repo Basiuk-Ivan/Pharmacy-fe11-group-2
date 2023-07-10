@@ -14,9 +14,10 @@ const OrdersBlock = () => {
   const userId = useSelector(state => state.user.id);
 
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setLoading(false);
     }, 500);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {

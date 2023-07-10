@@ -9,9 +9,10 @@ const PersonalData = () => {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setLoading(false);
     }, 500);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
