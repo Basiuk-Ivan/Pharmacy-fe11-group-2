@@ -98,13 +98,13 @@ const ProductReviews = ({ item, setLoading }) => {
                 src={item.gender === 'male' ? avatarImg.manImg : avatarImg.womanImg}
                 sx={avatarStyles}
               />
-              <Stack  direction="row" justifyContent="flex-start" alignItems="flex-start" spacing={0.5} flexWrap="wrap">
-              <Typography variant="p" component="p" gutterBottom sx={nameStyles}>
-                {item.userName}
-              </Typography>
-              <Typography variant="p" component="p" gutterBottom sx={nameStyles}>
-               {item.userSurname}
-              </Typography>
+              <Stack direction="row" justifyContent="flex-start" alignItems="flex-start" spacing={0.5} flexWrap="wrap">
+                <Typography variant="p" component="p" gutterBottom sx={nameStyles}>
+                  {item.userName}
+                </Typography>
+                <Typography variant="p" component="p" gutterBottom sx={nameStyles}>
+                  {item.userSurname}
+                </Typography>
               </Stack>
             </Stack>
             <Stack
@@ -147,8 +147,7 @@ const ProductReviews = ({ item, setLoading }) => {
           <Box sx={responseTextStyles}>{item.reviewTxt}</Box>
         </Stack>
 
-
-          <CloseSharpIcon onClick={() => openRemoveModal(item)} sx={deleteButtonStyles} />
+        <CloseSharpIcon onClick={() => openRemoveModal(item)} sx={deleteButtonStyles} />
 
         <ModalWindow
           mainText="Видалити даний відгук?"

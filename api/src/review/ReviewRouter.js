@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import {ReviewController} from './ReviewController.js';
+import { ReviewController } from './ReviewController.js';
 
 export const reviewRouter = new Router();
 export const reviewDefaultPath = '/api/review';

@@ -67,7 +67,7 @@ const Respond = ({ item }) => {
             src={item.gender === 'male' ? avatarImg.manImg : avatarImg.womanImg}
             sx={avatarStyles}
           />
-          <Stack  direction="row" justifyContent="flex-start" alignItems="flex-start" spacing={0.5} flexWrap="wrap">
+          <Stack direction="row" justifyContent="flex-start" alignItems="flex-start" spacing={0.5} flexWrap="wrap">
             <Typography variant="p" component="p" gutterBottom sx={nameStyles}>
               {item.userName}
             </Typography>

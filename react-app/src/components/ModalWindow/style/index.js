@@ -19,7 +19,7 @@ export const mainTextStyles = {
   mb: '30px',
   fontFamily: 'Roboto, sans-serif',
   fontWeight: 700,
-  fontSize: {xs:'18px', sm:'20px', md:'21px'},
+  fontSize: { xs: '18px', sm: '20px', md: '21px' },
   textAlign: 'center'
 };
 
@@ -35,7 +35,7 @@ export const confirmBtnStyles = {
   borderRadius: 50,
   fontFamily: 'Roboto, sans-serif',
   fontWeight: 700,
-  fontSize: {xs:'12px', sm:'14px'},
+  fontSize: { xs: '12px', sm: '14px' },
   color: '#FFFFFF'
 };
 
@@ -44,6 +44,6 @@ export const cancelBtnStyles = {
   borderRadius: 50,
   fontFamily: 'Roboto, sans-serif',
   fontWeight: 700,
-  fontSize: {xs:'12px', sm:'14px'},
+  fontSize: { xs: '12px', sm: '14px' },
   color: '#FFFFFF'
 };
