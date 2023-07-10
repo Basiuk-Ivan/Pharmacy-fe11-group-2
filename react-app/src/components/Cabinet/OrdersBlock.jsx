@@ -1,10 +1,10 @@
 import { Typography, Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { ThemeProvider } from '@mui/material/styles';
 import Loading from './Loading';
 import Orders from './Orders';
 import { getUserOrdersFromDB } from '../../utils/ActionsWithProduct/getUserOrdersFromDB';
-import { ThemeProvider } from '@mui/material/styles';
 import { noReviewsStyles } from './style';
 import { theme as muiTheme } from '../../tools/muiTheme';
 

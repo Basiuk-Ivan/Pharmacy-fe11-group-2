@@ -31,7 +31,7 @@ export const avatarStyles = {
   height: 56
 };
 export const nameStyles = {
-  fontSize:{xs:"16px",sm:"18px"},
+  fontSize: { xs: '16px', sm: '18px' },
   lineHeight: '24px',
   fontWeight: '500',
   fontFamily: 'Roboto, sans-serif'
@@ -45,7 +45,7 @@ export const ratingBlockStyles = {
 export const dateStyles = {
   mr: '10px',
   mb: '30px',
-  fontSize:{xs:"16px",sm:"18px"},
+  fontSize: { xs: '16px', sm: '18px' },
   lineHeight: '18px',
   fontWeight: '500',
   fontFamily: 'Roboto, sans-serif'

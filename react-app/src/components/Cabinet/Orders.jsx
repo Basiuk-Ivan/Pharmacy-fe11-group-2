@@ -1,6 +1,6 @@
 import { Stack, Typography } from '@mui/material';
-import ProductData from './ProductData';
 import { useEffect, useState } from 'react';
+import ProductData from './ProductData';
 import { formatDate } from '../../utils/ActionsWithProduct/formatDate';
 import { ordersValueStyles, ordersWrapperStyles } from './style';
 

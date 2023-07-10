@@ -3,12 +3,11 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import {
-    buttonBlockStyles,
-    confirmBtnStyles,
-    mainTextStyles,
-    ModalWrapperStyles,
-    cancelBtnStyles} from "./style";
-
+  buttonBlockStyles,
+  confirmBtnStyles,
+  mainTextStyles,
+  ModalWrapperStyles,
+  cancelBtnStyles } from './style';
 
 const ModalWindow = ({
   mainText,

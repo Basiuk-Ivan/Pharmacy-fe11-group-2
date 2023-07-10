@@ -1,7 +1,5 @@
 import { Router } from 'express';
-import {ResponseController} from './ResponseController.js';
-import {Response} from "./ResponseModel.js";
-
+import { ResponseController } from './ResponseController.js';
 
 export const responseRouter = new Router();
 export const responseDefaultPath = '/api/response';
