@@ -82,7 +82,7 @@ export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const token = await loginUserService(email, password);
-    return res.json({ token });
+    return res.json(token);
   } catch (error) {
     res.status(500).json(error.message);
   }
