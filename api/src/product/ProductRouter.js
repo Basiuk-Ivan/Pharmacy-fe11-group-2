@@ -7,8 +7,12 @@ import { ProductController } from './ProductController.js';
 export const productRouter = new Router();
 export const productDefaultPath = '/api/product';
 
-productRouter.post('/', validateSchema(productValidateSchema), ProductController.createProduct);
-productRouter.get('/', ProductController.getAllProduct);
-productRouter.get('/:id', ProductController.getOneProduct);
-productRouter.put('/:id', ProductController.updateProduct);
-productRouter.delete('/:id', ProductController.deleteProduct);
+productRouter.post(
+  '/',
+  validateSchema(productValidateSchema),
+  ProductController.createProductController
+);
+productRouter.get('/', ProductController.getAllProductController);
+productRouter.get('/:id', ProductController.getOneProductController);
+productRouter.put('/:id', ProductController.updateProductController);
+productRouter.delete('/:id', ProductController.deleteProductController);

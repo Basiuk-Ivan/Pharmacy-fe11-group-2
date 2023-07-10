@@ -5,7 +5,7 @@ import {
   updateOrder,
   deleteOrder,
 } from './OrderDataAccess.js';
-import { fillFields } from '../product/ProductController.js';
+import { fillFields } from '../product/ProductService.js';
 import { sendMailOrder } from '../utils/mail.js';
 
 export const createOrderService = async orderData => {
