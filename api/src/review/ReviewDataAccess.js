@@ -1,6 +1,15 @@
 import mongoose from 'mongoose';
 import ReviewDB from './ReviewModel.js';
 
+export const getReviewById = async reviewId => {
+  try {
+    const review = await ReviewDB.findById(reviewId);
+    return review;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
 export const getReviewsByProduct = async productId => {
   try {
     const objectIdProd = new mongoose.Types.ObjectId(productId);

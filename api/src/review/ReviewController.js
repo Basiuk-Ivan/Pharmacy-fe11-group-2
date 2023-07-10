@@ -1,3 +1,10 @@
+import {
+  getReviewById,
+  getReviewsByProduct,
+  getReviewsByUser,
+  getAllReviews,
+} from './ReviewDataAccess.js';
+
 import { ReviewService } from './ReviewService.js';
 
 export const createReview = async (req, res) => {
@@ -12,17 +19,18 @@ export const createReview = async (req, res) => {
 export const getReview = async (req, res) => {
   try {
     const { product, user, respondId } = req.query;
+
     if (!!respondId) {
-      const respond = await ReviewService.getReviewById(respondId);
+      const respond = await getReviewById(respondId);
       return res.json(respond);
     } else if (!!product) {
-      const reviews = await ReviewService.getReviewsByProduct(product);
+      const reviews = await getReviewsByProduct(product);
       return res.json(reviews);
     } else if (!!user) {
-      const reviews = await ReviewService.getReviewsByUser(user);
+      const reviews = await getReviewsByUser(user);
       return res.json(reviews);
     } else {
-      const reviews = await ReviewService.getAllReviews();
+      const reviews = await getAllReviews();
       return res.json(reviews);
     }
   } catch (error) {
@@ -39,6 +47,7 @@ export const updateReview = async (req, res) => {
       req.body.id,
       req.body
     );
+    console.log('updatedReview:', updatedReview);
     return res.json(updatedReview);
   } catch (error) {
     res.status(500).json(error.message);
@@ -46,7 +55,6 @@ export const updateReview = async (req, res) => {
 };
 
 export const deleteReview = async (req, res) => {
-
   try {
     if (!req.params.id) {
       throw new Error('ID не знайдено');
