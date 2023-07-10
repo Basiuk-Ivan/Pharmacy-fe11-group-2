@@ -1,5 +1,6 @@
 import { Table, TableBody, TableRow, TableCell } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import {tableStyles} from "./style";
 
 const ChangedTableCell = styled(TableCell)(() => ({
   color: '#4F4F4F',
@@ -14,12 +15,7 @@ const ChangedTableCell = styled(TableCell)(() => ({
 const SectionsMenu = props => {
   const { handleSectionClick } = props;
   return (
-    <Table
-      sx={{
-        mb: '40px',
-        border: '1px solid #E7E9EB',
-      }}
-    >
+    <Table sx={tableStyles}>
       <TableBody>
         <TableRow>
           <ChangedTableCell onClick={() => handleSectionClick('personalData')}>
@@ -30,6 +26,12 @@ const SectionsMenu = props => {
           <ChangedTableCell
             onClick={() => handleSectionClick('orders')}
           >Ваші замовлення
+          </ChangedTableCell>
+        </TableRow>
+        <TableRow>
+          <ChangedTableCell
+            onClick={() => handleSectionClick('reviews')}
+          >Ваші відгуки
           </ChangedTableCell>
         </TableRow>
       </TableBody>
