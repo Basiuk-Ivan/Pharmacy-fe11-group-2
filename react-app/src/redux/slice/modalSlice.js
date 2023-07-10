@@ -23,8 +23,8 @@ const modalSlice = createSlice({
       state.modalForgotPass = false;
       state.openModal = false;
     },
-    modalErrortPass: state => {
-      state.openModal = true;
+    modalErrortPass: (state, action) => {
+      state.errorModal = action.payload;
     }
   }
 });

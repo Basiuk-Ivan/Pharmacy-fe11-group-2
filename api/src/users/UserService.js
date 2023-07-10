@@ -93,7 +93,6 @@ export const loginUserService = async (email, password) => {
     const user = await UserDB.findOne({ email });
     if (user) {
       const isPasswordEqual = await bcrypt.compare(password, user.password);
-      console.log('isPasswordEqual:', isPasswordEqual);
       if (isPasswordEqual) {
         const { password, ...userData } = user._doc;
         const token = createToken({

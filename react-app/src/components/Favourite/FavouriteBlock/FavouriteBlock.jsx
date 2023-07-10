@@ -11,11 +11,13 @@ import { openModalAddtoCart, openModalRemoveAll } from '../../../redux/slice/fav
 import { request } from '../../../tools/Axios/request';
 import ModalWindow from '../../ModalWindow';
 import { closeModalNotAvailable, openModalNotAvailable } from '../../../redux/slice/cartItems';
+import { modalErrortPass } from '../../../redux/slice/modalSlice';
 
 const FavouriteBlock = props => {
   const [products, setProducts] = useState([]);
   const [showSkeleton, setShowSkeleton] = useState(true);
   const favoriteItems = useSelector(state => state.favouriteItems.favouriteItems);
+  const errorModal = useSelector(state => state.modalSlice.errorModal);
   const dispatch = useDispatch();
   const isOpenedCartModalNotAvailable = useSelector(state => state.itemCards.isOpenedCartModalNotAvailable);
 
@@ -45,6 +47,7 @@ const FavouriteBlock = props => {
         }
       } catch (error) {
         console.error('Error fetching products:', error);
+        dispatch(modalErrortPass(true));
       }
     };
     fetchProducts();
@@ -75,117 +78,132 @@ const FavouriteBlock = props => {
     dispatch(closeModalNotAvailable());
   };
 
+  const handleCloseErrorModal = () => {
+    dispatch(modalErrortPass(false));
+  };
+
   return (
-    <Container
-      disableGutters
-      sx={{
-        mt: '140px',
-        mb: '20px'
-      }}
-    >
-      <Bread />
-      {showSkeleton ? (
-        <Stack direction="row" spacing={2}>
-          <Box>
-            <Skeleton variant="rectangular" width={220} height={430} />
-          </Box>
-          <Box>
-            <Skeleton variant="rectangular" width={220} height={430} />
-          </Box>
-          <Box>
-            <Skeleton variant="rectangular" width={220} height={430} />
-          </Box>
-          <Box>
-            <Skeleton variant="rectangular" width={220} height={430} />
-          </Box>
-          <Box>
-            <Skeleton variant="rectangular" width={220} height={430} />
-          </Box>
-        </Stack>
-      ) : products.length > 0 ? (
-        <>
-          <Stack
-            direction={{ xs: 'column', sm: 'row' }}
-            spacing={{ xs: 1, sm: 2, md: 4 }}
-            justifyContent="space-between"
-            alignItems="center"
-            sx={{
-              mb: '20px'
-            }}
-          >
-            <Typography
+    <>
+      {!!errorModal && (
+        <ModalWindow
+          mainText="Упс... Щось пішло не так"
+          handleClick={() => {}}
+          handleClose={handleCloseErrorModal}
+          isOpened={errorModal}
+          actions={false}
+        />
+      )}
+      <Container
+        disableGutters
+        sx={{
+          mt: '140px',
+          mb: '20px'
+        }}
+      >
+        <Bread />
+        {showSkeleton ? (
+          <Stack direction="row" spacing={2}>
+            <Box>
+              <Skeleton variant="rectangular" width={220} height={430} />
+            </Box>
+            <Box>
+              <Skeleton variant="rectangular" width={220} height={430} />
+            </Box>
+            <Box>
+              <Skeleton variant="rectangular" width={220} height={430} />
+            </Box>
+            <Box>
+              <Skeleton variant="rectangular" width={220} height={430} />
+            </Box>
+            <Box>
+              <Skeleton variant="rectangular" width={220} height={430} />
+            </Box>
+          </Stack>
+        ) : products.length > 0 ? (
+          <>
+            <Stack
+              direction={{ xs: 'column', sm: 'row' }}
+              spacing={{ xs: 1, sm: 2, md: 4 }}
+              justifyContent="space-between"
+              alignItems="center"
               sx={{
-                fontFamily: 'Roboto, sans-serif',
-                fontWeight: 700,
-                fontSize: '36px',
-                color: '#2E3A59'
+                mb: '20px'
               }}
             >
-              Обране
-            </Typography>
-            <Stack direction="row" spacing={2} alignItems="center">
-              <DeleteIcon color="success" />
-              <Button
-                variant="text"
-                onClick={() => delFromFav()}
+              <Typography
                 sx={{
                   fontFamily: 'Roboto, sans-serif',
                   fontWeight: 700,
-                  fontSize: '14px',
-                  color: '#828282'
+                  fontSize: '36px',
+                  color: '#2E3A59'
                 }}
               >
-                Очистити все
-              </Button>
-              <Button
-                variant="contained"
-                type="submit"
-                form="contacts"
-                onClick={addAlltoCart}
-                component={Link}
-                sx={{
-                  backgroundColor: '#2FD3AE',
-                  borderRadius: 50,
-                  fontFamily: 'Roboto, sans-serif',
-                  fontWeight: 700,
-                  fontSize: '14px',
-                  color: '#FFFFFF'
-                }}
-              >
-                Додати все до кошика
-              </Button>
+                Обране
+              </Typography>
+              <Stack direction="row" spacing={2} alignItems="center">
+                <DeleteIcon color="success" />
+                <Button
+                  variant="text"
+                  onClick={() => delFromFav()}
+                  sx={{
+                    fontFamily: 'Roboto, sans-serif',
+                    fontWeight: 700,
+                    fontSize: '14px',
+                    color: '#828282'
+                  }}
+                >
+                  Очистити все
+                </Button>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  form="contacts"
+                  onClick={addAlltoCart}
+                  component={Link}
+                  sx={{
+                    backgroundColor: '#2FD3AE',
+                    borderRadius: 50,
+                    fontFamily: 'Roboto, sans-serif',
+                    fontWeight: 700,
+                    fontSize: '14px',
+                    color: '#FFFFFF'
+                  }}
+                >
+                  Додати все до кошика
+                </Button>
+              </Stack>
             </Stack>
-          </Stack>
-          <Grid container spacing={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
-            {products.map(item => (
-              <Grid item key={item.id}>
-                <ProductCard productItem={item} />
-              </Grid>
-            ))}
-          </Grid>
-        </>
-      ) : (
-        <Typography
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            fontSize: 24,
-            fontWeight: 400,
-            mt: '100px',
-            mb: '200px'
-          }}
-        >
-          Додайте товар в обране для відображення на цій сторінці
-        </Typography>
-      )}
-      <ModalWindow
-        mainText="В улюблених є товари, кількість яких відсутня. Для додавання товарів в корзину, будь-ласка видаліть відсутній товар"
-        handleClick={() => {}}
-        handleClose={handleCloseModalNotAvailable}
-        isOpened={isOpenedCartModalNotAvailable}
-        actions={false}
-      />
-    </Container>
+            <Grid container spacing={1} justifyContent={{ xs: 'center', md: 'flex-start' }}>
+              {products.map(item => (
+                <Grid item key={item.id}>
+                  <ProductCard productItem={item} />
+                </Grid>
+              ))}
+            </Grid>
+          </>
+        ) : (
+          <Typography
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              fontSize: 24,
+              fontWeight: 400,
+              mt: '100px',
+              mb: '200px'
+            }}
+          >
+            Додайте товар в обране для відображення на цій сторінці
+          </Typography>
+        )}
+        <ModalWindow
+          mainText="В улюблених є товари, кількість яких відсутня. Для додавання товарів в корзину, будь-ласка видаліть відсутній товар"
+          handleClick={() => {}}
+          handleClose={handleCloseModalNotAvailable}
+          isOpened={isOpenedCartModalNotAvailable}
+          actions={false}
+        />
+      </Container>
+    </>
   );
 };
 
