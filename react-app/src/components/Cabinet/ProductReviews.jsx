@@ -1,13 +1,16 @@
 import { Avatar, Box, Rating, Stack, Typography, Button } from '@mui/material';
-import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
+import CloseSharpIcon from '@mui/icons-material/CloseSharp';
+import { NavLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import CloseSharpIcon from '@mui/icons-material/CloseSharp';
-
-import { NavLink } from 'react-router-dom';
+import ModalWindow from '../ModalWindow';
+import { request } from '../../tools/Axios/request';
+import { avatarImg } from '../../utils/commonConstans/avatarImg';
+import { formatDate } from '../../utils/ActionsWithProduct/formatDate';
+import { deleteUserReviewsFromDB } from '../../utils/Responses/deleteUserReviewsFromDB';
+import { changeStateReview, closeModalRemoveReview, openModalRemoveReview } from '../../redux/slice/userSlice';
 import {
   responseWrapperStyles,
   responseHeaderStyles,
@@ -18,15 +21,9 @@ import {
   dateStyles,
   emotionBlockStyles,
   itemEmotionStyles,
-  responseTextStyles, productNameStyles
+  responseTextStyles, productNameStyles,
+  reviewContainerStyles, deleteButtonStyles
 } from './style';
-
-import { request } from '../../tools/Axios/request';
-import { avatarImg } from '../../utils/commonConstans/avatarImg';
-import { formatDate } from '../../utils/ActionsWithProduct/formatDate';
-import { deleteUserReviewsFromDB } from '../../utils/Responses/deleteUserReviewsFromDB';
-import ModalWindow from '../ModalWindow';
-import { changeStateReview, closeModalRemoveReview, openModalRemoveReview } from '../../redux/slice/userSlice';
 
 const ProductReviews = ({ item, setLoading }) => {
   const id = item.product;
@@ -82,7 +79,7 @@ const ProductReviews = ({ item, setLoading }) => {
     <>
       {!!product &&
 
-      <Stack sx={{ p: '10px', border: '1px solid green', mb: 2, borderRadius: '10px', position: 'relative' }}>
+      <Stack sx={reviewContainerStyles}>
 
         <Stack direction="row" alignItems="center" flexWrap="wrap" gap="10px" sx={{ mb: '10px' }}>
           <NavLink to={`/${product.categories[0]}/${product.id}`}>
@@ -101,9 +98,14 @@ const ProductReviews = ({ item, setLoading }) => {
                 src={item.gender === 'male' ? avatarImg.manImg : avatarImg.womanImg}
                 sx={avatarStyles}
               />
+              <Stack  direction="row" justifyContent="flex-start" alignItems="flex-start" spacing={0.5} flexWrap="wrap">
               <Typography variant="p" component="p" gutterBottom sx={nameStyles}>
-                {item.userName} {item.userSurname}
+                {item.userName}
               </Typography>
+              <Typography variant="p" component="p" gutterBottom sx={nameStyles}>
+               {item.userSurname}
+              </Typography>
+              </Stack>
             </Stack>
             <Stack
               flexWrap="wrap"
@@ -125,7 +127,6 @@ const ProductReviews = ({ item, setLoading }) => {
               sx={emotionBlockStyles}
             >
               <Stack direction="row" spacing={2} alignItems="center" sx={{ cursor: 'pointer' }}>
-
                 <Button disabled>
                   <ThumbUpIcon />
                 </Button>
@@ -146,9 +147,9 @@ const ProductReviews = ({ item, setLoading }) => {
           <Box sx={responseTextStyles}>{item.reviewTxt}</Box>
         </Stack>
 
-        <Button onClick={() => openRemoveModal(item)} sx={{ position: 'absolute', top: '10px', right: '-10px', color: '#1d8da0' }}>
-          <CloseSharpIcon />
-        </Button>
+
+          <CloseSharpIcon onClick={() => openRemoveModal(item)} sx={deleteButtonStyles} />
+
         <ModalWindow
           mainText="Видалити даний відгук?"
           confirmTextBtn="Підтвердити"

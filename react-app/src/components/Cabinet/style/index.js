@@ -1,4 +1,5 @@
 export const productNameStyles = {
+  fontSize:{xs:"16px",sm:"20px"},
   cursor: 'pointer',
   ':hover': { color: '#2fd3ae' }
 };
@@ -9,7 +10,7 @@ export const personalInfoStyles = {
   rowGap: '10px'
 };
 export const nameStyles = {
-  fontSize: '18px',
+  fontSize:{xs:"16px",sm:"18px"},
   lineHeight: '24px',
   fontWeight: '500',
   fontFamily: 'Roboto, sans-serif'
@@ -17,9 +18,10 @@ export const nameStyles = {
 export const dateStyles = {
   mr: '10px',
   mb: '30px',
-  fontSize: '18px',
+  fontSize:{xs:"16px",sm:"18px"},
   lineHeight: '18px',
   fontWeight: '500',
+  fontFamily: 'Roboto, sans-serif'
 };
 export const responseHeaderStyles = {
   mb: '20px',
@@ -60,6 +62,73 @@ export const responseTextStyles = {
   fontFamily: 'Roboto, sans-serif'
 };
 
-// export productInfoStyles = {
-//
-// }
+export const noReviewsStyles = {
+  mt: '100px',
+  mb: '100px',
+  display: 'flex',
+  justifyContent: 'center',
+  fontSize: 24,
+  fontWeight: 400,
+  textAlign:"center"
+};
+
+export const reviewContainerStyles = {
+  p: '10px',
+  border: '1px solid green',
+  mb: 2,
+  borderRadius: '10px',
+  position: 'relative',
+  minWidth:'220px'
+};
+
+export const deleteButtonStyles = {
+  position: 'absolute',
+  top: '10px',
+  right: '15px',
+  color: '#1d8da0',
+  fontSize:"26px",
+  cursor: "pointer"
+}
+
+export const saveBtnStyles = {
+  backgroundColor: '#2FD3AE',
+  borderRadius: 50,
+  mt: '20px',
+  color: '#FFFFFF',
+  padding: '13px 68px 10px 68px'
+}
+
+export const ordersWrapperStyles = {
+  mb: 3,
+  border: '1px solid green',
+  backgroundColor: '#f7fafb',
+  borderRadius: '10px',
+  p: 1,
+  minWidth:'220px'
+}
+
+export const ordersValueStyles = {
+  fontWeight: 500,
+  p: '5px',
+  borderRadius: '10px',
+  backgroundColor: '#2fd3ae',
+  color: '#ffffff'
+}
+
+export const cabineteTitleStyles = {
+  fontFamily: 'Raleway, sans-serif',
+  fontWeight: 700,
+  fontSize: {xs: '20px', sm: '36px'},
+  mb: {xs: '10px', sm: '20px'},
+  color: '#2E3A59'
+}
+
+export const sectionStyles = {
+  margin: {xs: '0 auto', sm: '0'}
+}
+
+export const tableStyles = {
+  width:"200px",
+  mb: '40px',
+  border: '1px solid #E7E9EB'
+}

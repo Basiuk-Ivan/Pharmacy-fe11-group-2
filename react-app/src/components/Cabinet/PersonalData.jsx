@@ -1,9 +1,9 @@
-import { Stack } from '@mui/material';
-import { ThemeProvider } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
-import { theme as muiTheme } from '../../tools/muiTheme';
 import DataBlock from './DataBlock';
+import Loading from "./Loading";
+import { ThemeProvider } from '@mui/material/styles';
+import { theme as muiTheme } from '../../tools/muiTheme';
+
 
 const PersonalData = () => {
   const [isLoading, setLoading] = useState(true);
@@ -16,15 +16,8 @@ const PersonalData = () => {
 
   return (
     <ThemeProvider theme={muiTheme}>
-      {isLoading ?
-        <Stack spacing={2} direction="row" justifyContent="center">
-          <CircularProgress color="primary" />
-          <CircularProgress color="primary" />
-          <CircularProgress color="primary" />
-          <CircularProgress color="primary" />
-          <CircularProgress color="primary" />
-        </Stack>
-        : <DataBlock />}
+      {isLoading && <Loading />}
+      {!isLoading && <DataBlock />}
     </ThemeProvider>
   );
 };

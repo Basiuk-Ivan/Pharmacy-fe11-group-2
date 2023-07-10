@@ -2,7 +2,7 @@ import { sendRequest } from '../../tools/Axios/sendRequest';
 
 export const deleteUserReviewsFromDB = async review => {
   try {
-    console.log('ID', review.id);
+    
     const urlData = `${process.env.VITE_API_URL}/api/review/${review.id}`;
     const findActualRespondData = await sendRequest(urlData, 'DELETE', {});
 
