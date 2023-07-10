@@ -1,5 +1,4 @@
-import { TextField, Box, Container, MenuItem, Button, Checkbox, FormControlLabel } from '@mui/material';
-import { useState } from 'react';
+import { TextField, Container, MenuItem, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -30,12 +29,6 @@ const DataBlock = () => {
 
   const dispatch = useDispatch();
 
-  const [changePassword, setChangePassword] = useState(false);
-
-  const handleCheckboxChange = () => {
-    setChangePassword(!changePassword);
-  };
-
   const handleCloseOrderModal = () => {
     dispatch(closeOrderModal());
   };
@@ -43,7 +36,7 @@ const DataBlock = () => {
     const digitsOnly = values.phoneNumber.replace(/\D/g, '');
     const changedData = { ...values, phoneNumber: digitsOnly };
     try {
-      const userData = await updateUserDB(userId, changedData, changePassword);
+      const userData = await updateUserDB(userId, changedData, false);
     } catch (err) {
       console.error('Error fetching', err);
     }
@@ -67,17 +60,7 @@ const DataBlock = () => {
       .max(20, 'Має бути не більше 20 символів')
       .required("Обов'язкове поле"),
     email: Yup.string().email('Невірний формат email').required("Обов'язкове поле"),
-    phoneNumber: Yup.string()
-    // .matches(/^[0-9]*$/, 'Можна вводити тільки цифри')
-      .required("Обов'язкове поле"),
-    ...(changePassword && {
-      newpassword: Yup.string().min(6, 'Мінімальна довжина пароля - 6 символів').required("Обов'язкове поле")
-    }),
-    ...(changePassword && {
-      confirmpassword: Yup.string()
-        .oneOf([Yup.ref('newpassword'), null], 'Паролі повинні співпадати')
-        .required("Обов'язкове поле")
-    })
+    phoneNumber: Yup.string().matches(/^[0-9]*$/, 'Можна вводити тільки цифри').required("Обов'язкове поле")
   });
 
   const formik = useFormik({
@@ -87,9 +70,7 @@ const DataBlock = () => {
       birthday: birthday || '2000-01-01',
       gender,
       email,
-      phoneNumber,
-      ...(changePassword && { newpassword: '' }),
-      ...(changePassword && { confirmpassword: '' })
+      phoneNumber: phoneNumber || ''
     },
     validationSchema,
     onSubmit: async values => {
@@ -160,36 +141,6 @@ const DataBlock = () => {
             error={Boolean(formik.touched.phoneNumber && formik.errors.phoneNumber)}
             helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
           />
-          <Box>
-            <FormControlLabel
-              control={<Checkbox checked={changePassword} onChange={handleCheckboxChange} />}
-              label="Встановити новий пароль"
-            />
-          </Box>
-          {changePassword && (
-            <>
-              <ChangedTextField
-                type="password"
-                label="Новий пароль"
-                fullWidth
-                name="newpassword"
-                value={formik.values.newpassword}
-                onChange={formik.handleChange}
-                error={Boolean(formik.touched.newpassword && formik.errors.newpassword)}
-                helperText={formik.touched.newpassword && formik.errors.newpassword}
-              />
-              <ChangedTextField
-                type="password"
-                label="Підтвердження пароля"
-                fullWidth
-                name="confirmpassword"
-                value={formik.values.confirmpassword}
-                onChange={formik.handleChange}
-                error={Boolean(formik.touched.confirmpassword && formik.errors.confirmpassword)}
-                helperText={formik.touched.confirmpassword && formik.errors.confirmpassword}
-              />
-            </>
-          )}
           <Button variant="contained" type="submit" sx={saveBtnStyles}>
             Зберегти зміни
           </Button>
