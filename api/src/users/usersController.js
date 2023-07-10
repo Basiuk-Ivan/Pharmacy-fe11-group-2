@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import {
   getUserService,
   getUserByIDService,
-  passwordUserService,
+  forgotPasswordUserService,
   updateUserService,
   createUserService,
   loginUserService,
@@ -28,9 +28,9 @@ export const getUserByID = async (req, res) => {
   }
 };
 
-export const passwordUser = async (req, res) => {
+export const forgotPasswordUser = async (req, res) => {
   try {
-    await passwordUserService(req.query);
+    await forgotPasswordUserService(req.query);
     res.json('Password updated successfully');
   } catch (error) {
     res.status(500).json(error.message);
@@ -42,10 +42,10 @@ export const updateUser = async (req, res) => {
   try {
     if (req.body.password) {
       req.body.password = await bcrypt.hash(req.body.password, 4);
+      console.log(req.body.password);
     }
 
     const user = await updateUserService(req.params.id, req.body);
-    console.log('user:', user);
 
     if (passwordNotHash) {
       const { password, ...userData } = user._doc;
@@ -95,7 +95,7 @@ export const loginUser = async (req, res) => {
 export const UserController = {
   getUser,
   getUserByID,
-  passwordUser,
+  forgotPasswordUser,
   updateUser,
   createUser,
   loginUser,
