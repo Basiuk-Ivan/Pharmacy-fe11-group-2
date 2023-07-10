@@ -1,3 +1,5 @@
+import bcrypt from 'bcrypt';
+
 import {
   getUserService,
   getUserByIDService,
@@ -6,6 +8,7 @@ import {
   createUserService,
   loginUserService,
 } from './UserService.js';
+import { sendMailRegistration } from '../utils/mail.js';
 
 export const getUser = async (req, res) => {
   try {
@@ -37,11 +40,12 @@ export const passwordUser = async (req, res) => {
 export const updateUser = async (req, res) => {
   const passwordNotHash = req.body.password;
   try {
-    if (req.body?.password) {
+    if (req.body.password) {
       req.body.password = await bcrypt.hash(req.body.password, 4);
     }
 
     const user = await updateUserService(req.params.id, req.body);
+    console.log('user:', user);
 
     if (passwordNotHash) {
       const { password, ...userData } = user._doc;
