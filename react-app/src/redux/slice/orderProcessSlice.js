@@ -16,7 +16,6 @@ const orderProcessSlice = createSlice({
     resetDelivery: state => {
       state.isDelivery = false;
     },
-    // addOrderDelivery: (state, action)
     addPaymentMethod: (state, action) => ({
       ...state, PaymentMethodValue: action.payload,
     }),

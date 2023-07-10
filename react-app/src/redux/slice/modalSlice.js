@@ -5,6 +5,7 @@ const modalSlice = createSlice({
   initialState: {
     openModal: false,
     modalForgotPass: false,
+    errorModal: false
   },
   reducers: {
     openModal: state => {
@@ -22,13 +23,12 @@ const modalSlice = createSlice({
       state.modalForgotPass = false;
       state.openModal = false;
     },
+    modalErrortPass: state => {
+      state.openModal = true;
+    }
   }
 });
 
-export const {
-  openModal,
-  closeModal,
-  openModalForgotPass,
-  closeModalForgotPass
-} = modalSlice.actions;
+export const { openModal, closeModal, openModalForgotPass, closeModalForgotPass, modalErrortPass } =
+  modalSlice.actions;
 export default modalSlice.reducer;
