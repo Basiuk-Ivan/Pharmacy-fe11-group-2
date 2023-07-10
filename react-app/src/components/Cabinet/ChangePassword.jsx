@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
-import DataBlock from './DataBlock';
+import ChangePasswordBlock from './ChangePasswordBlock';
 import Loading from './Loading';
 import { theme as muiTheme } from '../../tools/muiTheme';
 
-const PersonalData = () => {
+const ChangePassword = () => {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -17,9 +17,9 @@ const PersonalData = () => {
   return (
     <ThemeProvider theme={muiTheme}>
       {isLoading && <Loading />}
-      {!isLoading && <DataBlock />}
+      {!isLoading && <ChangePasswordBlock />}
     </ThemeProvider>
   );
 };
 
-export default PersonalData;
+export default ChangePassword;

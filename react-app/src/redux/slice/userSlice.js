@@ -16,6 +16,7 @@ const userSlice = createSlice({
     favoriteStoreId: '',
     changeStateReview: '',
     isOpenModalRemoveReview: false,
+    isOpenModalChangePassword: false,
   },
   reducers: {
     setUser: (state, action) => {
@@ -68,6 +69,12 @@ const userSlice = createSlice({
     closeModalRemoveReview: state => {
       state.isOpenModalRemoveReview = false;
     },
+    openModalChangePassword: state => {
+      state.isOpenModalChangePassword = true;
+    },
+    closeModalChangePassword: state => {
+      state.isOpenModalChangePassword = false;
+    },
   }
 });
 
@@ -79,7 +86,9 @@ export const {
   changeStateReview,
   updateUser,
   openModalRemoveReview,
-  closeModalRemoveReview
+  closeModalRemoveReview,
+  openModalChangePassword,
+  closeModalChangePassword
 } = userSlice.actions;
 
 export default userSlice.reducer;
