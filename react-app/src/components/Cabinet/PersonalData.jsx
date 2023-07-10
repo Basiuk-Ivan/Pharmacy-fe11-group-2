@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import DataBlock from './DataBlock';
-import Loading from "./Loading";
 import { ThemeProvider } from '@mui/material/styles';
+import DataBlock from './DataBlock';
+import Loading from './Loading';
 import { theme as muiTheme } from '../../tools/muiTheme';
-
 
 const PersonalData = () => {
   const [isLoading, setLoading] = useState(true);

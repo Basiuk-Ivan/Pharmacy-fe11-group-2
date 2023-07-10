@@ -1,6 +1,6 @@
 import { Table, TableBody, TableRow, TableCell } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import {tableStyles} from "./style";
+import { tableStyles } from './style';
 
 const ChangedTableCell = styled(TableCell)(() => ({
   color: '#4F4F4F',
