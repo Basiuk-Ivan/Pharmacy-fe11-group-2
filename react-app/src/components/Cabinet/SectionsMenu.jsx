@@ -23,6 +23,11 @@ const SectionsMenu = props => {
           </ChangedTableCell>
         </TableRow>
         <TableRow>
+          <ChangedTableCell onClick={() => handleSectionClick('changePassword')}>
+            Зміна паролю
+          </ChangedTableCell>
+        </TableRow>
+        <TableRow>
           <ChangedTableCell
             onClick={() => handleSectionClick('orders')}
           >Ваші замовлення
