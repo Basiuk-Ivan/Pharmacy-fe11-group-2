@@ -87,7 +87,7 @@ const DataBlock = () => {
       birthday: birthday || '2000-01-01',
       gender,
       email,
-      phoneNumber,
+      phoneNumber: phoneNumber || '',
       ...(changePassword && { newpassword: '' }),
       ...(changePassword && { confirmpassword: '' })
     },
