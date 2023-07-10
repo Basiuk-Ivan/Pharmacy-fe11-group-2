@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import {BacketController} from './BacketController.js';
+import { BacketController } from './BacketController.js';
 
 export const backetRouter = new Router();
 export const backetDefaultPath = '/api/backet';

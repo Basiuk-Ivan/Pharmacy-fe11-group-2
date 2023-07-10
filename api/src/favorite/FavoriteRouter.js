@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import {FavoriteController} from './FavoriteController.js';
+import { FavoriteController } from './FavoriteController.js';
 
 export const favoriteRouter = new Router();
 export const favoriteDefaultPath = '/api/favorite';

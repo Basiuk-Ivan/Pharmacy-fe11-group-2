@@ -1,75 +1,47 @@
-import UserDB from './UsersModel.js';
-import bcrypt from 'bcrypt';
-import { createToken } from '../utils/token.js';
-import { sendMailRegistration } from '../utils/mail.js';
-import { generateRandomString } from '../utils/stringRandom.js';
+import {
+  getUserService,
+  getUserByIDService,
+  passwordUserService,
+  updateUserService,
+  createUserService,
+  loginUserService,
+} from './UserService.js';
 
-const getUser = async (req, res) => {
+export const getUser = async (req, res) => {
   try {
-    const users = await UserDB.find(req.query);
+    const users = await getUserService(req.query);
     res.json(users);
-  } catch (err) {
-    res.status(500).json(err.message);
+  } catch (error) {
+    res.status(500).json(error.message);
   }
 };
 
-const getUserByID = async (req, res) => {
+export const getUserByID = async (req, res) => {
   try {
-    const user = await UserDB.findById(req.params.userId);
+    const user = await getUserByIDService(req.params.userId);
     res.json(user);
-  } catch (err) {
-    res.status(500).json(err.message);
+  } catch (error) {
+    res.status(500).json(error.message);
   }
 };
 
-// Create a function for reusable perpose
-
-const passwordUser = async (req, res) => {
+export const passwordUser = async (req, res) => {
   try {
-    const data = await UserDB.findOne(req.query);
-    if (!data) {
-      res.status(404).json('Email не знайдено ');
-    } else {
-      const passwordNotHash = generateRandomString(8);
-      const passwordHash = await bcrypt.hash(passwordNotHash, 4);
-      const filter = { email: data.email };
-      const update = { password: passwordHash };
-      const user = await UserDB.findOneAndUpdate(filter, update, { new: true });
-      const { password, ...userData } = user._doc;
-      const { email, firstName, secondName } = userData;
-      await sendMailRegistration({
-        email,
-        firstName,
-        secondName,
-        password: passwordNotHash,
-      });
-      res.json(user);
-    }
-  } catch (err) {
-    res.status(500).json(err.message);
+    await passwordUserService(req.query);
+    res.json('Password updated successfully');
+  } catch (error) {
+    res.status(500).json(error.message);
   }
 };
 
-const updateUser = async (req, res) => {
+export const updateUser = async (req, res) => {
   const passwordNotHash = req.body.password;
   try {
     if (req.body?.password) {
       req.body.password = await bcrypt.hash(req.body.password, 4);
     }
 
-    const user = await UserDB.findOneAndUpdate(
-      {
-        _id: req.params.id,
-      },
-      req.body,
-      { new: true }
-    );
-
-    // const user = await UserDB.findOneAndUpdate({
-    //   id: req.params.id,
-    //   updateData: req.body,
-    //   }, {new: true} );
-    //    console.log(user);
+    const user = await updateUserService(req.params.id, req.body);
 
     if (passwordNotHash) {
       const { password, ...userData } = user._doc;
@@ -82,21 +54,17 @@ const updateUser = async (req, res) => {
       });
     }
     res.json(user);
-  } catch (err) {
-    res.status(500).json(err.message);
+  } catch (error) {
+    res.status(500).json(error.message);
   }
 };
 
-const createUser = async (req, res) => {
+export const createUser = async (req, res) => {
   try {
     const passwordNotHash = req.body.password;
     req.body.password = await bcrypt.hash(req.body.password, 4);
-    const data = await UserDB.create(req.body);
-    const { password, ...userData } = data._doc;
-    const token = createToken({
-      payload: userData,
-    });
-    const { email, firstName, secondName } = userData;
+    const token = await createUserService(req.body);
+    const { email, firstName, secondName } = req.body;
     await sendMailRegistration({
       email,
       firstName,
@@ -105,33 +73,18 @@ const createUser = async (req, res) => {
     });
 
     res.json({ token });
-  } catch (err) {
-    res.status(500).json(err.message);
+  } catch (error) {
+    res.status(500).json(error.message);
   }
 };
 
-const loginUser = async (req, res) => {
+export const loginUser = async (req, res) => {
   try {
-    const user = await UserDB.findOne({ email: req.body.email });
-    if (user) {
-      const isPasswordEqual = await bcrypt.compare(
-        req.body.password,
-        user.password
-      );
-      if (isPasswordEqual) {
-        const { password, ...userData } = user._doc;
-        const token = createToken({
-          payload: userData,
-        });
-        return res.json({ token });
-        // return res.json({ token, user });
-      } else {
-        throw new Error('Неправильна електронна пошта користувача або пароль');
-      }
-    }
-    throw new Error('Неправильна електронна пошта користувача або пароль');
-  } catch (err) {
-    res.status(500).json(err.message);
+    const { email, password } = req.body;
+    const token = await loginUserService(email, password);
+    return res.json({ token });
+  } catch (error) {
+    res.status(500).json(error.message);
   }
 };
 

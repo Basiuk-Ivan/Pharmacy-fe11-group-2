@@ -1,9 +1,10 @@
 import mongoose from 'mongoose';
 
-export const Response = new mongoose.Schema(
+export const Review = new mongoose.Schema(
   {
+    product: { type: mongoose.Types.ObjectId, ref: 'ProductDB' },
     user: { type: mongoose.Types.ObjectId, ref: 'UserDB' },
-    responseTxt: String,
+    reviewTxt: String,
     rating: String,
     userName: String,
     userSurname: String,
@@ -26,5 +27,3 @@ export const Response = new mongoose.Schema(
     },
   }
 );
-
-export default mongoose.model('ResponseDB', Response, 'Responses');

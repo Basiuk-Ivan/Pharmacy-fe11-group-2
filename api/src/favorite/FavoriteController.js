@@ -1,9 +1,13 @@
-import FavoriteDB from './FavoriteModel.js';
-import mongoose from 'mongoose';
+import {
+  getFavorite,
+  addFavorite,
+  modifyFavorite,
+  removeFavorite,
+} from './FavoriteService.js';
 
 export const createFavorite = async (req, res) => {
   try {
-    const createdFavorite = await FavoriteDB.create(req.body);
+    const createdFavorite = await addFavorite(req.body);
     res.json(createdFavorite);
   } catch (e) {
     res.status(500).json(e.message);
@@ -12,14 +16,8 @@ export const createFavorite = async (req, res) => {
 
 export const getAllFavorite = async (req, res) => {
   try {
-    let favorites = {};
     const { user } = req.query;
-    if (!!user) {
-      const objectId = new mongoose.Types.ObjectId(user);
-      favorites = await FavoriteDB.findOne({ user: objectId });
-    } else {
-      favorites = await FavoriteDB.find();
-    }
+    const favorites = await getFavorite(user);
     return res.json(favorites);
   } catch (e) {
     res.status(500).json(e.message);
@@ -28,30 +26,17 @@ export const getAllFavorite = async (req, res) => {
 
 export const updateFavorite = async (req, res) => {
   try {
-    if (!req.body.id) {
-      throw new Error('ID was not set');
-    }
-    const updatedFavorite = await FavoriteDB.findByIdAndUpdate(
-      req.body.id,
-      req.body,
-      { new: true }
-    );
+    const updatedFavorite = await modifyFavorite(req.body.id, req.body);
     return res.json(updatedFavorite);
   } catch (e) {
     res.status(500).json(e.message);
   }
 };
+
 export const deleteFavorite = async (req, res) => {
   try {
-    if (!req.params.id) {
-      throw new Error('ID was not set');
-    }
-    const favorite = await FavoriteDB.findByIdAndDelete(req.params.id);
-    if (!favorite) {
-      res.status(404).json('ID was not founded or already deleted');
-    } else {
-      return res.json(favorite);
-    }
+    const favorite = await removeFavorite(req.params.id);
+    return res.json(favorite);
   } catch (e) {
     res.status(500).json(e.message);
   }
