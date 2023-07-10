@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { useDispatch } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import ProductCard from '../../ProductCard';
@@ -7,10 +8,12 @@ import { request } from '../../../tools/Axios/request';
 import { wrapperForPromotion, promotionStyles } from './style';
 import 'swiper/swiper-bundle.min.css';
 import './style/CustomSlider.scss';
+import { modalErrortPass } from '../../../redux/slice/modalSlice';
 
 const PromoMonth = () => {
   const [products, setProducts] = useState([]);
   const [slidesPerView, setslidesPerView] = useState(null);
+  const dispatch = useDispatch();
 
   const theme = useTheme();
   const isXs = useMediaQuery(theme.breakpoints.only('xs'));
@@ -29,6 +32,8 @@ const PromoMonth = () => {
 
         setProducts(data);
       } catch (error) {
+        dispatch(modalErrortPass(true));
+
         console.error('Error fetching products:', error);
       }
     };
@@ -54,29 +59,31 @@ const PromoMonth = () => {
   const productItems = randomIndexes.map(index => products[index]);
 
   return (
-    <Box>
-      <Box sx={wrapperForPromotion}>
-        <Typography fontFamily="Roboto" component="div" sx={promotionStyles}>
-          Акції місяця
-        </Typography>
-      </Box>
+    <>
+      <Box>
+        <Box sx={wrapperForPromotion}>
+          <Typography fontFamily="Roboto" component="div" sx={promotionStyles}>
+            Акції місяця
+          </Typography>
+        </Box>
 
-      <Swiper
-        modules={[Navigation, Pagination, Scrollbar, A11y]}
-        spaceBetween={50}
-        slidesPerView={slidesPerView}
-        loop
-        navigation
-        pagination={{ clickable: true }}
-        className="product-analogies-slider-promotion"
-      >
-        {productItems.map((product, index) => (
-          <SwiperSlide key={index}>
-            <ProductCard productItem={product} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </Box>
+        <Swiper
+          modules={[Navigation, Pagination, Scrollbar, A11y]}
+          spaceBetween={50}
+          slidesPerView={slidesPerView}
+          loop
+          navigation
+          pagination={{ clickable: true }}
+          className="product-analogies-slider-promotion"
+        >
+          {productItems.map((product, index) => (
+            <SwiperSlide key={index}>
+              <ProductCard productItem={product} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Box>
+    </>
   );
 };
 

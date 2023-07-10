@@ -42,7 +42,6 @@ export const updateUser = async (req, res) => {
   try {
     if (req.body.password) {
       req.body.password = await bcrypt.hash(req.body.password, 4);
-      console.log(req.body.password);
     }
 
     const user = await updateUserService(req.params.id, req.body);

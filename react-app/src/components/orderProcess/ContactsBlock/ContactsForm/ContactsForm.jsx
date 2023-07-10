@@ -8,7 +8,8 @@ import { request } from '../../../../tools/Axios/request';
 import { theme as muiTheme } from '../../../../tools/muiTheme';
 import {
   closeModalErrorDelivery,
-  closeModalNotAvailable, openModalErrorDelivery,
+  closeModalNotAvailable,
+  openModalErrorDelivery,
   openModalNotAvailable,
   openOrderModal,
   setSum
@@ -20,6 +21,7 @@ import { sendRequest } from '../../../../tools/Axios/sendRequest';
 import { countSum } from '../../../../utils/ActionsWithProduct/countSum';
 import { openModalAddtoCart } from '../../../../redux/slice/favouriteItems';
 import ModalWindow from '../../../ModalWindow';
+import { modalErrortPass } from '../../../../redux/slice/modalSlice';
 
 const ChangedTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),
@@ -36,6 +38,7 @@ const ContactsForm = () => {
   const isOpenedErrorDeliveryModal = useSelector(state => state.itemCards.isOpenedErrorDeliveryModal);
   const orderPaymentMethod = useSelector(state => state.order.PaymentMethodValue);
   const sumWithDiscount = useSelector(state => state.itemCards.sumWithDiscount);
+  const errorModal = useSelector(state => state.modalSlice.errorModal);
   const cartStoreId = useSelector(state => state.user.cartStoreId);
   const userId = useSelector(state => state.user.id);
   const surname = useSelector(state => state.user.secondName);
@@ -174,6 +177,7 @@ const ContactsForm = () => {
         }
       } catch (error) {
         console.error('Error fetching products:', error);
+        dispatch(modalErrortPass(true));
       }
     };
     fetchProducts();
@@ -198,94 +202,110 @@ const ContactsForm = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  const handleCloseErrorModal = () => {
+    dispatch(modalErrortPass(false));
+  };
+
   return (
-    <ThemeProvider theme={muiTheme}>
-      <Container>
-        <Typography
-          variant="h5"
-          sx={{
-            margin: '40px 0 30px 0',
-            fontFamily: 'Raleway, sans-serif',
-            color: '#4F4F4F',
-            fontWeight: '700',
-            fontSize: '24px'
-          }}
-        >
-          Контактні дані
-        </Typography>
-        {showSkeleton ? (
-          <Stack direction="column" spacing={2}>
-            <Skeleton />
-            <Skeleton />
-            <Skeleton />
-            <Skeleton />
-          </Stack>
-        ) : (
-          <form id="contacts" onSubmit={formik.handleSubmit}>
-            <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
-              <Grid item md={6} xl={6}>
-                <ChangedTextField
-                  label="Ваше ім'я"
-                  fullWidth
-                  name="firstName"
-                  value={formik.values.firstName}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={Boolean(formik.touched.firstName && formik.errors.firstName)}
-                  helperText={formik.touched.firstName && formik.errors.firstName}
-                />
-                <ChangedTextField
-                  label="Ваш e-mail"
-                  fullWidth
-                  name="email"
-                  value={formik.values.email}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={Boolean(formik.touched.email && formik.errors.email)}
-                  helperText={formik.touched.email && formik.errors.email}
-                />
-              </Grid>
-              <Grid item md={6} xl={6}>
-                <ChangedTextField
-                  label="Ваше прізвище"
-                  fullWidth
-                  name="lastName"
-                  value={formik.values.lastName}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={Boolean(formik.touched.lastName && formik.errors.lastName)}
-                  helperText={formik.touched.lastName && formik.errors.lastName}
-                />
-                <ChangedTextField
-                  label="Ваш телефон"
-                  fullWidth
-                  name="phone"
-                  value={formik.values.phone}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={Boolean(formik.touched.phone && formik.errors.phone)}
-                  helperText={formik.touched.phone && formik.errors.phone}
-                />
-              </Grid>
-            </Grid>
-          </form>
-        )}
+    <>
+      {!!errorModal && (
         <ModalWindow
-          mainText="В корзині є товари, наявність яких відсутня. Для подальшого оформлення видаліть відсутні товари з корзини."
+          mainText="Упс... Щось пішло не так"
           handleClick={() => {}}
-          handleClose={handleCloseModalNotAvailable}
-          isOpened={isOpenedCartModalNotAvailable}
+          handleClose={handleCloseErrorModal}
+          isOpened={errorModal}
           actions={false}
         />
-        <ModalWindow
-          mainText="Оберіть спосіб доставки та введіть необхідні дані"
-          handleClick={() => {}}
-          handleClose={handleCloseErrorDeliveryModal}
-          isOpened={isOpenedErrorDeliveryModal}
-          actions={false}
-        />
-      </Container>
-    </ThemeProvider>
+      )}
+
+      <ThemeProvider theme={muiTheme}>
+        <Container>
+          <Typography
+            variant="h5"
+            sx={{
+              margin: '40px 0 30px 0',
+              fontFamily: 'Raleway, sans-serif',
+              color: '#4F4F4F',
+              fontWeight: '700',
+              fontSize: '24px'
+            }}
+          >
+            Контактні дані
+          </Typography>
+          {showSkeleton ? (
+            <Stack direction="column" spacing={2}>
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+              <Skeleton />
+            </Stack>
+          ) : (
+            <form id="contacts" onSubmit={formik.handleSubmit}>
+              <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
+                <Grid item md={6} xl={6}>
+                  <ChangedTextField
+                    label="Ваше ім'я"
+                    fullWidth
+                    name="firstName"
+                    value={formik.values.firstName}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={Boolean(formik.touched.firstName && formik.errors.firstName)}
+                    helperText={formik.touched.firstName && formik.errors.firstName}
+                  />
+                  <ChangedTextField
+                    label="Ваш e-mail"
+                    fullWidth
+                    name="email"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={Boolean(formik.touched.email && formik.errors.email)}
+                    helperText={formik.touched.email && formik.errors.email}
+                  />
+                </Grid>
+                <Grid item md={6} xl={6}>
+                  <ChangedTextField
+                    label="Ваше прізвище"
+                    fullWidth
+                    name="lastName"
+                    value={formik.values.lastName}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={Boolean(formik.touched.lastName && formik.errors.lastName)}
+                    helperText={formik.touched.lastName && formik.errors.lastName}
+                  />
+                  <ChangedTextField
+                    label="Ваш телефон"
+                    fullWidth
+                    name="phone"
+                    value={formik.values.phone}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={Boolean(formik.touched.phone && formik.errors.phone)}
+                    helperText={formik.touched.phone && formik.errors.phone}
+                  />
+                </Grid>
+              </Grid>
+            </form>
+          )}
+          <ModalWindow
+            mainText="В корзині є товари, наявність яких відсутня. Для подальшого оформлення видаліть відсутні товари з корзини."
+            handleClick={() => {}}
+            handleClose={handleCloseModalNotAvailable}
+            isOpened={isOpenedCartModalNotAvailable}
+            actions={false}
+          />
+          <ModalWindow
+            mainText="Оберіть спосіб доставки та введіть необхідні дані"
+            handleClick={() => {}}
+            handleClose={handleCloseErrorDeliveryModal}
+            isOpened={isOpenedErrorDeliveryModal}
+            actions={false}
+          />
+        </Container>
+      </ThemeProvider>
+    </>
   );
 };
 
