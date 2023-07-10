@@ -45,7 +45,7 @@ export const personalInfoStyles = {
   rowGap: '10px'
 };
 export const nameStyles = {
-  fontSize: '18px',
+  fontSize:{xs:"16px",sm:"18px"},
   lineHeight: '24px',
   fontWeight: '500',
   fontFamily: 'Roboto, sans-serif'
@@ -53,9 +53,10 @@ export const nameStyles = {
 export const dateStyles = {
   mr: '10px',
   mb: '30px',
-  fontSize: '18px',
+  fontSize:{xs:"16px",sm:"18px"},
   lineHeight: '18px',
   fontWeight: '500',
+  fontFamily: 'Roboto, sans-serif'
 };
 export const responseHeaderStyles = {
   mb: '20px',
