@@ -28,8 +28,9 @@ export const sendMailOrder = async ({ products, email, totalPrice }) => {
         price * quantity
       } грн </li>`
   );
+  const productsWithoutCommas = productsList.join(', ').replace(/,/g, '');
   const message = `<p>Привіт, шановний клієнт. Це ваше замовлення </p>
-        <ul>${productsList}</ul>
+        <ul>${productsWithoutCommas}</ul>
         <hr>
         <div style="text-align: right">РАЗОМ:  ${totalPrice} грн</div>
         `;
