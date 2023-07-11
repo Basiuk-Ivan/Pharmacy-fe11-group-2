@@ -1,6 +1,6 @@
-# [**PharmacyOnline**](https://api-p4qh.onrender.com/)
+# [**PharmacyOnline**](https://pharmacy-online-8jx0.onrender.com)
 
-Welcome to our online application [**PharmacyOnline**](https://api-p4qh.onrender.com/) - a service for convenient purchase of medicines and medical products.
+Welcome to our online application [**PharmacyOnline**](https://pharmacy-online-8jx0.onrender.com) - a service for convenient purchase of medicines and medical products.
 
 The main features of the application:
 
@@ -43,62 +43,74 @@ The main features of the application:
 - [**Artem Shchelinskyi**](https://github.com/shchelinskyi)
 - [**Anatoliy Lehchylin**](https://github.com/AnatoliyLehchylin)
 - [**Ivan Basiuk**](https://github.com/IvanBasss)
-- [**Yaroslav**](https://github.com/keannko)
-- [**Sergiy**](https://github.com/NHunter007)
-- [**Dmytro**](https://github.com/D9D9kiev)
-- [**Vadim**](https://github.com/vadba)
+- [**Yaroslav Chaban**](https://github.com/keannko)
+- [**Sergii Tovstukha**](https://github.com/NHunter007)
+- [**Dmytro Podmazko**](https://github.com/D9D9kiev)
+- [**Vadym Bardas**](https://github.com/vadba)
 
 ### Responsibility:
 
 [**Artem Shchelinskyi**](https://github.com/shchelinskyi)
 
-- Implemented layout of the product page (Single page) and product card in compliance with the design.
-- The "scrollTo" technology is used to smoothly scroll to the sections of the product page.
-- Implemented the ability to change the product rating directly in the database by clicking on the rating value.
-- Redux Toolkit and localStorage were used to add products to the cart, change the number of products in the cart, and delete them.
-- A mechanism has been created that generates general information about the order.
-- Implemented modal windows using Redux state that allow you to conveniently interact with the content.
-- A search mechanism has been implemented that allows the user to search by product name in the database.
+- Created a product page (ProductPage component);
+- The logic of working with ratings and reviews is written;
+- Added logic for changing the quantity of goods in the cart, deleting it and validating the quantity of goods in the warehouse (Cart component);
+- Added logic for transferring favorite items to the cart;
+- Added logic in the user's personal account (Cabinet component):
+  - display and change the current user data and set a new password;
+  - display of completed orders;
+  - display of written user reviews, the ability to delete them;
 
 [**Anatoliy Lehchylin**](https://github.com/AnatoliyLehchylin)
 
-- Products page, components - Filter, ChoiceCategory, Cards, Pagination, Sorting.
-- Formation of the search string, component RequestString.
+- Created a page for displaying products by category (ProductsPage component);
+- Written logic for displaying products by category;
+- Written logic for filtering products by parameters;
+- The logic for transferring filtering to the address bar (searchParams) is written;
+- Pagination;
 
 [**Ivan Basiuk**](https://github.com/IvanBasss)
 
-- Organization of team work
-- Checking the work done
-- Development of the application structure
-- Home page development
-- Validation of goods
-- Working with the Swipper, Mui library
+- Organization of team work;
+- Create an application structure;
+- Adjusting the layout in Figma;
+- Setting up Husky and Eslint;
+- Create the main page (Home page):
+  - Header;
+  - Logic for displaying promotional offers and interesting products was created and added;
+- Added logic for adding/removing products to favorites and carts from the product card (ProductCard component);
+- Code refactoring;
+- Data validation;
+- Deploy the project;
 
-[**Yaroslav**](https://github.com/keannko)
+[**Yaroslav Chaban**](https://github.com/keannko)
 
-- Page Favorite
-- Components Modal
-- Components Analogs
-- Components YouBrowsed
-- Components CabinetUser
+- Created the Favorite page component and added the logic for changing them;
+- Created the Analogs component and added the logic for displaying similar products;
+- Created the component of viewed products (YouBrowsed) and added the logic for their display;
+- Created a component (Cabinet);
+- The Nova Poshta API is connected and the ability to place an order to a pharmacy has been added;
 
-[**Sergiy**](https://github.com/NHunter007)
+[**Sergii Tovstukha**](https://github.com/NHunter007)
 
-- Development of the database structure, creation of database collections.
-- Creation of api server elements.
-- Setting up access to the database.
-- Creation of queries for working with the database and search queries in the database.
-- Creation and configuration of the mail service.
+- Developed the data structure in the Database;
+- Creating an API;
+- Created the logic of filtering by parameters in the Database;
+- Added logic for automatically sending information to the user's email about placed orders, resetting and changing the password;
 
-[**Dmytro**](https://github.com/D9D9kiev)
+[**Dmytro Podmazko**](https://github.com/D9D9kiev)
 
-- Page Cart
-- Components Modal
-- Working with Yup, Formik
+- Created a component of the product cart (Cart page);
+- Implemented user registration logic;
+- The user password reset logic has been implemented;
+- Validation of the entered data (Yup, Formik);
+- Filling goods into the database;
+- Connecting a chat;
+- Deploy the project;
 
-- [**Vadim**](https://github.com/vadba)
+[**Vadym Bardas**](https://github.com/vadba)
 
-- Page Home
-- Component Footer
-- Component HealthBlogs
-- Separate tasks and adding entities to db
+- Participated in the creation of Home page components;
+- Created the HealthBlogs component;
+- The Footer component has been created;
+- Filling goods into the database;
