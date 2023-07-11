@@ -9,6 +9,7 @@ import { wrapForCardStyles, boxForImg, imgStyles, boxForImgPromotion, imgPromoti
 const ProductCard = ({ productItem, isInCart, parent = 'parent', isSlider }) => {
   const { pathname } = useLocation();
 
+
   const cardWrapStyles = wrapForCardStyles(isInCart);
   const pathElements = pathname.split('/');
   const lastPathElement = pathElements[pathElements.length - 1];
@@ -16,12 +17,13 @@ const ProductCard = ({ productItem, isInCart, parent = 'parent', isSlider }) => 
   const productPath =
     lastPathElement === parent ? `${newPathname}/${productItem.id}` : `${pathname}/${productItem.id}`;
 
+
   return (
     <ThemeProvider theme={theme}>
       <Card sx={cardWrapStyles}>
         {!isSlider ? (
           <>
-            <NavLink to={`/${productItem.categories[0]}/${productItem.id}`}>
+            <NavLink to={productPath}>
               <FavoriteCheckbox productItem={productItem} isInCart={isInCart} />
               <Box sx={boxForImg}>
                 <img style={imgStyles} src={productItem?.img[0]} alt="productImage" />
