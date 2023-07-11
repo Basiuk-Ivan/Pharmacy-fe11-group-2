@@ -59,6 +59,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
+    "jest-mock-axios": "^4.7.2",
     "jest-watch-typeahead": "^0.6.5",
     "prettier": "^2.8.8",
     "prop-types": "^15.8.1",
