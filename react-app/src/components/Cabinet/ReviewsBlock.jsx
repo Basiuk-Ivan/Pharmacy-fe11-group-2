@@ -34,15 +34,17 @@ const ReviewsBlock = () => {
     <ThemeProvider theme={muiTheme}>
       <Box sx={{ minHeight: '500px', maxWidth: '70vw', margin: '0 auto' }}>
         {isLoading && <Loading />}
-        {!isLoading &&
+        {!isLoading && (
           <Box sx={{ margin: '0 auto' }}>
-            {!!productReviews && productReviews.map((item, index) =>
-              <ProductReviews key={`${item.id}-${index}`} item={item} setLoading={setLoading} />)}
-            {productReviews.length < 1 &&
-            <Typography sx={noReviewsStyles}>
-              Відгуки товарів відсутні
-            </Typography>}
-          </Box>}
+            {!!productReviews &&
+              productReviews.map((item, index) => (
+                <ProductReviews key={`${item.id}-${index}`} item={item} setLoading={setLoading} />
+              ))}
+            {productReviews.length < 1 && (
+              <Typography sx={noReviewsStyles}>Відгуки товарів відсутні</Typography>
+            )}
+          </Box>
+        )}
       </Box>
     </ThemeProvider>
   );
