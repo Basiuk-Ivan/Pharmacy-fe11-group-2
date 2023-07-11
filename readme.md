@@ -108,7 +108,7 @@ The main features of the application:
 - Connecting a chat;
 - Deploy the project;
 
-- [**Vadym Bardas**](https://github.com/vadba)
+[**Vadym Bardas**](https://github.com/vadba)
 
 - Participated in the creation of Home page components;
 - Created the HealthBlogs component;
