@@ -149,7 +149,10 @@ const FavouriteBlock = props => {
                     fontFamily: 'Roboto, sans-serif',
                     fontWeight: 700,
                     fontSize: '14px',
-                    color: '#828282'
+                    color: '#828282',
+                    '@media (max-width: 415px)': {
+                      fontSize: '12px'
+                    }
                   }}
                 >
                   Очистити все
@@ -166,7 +169,12 @@ const FavouriteBlock = props => {
                     fontFamily: 'Roboto, sans-serif',
                     fontWeight: 700,
                     fontSize: '14px',
-                    color: '#FFFFFF'
+                    color: '#FFFFFF',
+                    '@media (max-width: 415px)': {
+                      fontSize: '12px',
+                      width: '120px',
+                      textAlign: 'center'
+                    }
                   }}
                 >
                   Додати все до кошика
