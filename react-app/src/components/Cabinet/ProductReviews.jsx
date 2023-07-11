@@ -86,10 +86,10 @@ const ProductReviews = ({ item, setLoading }) => {
       {!!product && (
         <Stack sx={reviewContainerStyles}>
           <Stack direction="row" alignItems="center" flexWrap="wrap" gap="10px" sx={{ mb: '10px' }}>
-            <NavLink to={`/${product.categories[0]}/${product.id}`}>
+            <NavLink to={`/product/${product.id}`}>
               <Box component="img" src={product.img[0]} sx={{ width: '80px' }} />
             </NavLink>
-            <NavLink to={`/${product.categories[0]}/${product.id}`}>
+            <NavLink to={`/product/${product.id}`}>
               <Typography variant="h6" component="p" sx={productNameStyles}>
                 {product.name}
               </Typography>

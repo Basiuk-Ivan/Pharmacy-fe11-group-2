@@ -17,7 +17,7 @@ export const ProductSlider = ({ product }) => {
         <Box sx={oralBTextStyles}>{product?.name}</Box>
         <Typography sx={descStyles}>{product?.descriptionForSlider}</Typography>
         <Box>
-          <NavLink to={`/${product?.categories[0]}/${product?.id}`}>
+          <NavLink to={`/product/${product?.id}`}>
             <Button sx={buttonStyles}>Переглянути</Button>
           </NavLink>
         </Box>

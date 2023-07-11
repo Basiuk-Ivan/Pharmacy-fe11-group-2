@@ -36,7 +36,7 @@ export const SwiperPromotion = ({ randomProducts }) => {
     >
       {randomProducts.map((product, index) => (
         <SwiperSlide key={index}>
-          <NavLink to={`/${product?.categories[0]}/${product?.id}`}>
+          <NavLink to={`/product/${product?.id}`}>
             <ProductCard productItem={product} isSlider={isSlider} />
           </NavLink>
         </SwiperSlide>
