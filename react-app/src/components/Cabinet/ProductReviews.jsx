@@ -10,7 +10,11 @@ import { request } from '../../tools/Axios/request';
 import { avatarImg } from '../../utils/commonConstans/avatarImg';
 import { formatDate } from '../../utils/ActionsWithProduct/formatDate';
 import { deleteUserReviewsFromDB } from '../../utils/Responses/deleteUserReviewsFromDB';
-import { changeStateReview, closeModalRemoveReview, openModalRemoveReview } from '../../redux/slice/userSlice';
+import {
+  changeStateReview,
+  closeModalRemoveReview,
+  openModalRemoveReview
+} from '../../redux/slice/userSlice';
 import {
   responseWrapperStyles,
   responseHeaderStyles,
@@ -21,8 +25,10 @@ import {
   dateStyles,
   emotionBlockStyles,
   itemEmotionStyles,
-  responseTextStyles, productNameStyles,
-  reviewContainerStyles, deleteButtonStyles
+  responseTextStyles,
+  productNameStyles,
+  reviewContainerStyles,
+  deleteButtonStyles
 } from './style';
 
 const ProductReviews = ({ item, setLoading }) => {
@@ -77,91 +83,90 @@ const ProductReviews = ({ item, setLoading }) => {
 
   return (
     <>
-      {!!product &&
-
-      <Stack sx={reviewContainerStyles}>
-
-        <Stack direction="row" alignItems="center" flexWrap="wrap" gap="10px" sx={{ mb: '10px' }}>
-          <NavLink to={`/${product.categories[0]}/${product.id}`}>
-            <Box component="img" src={product.img[0]} sx={{ width: '80px' }} />
-          </NavLink>
-          <NavLink to={`/${product.categories[0]}/${product.id}`}>
-            <Typography variant="h6" component="p" sx={productNameStyles}>{product.name}</Typography>
-          </NavLink>
-        </Stack>
-
-        <Stack sx={responseWrapperStyles}>
-          <Stack sx={responseHeaderStyles}>
-            <Stack direction="row" spacing={2} alignItems="center" sx={personalInfoStyles}>
-              <Avatar
-                alt="Remy Sharp"
-                src={item.gender === 'male' ? avatarImg.manImg : avatarImg.womanImg}
-                sx={avatarStyles}
-              />
-              <Stack direction="row" justifyContent="flex-start" alignItems="flex-start" spacing={0.5} flexWrap="wrap">
-                <Typography variant="p" component="p" gutterBottom sx={nameStyles}>
-                  {item.userName}
-                </Typography>
-                <Typography variant="p" component="p" gutterBottom sx={nameStyles}>
-                  {item.userSurname}
-                </Typography>
-              </Stack>
-            </Stack>
-            <Stack
-              flexWrap="wrap"
-              direction="row"
-              spacing={1}
-              alignItems="center"
-              sx={ratingBlockStyles}
-            >
-              <Rating name="read-only" value={numericValue} readOnly />
-              <Typography variant="p" gutterBottom sx={dateStyles}>
-                {dateValue}
+      {!!product && (
+        <Stack sx={reviewContainerStyles}>
+          <Stack direction="row" alignItems="center" flexWrap="wrap" gap="10px" sx={{ mb: '10px' }}>
+            <NavLink to={`/${product.categories[0]}/${product.id}`}>
+              <Box component="img" src={product.img[0]} sx={{ width: '80px' }} />
+            </NavLink>
+            <NavLink to={`/${product.categories[0]}/${product.id}`}>
+              <Typography variant="h6" component="p" sx={productNameStyles}>
+                {product.name}
               </Typography>
-            </Stack>
-            <Stack
-              flexWrap="wrap"
-              direction="row"
-              justifyContent="space-between"
-              alignItems="center"
-              sx={emotionBlockStyles}
-            >
-              <Stack direction="row" spacing={2} alignItems="center" sx={{ cursor: 'pointer' }}>
-                <Button disabled>
-                  <ThumbUpIcon />
-                </Button>
-                <Typography variant="p" component="p" gutterBottom sx={itemEmotionStyles}>
-                  {item.countLike}
-                </Typography>
-              </Stack>
-              <Stack direction="row" spacing={2} alignItems="center" sx={{ cursor: 'pointer' }}>
-                <Button disabled>
-                  <ThumbDownAltIcon />
-                </Button>
-                <Typography variant="p" component="p" gutterBottom sx={itemEmotionStyles}>
-                  {item.countDislike}
-                </Typography>
-              </Stack>
-            </Stack>
+            </NavLink>
           </Stack>
-          <Box sx={responseTextStyles}>{item.reviewTxt}</Box>
+
+          <Stack sx={responseWrapperStyles}>
+            <Stack sx={responseHeaderStyles}>
+              <Stack direction="row" spacing={2} alignItems="center" sx={personalInfoStyles}>
+                <Avatar
+                  alt="Remy Sharp"
+                  src={item.gender === 'male' ? avatarImg.manImg : avatarImg.womanImg}
+                  sx={avatarStyles}
+                />
+                <Stack
+                  direction="row"
+                  justifyContent="flex-start"
+                  alignItems="flex-start"
+                  spacing={0.5}
+                  flexWrap="wrap"
+                >
+                  <Typography variant="p" component="p" gutterBottom sx={nameStyles}>
+                    {item.userName}
+                  </Typography>
+                  <Typography variant="p" component="p" gutterBottom sx={nameStyles}>
+                    {item.userSurname}
+                  </Typography>
+                </Stack>
+              </Stack>
+              <Stack flexWrap="wrap" direction="row" spacing={1} alignItems="center" sx={ratingBlockStyles}>
+                <Rating name="read-only" value={numericValue} readOnly />
+                <Typography variant="p" gutterBottom sx={dateStyles}>
+                  {dateValue}
+                </Typography>
+              </Stack>
+              <Stack
+                flexWrap="wrap"
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                sx={emotionBlockStyles}
+              >
+                <Stack direction="row" spacing={2} alignItems="center" sx={{ cursor: 'pointer' }}>
+                  <Button disabled>
+                    <ThumbUpIcon />
+                  </Button>
+                  <Typography variant="p" component="p" gutterBottom sx={itemEmotionStyles}>
+                    {item.countLike}
+                  </Typography>
+                </Stack>
+                <Stack direction="row" spacing={2} alignItems="center" sx={{ cursor: 'pointer' }}>
+                  <Button disabled>
+                    <ThumbDownAltIcon />
+                  </Button>
+                  <Typography variant="p" component="p" gutterBottom sx={itemEmotionStyles}>
+                    {item.countDislike}
+                  </Typography>
+                </Stack>
+              </Stack>
+            </Stack>
+            <Box sx={responseTextStyles}>{item.reviewTxt}</Box>
+          </Stack>
+
+          <CloseSharpIcon onClick={() => openRemoveModal(item)} sx={deleteButtonStyles} />
+
+          <ModalWindow
+            mainText="Видалити даний відгук?"
+            confirmTextBtn="Підтвердити"
+            cancelTextBtn="Відміна"
+            handleClick={() => handleClickModalRemove(item)}
+            handleClose={handleCloseModalRemove}
+            isOpened={isOpenModalRemoveReview}
+            actions
+          />
         </Stack>
-
-        <CloseSharpIcon onClick={() => openRemoveModal(item)} sx={deleteButtonStyles} />
-
-        <ModalWindow
-          mainText="Видалити даний відгук?"
-          confirmTextBtn="Підтвердити"
-          cancelTextBtn="Відміна"
-          handleClick={() => handleClickModalRemove(item)}
-          handleClose={handleCloseModalRemove}
-          isOpened={isOpenModalRemoveReview}
-          actions
-        />
-      </Stack>}
-
+      )}
     </>
-
   );
 };
 

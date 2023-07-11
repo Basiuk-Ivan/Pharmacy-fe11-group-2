@@ -75,7 +75,7 @@ export const createUser = async (req, res) => {
       password: passwordNotHash,
     });
 
-    res.json({ token });
+    res.json(token);
   } catch (error) {
     res.status(500).json(error.message);
   }

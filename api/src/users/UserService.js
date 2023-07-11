@@ -68,19 +68,10 @@ export const updateUserService = async (userId, updatedFields) => {
 
 export const createUserService = async userData => {
   try {
-    const passwordNotHash = userData.password;
-    userData.password = await bcrypt.hash(userData.password, 4);
     const createdUser = await createUser(userData);
     const { password, ...userDataWithoutPassword } = createdUser._doc;
     const token = createToken({
       payload: userDataWithoutPassword,
-    });
-    const { email, firstName, secondName } = userDataWithoutPassword;
-    await sendMailRegistration({
-      email,
-      firstName,
-      secondName,
-      password: passwordNotHash,
     });
     return { token };
   } catch (error) {
