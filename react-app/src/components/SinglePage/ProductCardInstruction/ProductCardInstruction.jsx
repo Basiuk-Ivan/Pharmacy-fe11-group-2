@@ -52,6 +52,7 @@ const ProductCardInstruction = ({ productItem }) => {
       <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
         {instructionButtons.map((button, btnIndex) => (
           <Button
+            data-testid="btnInstruction"
             key={button.id}
             variant="outlined"
             color={activeButton === button.id ? 'secondary' : 'primary'}

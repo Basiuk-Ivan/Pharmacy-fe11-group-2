@@ -1,11 +1,13 @@
 import { Box, Typography } from '@mui/material';
 
 const TextComponent = ({ id, title, value }) => {
-  const paragraphs = value.split('\n').map((paragraph, index) => (
-    <Typography key={index} variant="body1" component="p" gutterBottom sx={{ textAlign: 'justify' }}>
-      {paragraph}
-    </Typography>
-  ));
+  const paragraphs = value
+    ? value.split('\n').map((paragraph, index) => (
+      <Typography key={index} variant="body1" component="p" gutterBottom sx={{ textAlign: 'justify' }}>
+        {paragraph}
+      </Typography>
+    ))
+    : null;
 
   return (
     <Box>
