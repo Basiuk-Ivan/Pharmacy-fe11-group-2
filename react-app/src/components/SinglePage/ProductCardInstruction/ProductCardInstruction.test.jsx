@@ -1,6 +1,7 @@
 import { render, fireEvent } from '@testing-library/react';
 import ProductCardInstruction from './ProductCardInstruction';
 
+
 const mockProductItem = {
   activeSubstance: 'exampleActiveSubstance',
 };
