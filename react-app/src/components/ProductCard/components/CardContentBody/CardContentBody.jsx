@@ -18,7 +18,7 @@ export const CardContentBody = ({ isInCart, productItem, isSlider }) => {
         <RatingCard productItem={productItem} />
 
         {!isSlider ? (
-          <NavLink to={`${pathname}/${productItem?.id}`}>
+          <NavLink to={`/product/${productItem?.id}`}>
             <Typography gutterBottom variant="h5" component="p" sx={productNameStyle}>
               <span title={productItem?.name}>
                 {productItem?.name.length > MAX_TITLE_LENGTH

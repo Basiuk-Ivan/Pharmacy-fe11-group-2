@@ -23,7 +23,9 @@ const ProductCard = ({ productItem, isInCart, parent = 'parent', isSlider }) => 
       <Card sx={cardWrapStyles}>
         {!isSlider ? (
           <>
-            <NavLink to={productPath}>
+
+            <NavLink to={`/product/${productItem.id}`}>
+
               <FavoriteCheckbox productItem={productItem} isInCart={isInCart} />
               <Box sx={boxForImg}>
                 <img style={imgStyles} src={productItem?.img[0]} alt="productImage" />
