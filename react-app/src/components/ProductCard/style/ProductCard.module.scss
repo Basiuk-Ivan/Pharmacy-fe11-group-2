@@ -1,0 +1,33 @@
+.productName {
+  overflow: hidden;
+  max-height: 40px;
+  cursor: pointer;
+
+  &:hover {
+    overflow: auto;
+    max-height: none;
+  }
+}
+
+.bullet {
+  margin-right: 8px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #f2c94c;
+}
+
+.brandTitle {
+  font-family: Roboto, sans-serif;
+  margin-right: 4px;
+  color: #bdbdbd;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.brandValue {
+  font-family: Roboto, sans-serif;
+  color: #7b818c;
+  font-size: 12px;
+  line-height: 20px;
+}
