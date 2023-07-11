@@ -90,7 +90,7 @@ const SearchActions = () => {
           >
             {products.length > 0 ? (
               products.map(item => (
-                <NavLink key={item.id} to={`/${item?.categories[0]}/${item?.id}`}>
+                <NavLink key={item.id} to={`/product/${item?.id}`}>
                   <Stack
                     key={item.id}
                     direction="row"
